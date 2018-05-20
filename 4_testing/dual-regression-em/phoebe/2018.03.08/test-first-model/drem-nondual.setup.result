@@ -1,0 +1,50 @@
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample1.base" are  (t = 2) learned models: weight = -5863.819914663432 + 45.19433961999434*bpd + 2.7657710589181104*hc + 19.18445395079902*fl + 8.178231887122182*ac, weight = -3937.8820330010644 + 186.1650101514751*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample2.base" are  (t = 2) learned models: weight = -5583.176690953148 + 47.21470495522455*bpd + 1.171259644112701*hc + 14.281616887684955*fl + 9.32705521724082*ac, weight = -3861.837940285663 + 183.48399628491643*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample1.base.0.2.miss" are  (t = 13) learned models: weight = -5912.808722707934 + 48.24288057918896*bpd + 2.697744332010582*hc + 17.474248409096525*fl + 7.931845381567454*ac, weight = -3871.7978341088606 + 183.95451945567274*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample2.base.0.2.miss" are  (t = 11) learned models: weight = -5584.105888543858 + 45.847784109336196*bpd + 0.6539038221401476*hc + 18.128200444272974*fl + 9.426500746662613*ac, weight = -3871.615402090375 + 183.49718856529046*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample1.base.0.4.miss" are  (t = 18) learned models: weight = -5885.476788761993 + 41.62645474735466*bpd + 2.5186329024709395*hc + 22.219421826989237*fl + 8.87896544488037*ac, weight = -3868.7487166698406 + 184.16458631295785*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample2.base.0.4.miss" are  (t = 18) learned models: weight = -5780.705018240033 + 53.1676201819044*bpd + 0.6215421573777506*hc + 11.38978178045733*fl + 9.550189598297132*ac, weight = -3811.120042293569 + 181.56241474485458*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample1.base.0.6.miss" are  (t = 31) learned models: weight = -5896.061460986639 + 45.3007107638156*bpd + 2.3187322282891802*hc + 16.3079318116037*fl + 9.413641797317556*ac, weight = -3807.3593063892317 + 182.4901609475871*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample2.base.0.6.miss" are  (t = 38) learned models: weight = -5954.463213511546 + 50.7467236187539*bpd + 0.7481450869838469*hc + 10.332549840225433*fl + 10.824605847895885*ac, weight = -3433.1593768024445 + 172.2345923688557*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample1.base.0.8.miss" are  (t = 57) learned models: weight = -6270.411542867125 + 48.1158755775985*bpd + 1.6522833912730732*hc + 12.981415802643603*fl + 11.106955080131982*ac, weight = -3507.4453500352415 + 174.36811351228386*age
+
+
+
+========== Algorithm "drem-nondual" ==========
+Setup result of algorithm "drem-nondual" on training dataset "hdp_sample2.base.0.8.miss" are  (t = 54) learned models: weight = -5706.246647922251 + 46.134552127455315*bpd + 0.7466131825841096*hc + 10.64563366686804*fl + 11.2800681013865*ac, weight = -3294.469984107905 + 168.43197828002354*age
+
+
+

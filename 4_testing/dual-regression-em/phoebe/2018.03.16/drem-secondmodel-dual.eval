@@ -1,0 +1,116 @@
+========== Algorithm "drem-secondmodel-dual" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.drem = [-40.165597812523, 310.244921812475]
+Hudup recall = 1.0
+MAE.drem = 242.540651330885
+MSE.drem = 97866.18675806657
+R.drem = 0.920490323428
+RMSE.drem = 312.835718481868
+Setup time = 0.045000001788
+Speed = 5.836576E-6
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.drem = [38.115322554778, 312.942933137687]
+Hudup recall = 1.0
+MAE.drem = 249.537438371965
+MSE.drem = 99387.05721427384
+R.drem = 0.919161744726
+RMSE.drem = 315.257128728715
+Setup time = 0.211999997497
+Speed = 5.847953E-6
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.drem = [-36.041958900863, 310.145943994484]
+Hudup recall = 1.0
+MAE.drem = 241.7887439058
+MSE.drem = 97490.52937764133
+R.drem = 0.920490323428
+RMSE.drem = 312.234734418901
+Setup time = 0.680000007153
+Speed = 1.5564202E-5
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.drem = [46.813014395553, 312.596565827942]
+Hudup recall = 1.0
+MAE.drem = 250.886685797809
+MSE.drem = 99909.07128422114
+R.drem = 0.919161744726
+RMSE.drem = 316.08396239642
+Setup time = 1.034999966621
+Speed = 1.1695907E-5
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.drem = [-40.135706900847, 310.684542862534]
+Hudup recall = 1.0
+MAE.drem = 242.95829400804
+MSE.drem = 98136.76014213225
+R.drem = 0.920490323428
+RMSE.drem = 313.26787282154
+Setup time = 1.618999958038
+Speed = 5.836576E-6
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.drem = [47.850478622948, 312.319488091073]
+Hudup recall = 1.0
+MAE.drem = 251.426583843159
+MSE.drem = 99834.13094591504
+R.drem = 0.919161744726
+RMSE.drem = 315.965395171552
+Setup time = 2.075999975204
+Speed = 7.797271E-6
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.drem = [-45.274498974472, 313.823435868967]
+Hudup recall = 1.0
+MAE.drem = 246.009519346178
+MSE.drem = 100535.92915799319
+R.drem = 0.920490323428
+RMSE.drem = 317.07401211388
+Setup time = 3.256999969482
+Speed = 1.945525E-6
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.drem = [43.217091851578, 313.217583245146]
+Hudup recall = 1.0
+MAE.drem = 254.062831609439
+MSE.drem = 99973.97148203742
+R.drem = 0.919161744726
+RMSE.drem = 316.18660863806
+Setup time = 3.579999923706
+Speed = 3.898636E-6
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.drem = [-57.174691786386, 316.544111004966]
+Hudup recall = 1.0
+MAE.drem = 249.635107242862
+MSE.drem = 103470.11959279247
+R.drem = 0.920490323428
+RMSE.drem = 321.667716118345
+Setup time = 6.415999889374
+Speed = 9.727627E-6
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.drem = [73.222867888088, 315.291421284552]
+Hudup recall = 1.0
+MAE.drem = 261.716854746439
+MSE.drem = 104771.2687173889
+R.drem = 0.919161744726
+RMSE.drem = 323.683902468734
+Setup time = 11.140000343323
+Speed = 3.898636E-6
+----- Testing dataset "10" -----
+
+========== Algorithm "drem-secondmodel-dual" - Final result ==========
+
+
+

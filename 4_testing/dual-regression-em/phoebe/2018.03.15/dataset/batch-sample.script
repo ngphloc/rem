@@ -1,0 +1,7 @@
+# Sample batch script
+
+algorithms=drem, rem.default
+
+trainingsets=datasets/phoebe/hdp_sample1.base#snapshot_parser#file, datasets/phoebe/hdp_sample2.base#snapshot_parser#file, datasets/phoebe/hdp_sample1.base.0.2.miss#snapshot_parser#file, datasets/phoebe/hdp_sample2.base.0.2.miss#snapshot_parser#file, datasets/phoebe/hdp_sample1.base.0.4.miss#snapshot_parser#file, datasets/phoebe/hdp_sample2.base.0.4.miss#snapshot_parser#file, datasets/phoebe/hdp_sample1.base.0.6.miss#snapshot_parser#file, datasets/phoebe/hdp_sample2.base.0.6.miss#snapshot_parser#file, datasets/phoebe/hdp_sample1.base.0.8.miss#snapshot_parser#file, datasets/phoebe/hdp_sample2.base.0.8.miss#snapshot_parser#file
+
+testingsets=datasets/phoebe/hdp_sample1.test#snapshot_parser#file, datasets/phoebe/hdp_sample2.test#snapshot_parser#file, datasets/phoebe/hdp_sample1.test#snapshot_parser#file, datasets/phoebe/hdp_sample2.test#snapshot_parser#file, datasets/phoebe/hdp_sample1.test#snapshot_parser#file, datasets/phoebe/hdp_sample2.test#snapshot_parser#file, datasets/phoebe/hdp_sample1.test#snapshot_parser#file, datasets/phoebe/hdp_sample2.test#snapshot_parser#file, datasets/phoebe/hdp_sample1.test#snapshot_parser#file, datasets/phoebe/hdp_sample2.test#snapshot_parser#file,

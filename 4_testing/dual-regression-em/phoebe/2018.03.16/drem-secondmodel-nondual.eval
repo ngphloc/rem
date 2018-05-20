@@ -1,0 +1,116 @@
+========== Algorithm "drem-secondmodel-nondual" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.drem = [-40.165597812523, 310.244921812475]
+Hudup recall = 1.0
+MAE.drem = 242.540651330885
+MSE.drem = 97866.18675806657
+R.drem = 0.920490323428
+RMSE.drem = 312.835718481868
+Setup time = 0.094999998808
+Speed = 1.945525E-6
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.drem = [38.115322554778, 312.942933137687]
+Hudup recall = 1.0
+MAE.drem = 249.537438371965
+MSE.drem = 99387.05721427384
+R.drem = 0.919161744726
+RMSE.drem = 315.257128728715
+Setup time = 0.061000000685
+Speed = 9.746589E-6
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.drem = [-33.819649482093, 309.705881896293]
+Hudup recall = 1.0
+MAE.drem = 240.863045800403
+MSE.drem = 97062.5019722519
+R.drem = 0.920490323428
+RMSE.drem = 311.548554758728
+Setup time = 0.186000004411
+Speed = 5.836576E-6
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.drem = [45.14573086649, 312.84774989018]
+Hudup recall = 1.0
+MAE.drem = 250.462028324565
+MSE.drem = 99912.85162681807
+R.drem = 0.919161744726
+RMSE.drem = 316.089942305696
+Setup time = 0.234999999404
+Speed = 1.3645225E-5
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.drem = [-40.701606065056, 310.042638496841]
+Hudup recall = 1.0
+MAE.drem = 242.385734820459
+MSE.drem = 97784.05842235808
+R.drem = 0.920490323428
+RMSE.drem = 312.70442661139
+Setup time = 0.731000006199
+Speed = 1.945525E-6
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.drem = [44.519642334922, 313.584096959934]
+Hudup recall = 1.0
+MAE.drem = 250.016436496474
+MSE.drem = 100317.98441980625
+R.drem = 0.919161744726
+RMSE.drem = 316.730144476029
+Setup time = 0.773999989033
+Speed = 0.0
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.drem = [-38.154418621341, 310.952826655068]
+Hudup recall = 1.0
+MAE.drem = 242.890373138081
+MSE.drem = 98148.42006510957
+R.drem = 0.920490323428
+RMSE.drem = 313.286482416828
+Setup time = 1.24899995327
+Speed = 9.727627E-6
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.drem = [34.302055061622, 312.475359626459]
+Hudup recall = 1.0
+MAE.drem = 249.598149555309
+MSE.drem = 98818.48135513547
+R.drem = 0.919161744726
+RMSE.drem = 314.354070047034
+Setup time = 0.894999980927
+Speed = 3.898636E-6
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.drem = [-49.673091280606, 310.008191387348]
+Hudup recall = 1.0
+MAE.drem = 243.69037421844
+MSE.drem = 98573.49472462607
+R.drem = 0.920490323428
+RMSE.drem = 313.964161529029
+Setup time = 1.978000044823
+Speed = 5.836576E-6
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.drem = [75.622018115223, 319.13799837688]
+Hudup recall = 1.0
+MAE.drem = 255.225384368627
+MSE.drem = 107568.75163182055
+R.drem = 0.919161744726
+RMSE.drem = 327.976754712618
+Setup time = 1.337000012398
+Speed = 1.949318E-6
+----- Testing dataset "10" -----
+
+========== Algorithm "drem-secondmodel-nondual" - Final result ==========
+
+
+

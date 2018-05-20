@@ -1,0 +1,31 @@
+Dataset is split into two sub-datasets called folders and each folder has one training dataset and testing dataset. Training dataset is named sample{i}.base and testing dataset is named sample{i}.test. There are two sub-training datasets and two sub-testing datasets.
+- sample1.base
+- sample1.test
+- sample2.base
+- sample2.base
+
+Each training dataset is made sparse with sparse ratios (for example, 0.2, 0.4, 0.6, 0.8) into missing (incomplete) training datasets. Each missing training dataset is named sample{i}.base.{sparse-ratio}.miss. There are 8 missing training datasets:
+- sample1.base.0.2.miss
+- sample2.base.0.2.miss
+- sample1.base.0.4.miss
+- sample2.base.0.4.miss
+- sample1.base.0.6.miss
+- sample2.base.0.6.miss
+- sample1.base.0.8.miss
+- sample2.base.0.8.miss
+
+Testing dual regression expectation maximization algorithm, called DREM algorithm with regard to 8 pairs of missing training datasets and testing datasets as follows:
+- sample1.base.0.2.miss / sample1.test
+- sample2.base.0.2.miss / sample2.test
+- sample1.base.0.4.miss / sample1.test
+- sample2.base.0.4.miss / sample2.test
+- sample1.base.0.6.miss / sample1.test
+- sample2.base.0.6.miss / sample2.test
+- sample1.base.0.8.miss / sample1.test
+- sample2.base.0.8.miss / sample2.test
+
+DREM algorithm always results out two regression models on weight estimation. The first model estimates weight based on ultrasound measures whereas the second model estimates weight based on age. DREM algorithm supports two options such as dual and non-dual. With dual option, the first model and second model are mutually dependent and so they are mutually improved. With non-dual option, the first model and second model are independent.
+
+There are two analyzed testing results:
+- The folder test-first-model contains testing results of REM algorithm on the first model with both dual and non-dual options.
+- The folder test-second-model contains testing results of REM algorithm on the second model with both dual and non-dual options.

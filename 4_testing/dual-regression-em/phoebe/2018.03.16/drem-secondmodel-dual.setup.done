@@ -1,0 +1,50 @@
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample1.base" (done) are  (t = 1) learned models: weight = -5728.637331477821 + 45.13436989456939*bpd + 2.559119580381024*hc + 18.90915198628791*fl + 7.989859897672536*ac, weight = -3820.147915655499 + 181.97839408713827*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample2.base" (done) are  (t = 1) learned models: weight = -5685.0574679932 + 47.27268877507859*bpd + 1.3630370531957392*hc + 13.774886098852885*fl + 9.588691685376652*ac, weight = -3970.1407557161097 + 187.3781751526476*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample1.base.0.2.miss" (done) are  (t = 18) learned models: weight = -5645.201854762048 + 40.12343442603994*bpd + 3.3448952717050586*hc + 21.128068200532027*fl + 7.867421818903724*ac, weight = -3829.7427591930327 + 182.36794714933845*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample2.base.0.2.miss" (done) are  (t = 19) learned models: weight = -5484.4716078697475 + 40.56792963194477*bpd + 2.1866348244426423*hc + 16.228384050725182*fl + 9.483298257127009*ac, weight = -3911.100937362814 + 185.93306794538876*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample1.base.0.4.miss" (done) are  (t = 31) learned models: weight = -5402.666964840362 + 33.61153337406913*bpd + 3.490978895390624*hc + 28.457236912180008*fl + 7.178444490082217*ac, weight = -3768.373049340636 + 180.50903231943272*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample2.base.0.4.miss" (done) are  (t = 34) learned models: weight = -5326.665392153818 + 40.02321463854029*bpd + 1.7101219506608585*hc + 14.677052139208381*fl + 9.925586753359504*ac, weight = -3848.90790055168 + 184.17755293585049*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample1.base.0.6.miss" (done) are  (t = 53) learned models: weight = -5105.45123710206 + 30.034885798955365*bpd + 3.7804894447967428*hc + 32.760744553751714*fl + 5.990857702772691*ac, weight = -3547.370004052291 + 174.08745868239316*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample2.base.0.6.miss" (done) are  (t = 58) learned models: weight = -5062.861894639127 + 37.379362579289825*bpd + 2.795830995198327*hc + 18.22436717317435*fl + 7.948816524965863*ac, weight = -3556.9171628396784 + 175.66274258052792*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample1.base.0.8.miss" (done) are  (t = 107) learned models: weight = -4755.933880031069 + 21.396696726237437*bpd + 5.257908170728258*hc + 27.87855557343867*fl + 6.760101636394915*ac, weight = -3427.7072518233713 + 170.35156819286286*age
+
+
+
+========== Algorithm "drem-secondmodel-dual" ==========
+Setup result of algorithm "drem-secondmodel-dual" on training dataset "hdp_sample2.base.0.8.miss" (done) are  (t = 110) learned models: weight = -4381.371247249072 + 20.66022205219389*bpd + 3.53259479680508*hc + 22.639290514761893*fl + 8.796739290562975*ac, weight = -3363.393154417983 + 170.96883327418806*age
+
+
+

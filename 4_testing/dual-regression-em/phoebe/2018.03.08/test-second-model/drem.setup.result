@@ -1,0 +1,50 @@
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample1.base" are  (t = 2) learned models: weight = -5863.819914663432 + 45.19433961999434*bpd + 2.7657710589181104*hc + 19.18445395079902*fl + 8.178231887122182*ac, weight = -3937.8820330010644 + 186.1650101514751*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample2.base" are  (t = 2) learned models: weight = -5583.176690953148 + 47.21470495522455*bpd + 1.171259644112701*hc + 14.281616887684955*fl + 9.32705521724082*ac, weight = -3861.837940285663 + 183.48399628491643*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample1.base.0.2.miss" are  (t = 11) learned models: weight = -5743.489823306489 + 43.32876632080541*bpd + 2.9221999076844307*hc + 21.5781946210416*fl + 7.630548881973352*ac, weight = -3869.3349915732483 + 184.09065884254377*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample2.base.0.2.miss" are  (t = 11) learned models: weight = -5438.104869734407 + 42.25159000537349*bpd + 1.2385024808290659*hc + 17.937355519427655*fl + 9.382401329425633*ac, weight = -3871.356742393229 + 183.665873313103*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample1.base.0.4.miss" are  (t = 18) learned models: weight = -5571.253359975978 + 37.84289010775562*bpd + 2.931295791033126*hc + 22.72048168570829*fl + 8.374319756621649*ac, weight = -3886.059803180851 + 184.85255609046084*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample2.base.0.4.miss" are  (t = 18) learned models: weight = -5438.743907689084 + 43.62788516356244*bpd + 1.64933784267994*hc + 16.33174635729876*fl + 8.951338968511962*ac, weight = -3782.2745003823743 + 181.30111019710893*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample1.base.0.6.miss" are  (t = 30) learned models: weight = -5345.425741353138 + 34.63830417131647*bpd + 3.2428385596960263*hc + 22.226627911329174*fl + 8.379856343845994*ac, weight = -3739.992331993433 + 181.2100414152991*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample2.base.0.6.miss" are  (t = 35) learned models: weight = -5072.928944468229 + 38.095132785967834*bpd + 1.4928722547928688*hc + 15.61230541947586*fl + 9.677023145427324*ac, weight = -3633.5892672197997 + 177.74268626445752*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample1.base.0.8.miss" are  (t = 53) learned models: weight = -5081.37554551468 + 32.21198268569318*bpd + 2.9029984879186506*hc + 19.806782279454996*fl + 9.050176648264548*ac, weight = -3602.9670193577026 + 177.3732638338944*age
+
+
+
+========== Algorithm "drem" ==========
+Setup result of algorithm "drem" on training dataset "hdp_sample2.base.0.8.miss" are  (t = 51) learned models: weight = -4683.312020180732 + 32.85917322825044*bpd + 1.8881351391807257*hc + 13.187578942766148*fl + 10.023715778792777*ac, weight = -3416.457638383449 + 171.99308956481343*age
+
+
+

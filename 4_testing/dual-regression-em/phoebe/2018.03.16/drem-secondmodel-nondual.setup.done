@@ -1,0 +1,50 @@
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample1.base" (done) are  (t = 1) learned models: weight = -5728.637331477821 + 45.13436989456939*bpd + 2.559119580381024*hc + 18.90915198628791*fl + 7.989859897672536*ac, weight = -3820.147915655499 + 181.97839408713827*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample2.base" (done) are  (t = 1) learned models: weight = -5685.0574679932 + 47.27268877507859*bpd + 1.3630370531957392*hc + 13.774886098852885*fl + 9.588691685376652*ac, weight = -3970.1407557161097 + 187.3781751526476*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample1.base.0.2.miss" (done) are  (t = 3) learned models: weight = -5647.409317381882 + 42.59693267297746*bpd + 2.5708248611330857*hc + 19.368209014996843*fl + 8.328971752500538*ac, weight = -3910.203066697638 + 184.71582102915806*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample2.base.0.2.miss" (done) are  (t = 6) learned models: weight = -5624.398154783732 + 44.32517094182542*bpd + 1.31582657427685*hc + 17.996921737067524*fl + 9.401004526642826*ac, weight = -3950.7140228121725 + 187.02232967585218*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample1.base.0.4.miss" (done) are  (t = 8) learned models: weight = -5797.925680066606 + 44.75208228969552*bpd + 2.2256342256174326*hc + 22.157049267027823*fl + 7.981853294821987*ac, weight = -3849.9582373235435 + 182.80967396645835*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample2.base.0.4.miss" (done) are  (t = 8) learned models: weight = -5620.417746620072 + 46.636182831091645*bpd + 0.537782671877034*hc + 15.28526545754912*fl + 10.08758897281794*ac, weight = -4032.1442458837637 + 189.34187088893657*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample1.base.0.6.miss" (done) are  (t = 13) learned models: weight = -5718.883699356926 + 45.8368078261989*bpd + 1.1910906098969676*hc + 26.77290286032284*fl + 7.446849187236711*ac, weight = -3739.6384226686687 + 179.74933860451503*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample2.base.0.6.miss" (done) are  (t = 15) learned models: weight = -5706.103821337459 + 52.97026039487751*bpd + 1.1066964459309496*hc + 13.622056692519134*fl + 8.383851060993617*ac, weight = -3900.9241409938018 + 185.28179948388072*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample1.base.0.8.miss" (done) are  (t = 40) learned models: weight = -5874.97160339912 + 51.80419037084977*bpd + 1.4529104497458727*hc - 0.1567256953923355*fl + 11.749318302219951*ac, weight = -4175.166235715949 + 191.78959594717236*age
+
+
+
+========== Algorithm "drem-secondmodel-nondual" ==========
+Setup result of algorithm "drem-secondmodel-nondual" on training dataset "hdp_sample2.base.0.8.miss" (done) are  (t = 27) learned models: weight = -5545.0418103758175 + 49.06060426898475*bpd - 0.02403632983294779*hc + 5.379547298400464*fl + 11.879415851369474*ac, weight = -4320.61061640448 + 198.51532323365274*age
+
+
+
