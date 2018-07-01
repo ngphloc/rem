@@ -35,6 +35,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	
 	/**
+	 * Regression indices field.
+	 */
+	protected final static String REGRESSION_INDICES = "rem_regression_indices";
+
+	
+	/**
 	 * Variable contains complete data of X.
 	 */
 	protected List<double[]> xData = Util.newList(); //1, x1, x2,..., x(n-1)
@@ -90,14 +96,23 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return null;
 		}
 		this.attList = profile0.getAttRef();
-		//Begin change this snippet
-		zIndices.add(-1); // due to Z = (1, z)
-		zIndices.add(n - 1);
-		xIndices.add(-1); // due to X = (1, x1, x2,..., x(n-1))
-		for (int j = 0; j < n - 1; j++)
-			xIndices.add(j);
-		//End change this snippet
-		if (zIndices.size() < 2 || xIndices.size() < 2) {
+		this.xIndices.add(-1); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
+		this.zIndices.add(-1); // due to Z = (1, z) and there is no 1 in data.
+		
+		List<Integer> indices = new ArrayList<>();
+		if (this.getConfig().containsKey(REGRESSION_INDICES))
+			indices = TextParserUtil.parseListByClass(this.getConfig().getAsString(REGRESSION_INDICES), Integer.class, ",");
+		if (indices == null || indices.size() < 2) {
+			for (int j = 0; j < n - 1; j++)
+				this.xIndices.add(j);
+			this.zIndices.add(n - 1);
+		}
+		else {
+			for (int j = 0; j < indices.size() - 1; j++)
+				this.xIndices.add(indices.get(j));
+			this.zIndices.add(indices.get(indices.size() - 1));
+		}
+		if (this.zIndices.size() < 2 || this.xIndices.size() < 2) {
 			unsetup();
 			return null;
 		}
@@ -422,6 +437,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		DefaultRegressionEM em = new DefaultRegressionEM();
 		em.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return em;
+	}
+
+
+	@Override
+	public DataConfig createDefaultConfig() {
+		// TODO Auto-generated method stub
+		DataConfig config = super.createDefaultConfig();
+		return config;
 	}
 
 	
