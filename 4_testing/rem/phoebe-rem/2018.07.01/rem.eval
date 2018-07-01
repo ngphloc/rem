@@ -1,0 +1,116 @@
+========== Algorithm "rem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.drem = [18.813135790153, 222.308761712036]
+Hudup recall = 1.0
+MAE.drem = 164.377651754199
+MSE.drem = 49776.11961219745
+R.drem = 0.959528672524
+RMSE.drem = 223.105624340126
+Setup time = 4.770999908447
+Speed = 1.16731519E-4
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.drem = [-18.557434385504, 226.922222002826]
+Hudup recall = 1.0
+MAE.drem = 171.536747000448
+MSE.drem = 51839.073209671835
+R.drem = 0.958790531409
+RMSE.drem = 227.681956267228
+Setup time = 0.206000000238
+Speed = 9.746589E-6
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.drem = [-29.3863095212, 252.532019037331]
+Hudup recall = 1.0
+MAE.drem = 187.493399941694
+MSE.drem = 64636.975826346905
+R.drem = 0.951353803426
+RMSE.drem = 254.23802985853
+Setup time = 23.502000808716
+Speed = 1.38132295E-4
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.drem = [-66.190470188192, 245.806597534393]
+Hudup recall = 1.0
+MAE.drem = 194.940937168119
+MSE.drem = 64803.061735168885
+R.drem = 0.953405277049
+RMSE.drem = 254.564454971956
+Setup time = 223.063003540039
+Speed = 1.9493178E-5
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.drem = [13.765305197003, 311.525904823935]
+Hudup recall = 1.0
+MAE.drem = 224.382828556689
+MSE.drem = 97238.87300353793
+R.drem = 0.925789324707
+RMSE.drem = 311.831481738996
+Setup time = 27.17200088501
+Speed = 5.836576E-6
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.drem = [-30.197823474111, 316.428766452117]
+Hudup recall = 1.0
+MAE.drem = 246.585234397801
+MSE.drem = 101040.07278098229
+R.drem = 0.929543801
+RMSE.drem = 317.868011572386
+Setup time = 58.27799987793
+Speed = 7.797271E-6
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.drem = [28.393881306106, 314.082240254698]
+Hudup recall = 1.0
+MAE.drem = 237.528682724301
+MSE.drem = 99454.86613903515
+R.drem = 0.923782009159
+RMSE.drem = 315.36465581773
+Setup time = 41.168998718262
+Speed = 7.782102E-6
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.drem = [-14.117938786682, 309.487140535992]
+Hudup recall = 1.0
+MAE.drem = 239.158480105555
+MSE.drem = 95982.6063527291
+R.drem = 0.927621360951
+RMSE.drem = 309.810597547484
+Setup time = 13.206999778748
+Speed = 5.847953E-6
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.drem = [-27.184249249501, 467.880302167991]
+Hudup recall = 1.0
+MAE.drem = 344.602583791551
+MSE.drem = 219651.96056406962
+R.drem = 0.839661403178
+RMSE.drem = 468.670417846134
+Setup time = 82.612998962402
+Speed = 9.5330739E-5
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.drem = [-1549.976010639773, 1407.726947400215]
+Hudup recall = 1.0
+MAE.drem = 1752.190123074598
+MSE.drem = 4384121.7919955095
+R.drem = -0.635386888649
+RMSE.drem = 2093.829456282319
+Setup time = 48.81600189209
+Speed = 0.0
+----- Testing dataset "10" -----
+
+========== Algorithm "rem" - Final result ==========
+
+
+
