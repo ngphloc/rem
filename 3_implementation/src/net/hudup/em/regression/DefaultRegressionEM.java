@@ -8,6 +8,7 @@ import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
+import net.hudup.Evaluator;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
@@ -238,28 +239,25 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		// TODO Auto-generated method stub
 		double[] zStatistic = ((InternalParameter)currentStatistic).getArray();
 		List<double[]> xStatistics = ((InternalParameter)currentStatistic).getArrayList();
-		if (zStatistic.length == 0 || xStatistics.size() <= 1)
+		if (zStatistic.length == 0 || xStatistics.size() != zStatistic.length)
 			return null;
 		
 		int N = zStatistic.length;
-		int n = xStatistics.size(); //1, x1, x2,..., x(n-1)
+		int n = xStatistics.get(0).length; //1, x1, x2,..., x(n-1)
 		RealMatrix X = MatrixUtils.createRealMatrix(xStatistics.toArray(new double[N][n]));
-		RealVector z = new ArrayRealVector(N);
-		for (int i = 0; i < N; i++) {
-			z.setEntry(i, zStatistic[i]);
-		}
+		RealVector z = new ArrayRealVector(zStatistic);
 		RealMatrix Xt = X.transpose();
 		double[] alpha = MatrixUtils.inverse(Xt.multiply(X)).multiply(Xt).operate(z).
 					toArray();
 		
-		List<double[]> betas = ((InternalParameter)currentParameter).getArrayList();
+		List<double[]> betas = new ArrayList<>();
 		for (int j = 0; j < n; j++) {
 			RealMatrix Z = MatrixUtils.createRealMatrix(N, 2);
 			RealVector x = new ArrayRealVector(N);
 			for (int i = 0; i < N; i++) {
 				Z.setEntry(i, 0, 1);
 				Z.setEntry(i, 1, zStatistic[i]);
-				x.setEntry(i, xStatistics.get(j)[i]);
+				x.setEntry(i, xStatistics.get(i)[j]);
 			}
 			RealMatrix Zt = Z.transpose();
 			double[] beta = MatrixUtils.inverse(Zt.multiply(Z)).multiply(Zt).operate(x).
@@ -322,14 +320,20 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		int N = this.zData.size();
 		int n = this.xData.get(0).length;
 		
-		double[] alpha0 = new double[N];
-		for (int i = 0; i < N; i++)
-			alpha0[i] = 0;
+		double[] alpha0 = new double[n];
+		for (int j = 0; j < n; j++)
+			alpha0[j] = 0;
 		List<double[]> betas0 = new ArrayList<>();
 		for (int j = 0; j < n; j++) {
 			double[] beta0 = new double[2];
-			beta0[0] = 0;
-			beta0[1] = 0;
+			if (j == 0) {
+				beta0[0] = 1;
+				beta0[1] = 0;
+			}
+			else {
+				beta0[0] = 0;
+				beta0[1] = 0;
+			}
 			betas0.add(beta0);
 		}
 		InternalParameter parameter0 = new InternalParameter(alpha0, betas0);
@@ -420,7 +424,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (name != null && !name.isEmpty())
 			return name;
 		else
-			return "rem.default";
+			return "rem";
 	}
 
 	
@@ -480,5 +484,16 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		return TextParserUtil.toText(array, ",");
 	}
 
+	
+	/**
+	 * The main method to start evaluator.
+	 * @param args The argument parameter of main method. It contains command line arguments.
+	 * @throws Exception if there is any error.
+	 */
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		new Evaluator().run(args);
+	}
+	
 	
 }
