@@ -7,8 +7,8 @@ MAE.drem = 164.377651754199
 MSE.drem = 49776.11961219745
 R.drem = 0.959528672524
 RMSE.drem = 223.105624340126
-Setup time = 4.770999908447
-Speed = 1.16731519E-4
+Setup time = 0.856000006199
+Speed = 1.3618678E-5
 ----- Testing dataset "1" -----
 
 ----- Testing dataset "2" -----
@@ -18,96 +18,96 @@ MAE.drem = 171.536747000448
 MSE.drem = 51839.073209671835
 R.drem = 0.958790531409
 RMSE.drem = 227.681956267228
-Setup time = 0.206000000238
-Speed = 9.746589E-6
+Setup time = 0.402999997139
+Speed = 7.797271E-6
 ----- Testing dataset "2" -----
 
 ----- Testing dataset "3" -----
-ErrorRange.drem = [-29.3863095212, 252.532019037331]
+ErrorRange.drem = [13.863040726795, 223.387083049108]
 Hudup recall = 1.0
-MAE.drem = 187.493399941694
-MSE.drem = 64636.975826346905
-R.drem = 0.951353803426
-RMSE.drem = 254.23802985853
-Setup time = 23.502000808716
-Speed = 1.38132295E-4
+MAE.drem = 166.627605636808
+MSE.drem = 50094.9727713819
+R.drem = 0.959231983019
+RMSE.drem = 223.819062573727
+Setup time = 1.223000049591
+Speed = 1.945525E-6
 ----- Testing dataset "3" -----
 
 ----- Testing dataset "4" -----
-ErrorRange.drem = [-66.190470188192, 245.806597534393]
+ErrorRange.drem = [-10.142672431883, 227.4363811441]
 Hudup recall = 1.0
-MAE.drem = 194.940937168119
-MSE.drem = 64803.061735168885
-R.drem = 0.953405277049
-RMSE.drem = 254.564454971956
-Setup time = 223.063003540039
-Speed = 1.9493178E-5
+MAE.drem = 173.317195063687
+MSE.drem = 51831.18127198459
+R.drem = 0.95884721119
+RMSE.drem = 227.664624551081
+Setup time = 1.287999987602
+Speed = 3.898636E-6
 ----- Testing dataset "4" -----
 
 ----- Testing dataset "5" -----
-ErrorRange.drem = [13.765305197003, 311.525904823935]
+ErrorRange.drem = [31.289358799276, 223.696742542384]
 Hudup recall = 1.0
-MAE.drem = 224.382828556689
-MSE.drem = 97238.87300353793
-R.drem = 0.925789324707
-RMSE.drem = 311.831481738996
-Setup time = 27.17200088501
-Speed = 5.836576E-6
+MAE.drem = 168.690840206493
+MSE.drem = 51020.25659814323
+R.drem = 0.959116375078
+RMSE.drem = 225.876640222364
+Setup time = 7.545000076294
+Speed = 3.891051E-6
 ----- Testing dataset "5" -----
 
 ----- Testing dataset "6" -----
-ErrorRange.drem = [-30.197823474111, 316.428766452117]
+ErrorRange.drem = [-3.90876534025, 230.420448929024]
 Hudup recall = 1.0
-MAE.drem = 246.585234397801
-MSE.drem = 101040.07278098229
-R.drem = 0.929543801
-RMSE.drem = 317.868011572386
-Setup time = 58.27799987793
-Speed = 7.797271E-6
+MAE.drem = 177.983636264257
+MSE.drem = 53109.86173113796
+R.drem = 0.95823031247
+RMSE.drem = 230.455769576589
+Setup time = 7.308000087738
+Speed = 9.746589E-6
 ----- Testing dataset "6" -----
 
 ----- Testing dataset "7" -----
-ErrorRange.drem = [28.393881306106, 314.082240254698]
+ErrorRange.drem = [-60.191262753573, 242.120641722525]
 Hudup recall = 1.0
-MAE.drem = 237.528682724301
-MSE.drem = 99454.86613903515
-R.drem = 0.923782009159
-RMSE.drem = 315.36465581773
-Setup time = 41.168998718262
-Speed = 7.782102E-6
+MAE.drem = 192.376316300383
+MSE.drem = 62246.3932599972
+R.drem = 0.953961745942
+RMSE.drem = 249.492270942403
+Setup time = 858.773010253906
+Speed = 1.7509728E-5
 ----- Testing dataset "7" -----
 
 ----- Testing dataset "8" -----
-ErrorRange.drem = [-14.117938786682, 309.487140535992]
+ErrorRange.drem = [23.436042990347, 247.247244680678]
 Hudup recall = 1.0
-MAE.drem = 239.158480105555
-MSE.drem = 95982.6063527291
-R.drem = 0.927621360951
-RMSE.drem = 309.810597547484
-Setup time = 13.206999778748
-Speed = 5.847953E-6
+MAE.drem = 191.502008802145
+MSE.drem = 61681.44811323249
+R.drem = 0.950885255066
+RMSE.drem = 248.357500618025
+Setup time = 764.044006347656
+Speed = 9.746589E-6
 ----- Testing dataset "8" -----
 
 ----- Testing dataset "9" -----
-ErrorRange.drem = [-27.184249249501, 467.880302167991]
+ErrorRange.drem = [-17.72861788203, 253.986262282353]
 Hudup recall = 1.0
-MAE.drem = 344.602583791551
-MSE.drem = 219651.96056406962
-R.drem = 0.839661403178
-RMSE.drem = 468.670417846134
-Setup time = 82.612998962402
-Speed = 9.5330739E-5
+MAE.drem = 196.427006715892
+MSE.drem = 64824.32532016743
+R.drem = 0.95019657129
+RMSE.drem = 254.606216185244
+Setup time = 268.43701171875
+Speed = 5.836576E-6
 ----- Testing dataset "9" -----
 
 ----- Testing dataset "10" -----
-ErrorRange.drem = [-1549.976010639773, 1407.726947400215]
+ErrorRange.drem = [6.947232844752, 318.562729218402]
 Hudup recall = 1.0
-MAE.drem = 1752.190123074598
-MSE.drem = 4384121.7919955095
-R.drem = -0.635386888649
-RMSE.drem = 2093.829456282319
-Setup time = 48.81600189209
-Speed = 0.0
+MAE.drem = 253.00484076189
+MSE.drem = 101531.47649127591
+R.drem = 0.920026309344
+RMSE.drem = 318.640042196953
+Setup time = 118.475997924805
+Speed = 4.8732944E-5
 ----- Testing dataset "10" -----
 
 ========== Algorithm "rem" - Final result ==========

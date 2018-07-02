@@ -573,31 +573,33 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
-		double[] dualCoeffs = (double[])estimatedParameter;
-		if (dualCoeffs == null || dualCoeffs.length == 0)
+		if (this.getParameter() == null)
+			return "";
+		double[] dualCoeffs = (double[])this.getParameter();
+		if (dualCoeffs.length == 0)
 			return "";
 
 		StringBuffer buffer = new StringBuffer();
 		RealVector alpha = extractAlpha(dualCoeffs);
-		buffer.append(attList.get(attList.size() - 1).getName() + " = " + alpha.getEntry(0));
-		for (int i = 0; i < n; i++) {
+		buffer.append(this.attList.get(attList.size() - 1).getName() + " = " + alpha.getEntry(0));
+		for (int i = 0; i < this.n; i++) {
 			double coeff = alpha.getEntry(i + 1);
 			if (coeff < 0)
-				buffer.append(" - " + Math.abs(coeff) + "*" + attList.get(i).getName());
+				buffer.append(" - " + Math.abs(coeff) + "*" + this.attList.get(i).getName());
 			else
-				buffer.append(" + " + coeff + "*" + attList.get(i).getName());
+				buffer.append(" + " + coeff + "*" + this.attList.get(i).getName());
 		}
 		
 		buffer.append(", ");
 		
 		RealVector beta = extractBeta(dualCoeffs);
-		buffer.append(attList.get(attList.size() - 1).getName() + " = " + beta.getEntry(0));
+		buffer.append(this.attList.get(this.attList.size() - 1).getName() + " = " + beta.getEntry(0));
 		for (int i = 0; i < k; i++) {
 			double coeff = beta.getEntry(i + 1);
 			if (coeff < 0)
-				buffer.append(" - " + Math.abs(coeff) + "*" + attList.get(i + n).getName());
+				buffer.append(" - " + Math.abs(coeff) + "*" + this.attList.get(i + this.n).getName());
 			else
-				buffer.append(" + " + coeff + "*" + attList.get(i + n).getName());
+				buffer.append(" + " + coeff + "*" + this.attList.get(i + this.n).getName());
 		}
 		
 		return buffer.toString();
@@ -605,7 +607,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 
 	@Override
-	public String parameterToShownText(Object parameter) {
+	public String parameterToShownText(Object parameter, Object...info) {
 		// TODO Auto-generated method stub
 		if (parameter == null || !(parameter instanceof double[]))
 			return "";
