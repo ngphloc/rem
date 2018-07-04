@@ -230,7 +230,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		int n = xStatistics.get(0).length; //1, x1, x2,..., x(n-1)
 		RealMatrix X = MatrixUtils.createRealMatrix(xStatistics.toArray(new double[N][n]));
 		RealVector z = new ArrayRealVector(zStatistics);
-		double[] alpha = calcBeta(X, z);;
+		double[] alpha = calcCoeffs(X, z);;
 		
 		List<double[]> betas = new ArrayList<>();
 		for (int j = 0; j < n; j++) {
@@ -249,7 +249,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				Z.setEntry(i, 1, zStatistics[i]);
 				x.setEntry(i, xStatistics.get(i)[j]);
 			}
-			double[] beta = calcBeta(Z, x);
+			double[] beta = calcCoeffs(Z, x);
 			betas.add(beta);
 		}
 		
@@ -258,14 +258,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	
 	
 	/**
-	 * Calculating beta coefficient based on data matrix and data vector.
+	 * Calculating coefficients based on data matrix and data vector.
 	 * This method will be improved in the next version.
 	 * @param Z specified data matrix.
 	 * @param x specified data vector.
 	 * @return beta coefficient base on data matrix and data vector.
 	 */
 	@NextUpdate
-	protected double[] calcBeta(RealMatrix Z, RealVector x) {
+	protected double[] calcCoeffs(RealMatrix Z, RealVector x) {
 		try {
 			RealMatrix Zt = Z.transpose();
 			return MatrixUtils.inverse(Zt.multiply(Z)).multiply(Zt).operate(x).
@@ -655,7 +655,6 @@ class Statistics {
 	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
 	 * @return estimated statistics with specified parameters alpha and beta.
 	 */
-	@NextUpdate
 	protected Statistics estimate2(double[] alpha, List<double[]> betas, double threshold, int maxIteration) {
 		double zValue = this.getZStatistic();
 		double[] xVector = this.getXStatistic();
@@ -699,18 +698,10 @@ class Statistics {
 				}
 				y.setEntry(i, -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b);
 			}
-			try {
-				DecompositionSolver solver = new LUDecomposition(A).getSolver();
-				RealVector solution = solver.solve(y); //solve Ax = y
-				for (int j = 0; j < U.size(); j++)
-					xStatistic[U.get(j)] = solution.getEntry(j);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				//This is work-around solution, which will be improved in the next version.
-				for (int j = 0; j < U.size(); j++)
-					xStatistic[U.get(j)] = 0;
-			}
+			
+			double[] solution = solve(A, y); //solve Ax = y
+			for (int j = 0; j < U.size(); j++)
+				xStatistic[U.get(j)] = solution[j];
 		}
 		
 		//Estimating missing zi (zStatistic) by equation 4, based on current parameter.
@@ -724,10 +715,37 @@ class Statistics {
 	
 	
 	/**
+	 * Solving the equation Ax = b.
+	 * @param A specified matrix.
+	 * @param b specified vector.
+	 * @return solution x of the equation Ax = b.
+	 */
+	@NextUpdate
+	protected double[] solve(RealMatrix A, RealVector b) {
+		double[] x = new double[b.getDimension()];
+		try {
+			DecompositionSolver solver = new LUDecomposition(A).getSolver();
+			RealVector solution = solver.solve(b); //solve Ax = b
+			for (int j = 0; j < b.getDimension(); j++)
+				x[j] = solution.getEntry(j);
+			
+			return x;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//This is work-around solution, which will be improved in the next version.
+		for (int j = 0; j < b.getDimension(); j++)
+			x[j] = 0;
+		return x;
+	}
+	
+	
+	/**
 	 * Estimating statistics with specified parameters alpha and beta.
 	 * @param alpha specified alpha parameter.
 	 * @param betas specified alpha parameters.
-	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
 	 * @return estimated statistics with specified parameters alpha and beta.
 	 */
 	public Statistics estimate2(double[] alpha, List<double[]> betas) {
@@ -743,6 +761,7 @@ class Statistics {
 	 * @param xStatistic statistic for X variables.
 	 * @param U list of missing X values.
 	 * @param threshold threshold for terminated condition in balancing process.
+	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
 	 * @return balanced statistics for Z and X variables.
 	 */
 	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
