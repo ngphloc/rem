@@ -1,6 +1,7 @@
 package net.hudup.em.regression;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
@@ -20,7 +21,6 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.parser.TextParserUtil;
-import net.hudup.em.EM;
 import net.hudup.em.ExponentialEM;
 
 
@@ -42,7 +42,19 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Regression indices field.
 	 */
-	protected final static String REM_INDICES = "rem_indices";
+	protected final static String REM_INDICES_FIELD = "rem_indices";
+
+	
+	/**
+	 * Inverse mode field name.
+	 */
+	protected final static String REM_INVERSE_MODE_FIELD = "rem_inverse_mode";
+
+	
+	/**
+	 * Default inverse mode field.
+	 */
+	protected final static boolean REM_INVERSE_MODE_DEFAULT = false;
 
 	
 	/**
@@ -111,8 +123,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		zIndices.add(-1); // due to Z = (1, z) and there is no 1 in data.
 		
 		List<Integer> indices = new ArrayList<>();
-		if (this.getConfig().containsKey(REM_INDICES)) {
-			String cfgIndices = this.getConfig().getAsString(REM_INDICES).trim();
+		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
+			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
 			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
 				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
 		}
@@ -206,9 +218,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		List<double[]> xStatistics = new ArrayList<>();
 		for (int i = 0; i < N; i++) {
 			Statistics stat = new Statistics(this.zData.get(i)[1], this.xData.get(i));
-			stat = stat.estimate(alpha, betas,
-					getConfig().getAsReal(EM_EPSILON_FIELD),
-					getConfig().getAsInt(EM_MAX_ITERATION_FIELD));
+			if (!getConfig().getAsBoolean(REM_INVERSE_MODE_FIELD))
+				stat = estimate(stat, alpha, betas);
+			else
+				stat = estimateInverse(stat, alpha, betas);
 			
 			zStatistics[i] = stat.getZStatistic();
 			xStatistics.add(stat.getXStatistic());
@@ -225,12 +238,15 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		List<double[]> xStatistics = ((ExchangedParameter)currentStatistic).getMatrix();
 		if (zStatistics.length == 0 || xStatistics.size() != zStatistics.length)
 			return null;
+		ExchangedParameter currentParameter = (ExchangedParameter) getCurrentParameter();
 		
 		int N = zStatistics.length;
 		int n = xStatistics.get(0).length; //1, x1, x2,..., x(n-1)
 		RealMatrix X = MatrixUtils.createRealMatrix(xStatistics.toArray(new double[N][n]));
 		RealVector z = new ArrayRealVector(zStatistics);
-		double[] alpha = calcCoeffs(X, z);;
+		double[] alpha = calcCoeffs(X, z);
+		if (alpha == null)
+			alpha = Arrays.copyOf(currentParameter.vector, currentParameter.vector.length);
 		
 		List<double[]> betas = new ArrayList<>();
 		for (int j = 0; j < n; j++) {
@@ -250,6 +266,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				x.setEntry(i, xStatistics.get(i)[j]);
 			}
 			double[] beta = calcCoeffs(Z, x);
+			if (beta == null) {
+				beta = Arrays.copyOf(currentParameter.matrix.get(j),
+						currentParameter.matrix.get(j).length);
+			}
 			betas.add(beta);
 		}
 		
@@ -257,29 +277,127 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	}
 	
 	
+	
 	/**
-	 * Calculating coefficients based on data matrix and data vector.
-	 * This method will be improved in the next version.
-	 * @param Z specified data matrix.
-	 * @param x specified data vector.
-	 * @return beta coefficient base on data matrix and data vector.
+	 * Estimating statistics with specified parameters alpha and beta.
+	 * @param stat specified statistics.
+	 * @param alpha specified alpha parameter.
+	 * @param betas specified alpha parameters.
+	 * @return estimated statistics with specified parameters alpha and beta.
 	 */
-	@NextUpdate
-	protected double[] calcCoeffs(RealMatrix Z, RealVector x) {
-		try {
-			RealMatrix Zt = Z.transpose();
-			return MatrixUtils.inverse(Zt.multiply(Z)).multiply(Zt).operate(x).
-						toArray();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+	protected Statistics estimate(Statistics stat, double[] alpha, List<double[]> betas) {
+		double zValue = stat.getZStatistic();
+		double[] xVector = stat.getXStatistic();
+		double zStatistic = Constants.UNUSED;
+		double[] xStatistic = new double[xVector.length];
+		
+		if (Util.isUsed(zValue)) {
+			zStatistic = zValue;
+			
+			//Estimating missing xij (xStatistic) by equation 5 and zi (zStatistic) above, based on current parameter.
+			for (int j = 0; j < xVector.length; j++) {
+				if (Util.isUsed(xVector[j]))
+					xStatistic[j] = xVector[j];
+				else
+					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
+			}
+			
+			return new Statistics(zStatistic, xStatistic);
 		}
 		
-		//This is work-around solution, which is improved in the next version.
-		double[] beta0 = new double[x.getDimension()];
-		for (int j = 0; j < beta0.length; j++)
-			beta0[j] = 0;
-		return beta0;
+		//Estimating missing zi (zStatistic) by equation 7, based on current parameter.
+		int a = 0, b = 0, c = 0;
+		List<Integer> U = new ArrayList<>();
+		for (int j = 0; j < xVector.length; j++) {
+			if (Util.isUsed(xVector[j])) {
+				b += alpha[j] * xVector[j];
+			}
+			else {
+				a += alpha[j] * betas.get(j)[0];
+				c += alpha[j] * betas.get(j)[1];
+				U.add(j);
+			}
+		}
+		if (c != 1)
+			zStatistic = (a + b) / (1 - c);
+		else
+			zStatistic = 0; //Fixing zero denominator
+		
+		//Estimating missing xij (xStatistic) by equation 5 and estimated zi (zStatistic) above, based on current parameter.
+		for (int j = 0; j < xVector.length; j++) {
+			if (Util.isUsed(xVector[j]))
+				xStatistic[j] = xVector[j];
+			else
+				xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
+		}
+		
+		return balanceStatistics(alpha, betas, zStatistic, xStatistic, U);
+	}
+
+	
+	/**
+	 * Estimating statistics with specified parameters alpha and beta.
+	 * @param stat specified statistics.
+	 * @param alpha specified alpha parameter.
+	 * @param betas specified alpha parameters.
+	 * @return estimated statistics with specified parameters alpha and beta.
+	 */
+	protected Statistics estimateInverse(Statistics stat, double[] alpha, List<double[]> betas) {
+		double zValue = stat.getZStatistic();
+		double[] xVector = stat.getXStatistic();
+		double zStatistic = Constants.UNUSED;
+		double[] xStatistic = new double[xVector.length];
+		
+		if (Util.isUsed(zValue)) {
+			zStatistic = zValue;
+			//Estimating missing xij (xStatistic) by equation 5 and zi (zStatistic) above, based on current parameter.
+			for (int j = 0; j < xVector.length; j++) {
+				if (Util.isUsed(xVector[j]))
+					xStatistic[j] = xVector[j];
+				else
+					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
+			}
+			
+			return new Statistics(zStatistic, xStatistic);
+		}
+		
+		List<Integer> U = new ArrayList<>();
+		int b = 0;
+		for (int j = 0; j < xVector.length; j++) {
+			if (Util.isUsed(xVector[j])) {
+				b += alpha[j] * xVector[j];
+				xStatistic[j] = xVector[j]; //existent xij
+			}
+			else
+				U.add(j);
+		}
+
+		if (U.size() > 0) {
+			//Estimating missing xij (xStatistic) by equation 8, based on current parameter.
+			RealMatrix A = MatrixUtils.createRealMatrix(U.size(), U.size());
+			RealVector y = new ArrayRealVector(U.size());
+			for (int i = 0; i < U.size(); i++) {
+				for (int j = 0; j < U.size(); j++) {
+					if (i == j)
+						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)] - 1);
+					else
+						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)]);
+				}
+				y.setEntry(i, -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b);
+			}
+			
+			double[] solution = solve(A, y); //solve Ax = y
+			for (int j = 0; j < U.size(); j++)
+				xStatistic[U.get(j)] = solution[j];
+		}
+		
+		//Estimating missing zi (zStatistic) by equation 4, based on current parameter.
+		zStatistic = 0;
+		for (int j = 0; j < xStatistic.length; j++) {
+			zStatistic += alpha[j] * xStatistic[j];
+		}
+		
+		return balanceStatistics(alpha, betas, zStatistic, xStatistic, U);
 	}
 	
 	
@@ -290,8 +408,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		int n = this.xData.get(0).length;
 		
 		double[] alpha0 = new double[n];
-		for (int j = 0; j < n; j++)
-			alpha0[j] = 0;
+		Arrays.fill(alpha0, 0.0);
 		List<double[]> betas0 = new ArrayList<>();
 		for (int j = 0; j < n; j++) {
 			double[] beta0 = new double[2];
@@ -417,7 +534,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(REM_INDICES, "-1, -1, -1"); //Not used
+		config.put(REM_INDICES_FIELD, "-1, -1, -1"); //Not used
+		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
 		return config;
 	}
 
@@ -462,7 +580,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @author Loc Nguyen
 	 * @version 1.0
 	 */
-	public static class ExchangedParameter {
+	protected class ExchangedParameter {
 		
 		/**
 		 * Vector parameter.
@@ -513,207 +631,143 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	}
 	
 	
-}
+	/**
+	 * This class represents a compound statistic.
+	 * @author Loc Nguyen
+	 * @version 1.0
+	 * 
+	 */
+	protected class Statistics {
 
-
-/**
- * This class represents a compound statistic.
- * @author Loc Nguyen
- * @version 1.0
- * 
- */
-class Statistics {
+		/**
+		 * Statistic for Z variable.
+		 */
+		protected double zStatistic = Constants.UNUSED;
+		
+		
+		/**
+		 * Statistic for X variables.
+		 */
+		protected double[] xStatistic = new double[0];
+		
+		
+		/**
+		 * Constructor with specified statistic for Z variable and statistic for X variables.
+		 * @param zStatistic statistic for Z variable.
+		 * @param xStatistic statistic for X variables.
+		 */
+		public Statistics(double zStatistic, double[] xStatistic) {
+			this.zStatistic = zStatistic;
+			this.xStatistic = xStatistic;
+		}
+		
+		
+		/**
+		 * Getting statistic for Z variable.
+		 * @return statistic for Z variable.
+		 */
+		public double getZStatistic() {
+			return zStatistic;
+		}
+		
+		
+		/**
+		 * Getting statistic for X variables.
+		 * @return statistic for X variables.
+		 */
+		public double[] getXStatistic() {
+			return xStatistic;
+		}
+		
+	}
 	
 	
 	/**
-	 * Maximum iteration for estimation.
-	 */
-	public final static int MAX_ESTIMATION_ITERATION = EM.EM_MAX_ITERATION;
-	
-	
-	/**
-	 * Threshold of terminated condition for estimation process.
-	 */
-	public final static double TERMINATED_ESTIMATION_THRESHOLD = EM.EM_DEFAULT_EPSILON;
-	
-	
-	/**
-	 * Statistic for Z variable.
-	 */
-	protected double zStatistic = Constants.UNUSED;
-	
-	
-	/**
-	 * Statistic for X variables.
-	 */
-	protected double[] xStatistic = new double[0];
-	
-	
-	/**
-	 * Constructor with specified statistic for Z variable and statistic for X variables.
+	 * Balancing missing values zi (xStatistic) and xij (xValues).
+	 * @param alpha alpha coefficients.
+	 * @param betas beta coefficients.
 	 * @param zStatistic statistic for Z variable.
 	 * @param xStatistic statistic for X variables.
+	 * @param U list of missing X values.
+	 * @return balanced statistics for Z and X variables.
 	 */
-	public Statistics(double zStatistic, double[] xStatistic) {
-		this.zStatistic = zStatistic;
-		this.xStatistic = xStatistic;
-	}
-	
-	
-	/**
-	 * Getting statistic for Z variable.
-	 * @return statistic for Z variable.
-	 */
-	public double getZStatistic() {
-		return zStatistic;
-	}
-	
-	
-	/**
-	 * Getting statistic for X variables.
-	 * @return statistic for X variables.
-	 */
-	public double[] getXStatistic() {
-		return xStatistic;
-	}
-	
-	
-	/**
-	 * Estimating statistics with specified parameters alpha and beta.
-	 * @param alpha specified alpha parameter.
-	 * @param betas specified alpha parameters.
-	 * @param threshold threshold for terminated condition.
-	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
-	 * @return estimated statistics with specified parameters alpha and beta.
-	 */
-	protected Statistics estimate(double[] alpha, List<double[]> betas, double threshold, int maxIteration) {
-		double zValue = this.getZStatistic();
-		double[] xVector = this.getXStatistic();
-		double zStatistic = Constants.UNUSED;
-		double[] xStatistic = new double[xVector.length];
+	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
+			double zStatistic, double[] xStatistic,
+			List<Integer> U) {
 		
-		if (Util.isUsed(zValue)) {
-			zStatistic = zValue;
-			
-			//Estimating missing xij (xStatistic) by equation 5 and zi (zStatistic) above, based on current parameter.
-			for (int j = 0; j < xVector.length; j++) {
-				if (Util.isUsed(xVector[j]))
-					xStatistic[j] = xVector[j];
-				else
-					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-			}
-			
-			return new Statistics(zStatistic, xStatistic);
-		}
-		
-		//Estimating missing zi (zStatistic) by equation 7, based on current parameter.
-		int a = 0, b = 0, c = 0;
-		List<Integer> U = new ArrayList<>();
-		for (int j = 0; j < xVector.length; j++) {
-			if (Util.isUsed(xVector[j])) {
-				b += alpha[j] * xVector[j];
+		double zStatisticNext = Constants.UNUSED;
+		double[] xStatisticNext = new double[xStatistic.length];
+		int t = 0;
+		int maxIteration = getConfig().getAsInt(EM_MAX_ITERATION_FIELD);
+		maxIteration = (maxIteration <= 0) ? EM_MAX_ITERATION : maxIteration;
+		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
+		while (t < maxIteration) {
+			if (!getConfig().getAsBoolean(REM_INVERSE_MODE_FIELD)) {
+				zStatisticNext = 0;
+				for (int j = 0; j < xStatistic.length; j++)
+					zStatisticNext += alpha[j] * xStatistic[j];
+				
+				for (int j = 0; j < xStatistic.length; j++) {
+					if (!U.contains(j))
+						xStatisticNext[j] = xStatistic[j];
+					else
+						xStatisticNext[j] = betas.get(j)[0] + betas.get(j)[1] * zStatisticNext;
+				}
 			}
 			else {
-				a += alpha[j] * betas.get(j)[0];
-				c += alpha[j] * betas.get(j)[1];
-				U.add(j);
-			}
-		}
-		if (c != 1)
-			zStatistic = (a + b) / (1 - c);
-		else
-			zStatistic = 0; //Fixing zero denominator
-		
-		//Estimating missing xij (xStatistic) by equation 5 and estimated zi (zStatistic) above, based on current parameter.
-		for (int j = 0; j < xVector.length; j++) {
-			if (Util.isUsed(xVector[j]))
-				xStatistic[j] = xVector[j];
-			else
-				xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-		}
-		
-		return balanceStatistics(alpha, betas, zStatistic, xStatistic, U, threshold, maxIteration);
-	}
-
-	
-	/**
-	 * Estimating statistics with specified parameters alpha and beta.
-	 * @param alpha specified alpha parameter.
-	 * @param betas specified alpha parameters.
-	 * @return estimated statistics with specified parameters alpha and beta.
-	 */
-	public Statistics estimate(double[] alpha, List<double[]> betas) {
-		return estimate(alpha, betas, TERMINATED_ESTIMATION_THRESHOLD, MAX_ESTIMATION_ITERATION);
-	}
-	
-	
-	/**
-	 * Estimating statistics with specified parameters alpha and beta.
-	 * @param alpha specified alpha parameter.
-	 * @param betas specified alpha parameters.
-	 * @param threshold threshold for terminated condition.
-	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
-	 * @return estimated statistics with specified parameters alpha and beta.
-	 */
-	protected Statistics estimate2(double[] alpha, List<double[]> betas, double threshold, int maxIteration) {
-		double zValue = this.getZStatistic();
-		double[] xVector = this.getXStatistic();
-		double zStatistic = Constants.UNUSED;
-		double[] xStatistic = new double[xVector.length];
-		
-		if (Util.isUsed(zValue)) {
-			zStatistic = zValue;
-			//Estimating missing xij (xStatistic) by equation 5 and zi (zStatistic) above, based on current parameter.
-			for (int j = 0; j < xVector.length; j++) {
-				if (Util.isUsed(xVector[j]))
-					xStatistic[j] = xVector[j];
-				else
-					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-			}
-			
-			return new Statistics(zStatistic, xStatistic);
-		}
-		
-		List<Integer> U = new ArrayList<>();
-		int b = 0;
-		for (int j = 0; j < xVector.length; j++) {
-			if (Util.isUsed(xVector[j])) {
-				b += alpha[j] * xVector[j];
-				xStatistic[j] = xVector[j]; //existent xij
-			}
-			else
-				U.add(j);
-		}
-
-		if (U.size() > 0) {
-			//Estimating missing xij (xStatistic) by equation 8, based on current parameter.
-			RealMatrix A = MatrixUtils.createRealMatrix(U.size(), U.size());
-			RealVector y = new ArrayRealVector(U.size());
-			for (int i = 0; i < U.size(); i++) {
-				for (int j = 0; j < U.size(); j++) {
-					if (i == j)
-						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)] - 1);
+				for (int j = 0; j < xStatistic.length; j++) {
+					if (!U.contains(j))
+						xStatisticNext[j] = xStatistic[j];
 					else
-						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)]);
+						xStatisticNext[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
 				}
-				y.setEntry(i, -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b);
+				
+				zStatisticNext = 0;
+				for (int j = 0; j < xStatistic.length; j++)
+					zStatisticNext += alpha[j] * xStatisticNext[j];
 			}
 			
-			double[] solution = solve(A, y); //solve Ax = y
-			for (int j = 0; j < U.size(); j++)
-				xStatistic[U.get(j)] = solution[j];
+			t++;
+			
+			boolean approx = (Math.abs(zStatisticNext - zStatistic) / Math.abs(zStatistic) <= threshold);
+			for (int j = 0; j < xStatistic.length; j++) {
+				approx &= (Math.abs(xStatisticNext[j] - xStatistic[j]) / Math.abs(xStatistic[j]) <= threshold);
+				if (!approx) break;
+			}
+			if (approx) break;
+			
+			zStatistic = zStatisticNext;
+			xStatistic = xStatisticNext;
+			zStatisticNext = Constants.UNUSED;
+			xStatisticNext = new double[xStatistic.length];
 		}
 		
-		//Estimating missing zi (zStatistic) by equation 4, based on current parameter.
-		zStatistic = 0;
-		for (int j = 0; j < xStatistic.length; j++) {
-			zStatistic += alpha[j] * xStatistic[j];
-		}
-		
-		return balanceStatistics(alpha, betas, zStatistic, xStatistic, U, threshold, maxIteration);
+		return new Statistics(zStatistic, xStatistic);
 	}
-	
-	
+
+
+	/**
+	 * Calculating coefficients based on data matrix and data vector.
+	 * This method will be improved in the next version.
+	 * @param Z specified data matrix.
+	 * @param x specified data vector.
+	 * @return beta coefficient base on data matrix and data vector.
+	 */
+	@NextUpdate
+	protected double[] calcCoeffs(RealMatrix Z, RealVector x) {
+		try {
+			RealMatrix Zt = Z.transpose();
+			return MatrixUtils.inverse(Zt.multiply(Z)).multiply(Zt).operate(x).
+						toArray();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
 	/**
 	 * Solving the equation Ax = b.
 	 * @param A specified matrix.
@@ -735,75 +789,9 @@ class Statistics {
 			e.printStackTrace();
 		}
 		
-		//This is work-around solution, which will be improved in the next version.
-		for (int j = 0; j < b.getDimension(); j++)
-			x[j] = 0;
-		return x;
-	}
-	
-	
-	/**
-	 * Estimating statistics with specified parameters alpha and beta.
-	 * @param alpha specified alpha parameter.
-	 * @param betas specified alpha parameters.
-	 * @return estimated statistics with specified parameters alpha and beta.
-	 */
-	public Statistics estimate2(double[] alpha, List<double[]> betas) {
-		return estimate2(alpha, betas, TERMINATED_ESTIMATION_THRESHOLD, MAX_ESTIMATION_ITERATION);
-	}
-	
-	
-	/**
-	 * Balancing missing values zi (xStatistic) and xij (xValues).
-	 * @param alpha alpha coefficients.
-	 * @param betas beta coefficients.
-	 * @param zStatistic statistic for Z variable.
-	 * @param xStatistic statistic for X variables.
-	 * @param U list of missing X values.
-	 * @param threshold threshold for terminated condition in balancing process.
-	 * @param maxIteration maximum number of iterations. Setting it as 0 by default.
-	 * @return balanced statistics for Z and X variables.
-	 */
-	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
-			double zStatistic, double[] xStatistic,
-			List<Integer> U, double threshold, int maxIteration) {
-		
-		double zStatisticNext = Constants.UNUSED;
-		double[] xStatisticNext = new double[xStatistic.length];
-		int t = 0;
-		maxIteration = (maxIteration <= 0) ? MAX_ESTIMATION_ITERATION : maxIteration;
-		while (t < maxIteration) {
-			zStatisticNext = 0;
-			for (int j = 0; j < xStatistic.length; j++)
-				zStatisticNext += alpha[j] * xStatistic[j];
-			
-			for (int j = 0; j < xStatistic.length; j++) {
-				if (!U.contains(j))
-					xStatisticNext[j] = xStatistic[j];
-				else
-					xStatisticNext[j] = betas.get(j)[0] + betas.get(j)[1] * zStatisticNext;
-			}
-			
-			t++;
-			
-			boolean approx = (Math.abs(zStatisticNext - zStatistic) / Math.abs(zStatistic) <= threshold);
-			for (int j = 0; j < xStatistic.length; j++) {
-				approx &= (Math.abs(xStatisticNext[j] - xStatistic[j]) / Math.abs(xStatistic[j]) <= threshold);
-				if (!approx) break;
-			}
-			if (approx) break;
-			
-			zStatistic = zStatisticNext;
-			xStatistic = xStatisticNext;
-			zStatisticNext = Constants.UNUSED;
-			xStatisticNext = new double[xStatistic.length];
-		}
-		
-		return new Statistics(zStatistic, xStatistic);
+		return null;
 	}
 	
 	
 }
-
-
 
