@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.DecompositionSolver;
-import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.QRDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.linear.SingularMatrixException;
@@ -224,8 +224,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			else
 				stat = estimateInverse(stat, alpha, betas);
 			
-			zStatistics[i] = stat.getZStatistic();
-			xStatistics.add(stat.getXStatistic());
+			if (stat == null) //Cannot estimate
+				return null;
+			else {
+				zStatistics[i] = stat.getZStatistic();
+				xStatistics.add(stat.getXStatistic());
+			}
 		}
 		
 		return new ExchangedParameter(zStatistics, xStatistics);
@@ -243,13 +247,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		
 		int N = zStatistics.length;
 		int n = xStatistics.get(0).length; //1, x1, x2,..., x(n-1)
-		RealMatrix X = MatrixUtils.createRealMatrix(xStatistics.toArray(new double[N][n]));
-		RealVector z = new ArrayRealVector(zStatistics);
-		double[] alpha = calcCoeffs(X, z);
+		double[] alpha = calcCoeffs(xStatistics, zStatistics);
 		if (alpha == null) {
 			if (currentParameter != null)
 				alpha = Arrays.copyOf(currentParameter.vector, currentParameter.vector.length);
-			else {
+			else { //Used for initialization so that regression model is always determined.
 				alpha = new double[n];
 				Arrays.fill(alpha, 0.0);
 				for (int i = 0; i < N; i++)
@@ -268,12 +270,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				continue;
 			}
 			
-			RealMatrix Z = MatrixUtils.createRealMatrix(N, 2);
-			RealVector x = new ArrayRealVector(N);
+			List<double[]> Z = new ArrayList<>(N);
+			double[] x = new double[N];
 			for (int i = 0; i < N; i++) {
-				Z.setEntry(i, 0, 1);
-				Z.setEntry(i, 1, zStatistics[i]);
-				x.setEntry(i, xStatistics.get(i)[j]);
+				double[] zRow = new double[2];
+				Z.add(zRow);
+				zRow[0] = 1;
+				zRow[1] = zStatistics[i];
+				x[i] = xStatistics.get(i)[j];
 			}
 			double[] beta = calcCoeffs(Z, x);
 			if (beta == null) {
@@ -281,7 +285,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 					beta = Arrays.copyOf(currentParameter.matrix.get(j),
 						currentParameter.matrix.get(j).length);
 				}
-				else {
+				else { //Used for initialization so that regression model is always determined.
 					beta = new double[2];
 					beta[1] = 0;
 					for (int i = 0; i < N; i++)
@@ -304,7 +308,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param betas specified alpha parameters.
 	 * @return estimated statistics with specified parameters alpha and beta.
 	 */
-	protected Statistics estimate(Statistics stat, double[] alpha, List<double[]> betas) {
+	private Statistics estimate(Statistics stat, double[] alpha, List<double[]> betas) {
 		double zValue = stat.getZStatistic();
 		double[] xVector = stat.getXStatistic();
 		double zStatistic = Constants.UNUSED;
@@ -339,8 +343,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		}
 		if (c != 1)
 			zStatistic = (a + b) / (1 - c);
-		else
-			zStatistic = zStatisticNearestNeighborFilter(); //Fixing zero denominator
+		else {
+			logger.info("Cannot estimate statistic for Z by expectation and so other technique is used");
+			zStatistic = zStatisticOtherEstimate(); //Fixing zero denominator
+			if (!Util.isUsed(zStatistic)) //Cannot estimate
+				return null;
+		}
 		
 		//Estimating missing xij (xStatistic) by equation 5 and estimated zi (zStatistic) above, based on current parameter.
 		for (int j = 0; j < xVector.length; j++) {
@@ -361,7 +369,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param betas specified alpha parameters.
 	 * @return estimated statistics with specified parameters alpha and beta.
 	 */
-	protected Statistics estimateInverse(Statistics stat, double[] alpha, List<double[]> betas) {
+	private Statistics estimateInverse(Statistics stat, double[] alpha, List<double[]> betas) {
 		double zValue = stat.getZStatistic();
 		double[] xVector = stat.getXStatistic();
 		double zStatistic = Constants.UNUSED;
@@ -393,16 +401,19 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 		if (U.size() > 0) {
 			//Estimating missing xij (xStatistic) by equation 8, based on current parameter.
-			RealMatrix A = MatrixUtils.createRealMatrix(U.size(), U.size());
-			RealVector y = new ArrayRealVector(U.size());
+			List<double[]> A = new ArrayList<>(U.size());
+			double[] y = new double[U.size()];
+			
 			for (int i = 0; i < U.size(); i++) {
+				double[] aRow = new double[U.size()];
+				A.add(aRow);
 				for (int j = 0; j < U.size(); j++) {
 					if (i == j)
-						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)] - 1);
+						aRow[j] = betas.get(U.get(i))[1] * alpha[U.get(j)] - 1;
 					else
-						A.setEntry(i, j, betas.get(U.get(i))[1] * alpha[U.get(j)]);
+						aRow[j] = betas.get(U.get(i))[1] * alpha[U.get(j)];
 				}
-				y.setEntry(i, -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b);
+				y[i] = -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b;
 			}
 			
 			double[] solution = solve(A, y); //solve Ax = y
@@ -410,9 +421,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				for (int j = 0; j < U.size(); j++)
 					xStatistic[U.get(j)] = solution[j]; 
 			}
-			else { //Solving the problem that the equation Ax = y has no solution.
-				for (int j = 0; j < U.size(); j++)
-					xStatistic[U.get(j)] = xStatisticNearestNeighborFilter(U.get(j));
+			else {
+				logger.info("Cannot estimate statistic for X by expectation and so other technique is used");
+				for (int j = 0; j < U.size(); j++) {
+					xStatistic[U.get(j)] = xStatisticOtherEstimate(U.get(j));
+					if (!Util.isUsed(xStatistic[U.get(j)])) //Cannot estimate
+						return null;
+				}
 			}
 		}
 		
@@ -667,12 +682,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		 */
 		protected double zStatistic = Constants.UNUSED;
 		
-		
 		/**
 		 * Statistic for X variables.
 		 */
 		protected double[] xStatistic = new double[0];
-		
 		
 		/**
 		 * Constructor with specified statistic for Z variable and statistic for X variables.
@@ -684,7 +697,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			this.xStatistic = xStatistic;
 		}
 		
-		
 		/**
 		 * Getting statistic for Z variable.
 		 * @return statistic for Z variable.
@@ -692,7 +704,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		public double getZStatistic() {
 			return zStatistic;
 		}
-		
 		
 		/**
 		 * Getting statistic for X variables.
@@ -714,7 +725,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param U list of missing X values.
 	 * @return balanced statistics for Z and X variables.
 	 */
-	protected Statistics balanceStatistics(double[] alpha, List<double[]> betas,
+	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
 			double zStatistic, double[] xStatistic,
 			List<Integer> U) {
 		
@@ -790,40 +801,36 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Calculating coefficients based on data matrix and data vector.
 	 * This method will be improved in the next version.
-	 * @param Z specified data matrix.
+	 * @param X specified data matrix.
 	 * @param x specified data vector.
-	 * @return beta coefficient base on data matrix and data vector.
+	 * @return coefficients base on data matrix and data vector.
 	 */
-	protected double[] calcCoeffs(RealMatrix Z, RealVector x) {
-		RealMatrix Zt = Z.transpose();
-		return solve(Zt.multiply(Z), Zt.operate(x));
-	}
-
-
-	/**
-	 * Solving the equation Ax = b.
-	 * @param A specified matrix.
-	 * @param b specified vector.
-	 * @return solution x of the equation Ax = b.
-	 */
-	protected double[] solve(RealMatrix A, RealVector b) {
-		double[] x = null;
-		try {
-			DecompositionSolver solver = new LUDecomposition(A).getSolver();
-			x = solver.solve(b).toArray(); //solve Ax = b
-		}
-		catch (SingularMatrixException e) {
-			logger.info("Singular matrix in #solve(RealMatrix, RealVector");
-			x = null;
+	private double[] calcCoeffs(List<double[]> X, double[] x) {
+		int N = x.length;
+		int n = X.get(0).length;
+		
+		List<double[]> A = new ArrayList<>(n);
+		for (int i = 0; i < n; i++) {
+			double[] aRow = new double[n];
+			A.add(aRow);
+			for (int j = 0; j < n; j++) {
+				double sum = 0;
+				for (int k = 0; k < N; k++) {
+					sum += X.get(k)[i] * X.get(k)[j];
+				}
+				aRow[j] = sum;
+			}
 		}
 		
-		if (x == null)
-			return null;
-		for (int i = 0; i < x.length; i++) {
-			if (Double.isNaN(x[i]))
-				return null;
+		double[] b = new double[n];
+		for (int i = 0; i < n; i++) {
+			double sum = 0;
+			for (int k = 0; k < N; k++)
+				sum += X.get(k)[i] * x[k];
+			b[i] = sum;
 		}
-		return x;
+		
+		return solve(A, b);
 	}
 	
 
@@ -831,7 +838,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * Estimating the statistic for Z variable (zStatistic) by nearest neighbor filtering.
 	 * @return the estimated statistic for Z variable (zStatistic) by nearest neighbor filtering.
 	 */
-	protected double zStatisticNearestNeighborFilter() {
+	protected double zStatisticOtherEstimate() {
 		List<double[]> source = new ArrayList<>();
 		List<Double> target = new ArrayList<>();
 		int N = this.zData.size();
@@ -843,7 +850,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			}
 		}
 		
-		return nearestNeighborFilter(source, target);
+		double[] targetArray = new double[target.size()];
+		for (int i = 0; i < target.size(); i++)
+			targetArray[i] = target.get(i);
+		return nearestNeighborFilter(source, targetArray);
 	}
 	
 	
@@ -852,7 +862,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param index the index of statistic.
 	 * @return the estimated statistic for X variables (xStatistic) by nearest neighbor filtering.
 	 */
-	protected double xStatisticNearestNeighborFilter(int index) {
+	protected double xStatisticOtherEstimate(int index) {
 		List<double[]> source = new ArrayList<>();
 		List<Double> target = new ArrayList<>();
 		int N = this.xData.size();
@@ -864,7 +874,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			}
 		}
 		
-		return nearestNeighborFilter(source, target);
+		double[] targetArray = new double[target.size()];
+		for (int i = 0; i < target.size(); i++)
+			targetArray[i] = target.get(i);
+		return nearestNeighborFilter(source, targetArray);
 	}
 	
 	
@@ -873,19 +886,65 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * The current implementation is average method and so it is enhanced in the next version.
 	 * @param source source data.
 	 * @param target target data.
-	 * @return the estimated variable by nearest neighbor filtering.
+	 * @return the estimated variable by nearest neighbor filtering. Return NaN if it is impossible to filter.
 	 */
 	@NextUpdate
-	protected double nearestNeighborFilter(List<double[]> source, List<Double> target) {
-		int N = target.size();
+	protected double nearestNeighborFilter(List<double[]> source, double[] target) {
+		int N = target.length;
 		if (N == 0)
 			return 0;
 		
 		double mean = 0;
 		for (int i = 0; i < N; i++)
-			mean += target.get(i);
+			mean += target[i];
 		
 		return mean / (double)N;
+	}
+
+	
+	/**
+	 * Solving the equation Ax = b.
+	 * @param A specified matrix.
+	 * @param b specified vector.
+	 * @return solution x of the equation Ax = b.
+	 */
+	@NextUpdate
+	protected double[] solve(List<double[]> A, double[] b) {
+		int N = b.length;
+		int n = A.get(0).length;
+		if (N == 0 || n == 0)
+			return null;
+		
+		double[] x = null;
+		RealMatrix M = MatrixUtils.createRealMatrix(A.toArray(new double[N][n]));
+		RealVector m = new ArrayRealVector(b);
+		try {
+			DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
+			x = solver.solve(m).toArray(); //solve Ax = b
+		}
+		catch (SingularMatrixException e) {
+			logger.info("Singular matrix problem occurs in #solve(RealMatrix, RealVector)");
+			x = null;
+			
+			//Proposed solution will be improved in next version
+			try {
+				QRDecomposition QR = new QRDecomposition(M);
+				RealMatrix pseudoInverse = QR.getSolver().getInverse();
+				x = pseudoInverse.operate(m).toArray();
+			}
+			catch (SingularMatrixException e2) {
+				logger.info("Cannot solve the problem of singluar matrix by Moore–Penrose pseudo-inverse matrix in #solve(RealMatrix, RealVector)");
+				x = null;
+			}
+		}
+		
+		if (x == null)
+			return null;
+		for (int i = 0; i < x.length; i++) {
+			if (Double.isNaN(x[i]))
+				return null;
+		}
+		return x;
 	}
 	
 	
