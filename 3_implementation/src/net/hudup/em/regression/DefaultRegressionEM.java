@@ -11,6 +11,7 @@ import org.apache.commons.math3.linear.QRDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.linear.SingularMatrixException;
+import org.apache.commons.math3.linear.SingularValueDecomposition;
 
 import net.hudup.Evaluator;
 import net.hudup.core.Constants;
@@ -920,16 +921,15 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		RealVector m = new ArrayRealVector(b);
 		try {
 			DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-			x = solver.solve(m).toArray(); //solve Ax = b
+			x = solver.solve(m).toArray(); //solve Ax = b with approximation
 		}
 		catch (SingularMatrixException e) {
 			logger.info("Singular matrix problem occurs in #solve(RealMatrix, RealVector)");
-			x = null;
 			
 			//Proposed solution will be improved in next version
 			try {
-				QRDecomposition QR = new QRDecomposition(M);
-				RealMatrix pseudoInverse = QR.getSolver().getInverse();
+				DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
+				RealMatrix pseudoInverse = solver.getInverse();
 				x = pseudoInverse.operate(m).toArray();
 			}
 			catch (SingularMatrixException e2) {
