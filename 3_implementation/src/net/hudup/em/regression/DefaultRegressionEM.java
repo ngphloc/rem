@@ -54,9 +54,21 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	
 	/**
+	 * Inverse mode field name.
+	 */
+	protected final static String REM_BALANCE_MODE_FIELD = "rem_balance_mode";
+
+	
+	/**
 	 * Default inverse mode field.
 	 */
 	protected final static boolean REM_INVERSE_MODE_DEFAULT = false;
+
+	
+	/**
+	 * Default inverse mode field.
+	 */
+	protected final static boolean REM_BALANCE_MODE_DEFAULT = true;
 
 	
 	/**
@@ -144,6 +156,39 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			unsetup();
 			return null;
 		}
+		
+		//Checking existence of values.
+		boolean zExists = false;
+		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
+		Arrays.fill(xExists, false);
+		while (this.sample.next()) {
+			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
+			if (profile == null)
+				continue;
+			
+			double lastValue = profile.getValueAsReal(zIndices.get(1));
+			if (Util.isUsed(lastValue))
+				zExists = zExists || true; 
+			
+			for (int j = 1; j < xIndices.size(); j++) {
+				double value = profile.getValueAsReal(xIndices.get(j));
+				if (Util.isUsed(value))
+					xExists[j - 1] = xExists[j - 1] || true;
+			}
+		}
+		this.sample.reset();
+
+		List<Integer> xIndicesTemp = new ArrayList<>();
+		xIndicesTemp.add(xIndices.get(0)); //adding -1
+		for (int j = 1; j < xIndices.size(); j++) {
+			if (xExists[j - 1])
+				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
+		}
+		if (!zExists || xIndicesTemp.size() < 2) {
+			unsetup();
+			return null;
+		}
+		xIndices = xIndicesTemp;
 		
 		n = xIndices.size();
 		while (this.sample.next()) {
@@ -585,6 +630,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		DataConfig config = super.createDefaultConfig();
 		config.put(REM_INDICES_FIELD, "-1, -1, -1"); //Not used
 		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
+		config.put(REM_BALANCE_MODE_FIELD, REM_BALANCE_MODE_DEFAULT);
 		return config;
 	}
 
@@ -729,6 +775,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
 			double zStatistic, double[] xStatistic,
 			List<Integer> U) {
+		if (!getConfig().getAsBoolean(REM_BALANCE_MODE_FIELD))
+			return new Statistics(zStatistic, xStatistic);
 		
 		double zStatisticNext = Constants.UNUSED;
 		double[] xStatisticNext = new double[xStatistic.length];
@@ -778,17 +826,18 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			for (int j = 0; j < xStatistic.length; j++) {
 				if (xStatistic[j] == 0) {
 					if (xStatisticNext[j] == 0)
-						approx &= true;
+						approx = approx && true;
 					else
-						approx &= false;
+						approx = approx && false;
 				}
 				else
-					approx &= (Math.abs(xStatisticNext[j] - xStatistic[j]) / Math.abs(xStatistic[j]) <= threshold);
+					approx = approx && (Math.abs(xStatisticNext[j] - xStatistic[j]) / Math.abs(xStatistic[j]) <= threshold);
 				
 				if (!approx) break;
 			}
-			if (approx) break;
 			
+			if (approx) break;
+
 			zStatistic = zStatisticNext;
 			xStatistic = xStatisticNext;
 			zStatisticNext = Constants.UNUSED;
