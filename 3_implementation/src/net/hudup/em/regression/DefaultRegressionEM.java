@@ -21,6 +21,7 @@ import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
+import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
@@ -62,13 +63,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Default inverse mode field.
 	 */
-	protected final static boolean REM_INVERSE_MODE_DEFAULT = false;
+	protected final static boolean REM_INVERSE_MODE_DEFAULT = true;
 
 	
 	/**
 	 * Default inverse mode field.
 	 */
-	protected final static boolean REM_BALANCE_MODE_DEFAULT = true;
+	protected final static boolean REM_BALANCE_MODE_DEFAULT = false;
 
 	
 	/**
@@ -646,14 +647,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(this.attList.get(this.zIndices.get(this.zIndices.size() - 1)).getName()
-				+ " = " + alpha[0]);
+				+ " = " + MathUtil.format(alpha[0]));
 		for (int i = 0; i < alpha.length - 1; i++) {
 			double coeff = alpha[i + 1];
 			String variableName = this.attList.get(this.xIndices.get(i + 1)).getName();
 			if (coeff < 0)
-				buffer.append(" - " + Math.abs(coeff) + "*" + variableName);
+				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
 			else
-				buffer.append(" + " + coeff + "*" + variableName);
+				buffer.append(" + " + MathUtil.format(coeff) + "*" + variableName);
 		}
 		
 		return buffer.toString();
@@ -666,7 +667,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (parameter == null || !(parameter instanceof ExchangedParameter))
 			return "";
 		double[] array = ((ExchangedParameter)parameter).getVector();
-		return TextParserUtil.toText(array, ",");
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < array.length; i++) {
+			if (i > 0)
+				buffer.append(", ");
+			buffer.append(MathUtil.format(array[i]));
+		}
+		
+		return buffer.toString();
 	}
 
 	
@@ -836,12 +844,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				if (!approx) break;
 			}
 			
-			if (approx) break;
-
 			zStatistic = zStatisticNext;
 			xStatistic = xStatisticNext;
 			zStatisticNext = Constants.UNUSED;
 			xStatisticNext = new double[xStatistic.length];
+			
+			if (approx) break;
 		}
 		
 		return new Statistics(zStatistic, xStatistic);
@@ -1004,6 +1012,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		System.setProperty(Constants.DECIMAL_PRECISION_FIELD, "4");
 		new Evaluator().run(args);
 	}
 	

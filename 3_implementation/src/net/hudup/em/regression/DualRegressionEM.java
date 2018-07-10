@@ -15,7 +15,7 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Profile;
-import net.hudup.core.parser.TextParserUtil;
+import net.hudup.core.logistic.MathUtil;
 import net.hudup.em.ExponentialEM;
 
 
@@ -581,25 +581,25 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 		StringBuffer buffer = new StringBuffer();
 		RealVector alpha = extractAlpha(dualCoeffs);
-		buffer.append(this.attList.get(attList.size() - 1).getName() + " = " + alpha.getEntry(0));
+		buffer.append(this.attList.get(attList.size() - 1).getName() + " = " + MathUtil.format(alpha.getEntry(0)));
 		for (int i = 0; i < this.n; i++) {
 			double coeff = alpha.getEntry(i + 1);
 			if (coeff < 0)
-				buffer.append(" - " + Math.abs(coeff) + "*" + this.attList.get(i).getName());
+				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + this.attList.get(i).getName());
 			else
-				buffer.append(" + " + coeff + "*" + this.attList.get(i).getName());
+				buffer.append(" + " + MathUtil.format(coeff) + "*" + this.attList.get(i).getName());
 		}
 		
 		buffer.append(", ");
 		
 		RealVector beta = extractBeta(dualCoeffs);
-		buffer.append(this.attList.get(this.attList.size() - 1).getName() + " = " + beta.getEntry(0));
+		buffer.append(this.attList.get(this.attList.size() - 1).getName() + " = " + MathUtil.format(beta.getEntry(0)));
 		for (int i = 0; i < k; i++) {
 			double coeff = beta.getEntry(i + 1);
 			if (coeff < 0)
-				buffer.append(" - " + Math.abs(coeff) + "*" + this.attList.get(i + this.n).getName());
+				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + this.attList.get(i + this.n).getName());
 			else
-				buffer.append(" + " + coeff + "*" + this.attList.get(i + this.n).getName());
+				buffer.append(" + " + MathUtil.format(coeff) + "*" + this.attList.get(i + this.n).getName());
 		}
 		
 		return buffer.toString();
@@ -612,7 +612,14 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 		if (parameter == null || !(parameter instanceof double[]))
 			return "";
 		double[] array = (double[])parameter;
-		return TextParserUtil.toText(array, ",");
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < array.length; i++) {
+			if (i > 0)
+				buffer.append(", ");
+			buffer.append(MathUtil.format(array[i]));
+		}
+		
+		return buffer.toString();
 	}
 
 	

@@ -1,0 +1,50 @@
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: weight = -5686.8907 + 46.2369*bpd + 1.7148*hc + 14.3173*fl + 9.3881*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 4) learned models: weight = -5685.7854 + 43.1103*bpd + 1.4912*hc + 17.0387*fl + 9.8929*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: weight = -5853.1375 + 39.5620*bpd + 2.4174*hc + 21.7262*fl + 9.5004*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 7) learned models: weight = -6198.2135 + 44.6905*bpd + 5.2471*hc + 20.4518*fl + 6.6326*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 11) learned models: weight = -5941.9911 + 39.9082*bpd + 2.6244*hc + 23.3244*fl + 9.2312*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 18) learned models: weight = -6496.4041 + 44.6181*bpd + 3.9971*hc + 25.8895*fl + 7.7752*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 20) learned models: weight = -5945.7599 + 31.7033*bpd + 2.8255*hc + 34.1700*fl + 9.0212*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 36) learned models: weight = -6299.4105 + 66.9913*bpd + 2.7079*hc + 16.8104*fl + 4.0521*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 229) learned models: weight = -8991.6524 + 116.5457*bpd - 0.7010*hc + 33.5400*fl - 1.1436*ac
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 269) learned models: weight = 20982.7191 - 27.9779*bpd - 22.6780*hc - 62.4584*fl - 17.1056*ac
+
+
+

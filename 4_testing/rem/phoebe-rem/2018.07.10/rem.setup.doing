@@ -1,0 +1,5409 @@
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base"
+Current parameter:
+  -5686.8907, 46.2369, 1.7148, 14.3173, 9.3881
+Estimated parameter:
+  -5686.8907, 46.2369, 1.7148, 14.3173, 9.3881
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5599.3621, 45.9801, 0.3958, 16.2667, 10.0791
+Estimated parameter:
+  -5690.1166, 43.4878, 1.4055, 17.1470, 9.8661
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5690.1166, 43.4878, 1.4055, 17.1470, 9.8661
+Estimated parameter:
+  -5687.0335, 43.1636, 1.4823, 17.0664, 9.8855
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5687.0335, 43.1636, 1.4823, 17.0664, 9.8855
+Estimated parameter:
+  -5685.9729, 43.1172, 1.4902, 17.0432, 9.8916
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5685.9729, 43.1172, 1.4902, 17.0432, 9.8916
+Estimated parameter:
+  -5685.7854, 43.1103, 1.4912, 17.0387, 9.8929
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5626.4431, 47.1544, 2.0295, 5.3492, 10.4663
+Estimated parameter:
+  -5780.6151, 41.1728, 2.2576, 17.5963, 9.8382
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5780.6151, 41.1728, 2.2576, 17.5963, 9.8382
+Estimated parameter:
+  -5827.6807, 39.8667, 2.3711, 20.7267, 9.5869
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5827.6807, 39.8667, 2.3711, 20.7267, 9.5869
+Estimated parameter:
+  -5844.3298, 39.6175, 2.4031, 21.4789, 9.5217
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5844.3298, 39.6175, 2.4031, 21.4789, 9.5217
+Estimated parameter:
+  -5850.2899, 39.5711, 2.4129, 21.6659, 9.5055
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5850.2899, 39.5711, 2.4129, 21.6659, 9.5055
+Estimated parameter:
+  -5852.3949, 39.5630, 2.4162, 21.7138, 9.5014
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5852.3949, 39.5630, 2.4162, 21.7138, 9.5014
+Estimated parameter:
+  -5853.1375, 39.5620, 2.4174, 21.7262, 9.5004
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6131.6509, 61.2119, 2.6641, 2.8617, 8.0833
+Estimated parameter:
+  -6157.7610, 49.2222, 4.4624, 14.6331, 7.2358
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6157.7610, 49.2222, 4.4624, 14.6331, 7.2358
+Estimated parameter:
+  -6170.4311, 45.7460, 5.0044, 18.6674, 6.8583
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6170.4311, 45.7460, 5.0044, 18.6674, 6.8583
+Estimated parameter:
+  -6182.1692, 44.8981, 5.1699, 19.8679, 6.7180
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6182.1692, 44.8981, 5.1699, 19.8679, 6.7180
+Estimated parameter:
+  -6190.0209, 44.7120, 5.2224, 20.2490, 6.6649
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6190.0209, 44.7120, 5.2224, 20.2490, 6.6649
+Estimated parameter:
+  -6194.5248, 44.6819, 5.2396, 20.3818, 6.6441
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6194.5248, 44.6819, 5.2396, 20.3818, 6.6441
+Estimated parameter:
+  -6196.9462, 44.6842, 5.2452, 20.4320, 6.6358
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6196.9462, 44.6842, 5.2452, 20.4320, 6.6358
+Estimated parameter:
+  -6198.2135, 44.6905, 5.2471, 20.4518, 6.6326
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5419.1859, 44.4876, -1.6620, 15.1019, 12.2747
+Estimated parameter:
+  -5783.4634, 44.8690, -0.4460, 20.5862, 10.9975
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5783.4634, 44.8690, -0.4460, 20.5862, 10.9975
+Estimated parameter:
+  -5913.4886, 43.2038, 0.7601, 22.9834, 10.1705
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5913.4886, 43.2038, 0.7601, 22.9834, 10.1705
+Estimated parameter:
+  -5964.0732, 41.7385, 1.6937, 23.4502, 9.7056
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5964.0732, 41.7385, 1.6937, 23.4502, 9.7056
+Estimated parameter:
+  -5971.6814, 40.8577, 2.1974, 23.4484, 9.4685
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5971.6814, 40.8577, 2.1974, 23.4484, 9.4685
+Estimated parameter:
+  -5966.2962, 40.3939, 2.4362, 23.3895, 9.3517
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5966.2962, 40.3939, 2.4362, 23.3895, 9.3517
+Estimated parameter:
+  -5958.9924, 40.1576, 2.5436, 23.3508, 9.2934
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5958.9924, 40.1576, 2.5436, 23.3508, 9.2934
+Estimated parameter:
+  -5952.8726, 40.0367, 2.5905, 23.3327, 9.2635
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5952.8726, 40.0367, 2.5905, 23.3327, 9.2635
+Estimated parameter:
+  -5948.4073, 39.9728, 2.6108, 23.3260, 9.2476
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5948.4073, 39.9728, 2.6108, 23.3260, 9.2476
+Estimated parameter:
+  -5945.3436, 39.9380, 2.6195, 23.3245, 9.2388
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5945.3436, 39.9380, 2.6195, 23.3245, 9.2388
+Estimated parameter:
+  -5943.3137, 39.9190, 2.6231, 23.3242, 9.2339
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5943.3137, 39.9190, 2.6231, 23.3242, 9.2339
+Estimated parameter:
+  -5941.9911, 39.9082, 2.6244, 23.3244, 9.2312
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -7513.3167, 78.5625, -1.0295, 7.0683, 10.6146
+Estimated parameter:
+  -7047.3714, 60.8880, -0.0750, 18.8289, 10.5650
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -7047.3714, 60.8880, -0.0750, 18.8289, 10.5650
+Estimated parameter:
+  -6882.3274, 53.0172, 1.0141, 26.9861, 9.4261
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6882.3274, 53.0172, 1.0141, 26.9861, 9.4261
+Estimated parameter:
+  -6819.6992, 49.5472, 2.1128, 29.2004, 8.6332
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6819.6992, 49.5472, 2.1128, 29.2004, 8.6332
+Estimated parameter:
+  -6767.2533, 47.7621, 2.8758, 29.1611, 8.2090
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6767.2533, 47.7621, 2.8758, 29.1611, 8.2090
+Estimated parameter:
+  -6715.1571, 46.7198, 3.3356, 28.5538, 7.9994
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6715.1571, 46.7198, 3.3356, 28.5538, 7.9994
+Estimated parameter:
+  -6667.8644, 46.0606, 3.6022, 27.9196, 7.8966
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6667.8644, 46.0606, 3.6022, 27.9196, 7.8966
+Estimated parameter:
+  -6627.9384, 45.6237, 3.7565, 27.3945, 7.8450
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6627.9384, 45.6237, 3.7565, 27.3945, 7.8450
+Estimated parameter:
+  -6595.7627, 45.3259, 3.8473, 26.9909, 7.8176
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6595.7627, 45.3259, 3.8473, 26.9909, 7.8176
+Estimated parameter:
+  -6570.5278, 45.1191, 3.9019, 26.6890, 7.8022
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6570.5278, 45.1191, 3.9019, 26.6890, 7.8022
+Estimated parameter:
+  -6551.0337, 44.9732, 3.9356, 26.4658, 7.7929
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6551.0337, 44.9732, 3.9356, 26.4658, 7.7929
+Estimated parameter:
+  -6536.1344, 44.8685, 3.9571, 26.3007, 7.7871
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6536.1344, 44.8685, 3.9571, 26.3007, 7.7871
+Estimated parameter:
+  -6524.7773, 44.7927, 3.9709, 26.1787, 7.7834
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6524.7773, 44.7927, 3.9709, 26.1787, 7.7834
+Estimated parameter:
+  -6516.1929, 44.7373, 3.9802, 26.0886, 7.7807
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6516.1929, 44.7373, 3.9802, 26.0886, 7.7807
+Estimated parameter:
+  -6509.7260, 44.6978, 3.9861, 26.0224, 7.7789
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6509.7260, 44.6978, 3.9861, 26.0224, 7.7789
+Estimated parameter:
+  -6504.8452, 44.6683, 3.9903, 25.9733, 7.7775
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6504.8452, 44.6683, 3.9903, 25.9733, 7.7775
+Estimated parameter:
+  -6501.1987, 44.6466, 3.9933, 25.9370, 7.7765
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6501.1987, 44.6466, 3.9933, 25.9370, 7.7765
+Estimated parameter:
+  -6498.4586, 44.6307, 3.9953, 25.9100, 7.7758
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -6498.4586, 44.6307, 3.9953, 25.9100, 7.7758
+Estimated parameter:
+  -6496.4041, 44.6181, 3.9971, 25.8895, 7.7752
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -2570.3974, -63.5893, -3.3324, 55.5394, 26.8686
+Estimated parameter:
+  -4200.4284, -11.6469, 1.4727, 26.4314, 18.6597
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -4200.4284, -11.6469, 1.4727, 26.4314, 18.6597
+Estimated parameter:
+  -4887.4854, 2.2940, 0.7822, 35.0783, 15.8215
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -4887.4854, 2.2940, 0.7822, 35.0783, 15.8215
+Estimated parameter:
+  -5663.0248, 16.6123, 1.8169, 39.1949, 12.4176
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5663.0248, 16.6123, 1.8169, 39.1949, 12.4176
+Estimated parameter:
+  -6031.0554, 25.9503, 2.2789, 37.9212, 10.7900
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6031.0554, 25.9503, 2.2789, 37.9212, 10.7900
+Estimated parameter:
+  -6143.6386, 29.9162, 2.5169, 36.6706, 10.0549
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6143.6386, 29.9162, 2.5169, 36.6706, 10.0549
+Estimated parameter:
+  -6160.5033, 31.4632, 2.6564, 35.9117, 9.6813
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6160.5033, 31.4632, 2.6564, 35.9117, 9.6813
+Estimated parameter:
+  -6144.0869, 32.0173, 2.7418, 35.4594, 9.4682
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6144.0869, 32.0173, 2.7418, 35.4594, 9.4682
+Estimated parameter:
+  -6117.8499, 32.1781, 2.7937, 35.1659, 9.3351
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6117.8499, 32.1781, 2.7937, 35.1659, 9.3351
+Estimated parameter:
+  -6090.4113, 32.1853, 2.8227, 34.9578, 9.2475
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6090.4113, 32.1853, 2.8227, 34.9578, 9.2475
+Estimated parameter:
+  -6064.9918, 32.1374, 2.8382, 34.7975, 9.1869
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6064.9918, 32.1374, 2.8382, 34.7975, 9.1869
+Estimated parameter:
+  -6042.5061, 32.0737, 2.8447, 34.6686, 9.1441
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6042.5061, 32.0737, 2.8447, 34.6686, 9.1441
+Estimated parameter:
+  -6023.1273, 32.0087, 2.8466, 34.5629, 9.1127
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6023.1273, 32.0087, 2.8466, 34.5629, 9.1127
+Estimated parameter:
+  -6006.6884, 31.9499, 2.8459, 34.4746, 9.0889
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -6006.6884, 31.9499, 2.8459, 34.4746, 9.0889
+Estimated parameter:
+  -5992.8582, 31.8977, 2.8437, 34.4025, 9.0708
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5992.8582, 31.8977, 2.8437, 34.4025, 9.0708
+Estimated parameter:
+  -5981.1491, 31.8511, 2.8405, 34.3434, 9.0571
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5981.1491, 31.8511, 2.8405, 34.3434, 9.0571
+Estimated parameter:
+  -5971.3364, 31.8107, 2.8373, 34.2941, 9.0463
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5971.3364, 31.8107, 2.8373, 34.2941, 9.0463
+Estimated parameter:
+  -5963.1600, 31.7772, 2.8342, 34.2529, 9.0377
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5963.1600, 31.7772, 2.8342, 34.2529, 9.0377
+Estimated parameter:
+  -5956.3010, 31.7488, 2.8311, 34.2187, 9.0310
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5956.3010, 31.7488, 2.8311, 34.2187, 9.0310
+Estimated parameter:
+  -5950.5705, 31.7245, 2.8283, 34.1913, 9.0255
+
+
+
+========== Algorithm "rem" ==========
+At the 20 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5950.5705, 31.7245, 2.8283, 34.1913, 9.0255
+Estimated parameter:
+  -5945.7599, 31.7033, 2.8255, 34.1700, 9.0212
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  1242.9984, 3.6074, 8.6385, 25.9213, -9.7006
+Estimated parameter:
+  -725.0310, 4.0252, 8.9196, 25.3963, -3.8607
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -725.0310, 4.0252, 8.9196, 25.3963, -3.8607
+Estimated parameter:
+  -2179.1901, 8.1434, 6.8204, 44.5307, -2.4068
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -2179.1901, 8.1434, 6.8204, 44.5307, -2.4068
+Estimated parameter:
+  -3691.1769, 21.5530, 4.1641, 58.2010, -1.5712
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -3691.1769, 21.5530, 4.1641, 58.2010, -1.5712
+Estimated parameter:
+  -4894.2012, 46.2945, 2.3658, 48.8564, -0.8306
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -4894.2012, 46.2945, 2.3658, 48.8564, -0.8306
+Estimated parameter:
+  -5530.7783, 62.8001, 1.5824, 38.0955, -0.3360
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5530.7783, 62.8001, 1.5824, 38.0955, -0.3360
+Estimated parameter:
+  -5791.2480, 69.8169, 1.3265, 32.7675, -0.0921
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5791.2480, 69.8169, 1.3265, 32.7675, -0.0921
+Estimated parameter:
+  -5903.6553, 72.7228, 1.2805, 30.1643, 0.0330
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5903.6553, 72.7228, 1.2805, 30.1643, 0.0330
+Estimated parameter:
+  -5929.7110, 74.3135, 1.3750, 28.4775, -0.0885
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5929.7110, 74.3135, 1.3750, 28.4775, -0.0885
+Estimated parameter:
+  -6000.9036, 74.8997, 1.5882, 26.8366, 0.0916
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6000.9036, 74.8997, 1.5882, 26.8366, 0.0916
+Estimated parameter:
+  -6038.5320, 75.2281, 1.8496, 25.7231, 0.0765
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6038.5320, 75.2281, 1.8496, 25.7231, 0.0765
+Estimated parameter:
+  -6084.2262, 74.8462, 2.1549, 24.3986, 0.2884
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6084.2262, 74.8462, 2.1549, 24.3986, 0.2884
+Estimated parameter:
+  -6096.6205, 73.1333, 2.4149, 22.8045, 0.8661
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6096.6205, 73.1333, 2.4149, 22.8045, 0.8661
+Estimated parameter:
+  -6069.7232, 70.3042, 2.6200, 21.0904, 1.7075
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6069.7232, 70.3042, 2.6200, 21.0904, 1.7075
+Estimated parameter:
+  -6041.3104, 67.8301, 2.7391, 19.6644, 2.4707
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6041.3104, 67.8301, 2.7391, 19.6644, 2.4707
+Estimated parameter:
+  -6026.1128, 66.1508, 2.7960, 18.5761, 3.0476
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6026.1128, 66.1508, 2.7960, 18.5761, 3.0476
+Estimated parameter:
+  -6024.7943, 65.1615, 2.8205, 17.8067, 3.4437
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6024.7943, 65.1615, 2.8205, 17.8067, 3.4437
+Estimated parameter:
+  -6034.4580, 64.6825, 2.8266, 17.2942, 3.6992
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6034.4580, 64.6825, 2.8266, 17.2942, 3.6992
+Estimated parameter:
+  -6050.8435, 64.5234, 2.8231, 16.9739, 3.8576
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6050.8435, 64.5234, 2.8231, 16.9739, 3.8576
+Estimated parameter:
+  -6070.9101, 64.5617, 2.8135, 16.7830, 3.9530
+
+
+
+========== Algorithm "rem" ==========
+At the 20 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6070.9101, 64.5617, 2.8135, 16.7830, 3.9530
+Estimated parameter:
+  -6092.4380, 64.7097, 2.8010, 16.6776, 4.0084
+
+
+
+========== Algorithm "rem" ==========
+At the 21 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6092.4380, 64.7097, 2.8010, 16.6776, 4.0084
+Estimated parameter:
+  -6113.8627, 64.9064, 2.7876, 16.6268, 4.0402
+
+
+
+========== Algorithm "rem" ==========
+At the 22 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6113.8627, 64.9064, 2.7876, 16.6268, 4.0402
+Estimated parameter:
+  -6134.5394, 65.1224, 2.7746, 16.6102, 4.0573
+
+
+
+========== Algorithm "rem" ==========
+At the 23 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6134.5394, 65.1224, 2.7746, 16.6102, 4.0573
+Estimated parameter:
+  -6153.9880, 65.3382, 2.7631, 16.6111, 4.0660
+
+
+
+========== Algorithm "rem" ==========
+At the 24 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6153.9880, 65.3382, 2.7631, 16.6111, 4.0660
+Estimated parameter:
+  -6172.1358, 65.5471, 2.7528, 16.6224, 4.0695
+
+
+
+========== Algorithm "rem" ==========
+At the 25 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6172.1358, 65.5471, 2.7528, 16.6224, 4.0695
+Estimated parameter:
+  -6188.7528, 65.7377, 2.7445, 16.6397, 4.0704
+
+
+
+========== Algorithm "rem" ==========
+At the 26 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6188.7528, 65.7377, 2.7445, 16.6397, 4.0704
+Estimated parameter:
+  -6204.0603, 65.9151, 2.7373, 16.6595, 4.0695
+
+
+
+========== Algorithm "rem" ==========
+At the 27 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6204.0603, 65.9151, 2.7373, 16.6595, 4.0695
+Estimated parameter:
+  -6218.0090, 66.0754, 2.7316, 16.6796, 4.0678
+
+
+
+========== Algorithm "rem" ==========
+At the 28 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6218.0090, 66.0754, 2.7316, 16.6796, 4.0678
+Estimated parameter:
+  -6230.7208, 66.2198, 2.7270, 16.7000, 4.0658
+
+
+
+========== Algorithm "rem" ==========
+At the 29 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6230.7208, 66.2198, 2.7270, 16.7000, 4.0658
+Estimated parameter:
+  -6242.3810, 66.3537, 2.7228, 16.7192, 4.0635
+
+
+
+========== Algorithm "rem" ==========
+At the 30 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6242.3810, 66.3537, 2.7228, 16.7192, 4.0635
+Estimated parameter:
+  -6252.9971, 66.4752, 2.7193, 16.7358, 4.0613
+
+
+
+========== Algorithm "rem" ==========
+At the 31 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6252.9971, 66.4752, 2.7193, 16.7358, 4.0613
+Estimated parameter:
+  -6262.7028, 66.5861, 2.7164, 16.7508, 4.0592
+
+
+
+========== Algorithm "rem" ==========
+At the 32 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6262.7028, 66.5861, 2.7164, 16.7508, 4.0592
+Estimated parameter:
+  -6271.5174, 66.6865, 2.7138, 16.7638, 4.0574
+
+
+
+========== Algorithm "rem" ==========
+At the 33 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6271.5174, 66.6865, 2.7138, 16.7638, 4.0574
+Estimated parameter:
+  -6279.5300, 66.7763, 2.7119, 16.7761, 4.0557
+
+
+
+========== Algorithm "rem" ==========
+At the 34 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6279.5300, 66.7763, 2.7119, 16.7761, 4.0557
+Estimated parameter:
+  -6286.7768, 66.8550, 2.7103, 16.7888, 4.0544
+
+
+
+========== Algorithm "rem" ==========
+At the 35 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6286.7768, 66.8550, 2.7103, 16.7888, 4.0544
+Estimated parameter:
+  -6293.4004, 66.9264, 2.7091, 16.8001, 4.0531
+
+
+
+========== Algorithm "rem" ==========
+At the 36 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -6293.4004, 66.9264, 2.7091, 16.8001, 4.0531
+Estimated parameter:
+  -6299.4105, 66.9913, 2.7079, 16.8104, 4.0521
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  0.0000, 0.0000, 0.0000, 0.0000, 0.0000
+Estimated parameter:
+  1401.4009, -5.8096, -1.8574, -5.9449, -2.1933
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  1401.4009, -5.8096, -1.8574, -5.9449, -2.1933
+Estimated parameter:
+  3316.2222, -12.1763, -4.1318, -12.4116, -5.2427
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  3316.2222, -12.1763, -4.1318, -12.4116, -5.2427
+Estimated parameter:
+  5723.5309, -18.3117, -6.6453, -18.9733, -8.9761
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  5723.5309, -18.3117, -6.6453, -18.9733, -8.9761
+Estimated parameter:
+  8345.4491, -23.5316, -9.2285, -25.5005, -12.6265
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  8345.4491, -23.5316, -9.2285, -25.5005, -12.6265
+Estimated parameter:
+  11133.4739, -29.1263, -12.0977, -33.5893, -15.5509
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  11133.4739, -29.1263, -12.0977, -33.5893, -15.5509
+Estimated parameter:
+  14054.4501, -35.2424, -14.9483, -43.4583, -18.1081
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14054.4501, -35.2424, -14.9483, -43.4583, -18.1081
+Estimated parameter:
+  17004.3203, -40.9913, -17.6668, -54.1026, -20.6290
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  17004.3203, -40.9913, -17.6668, -54.1026, -20.6290
+Estimated parameter:
+  19869.6472, -45.9621, -20.2371, -65.0786, -23.0347
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  19869.6472, -45.9621, -20.2371, -65.0786, -23.0347
+Estimated parameter:
+  22518.2493, -50.0045, -22.5459, -76.2323, -25.1232
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  22518.2493, -50.0045, -22.5459, -76.2323, -25.1232
+Estimated parameter:
+  24823.1187, -53.0495, -24.4903, -87.1785, -26.7128
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  24823.1187, -53.0495, -24.4903, -87.1785, -26.7128
+Estimated parameter:
+  26702.9545, -55.2152, -26.0358, -97.2515, -27.7067
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  26702.9545, -55.2152, -26.0358, -97.2515, -27.7067
+Estimated parameter:
+  28134.1809, -56.7409, -27.2054, -105.7389, -28.1138
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  28134.1809, -56.7409, -27.2054, -105.7389, -28.1138
+Estimated parameter:
+  29135.8724, -57.9103, -28.0422, -112.1048, -28.0097
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  29135.8724, -57.9103, -28.0422, -112.1048, -28.0097
+Estimated parameter:
+  29757.7599, -58.9125, -28.5902, -116.1899, -27.5113
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  29757.7599, -58.9125, -28.5902, -116.1899, -27.5113
+Estimated parameter:
+  30056.0010, -59.8321, -28.8832, -118.1191, -26.7303
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  30056.0010, -59.8321, -28.8832, -118.1191, -26.7303
+Estimated parameter:
+  30086.2133, -60.6509, -28.9537, -118.2124, -25.7606
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  30086.2133, -60.6509, -28.9537, -118.2124, -25.7606
+Estimated parameter:
+  29900.4735, -61.2929, -28.8317, -116.8739, -24.6816
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  29900.4735, -61.2929, -28.8317, -116.8739, -24.6816
+Estimated parameter:
+  29543.5874, -61.6763, -28.5492, -114.4946, -23.5489
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  29543.5874, -61.6763, -28.5492, -114.4946, -23.5489
+Estimated parameter:
+  29053.0804, -61.7437, -28.1375, -111.3927, -22.4011
+
+
+
+========== Algorithm "rem" ==========
+At the 20 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  29053.0804, -61.7437, -28.1375, -111.3927, -22.4011
+Estimated parameter:
+  28459.5784, -61.4719, -27.6226, -107.8175, -21.2639
+
+
+
+========== Algorithm "rem" ==========
+At the 21 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  28459.5784, -61.4719, -27.6226, -107.8175, -21.2639
+Estimated parameter:
+  27790.9847, -60.8609, -27.0329, -103.9687, -20.1552
+
+
+
+========== Algorithm "rem" ==========
+At the 22 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  27790.9847, -60.8609, -27.0329, -103.9687, -20.1552
+Estimated parameter:
+  27069.7509, -59.9444, -26.3903, -99.9849, -19.0846
+
+
+
+========== Algorithm "rem" ==========
+At the 23 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  27069.7509, -59.9444, -26.3903, -99.9849, -19.0846
+Estimated parameter:
+  26313.6397, -58.7703, -25.7124, -95.9486, -18.0587
+
+
+
+========== Algorithm "rem" ==========
+At the 24 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  26313.6397, -58.7703, -25.7124, -95.9486, -18.0587
+Estimated parameter:
+  25538.4017, -57.3893, -25.0155, -91.9302, -17.0805
+
+
+
+========== Algorithm "rem" ==========
+At the 25 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  25538.4017, -57.3893, -25.0155, -91.9302, -17.0805
+Estimated parameter:
+  24756.7241, -55.8513, -24.3121, -87.9795, -16.1517
+
+
+
+========== Algorithm "rem" ==========
+At the 26 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  24756.7241, -55.8513, -24.3121, -87.9795, -16.1517
+Estimated parameter:
+  23979.9060, -54.2017, -23.6140, -84.1390, -15.2731
+
+
+
+========== Algorithm "rem" ==========
+At the 27 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  23979.9060, -54.2017, -23.6140, -84.1390, -15.2731
+Estimated parameter:
+  23216.8797, -52.4853, -22.9297, -80.4314, -14.4452
+
+
+
+========== Algorithm "rem" ==========
+At the 28 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  23216.8797, -52.4853, -22.9297, -80.4314, -14.4452
+Estimated parameter:
+  22474.5920, -50.7339, -22.2665, -76.8799, -13.6675
+
+
+
+========== Algorithm "rem" ==========
+At the 29 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  22474.5920, -50.7339, -22.2665, -76.8799, -13.6675
+Estimated parameter:
+  21758.5193, -48.9758, -21.6298, -73.4942, -12.9399
+
+
+
+========== Algorithm "rem" ==========
+At the 30 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  21758.5193, -48.9758, -21.6298, -73.4942, -12.9399
+Estimated parameter:
+  21073.5596, -47.2368, -21.0247, -70.2873, -12.2616
+
+
+
+========== Algorithm "rem" ==========
+At the 31 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  21073.5596, -47.2368, -21.0247, -70.2873, -12.2616
+Estimated parameter:
+  20424.0350, -45.5344, -20.4563, -67.2742, -11.6315
+
+
+
+========== Algorithm "rem" ==========
+At the 32 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  20424.0350, -45.5344, -20.4563, -67.2742, -11.6315
+Estimated parameter:
+  19812.3792, -43.8873, -19.9264, -64.4541, -11.0486
+
+
+
+========== Algorithm "rem" ==========
+At the 33 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  19812.3792, -43.8873, -19.9264, -64.4541, -11.0486
+Estimated parameter:
+  19241.2446, -42.3078, -19.4388, -61.8346, -10.5115
+
+
+
+========== Algorithm "rem" ==========
+At the 34 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  19241.2446, -42.3078, -19.4388, -61.8346, -10.5115
+Estimated parameter:
+  18711.7330, -40.8035, -18.9943, -59.4162, -10.0189
+
+
+
+========== Algorithm "rem" ==========
+At the 35 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  18711.7330, -40.8035, -18.9943, -59.4162, -10.0189
+Estimated parameter:
+  18225.0199, -39.3843, -18.5945, -57.1994, -9.5689
+
+
+
+========== Algorithm "rem" ==========
+At the 36 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  18225.0199, -39.3843, -18.5945, -57.1994, -9.5689
+Estimated parameter:
+  17780.2300, -38.0517, -18.2386, -55.1736, -9.1597
+
+
+
+========== Algorithm "rem" ==========
+At the 37 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  17780.2300, -38.0517, -18.2386, -55.1736, -9.1597
+Estimated parameter:
+  17377.1545, -36.8082, -17.9269, -53.3362, -8.7892
+
+
+
+========== Algorithm "rem" ==========
+At the 38 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  17377.1545, -36.8082, -17.9269, -53.3362, -8.7892
+Estimated parameter:
+  17014.4923, -35.6529, -17.6575, -51.6818, -8.4552
+
+
+
+========== Algorithm "rem" ==========
+At the 39 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  17014.4923, -35.6529, -17.6575, -51.6818, -8.4552
+Estimated parameter:
+  16690.8178, -34.5852, -17.4294, -50.2016, -8.1551
+
+
+
+========== Algorithm "rem" ==========
+At the 40 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  16690.8178, -34.5852, -17.4294, -50.2016, -8.1551
+Estimated parameter:
+  16403.8989, -33.6030, -17.2399, -48.8846, -7.8863
+
+
+
+========== Algorithm "rem" ==========
+At the 41 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  16403.8989, -33.6030, -17.2399, -48.8846, -7.8863
+Estimated parameter:
+  16151.0175, -32.7015, -17.0852, -47.7200, -7.6463
+
+
+
+========== Algorithm "rem" ==========
+At the 42 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  16151.0175, -32.7015, -17.0852, -47.7200, -7.6463
+Estimated parameter:
+  15929.1024, -31.8757, -16.9620, -46.6933, -7.4324
+
+
+
+========== Algorithm "rem" ==========
+At the 43 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15929.1024, -31.8757, -16.9620, -46.6933, -7.4324
+Estimated parameter:
+  15735.5877, -31.1216, -16.8668, -45.7940, -7.2421
+
+
+
+========== Algorithm "rem" ==========
+At the 44 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15735.5877, -31.1216, -16.8668, -45.7940, -7.2421
+Estimated parameter:
+  15567.6868, -30.4322, -16.7965, -45.0120, -7.0733
+
+
+
+========== Algorithm "rem" ==========
+At the 45 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15567.6868, -30.4322, -16.7965, -45.0120, -7.0733
+Estimated parameter:
+  15422.3636, -29.8016, -16.7473, -44.3337, -6.9234
+
+
+
+========== Algorithm "rem" ==========
+At the 46 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15422.3636, -29.8016, -16.7473, -44.3337, -6.9234
+Estimated parameter:
+  15296.7851, -29.2241, -16.7158, -43.7469, -6.7904
+
+
+
+========== Algorithm "rem" ==========
+At the 47 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15296.7851, -29.2241, -16.7158, -43.7469, -6.7904
+Estimated parameter:
+  15188.5911, -28.6964, -16.6988, -43.2424, -6.6724
+
+
+
+========== Algorithm "rem" ==========
+At the 48 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15188.5911, -28.6964, -16.6988, -43.2424, -6.6724
+Estimated parameter:
+  15095.1769, -28.2115, -16.6932, -42.8093, -6.5675
+
+
+
+========== Algorithm "rem" ==========
+At the 49 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15095.1769, -28.2115, -16.6932, -42.8093, -6.5675
+Estimated parameter:
+  15014.4298, -27.7650, -16.6966, -42.4392, -6.4743
+
+
+
+========== Algorithm "rem" ==========
+At the 50 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  15014.4298, -27.7650, -16.6966, -42.4392, -6.4743
+Estimated parameter:
+  14944.6080, -27.3539, -16.7069, -42.1223, -6.3917
+
+
+
+========== Algorithm "rem" ==========
+At the 51 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14944.6080, -27.3539, -16.7069, -42.1223, -6.3917
+Estimated parameter:
+  14883.9866, -26.9726, -16.7223, -41.8522, -6.3182
+
+
+
+========== Algorithm "rem" ==========
+At the 52 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14883.9866, -26.9726, -16.7223, -41.8522, -6.3182
+Estimated parameter:
+  14831.1805, -26.6187, -16.7414, -41.6232, -6.2527
+
+
+
+========== Algorithm "rem" ==========
+At the 53 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14831.1805, -26.6187, -16.7414, -41.6232, -6.2527
+Estimated parameter:
+  14784.7656, -26.2880, -16.7625, -41.4285, -6.1942
+
+
+
+========== Algorithm "rem" ==========
+At the 54 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14784.7656, -26.2880, -16.7625, -41.4285, -6.1942
+Estimated parameter:
+  14743.9022, -25.9788, -16.7850, -41.2640, -6.1422
+
+
+
+========== Algorithm "rem" ==========
+At the 55 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14743.9022, -25.9788, -16.7850, -41.2640, -6.1422
+Estimated parameter:
+  14707.5646, -25.6868, -16.8080, -41.1244, -6.0960
+
+
+
+========== Algorithm "rem" ==========
+At the 56 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14707.5646, -25.6868, -16.8080, -41.1244, -6.0960
+Estimated parameter:
+  14674.9987, -25.4114, -16.8309, -41.0060, -6.0547
+
+
+
+========== Algorithm "rem" ==========
+At the 57 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14674.9987, -25.4114, -16.8309, -41.0060, -6.0547
+Estimated parameter:
+  14645.6684, -25.1499, -16.8539, -40.9047, -6.0178
+
+
+
+========== Algorithm "rem" ==========
+At the 58 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14645.6684, -25.1499, -16.8539, -40.9047, -6.0178
+Estimated parameter:
+  14618.8918, -24.8994, -16.8759, -40.8202, -5.9848
+
+
+
+========== Algorithm "rem" ==========
+At the 59 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14618.8918, -24.8994, -16.8759, -40.8202, -5.9848
+Estimated parameter:
+  14594.3364, -24.6597, -16.8971, -40.7485, -5.9554
+
+
+
+========== Algorithm "rem" ==========
+At the 60 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14594.3364, -24.6597, -16.8971, -40.7485, -5.9554
+Estimated parameter:
+  14571.5136, -24.4285, -16.9169, -40.6877, -5.9293
+
+
+
+========== Algorithm "rem" ==========
+At the 61 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14571.5136, -24.4285, -16.9169, -40.6877, -5.9293
+Estimated parameter:
+  14550.2645, -24.2059, -16.9356, -40.6366, -5.9061
+
+
+
+========== Algorithm "rem" ==========
+At the 62 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14550.2645, -24.2059, -16.9356, -40.6366, -5.9061
+Estimated parameter:
+  14530.2533, -23.9901, -16.9529, -40.5933, -5.8856
+
+
+
+========== Algorithm "rem" ==========
+At the 63 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14530.2533, -23.9901, -16.9529, -40.5933, -5.8856
+Estimated parameter:
+  14511.2680, -23.7796, -16.9690, -40.5571, -5.8675
+
+
+
+========== Algorithm "rem" ==========
+At the 64 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14511.2680, -23.7796, -16.9690, -40.5571, -5.8675
+Estimated parameter:
+  14493.0572, -23.5722, -16.9842, -40.5264, -5.8515
+
+
+
+========== Algorithm "rem" ==========
+At the 65 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14493.0572, -23.5722, -16.9842, -40.5264, -5.8515
+Estimated parameter:
+  14475.4369, -23.3670, -16.9986, -40.5002, -5.8373
+
+
+
+========== Algorithm "rem" ==========
+At the 66 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14475.4369, -23.3670, -16.9986, -40.5002, -5.8373
+Estimated parameter:
+  14458.3163, -23.1640, -17.0118, -40.4789, -5.8249
+
+
+
+========== Algorithm "rem" ==========
+At the 67 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14458.3163, -23.1640, -17.0118, -40.4789, -5.8249
+Estimated parameter:
+  14441.4959, -22.9618, -17.0241, -40.4605, -5.8139
+
+
+
+========== Algorithm "rem" ==========
+At the 68 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14441.4959, -22.9618, -17.0241, -40.4605, -5.8139
+Estimated parameter:
+  14424.8789, -22.7590, -17.0360, -40.4440, -5.8042
+
+
+
+========== Algorithm "rem" ==========
+At the 69 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14424.8789, -22.7590, -17.0360, -40.4440, -5.8042
+Estimated parameter:
+  14408.2659, -22.5538, -17.0469, -40.4296, -5.7962
+
+
+
+========== Algorithm "rem" ==========
+At the 70 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14408.2659, -22.5538, -17.0469, -40.4296, -5.7962
+Estimated parameter:
+  14391.5894, -22.3464, -17.0569, -40.4174, -5.7893
+
+
+
+========== Algorithm "rem" ==========
+At the 71 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14391.5894, -22.3464, -17.0569, -40.4174, -5.7893
+Estimated parameter:
+  14374.9578, -22.1382, -17.0660, -40.4083, -5.7834
+
+
+
+========== Algorithm "rem" ==========
+At the 72 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14374.9578, -22.1382, -17.0660, -40.4083, -5.7834
+Estimated parameter:
+  14358.0726, -21.9243, -17.0748, -40.4008, -5.7786
+
+
+
+========== Algorithm "rem" ==========
+At the 73 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14358.0726, -21.9243, -17.0748, -40.4008, -5.7786
+Estimated parameter:
+  14340.8271, -21.7047, -17.0829, -40.3948, -5.7747
+
+
+
+========== Algorithm "rem" ==========
+At the 74 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14340.8271, -21.7047, -17.0829, -40.3948, -5.7747
+Estimated parameter:
+  14323.4157, -21.4824, -17.0904, -40.3902, -5.7718
+
+
+
+========== Algorithm "rem" ==========
+At the 75 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14323.4157, -21.4824, -17.0904, -40.3902, -5.7718
+Estimated parameter:
+  14305.3690, -21.2501, -17.0975, -40.3867, -5.7699
+
+
+
+========== Algorithm "rem" ==========
+At the 76 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14305.3690, -21.2501, -17.0975, -40.3867, -5.7699
+Estimated parameter:
+  14286.7720, -21.0090, -17.1048, -40.3837, -5.7685
+
+
+
+========== Algorithm "rem" ==========
+At the 77 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14286.7720, -21.0090, -17.1048, -40.3837, -5.7685
+Estimated parameter:
+  14267.5106, -20.7594, -17.1112, -40.3824, -5.7681
+
+
+
+========== Algorithm "rem" ==========
+At the 78 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14267.5106, -20.7594, -17.1112, -40.3824, -5.7681
+Estimated parameter:
+  14247.3792, -20.4973, -17.1175, -40.3814, -5.7685
+
+
+
+========== Algorithm "rem" ==========
+At the 79 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14247.3792, -20.4973, -17.1175, -40.3814, -5.7685
+Estimated parameter:
+  14226.3506, -20.2227, -17.1238, -40.3817, -5.7694
+
+
+
+========== Algorithm "rem" ==========
+At the 80 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14226.3506, -20.2227, -17.1238, -40.3817, -5.7694
+Estimated parameter:
+  14204.3130, -19.9345, -17.1295, -40.3838, -5.7711
+
+
+
+========== Algorithm "rem" ==========
+At the 81 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14204.3130, -19.9345, -17.1295, -40.3838, -5.7711
+Estimated parameter:
+  14180.9970, -19.6281, -17.1352, -40.3870, -5.7737
+
+
+
+========== Algorithm "rem" ==========
+At the 82 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14180.9970, -19.6281, -17.1352, -40.3870, -5.7737
+Estimated parameter:
+  14156.2402, -19.3018, -17.1407, -40.3916, -5.7771
+
+
+
+========== Algorithm "rem" ==========
+At the 83 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14156.2402, -19.3018, -17.1407, -40.3916, -5.7771
+Estimated parameter:
+  14129.7155, -18.9516, -17.1460, -40.3979, -5.7813
+
+
+
+========== Algorithm "rem" ==========
+At the 84 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14129.7155, -18.9516, -17.1460, -40.3979, -5.7813
+Estimated parameter:
+  14101.3202, -18.5748, -17.1514, -40.4071, -5.7863
+
+
+
+========== Algorithm "rem" ==========
+At the 85 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14101.3202, -18.5748, -17.1514, -40.4071, -5.7863
+Estimated parameter:
+  14070.5693, -18.1659, -17.1568, -40.4176, -5.7922
+
+
+
+========== Algorithm "rem" ==========
+At the 86 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14070.5693, -18.1659, -17.1568, -40.4176, -5.7922
+Estimated parameter:
+  14037.3208, -17.7235, -17.1624, -40.4294, -5.7991
+
+
+
+========== Algorithm "rem" ==========
+At the 87 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14037.3208, -17.7235, -17.1624, -40.4294, -5.7991
+Estimated parameter:
+  14000.8700, -17.2372, -17.1681, -40.4435, -5.8072
+
+
+
+========== Algorithm "rem" ==========
+At the 88 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  14000.8700, -17.2372, -17.1681, -40.4435, -5.8072
+Estimated parameter:
+  13960.8112, -16.7025, -17.1737, -40.4612, -5.8164
+
+
+
+========== Algorithm "rem" ==========
+At the 89 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13960.8112, -16.7025, -17.1737, -40.4612, -5.8164
+Estimated parameter:
+  13916.0800, -16.1040, -17.1796, -40.4815, -5.8273
+
+
+
+========== Algorithm "rem" ==========
+At the 90 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13916.0800, -16.1040, -17.1796, -40.4815, -5.8273
+Estimated parameter:
+  13865.8530, -15.4307, -17.1857, -40.5071, -5.8398
+
+
+
+========== Algorithm "rem" ==========
+At the 91 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13865.8530, -15.4307, -17.1857, -40.5071, -5.8398
+Estimated parameter:
+  13809.1665, -14.6712, -17.1915, -40.5393, -5.8544
+
+
+
+========== Algorithm "rem" ==========
+At the 92 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13809.1665, -14.6712, -17.1915, -40.5393, -5.8544
+Estimated parameter:
+  13744.0294, -13.7982, -17.1977, -40.5769, -5.8715
+
+
+
+========== Algorithm "rem" ==========
+At the 93 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13744.0294, -13.7982, -17.1977, -40.5769, -5.8715
+Estimated parameter:
+  13668.6869, -12.7906, -17.2033, -40.6242, -5.8913
+
+
+
+========== Algorithm "rem" ==========
+At the 94 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13668.6869, -12.7906, -17.2033, -40.6242, -5.8913
+Estimated parameter:
+  13580.0494, -11.6087, -17.2083, -40.6823, -5.9148
+
+
+
+========== Algorithm "rem" ==========
+At the 95 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13580.0494, -11.6087, -17.2083, -40.6823, -5.9148
+Estimated parameter:
+  13473.7621, -10.1974, -17.2122, -40.7538, -5.9428
+
+
+
+========== Algorithm "rem" ==========
+At the 96 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13473.7621, -10.1974, -17.2122, -40.7538, -5.9428
+Estimated parameter:
+  13344.0741, -8.4879, -17.2141, -40.8421, -5.9759
+
+
+
+========== Algorithm "rem" ==========
+At the 97 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13344.0741, -8.4879, -17.2141, -40.8421, -5.9759
+Estimated parameter:
+  13181.6777, -6.3700, -17.2116, -40.9510, -6.0160
+
+
+
+========== Algorithm "rem" ==========
+At the 98 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  13181.6777, -6.3700, -17.2116, -40.9510, -6.0160
+Estimated parameter:
+  12973.0914, -3.6934, -17.1998, -41.0883, -6.0643
+
+
+
+========== Algorithm "rem" ==========
+At the 99 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  12973.0914, -3.6934, -17.1998, -41.0883, -6.0643
+Estimated parameter:
+  12696.1121, -0.2224, -17.1699, -41.2548, -6.1224
+
+
+
+========== Algorithm "rem" ==========
+At the 100 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  12696.1121, -0.2224, -17.1699, -41.2548, -6.1224
+Estimated parameter:
+  12313.5331, 4.4106, -17.1031, -41.4485, -6.1908
+
+
+
+========== Algorithm "rem" ==========
+At the 101 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  12313.5331, 4.4106, -17.1031, -41.4485, -6.1908
+Estimated parameter:
+  11758.4778, 10.8083, -16.9572, -41.6460, -6.2662
+
+
+
+========== Algorithm "rem" ==========
+At the 102 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  11758.4778, 10.8083, -16.9572, -41.6460, -6.2662
+Estimated parameter:
+  10907.2492, 19.9552, -16.6397, -41.7523, -6.3325
+
+
+
+========== Algorithm "rem" ==========
+At the 103 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  10907.2492, 19.9552, -16.6397, -41.7523, -6.3325
+Estimated parameter:
+  9529.4731, 33.4062, -15.9429, -41.4986, -6.3386
+
+
+
+========== Algorithm "rem" ==========
+At the 104 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  9529.4731, 33.4062, -15.9429, -41.4986, -6.3386
+Estimated parameter:
+  7247.1818, 53.1797, -14.4701, -40.2348, -6.1545
+
+
+
+========== Algorithm "rem" ==========
+At the 105 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  7247.1818, 53.1797, -14.4701, -40.2348, -6.1545
+Estimated parameter:
+  3777.6902, 79.5838, -11.8453, -36.8813, -5.5595
+
+
+
+========== Algorithm "rem" ==========
+At the 106 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  3777.6902, 79.5838, -11.8453, -36.8813, -5.5595
+Estimated parameter:
+  -231.7908, 106.3548, -8.5984, -30.9601, -4.4959
+
+
+
+========== Algorithm "rem" ==========
+At the 107 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -231.7908, 106.3548, -8.5984, -30.9601, -4.4959
+Estimated parameter:
+  -3469.7656, 125.1038, -5.9305, -23.9979, -3.3663
+
+
+
+========== Algorithm "rem" ==========
+At the 108 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -3469.7656, 125.1038, -5.9305, -23.9979, -3.3663
+Estimated parameter:
+  -5532.5686, 135.2486, -4.1935, -17.9483, -2.5447
+
+
+
+========== Algorithm "rem" ==========
+At the 109 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5532.5686, 135.2486, -4.1935, -17.9483, -2.5447
+Estimated parameter:
+  -6729.4292, 140.0623, -3.1370, -13.4404, -2.0473
+
+
+
+========== Algorithm "rem" ==========
+At the 110 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -6729.4292, 140.0623, -3.1370, -13.4404, -2.0473
+Estimated parameter:
+  -7408.2007, 142.0895, -2.4920, -10.2836, -1.7585
+
+
+
+========== Algorithm "rem" ==========
+At the 111 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -7408.2007, 142.0895, -2.4920, -10.2836, -1.7585
+Estimated parameter:
+  -7795.4035, 142.7317, -2.0875, -8.0933, -1.5842
+
+
+
+========== Algorithm "rem" ==========
+At the 112 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -7795.4035, 142.7317, -2.0875, -8.0933, -1.5842
+Estimated parameter:
+  -8021.3473, 142.7042, -1.8231, -6.5443, -1.4691
+
+
+
+========== Algorithm "rem" ==========
+At the 113 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8021.3473, 142.7042, -1.8231, -6.5443, -1.4691
+Estimated parameter:
+  -8156.8246, 142.3564, -1.6426, -5.4078, -1.3853
+
+
+
+========== Algorithm "rem" ==========
+At the 114 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8156.8246, 142.3564, -1.6426, -5.4078, -1.3853
+Estimated parameter:
+  -8241.3114, 141.8653, -1.5129, -4.5357, -1.3180
+
+
+
+========== Algorithm "rem" ==========
+At the 115 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8241.3114, 141.8653, -1.5129, -4.5357, -1.3180
+Estimated parameter:
+  -8291.8410, 141.2917, -1.4216, -3.8358, -1.2615
+
+
+
+========== Algorithm "rem" ==========
+At the 116 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8291.8410, 141.2917, -1.4216, -3.8358, -1.2615
+Estimated parameter:
+  -8325.3280, 140.7047, -1.3496, -3.2465, -1.2116
+
+
+
+========== Algorithm "rem" ==========
+At the 117 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8325.3280, 140.7047, -1.3496, -3.2465, -1.2116
+Estimated parameter:
+  -8343.5406, 140.0978, -1.2961, -2.7448, -1.1672
+
+
+
+========== Algorithm "rem" ==========
+At the 118 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8343.5406, 140.0978, -1.2961, -2.7448, -1.1672
+Estimated parameter:
+  -8353.8916, 139.4976, -1.2531, -2.2958, -1.1268
+
+
+
+========== Algorithm "rem" ==========
+At the 119 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8353.8916, 139.4976, -1.2531, -2.2958, -1.1268
+Estimated parameter:
+  -8358.9665, 138.9087, -1.2176, -1.8830, -1.0898
+
+
+
+========== Algorithm "rem" ==========
+At the 120 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8358.9665, 138.9087, -1.2176, -1.8830, -1.0898
+Estimated parameter:
+  -8359.0240, 138.3253, -1.1895, -1.4992, -1.0556
+
+
+
+========== Algorithm "rem" ==========
+At the 121 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8359.0240, 138.3253, -1.1895, -1.4992, -1.0556
+Estimated parameter:
+  -8350.4703, 137.7223, -1.1739, -1.1397, -1.0253
+
+
+
+========== Algorithm "rem" ==========
+At the 122 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8350.4703, 137.7223, -1.1739, -1.1397, -1.0253
+Estimated parameter:
+  -8341.2721, 137.1293, -1.1572, -0.7927, -0.9969
+
+
+
+========== Algorithm "rem" ==========
+At the 123 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8341.2721, 137.1293, -1.1572, -0.7927, -0.9969
+Estimated parameter:
+  -8328.5268, 136.5259, -1.1455, -0.4376, -0.9726
+
+
+
+========== Algorithm "rem" ==========
+At the 124 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8328.5268, 136.5259, -1.1455, -0.4376, -0.9726
+Estimated parameter:
+  -8316.5151, 135.9277, -1.1375, -0.0479, -0.9497
+
+
+
+========== Algorithm "rem" ==========
+At the 125 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8316.5151, 135.9277, -1.1375, -0.0479, -0.9497
+Estimated parameter:
+  -8305.4221, 135.3279, -1.1380, 0.4221, -0.9308
+
+
+
+========== Algorithm "rem" ==========
+At the 126 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8305.4221, 135.3279, -1.1380, 0.4221, -0.9308
+Estimated parameter:
+  -8299.1087, 134.7250, -1.1527, 1.0859, -0.9208
+
+
+
+========== Algorithm "rem" ==========
+At the 127 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8299.1087, 134.7250, -1.1527, 1.0859, -0.9208
+Estimated parameter:
+  -8307.6918, 134.1276, -1.1959, 2.2082, -0.9313
+
+
+
+========== Algorithm "rem" ==========
+At the 128 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8307.6918, 134.1276, -1.1959, 2.2082, -0.9313
+Estimated parameter:
+  -8338.5564, 133.5334, -1.2647, 3.9348, -0.9707
+
+
+
+========== Algorithm "rem" ==========
+At the 129 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8338.5564, 133.5334, -1.2647, 3.9348, -0.9707
+Estimated parameter:
+  -8377.4960, 132.9262, -1.3143, 5.7695, -1.0217
+
+
+
+========== Algorithm "rem" ==========
+At the 130 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8377.4960, 132.9262, -1.3143, 5.7695, -1.0217
+Estimated parameter:
+  -8424.2446, 132.3337, -1.3238, 7.4465, -1.0582
+
+
+
+========== Algorithm "rem" ==========
+At the 131 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8424.2446, 132.3337, -1.3238, 7.4465, -1.0582
+Estimated parameter:
+  -8475.1167, 131.7084, -1.3110, 9.0631, -1.0816
+
+
+
+========== Algorithm "rem" ==========
+At the 132 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8475.1167, 131.7084, -1.3110, 9.0631, -1.0816
+Estimated parameter:
+  -8527.8980, 131.0295, -1.2855, 10.6858, -1.0975
+
+
+
+========== Algorithm "rem" ==========
+At the 133 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8527.8980, 131.0295, -1.2855, 10.6858, -1.0975
+Estimated parameter:
+  -8582.1977, 130.3194, -1.2498, 12.2992, -1.1073
+
+
+
+========== Algorithm "rem" ==========
+At the 134 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8582.1977, 130.3194, -1.2498, 12.2992, -1.1073
+Estimated parameter:
+  -8633.3827, 129.5746, -1.2165, 13.9149, -1.1152
+
+
+
+========== Algorithm "rem" ==========
+At the 135 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8633.3827, 129.5746, -1.2165, 13.9149, -1.1152
+Estimated parameter:
+  -8681.6964, 128.8491, -1.1800, 15.4289, -1.1193
+
+
+
+========== Algorithm "rem" ==========
+At the 136 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8681.6964, 128.8491, -1.1800, 15.4289, -1.1193
+Estimated parameter:
+  -8725.4745, 128.1673, -1.1418, 16.7971, -1.1209
+
+
+
+========== Algorithm "rem" ==========
+At the 137 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8725.4745, 128.1673, -1.1418, 16.7971, -1.1209
+Estimated parameter:
+  -8762.5552, 127.5258, -1.1087, 18.0296, -1.1214
+
+
+
+========== Algorithm "rem" ==========
+At the 138 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8762.5552, 127.5258, -1.1087, 18.0296, -1.1214
+Estimated parameter:
+  -8794.2915, 126.9419, -1.0773, 19.1071, -1.1206
+
+
+
+========== Algorithm "rem" ==========
+At the 139 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8794.2915, 126.9419, -1.0773, 19.1071, -1.1206
+Estimated parameter:
+  -8820.3887, 126.4050, -1.0507, 20.0585, -1.1198
+
+
+
+========== Algorithm "rem" ==========
+At the 140 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8820.3887, 126.4050, -1.0507, 20.0585, -1.1198
+Estimated parameter:
+  -8842.1834, 125.9185, -1.0264, 20.8887, -1.1188
+
+
+
+========== Algorithm "rem" ==========
+At the 141 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8842.1834, 125.9185, -1.0264, 20.8887, -1.1188
+Estimated parameter:
+  -8859.7728, 125.4673, -1.0067, 21.6333, -1.1185
+
+
+
+========== Algorithm "rem" ==========
+At the 142 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8859.7728, 125.4673, -1.0067, 21.6333, -1.1185
+Estimated parameter:
+  -8875.6049, 125.0652, -0.9856, 22.2782, -1.1177
+
+
+
+========== Algorithm "rem" ==========
+At the 143 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8875.6049, 125.0652, -0.9856, 22.2782, -1.1177
+Estimated parameter:
+  -8888.3234, 124.6867, -0.9695, 22.8721, -1.1174
+
+
+
+========== Algorithm "rem" ==========
+At the 144 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8888.3234, 124.6867, -0.9695, 22.8721, -1.1174
+Estimated parameter:
+  -8898.7234, 124.3327, -0.9565, 23.4160, -1.1178
+
+
+
+========== Algorithm "rem" ==========
+At the 145 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8898.7234, 124.3327, -0.9565, 23.4160, -1.1178
+Estimated parameter:
+  -8908.3356, 124.0110, -0.9424, 23.8997, -1.1178
+
+
+
+========== Algorithm "rem" ==========
+At the 146 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8908.3356, 124.0110, -0.9424, 23.8997, -1.1178
+Estimated parameter:
+  -8915.7776, 123.7021, -0.9331, 24.3587, -1.1184
+
+
+
+========== Algorithm "rem" ==========
+At the 147 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8915.7776, 123.7021, -0.9331, 24.3587, -1.1184
+Estimated parameter:
+  -8923.0223, 123.4214, -0.9216, 24.7674, -1.1187
+
+
+
+========== Algorithm "rem" ==========
+At the 148 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8923.0223, 123.4214, -0.9216, 24.7674, -1.1187
+Estimated parameter:
+  -8928.0832, 123.1442, -0.9159, 25.1693, -1.1197
+
+
+
+========== Algorithm "rem" ==========
+At the 149 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8928.0832, 123.1442, -0.9159, 25.1693, -1.1197
+Estimated parameter:
+  -8933.0577, 122.8898, -0.9081, 25.5298, -1.1207
+
+
+
+========== Algorithm "rem" ==========
+At the 150 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8933.0577, 122.8898, -0.9081, 25.5298, -1.1207
+Estimated parameter:
+  -8937.5583, 122.6496, -0.9002, 25.8657, -1.1218
+
+
+
+========== Algorithm "rem" ==========
+At the 151 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8937.5583, 122.6496, -0.9002, 25.8657, -1.1218
+Estimated parameter:
+  -8942.1974, 122.4261, -0.8909, 26.1748, -1.1227
+
+
+
+========== Algorithm "rem" ==========
+At the 152 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8942.1974, 122.4261, -0.8909, 26.1748, -1.1227
+Estimated parameter:
+  -8945.8371, 122.2066, -0.8845, 26.4794, -1.1239
+
+
+
+========== Algorithm "rem" ==========
+At the 153 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8945.8371, 122.2066, -0.8845, 26.4794, -1.1239
+Estimated parameter:
+  -8949.9276, 122.0057, -0.8758, 26.7537, -1.1245
+
+
+
+========== Algorithm "rem" ==========
+At the 154 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8949.9276, 122.0057, -0.8758, 26.7537, -1.1245
+Estimated parameter:
+  -8953.4656, 121.8102, -0.8689, 27.0224, -1.1253
+
+
+
+========== Algorithm "rem" ==========
+At the 155 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8953.4656, 121.8102, -0.8689, 27.0224, -1.1253
+Estimated parameter:
+  -8955.8615, 121.6175, -0.8654, 27.2876, -1.1263
+
+
+
+========== Algorithm "rem" ==========
+At the 156 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8955.8615, 121.6175, -0.8654, 27.2876, -1.1263
+Estimated parameter:
+  -8958.7741, 121.4412, -0.8595, 27.5255, -1.1267
+
+
+
+========== Algorithm "rem" ==========
+At the 157 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8958.7741, 121.4412, -0.8595, 27.5255, -1.1267
+Estimated parameter:
+  -8961.0649, 121.2695, -0.8553, 27.7579, -1.1274
+
+
+
+========== Algorithm "rem" ==========
+At the 158 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8961.0649, 121.2695, -0.8553, 27.7579, -1.1274
+Estimated parameter:
+  -8962.5294, 121.1012, -0.8533, 27.9846, -1.1282
+
+
+
+========== Algorithm "rem" ==========
+At the 159 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8962.5294, 121.1012, -0.8533, 27.9846, -1.1282
+Estimated parameter:
+  -8964.7843, 120.9492, -0.8472, 28.1835, -1.1291
+
+
+
+========== Algorithm "rem" ==========
+At the 160 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8964.7843, 120.9492, -0.8472, 28.1835, -1.1291
+Estimated parameter:
+  -8966.9427, 120.8025, -0.8418, 28.3759, -1.1296
+
+
+
+========== Algorithm "rem" ==========
+At the 161 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8966.9427, 120.8025, -0.8418, 28.3759, -1.1296
+Estimated parameter:
+  -8969.0244, 120.6608, -0.8365, 28.5624, -1.1303
+
+
+
+========== Algorithm "rem" ==========
+At the 162 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8969.0244, 120.6608, -0.8365, 28.5624, -1.1303
+Estimated parameter:
+  -8970.0189, 120.5172, -0.8351, 28.7536, -1.1310
+
+
+
+========== Algorithm "rem" ==========
+At the 163 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8970.0189, 120.5172, -0.8351, 28.7536, -1.1310
+Estimated parameter:
+  -8971.1742, 120.3850, -0.8317, 28.9238, -1.1319
+
+
+
+========== Algorithm "rem" ==========
+At the 164 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8971.1742, 120.3850, -0.8317, 28.9238, -1.1319
+Estimated parameter:
+  -8972.5671, 120.2601, -0.8270, 29.0820, -1.1328
+
+
+
+========== Algorithm "rem" ==========
+At the 165 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8972.5671, 120.2601, -0.8270, 29.0820, -1.1328
+Estimated parameter:
+  -8974.2540, 120.1410, -0.8213, 29.2324, -1.1335
+
+
+
+========== Algorithm "rem" ==========
+At the 166 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8974.2540, 120.1410, -0.8213, 29.2324, -1.1335
+Estimated parameter:
+  -8975.3534, 120.0207, -0.8179, 29.3871, -1.1343
+
+
+
+========== Algorithm "rem" ==========
+At the 167 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8975.3534, 120.0207, -0.8179, 29.3871, -1.1343
+Estimated parameter:
+  -8976.4915, 119.9062, -0.8140, 29.5326, -1.1351
+
+
+
+========== Algorithm "rem" ==========
+At the 168 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8976.4915, 119.9062, -0.8140, 29.5326, -1.1351
+Estimated parameter:
+  -8977.7812, 119.7963, -0.8095, 29.6720, -1.1358
+
+
+
+========== Algorithm "rem" ==========
+At the 169 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8977.7812, 119.7963, -0.8095, 29.6720, -1.1358
+Estimated parameter:
+  -8979.0686, 119.6905, -0.8052, 29.8058, -1.1363
+
+
+
+========== Algorithm "rem" ==========
+At the 170 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8979.0686, 119.6905, -0.8052, 29.8058, -1.1363
+Estimated parameter:
+  -8979.2925, 119.5811, -0.8046, 29.9466, -1.1369
+
+
+
+========== Algorithm "rem" ==========
+At the 171 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8979.2925, 119.5811, -0.8046, 29.9466, -1.1369
+Estimated parameter:
+  -8979.9722, 119.4819, -0.8016, 30.0694, -1.1374
+
+
+
+========== Algorithm "rem" ==========
+At the 172 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8979.9722, 119.4819, -0.8016, 30.0694, -1.1374
+Estimated parameter:
+  -8981.2513, 119.3885, -0.7967, 30.1840, -1.1378
+
+
+
+========== Algorithm "rem" ==========
+At the 173 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8981.2513, 119.3885, -0.7967, 30.1840, -1.1378
+Estimated parameter:
+  -8981.4141, 119.2878, -0.7961, 30.3136, -1.1384
+
+
+
+========== Algorithm "rem" ==========
+At the 174 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8981.4141, 119.2878, -0.7961, 30.3136, -1.1384
+Estimated parameter:
+  -8982.2097, 119.1971, -0.7928, 30.4261, -1.1388
+
+
+
+========== Algorithm "rem" ==========
+At the 175 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8982.2097, 119.1971, -0.7928, 30.4261, -1.1388
+Estimated parameter:
+  -8982.6569, 119.1074, -0.7905, 30.5375, -1.1394
+
+
+
+========== Algorithm "rem" ==========
+At the 176 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8982.6569, 119.1074, -0.7905, 30.5375, -1.1394
+Estimated parameter:
+  -8983.3894, 119.0240, -0.7870, 30.6385, -1.1398
+
+
+
+========== Algorithm "rem" ==========
+At the 177 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8983.3894, 119.0240, -0.7870, 30.6385, -1.1398
+Estimated parameter:
+  -8983.7628, 118.9388, -0.7850, 30.7442, -1.1402
+
+
+
+========== Algorithm "rem" ==========
+At the 178 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8983.7628, 118.9388, -0.7850, 30.7442, -1.1402
+Estimated parameter:
+  -8984.5562, 118.8594, -0.7814, 30.8410, -1.1405
+
+
+
+========== Algorithm "rem" ==========
+At the 179 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8984.5562, 118.8594, -0.7814, 30.8410, -1.1405
+Estimated parameter:
+  -8985.0283, 118.7790, -0.7792, 30.9412, -1.1409
+
+
+
+========== Algorithm "rem" ==========
+At the 180 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8985.0283, 118.7790, -0.7792, 30.9412, -1.1409
+Estimated parameter:
+  -8985.1407, 118.6996, -0.7783, 31.0398, -1.1411
+
+
+
+========== Algorithm "rem" ==========
+At the 181 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8985.1407, 118.6996, -0.7783, 31.0398, -1.1411
+Estimated parameter:
+  -8985.6637, 118.6282, -0.7752, 31.1242, -1.1414
+
+
+
+========== Algorithm "rem" ==========
+At the 182 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8985.6637, 118.6282, -0.7752, 31.1242, -1.1414
+Estimated parameter:
+  -8986.5676, 118.5611, -0.7706, 31.2021, -1.1417
+
+
+
+========== Algorithm "rem" ==========
+At the 183 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8986.5676, 118.5611, -0.7706, 31.2021, -1.1417
+Estimated parameter:
+  -8987.0831, 118.4907, -0.7680, 31.2879, -1.1420
+
+
+
+========== Algorithm "rem" ==========
+At the 184 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8987.0831, 118.4907, -0.7680, 31.2879, -1.1420
+Estimated parameter:
+  -8987.0976, 118.4198, -0.7671, 31.3749, -1.1422
+
+
+
+========== Algorithm "rem" ==========
+At the 185 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8987.0976, 118.4198, -0.7671, 31.3749, -1.1422
+Estimated parameter:
+  -8987.3575, 118.3550, -0.7649, 31.4508, -1.1424
+
+
+
+========== Algorithm "rem" ==========
+At the 186 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8987.3575, 118.3550, -0.7649, 31.4508, -1.1424
+Estimated parameter:
+  -8987.8243, 118.2933, -0.7615, 31.5221, -1.1428
+
+
+
+========== Algorithm "rem" ==========
+At the 187 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8987.8243, 118.2933, -0.7615, 31.5221, -1.1428
+Estimated parameter:
+  -8988.3901, 118.2317, -0.7581, 31.5945, -1.1432
+
+
+
+========== Algorithm "rem" ==========
+At the 188 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8988.3901, 118.2317, -0.7581, 31.5945, -1.1432
+Estimated parameter:
+  -8988.3064, 118.1652, -0.7576, 31.6772, -1.1435
+
+
+
+========== Algorithm "rem" ==========
+At the 189 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8988.3064, 118.1652, -0.7576, 31.6772, -1.1435
+Estimated parameter:
+  -8988.3109, 118.1033, -0.7564, 31.7516, -1.1438
+
+
+
+========== Algorithm "rem" ==========
+At the 190 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8988.3109, 118.1033, -0.7564, 31.7516, -1.1438
+Estimated parameter:
+  -8988.6686, 118.0457, -0.7539, 31.8190, -1.1440
+
+
+
+========== Algorithm "rem" ==========
+At the 191 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8988.6686, 118.0457, -0.7539, 31.8190, -1.1440
+Estimated parameter:
+  -8989.0795, 117.9901, -0.7511, 31.8837, -1.1441
+
+
+
+========== Algorithm "rem" ==========
+At the 192 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.0795, 117.9901, -0.7511, 31.8837, -1.1441
+Estimated parameter:
+  -8988.9088, 117.9306, -0.7507, 31.9559, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 193 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8988.9088, 117.9306, -0.7507, 31.9559, -1.1444
+Estimated parameter:
+  -8989.5475, 117.8799, -0.7468, 32.0131, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 194 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.5475, 117.8799, -0.7468, 32.0131, -1.1446
+Estimated parameter:
+  -8989.4834, 117.8228, -0.7463, 32.0829, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 195 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.4834, 117.8228, -0.7463, 32.0829, -1.1446
+Estimated parameter:
+  -8989.5191, 117.7700, -0.7452, 32.1454, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 196 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.5191, 117.7700, -0.7452, 32.1454, -1.1446
+Estimated parameter:
+  -8989.4939, 117.7190, -0.7440, 32.2052, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 197 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.4939, 117.7190, -0.7440, 32.2052, -1.1446
+Estimated parameter:
+  -8989.5881, 117.6696, -0.7425, 32.2626, -1.1447
+
+
+
+========== Algorithm "rem" ==========
+At the 198 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.5881, 117.6696, -0.7425, 32.2626, -1.1447
+Estimated parameter:
+  -8989.9358, 117.6231, -0.7401, 32.3158, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 199 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.9358, 117.6231, -0.7401, 32.3158, -1.1446
+Estimated parameter:
+  -8990.2888, 117.5769, -0.7378, 32.3695, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 200 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.2888, 117.5769, -0.7378, 32.3695, -1.1446
+Estimated parameter:
+  -8989.9909, 117.5267, -0.7382, 32.4309, -1.1445
+
+
+
+========== Algorithm "rem" ==========
+At the 201 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8989.9909, 117.5267, -0.7382, 32.4309, -1.1445
+Estimated parameter:
+  -8990.4685, 117.4856, -0.7352, 32.4763, -1.1445
+
+
+
+========== Algorithm "rem" ==========
+At the 202 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.4685, 117.4856, -0.7352, 32.4763, -1.1445
+Estimated parameter:
+  -8990.3929, 117.4392, -0.7347, 32.5322, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 203 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.3929, 117.4392, -0.7347, 32.5322, -1.1444
+Estimated parameter:
+  -8990.4355, 117.3968, -0.7334, 32.5807, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 204 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.4355, 117.3968, -0.7334, 32.5807, -1.1444
+Estimated parameter:
+  -8990.4471, 117.3563, -0.7320, 32.6262, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 205 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.4471, 117.3563, -0.7320, 32.6262, -1.1444
+Estimated parameter:
+  -8990.7045, 117.3175, -0.7297, 32.6690, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 206 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.7045, 117.3175, -0.7297, 32.6690, -1.1444
+Estimated parameter:
+  -8990.9173, 117.2789, -0.7276, 32.7122, -1.1445
+
+
+
+========== Algorithm "rem" ==========
+At the 207 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.9173, 117.2789, -0.7276, 32.7122, -1.1445
+Estimated parameter:
+  -8991.1854, 117.2397, -0.7256, 32.7574, -1.1445
+
+
+
+========== Algorithm "rem" ==========
+At the 208 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.1854, 117.2397, -0.7256, 32.7574, -1.1445
+Estimated parameter:
+  -8990.8264, 117.1971, -0.7262, 32.8093, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 209 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.8264, 117.1971, -0.7262, 32.8093, -1.1444
+Estimated parameter:
+  -8991.1540, 117.1632, -0.7236, 32.8454, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 210 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.1540, 117.1632, -0.7236, 32.8454, -1.1444
+Estimated parameter:
+  -8990.9175, 117.1240, -0.7235, 32.8915, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 211 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8990.9175, 117.1240, -0.7235, 32.8915, -1.1443
+Estimated parameter:
+  -8991.3598, 117.0922, -0.7204, 32.9247, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 212 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.3598, 117.0922, -0.7204, 32.9247, -1.1443
+Estimated parameter:
+  -8991.1876, 117.0540, -0.7202, 32.9703, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 213 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.1876, 117.0540, -0.7202, 32.9703, -1.1443
+Estimated parameter:
+  -8991.1305, 117.0198, -0.7192, 33.0084, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 214 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.1305, 117.0198, -0.7192, 33.0084, -1.1443
+Estimated parameter:
+  -8991.2277, 116.9883, -0.7174, 33.0416, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 215 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.2277, 116.9883, -0.7174, 33.0416, -1.1443
+Estimated parameter:
+  -8991.4989, 116.9585, -0.7148, 33.0720, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 216 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.4989, 116.9585, -0.7148, 33.0720, -1.1444
+Estimated parameter:
+  -8991.7613, 116.9282, -0.7123, 33.1041, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 217 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.7613, 116.9282, -0.7123, 33.1041, -1.1446
+Estimated parameter:
+  -8991.9472, 116.8962, -0.7105, 33.1400, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 218 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.9472, 116.8962, -0.7105, 33.1400, -1.1446
+Estimated parameter:
+  -8992.0040, 116.8627, -0.7095, 33.1795, -1.1446
+
+
+
+========== Algorithm "rem" ==========
+At the 219 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8992.0040, 116.8627, -0.7095, 33.1795, -1.1446
+Estimated parameter:
+  -8991.6235, 116.8270, -0.7104, 33.2233, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 220 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.6235, 116.8270, -0.7104, 33.2233, -1.1444
+Estimated parameter:
+  -8991.8208, 116.8003, -0.7083, 33.2503, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 221 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.8208, 116.8003, -0.7083, 33.2503, -1.1444
+Estimated parameter:
+  -8991.9814, 116.7713, -0.7066, 33.2824, -1.1444
+
+
+
+========== Algorithm "rem" ==========
+At the 222 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.9814, 116.7713, -0.7066, 33.2824, -1.1444
+Estimated parameter:
+  -8992.0515, 116.7403, -0.7056, 33.3189, -1.1443
+
+
+
+========== Algorithm "rem" ==========
+At the 223 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8992.0515, 116.7403, -0.7056, 33.3189, -1.1443
+Estimated parameter:
+  -8991.5226, 116.7064, -0.7071, 33.3609, -1.1441
+
+
+
+========== Algorithm "rem" ==========
+At the 224 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.5226, 116.7064, -0.7071, 33.3609, -1.1441
+Estimated parameter:
+  -8991.6027, 116.6815, -0.7054, 33.3860, -1.1440
+
+
+
+========== Algorithm "rem" ==========
+At the 225 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.6027, 116.6815, -0.7054, 33.3860, -1.1440
+Estimated parameter:
+  -8991.7153, 116.6551, -0.7039, 33.4146, -1.1440
+
+
+
+========== Algorithm "rem" ==========
+At the 226 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.7153, 116.6551, -0.7039, 33.4146, -1.1440
+Estimated parameter:
+  -8991.6629, 116.6270, -0.7032, 33.4467, -1.1440
+
+
+
+========== Algorithm "rem" ==========
+At the 227 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.6629, 116.6270, -0.7032, 33.4467, -1.1440
+Estimated parameter:
+  -8991.7173, 116.5995, -0.7022, 33.4783, -1.1438
+
+
+
+========== Algorithm "rem" ==========
+At the 228 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.7173, 116.5995, -0.7022, 33.4783, -1.1438
+Estimated parameter:
+  -8991.7155, 116.5725, -0.7015, 33.5090, -1.1437
+
+
+
+========== Algorithm "rem" ==========
+At the 229 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -8991.7155, 116.5725, -0.7015, 33.5090, -1.1437
+Estimated parameter:
+  -8991.6524, 116.5457, -0.7010, 33.5400, -1.1436
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  0.0000, 0.0000, 0.0000, 0.0000, 0.0000
+Estimated parameter:
+  1633.3738, -11.6855, -3.3096, -19.9645, -3.8452
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  1633.3738, -11.6855, -3.3096, -19.9645, -3.8452
+Estimated parameter:
+  3618.4507, -18.8779, -5.5062, -38.6909, -7.2537
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  3618.4507, -18.8779, -5.5062, -38.6909, -7.2537
+Estimated parameter:
+  4717.6252, -15.5195, -5.0548, -53.5094, -9.1555
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  4717.6252, -15.5195, -5.0548, -53.5094, -9.1555
+Estimated parameter:
+  5257.0591, -9.8085, -4.9109, -62.1595, -10.1350
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  5257.0591, -9.8085, -4.9109, -62.1595, -10.1350
+Estimated parameter:
+  5919.5608, -9.6092, -5.6397, -65.4005, -10.7146
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  5919.5608, -9.6092, -5.6397, -65.4005, -10.7146
+Estimated parameter:
+  6640.4351, -10.7734, -6.2406, -68.6113, -11.2751
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  6640.4351, -10.7734, -6.2406, -68.6113, -11.2751
+Estimated parameter:
+  7406.9608, -12.3333, -6.8043, -72.0510, -11.8649
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  7406.9608, -12.3333, -6.8043, -72.0510, -11.8649
+Estimated parameter:
+  8213.0852, -14.0247, -7.3893, -75.7048, -12.4801
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  8213.0852, -14.0247, -7.3893, -75.7048, -12.4801
+Estimated parameter:
+  9050.6880, -15.7111, -8.0116, -79.5678, -13.1170
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  9050.6880, -15.7111, -8.0116, -79.5678, -13.1170
+Estimated parameter:
+  9911.5575, -17.3067, -8.6747, -83.6267, -13.7714
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  9911.5575, -17.3067, -8.6747, -83.6267, -13.7714
+Estimated parameter:
+  10785.8251, -18.7483, -9.3720, -87.8668, -14.4385
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  10785.8251, -18.7483, -9.3720, -87.8668, -14.4385
+Estimated parameter:
+  11664.2506, -19.9972, -10.0948, -92.2624, -15.1136
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  11664.2506, -19.9972, -10.0948, -92.2624, -15.1136
+Estimated parameter:
+  12540.0683, -21.0813, -10.8261, -96.7836, -15.7914
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  12540.0683, -21.0813, -10.8261, -96.7836, -15.7914
+Estimated parameter:
+  13406.9200, -22.0101, -11.5550, -101.3978, -16.4660
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  13406.9200, -22.0101, -11.5550, -101.3978, -16.4660
+Estimated parameter:
+  14261.0864, -22.8428, -12.2663, -106.0632, -17.1325
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  14261.0864, -22.8428, -12.2663, -106.0632, -17.1325
+Estimated parameter:
+  15100.4333, -23.6663, -12.9434, -110.7361, -17.7859
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  15100.4333, -23.6663, -12.9434, -110.7361, -17.7859
+Estimated parameter:
+  15923.3643, -24.5304, -13.5781, -115.3790, -18.4223
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  15923.3643, -24.5304, -13.5781, -115.3790, -18.4223
+Estimated parameter:
+  16728.4377, -25.4736, -14.1650, -119.9557, -19.0388
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  16728.4377, -25.4736, -14.1650, -119.9557, -19.0388
+Estimated parameter:
+  17514.7676, -26.5274, -14.7014, -124.4337, -19.6331
+
+
+
+========== Algorithm "rem" ==========
+At the 20 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  17514.7676, -26.5274, -14.7014, -124.4337, -19.6331
+Estimated parameter:
+  18280.9650, -27.6868, -15.1894, -128.7918, -20.2040
+
+
+
+========== Algorithm "rem" ==========
+At the 21 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  18280.9650, -27.6868, -15.1894, -128.7918, -20.2040
+Estimated parameter:
+  19025.6513, -28.9408, -15.6313, -133.0145, -20.7511
+
+
+
+========== Algorithm "rem" ==========
+At the 22 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  19025.6513, -28.9408, -15.6313, -133.0145, -20.7511
+Estimated parameter:
+  19748.8706, -30.2850, -16.0340, -137.0797, -21.2737
+
+
+
+========== Algorithm "rem" ==========
+At the 23 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  19748.8706, -30.2850, -16.0340, -137.0797, -21.2737
+Estimated parameter:
+  20448.7694, -31.6562, -16.4068, -140.9852, -21.7750
+
+
+
+========== Algorithm "rem" ==========
+At the 24 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  20448.7694, -31.6562, -16.4068, -140.9852, -21.7750
+Estimated parameter:
+  21125.2903, -33.0188, -16.7603, -144.7259, -22.2553
+
+
+
+========== Algorithm "rem" ==========
+At the 25 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21125.2903, -33.0188, -16.7603, -144.7259, -22.2553
+Estimated parameter:
+  21779.2471, -34.3798, -17.0969, -148.2980, -22.7143
+
+
+
+========== Algorithm "rem" ==========
+At the 26 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21779.2471, -34.3798, -17.0969, -148.2980, -22.7143
+Estimated parameter:
+  22409.6222, -35.6804, -17.4250, -151.7102, -23.1551
+
+
+
+========== Algorithm "rem" ==========
+At the 27 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22409.6222, -35.6804, -17.4250, -151.7102, -23.1551
+Estimated parameter:
+  23017.0999, -36.8967, -17.7510, -154.9631, -23.5801
+
+
+
+========== Algorithm "rem" ==========
+At the 28 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23017.0999, -36.8967, -17.7510, -154.9631, -23.5801
+Estimated parameter:
+  23603.5142, -38.0650, -18.0736, -158.0508, -23.9881
+
+
+
+========== Algorithm "rem" ==========
+At the 29 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23603.5142, -38.0650, -18.0736, -158.0508, -23.9881
+Estimated parameter:
+  24168.3121, -39.1427, -18.3964, -160.9875, -24.3825
+
+
+
+========== Algorithm "rem" ==========
+At the 30 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24168.3121, -39.1427, -18.3964, -160.9875, -24.3825
+Estimated parameter:
+  24713.6064, -40.1646, -18.7193, -163.7618, -24.7630
+
+
+
+========== Algorithm "rem" ==========
+At the 31 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24713.6064, -40.1646, -18.7193, -163.7618, -24.7630
+Estimated parameter:
+  25238.8178, -41.1066, -19.0422, -166.3928, -25.1309
+
+
+
+========== Algorithm "rem" ==========
+At the 32 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25238.8178, -41.1066, -19.0422, -166.3928, -25.1309
+Estimated parameter:
+  25745.3877, -41.9846, -19.3656, -168.8757, -25.4868
+
+
+
+========== Algorithm "rem" ==========
+At the 33 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25745.3877, -41.9846, -19.3656, -168.8757, -25.4868
+Estimated parameter:
+  26234.7124, -42.8450, -19.6838, -171.1995, -25.8301
+
+
+
+========== Algorithm "rem" ==========
+At the 34 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26234.7124, -42.8450, -19.6838, -171.1995, -25.8301
+Estimated parameter:
+  26705.7506, -43.6320, -20.0028, -173.3864, -26.1628
+
+
+
+========== Algorithm "rem" ==========
+At the 35 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26705.7506, -43.6320, -20.0028, -173.3864, -26.1628
+Estimated parameter:
+  27160.2641, -44.3834, -20.3203, -175.4233, -26.4850
+
+
+
+========== Algorithm "rem" ==========
+At the 36 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27160.2641, -44.3834, -20.3203, -175.4233, -26.4850
+Estimated parameter:
+  27598.4726, -45.1257, -20.6295, -177.3121, -26.7962
+
+
+
+========== Algorithm "rem" ==========
+At the 37 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27598.4726, -45.1257, -20.6295, -177.3121, -26.7962
+Estimated parameter:
+  28020.0817, -45.8251, -20.9357, -179.0635, -27.0978
+
+
+
+========== Algorithm "rem" ==========
+At the 38 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28020.0817, -45.8251, -20.9357, -179.0635, -27.0978
+Estimated parameter:
+  28426.1591, -46.5072, -21.2378, -180.6686, -27.3889
+
+
+
+========== Algorithm "rem" ==========
+At the 39 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28426.1591, -46.5072, -21.2378, -180.6686, -27.3889
+Estimated parameter:
+  28816.2290, -47.1528, -21.5356, -182.1422, -27.6706
+
+
+
+========== Algorithm "rem" ==========
+At the 40 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28816.2290, -47.1528, -21.5356, -182.1422, -27.6706
+Estimated parameter:
+  29190.9640, -47.7853, -21.8255, -183.4852, -27.9419
+
+
+
+========== Algorithm "rem" ==========
+At the 41 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29190.9640, -47.7853, -21.8255, -183.4852, -27.9419
+Estimated parameter:
+  29550.2619, -48.3775, -22.1111, -184.7076, -28.2046
+
+
+
+========== Algorithm "rem" ==========
+At the 42 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29550.2619, -48.3775, -22.1111, -184.7076, -28.2046
+Estimated parameter:
+  29895.4845, -48.9770, -22.3895, -185.7879, -28.4571
+
+
+
+========== Algorithm "rem" ==========
+At the 43 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29895.4845, -48.9770, -22.3895, -185.7879, -28.4571
+Estimated parameter:
+  30225.7567, -49.5469, -22.6630, -186.7484, -28.7001
+
+
+
+========== Algorithm "rem" ==========
+At the 44 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30225.7567, -49.5469, -22.6630, -186.7484, -28.7001
+Estimated parameter:
+  30541.5384, -50.1044, -22.9278, -187.5922, -28.9334
+
+
+
+========== Algorithm "rem" ==========
+At the 45 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30541.5384, -50.1044, -22.9278, -187.5922, -28.9334
+Estimated parameter:
+  30843.2518, -50.6418, -23.1888, -188.3135, -29.1570
+
+
+
+========== Algorithm "rem" ==========
+At the 46 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30843.2518, -50.6418, -23.1888, -188.3135, -29.1570
+Estimated parameter:
+  31130.9827, -51.1742, -23.4417, -188.9149, -29.3705
+
+
+
+========== Algorithm "rem" ==========
+At the 47 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31130.9827, -51.1742, -23.4417, -188.9149, -29.3705
+Estimated parameter:
+  31404.4351, -51.6666, -23.6905, -189.4134, -29.5759
+
+
+
+========== Algorithm "rem" ==========
+At the 48 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31404.4351, -51.6666, -23.6905, -189.4134, -29.5759
+Estimated parameter:
+  31664.7341, -52.1700, -23.9301, -189.7937, -29.7701
+
+
+
+========== Algorithm "rem" ==========
+At the 49 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31664.7341, -52.1700, -23.9301, -189.7937, -29.7701
+Estimated parameter:
+  31911.1235, -52.6378, -24.1652, -190.0771, -29.9552
+
+
+
+========== Algorithm "rem" ==========
+At the 50 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31911.1235, -52.6378, -24.1652, -190.0771, -29.9552
+Estimated parameter:
+  32144.4223, -53.0949, -24.3950, -190.2510, -30.1302
+
+
+
+========== Algorithm "rem" ==========
+At the 51 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32144.4223, -53.0949, -24.3950, -190.2510, -30.1302
+Estimated parameter:
+  32364.3250, -53.5291, -24.6174, -190.3341, -30.2958
+
+
+
+========== Algorithm "rem" ==========
+At the 52 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32364.3250, -53.5291, -24.6174, -190.3341, -30.2958
+Estimated parameter:
+  32571.4131, -53.9446, -24.8342, -190.3209, -30.4521
+
+
+
+========== Algorithm "rem" ==========
+At the 53 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32571.4131, -53.9446, -24.8342, -190.3209, -30.4521
+Estimated parameter:
+  32765.7615, -54.3430, -25.0439, -190.2218, -30.5984
+
+
+
+========== Algorithm "rem" ==========
+At the 54 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32765.7615, -54.3430, -25.0439, -190.2218, -30.5984
+Estimated parameter:
+  32947.6040, -54.7196, -25.2470, -190.0422, -30.7350
+
+
+
+========== Algorithm "rem" ==========
+At the 55 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32947.6040, -54.7196, -25.2470, -190.0422, -30.7350
+Estimated parameter:
+  33117.3245, -55.0793, -25.4440, -189.7778, -30.8623
+
+
+
+========== Algorithm "rem" ==========
+At the 56 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33117.3245, -55.0793, -25.4440, -189.7778, -30.8623
+Estimated parameter:
+  33275.1142, -55.4245, -25.6348, -189.4322, -30.9796
+
+
+
+========== Algorithm "rem" ==========
+At the 57 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33275.1142, -55.4245, -25.6348, -189.4322, -30.9796
+Estimated parameter:
+  33421.0438, -55.7516, -25.8191, -189.0103, -31.0875
+
+
+
+========== Algorithm "rem" ==========
+At the 58 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33421.0438, -55.7516, -25.8191, -189.0103, -31.0875
+Estimated parameter:
+  33555.3141, -56.0524, -25.9984, -188.5221, -31.1855
+
+
+
+========== Algorithm "rem" ==========
+At the 59 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33555.3141, -56.0524, -25.9984, -188.5221, -31.1855
+Estimated parameter:
+  33678.3008, -56.3307, -26.1714, -187.9698, -31.2747
+
+
+
+========== Algorithm "rem" ==========
+At the 60 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33678.3008, -56.3307, -26.1714, -187.9698, -31.2747
+Estimated parameter:
+  33790.3466, -56.5920, -26.3373, -187.3552, -31.3548
+
+
+
+========== Algorithm "rem" ==========
+At the 61 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33790.3466, -56.5920, -26.3373, -187.3552, -31.3548
+Estimated parameter:
+  33891.7162, -56.8311, -26.4981, -186.6818, -31.4257
+
+
+
+========== Algorithm "rem" ==========
+At the 62 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33891.7162, -56.8311, -26.4981, -186.6818, -31.4257
+Estimated parameter:
+  33982.6620, -57.0422, -26.6542, -185.9565, -31.4880
+
+
+
+========== Algorithm "rem" ==========
+At the 63 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33982.6620, -57.0422, -26.6542, -185.9565, -31.4880
+Estimated parameter:
+  34063.6245, -57.2396, -26.8043, -185.1741, -31.5416
+
+
+
+========== Algorithm "rem" ==========
+At the 64 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34063.6245, -57.2396, -26.8043, -185.1741, -31.5416
+Estimated parameter:
+  34134.6240, -57.4158, -26.9480, -184.3438, -31.5868
+
+
+
+========== Algorithm "rem" ==========
+At the 65 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34134.6240, -57.4158, -26.9480, -184.3438, -31.5868
+Estimated parameter:
+  34195.9875, -57.5656, -27.0876, -183.4687, -31.6237
+
+
+
+========== Algorithm "rem" ==========
+At the 66 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34195.9875, -57.5656, -27.0876, -183.4687, -31.6237
+Estimated parameter:
+  34248.0750, -57.6932, -27.2215, -182.5540, -31.6526
+
+
+
+========== Algorithm "rem" ==========
+At the 67 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34248.0750, -57.6932, -27.2215, -182.5540, -31.6526
+Estimated parameter:
+  34291.1180, -57.8139, -27.3486, -181.5928, -31.6724
+
+
+
+========== Algorithm "rem" ==========
+At the 68 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34291.1180, -57.8139, -27.3486, -181.5928, -31.6724
+Estimated parameter:
+  34325.1907, -57.9151, -27.4689, -180.5964, -31.6845
+
+
+
+========== Algorithm "rem" ==========
+At the 69 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34325.1907, -57.9151, -27.4689, -180.5964, -31.6845
+Estimated parameter:
+  34350.6740, -57.9905, -27.5847, -179.5708, -31.6888
+
+
+
+========== Algorithm "rem" ==========
+At the 70 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34350.6740, -57.9905, -27.5847, -179.5708, -31.6888
+Estimated parameter:
+  34367.9905, -58.0369, -27.6965, -178.5165, -31.6866
+
+
+
+========== Algorithm "rem" ==========
+At the 71 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34367.9905, -58.0369, -27.6965, -178.5165, -31.6866
+Estimated parameter:
+  34377.6230, -58.0667, -27.8037, -177.4307, -31.6773
+
+
+
+========== Algorithm "rem" ==========
+At the 72 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34377.6230, -58.0667, -27.8037, -177.4307, -31.6773
+Estimated parameter:
+  34379.6598, -58.0891, -27.9040, -176.3149, -31.6604
+
+
+
+========== Algorithm "rem" ==========
+At the 73 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34379.6598, -58.0891, -27.9040, -176.3149, -31.6604
+Estimated parameter:
+  34374.2336, -58.0922, -27.9990, -175.1768, -31.6368
+
+
+
+========== Algorithm "rem" ==========
+At the 74 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34374.2336, -58.0922, -27.9990, -175.1768, -31.6368
+Estimated parameter:
+  34361.6464, -58.0766, -28.0900, -174.0147, -31.6060
+
+
+
+========== Algorithm "rem" ==========
+At the 75 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34361.6464, -58.0766, -28.0900, -174.0147, -31.6060
+Estimated parameter:
+  34342.1477, -58.0514, -28.1730, -172.8357, -31.5691
+
+
+
+========== Algorithm "rem" ==========
+At the 76 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34342.1477, -58.0514, -28.1730, -172.8357, -31.5691
+Estimated parameter:
+  34316.1030, -58.0119, -28.2516, -171.6340, -31.5260
+
+
+
+========== Algorithm "rem" ==========
+At the 77 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34316.1030, -58.0119, -28.2516, -171.6340, -31.5260
+Estimated parameter:
+  34283.6203, -57.9511, -28.3257, -170.4218, -31.4767
+
+
+
+========== Algorithm "rem" ==========
+At the 78 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34283.6203, -57.9511, -28.3257, -170.4218, -31.4767
+Estimated parameter:
+  34245.0925, -57.8708, -28.3957, -169.1951, -31.4223
+
+
+
+========== Algorithm "rem" ==========
+At the 79 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34245.0925, -57.8708, -28.3957, -169.1951, -31.4223
+Estimated parameter:
+  34200.8168, -57.7852, -28.4598, -167.9531, -31.3619
+
+
+
+========== Algorithm "rem" ==========
+At the 80 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34200.8168, -57.7852, -28.4598, -167.9531, -31.3619
+Estimated parameter:
+  34150.9598, -57.6766, -28.5200, -166.7065, -31.2967
+
+
+
+========== Algorithm "rem" ==========
+At the 81 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34150.9598, -57.6766, -28.5200, -166.7065, -31.2967
+Estimated parameter:
+  34095.9560, -57.5554, -28.5763, -165.4486, -31.2265
+
+
+
+========== Algorithm "rem" ==========
+At the 82 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34095.9560, -57.5554, -28.5763, -165.4486, -31.2265
+Estimated parameter:
+  34035.9507, -57.4233, -28.6280, -164.1820, -31.1513
+
+
+
+========== Algorithm "rem" ==========
+At the 83 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34035.9507, -57.4233, -28.6280, -164.1820, -31.1513
+Estimated parameter:
+  33971.0696, -57.2798, -28.6750, -162.9097, -31.0715
+
+
+
+========== Algorithm "rem" ==========
+At the 84 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33971.0696, -57.2798, -28.6750, -162.9097, -31.0715
+Estimated parameter:
+  33901.4278, -57.1352, -28.7155, -161.6285, -30.9866
+
+
+
+========== Algorithm "rem" ==========
+At the 85 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33901.4278, -57.1352, -28.7155, -161.6285, -30.9866
+Estimated parameter:
+  33827.2838, -56.9705, -28.7528, -160.3490, -30.8977
+
+
+
+========== Algorithm "rem" ==========
+At the 86 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33827.2838, -56.9705, -28.7528, -160.3490, -30.8977
+Estimated parameter:
+  33749.0300, -56.7961, -28.7866, -159.0630, -30.8049
+
+
+
+========== Algorithm "rem" ==========
+At the 87 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33749.0300, -56.7961, -28.7866, -159.0630, -30.8049
+Estimated parameter:
+  33666.7167, -56.6113, -28.8163, -157.7745, -30.7082
+
+
+
+========== Algorithm "rem" ==========
+At the 88 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33666.7167, -56.6113, -28.8163, -157.7745, -30.7082
+Estimated parameter:
+  33580.6888, -56.4132, -28.8420, -156.4901, -30.6083
+
+
+
+========== Algorithm "rem" ==========
+At the 89 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33580.6888, -56.4132, -28.8420, -156.4901, -30.6083
+Estimated parameter:
+  33491.2347, -56.2098, -28.8640, -155.2023, -30.5050
+
+
+
+========== Algorithm "rem" ==========
+At the 90 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33491.2347, -56.2098, -28.8640, -155.2023, -30.5050
+Estimated parameter:
+  33398.2943, -55.9977, -28.8819, -153.9158, -30.3983
+
+
+
+========== Algorithm "rem" ==========
+At the 91 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33398.2943, -55.9977, -28.8819, -153.9158, -30.3983
+Estimated parameter:
+  33302.1618, -55.7872, -28.8940, -152.6289, -30.2886
+
+
+
+========== Algorithm "rem" ==========
+At the 92 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33302.1618, -55.7872, -28.8940, -152.6289, -30.2886
+Estimated parameter:
+  33202.9714, -55.5643, -28.9033, -151.3472, -30.1759
+
+
+
+========== Algorithm "rem" ==========
+At the 93 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33202.9714, -55.5643, -28.9033, -151.3472, -30.1759
+Estimated parameter:
+  33101.0868, -55.3265, -28.9106, -150.0717, -30.0613
+
+
+
+========== Algorithm "rem" ==========
+At the 94 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  33101.0868, -55.3265, -28.9106, -150.0717, -30.0613
+Estimated parameter:
+  32996.5276, -55.0919, -28.9129, -148.7974, -29.9434
+
+
+
+========== Algorithm "rem" ==========
+At the 95 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32996.5276, -55.0919, -28.9129, -148.7974, -29.9434
+Estimated parameter:
+  32889.4855, -54.8469, -28.9127, -147.5287, -29.8236
+
+
+
+========== Algorithm "rem" ==========
+At the 96 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32889.4855, -54.8469, -28.9127, -147.5287, -29.8236
+Estimated parameter:
+  32780.1966, -54.5954, -28.9097, -146.2667, -29.7012
+
+
+
+========== Algorithm "rem" ==========
+At the 97 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32780.1966, -54.5954, -28.9097, -146.2667, -29.7012
+Estimated parameter:
+  32668.7057, -54.3432, -28.9027, -145.0094, -29.5767
+
+
+
+========== Algorithm "rem" ==========
+At the 98 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32668.7057, -54.3432, -28.9027, -145.0094, -29.5767
+Estimated parameter:
+  32555.2265, -54.0807, -28.8937, -143.7626, -29.4503
+
+
+
+========== Algorithm "rem" ==========
+At the 99 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32555.2265, -54.0807, -28.8937, -143.7626, -29.4503
+Estimated parameter:
+  32439.9048, -53.8132, -28.8824, -142.5207, -29.3220
+
+
+
+========== Algorithm "rem" ==========
+At the 100 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32439.9048, -53.8132, -28.8824, -142.5207, -29.3220
+Estimated parameter:
+  32322.9467, -53.5409, -28.8684, -141.2873, -29.1924
+
+
+
+========== Algorithm "rem" ==========
+At the 101 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32322.9467, -53.5409, -28.8684, -141.2873, -29.1924
+Estimated parameter:
+  32204.4552, -53.2611, -28.8526, -140.0616, -29.0617
+
+
+
+========== Algorithm "rem" ==========
+At the 102 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32204.4552, -53.2611, -28.8526, -140.0616, -29.0617
+Estimated parameter:
+  32084.4957, -52.9839, -28.8334, -138.8418, -28.9293
+
+
+
+========== Algorithm "rem" ==========
+At the 103 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  32084.4957, -52.9839, -28.8334, -138.8418, -28.9293
+Estimated parameter:
+  31963.1635, -52.7072, -28.8100, -137.6333, -28.7956
+
+
+
+========== Algorithm "rem" ==========
+At the 104 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31963.1635, -52.7072, -28.8100, -137.6333, -28.7956
+Estimated parameter:
+  31840.5402, -52.4260, -28.7844, -136.4338, -28.6610
+
+
+
+========== Algorithm "rem" ==========
+At the 105 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31840.5402, -52.4260, -28.7844, -136.4338, -28.6610
+Estimated parameter:
+  31716.8956, -52.1404, -28.7571, -135.2437, -28.5255
+
+
+
+========== Algorithm "rem" ==========
+At the 106 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31716.8956, -52.1404, -28.7571, -135.2437, -28.5255
+Estimated parameter:
+  31592.4392, -51.8490, -28.7290, -134.0635, -28.3892
+
+
+
+========== Algorithm "rem" ==========
+At the 107 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31592.4392, -51.8490, -28.7290, -134.0635, -28.3892
+Estimated parameter:
+  31467.0915, -51.5585, -28.6982, -132.8932, -28.2520
+
+
+
+========== Algorithm "rem" ==========
+At the 108 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31467.0915, -51.5585, -28.6982, -132.8932, -28.2520
+Estimated parameter:
+  31340.8500, -51.2712, -28.6635, -131.7334, -28.1141
+
+
+
+========== Algorithm "rem" ==========
+At the 109 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31340.8500, -51.2712, -28.6635, -131.7334, -28.1141
+Estimated parameter:
+  31214.0746, -50.9785, -28.6276, -130.5854, -27.9761
+
+
+
+========== Algorithm "rem" ==========
+At the 110 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31214.0746, -50.9785, -28.6276, -130.5854, -27.9761
+Estimated parameter:
+  31086.7175, -50.6819, -28.5909, -129.4494, -27.8372
+
+
+
+========== Algorithm "rem" ==========
+At the 111 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  31086.7175, -50.6819, -28.5909, -129.4494, -27.8372
+Estimated parameter:
+  30958.9583, -50.3837, -28.5524, -128.3220, -27.6987
+
+
+
+========== Algorithm "rem" ==========
+At the 112 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30958.9583, -50.3837, -28.5524, -128.3220, -27.6987
+Estimated parameter:
+  30830.9574, -50.0846, -28.5129, -127.2064, -27.5597
+
+
+
+========== Algorithm "rem" ==========
+At the 113 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30830.9574, -50.0846, -28.5129, -127.2064, -27.5597
+Estimated parameter:
+  30702.7378, -49.7872, -28.4714, -126.1018, -27.4206
+
+
+
+========== Algorithm "rem" ==========
+At the 114 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30702.7378, -49.7872, -28.4714, -126.1018, -27.4206
+Estimated parameter:
+  30574.2868, -49.4916, -28.4276, -125.0096, -27.2812
+
+
+
+========== Algorithm "rem" ==========
+At the 115 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30574.2868, -49.4916, -28.4276, -125.0096, -27.2812
+Estimated parameter:
+  30445.6364, -49.1996, -28.3811, -123.9306, -27.1414
+
+
+
+========== Algorithm "rem" ==========
+At the 116 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30445.6364, -49.1996, -28.3811, -123.9306, -27.1414
+Estimated parameter:
+  30316.9708, -48.9024, -28.3345, -122.8611, -27.0026
+
+
+
+========== Algorithm "rem" ==========
+At the 117 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30316.9708, -48.9024, -28.3345, -122.8611, -27.0026
+Estimated parameter:
+  30188.3655, -48.6009, -28.2873, -121.8042, -26.8643
+
+
+
+========== Algorithm "rem" ==========
+At the 118 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30188.3655, -48.6009, -28.2873, -121.8042, -26.8643
+Estimated parameter:
+  30059.8630, -48.3068, -28.2376, -120.7603, -26.7254
+
+
+
+========== Algorithm "rem" ==========
+At the 119 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  30059.8630, -48.3068, -28.2376, -120.7603, -26.7254
+Estimated parameter:
+  29931.6289, -48.0139, -28.1869, -119.7279, -26.5868
+
+
+
+========== Algorithm "rem" ==========
+At the 120 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29931.6289, -48.0139, -28.1869, -119.7279, -26.5868
+Estimated parameter:
+  29803.6275, -47.7182, -28.1356, -118.7102, -26.4487
+
+
+
+========== Algorithm "rem" ==========
+At the 121 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29803.6275, -47.7182, -28.1356, -118.7102, -26.4487
+Estimated parameter:
+  29675.9353, -47.4259, -28.0828, -117.7024, -26.3111
+
+
+
+========== Algorithm "rem" ==========
+At the 122 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29675.9353, -47.4259, -28.0828, -117.7024, -26.3111
+Estimated parameter:
+  29548.6921, -47.1340, -28.0293, -116.7075, -26.1741
+
+
+
+========== Algorithm "rem" ==========
+At the 123 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29548.6921, -47.1340, -28.0293, -116.7075, -26.1741
+Estimated parameter:
+  29421.8537, -46.8442, -27.9749, -115.7240, -26.0375
+
+
+
+========== Algorithm "rem" ==========
+At the 124 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29421.8537, -46.8442, -27.9749, -115.7240, -26.0375
+Estimated parameter:
+  29295.4958, -46.5561, -27.9194, -114.7545, -25.9014
+
+
+
+========== Algorithm "rem" ==========
+At the 125 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29295.4958, -46.5561, -27.9194, -114.7545, -25.9014
+Estimated parameter:
+  29169.6478, -46.2708, -27.8628, -113.7951, -25.7662
+
+
+
+========== Algorithm "rem" ==========
+At the 126 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29169.6478, -46.2708, -27.8628, -113.7951, -25.7662
+Estimated parameter:
+  29044.3685, -45.9854, -27.8059, -112.8484, -25.6318
+
+
+
+========== Algorithm "rem" ==========
+At the 127 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  29044.3685, -45.9854, -27.8059, -112.8484, -25.6318
+Estimated parameter:
+  28919.6996, -45.7055, -27.7474, -111.9135, -25.4979
+
+
+
+========== Algorithm "rem" ==========
+At the 128 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28919.6996, -45.7055, -27.7474, -111.9135, -25.4979
+Estimated parameter:
+  28795.7027, -45.4221, -27.6893, -110.9923, -25.3652
+
+
+
+========== Algorithm "rem" ==========
+At the 129 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28795.7027, -45.4221, -27.6893, -110.9923, -25.3652
+Estimated parameter:
+  28672.5015, -45.1433, -27.6304, -110.0834, -25.2329
+
+
+
+========== Algorithm "rem" ==========
+At the 130 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28672.5015, -45.1433, -27.6304, -110.0834, -25.2329
+Estimated parameter:
+  28549.9961, -44.8669, -27.5703, -109.1869, -25.1019
+
+
+
+========== Algorithm "rem" ==========
+At the 131 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28549.9961, -44.8669, -27.5703, -109.1869, -25.1019
+Estimated parameter:
+  28428.3433, -44.5907, -27.5102, -108.3043, -24.9719
+
+
+
+========== Algorithm "rem" ==========
+At the 132 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28428.3433, -44.5907, -27.5102, -108.3043, -24.9719
+Estimated parameter:
+  28307.4750, -44.3191, -27.4493, -107.4332, -24.8424
+
+
+
+========== Algorithm "rem" ==========
+At the 133 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28307.4750, -44.3191, -27.4493, -107.4332, -24.8424
+Estimated parameter:
+  28187.4510, -44.0481, -27.3884, -106.5729, -24.7143
+
+
+
+========== Algorithm "rem" ==========
+At the 134 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28187.4510, -44.0481, -27.3884, -106.5729, -24.7143
+Estimated parameter:
+  28068.3311, -43.7779, -27.3274, -105.7264, -24.5871
+
+
+
+========== Algorithm "rem" ==========
+At the 135 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28068.3311, -43.7779, -27.3274, -105.7264, -24.5871
+Estimated parameter:
+  27950.1305, -43.5134, -27.2655, -104.8912, -24.4608
+
+
+
+========== Algorithm "rem" ==========
+At the 136 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27950.1305, -43.5134, -27.2655, -104.8912, -24.4608
+Estimated parameter:
+  27832.8457, -43.2509, -27.2033, -104.0688, -24.3355
+
+
+
+========== Algorithm "rem" ==========
+At the 137 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27832.8457, -43.2509, -27.2033, -104.0688, -24.3355
+Estimated parameter:
+  27716.6287, -42.9882, -27.1416, -103.2595, -24.2115
+
+
+
+========== Algorithm "rem" ==========
+At the 138 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27716.6287, -42.9882, -27.1416, -103.2595, -24.2115
+Estimated parameter:
+  27601.4308, -42.7331, -27.0789, -102.4598, -24.0885
+
+
+
+========== Algorithm "rem" ==========
+At the 139 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27601.4308, -42.7331, -27.0789, -102.4598, -24.0885
+Estimated parameter:
+  27487.2904, -42.4824, -27.0158, -101.6729, -23.9664
+
+
+
+========== Algorithm "rem" ==========
+At the 140 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27487.2904, -42.4824, -27.0158, -101.6729, -23.9664
+Estimated parameter:
+  27374.1474, -42.2320, -26.9532, -100.8953, -23.8459
+
+
+
+========== Algorithm "rem" ==========
+At the 141 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27374.1474, -42.2320, -26.9532, -100.8953, -23.8459
+Estimated parameter:
+  27262.0243, -41.9811, -26.8907, -100.1330, -23.7263
+
+
+
+========== Algorithm "rem" ==========
+At the 142 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27262.0243, -41.9811, -26.8907, -100.1330, -23.7263
+Estimated parameter:
+  27150.9395, -41.7314, -26.8284, -99.3809, -23.6085
+
+
+
+========== Algorithm "rem" ==========
+At the 143 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27150.9395, -41.7314, -26.8284, -99.3809, -23.6085
+Estimated parameter:
+  27041.0355, -41.4798, -26.7674, -98.6407, -23.4921
+
+
+
+========== Algorithm "rem" ==========
+At the 144 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  27041.0355, -41.4798, -26.7674, -98.6407, -23.4921
+Estimated parameter:
+  26932.2626, -41.2361, -26.7055, -97.9126, -23.3762
+
+
+
+========== Algorithm "rem" ==========
+At the 145 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26932.2626, -41.2361, -26.7055, -97.9126, -23.3762
+Estimated parameter:
+  26824.5605, -40.9947, -26.6435, -97.1959, -23.2618
+
+
+
+========== Algorithm "rem" ==========
+At the 146 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26824.5605, -40.9947, -26.6435, -97.1959, -23.2618
+Estimated parameter:
+  26718.0732, -40.7554, -26.5821, -96.4893, -23.1489
+
+
+
+========== Algorithm "rem" ==========
+At the 147 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26718.0732, -40.7554, -26.5821, -96.4893, -23.1489
+Estimated parameter:
+  26612.7416, -40.5210, -26.5207, -95.7930, -23.0370
+
+
+
+========== Algorithm "rem" ==========
+At the 148 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26612.7416, -40.5210, -26.5207, -95.7930, -23.0370
+Estimated parameter:
+  26508.6131, -40.2885, -26.4595, -95.1078, -22.9266
+
+
+
+========== Algorithm "rem" ==========
+At the 149 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26508.6131, -40.2885, -26.4595, -95.1078, -22.9266
+Estimated parameter:
+  26405.6849, -40.0566, -26.3994, -94.4333, -22.8176
+
+
+
+========== Algorithm "rem" ==========
+At the 150 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26405.6849, -40.0566, -26.3994, -94.4333, -22.8176
+Estimated parameter:
+  26303.9674, -39.8256, -26.3400, -93.7701, -22.7099
+
+
+
+========== Algorithm "rem" ==========
+At the 151 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26303.9674, -39.8256, -26.3400, -93.7701, -22.7099
+Estimated parameter:
+  26203.4657, -39.5943, -26.2817, -93.1190, -22.6033
+
+
+
+========== Algorithm "rem" ==========
+At the 152 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26203.4657, -39.5943, -26.2817, -93.1190, -22.6033
+Estimated parameter:
+  26104.1273, -39.3691, -26.2227, -92.4782, -22.4980
+
+
+
+========== Algorithm "rem" ==========
+At the 153 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26104.1273, -39.3691, -26.2227, -92.4782, -22.4980
+Estimated parameter:
+  26005.9496, -39.1506, -26.1630, -91.8476, -22.3939
+
+
+
+========== Algorithm "rem" ==========
+At the 154 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  26005.9496, -39.1506, -26.1630, -91.8476, -22.3939
+Estimated parameter:
+  25909.0447, -38.9343, -26.1040, -91.2273, -22.2913
+
+
+
+========== Algorithm "rem" ==========
+At the 155 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25909.0447, -38.9343, -26.1040, -91.2273, -22.2913
+Estimated parameter:
+  25813.3220, -38.7213, -26.0450, -90.6190, -22.1897
+
+
+
+========== Algorithm "rem" ==========
+At the 156 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25813.3220, -38.7213, -26.0450, -90.6190, -22.1897
+Estimated parameter:
+  25718.7303, -38.5104, -25.9861, -90.0198, -22.0898
+
+
+
+========== Algorithm "rem" ==========
+At the 157 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25718.7303, -38.5104, -25.9861, -90.0198, -22.0898
+Estimated parameter:
+  25625.4593, -38.3023, -25.9284, -89.4287, -21.9912
+
+
+
+========== Algorithm "rem" ==========
+At the 158 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25625.4593, -38.3023, -25.9284, -89.4287, -21.9912
+Estimated parameter:
+  25533.4415, -38.0974, -25.8710, -88.8504, -21.8936
+
+
+
+========== Algorithm "rem" ==========
+At the 159 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25533.4415, -38.0974, -25.8710, -88.8504, -21.8936
+Estimated parameter:
+  25442.6104, -37.8970, -25.8133, -88.2818, -21.7973
+
+
+
+========== Algorithm "rem" ==========
+At the 160 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25442.6104, -37.8970, -25.8133, -88.2818, -21.7973
+Estimated parameter:
+  25353.0158, -37.6984, -25.7565, -87.7216, -21.7027
+
+
+
+========== Algorithm "rem" ==========
+At the 161 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25353.0158, -37.6984, -25.7565, -87.7216, -21.7027
+Estimated parameter:
+  25264.5896, -37.5026, -25.6998, -87.1731, -21.6091
+
+
+
+========== Algorithm "rem" ==========
+At the 162 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25264.5896, -37.5026, -25.6998, -87.1731, -21.6091
+Estimated parameter:
+  25177.3722, -37.3095, -25.6436, -86.6317, -21.5173
+
+
+
+========== Algorithm "rem" ==========
+At the 163 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25177.3722, -37.3095, -25.6436, -86.6317, -21.5173
+Estimated parameter:
+  25091.4141, -37.1169, -25.5888, -86.1007, -21.4264
+
+
+
+========== Algorithm "rem" ==========
+At the 164 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25091.4141, -37.1169, -25.5888, -86.1007, -21.4264
+Estimated parameter:
+  25006.6587, -36.9270, -25.5346, -85.5782, -21.3370
+
+
+
+========== Algorithm "rem" ==========
+At the 165 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  25006.6587, -36.9270, -25.5346, -85.5782, -21.3370
+Estimated parameter:
+  24923.1500, -36.7414, -25.4804, -85.0663, -21.2488
+
+
+
+========== Algorithm "rem" ==========
+At the 166 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24923.1500, -36.7414, -25.4804, -85.0663, -21.2488
+Estimated parameter:
+  24840.7941, -36.5577, -25.4268, -84.5629, -21.1619
+
+
+
+========== Algorithm "rem" ==========
+At the 167 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24840.7941, -36.5577, -25.4268, -84.5629, -21.1619
+Estimated parameter:
+  24759.6669, -36.3766, -25.3739, -84.0677, -21.0765
+
+
+
+========== Algorithm "rem" ==========
+At the 168 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24759.6669, -36.3766, -25.3739, -84.0677, -21.0765
+Estimated parameter:
+  24679.7838, -36.1973, -25.3220, -83.5829, -20.9920
+
+
+
+========== Algorithm "rem" ==========
+At the 169 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24679.7838, -36.1973, -25.3220, -83.5829, -20.9920
+Estimated parameter:
+  24601.1037, -36.0204, -25.2709, -83.1061, -20.9088
+
+
+
+========== Algorithm "rem" ==========
+At the 170 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24601.1037, -36.0204, -25.2709, -83.1061, -20.9088
+Estimated parameter:
+  24523.5829, -35.8515, -25.2192, -82.6379, -20.8265
+
+
+
+========== Algorithm "rem" ==========
+At the 171 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24523.5829, -35.8515, -25.2192, -82.6379, -20.8265
+Estimated parameter:
+  24447.2209, -35.6847, -25.1679, -82.1764, -20.7460
+
+
+
+========== Algorithm "rem" ==========
+At the 172 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24447.2209, -35.6847, -25.1679, -82.1764, -20.7460
+Estimated parameter:
+  24371.9822, -35.5189, -25.1170, -81.7252, -20.6668
+
+
+
+========== Algorithm "rem" ==========
+At the 173 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24371.9822, -35.5189, -25.1170, -81.7252, -20.6668
+Estimated parameter:
+  24297.9657, -35.3538, -25.0677, -81.2805, -20.5891
+
+
+
+========== Algorithm "rem" ==========
+At the 174 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24297.9657, -35.3538, -25.0677, -81.2805, -20.5891
+Estimated parameter:
+  24225.1264, -35.1863, -25.0203, -80.8456, -20.5123
+
+
+
+========== Algorithm "rem" ==========
+At the 175 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24225.1264, -35.1863, -25.0203, -80.8456, -20.5123
+Estimated parameter:
+  24153.3941, -35.0258, -24.9723, -80.4194, -20.4364
+
+
+
+========== Algorithm "rem" ==========
+At the 176 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24153.3941, -35.0258, -24.9723, -80.4194, -20.4364
+Estimated parameter:
+  24082.7777, -34.8692, -24.9245, -79.9992, -20.3621
+
+
+
+========== Algorithm "rem" ==========
+At the 177 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24082.7777, -34.8692, -24.9245, -79.9992, -20.3621
+Estimated parameter:
+  24013.2816, -34.7109, -24.8781, -79.5890, -20.2890
+
+
+
+========== Algorithm "rem" ==========
+At the 178 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24013.2816, -34.7109, -24.8781, -79.5890, -20.2890
+Estimated parameter:
+  23944.8659, -34.5571, -24.8320, -79.1828, -20.2173
+
+
+
+========== Algorithm "rem" ==========
+At the 179 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23944.8659, -34.5571, -24.8320, -79.1828, -20.2173
+Estimated parameter:
+  23877.6088, -34.4071, -24.7862, -78.7853, -20.1467
+
+
+
+========== Algorithm "rem" ==========
+At the 180 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23877.6088, -34.4071, -24.7862, -78.7853, -20.1467
+Estimated parameter:
+  23811.4641, -34.2558, -24.7421, -78.3966, -20.0770
+
+
+
+========== Algorithm "rem" ==========
+At the 181 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23811.4641, -34.2558, -24.7421, -78.3966, -20.0770
+Estimated parameter:
+  23746.3732, -34.1093, -24.6976, -78.0154, -20.0085
+
+
+
+========== Algorithm "rem" ==========
+At the 182 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23746.3732, -34.1093, -24.6976, -78.0154, -20.0085
+Estimated parameter:
+  23682.3617, -33.9674, -24.6535, -77.6393, -19.9414
+
+
+
+========== Algorithm "rem" ==========
+At the 183 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23682.3617, -33.9674, -24.6535, -77.6393, -19.9414
+Estimated parameter:
+  23619.4175, -33.8297, -24.6095, -77.2690, -19.8756
+
+
+
+========== Algorithm "rem" ==========
+At the 184 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23619.4175, -33.8297, -24.6095, -77.2690, -19.8756
+Estimated parameter:
+  23557.4923, -33.6903, -24.5667, -76.9085, -19.8108
+
+
+
+========== Algorithm "rem" ==========
+At the 185 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23557.4923, -33.6903, -24.5667, -76.9085, -19.8108
+Estimated parameter:
+  23496.6458, -33.5572, -24.5235, -76.5550, -19.7469
+
+
+
+========== Algorithm "rem" ==========
+At the 186 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23496.6458, -33.5572, -24.5235, -76.5550, -19.7469
+Estimated parameter:
+  23436.8752, -33.4244, -24.4818, -76.2087, -19.6839
+
+
+
+========== Algorithm "rem" ==========
+At the 187 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23436.8752, -33.4244, -24.4818, -76.2087, -19.6839
+Estimated parameter:
+  23378.1500, -33.2937, -24.4410, -75.8677, -19.6222
+
+
+
+========== Algorithm "rem" ==========
+At the 188 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23378.1500, -33.2937, -24.4410, -75.8677, -19.6222
+Estimated parameter:
+  23320.4159, -33.1647, -24.4008, -75.5351, -19.5612
+
+
+
+========== Algorithm "rem" ==========
+At the 189 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23320.4159, -33.1647, -24.4008, -75.5351, -19.5612
+Estimated parameter:
+  23263.6392, -33.0402, -24.3604, -75.2067, -19.5016
+
+
+
+========== Algorithm "rem" ==========
+At the 190 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23263.6392, -33.0402, -24.3604, -75.2067, -19.5016
+Estimated parameter:
+  23207.9031, -32.9189, -24.3207, -74.8847, -19.4430
+
+
+
+========== Algorithm "rem" ==========
+At the 191 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23207.9031, -32.9189, -24.3207, -74.8847, -19.4430
+Estimated parameter:
+  23153.2057, -32.7987, -24.2820, -74.5703, -19.3852
+
+
+
+========== Algorithm "rem" ==========
+At the 192 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23153.2057, -32.7987, -24.2820, -74.5703, -19.3852
+Estimated parameter:
+  23099.4374, -32.6813, -24.2435, -74.2625, -19.3284
+
+
+
+========== Algorithm "rem" ==========
+At the 193 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23099.4374, -32.6813, -24.2435, -74.2625, -19.3284
+Estimated parameter:
+  23046.5748, -32.5664, -24.2054, -73.9588, -19.2729
+
+
+
+========== Algorithm "rem" ==========
+At the 194 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  23046.5748, -32.5664, -24.2054, -73.9588, -19.2729
+Estimated parameter:
+  22994.7084, -32.4526, -24.1683, -73.6618, -19.2183
+
+
+
+========== Algorithm "rem" ==========
+At the 195 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22994.7084, -32.4526, -24.1683, -73.6618, -19.2183
+Estimated parameter:
+  22943.7597, -32.3378, -24.1325, -73.3696, -19.1649
+
+
+
+========== Algorithm "rem" ==========
+At the 196 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22943.7597, -32.3378, -24.1325, -73.3696, -19.1649
+Estimated parameter:
+  22893.7312, -32.2250, -24.0971, -73.0851, -19.1124
+
+
+
+========== Algorithm "rem" ==========
+At the 197 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22893.7312, -32.2250, -24.0971, -73.0851, -19.1124
+Estimated parameter:
+  22844.6076, -32.1143, -24.0622, -72.8052, -19.0610
+
+
+
+========== Algorithm "rem" ==========
+At the 198 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22844.6076, -32.1143, -24.0622, -72.8052, -19.0610
+Estimated parameter:
+  22796.3735, -32.0055, -24.0280, -72.5314, -19.0103
+
+
+
+========== Algorithm "rem" ==========
+At the 199 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22796.3735, -32.0055, -24.0280, -72.5314, -19.0103
+Estimated parameter:
+  22749.0200, -31.9005, -23.9939, -72.2636, -18.9605
+
+
+
+========== Algorithm "rem" ==========
+At the 200 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22749.0200, -31.9005, -23.9939, -72.2636, -18.9605
+Estimated parameter:
+  22702.4967, -31.8006, -23.9593, -71.9998, -18.9117
+
+
+
+========== Algorithm "rem" ==========
+At the 201 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22702.4967, -31.8006, -23.9593, -71.9998, -18.9117
+Estimated parameter:
+  22656.8580, -31.7030, -23.9253, -71.7424, -18.8637
+
+
+
+========== Algorithm "rem" ==========
+At the 202 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22656.8580, -31.7030, -23.9253, -71.7424, -18.8637
+Estimated parameter:
+  22612.1028, -31.6056, -23.8925, -71.4883, -18.8168
+
+
+
+========== Algorithm "rem" ==========
+At the 203 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22612.1028, -31.6056, -23.8925, -71.4883, -18.8168
+Estimated parameter:
+  22568.1774, -31.5088, -23.8603, -71.2420, -18.7705
+
+
+
+========== Algorithm "rem" ==========
+At the 204 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22568.1774, -31.5088, -23.8603, -71.2420, -18.7705
+Estimated parameter:
+  22525.0055, -31.4135, -23.8286, -70.9983, -18.7255
+
+
+
+========== Algorithm "rem" ==========
+At the 205 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22525.0055, -31.4135, -23.8286, -70.9983, -18.7255
+Estimated parameter:
+  22482.6777, -31.3220, -23.7968, -70.7626, -18.6808
+
+
+
+========== Algorithm "rem" ==========
+At the 206 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22482.6777, -31.3220, -23.7968, -70.7626, -18.6808
+Estimated parameter:
+  22441.1266, -31.2305, -23.7663, -70.5271, -18.6377
+
+
+
+========== Algorithm "rem" ==========
+At the 207 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22441.1266, -31.2305, -23.7663, -70.5271, -18.6377
+Estimated parameter:
+  22400.4201, -31.1396, -23.7367, -70.2990, -18.5949
+
+
+
+========== Algorithm "rem" ==========
+At the 208 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22400.4201, -31.1396, -23.7367, -70.2990, -18.5949
+Estimated parameter:
+  22360.4642, -31.0511, -23.7074, -70.0745, -18.5531
+
+
+
+========== Algorithm "rem" ==========
+At the 209 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22360.4642, -31.0511, -23.7074, -70.0745, -18.5531
+Estimated parameter:
+  22321.2758, -30.9633, -23.6787, -69.8547, -18.5122
+
+
+
+========== Algorithm "rem" ==========
+At the 210 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22321.2758, -30.9633, -23.6787, -69.8547, -18.5122
+Estimated parameter:
+  22282.8599, -30.8791, -23.6503, -69.6398, -18.4718
+
+
+
+========== Algorithm "rem" ==========
+At the 211 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22282.8599, -30.8791, -23.6503, -69.6398, -18.4718
+Estimated parameter:
+  22245.2308, -30.7967, -23.6227, -69.4282, -18.4323
+
+
+
+========== Algorithm "rem" ==========
+At the 212 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22245.2308, -30.7967, -23.6227, -69.4282, -18.4323
+Estimated parameter:
+  22208.2926, -30.7148, -23.5953, -69.2224, -18.3935
+
+
+
+========== Algorithm "rem" ==========
+At the 213 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22208.2926, -30.7148, -23.5953, -69.2224, -18.3935
+Estimated parameter:
+  22172.0256, -30.6332, -23.5686, -69.0200, -18.3558
+
+
+
+========== Algorithm "rem" ==========
+At the 214 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22172.0256, -30.6332, -23.5686, -69.0200, -18.3558
+Estimated parameter:
+  22136.4922, -30.5557, -23.5418, -68.8231, -18.3185
+
+
+
+========== Algorithm "rem" ==========
+At the 215 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22136.4922, -30.5557, -23.5418, -68.8231, -18.3185
+Estimated parameter:
+  22101.6624, -30.4791, -23.5157, -68.6297, -18.2821
+
+
+
+========== Algorithm "rem" ==========
+At the 216 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22101.6624, -30.4791, -23.5157, -68.6297, -18.2821
+Estimated parameter:
+  22067.5444, -30.3999, -23.4914, -68.4401, -18.2463
+
+
+
+========== Algorithm "rem" ==========
+At the 217 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22067.5444, -30.3999, -23.4914, -68.4401, -18.2463
+Estimated parameter:
+  22034.1301, -30.3248, -23.4670, -68.2551, -18.2109
+
+
+
+========== Algorithm "rem" ==========
+At the 218 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22034.1301, -30.3248, -23.4670, -68.2551, -18.2109
+Estimated parameter:
+  22001.3410, -30.2527, -23.4426, -68.0723, -18.1765
+
+
+
+========== Algorithm "rem" ==========
+At the 219 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22001.3410, -30.2527, -23.4426, -68.0723, -18.1765
+Estimated parameter:
+  21969.1991, -30.1847, -23.4180, -67.8924, -18.1429
+
+
+
+========== Algorithm "rem" ==========
+At the 220 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21969.1991, -30.1847, -23.4180, -67.8924, -18.1429
+Estimated parameter:
+  21937.6809, -30.1171, -23.3941, -67.7155, -18.1101
+
+
+
+========== Algorithm "rem" ==========
+At the 221 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21937.6809, -30.1171, -23.3941, -67.7155, -18.1101
+Estimated parameter:
+  21906.8112, -30.0492, -23.3709, -67.5437, -18.0779
+
+
+
+========== Algorithm "rem" ==========
+At the 222 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21906.8112, -30.0492, -23.3709, -67.5437, -18.0779
+Estimated parameter:
+  21876.6230, -29.9813, -23.3490, -67.3751, -18.0461
+
+
+
+========== Algorithm "rem" ==========
+At the 223 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21876.6230, -29.9813, -23.3490, -67.3751, -18.0461
+Estimated parameter:
+  21847.0155, -29.9114, -23.3282, -67.2115, -18.0149
+
+
+
+========== Algorithm "rem" ==========
+At the 224 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21847.0155, -29.9114, -23.3282, -67.2115, -18.0149
+Estimated parameter:
+  21817.9495, -29.8424, -23.3077, -67.0512, -17.9843
+
+
+
+========== Algorithm "rem" ==========
+At the 225 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21817.9495, -29.8424, -23.3077, -67.0512, -17.9843
+Estimated parameter:
+  21789.4950, -29.7794, -23.2866, -66.8928, -17.9544
+
+
+
+========== Algorithm "rem" ==========
+At the 226 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21789.4950, -29.7794, -23.2866, -66.8928, -17.9544
+Estimated parameter:
+  21761.6416, -29.7156, -23.2665, -66.7387, -17.9250
+
+
+
+========== Algorithm "rem" ==========
+At the 227 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21761.6416, -29.7156, -23.2665, -66.7387, -17.9250
+Estimated parameter:
+  21734.3601, -29.6542, -23.2466, -66.5880, -17.8961
+
+
+
+========== Algorithm "rem" ==========
+At the 228 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21734.3601, -29.6542, -23.2466, -66.5880, -17.8961
+Estimated parameter:
+  21707.6123, -29.5949, -23.2267, -66.4400, -17.8679
+
+
+
+========== Algorithm "rem" ==========
+At the 229 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21707.6123, -29.5949, -23.2267, -66.4400, -17.8679
+Estimated parameter:
+  21681.4012, -29.5373, -23.2069, -66.2947, -17.8405
+
+
+
+========== Algorithm "rem" ==========
+At the 230 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21681.4012, -29.5373, -23.2069, -66.2947, -17.8405
+Estimated parameter:
+  21655.7152, -29.4803, -23.1876, -66.1531, -17.8136
+
+
+
+========== Algorithm "rem" ==========
+At the 231 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21655.7152, -29.4803, -23.1876, -66.1531, -17.8136
+Estimated parameter:
+  21630.5794, -29.4274, -23.1678, -66.0139, -17.7873
+
+
+
+========== Algorithm "rem" ==========
+At the 232 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21630.5794, -29.4274, -23.1678, -66.0139, -17.7873
+Estimated parameter:
+  21605.9569, -29.3712, -23.1496, -65.8793, -17.7614
+
+
+
+========== Algorithm "rem" ==========
+At the 233 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21605.9569, -29.3712, -23.1496, -65.8793, -17.7614
+Estimated parameter:
+  21581.8320, -29.3157, -23.1320, -65.7454, -17.7363
+
+
+
+========== Algorithm "rem" ==========
+At the 234 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21581.8320, -29.3157, -23.1320, -65.7454, -17.7363
+Estimated parameter:
+  21558.2198, -29.2575, -23.1158, -65.6158, -17.7113
+
+
+
+========== Algorithm "rem" ==========
+At the 235 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21558.2198, -29.2575, -23.1158, -65.6158, -17.7113
+Estimated parameter:
+  21535.0956, -29.2036, -23.0992, -65.4890, -17.6868
+
+
+
+========== Algorithm "rem" ==========
+At the 236 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21535.0956, -29.2036, -23.0992, -65.4890, -17.6868
+Estimated parameter:
+  21512.4270, -29.1563, -23.0813, -65.3640, -17.6630
+
+
+
+========== Algorithm "rem" ==========
+At the 237 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21512.4270, -29.1563, -23.0813, -65.3640, -17.6630
+Estimated parameter:
+  21490.2332, -29.1107, -23.0634, -65.2420, -17.6398
+
+
+
+========== Algorithm "rem" ==========
+At the 238 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21490.2332, -29.1107, -23.0634, -65.2420, -17.6398
+Estimated parameter:
+  21468.4853, -29.0614, -23.0470, -65.1236, -17.6170
+
+
+
+========== Algorithm "rem" ==========
+At the 239 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21468.4853, -29.0614, -23.0470, -65.1236, -17.6170
+Estimated parameter:
+  21447.1871, -29.0133, -23.0307, -65.0081, -17.5947
+
+
+
+========== Algorithm "rem" ==========
+At the 240 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21447.1871, -29.0133, -23.0307, -65.0081, -17.5947
+Estimated parameter:
+  21426.3588, -28.9685, -23.0143, -64.8939, -17.5730
+
+
+
+========== Algorithm "rem" ==========
+At the 241 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21426.3588, -28.9685, -23.0143, -64.8939, -17.5730
+Estimated parameter:
+  21405.9148, -28.9208, -22.9990, -64.7822, -17.5520
+
+
+
+========== Algorithm "rem" ==========
+At the 242 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21405.9148, -28.9208, -22.9990, -64.7822, -17.5520
+Estimated parameter:
+  21385.9168, -28.8725, -22.9845, -64.6727, -17.5312
+
+
+
+========== Algorithm "rem" ==========
+At the 243 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21385.9168, -28.8725, -22.9845, -64.6727, -17.5312
+Estimated parameter:
+  21366.4314, -28.8282, -22.9701, -64.5664, -17.5105
+
+
+
+========== Algorithm "rem" ==========
+At the 244 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21366.4314, -28.8282, -22.9701, -64.5664, -17.5105
+Estimated parameter:
+  21347.3938, -28.7868, -22.9558, -64.4618, -17.4901
+
+
+
+========== Algorithm "rem" ==========
+At the 245 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21347.3938, -28.7868, -22.9558, -64.4618, -17.4901
+Estimated parameter:
+  21328.6638, -28.7443, -22.9419, -64.3581, -17.4706
+
+
+
+========== Algorithm "rem" ==========
+At the 246 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21328.6638, -28.7443, -22.9419, -64.3581, -17.4706
+Estimated parameter:
+  21310.3651, -28.7048, -22.9279, -64.2565, -17.4513
+
+
+
+========== Algorithm "rem" ==========
+At the 247 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21310.3651, -28.7048, -22.9279, -64.2565, -17.4513
+Estimated parameter:
+  21292.4795, -28.6667, -22.9142, -64.1576, -17.4323
+
+
+
+========== Algorithm "rem" ==========
+At the 248 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21292.4795, -28.6667, -22.9142, -64.1576, -17.4323
+Estimated parameter:
+  21274.9220, -28.6278, -22.9008, -64.0609, -17.4140
+
+
+
+========== Algorithm "rem" ==========
+At the 249 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21274.9220, -28.6278, -22.9008, -64.0609, -17.4140
+Estimated parameter:
+  21257.7482, -28.5888, -22.8879, -63.9662, -17.3961
+
+
+
+========== Algorithm "rem" ==========
+At the 250 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21257.7482, -28.5888, -22.8879, -63.9662, -17.3961
+Estimated parameter:
+  21240.9844, -28.5492, -22.8759, -63.8747, -17.3781
+
+
+
+========== Algorithm "rem" ==========
+At the 251 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21240.9844, -28.5492, -22.8759, -63.8747, -17.3781
+Estimated parameter:
+  21224.5755, -28.5114, -22.8640, -63.7848, -17.3607
+
+
+
+========== Algorithm "rem" ==========
+At the 252 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21224.5755, -28.5114, -22.8640, -63.7848, -17.3607
+Estimated parameter:
+  21208.5347, -28.4746, -22.8523, -63.6971, -17.3435
+
+
+
+========== Algorithm "rem" ==========
+At the 253 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21208.5347, -28.4746, -22.8523, -63.6971, -17.3435
+Estimated parameter:
+  21192.7753, -28.4366, -22.8410, -63.6118, -17.3268
+
+
+
+========== Algorithm "rem" ==========
+At the 254 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21192.7753, -28.4366, -22.8410, -63.6118, -17.3268
+Estimated parameter:
+  21177.3618, -28.4019, -22.8294, -63.5270, -17.3106
+
+
+
+========== Algorithm "rem" ==========
+At the 255 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21177.3618, -28.4019, -22.8294, -63.5270, -17.3106
+Estimated parameter:
+  21162.3097, -28.3680, -22.8182, -63.4443, -17.2945
+
+
+
+========== Algorithm "rem" ==========
+At the 256 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21162.3097, -28.3680, -22.8182, -63.4443, -17.2945
+Estimated parameter:
+  21147.5657, -28.3382, -22.8062, -63.3632, -17.2790
+
+
+
+========== Algorithm "rem" ==========
+At the 257 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21147.5657, -28.3382, -22.8062, -63.3632, -17.2790
+Estimated parameter:
+  21133.1100, -28.3090, -22.7942, -63.2834, -17.2641
+
+
+
+========== Algorithm "rem" ==========
+At the 258 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21133.1100, -28.3090, -22.7942, -63.2834, -17.2641
+Estimated parameter:
+  21118.9941, -28.2798, -22.7827, -63.2063, -17.2493
+
+
+
+========== Algorithm "rem" ==========
+At the 259 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21118.9941, -28.2798, -22.7827, -63.2063, -17.2493
+Estimated parameter:
+  21105.1728, -28.2513, -22.7712, -63.1309, -17.2349
+
+
+
+========== Algorithm "rem" ==========
+At the 260 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21105.1728, -28.2513, -22.7712, -63.1309, -17.2349
+Estimated parameter:
+  21091.6637, -28.2201, -22.7610, -63.0576, -17.2207
+
+
+
+========== Algorithm "rem" ==========
+At the 261 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21091.6637, -28.2201, -22.7610, -63.0576, -17.2207
+Estimated parameter:
+  21078.4544, -28.1911, -22.7509, -62.9846, -17.2068
+
+
+
+========== Algorithm "rem" ==========
+At the 262 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21078.4544, -28.1911, -22.7509, -62.9846, -17.2068
+Estimated parameter:
+  21065.5124, -28.1587, -22.7419, -62.9139, -17.1932
+
+
+
+========== Algorithm "rem" ==========
+At the 263 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21065.5124, -28.1587, -22.7419, -62.9139, -17.1932
+Estimated parameter:
+  21052.8678, -28.1304, -22.7319, -62.8471, -17.1797
+
+
+
+========== Algorithm "rem" ==========
+At the 264 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21052.8678, -28.1304, -22.7319, -62.8471, -17.1797
+Estimated parameter:
+  21040.5190, -28.1035, -22.7224, -62.7793, -17.1666
+
+
+
+========== Algorithm "rem" ==========
+At the 265 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21040.5190, -28.1035, -22.7224, -62.7793, -17.1666
+Estimated parameter:
+  21028.4875, -28.0797, -22.7127, -62.7127, -17.1537
+
+
+
+========== Algorithm "rem" ==========
+At the 266 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21028.4875, -28.0797, -22.7127, -62.7127, -17.1537
+Estimated parameter:
+  21016.6805, -28.0527, -22.7039, -62.6481, -17.1411
+
+
+
+========== Algorithm "rem" ==========
+At the 267 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21016.6805, -28.0527, -22.7039, -62.6481, -17.1411
+Estimated parameter:
+  21005.1039, -28.0266, -22.6951, -62.5842, -17.1291
+
+
+
+========== Algorithm "rem" ==========
+At the 268 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21005.1039, -28.0266, -22.6951, -62.5842, -17.1291
+Estimated parameter:
+  20993.8279, -28.0036, -22.6863, -62.5203, -17.1170
+
+
+
+========== Algorithm "rem" ==========
+At the 269 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  20993.8279, -28.0036, -22.6863, -62.5203, -17.1170
+Estimated parameter:
+  20982.7191, -27.9779, -22.6780, -62.4584, -17.1056
+
+
+

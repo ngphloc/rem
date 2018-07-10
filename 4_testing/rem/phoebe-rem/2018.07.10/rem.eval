@@ -1,0 +1,116 @@
+========== Algorithm "rem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.drem = [0.1185, 216.1102]
+Hudup recall = 1.0000
+MAE.drem = 162.7412
+MSE.drem = 46704.6462
+R.drem = 0.9615
+RMSE.drem = 216.1126
+Setup time = 0.7950
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.drem = [-3.2642, 217.4171]
+Hudup recall = 1.0000
+MAE.drem = 164.2515
+MSE.drem = 47281.8717
+R.drem = 0.9612
+RMSE.drem = 217.4440
+Setup time = 0.5970
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.drem = [-6.9350, 218.9706]
+Hudup recall = 1.0000
+MAE.drem = 167.6166
+MSE.drem = 47997.2060
+R.drem = 0.9611
+RMSE.drem = 219.0826
+Setup time = 0.8600
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.drem = [-9.5368, 220.5430]
+Hudup recall = 1.0000
+MAE.drem = 168.6956
+MSE.drem = 48731.1769
+R.drem = 0.9602
+RMSE.drem = 220.7514
+Setup time = 0.5630
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.drem = [17.5068, 219.9003]
+Hudup recall = 1.0000
+MAE.drem = 169.4407
+MSE.drem = 48663.6141
+R.drem = 0.9612
+RMSE.drem = 220.5983
+Setup time = 0.6020
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.drem = [3.1628, 226.0041]
+Hudup recall = 1.0000
+MAE.drem = 175.3171
+MSE.drem = 51088.8548
+R.drem = 0.9612
+RMSE.drem = 226.0284
+Setup time = 1.4070
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.drem = [12.0192, 227.3370]
+Hudup recall = 1.0000
+MAE.drem = 176.9861
+MSE.drem = 51827.5713
+R.drem = 0.9594
+RMSE.drem = 227.6567
+Setup time = 2.2450
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.drem = [-16.8989, 228.3966]
+Hudup recall = 1.0000
+MAE.drem = 169.4873
+MSE.drem = 52451.5784
+R.drem = 0.9568
+RMSE.drem = 229.0231
+Setup time = 4.4610
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.drem = [-54.3960, 337.8240]
+Hudup recall = 1.0000
+MAE.drem = 267.0266
+MSE.drem = 117084.9569
+R.drem = 0.9358
+RMSE.drem = 342.1768
+Setup time = 24.4730
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.drem = [-151.0489, 2491.7896]
+Hudup recall = 1.0000
+MAE.drem = 2121.2628
+MSE.drem = 6231831.9577
+R.drem = -0.9468
+RMSE.drem = 2496.3637
+Setup time = 35.0320
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "rem" - Final result ==========
+
+
+
