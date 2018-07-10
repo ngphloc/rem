@@ -391,10 +391,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (c != 1)
 			zStatistic = (a + b) / (1 - c);
 		else {
-			logger.info("Cannot estimate statistic for Z by expectation and so other technique is used");
-			zStatistic = zStatisticOtherEstimate(); //Fixing zero denominator
-			if (!Util.isUsed(zStatistic)) //Cannot estimate
-				return null;
+			logger.info("Cannot estimate statistic for Z by expectation, stop estimating for this statistic here because use of other method is wrong.");
+			return null;
 		}
 		
 		//Estimating missing xij (xStatistic) by equation 5 and estimated zi (zStatistic) above, based on current parameter.
@@ -469,12 +467,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 					xStatistic[U.get(j)] = solution[j]; 
 			}
 			else {
-				logger.info("Cannot estimate statistic for X by expectation and so other technique is used");
-				for (int j = 0; j < U.size(); j++) {
-					xStatistic[U.get(j)] = xStatisticOtherEstimate(U.get(j));
-					if (!Util.isUsed(xStatistic[U.get(j)])) //Cannot estimate
-						return null;
-				}
+				logger.info("Cannot estimate statistic for X by expectation, stop estimating for this statistic here because use of other method is wrong.");
+				return null;
 			}
 		}
 		
@@ -893,74 +887,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	
 
 	/**
-	 * Estimating the statistic for Z variable (zStatistic) by nearest neighbor filtering.
-	 * @return the estimated statistic for Z variable (zStatistic) by nearest neighbor filtering.
-	 */
-	protected double zStatisticOtherEstimate() {
-		List<double[]> source = new ArrayList<>();
-		List<Double> target = new ArrayList<>();
-		int N = this.zData.size();
-		for (int i = 0; i < N; i++) {
-			double value = this.zData.get(i)[1]; //due to Z = (1, z)
-			if (Util.isUsed(value)) {
-				source.add(this.xData.get(i));
-				target.add(value);
-			}
-		}
-		
-		double[] targetArray = new double[target.size()];
-		for (int i = 0; i < target.size(); i++)
-			targetArray[i] = target.get(i);
-		return nearestNeighborFilter(source, targetArray);
-	}
-	
-	
-	/**
-	 * Estimating the statistic for X variables (xStatistic) by nearest neighbor filtering.
-	 * @param index the index of statistic.
-	 * @return the estimated statistic for X variables (xStatistic) by nearest neighbor filtering.
-	 */
-	protected double xStatisticOtherEstimate(int index) {
-		List<double[]> source = new ArrayList<>();
-		List<Double> target = new ArrayList<>();
-		int N = this.xData.size();
-		for (int i = 0; i < N; i++) {
-			double value = this.xData.get(i)[index];
-			if (Util.isUsed(value)) {
-				source.add(new double[] {this.zData.get(i)[1]}); //due to Z = (1, z)
-				target.add(value);
-			}
-		}
-		
-		double[] targetArray = new double[target.size()];
-		for (int i = 0; i < target.size(); i++)
-			targetArray[i] = target.get(i);
-		return nearestNeighborFilter(source, targetArray);
-	}
-	
-	
-	/**
-	 * Estimating a variable the statistic nearest neighbor filtering.
-	 * The current implementation is average method and so it is enhanced in the next version.
-	 * @param source source data.
-	 * @param target target data.
-	 * @return the estimated variable by nearest neighbor filtering. Return NaN if it is impossible to filter.
-	 */
-	@NextUpdate
-	protected double nearestNeighborFilter(List<double[]> source, double[] target) {
-		int N = target.length;
-		if (N == 0)
-			return 0;
-		
-		double mean = 0;
-		for (int i = 0; i < N; i++)
-			mean += target[i];
-		
-		return mean / (double)N;
-	}
-
-	
-	/**
 	 * Solving the equation Ax = b.
 	 * @param A specified matrix.
 	 * @param b specified vector.
@@ -1012,7 +938,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		System.setProperty(Constants.DECIMAL_PRECISION_FIELD, "4");
+		System.setProperty("hudup_decimal_precision", "4");
 		new Evaluator().run(args);
 	}
 	
