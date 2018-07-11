@@ -125,12 +125,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		}
 		this.sample.reset();
 		if (profile0 == null) {
-			unsetup();
+			clear();
 			return null;
 		}
 		int n = profile0.getAttCount(); //x1, x2,..., x(n-1), z
 		if (n < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		attList = profile0.getAttRef();
@@ -154,7 +154,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			zIndices.add(indices.get(indices.size() - 1)); //The last index is Z index
 		}
 		if (zIndices.size() < 2 || xIndices.size() < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		
@@ -186,7 +186,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
 		}
 		if (!zExists || xIndicesTemp.size() < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		xIndices = xIndicesTemp;
@@ -230,7 +230,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		this.sample.close();
 		
 		if (xData.size() == 0 || zData.size() == 0) {
-			unsetup();
+			clear();
 			return null;
 		}
 		
@@ -255,6 +255,19 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	}
 
 
+	/**
+	 * Clear all internal data.
+	 */
+	private void clear() {
+		unsetup();
+		this.currentIteration = 0;
+		this.currentParameter = this.estimatedParameter = null;
+		this.xIndices.clear();
+		this.zIndices.clear();
+		this.attList = null;
+	}
+	
+	
 	@Override
 	protected Object expectation(Object currentParameter) throws Exception {
 		// TODO Auto-generated method stub
@@ -353,7 +366,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param stat specified statistics.
 	 * @param alpha specified alpha parameter.
 	 * @param betas specified alpha parameters.
-	 * @return estimated statistics with specified parameters alpha and beta.
+	 * @return estimated statistics with specified parameters alpha and beta. Return null if any error raises.
 	 */
 	private Statistics estimate(Statistics stat, double[] alpha, List<double[]> betas) {
 		double zValue = stat.getZStatistic();
@@ -412,7 +425,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param stat specified statistics.
 	 * @param alpha specified alpha parameter.
 	 * @param betas specified alpha parameters.
-	 * @return estimated statistics with specified parameters alpha and beta.
+	 * @return estimated statistics with specified parameters alpha and beta. Return null if any error raises.
 	 */
 	private Statistics estimateInverse(Statistics stat, double[] alpha, List<double[]> betas) {
 		double zValue = stat.getZStatistic();
@@ -574,18 +587,20 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	@Override
 	public Object execute(Object input) {
 		// TODO Auto-generated method stub
+		if (this.estimatedParameter == null)
+			return null;
 		double[] alpha = ((ExchangedParameter)this.estimatedParameter).getVector();
 		if (alpha == null || alpha.length == 0)
-			return Constants.UNUSED;
+			return null;
 		
 		if (input == null || !(input instanceof Profile))
 			return null; //only support profile input currently
 		Profile profile = (Profile)input;
 		
 		double sum = alpha[0];
-		for (int i = 0; i < alpha.length - 1; i++) {
-			double value = profile.getValueAsReal(i);
-			sum += alpha[i + 1] * value; 
+		for (int j= 0; j < alpha.length - 1; j++) {
+			double value = profile.getValueAsReal(this.xIndices.get(j + 1)); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
+			sum += alpha[j + 1] * value; 
 		}
 		
 		return sum;
@@ -638,13 +653,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		double[] alpha = ((ExchangedParameter)this.getParameter()).getVector();
 		if (alpha.length == 0)
 			return "";
-
+		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(this.attList.get(this.zIndices.get(this.zIndices.size() - 1)).getName()
 				+ " = " + MathUtil.format(alpha[0]));
-		for (int i = 0; i < alpha.length - 1; i++) {
-			double coeff = alpha[i + 1];
-			String variableName = this.attList.get(this.xIndices.get(i + 1)).getName();
+		for (int j = 0; j < alpha.length - 1; j++) {
+			double coeff = alpha[j + 1];
+			String variableName = this.attList.get(this.xIndices.get(j + 1)).getName();
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
 			else
@@ -662,10 +677,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return "";
 		double[] array = ((ExchangedParameter)parameter).getVector();
 		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < array.length; i++) {
-			if (i > 0)
+		for (int j = 0; j < array.length; j++) {
+			if (j > 0)
 				buffer.append(", ");
-			buffer.append(MathUtil.format(array[i]));
+			buffer.append(MathUtil.format(array[j]));
 		}
 		
 		return buffer.toString();
@@ -691,8 +706,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		
 		/**
 		 * Constructor with specified vector and matrix.
-		 * @param vector specified vector.
-		 * @param matrix specified matrix.
+		 * @param vector specified vector. It must be not null but can be zero-length.
+		 * @param matrix specified matrix. It must be not null but can be zero-length.
 		 */
 		public ExchangedParameter(double[] vector, List<double[]> matrix) {
 			this.vector = vector;
@@ -739,7 +754,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		/**
 		 * Constructor with specified statistic for Z variable and statistic for X variables.
 		 * @param zStatistic statistic for Z variable.
-		 * @param xStatistic statistic for X variables.
+		 * @param xStatistic statistic for X variables. It must be not null but can be zero-length.
 		 */
 		public Statistics(double zStatistic, double[] xStatistic) {
 			this.zStatistic = zStatistic;
@@ -772,7 +787,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @param zStatistic statistic for Z variable.
 	 * @param xStatistic statistic for X variables.
 	 * @param U list of missing X values.
-	 * @return balanced statistics for Z and X variables.
+	 * @return balanced statistics for Z and X variables. Return null if any error raises.
 	 */
 	private Statistics balanceStatistics(double[] alpha, List<double[]> betas,
 			double zStatistic, double[] xStatistic,
@@ -855,7 +870,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * This method will be improved in the next version.
 	 * @param X specified data matrix.
 	 * @param x specified data vector.
-	 * @return coefficients base on data matrix and data vector.
+	 * @return coefficients base on data matrix and data vector. Return null if any error raises.
 	 */
 	private double[] calcCoeffs(List<double[]> X, double[] x) {
 		int N = x.length;
@@ -890,7 +905,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * Solving the equation Ax = b.
 	 * @param A specified matrix.
 	 * @param b specified vector.
-	 * @return solution x of the equation Ax = b.
+	 * @return solution x of the equation Ax = b. Return null if any error raises.
 	 */
 	@NextUpdate
 	protected double[] solve(List<double[]> A, double[] b) {
@@ -924,7 +939,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (x == null)
 			return null;
 		for (int i = 0; i < x.length; i++) {
-			if (Double.isNaN(x[i]))
+			if (Double.isNaN(x[i]) || !Util.isUsed(x[i]))
 				return null;
 		}
 		return x;
