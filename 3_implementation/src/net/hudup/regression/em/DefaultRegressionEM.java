@@ -1,4 +1,4 @@
-package net.hudup.em.regression;
+package net.hudup.regression.em;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.linear.SingularMatrixException;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 
-import net.hudup.Evaluator;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
@@ -137,6 +136,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		xIndices.add(-1); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
 		zIndices.add(-1); // due to Z = (1, z) and there is no 1 in data.
 		
+		//Begin extracting indices from configuration
 		List<Integer> indices = new ArrayList<>();
 		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
 			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
@@ -157,8 +157,9 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			clear();
 			return null;
 		}
+		//End extracting indices from configuration
 		
-		//Checking existence of values.
+		//Begin checking existence of values.
 		boolean zExists = false;
 		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
 		Arrays.fill(xExists, false);
@@ -190,7 +191,9 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return null;
 		}
 		xIndices = xIndicesTemp;
+		//End checking existence of values.
 		
+		//Begin extracting data
 		n = xIndices.size();
 		while (this.sample.next()) {
 			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
@@ -228,6 +231,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			}
 		}
 		this.sample.close();
+		//End extracting data
 		
 		if (xData.size() == 0 || zData.size() == 0) {
 			clear();
@@ -358,7 +362,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		
 		return new ExchangedParameter(alpha, betas);
 	}
-	
 	
 	
 	/**
@@ -585,7 +588,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	
 	@Override
-	public Object execute(Object input) {
+	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (this.estimatedParameter == null)
 			return null;
@@ -633,6 +636,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		return em;
 	}
 
+	
+	@Override
+	public int getResponseIndex() {
+		// TODO Auto-generated method stub
+		return zIndices.get(1);
+	}
+
 
 	@Override
 	public DataConfig createDefaultConfig() {
@@ -646,7 +656,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	
 	@Override
-	public String getDescription() {
+	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
 		if (this.getParameter() == null)
 			return "";
@@ -946,17 +956,4 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	}
 	
 	
-	/**
-	 * The main method to start evaluator.
-	 * @param args The argument parameter of main method. It contains command line arguments.
-	 * @throws Exception if there is any error.
-	 */
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		System.setProperty("hudup_decimal_precision", "4");
-		new Evaluator().run(args);
-	}
-	
-	
 }
-

@@ -1,6 +1,7 @@
-package net.hudup.em.regression;
+package net.hudup.regression.em;
 
 import net.hudup.em.EM;
+import net.hudup.regression.Regression;
 
 
 /**
@@ -10,7 +11,7 @@ import net.hudup.em.EM;
  * @version 1.0
  *
  */
-public interface RegressionEM extends EM {
+public interface RegressionEM extends Regression, EM {
 
 	
 }

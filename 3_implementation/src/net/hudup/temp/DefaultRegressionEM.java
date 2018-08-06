@@ -15,7 +15,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.em.regression.RegressionEM;
+import net.hudup.regression.em.RegressionEM;
 
 
 /**
@@ -265,6 +265,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		DefaultRegressionEM em = new DefaultRegressionEM();
 		em.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return em;
+	}
+
+	
+	@Override
+	public int getResponseIndex() {
+		// TODO Auto-generated method stub
+		return attList.size() - 1;
 	}
 
 

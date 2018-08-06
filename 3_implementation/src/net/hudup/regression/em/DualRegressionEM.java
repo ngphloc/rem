@@ -1,4 +1,4 @@
-package net.hudup.em.regression;
+package net.hudup.regression.em;
 
 import java.util.List;
 
@@ -554,6 +554,13 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 		DualRegressionEM em = new DualRegressionEM();
 		em.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return em;
+	}
+
+	
+	@Override
+	public int getResponseIndex() {
+		// TODO Auto-generated method stub
+		return attList.size() - 1;
 	}
 
 
