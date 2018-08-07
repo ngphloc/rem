@@ -106,6 +106,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 */
 	public DefaultRegressionEM() {
 		// TODO Auto-generated constructor stub
+		super();
 	}
 	
 	

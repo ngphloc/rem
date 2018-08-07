@@ -65,17 +65,6 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 
 
 	@Override
-	public synchronized void unsetup() {
-		super.unsetup();
-		
-		this.coeffs = null;
-		this.xIndices.clear();
-		this.zIndices.clear();
-		this.attList = null;
-	}
-
-	
-	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (this.coeffs == null)

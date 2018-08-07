@@ -73,12 +73,12 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 		}
 		this.sample.reset();
 		if (profile0 == null) {
-			unsetup();
+			clear();
 			return null;
 		}
 		int n = profile0.getAttCount(); //x1, x2,..., x(n-1), z
 		if (n < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		attList = profile0.getAttRef();
@@ -103,7 +103,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			zIndices.add(indices.get(indices.size() - 1)); //The last index is Z index
 		}
 		if (zIndices.size() < 2 || xIndices.size() < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		//End extracting indices from configuration
@@ -136,7 +136,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
 		}
 		if (!zExists || xIndicesTemp.size() < 2) {
-			unsetup();
+			clear();
 			return null;
 		}
 		xIndices = xIndicesTemp;
@@ -318,6 +318,18 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 		super.unsetup();
 		xVectors.clear();
 		zVector.clear();
+	}
+
+	
+	/**
+	 * Clear all internal data.
+	 */
+	private void clear() {
+		unsetup();
+		this.coeffs = null;
+		this.xIndices.clear();
+		this.zIndices.clear();
+		this.attList = null;
 	}
 
 	
