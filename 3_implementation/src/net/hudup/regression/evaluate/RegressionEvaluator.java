@@ -28,8 +28,7 @@ public class RegressionEvaluator extends TestingEvaluator {
 	@Override
 	protected Object extractTestValue(Alg alg, Profile testingProfile) {
 		// TODO Auto-generated method stub
-		int index = ((Regression)alg).getResponseIndex();
-		return testingProfile.getValueAsReal(index);
+		return ((Regression)alg).extractResponse(testingProfile);
 	}
 
 	

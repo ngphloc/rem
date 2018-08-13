@@ -25,7 +25,6 @@ import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
 
-
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
  * @author Loc Nguyen
@@ -44,31 +43,31 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Regression indices field.
 	 */
-	protected final static String REM_INDICES_FIELD = "rem_indices";
+	public final static String REM_INDICES_FIELD = "rem_indices";
 
 	
 	/**
 	 * Inverse mode field name.
 	 */
-	protected final static String REM_INVERSE_MODE_FIELD = "rem_inverse_mode";
+	public final static String REM_INVERSE_MODE_FIELD = "rem_inverse_mode";
 
 	
 	/**
-	 * Inverse mode field name.
+	 * Balance mode field name.
 	 */
-	protected final static String REM_BALANCE_MODE_FIELD = "rem_balance_mode";
-
-	
-	/**
-	 * Default inverse mode field.
-	 */
-	protected final static boolean REM_INVERSE_MODE_DEFAULT = true;
+	public final static String REM_BALANCE_MODE_FIELD = "rem_balance_mode";
 
 	
 	/**
 	 * Default inverse mode field.
 	 */
-	protected final static boolean REM_BALANCE_MODE_DEFAULT = false;
+	public final static boolean REM_INVERSE_MODE_DEFAULT = false;
+
+	
+	/**
+	 * Default balance mode field.
+	 */
+	public final static boolean REM_BALANCE_MODE_DEFAULT = true;
 
 	
 	/**
@@ -86,13 +85,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Indices for X data.
 	 */
-	protected List<Integer> xIndices = new ArrayList<>();
+	protected List<int[]> xIndices = new ArrayList<>();
 	
 	
 	/**
 	 * Indices for Z data.
 	 */
-	protected List<Integer> zIndices = new ArrayList<>();
+	protected List<int[]> zIndices = new ArrayList<>();
 	
 	
 	/**
@@ -113,141 +112,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	@Override
 	public synchronized Object learn() throws Exception {
 		// TODO Auto-generated method stub
-		List<double[]> xData = Util.newList(); //1, x1, x2,..., x(n-1)
-		List<double[]> zData = Util.newList(); //1, z
-		List<Integer> xIndices = new ArrayList<>();
-		List<Integer> zIndices = new ArrayList<>();
-		AttributeList attList = null;
-		
-		Profile profile0 = null;
-		if (this.sample.next()) {
-			profile0 = this.sample.pick();
-		}
-		this.sample.reset();
-		if (profile0 == null) {
-			clear();
+		if (prepareInternalData())
+			return super.learn();
+		else
 			return null;
-		}
-		int n = profile0.getAttCount(); //x1, x2,..., x(n-1), z
-		if (n < 2) {
-			clear();
-			return null;
-		}
-		attList = profile0.getAttRef();
-		xIndices.add(-1); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
-		zIndices.add(-1); // due to Z = (1, z) and there is no 1 in data.
-		
-		//Begin extracting indices from configuration
-		List<Integer> indices = new ArrayList<>();
-		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
-			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
-			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
-				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
-		}
-		if (indices == null || indices.size() < 2) {
-			for (int j = 0; j < n - 1; j++)
-				xIndices.add(j);
-			zIndices.add(n - 1);
-		}
-		else {
-			for (int j = 0; j < indices.size() - 1; j++)
-				xIndices.add(indices.get(j));
-			zIndices.add(indices.get(indices.size() - 1)); //The last index is Z index
-		}
-		if (zIndices.size() < 2 || xIndices.size() < 2) {
-			clear();
-			return null;
-		}
-		//End extracting indices from configuration
-		
-		//Begin checking existence of values.
-		boolean zExists = false;
-		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
-		Arrays.fill(xExists, false);
-		while (this.sample.next()) {
-			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
-			if (profile == null)
-				continue;
-			
-			double lastValue = profile.getValueAsReal(zIndices.get(1));
-			if (Util.isUsed(lastValue))
-				zExists = zExists || true; 
-			
-			for (int j = 1; j < xIndices.size(); j++) {
-				double value = profile.getValueAsReal(xIndices.get(j));
-				if (Util.isUsed(value))
-					xExists[j - 1] = xExists[j - 1] || true;
-			}
-		}
-		this.sample.reset();
-
-		List<Integer> xIndicesTemp = new ArrayList<>();
-		xIndicesTemp.add(xIndices.get(0)); //adding -1
-		for (int j = 1; j < xIndices.size(); j++) {
-			if (xExists[j - 1])
-				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
-		}
-		if (!zExists || xIndicesTemp.size() < 2) {
-			clear();
-			return null;
-		}
-		xIndices = xIndicesTemp;
-		//End checking existence of values.
-		
-		//Begin extracting data
-		n = xIndices.size();
-		while (this.sample.next()) {
-			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
-			if (profile == null)
-				continue;
-			
-			double[] xVector = new double[n]; //1, x1, x2,..., x(n-1)
-			double[] zVector = new double[2]; //1, z
-			xVector[0] = 1;
-			zVector[0] = 1;
-			
-			boolean zExist = false;
-			double lastValue = profile.getValueAsReal(zIndices.get(1));
-			if (!Util.isUsed(lastValue))
-				zVector[1] = Constants.UNUSED;
-			else {
-				zVector[1] = lastValue;
-				zExist = true;
-			}
-			
-			boolean xExist = false;
-			for (int j = 1; j < xIndices.size(); j++) {
-				double value = profile.getValueAsReal(xIndices.get(j));
-				if (!Util.isUsed(value))
-					xVector[j] = Constants.UNUSED;
-				else {
-					xVector[j] = value;
-					xExist = true;
-				}
-			}
-			
-			if(zExist || xExist) {
-				zData.add(zVector);
-				xData.add(xVector);
-			}
-		}
-		this.sample.close();
-		//End extracting data
-		
-		if (xData.size() == 0 || zData.size() == 0) {
-			clear();
-			return null;
-		}
-		
-		this.xData.clear();
-		this.xData = xData; //1, x1, x2,..., x(n-1)
-		this.zData.clear();
-		this.zData = zData; //1, z
-		this.xIndices = xIndices;
-		this.zIndices = zIndices;
-		this.attList = attList;
-		
-		return super.learn();
 	}
 
 
@@ -261,15 +129,144 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 
 	/**
+	 * Preparing data.
+	 * @return true if data preparation is successful.
+	 * @throws Exception if any error raises.
+	 */
+	protected boolean prepareInternalData() throws Exception {
+		clearInternalData();
+		
+		Profile profile0 = null;
+		if (this.sample.next()) {
+			profile0 = this.sample.pick();
+		}
+		this.sample.reset();
+		if (profile0 == null)
+			return false;
+		int n = profile0.getAttCount(); //x1, x2,..., x(n-1), z
+		if (n < 2)
+			return false;
+		this.attList = profile0.getAttRef();
+		this.xIndices.add(new int[] {-1}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
+		this.zIndices.add(new int[] {-1}); // due to Z = (1, z) and there is no 1 in data.
+		
+		//Begin extracting indices from configuration
+		List<Integer> indices = new ArrayList<>();
+		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
+			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
+			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
+				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
+		}
+		if (indices == null || indices.size() < 2) {
+			for (int j = 0; j < n - 1; j++)
+				this.xIndices.add(new int[] {j});
+			this.zIndices.add(new int[] {n - 1});
+		}
+		else {
+			for (int j = 0; j < indices.size() - 1; j++)
+				this.xIndices.add(new int[] {indices.get(j)});
+			this.zIndices.add(new int[] {indices.get(indices.size() - 1)}); //The last index is Z index
+		}
+		if (this.zIndices.size() < 2 || this.xIndices.size() < 2) {
+			clearInternalData();
+			return false;
+		}
+		//End extracting indices from configuration
+		
+		//Begin checking existence of values.
+		boolean zExists = false;
+		boolean[] xExists = new boolean[this.xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
+		Arrays.fill(xExists, false);
+		while (this.sample.next()) {
+			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
+			if (profile == null)
+				continue;
+			
+			double lastValue = extractResponse(profile);
+			if (Util.isUsed(lastValue))
+				zExists = zExists || true; 
+			
+			for (int j = 1; j < this.xIndices.size(); j++) {
+				double value = extractRegressor(profile, j);
+				if (Util.isUsed(value))
+					xExists[j - 1] = xExists[j - 1] || true;
+			}
+		}
+		this.sample.reset();
+		List<int[]> xIndicesTemp = new ArrayList<>();
+		xIndicesTemp.add(this.xIndices.get(0)); //adding -1
+		for (int j = 1; j < this.xIndices.size(); j++) {
+			if (xExists[j - 1])
+				xIndicesTemp.add(this.xIndices.get(j)); //only use variables having at least one value.
+		}
+		if (!zExists || xIndicesTemp.size() < 2) {
+			clearInternalData();
+			return false;
+		}
+		this.xIndices = xIndicesTemp;
+		//End checking existence of values.
+		
+		//Begin extracting data
+		n = this.xIndices.size();
+		while (this.sample.next()) {
+			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
+			if (profile == null)
+				continue;
+			
+			double[] xVector = new double[n]; //1, x1, x2,..., x(n-1)
+			double[] zVector = new double[2]; //1, z
+			xVector[0] = 1;
+			zVector[0] = 1;
+			
+			boolean zExist = false;
+			double lastValue = extractResponse(profile);
+			if (!Util.isUsed(lastValue))
+				zVector[1] = Constants.UNUSED;
+			else {
+				zVector[1] = (double)transformResponse(lastValue);
+				zExist = true;
+			}
+			
+			boolean xExist = false;
+			for (int j = 1; j < this.xIndices.size(); j++) {
+				double value = extractRegressor(profile, j);
+				if (!Util.isUsed(value))
+					xVector[j] = Constants.UNUSED;
+				else {
+					xVector[j] = (double)transformRegressor(value);
+					xExist = true;
+				}
+			}
+			
+			if(zExist || xExist) {
+				this.zData.add(zVector);
+				this.xData.add(xVector);
+			}
+		}
+		this.sample.close();
+		//End extracting data
+		
+		if (this.xData.size() == 0 || this.zData.size() == 0) {
+			clearInternalData();
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	
+	/**
 	 * Clear all internal data.
 	 */
-	private void clear() {
-		unsetup();
+	protected void clearInternalData() {
 		this.currentIteration = 0;
 		this.currentParameter = this.estimatedParameter = null;
 		this.xIndices.clear();
 		this.zIndices.clear();
 		this.attList = null;
+		
+		this.xData.clear();
+		this.zData.clear();
 	}
 	
 	
@@ -602,12 +599,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		Profile profile = (Profile)input;
 		
 		double sum = alpha[0];
-		for (int j= 0; j < alpha.length - 1; j++) {
-			double value = profile.getValueAsReal(this.xIndices.get(j + 1)); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			sum += alpha[j + 1] * value; 
+		for (int j = 0; j < alpha.length - 1; j++) {
+			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
+			sum += alpha[j + 1] * (double)transformRegressor(value); 
 		}
 		
-		return sum;
+		return inverseTransformResponse(sum);
 	}
 	
 	
@@ -639,19 +636,13 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	
 	@Override
-	public int getResponseIndex() {
-		// TODO Auto-generated method stub
-		return zIndices.get(1);
-	}
-
-
-	@Override
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(REM_INDICES_FIELD, "-1, -1, -1"); //Not used
+		config.put(REM_INDICES_FIELD, "{-1}, {-1}, {-1}"); //Not used
 		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
 		config.put(REM_BALANCE_MODE_FIELD, REM_BALANCE_MODE_DEFAULT);
+		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
 	}
 
@@ -666,11 +657,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(this.attList.get(this.zIndices.get(this.zIndices.size() - 1)).getName()
-				+ " = " + MathUtil.format(alpha[0]));
+		buffer.append(transformResponse(extractResponseText()) + " = " + MathUtil.format(alpha[0]));
 		for (int j = 0; j < alpha.length - 1; j++) {
 			double coeff = alpha[j + 1];
-			String variableName = this.attList.get(this.xIndices.get(j + 1)).getName();
+			String variableName = transformRegressor(extractRegressorText(j + 1)).toString();
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
 			else
@@ -703,7 +693,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @author Loc Nguyen
 	 * @version 1.0
 	 */
-	protected class ExchangedParameter {
+	public static class ExchangedParameter {
 		
 		/**
 		 * Vector parameter.
@@ -741,6 +731,34 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return matrix;
 		}
 		
+		/**
+		 * Making average of this parameter and specified parameter.
+		 * @param other specified parameter.
+		 * @return average of this parameter and specified parameter.
+		 */
+		public ExchangedParameter mean(ExchangedParameter other) {
+			if (other == null)
+				return null;
+			
+			double[] newVector = new double[Math.min(this.vector.length, other.vector.length)];
+			for (int j = 0; j < newVector.length; j++) {
+				newVector[j] = (this.vector[j] + other.vector[j]) / 2.0;
+			}
+			
+			int m = Math.min(this.matrix.size(), other.matrix.size());
+			List<double[]> newMatrix = new ArrayList<>();
+			for (int i = 0; i < m; i++) {
+				int n = Math.min(this.matrix.get(i).length, other.matrix.get(i).length);
+				double[] vector = new double[n];
+				for (int j = 0; j < n; j++) {
+					vector[j] = (this.matrix.get(i)[j] + other.matrix.get(i)[j]) / 2.0;
+				}
+				newMatrix.add(vector);
+			}
+			
+			return new ExchangedParameter(newVector, newMatrix);
+		}
+		
 	}
 	
 	
@@ -750,7 +768,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @version 1.0
 	 * 
 	 */
-	protected class Statistics {
+	private class Statistics {
 
 		/**
 		 * Statistic for Z variable.
@@ -955,6 +973,106 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		}
 		return x;
 	}
+
 	
+	/**
+	 * Extracting value of regressor (X) from specified profile.
+	 * @param profile specified profile.
+	 * @param index specified indices.
+	 * @return value of regressor (X) extracted from specified profile.
+	 */
+	protected double extractRegressor(Profile profile, int index) {
+		// TODO Auto-generated method stub
+		return profile.getValueAsReal(xIndices.get(index)[0]);
+	}
+
+
+	/**
+	 * Extracting text of regressor (X).
+	 * @param index specified indices.
+	 * @return text of regressor (X) extracted.
+	 */
+	protected String extractRegressorText(int index) {
+		// TODO Auto-generated method stub
+		return attList.get(xIndices.get(index)[0]).getName();
+	}
+
+
+	@Override
+	public double extractResponse(Profile profile) {
+		// TODO Auto-generated method stub
+		return profile.getValueAsReal(zIndices.get(1)[0]);
+	}
+
+
+	/**
+	 * Extracting text of response variable (Z).
+	 * @return text of response variable (Z) extracted.
+	 */
+	protected String extractResponseText() {
+		// TODO Auto-generated method stub
+		return attList.get(zIndices.get(1)[0]).getName();
+	}
+
+
+	/**
+	 * Transforming independent variable X.
+	 * @param x specified variable X.
+	 * @return transformed value of X.
+	 */
+	protected Object transformRegressor(Object x) {
+		// TODO Auto-generated method stub
+		if (x == null)
+			return null;
+		else if (x instanceof Number)
+			return ((Number)x).doubleValue();
+		else if (x instanceof String)
+			return (String)x;
+		else
+			return x;
+	}
+
+
+	/**
+	 * Inverse transforming of the inverse value of independent variable X.
+	 * This method is the inverse of {@link #transformRegressor(double)}.
+	 * @param inverseX inverse value of independent variable X.
+	 * @return value of X.
+	 */
+	protected Object inverseTransformRegressor(Object inverseX) {
+		// TODO Auto-generated method stub
+		return transformRegressor(inverseX);
+	}
+
+
+	/**
+	 * Transforming independent variable Z.
+	 * @param z specified variable Z.
+	 * @return transformed value of Z.
+	 */
+	protected Object transformResponse(Object z) {
+		// TODO Auto-generated method stub
+		if (z == null)
+			return null;
+		else if (z instanceof Number)
+			return ((Number)z).doubleValue();
+		else if (z instanceof String)
+			return (String)z;
+		else
+			return z;
+	}
+
+
+	/**
+	 * Inverse transforming of the inverse value of independent variable Z.
+	 * This method is the inverse of {@link #transformResponse(double)}.
+	 * @param inverseZ inverse value of independent variable Z.
+	 * @return value of Z.
+	 */
+	protected Object inverseTransformResponse(Object inverseZ) {
+		// TODO Auto-generated method stub
+		return transformResponse(inverseZ);
+	}
+
 	
 }

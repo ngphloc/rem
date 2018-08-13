@@ -1,6 +1,7 @@
 package net.hudup.regression;
 
 import net.hudup.core.alg.TestingAlg;
+import net.hudup.core.data.Profile;
 
 /**
  * <code>Regression</code> is the most abstract interface for all regression algorithms.
@@ -13,10 +14,11 @@ public interface Regression extends TestingAlg {
 
 	
 	/**
-	 * Getting index of response variable (Z).
-	 * @return response variable (Z).
+	 * Extracting value of response variable (Z) from specified profile.
+	 * @param profile specified profile.
+	 * @return value of response variable (Z) extracted from specified profile.
 	 */
-	int getResponseIndex();
+	double extractResponse(Profile profile);
 	
 	
 }

@@ -1,4 +1,4 @@
-package net.hudup.regression;
+package net.hudup.temp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +22,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.parser.TextParserUtil;
+import net.hudup.regression.AbstractRegression;
 
 /**
  * This class implements regression model with correlation in case of missing data, called COR algorithm. 
@@ -63,8 +64,8 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	@Override
 	public Object learn() throws Exception {
 		// TODO Auto-generated method stub
-		List<Integer> xIndices = new ArrayList<>();
-		List<Integer> zIndices = new ArrayList<>();
+		List<int[]> xIndices = new ArrayList<>();
+		List<int[]> zIndices = new ArrayList<>();
 		AttributeList attList = null;
 		
 		Profile profile0 = null;
@@ -82,8 +83,8 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			return null;
 		}
 		attList = profile0.getAttRef();
-		xIndices.add(-1); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
-		zIndices.add(-1); // due to Z = (1, z) and there is no 1 in data.
+		xIndices.add(new int[] {-1}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
+		zIndices.add(new int[] {-1}); // due to Z = (1, z) and there is no 1 in data.
 
 		//Begin extracting indices from configuration
 		List<Integer> indices = new ArrayList<>();
@@ -94,13 +95,13 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 		}
 		if (indices == null || indices.size() < 2) {
 			for (int j = 0; j < n - 1; j++)
-				xIndices.add(j);
-			zIndices.add(n - 1);
+				xIndices.add(new int[] {j});
+			zIndices.add(new int[] {n - 1});
 		}
 		else {
 			for (int j = 0; j < indices.size() - 1; j++)
-				xIndices.add(indices.get(j));
-			zIndices.add(indices.get(indices.size() - 1)); //The last index is Z index
+				xIndices.add(new int[] {indices.get(j)});
+			zIndices.add(new int[] {indices.get(indices.size() - 1)}); //The last index is Z index
 		}
 		if (zIndices.size() < 2 || xIndices.size() < 2) {
 			clear();
@@ -117,19 +118,19 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			if (profile == null)
 				continue;
 			
-			double lastValue = profile.getValueAsReal(zIndices.get(1));
+			double lastValue = profile.getValueAsReal(zIndices.get(1)[0]);
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
 			for (int j = 1; j < xIndices.size(); j++) {
-				double value = profile.getValueAsReal(xIndices.get(j));
+				double value = profile.getValueAsReal(xIndices.get(j)[0]);
 				if (Util.isUsed(value))
 					xExists[j - 1] = xExists[j - 1] || true;
 			}
 		}
 		this.sample.reset();
 
-		List<Integer> xIndicesTemp = new ArrayList<>();
+		List<int[]> xIndicesTemp = new ArrayList<>();
 		xIndicesTemp.add(xIndices.get(0)); //adding -1
 		for (int j = 1; j < xIndices.size(); j++) {
 			if (xExists[j - 1])
@@ -167,12 +168,12 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				}
 				xVector = xVectors.get(j);
 
-				double value = profile.getValueAsReal(xIndices.get(j));
-				xVector.add(value);
+				double value = profile.getValueAsReal(xIndices.get(j)[0]);
+				xVector.add((double)transformRegressor(value));
 			}
 			
-			double lastValue = profile.getValueAsReal(zIndices.get(1));
-			zVector.add(lastValue);
+			double lastValue = profile.getValueAsReal(zIndices.get(1)[0]);
+			zVector.add((double)transformResponse(lastValue));
 		}
 		this.sample.close();
 		//End extracting data

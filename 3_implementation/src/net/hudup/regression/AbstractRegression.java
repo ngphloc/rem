@@ -40,13 +40,13 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	/**
 	 * Indices for X data.
 	 */
-	protected List<Integer> xIndices = new ArrayList<>();
+	protected List<int[]> xIndices = new ArrayList<>();
 
 	
 	/**
 	 * Indices for Z data.
 	 */
-	protected List<Integer> zIndices = new ArrayList<>();
+	protected List<int[]> zIndices = new ArrayList<>();
 	
 	
 	/**
@@ -76,11 +76,11 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		
 		double sum = this.coeffs[0];
 		for (int j= 0; j < this.coeffs.length - 1; j++) {
-			double value = profile.getValueAsReal(this.xIndices.get(j + 1)); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			sum += this.coeffs[j + 1] * value; 
+			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
+			sum += this.coeffs[j + 1] * (double)transformRegressor(value); 
 		}
 		
-		return sum;
+		return inverseTransformResponse(sum);
 	}
 
 	
@@ -91,13 +91,6 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	}
 
 	
-	@Override
-	public int getResponseIndex() {
-		// TODO Auto-generated method stub
-		return zIndices.get(1);
-	}
-
-
 	@Override
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
@@ -132,11 +125,10 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(this.attList.get(this.zIndices.get(this.zIndices.size() - 1)).getName()
-				+ " = " + MathUtil.format(coeffs[0]));
+		buffer.append(transformResponse(extractResponseText()) + " = " + MathUtil.format(coeffs[0]));
 		for (int j = 0; j < this.coeffs.length - 1; j++) {
 			double coeff = this.coeffs[j + 1];
-			String variableName = this.attList.get(this.xIndices.get(j + 1)).getName();
+			String variableName = transformRegressor(extractRegressorText(j + 1)).toString();
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
 			else
@@ -144,6 +136,106 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		}
 		
 		return buffer.toString();
+	}
+	
+	
+	/**
+	 * Extracting value of regressor (X) from specified profile.
+	 * @param profile specified profile.
+	 * @param index specified indices.
+	 * @return value of regressor (X) extracted from specified profile.
+	 */
+	protected double extractRegressor(Profile profile, int index) {
+		// TODO Auto-generated method stub
+		return profile.getValueAsReal(xIndices.get(index)[0]);
+	}
+
+
+	/**
+	 * Extracting text of regressor (X).
+	 * @param index specified indices.
+	 * @return text of regressor (X) extracted.
+	 */
+	protected String extractRegressorText(int index) {
+		// TODO Auto-generated method stub
+		return attList.get(xIndices.get(index)[0]).getName();
+	}
+
+
+	@Override
+	public double extractResponse(Profile profile) {
+		// TODO Auto-generated method stub
+		return profile.getValueAsReal(zIndices.get(1)[0]);
+	}
+
+
+	/**
+	 * Extracting text of response variable (Z).
+	 * @return text of response variable (Z) extracted.
+	 */
+	protected String extractResponseText() {
+		// TODO Auto-generated method stub
+		return attList.get(zIndices.get(1)[0]).getName();
+	}
+
+
+	/**
+	 * Transforming independent variable X.
+	 * @param x specified variable X.
+	 * @return transformed value of X.
+	 */
+	protected Object transformRegressor(Object x) {
+		// TODO Auto-generated method stub
+		if (x == null)
+			return null;
+		else if (x instanceof Number)
+			return ((Number)x).doubleValue();
+		else if (x instanceof String)
+			return (String)x;
+		else
+			return x;
+	}
+
+
+	/**
+	 * Inverse transforming of the inverse value of independent variable X.
+	 * This method is the inverse of {@link #transformRegressor(double)}.
+	 * @param inverseX inverse value of independent variable X.
+	 * @return value of X.
+	 */
+	protected Object inverseTransformRegressor(Object inverseX) {
+		// TODO Auto-generated method stub
+		return transformRegressor(inverseX);
+	}
+
+
+	/**
+	 * Transforming independent variable Z.
+	 * @param z specified variable Z.
+	 * @return transformed value of Z.
+	 */
+	protected Object transformResponse(Object z) {
+		// TODO Auto-generated method stub
+		if (z == null)
+			return null;
+		else if (z instanceof Number)
+			return ((Number)z).doubleValue();
+		else if (z instanceof String)
+			return (String)z;
+		else
+			return z;
+	}
+
+
+	/**
+	 * Inverse transforming of the inverse value of independent variable Z.
+	 * This method is the inverse of {@link #transformResponse(double)}.
+	 * @param inverseZ inverse value of independent variable Z.
+	 * @return value of Z.
+	 */
+	protected Object inverseTransformResponse(Object inverseZ) {
+		// TODO Auto-generated method stub
+		return transformResponse(inverseZ);
 	}
 
 	
