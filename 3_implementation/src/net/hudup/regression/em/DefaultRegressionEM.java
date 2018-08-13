@@ -60,14 +60,16 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	
 	/**
 	 * Default inverse mode field.
+	 * The best combination is "REM_INVERSE_MODE_DEFAULT = false" and "REM_BALANCE_MODE_DEFAULT = true" but here is used for faster running. 
 	 */
-	public final static boolean REM_INVERSE_MODE_DEFAULT = false;
+	public final static boolean REM_INVERSE_MODE_DEFAULT = true;
 
 	
 	/**
 	 * Default balance mode field.
+	 * The best combination is "REM_INVERSE_MODE_DEFAULT = false" and "REM_BALANCE_MODE_DEFAULT = true" but here is used for faster running. 
 	 */
-	public final static boolean REM_BALANCE_MODE_DEFAULT = true;
+	public final static boolean REM_BALANCE_MODE_DEFAULT = false;
 
 	
 	/**
@@ -147,31 +149,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (n < 2)
 			return false;
 		this.attList = profile0.getAttRef();
-		this.xIndices.add(new int[] {-1}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
-		this.zIndices.add(new int[] {-1}); // due to Z = (1, z) and there is no 1 in data.
 		
-		//Begin extracting indices from configuration
-		List<Integer> indices = new ArrayList<>();
-		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
-			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
-			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
-				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
-		}
-		if (indices == null || indices.size() < 2) {
-			for (int j = 0; j < n - 1; j++)
-				this.xIndices.add(new int[] {j});
-			this.zIndices.add(new int[] {n - 1});
-		}
-		else {
-			for (int j = 0; j < indices.size() - 1; j++)
-				this.xIndices.add(new int[] {indices.get(j)});
-			this.zIndices.add(new int[] {indices.get(indices.size() - 1)}); //The last index is Z index
-		}
-		if (this.zIndices.size() < 2 || this.xIndices.size() < 2) {
+		if (!parseIndices()) {
 			clearInternalData();
 			return false;
 		}
-		//End extracting indices from configuration
 		
 		//Begin checking existence of values.
 		boolean zExists = false;
@@ -223,7 +205,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			if (!Util.isUsed(lastValue))
 				zVector[1] = Constants.UNUSED;
 			else {
-				zVector[1] = (double)transformResponse(lastValue);
+				zVector[1] = (double)transformResponse(lastValue, false);
 				zExist = true;
 			}
 			
@@ -233,7 +215,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				if (!Util.isUsed(value))
 					xVector[j] = Constants.UNUSED;
 				else {
-					xVector[j] = (double)transformRegressor(value);
+					xVector[j] = (double)transformRegressor(value, false);
 					xExist = true;
 				}
 			}
@@ -250,6 +232,44 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			clearInternalData();
 			return false;
 		}
+		else
+			return true;
+	}
+	
+	
+	/**
+	 * Parsing indices of variables.
+	 * @return true if parsing is successful.
+	 */
+	@NextUpdate
+	protected boolean parseIndices() {
+		int n = this.attList.size(); //profile = (x1, x2,..., x(n-1), z)
+		this.xIndices.clear();
+		this.xIndices.add(new int[] {-1}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
+		this.zIndices.clear();
+		this.zIndices.add(new int[] {-1}); // due to Z = (1, z) and there is no 1 in data.
+		
+		//Begin extracting indices from configuration. It is improved later with Java regular expression.
+		List<Integer> indices = new ArrayList<>();
+		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
+			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
+			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
+				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
+		}
+		if (indices == null || indices.size() < 2) {
+			for (int j = 0; j < n - 1; j++)
+				this.xIndices.add(new int[] {j});
+			this.zIndices.add(new int[] {n - 1});
+		}
+		else {
+			for (int j = 0; j < indices.size() - 1; j++)
+				this.xIndices.add(new int[] {indices.get(j)});
+			this.zIndices.add(new int[] {indices.get(indices.size() - 1)}); //The last index is Z index
+		}
+		//End extracting indices from configuration
+		
+		if (this.zIndices.size() < 2 || this.xIndices.size() < 2)
+			return false;
 		else
 			return true;
 	}
@@ -601,10 +621,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		double sum = alpha[0];
 		for (int j = 0; j < alpha.length - 1; j++) {
 			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			sum += alpha[j + 1] * (double)transformRegressor(value); 
+			sum += alpha[j + 1] * (double)transformRegressor(value, false); 
 		}
 		
-		return inverseTransformResponse(sum);
+		return transformResponse(sum, true);
 	}
 	
 	
@@ -657,10 +677,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(transformResponse(extractResponseText()) + " = " + MathUtil.format(alpha[0]));
+		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(alpha[0]));
 		for (int j = 0; j < alpha.length - 1; j++) {
 			double coeff = alpha[j + 1];
-			String variableName = transformRegressor(extractRegressorText(j + 1)).toString();
+			String variableName = transformRegressor(extractRegressorName(j + 1), false).toString();
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
 			else
@@ -693,7 +713,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @author Loc Nguyen
 	 * @version 1.0
 	 */
-	public static class ExchangedParameter {
+	protected static class ExchangedParameter {
 		
 		/**
 		 * Vector parameter.
@@ -731,34 +751,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			return matrix;
 		}
 		
-		/**
-		 * Making average of this parameter and specified parameter.
-		 * @param other specified parameter.
-		 * @return average of this parameter and specified parameter.
-		 */
-		public ExchangedParameter mean(ExchangedParameter other) {
-			if (other == null)
-				return null;
-			
-			double[] newVector = new double[Math.min(this.vector.length, other.vector.length)];
-			for (int j = 0; j < newVector.length; j++) {
-				newVector[j] = (this.vector[j] + other.vector[j]) / 2.0;
-			}
-			
-			int m = Math.min(this.matrix.size(), other.matrix.size());
-			List<double[]> newMatrix = new ArrayList<>();
-			for (int i = 0; i < m; i++) {
-				int n = Math.min(this.matrix.get(i).length, other.matrix.get(i).length);
-				double[] vector = new double[n];
-				for (int j = 0; j < n; j++) {
-					vector[j] = (this.matrix.get(i)[j] + other.matrix.get(i)[j]) / 2.0;
-				}
-				newMatrix.add(vector);
-			}
-			
-			return new ExchangedParameter(newVector, newMatrix);
-		}
-		
 	}
 	
 	
@@ -768,7 +760,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * @version 1.0
 	 * 
 	 */
-	private class Statistics {
+	protected static class Statistics {
 
 		/**
 		 * Statistic for Z variable.
@@ -929,9 +921,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		return solve(A, b);
 	}
 	
-
+	
+	//Methods below should be improved by derived classes.
+	
+	
 	/**
-	 * Solving the equation Ax = b.
+	 * Solving the equation Ax = b. This method uses QR decomposition to solve approximately optimized equations.
+	 * This method should be improved in the next version for solving perfectly the problem of singular matrix.
+	 * Currently, the problem of singular matrix is solved by Moore–Penrose pseudo-inverse matrix.
 	 * @param A specified matrix.
 	 * @param b specified vector.
 	 * @return solution x of the equation Ax = b. Return null if any error raises.
@@ -988,11 +985,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 
 	/**
-	 * Extracting text of regressor (X).
+	 * Extracting name of regressor (X).
 	 * @param index specified indices.
 	 * @return text of regressor (X) extracted.
 	 */
-	protected String extractRegressorText(int index) {
+	protected String extractRegressorName(int index) {
 		// TODO Auto-generated method stub
 		return attList.get(xIndices.get(index)[0]).getName();
 	}
@@ -1006,10 +1003,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 
 	/**
-	 * Extracting text of response variable (Z).
+	 * Extracting name of response variable (Z).
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractResponseText() {
+	protected String extractResponseName() {
 		// TODO Auto-generated method stub
 		return attList.get(zIndices.get(1)[0]).getName();
 	}
@@ -1018,9 +1015,10 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Transforming independent variable X.
 	 * @param x specified variable X.
+	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of X.
 	 */
-	protected Object transformRegressor(Object x) {
+	protected Object transformRegressor(Object x, boolean inverse) {
 		// TODO Auto-generated method stub
 		if (x == null)
 			return null;
@@ -1034,23 +1032,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 
 	/**
-	 * Inverse transforming of the inverse value of independent variable X.
-	 * This method is the inverse of {@link #transformRegressor(double)}.
-	 * @param inverseX inverse value of independent variable X.
-	 * @return value of X.
-	 */
-	protected Object inverseTransformRegressor(Object inverseX) {
-		// TODO Auto-generated method stub
-		return transformRegressor(inverseX);
-	}
-
-
-	/**
 	 * Transforming independent variable Z.
 	 * @param z specified variable Z.
+	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of Z.
 	 */
-	protected Object transformResponse(Object z) {
+	protected Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		if (z == null)
 			return null;
@@ -1063,16 +1050,4 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	}
 
 
-	/**
-	 * Inverse transforming of the inverse value of independent variable Z.
-	 * This method is the inverse of {@link #transformResponse(double)}.
-	 * @param inverseZ inverse value of independent variable Z.
-	 * @return value of Z.
-	 */
-	protected Object inverseTransformResponse(Object inverseZ) {
-		// TODO Auto-generated method stub
-		return transformResponse(inverseZ);
-	}
-
-	
 }

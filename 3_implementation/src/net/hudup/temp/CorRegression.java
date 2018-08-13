@@ -169,11 +169,11 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				xVector = xVectors.get(j);
 
 				double value = profile.getValueAsReal(xIndices.get(j)[0]);
-				xVector.add((double)transformRegressor(value));
+				xVector.add((double)transformRegressor(value, false));
 			}
 			
 			double lastValue = profile.getValueAsReal(zIndices.get(1)[0]);
-			zVector.add((double)transformResponse(lastValue));
+			zVector.add((double)transformResponse(lastValue, false));
 		}
 		this.sample.close();
 		//End extracting data
@@ -358,6 +358,15 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 		CorRegression cor = new CorRegression();
 		cor.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return cor;
+	}
+
+
+	@Override
+	public DataConfig createDefaultConfig() {
+		// TODO Auto-generated method stub
+		DataConfig config = super.createDefaultConfig();
+		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
+		return config;
 	}
 	
 	

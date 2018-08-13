@@ -79,9 +79,9 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			return null;
 
 		if (this.rem1 != null && parameters[0] != null)
-			this.rem1.setParameter(parameters[0], 0);
+			this.rem1.setParameter(parameters[0], getCurrentIteration());
 		if (this.rem2 != null && parameters[1] != null)
-			this.rem2.setParameter(parameters[1], 0);
+			this.rem2.setParameter(parameters[1], getCurrentIteration());
 		
 		return parameters;
 	}
@@ -127,9 +127,9 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			}
 
 			@Override
-			protected String extractRegressorText(int index) {
+			protected String extractRegressorName(int index) {
 				// TODO Auto-generated method stub
-				return getThis().extractRegressorText(attList, xIndices, index);
+				return getThis().extractRegressorName(attList, xIndices, index);
 			}
 
 			@Override
@@ -139,42 +139,30 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			}
 
 			@Override
-			protected String extractResponseText() {
+			protected String extractResponseName() {
 				// TODO Auto-generated method stub
-				return getThis().extractResponseText(attList, zIndices);
+				return getThis().extractResponseName(attList, zIndices);
 			}
 
 			@Override
-			protected Object transformRegressor(Object x) {
+			protected Object transformRegressor(Object x, boolean inverse) {
 				// TODO Auto-generated method stub
-				return getThis().transformRegressor(x, true);
+				return getThis().transformRegressor(x, true, inverse);
 			}
 
 			@Override
-			protected Object inverseTransformRegressor(Object inverseX) {
+			protected Object transformResponse(Object z, boolean inverse) {
 				// TODO Auto-generated method stub
-				return getThis().inverseTransformRegressor(inverseX, true);
+				return getThis().transformResponse(z, true, inverse);
 			}
 
-			@Override
-			protected Object transformResponse(Object z) {
-				// TODO Auto-generated method stub
-				return getThis().transformResponse(z, true);
-			}
-
-			@Override
-			protected Object inverseTransformResponse(Object inverseZ) {
-				// TODO Auto-generated method stub
-				return getThis().inverseTransformResponse(inverseZ, true);
-			}
-			
 		};
 		DataConfig config1 = rem1.getConfig();
 		config1.put(DefaultRegressionEM.REM_INDICES_FIELD, thisConfig.get(DefaultRegressionEM.REM_INDICES_FIELD));
 		config1.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_INVERSE_MODE_FIELD));
 		config1.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_BALANCE_MODE_FIELD));
 		rem1.setup(this.dataset);
-		if(rem1.attList != null)
+		if(rem1.attList != null) // if rem1 is set up successfully.
 			this.rem1 = rem1;
 		else
 			rem1.clearInternalData();
@@ -199,9 +187,9 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			}
 
 			@Override
-			protected String extractRegressorText(int index) {
+			protected String extractRegressorName(int index) {
 				// TODO Auto-generated method stub
-				return getThis().extractRegressorText(attList, xIndices, index);
+				return getThis().extractRegressorName(attList, xIndices, index);
 			}
 
 			@Override
@@ -211,42 +199,30 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			}
 
 			@Override
-			protected String extractResponseText() {
+			protected String extractResponseName() {
 				// TODO Auto-generated method stub
-				return getThis().extractResponseText(attList, zIndices);
+				return getThis().extractResponseName(attList, zIndices);
 			}
 
 			@Override
-			protected Object transformRegressor(Object x) {
+			protected Object transformRegressor(Object x, boolean inverse) {
 				// TODO Auto-generated method stub
-				return getThis().transformRegressor(x, false);
+				return getThis().transformRegressor(x, false, inverse);
 			}
 
 			@Override
-			protected Object inverseTransformRegressor(Object inverseX) {
+			protected Object transformResponse(Object z, boolean inverse) {
 				// TODO Auto-generated method stub
-				return getThis().inverseTransformRegressor(inverseX, false);
+				return getThis().transformResponse(z, false, inverse);
 			}
 
-			@Override
-			protected Object transformResponse(Object z) {
-				// TODO Auto-generated method stub
-				return getThis().transformResponse(z, false);
-			}
-
-			@Override
-			protected Object inverseTransformResponse(Object inverseZ) {
-				// TODO Auto-generated method stub
-				return getThis().inverseTransformResponse(inverseZ, false);
-			}
-			
 		};
 		DataConfig config2 = rem2.getConfig();
-		config2.put(REM_INDICES_FIELD2, thisConfig.get(REM_INDICES_FIELD2));
+		config2.put(DefaultRegressionEM.REM_INDICES_FIELD, thisConfig.get(REM_INDICES_FIELD2));
 		config2.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_INVERSE_MODE_FIELD));
 		config2.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_BALANCE_MODE_FIELD));
 		rem2.setup(this.dataset);
-		if(rem2.attList != null)
+		if(rem2.attList != null) // if rem1 is set up successfully.
 			this.rem2 = rem2;
 		else
 			rem2.clearInternalData();
@@ -255,8 +231,37 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			clearInternalData();
 			return false;
 		}
+		else if (!equalsIndices(this.rem1.zIndices, this.rem2.zIndices)) {
+			clearInternalData();
+			return false;
+		}
 		else
 			return true;
+	}
+	
+	
+	/**
+	 * Testing whether two specified lists of indices are equal.
+	 * @param zIndices1 the first specified list of indices. 
+	 * @param zIndices2 the second specified list of indices.
+	 * @return true if two specified lists of indices are equal.
+	 */
+	private boolean equalsIndices(List<int[]> zIndices1, List<int[]> zIndices2) {
+		if (zIndices1.size() != zIndices2.size())
+			return false;
+		
+		for (int i = 0; i < zIndices1.size(); i++) {
+			int[] index1 = zIndices1.get(i);
+			int[] index2 = zIndices2.get(i);
+			if (index1.length != index2.length)
+				return false;
+			for (int j = 0; j < index1.length; j++) {
+				if (index1[j] != index2[j])
+					return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	
@@ -301,8 +306,12 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			stat2 = (ExchangedParameter)this.rem2.expectation(parameter2);
 
 		if(stat1 != null && stat2 != null) {
-			stat1 = stat1.mean(stat2);
-			stat2 = stat1;
+			double[] meanVector = new double[stat1.vector.length]; //Z statistic
+			for (int j = 0; j < meanVector.length; j++) {
+				meanVector[j] = (stat1.vector[j] + stat2.vector[j]) / 2.0;
+			}
+			stat1.vector = meanVector;
+			stat2.vector = meanVector;
 		}
 		
 		if (stat1 == null && stat2 == null)
@@ -371,7 +380,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 	
 	@Override
-	public Object execute(Object input) {
+	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		boolean executionMode = getConfig().getAsBoolean(EXECUTION_FIRST_MODE_FIELD);
 		DefaultRegressionEM rem = null;
@@ -411,7 +420,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 	
 	@Override
-	public String getDescription() {
+	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
 		StringBuffer buffer = new StringBuffer();
 
@@ -427,7 +436,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			buffer.append(text2);
 		}
 
-		return null;
+		return buffer.toString();
 	}
 
 	
@@ -471,7 +480,10 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 		config.put(EXECUTION_FIRST_MODE_FIELD, EXECUTION_FIRST_MODE_DEFAULT); // execution mode
 		return config;
 	}
-
+	
+	
+	//Methods below should be improved by derived classes.
+	
 	
 	/**
 	 * Extracting value of regressor (X) from specified profile.
@@ -487,13 +499,13 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 	
 	/**
-	 * Extracting text of response variable (Z).
+	 * Extracting name of response variable (Z).
 	 * @param attList specified attribute list.
 	 * @param xIndices specified indices of regressors.
 	 * @param index specified index.
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractRegressorText(AttributeList attList, List<int[]> xIndices, int index) {
+	protected String extractRegressorName(AttributeList attList, List<int[]> xIndices, int index) {
 		// TODO Auto-generated method stub
 		return attList.get(xIndices.get(index)[0]).getName();
 	}
@@ -529,12 +541,12 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 	
 	/**
-	 * Extracting text of response variable (Z).
+	 * Extracting name of response variable (Z).
 	 * @param attList specified attribute list.
 	 * @param zIndices specified indices of response variables.
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractResponseText(AttributeList attList, List<int[]> zIndices) {
+	protected String extractResponseName(AttributeList attList, List<int[]> zIndices) {
 		// TODO Auto-generated method stub
 		return attList.get(zIndices.get(1)[0]).getName();
 	}
@@ -544,9 +556,10 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	 * Transforming independent variable X.
 	 * @param x specified variable X.
 	 * @param firstModel if true, the first model is used.
+	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of X.
 	 */
-	protected Object transformRegressor(Object x, boolean firstModel) {
+	protected Object transformRegressor(Object x, boolean firstModel, boolean inverse) {
 		// TODO Auto-generated method stub
 		if (x == null)
 			return null;
@@ -560,25 +573,13 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 	
 	/**
-	 * Inverse transforming of the inverse value of independent variable X.
-	 * This method is the inverse of {@link #transformRegressor(double)}.
-	 * @param inverseX inverse value of independent variable X.
-	 * @param firstModel if true, the first model is used.
-	 * @return value of X.
-	 */
-	protected Object inverseTransformRegressor(Object inverseX, boolean firstModel) {
-		// TODO Auto-generated method stub
-		return transformRegressor(inverseX, firstModel);
-	}
-
-	
-	/**
 	 * Transforming independent variable Z.
 	 * @param z specified variable Z.
 	 * @param firstModel if true, the first model is used.
+	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of Z.
 	 */
-	protected Object transformResponse(Object z, boolean firstModel) {
+	protected Object transformResponse(Object z, boolean firstModel, boolean inverse) {
 		// TODO Auto-generated method stub
 		if (z == null)
 			return null;
@@ -591,17 +592,4 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	}
 
 	
-	/**
-	 * Inverse transforming of the inverse value of independent variable Z.
-	 * This method is the inverse of {@link #transformResponse(double)}.
-	 * @param inverseZ inverse value of independent variable Z.
-	 * @param firstModel if true, the first model is used.
-	 * @return value of Z.
-	 */
-	protected Object inverseTransformResponse(Object inverseZ, boolean firstModel) {
-		// TODO Auto-generated method stub
-		return transformResponse(inverseZ, firstModel);
-	}
-
-
 }
