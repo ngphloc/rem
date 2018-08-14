@@ -237,17 +237,17 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * @param attList standardized attribute list.
 	 */
 	public static void standardizeAttributeNames(AttributeList attList) {
-		for (int i = 0; i < attList.size(); i++) {
-			String name = attList.get(i).getName();
-			try {
-				Double.parseDouble(name);
-				System.out.println("Attribute name \"" + name + "\" is invalid because it is a number");
-				//attList.get(i).setName("a" + name);
-			}
-			catch (Throwable e) {
-				
-			}
-		}
+//		for (int i = 0; i < attList.size(); i++) {
+//			String name = attList.get(i).getName();
+//			try {
+//				Double.parseDouble(name);
+//				System.out.println("Attribute name \"" + name + "\" is invalid because it is a number");
+//				attList.get(i).setName("a" + name);
+//			}
+//			catch (Throwable e) {
+//				
+//			}
+//		}
 	}
 	
 	
@@ -353,16 +353,24 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			if (item instanceof Integer)
 				return profile.getValueAsReal((int)item);
 			
-			String txtValue = item.toString();
+			String txtValue = item.toString().trim();
 			int n = profile.getAttCount();
 			for (int i = 0; i < n; i++) {
 				String attName =  profile.getAtt(i).getName();
-				txtValue = txtValue.replaceAll(attName, profile.getValueAsString(attName));
+				if(!txtValue.contains(attName))
+					continue;
+				
+				if(profile.isMissing(i))
+					return Constants.UNUSED; //Cannot evaluate
+				Double value = profile.getValueAsReal(attName);
+				if(!Util.isUsed(value))
+					return Constants.UNUSED; //Cannot evaluate
+				
+				txtValue = txtValue.replaceAll(attName, value.toString()).trim();
 			}
 			
-			Parser prs = new Parser();
-			String result = prs.parse(txtValue);
-			return Double.parseDouble(result);
+			Parser parser = new Parser();
+			return parser.parse2(txtValue);
 		}
 		catch (Throwable e) {
 			e.printStackTrace();

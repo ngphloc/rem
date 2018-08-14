@@ -132,6 +132,48 @@ public class Parser
 
 
 	/**
+	 * This method parses and evaluates the given expression.
+	 * On error, an error of type Error is thrown.
+	 * Modified by Loc Nguyen on August 14, 2018
+	 */
+	public double parse2(final String new_expr) throws Error {
+		//Initialize all variables
+		expr = new_expr; //Copy the given expression to expr
+		ans = 0.0;
+
+		//Get the first character in expression.
+		getFirstChar();
+
+		getToken();
+		
+		//Check whether the given expression is empty.
+		if (token_type == TOKENTYPE.DELIMETER && expr_c == '\0') {
+			throw new Error(row(), col(), 4);
+		}
+
+		ans = parse_level1();
+
+		//Check for garbage at the end of the expression
+		if (token_type != TOKENTYPE.DELIMETER || token.length() > 0) {
+			if (token_type == TOKENTYPE.DELIMETER) {
+				//User entered a not existing operator like "//"
+				throw new Error(row(), col(), 101, token);
+			}
+			else {
+				throw new Error(row(), col(), 5, token);
+			}
+		}
+
+		//Add the answer to memory as variable "Ans"
+		user_var.put(new String("ANS"), new Double(ans));
+
+		ans_str = String.format("Ans = %g", ans);
+		
+		return ans;
+	}
+
+	
+	/**
 	 * checks if the given char c is a minus
 	 */
 	boolean isMinus(final char c)
