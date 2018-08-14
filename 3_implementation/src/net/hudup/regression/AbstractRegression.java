@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.DecompositionSolver;
+import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.QRDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -21,7 +22,6 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
-import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.parser.TextParserUtil;
 
 /**
@@ -49,7 +49,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	/**
 	 * Default regression indices field.
 	 */
-	public final static String R_INDICES_FIELD_DEFAULT = "{-1, -1}, {-1}, {-1}";
+	public final static String R_INDICES_FIELD_DEFAULT = "{-1+, -1+}, {-1+}, {-1}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
 	
 	
 	/**
@@ -398,14 +398,12 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	
 
 	/**
-	 * Solving the equation Ax = b. This method uses QR decomposition to solve approximately optimized equations.
-	 * This method should be improved in the next version for solving perfectly the problem of singular matrix.
-	 * Currently, the problem of singular matrix is solved by Moore–Penrose pseudo-inverse matrix.
+	 * Solving the equation Ax = b. This method uses firstly LU decomposition to solve exact solution and then uses QR decomposition to solve approximate solution in least square sense.
+	 * Finally, if the problem of singular matrix continues to raise, Moore–Penrose pseudo-inverse matrix is used to find approximate solution.
 	 * @param A specified matrix.
 	 * @param b specified vector.
 	 * @return solution x of the equation Ax = b. Return null if any error raises.
 	 */
-	@NextUpdate
 	public static double[] solve(List<double[]> A, double[] b) {
 		int N = b.length;
 		int n = A.get(0).length;
@@ -416,24 +414,47 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		RealMatrix M = MatrixUtils.createRealMatrix(A.toArray(new double[N][n]));
 		RealVector m = new ArrayRealVector(b);
 		try {
-			DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-			x = solver.solve(m).toArray(); //solve Ax = b with approximation
+			//Firstly, solve exact solution by LU Decomposition
+			DecompositionSolver solver = new LUDecomposition(M).getSolver();
+			x = solver.solve(m).toArray(); //solve Ax = b exactly
+			x = checkSolution(x);
+			if (x == null)
+				throw new Exception("Null solution");
 		}
-		catch (SingularMatrixException e) {
-			logger.info("Singular matrix problem occurs in #solve(RealMatrix, RealVector)");
-			
-			//Proposed solution will be improved in next version
+		catch (Exception e1) {
+			logger.info("Problem by LU Decomposition: " + e1.getMessage());
 			try {
-				DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-				RealMatrix pseudoInverse = solver.getInverse();
-				x = pseudoInverse.operate(m).toArray();
+				//Secondly, solve approximate solution by QR Decomposition
+				DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
+				x = solver.solve(m).toArray(); //solve Ax = b with approximation
+				x = checkSolution(x);
 			}
 			catch (SingularMatrixException e2) {
-				logger.info("Cannot solve the problem of singluar matrix by Moore–Penrose pseudo-inverse matrix in #solve(RealMatrix, RealVector)");
-				x = null;
+				logger.info("Singular matrix problem by QR Decomposition");
+				//Finally, solve approximate solution by Moore–Penrose pseudo-inverse matrix
+				try {
+					DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
+					RealMatrix pseudoInverse = solver.getInverse();
+					x = pseudoInverse.operate(m).toArray();
+					x = checkSolution(x);
+				}
+				catch (SingularMatrixException e3) {
+					logger.info("Cannot solve the problem of singluar matrix by Moore–Penrose pseudo-inverse matrix in #solve(RealMatrix, RealVector)");
+					x = null;
+				}
 			}
 		}
 		
+		return x;
+	}
+
+
+	/**
+	 * Checking the specified solution of equation Ax = b.
+	 * @param x the specified solution.
+	 * @return the checked solution.
+	 */
+	private static double[] checkSolution(double[] x) {
 		if (x == null)
 			return null;
 		for (int i = 0; i < x.length; i++) {
@@ -442,6 +463,6 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		}
 		return x;
 	}
-
-
+	
+	
 }

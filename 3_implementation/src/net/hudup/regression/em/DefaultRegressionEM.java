@@ -607,7 +607,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
+		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT);
 		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
 		config.put(REM_BALANCE_MODE_FIELD, REM_BALANCE_MODE_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
@@ -868,9 +868,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		
 		return AbstractRegression.solve(A, b);
 	}
-	
-	
-	//Methods below should be improved by derived classes.
 	
 	
 	/**

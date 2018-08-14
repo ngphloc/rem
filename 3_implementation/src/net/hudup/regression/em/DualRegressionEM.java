@@ -443,18 +443,15 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
+		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT);
 		config.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, DefaultRegressionEM.REM_INVERSE_MODE_DEFAULT);
 		config.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, DefaultRegressionEM.REM_BALANCE_MODE_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		
-		config.put(R_INDICES_FIELD2, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
+		config.put(R_INDICES_FIELD2, AbstractRegression.R_INDICES_FIELD_DEFAULT);
 		config.put(EXECUTION_FIRST_MODE_FIELD, EXECUTION_FIRST_MODE_DEFAULT); // execution mode
 		return config;
 	}
-	
-	
-	//Methods below should be improved by derived classes.
 	
 	
 	/**
