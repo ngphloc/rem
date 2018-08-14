@@ -53,8 +53,14 @@ public class RegressionEvaluator extends TestingEvaluator {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		try {
+			System.setProperty("hudup_decimal_precision", "4");
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
 		String regressEvClassName = RegressionEvaluator.class.getName();
-		System.setProperty("hudup_decimal_precision", "4");
 		new Evaluator().run(new String[] {regressEvClassName});
 	}
 

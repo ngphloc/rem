@@ -9,6 +9,7 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRegression;
 import net.hudup.regression.em.DefaultRegressionEM.ExchangedParameter;
 
 
@@ -30,7 +31,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	/**
 	 * Regression indices field.
 	 */
-	public final static String REM_INDICES_FIELD2 = "rem_indices2";
+	public final static String R_INDICES_FIELD2 = "r_indices2";
 
 	
 	/**
@@ -158,7 +159,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 		};
 		DataConfig config1 = rem1.getConfig();
-		config1.put(DefaultRegressionEM.REM_INDICES_FIELD, thisConfig.get(DefaultRegressionEM.REM_INDICES_FIELD));
+		config1.put(AbstractRegression.R_INDICES_FIELD, thisConfig.get(AbstractRegression.R_INDICES_FIELD));
 		config1.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_INVERSE_MODE_FIELD));
 		config1.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_BALANCE_MODE_FIELD));
 		rem1.setup(this.dataset);
@@ -218,11 +219,11 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 
 		};
 		DataConfig config2 = rem2.getConfig();
-		config2.put(DefaultRegressionEM.REM_INDICES_FIELD, thisConfig.get(REM_INDICES_FIELD2));
+		config2.put(AbstractRegression.R_INDICES_FIELD, thisConfig.get(R_INDICES_FIELD2));
 		config2.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_INVERSE_MODE_FIELD));
 		config2.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, thisConfig.get(DefaultRegressionEM.REM_BALANCE_MODE_FIELD));
 		rem2.setup(this.dataset);
-		if(rem2.attList != null) // if rem1 is set up successfully.
+		if(rem2.attList != null) // if rem2 is set up successfully.
 			this.rem2 = rem2;
 		else
 			rem2.clearInternalData();
@@ -231,37 +232,8 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 			clearInternalData();
 			return false;
 		}
-		else if (!equalsIndices(this.rem1.zIndices, this.rem2.zIndices)) {
-			clearInternalData();
-			return false;
-		}
 		else
 			return true;
-	}
-	
-	
-	/**
-	 * Testing whether two specified lists of indices are equal.
-	 * @param zIndices1 the first specified list of indices. 
-	 * @param zIndices2 the second specified list of indices.
-	 * @return true if two specified lists of indices are equal.
-	 */
-	private boolean equalsIndices(List<int[]> zIndices1, List<int[]> zIndices2) {
-		if (zIndices1.size() != zIndices2.size())
-			return false;
-		
-		for (int i = 0; i < zIndices1.size(); i++) {
-			int[] index1 = zIndices1.get(i);
-			int[] index2 = zIndices2.get(i);
-			if (index1.length != index2.length)
-				return false;
-			for (int j = 0; j < index1.length; j++) {
-				if (index1[j] != index2[j])
-					return false;
-			}
-		}
-		
-		return true;
 	}
 	
 	
@@ -305,7 +277,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 		if (parameter2 != null && this.rem2 != null)
 			stat2 = (ExchangedParameter)this.rem2.expectation(parameter2);
 
-		if(stat1 != null && stat2 != null) {
+		if(stat1 != null && stat2 != null && stat1.vector.length == stat2.vector.length) {
 			double[] meanVector = new double[stat1.vector.length]; //Z statistic
 			for (int j = 0; j < meanVector.length; j++) {
 				meanVector[j] = (stat1.vector[j] + stat2.vector[j]) / 2.0;
@@ -471,12 +443,12 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(DefaultRegressionEM.REM_INDICES_FIELD, "{-1}, {-1}, {-1}"); //Not used
+		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
 		config.put(DefaultRegressionEM.REM_INVERSE_MODE_FIELD, DefaultRegressionEM.REM_INVERSE_MODE_DEFAULT);
 		config.put(DefaultRegressionEM.REM_BALANCE_MODE_FIELD, DefaultRegressionEM.REM_BALANCE_MODE_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		
-		config.put(REM_INDICES_FIELD2, "{-1}, {-1}, {-1}"); //Not used
+		config.put(R_INDICES_FIELD2, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
 		config.put(EXECUTION_FIRST_MODE_FIELD, EXECUTION_FIRST_MODE_DEFAULT); // execution mode
 		return config;
 	}
@@ -487,30 +459,35 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	
 	/**
 	 * Extracting value of regressor (X) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param profile specified profile.
 	 * @param xIndices specified indices of regressors.
 	 * @param index specified indices.
 	 * @return value of regressor (X) extracted from specified profile.
 	 */
-	protected double extractRegressor(Profile profile, List<int[]> xIndices, int index) {
+	protected double extractRegressor(Profile profile, List<Object[]> xIndices, int index) {
 		// TODO Auto-generated method stub
-		return profile.getValueAsReal(xIndices.get(index)[0]);
+		return AbstractRegression.defaultExtractVariable(profile, xIndices, index);
 	}
 
 	
 	/**
 	 * Extracting name of response variable (Z).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param attList specified attribute list.
 	 * @param xIndices specified indices of regressors.
 	 * @param index specified index.
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractRegressorName(AttributeList attList, List<int[]> xIndices, int index) {
+	protected String extractRegressorName(AttributeList attList, List<Object[]> xIndices, int index) {
 		// TODO Auto-generated method stub
-		return attList.get(xIndices.get(index)[0]).getName();
+		return AbstractRegression.defaultExtractVariableName(attList, xIndices, index);
 	}
 
 	
+	/**
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 */
 	@Override
 	public double extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
@@ -530,30 +507,33 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	
 	/**
 	 * Extracting value of response variable (Z) from specified profile and indices.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param profile specified profile.
 	 * @param zIndices specified indices of response variables.
 	 * @return value of response variable (Z) extracted from specified profile and indices.
 	 */
-	protected double extractResponse(Profile profile, List<int[]> zIndices) {
+	protected double extractResponse(Profile profile, List<Object[]> zIndices) {
 		// TODO Auto-generated method stub
-		return profile.getValueAsReal(zIndices.get(1)[0]);
+		return AbstractRegression.defaultExtractVariable(profile, zIndices, 1);
 	}
 
 	
 	/**
 	 * Extracting name of response variable (Z).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param attList specified attribute list.
 	 * @param zIndices specified indices of response variables.
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractResponseName(AttributeList attList, List<int[]> zIndices) {
+	protected String extractResponseName(AttributeList attList, List<Object[]> zIndices) {
 		// TODO Auto-generated method stub
-		return attList.get(zIndices.get(1)[0]).getName();
+		return AbstractRegression.defaultExtractVariableName(attList, zIndices, 1);
 	}
 
 	
 	/**
 	 * Transforming independent variable X.
+	 * In the most general case that each index is an mathematical expression, this method is not focused.
 	 * @param x specified variable X.
 	 * @param firstModel if true, the first model is used.
 	 * @param inverse if true, there is an inverse transformation.
@@ -561,19 +541,13 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	 */
 	protected Object transformRegressor(Object x, boolean firstModel, boolean inverse) {
 		// TODO Auto-generated method stub
-		if (x == null)
-			return null;
-		else if (x instanceof Number)
-			return ((Number)x).doubleValue();
-		else if (x instanceof String)
-			return (String)x;
-		else
-			return x;
+		return x;
 	}
 
 	
 	/**
 	 * Transforming independent variable Z.
+	 * In the most general case that each index is an mathematical expression, this method is not focused.
 	 * @param z specified variable Z.
 	 * @param firstModel if true, the first model is used.
 	 * @param inverse if true, there is an inverse transformation.
@@ -581,14 +555,7 @@ public class DualRegressionEM extends ExponentialEM implements RegressionEM, Dup
 	 */
 	protected Object transformResponse(Object z, boolean firstModel, boolean inverse) {
 		// TODO Auto-generated method stub
-		if (z == null)
-			return null;
-		else if (z instanceof Number)
-			return ((Number)z).doubleValue();
-		else if (z instanceof String)
-			return (String)z;
-		else
-			return z;
+		return z;
 	}
 
 	

@@ -4,15 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.math3.linear.ArrayRealVector;
-import org.apache.commons.math3.linear.DecompositionSolver;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.QRDecomposition;
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.RealVector;
-import org.apache.commons.math3.linear.SingularMatrixException;
-import org.apache.commons.math3.linear.SingularValueDecomposition;
-
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
@@ -21,9 +12,8 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
-import net.hudup.core.logistic.NextUpdate;
-import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRegression;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
@@ -38,12 +28,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * Serial version UID for serializable class.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	
-	/**
-	 * Regression indices field.
-	 */
-	public final static String REM_INDICES_FIELD = "rem_indices";
 
 	
 	/**
@@ -75,25 +59,25 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Variable contains complete data of X.
 	 */
-	protected List<double[]> xData = Util.newList(); //1, x1, x2,..., x(n-1)
+	protected List<double[]> xData = new ArrayList<>(); //1, x1, x2,..., x(n-1)
 	
 	
 	/**
 	 * Variable contains complete data of Z.
 	 */
-	protected List<double[]> zData = Util.newList(); //1, z
+	protected List<double[]> zData = new ArrayList<>(); //1, z
 	
 	
 	/**
 	 * Indices for X data.
 	 */
-	protected List<int[]> xIndices = new ArrayList<>();
+	protected List<Object[]> xIndices = new ArrayList<>(); //Object list for parsing mathematical expressions in the most general case.
 	
 	
 	/**
 	 * Indices for Z data.
 	 */
-	protected List<int[]> zIndices = new ArrayList<>();
+	protected List<Object[]> zIndices = new ArrayList<>(); //Object list for parsing mathematical expressions in the most general case.
 	
 	
 	/**
@@ -145,12 +129,15 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		this.sample.reset();
 		if (profile0 == null)
 			return false;
-		int n = profile0.getAttCount(); //x1, x2,..., x(n-1), z
-		if (n < 2)
+		if (profile0.getAttCount() < 2) //(x1, x2,..., x(n-1), z)
 			return false;
 		this.attList = profile0.getAttRef();
+		AbstractRegression.standardizeAttributeNames(this.attList);
 		
-		if (!parseIndices()) {
+		String cfgIndices = null;
+		if (this.getConfig().containsKey(AbstractRegression.R_INDICES_FIELD))
+			cfgIndices = this.getConfig().getAsString(AbstractRegression.R_INDICES_FIELD).trim();
+		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices)) { //parsing indices
 			clearInternalData();
 			return false;
 		}
@@ -175,7 +162,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			}
 		}
 		this.sample.reset();
-		List<int[]> xIndicesTemp = new ArrayList<>();
+		List<Object[]> xIndicesTemp = new ArrayList<>();
 		xIndicesTemp.add(this.xIndices.get(0)); //adding -1
 		for (int j = 1; j < this.xIndices.size(); j++) {
 			if (xExists[j - 1])
@@ -189,13 +176,12 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		//End checking existence of values.
 		
 		//Begin extracting data
-		n = this.xIndices.size();
 		while (this.sample.next()) {
 			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
 			if (profile == null)
 				continue;
 			
-			double[] xVector = new double[n]; //1, x1, x2,..., x(n-1)
+			double[] xVector = new double[this.xIndices.size()]; //1, x1, x2,..., x(n-1)
 			double[] zVector = new double[2]; //1, z
 			xVector[0] = 1;
 			zVector[0] = 1;
@@ -232,44 +218,6 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			clearInternalData();
 			return false;
 		}
-		else
-			return true;
-	}
-	
-	
-	/**
-	 * Parsing indices of variables.
-	 * @return true if parsing is successful.
-	 */
-	@NextUpdate
-	protected boolean parseIndices() {
-		int n = this.attList.size(); //profile = (x1, x2,..., x(n-1), z)
-		this.xIndices.clear();
-		this.xIndices.add(new int[] {-1}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in data.
-		this.zIndices.clear();
-		this.zIndices.add(new int[] {-1}); // due to Z = (1, z) and there is no 1 in data.
-		
-		//Begin extracting indices from configuration. It is improved later with Java regular expression.
-		List<Integer> indices = new ArrayList<>();
-		if (this.getConfig().containsKey(REM_INDICES_FIELD)) {
-			String cfgIndices = this.getConfig().getAsString(REM_INDICES_FIELD).trim();
-			if (!cfgIndices.isEmpty() && !cfgIndices.contains("-1"))
-				indices = TextParserUtil.parseListByClass(cfgIndices, Integer.class, ",");
-		}
-		if (indices == null || indices.size() < 2) {
-			for (int j = 0; j < n - 1; j++)
-				this.xIndices.add(new int[] {j});
-			this.zIndices.add(new int[] {n - 1});
-		}
-		else {
-			for (int j = 0; j < indices.size() - 1; j++)
-				this.xIndices.add(new int[] {indices.get(j)});
-			this.zIndices.add(new int[] {indices.get(indices.size() - 1)}); //The last index is Z index
-		}
-		//End extracting indices from configuration
-		
-		if (this.zIndices.size() < 2 || this.xIndices.size() < 2)
-			return false;
 		else
 			return true;
 	}
@@ -495,7 +443,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				y[i] = -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b;
 			}
 			
-			double[] solution = solve(A, y); //solve Ax = y
+			double[] solution = AbstractRegression.solve(A, y); //solve Ax = y
 			if (solution != null) {
 				for (int j = 0; j < U.size(); j++)
 					xStatistic[U.get(j)] = solution[j]; 
@@ -659,7 +607,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(REM_INDICES_FIELD, "{-1}, {-1}, {-1}"); //Not used
+		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT); //Not used
 		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
 		config.put(REM_BALANCE_MODE_FIELD, REM_BALANCE_MODE_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
@@ -918,7 +866,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			b[i] = sum;
 		}
 		
-		return solve(A, b);
+		return AbstractRegression.solve(A, b);
 	}
 	
 	
@@ -926,127 +874,74 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	
 	
 	/**
-	 * Solving the equation Ax = b. This method uses QR decomposition to solve approximately optimized equations.
-	 * This method should be improved in the next version for solving perfectly the problem of singular matrix.
-	 * Currently, the problem of singular matrix is solved by Moore–Penrose pseudo-inverse matrix.
-	 * @param A specified matrix.
-	 * @param b specified vector.
-	 * @return solution x of the equation Ax = b. Return null if any error raises.
-	 */
-	@NextUpdate
-	protected double[] solve(List<double[]> A, double[] b) {
-		int N = b.length;
-		int n = A.get(0).length;
-		if (N == 0 || n == 0)
-			return null;
-		
-		double[] x = null;
-		RealMatrix M = MatrixUtils.createRealMatrix(A.toArray(new double[N][n]));
-		RealVector m = new ArrayRealVector(b);
-		try {
-			DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-			x = solver.solve(m).toArray(); //solve Ax = b with approximation
-		}
-		catch (SingularMatrixException e) {
-			logger.info("Singular matrix problem occurs in #solve(RealMatrix, RealVector)");
-			
-			//Proposed solution will be improved in next version
-			try {
-				DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-				RealMatrix pseudoInverse = solver.getInverse();
-				x = pseudoInverse.operate(m).toArray();
-			}
-			catch (SingularMatrixException e2) {
-				logger.info("Cannot solve the problem of singluar matrix by Moore–Penrose pseudo-inverse matrix in #solve(RealMatrix, RealVector)");
-				x = null;
-			}
-		}
-		
-		if (x == null)
-			return null;
-		for (int i = 0; i < x.length; i++) {
-			if (Double.isNaN(x[i]) || !Util.isUsed(x[i]))
-				return null;
-		}
-		return x;
-	}
-
-	
-	/**
 	 * Extracting value of regressor (X) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param profile specified profile.
 	 * @param index specified indices.
 	 * @return value of regressor (X) extracted from specified profile.
 	 */
 	protected double extractRegressor(Profile profile, int index) {
 		// TODO Auto-generated method stub
-		return profile.getValueAsReal(xIndices.get(index)[0]);
+		return AbstractRegression.defaultExtractVariable(profile, xIndices, index);
 	}
 
 
 	/**
 	 * Extracting name of regressor (X).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param index specified indices.
 	 * @return text of regressor (X) extracted.
 	 */
 	protected String extractRegressorName(int index) {
 		// TODO Auto-generated method stub
-		return attList.get(xIndices.get(index)[0]).getName();
+		return AbstractRegression.defaultExtractVariableName(attList, xIndices, index);
 	}
 
-
+	
+	/**
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 */
 	@Override
 	public double extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
-		return profile.getValueAsReal(zIndices.get(1)[0]);
+		return AbstractRegression.defaultExtractVariable(profile, zIndices, 1);
 	}
 
 
 	/**
 	 * Extracting name of response variable (Z).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @return text of response variable (Z) extracted.
 	 */
 	protected String extractResponseName() {
 		// TODO Auto-generated method stub
-		return attList.get(zIndices.get(1)[0]).getName();
+		return AbstractRegression.defaultExtractVariableName(attList, zIndices, 1);
 	}
 
 
 	/**
 	 * Transforming independent variable X.
+	 * In the most general case that each index is an mathematical expression, this method is not focused.
 	 * @param x specified variable X.
 	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of X.
 	 */
 	protected Object transformRegressor(Object x, boolean inverse) {
 		// TODO Auto-generated method stub
-		if (x == null)
-			return null;
-		else if (x instanceof Number)
-			return ((Number)x).doubleValue();
-		else if (x instanceof String)
-			return (String)x;
-		else
-			return x;
+		return x;
 	}
 
 
 	/**
 	 * Transforming independent variable Z.
+	 * In the most general case that each index is an mathematical expression, this method is not focused.
 	 * @param z specified variable Z.
 	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of Z.
 	 */
 	protected Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
-		if (z == null)
-			return null;
-		else if (z instanceof Number)
-			return ((Number)z).doubleValue();
-		else if (z instanceof String)
-			return (String)z;
-		else
-			return z;
+		return z;
 	}
 
 
