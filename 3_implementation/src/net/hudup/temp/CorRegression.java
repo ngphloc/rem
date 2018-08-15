@@ -1,7 +1,6 @@
 package net.hudup.temp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import net.hudup.core.Constants;
@@ -51,10 +50,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	
 	
 	@Override
-	public synchronized Object learn() throws Exception {
-		if (!prepareInternalData())
-			return null;
-		
+	public Object learn0() throws Exception {
 		int n = xIndices.size();
 		List<double[]> A = new ArrayList<>(n);
 		double[] b = new double[n];
@@ -154,69 +150,12 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	}
 
 	
-	/**
-	 * Preparing data.
-	 * @return true if data preparation is successful.
-	 * @throws Exception if any error raises.
-	 */
+	@Override
 	protected boolean prepareInternalData() throws Exception {
 		// TODO Auto-generated method stub
-		clearInternalData();
+		if (!super.prepareInternalData())
+			return false;
 		
-		Profile profile0 = null;
-		if (this.sample.next()) {
-			profile0 = this.sample.pick();
-		}
-		this.sample.reset();
-		if (profile0 == null)
-			return false;
-		if (profile0.getAttCount() < 2) //x1, x2,..., x(n-1), z
-			return false;
-		this.attList = profile0.getAttRef();
-		AbstractRegression.standardizeAttributeNames(this.attList);
-		
-		String cfgIndices = null;
-		if (this.getConfig().containsKey(R_INDICES_FIELD))
-			cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD).trim();
-		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices)) { //parsing indices
-			clearInternalData();
-			return false;
-		}
-
-		//Begin checking existence of values.
-		boolean zExists = false;
-		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
-		Arrays.fill(xExists, false);
-		while (this.sample.next()) {
-			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
-			if (profile == null)
-				continue;
-			
-			double lastValue = extractResponse(profile);
-			if (Util.isUsed(lastValue))
-				zExists = zExists || true; 
-			
-			for (int j = 1; j < xIndices.size(); j++) {
-				double value = extractRegressor(profile, j);
-				if (Util.isUsed(value))
-					xExists[j - 1] = xExists[j - 1] || true;
-			}
-		}
-		this.sample.reset();
-
-		List<Object[]> xIndicesTemp = new ArrayList<>();
-		xIndicesTemp.add(xIndices.get(0)); //adding -1
-		for (int j = 1; j < xIndices.size(); j++) {
-			if (xExists[j - 1])
-				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
-		}
-		if (!zExists || xIndicesTemp.size() < 2) {
-			clearInternalData();
-			return false;
-		}
-		xIndices = xIndicesTemp;
-		//End checking existence of values.
-
 		//Begin extracting data
 		while (this.sample.next()) {
 			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
@@ -243,10 +182,10 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				xVector.add((double)transformRegressor(value, false));
 			}
 			
-			double lastValue = extractResponse(profile);
+			double lastValue = (double)extractResponse(profile);
 			this.zVector.add((double)transformResponse(lastValue, false));
 		}
-		this.sample.close();
+		this.sample.reset();
 		//End extracting data
 		
 		return true;
@@ -261,17 +200,15 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	}
 
 	
-	/**
-	 * Clear all internal data.
-	 */
+	@Override
 	protected void clearInternalData() {
-		this.coeffs = null;
-		this.xIndices.clear();
-		this.zIndices.clear();
-		this.attList = null;
+		// TODO Auto-generated method stub
+		super.clearInternalData();
+		xVectors.clear();
+		zVector.clear();
 	}
 
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

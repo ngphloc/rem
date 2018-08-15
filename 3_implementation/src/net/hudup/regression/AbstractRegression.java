@@ -1,6 +1,7 @@
 package net.hudup.regression;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
@@ -18,6 +19,8 @@ import com.speqmath.Parser;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.AbstractTestingAlg;
+import net.hudup.core.data.Attribute;
+import net.hudup.core.data.Attribute.Type;
 import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
@@ -25,8 +28,7 @@ import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 
 /**
- * <code>AbstractRegression</code> is the most abstract class for expectation maximization (EM) algorithm.
- * It implements partially the interface {@link Regression}.
+ * This is the most abstract class for regression model. It implements partially the interface {@link Regression}.
  * 
  * @author Loc Nguyen
  * @version 1.0*
@@ -39,18 +41,6 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	/**
-	 * Name of regression indices field.
-	 */
-	public final static String R_INDICES_FIELD = "r_indices";
-
-	
-	/**
-	 * Default regression indices field.
-	 */
-	public final static String R_INDICES_FIELD_DEFAULT = "{-1+, -1+}, {-1+}, {-1}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
-	
 	
 	/**
 	 * Regression coefficient.
@@ -72,6 +62,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	
 	/**
 	 * Attribute list for all variables: all X, Y, and z.
+	 * This variable is also used as the indicator of successful learning.
 	 */
 	protected AttributeList attList = null;
 	
@@ -83,8 +74,104 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	@Override
+	public Object learn() throws Exception {
+		// TODO Auto-generated method stub
+		Object resulted = null;
+		if (prepareInternalData())
+			resulted = learn0();
+		if (resulted == null)
+			clearInternalData();
+		
+		return resulted;
+	}
 
+	
+	/**
+	 * Internal learning parameters. Derived class needs to implement this method.
+	 * @return the parameter to be learned.
+	 * @throws Exception if any error occurs.
+	 */
+	protected abstract Object learn0() throws Exception;
+	
+	
+	/**
+	 * Preparing data.
+	 * @return true if data preparation is successful.
+	 * @throws Exception if any error raises.
+	 */
+	protected boolean prepareInternalData() throws Exception {
+		// TODO Auto-generated method stub
+		clearInternalData();
+		
+		Profile profile0 = null;
+		if (this.sample.next()) {
+			profile0 = this.sample.pick();
+		}
+		this.sample.reset();
+		if (profile0 == null)
+			return false;
+		if (profile0.getAttCount() < 2) //x1, x2,..., x(n-1), z
+			return false;
+		this.attList = profile0.getAttRef();
+		
+		//Begin parsing indices
+		String cfgIndices = null;
+		if (this.getConfig().containsKey(R_INDICES_FIELD))
+			cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD).trim();
+		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices))
+			return false;
+		//End parsing indices
 
+		//Begin checking existence of values.
+		boolean zExists = false;
+		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
+		Arrays.fill(xExists, false);
+		while (this.sample.next()) {
+			Profile profile = this.sample.pick(); //profile = (x1, x2,..., x(n-1), z)
+			if (profile == null)
+				continue;
+			
+			double lastValue = (double)extractResponse(profile);
+			if (Util.isUsed(lastValue))
+				zExists = zExists || true; 
+			
+			for (int j = 1; j < xIndices.size(); j++) {
+				double value = extractRegressor(profile, j);
+				if (Util.isUsed(value))
+					xExists[j - 1] = xExists[j - 1] || true;
+			}
+		}
+		this.sample.reset();
+
+		List<Object[]> xIndicesTemp = new ArrayList<>();
+		xIndicesTemp.add(xIndices.get(0)); //adding -1
+		for (int j = 1; j < xIndices.size(); j++) {
+			if (xExists[j - 1])
+				xIndicesTemp.add(xIndices.get(j)); //only use variables having at least one value.
+		}
+		if (!zExists || xIndicesTemp.size() < 2)
+			return false;
+		xIndices = xIndicesTemp;
+		//End checking existence of values.
+
+		return true;
+	}
+
+	
+	/**
+	 * Clear all internal data.
+	 */
+	protected void clearInternalData() {
+		this.coeffs = null;
+		this.xIndices.clear();
+		this.zIndices.clear();
+		this.attList = null;
+	}
+
+	
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
@@ -116,7 +203,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT); //Not used
+		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
 		return config;
 	}
 
@@ -149,11 +236,11 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(coeffs[0]));
 		for (int j = 0; j < this.coeffs.length - 1; j++) {
 			double coeff = this.coeffs[j + 1];
-			String variableName = transformRegressor(extractRegressorName(j + 1), false).toString();
+			String regressorExpr = "(" + transformRegressor(extractRegressorName(j + 1), false).toString() + ")";
 			if (coeff < 0)
-				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
+				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + regressorExpr);
 			else
-				buffer.append(" + " + MathUtil.format(coeff) + "*" + variableName);
+				buffer.append(" + " + MathUtil.format(coeff) + "*" + regressorExpr);
 		}
 		
 		return buffer.toString();
@@ -189,7 +276,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public double extractResponse(Profile profile) {
+	public Object extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
 		return defaultExtractVariable(profile, zIndices, 1);
 	}
@@ -221,7 +308,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 
 	/**
 	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused.
+	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
 	 * @param z specified variable Z.
 	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of Z.
@@ -231,78 +318,78 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		return z;
 	}
 
-
+	
 	/**
-	 * Standardizing attribute names, for example, if attribute name is an number name "1.0", it is converted into "a1.0".
-	 * @param attList standardized attribute list.
+	 * Splitting the specified string into list of indices.
+	 * @param cfgIndices specified string.
+	 * @return list of indices.
 	 */
-	public static void standardizeAttributeNames(AttributeList attList) {
-//		for (int i = 0; i < attList.size(); i++) {
-//			String name = attList.get(i).getName();
-//			try {
-//				Double.parseDouble(name);
-//				System.out.println("Attribute name \"" + name + "\" is invalid because it is a number");
-//				attList.get(i).setName("a" + name);
-//			}
-//			catch (Throwable e) {
-//				
-//			}
-//		}
+	public static List<String> splitIndices(String cfgIndices) {
+		List<String> txtList = new ArrayList<>();
+		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(R_INDICES_FIELD_DEFAULT))
+			return txtList;
+					
+		//The pattern is {1, 2}, {3, 4, 5), {5, 6}, {5, 6, 7, 8}, {9, 10}
+		//The pattern can also be 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
+		String regex = "\\}(\\s)*,(\\s)*\\{";
+		String[] txtArray = cfgIndices.split(regex);
+		for (String txt : txtArray) {
+			txt = txt.trim().replaceAll("\\}", "").replaceAll("\\{", "");
+			if (!txt.isEmpty())
+				txtList.add(txt);
+		}
+		
+		return txtList;
 	}
 	
 	
 	/**
 	 * Parsing indices of variables. In the most general case, each index is an mathematical expression.
+	 * @param cfgIndices input configured indices string.
+	 * @param maxVariables input maximum variables.
+	 * @param xIndicesOutput output regressors indices.
+	 * @param zIndicesOutput output response indices.
 	 * @return true if parsing is successful.
 	 */
-	public static boolean parseIndices(String cfgIndices, int maxVariables, List<Object[]> xIndices, List<Object[]> zIndices) {
-		xIndices.clear();
-		xIndices.add(new Object[] {new Integer(-1)}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in real data.
-		zIndices.clear();
-		zIndices.add(new Object[] {new Integer(-1)}); // due to Z = (1, z) and there is no 1 in real data.
+	public static boolean parseIndices(String cfgIndices, int maxVariables, List<Object[]> xIndicesOutput, List<Object[]> zIndicesOutput) {
+		xIndicesOutput.clear();
+		xIndicesOutput.add(new Object[] {new Integer(-1)}); // due to X = (1, x1, x2,..., x(n-1)) and there is no 1 in real data.
+		zIndicesOutput.clear();
+		zIndicesOutput.add(new Object[] {new Integer(-1)}); // due to Z = (1, z) and there is no 1 in real data.
 		
 		//Begin extracting indices from configuration.
 		//The pattern is {1, 2}, {3, 4, 5), {5, 6}, {5, 6, 7, 8}, {9, 10}
 		//The pattern can also be 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
+		List<String> txtList = splitIndices(cfgIndices);
+		
 		List<Object[]> indices = new ArrayList<>();
-		if (cfgIndices != null && !cfgIndices.isEmpty() && !cfgIndices.equals(R_INDICES_FIELD_DEFAULT)) {
-			String regex = "\\}(\\s)*,(\\s)*\\{";
-			//String regex = "\\)(\\s)*,(\\s)*\\(";
-			String[] txtArray = cfgIndices.split(regex);
-			List<String> txtList = new ArrayList<>();
-			for (String txt : txtArray) {
-				txt = txt.trim().replaceAll("\\}", "").replaceAll("\\{", "").replaceAll("\\)", "").replaceAll("\\(", "");
-				if (!txt.isEmpty())
-					txtList.add(txt);
-			}
-			if (txtList.size() == 1) { //The case: 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
-				List<Object> oneIndices = parseIndex(txtList.get(0), ",");
-				for (Object index : oneIndices)
-					indices.add(new Object[] {index});
-			}
-			else if (txtList.size() > 1) {
-				for (String txt : txtList) {
-					List<Object> oneIndices = parseIndex(txt, ",");
-					if (oneIndices.size() == 0)
-						continue;
-					indices.add(oneIndices.toArray());
-				}
+		if (txtList.size() == 1) { //The case: 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
+			List<Object> oneIndices = parseIndex(txtList.get(0), ",");
+			for (Object index : oneIndices)
+				indices.add(new Object[] {index});
+		}
+		else if (txtList.size() > 1) {
+			for (String txt : txtList) {
+				List<Object> oneIndices = parseIndex(txt, ",");
+				if (oneIndices.size() == 0)
+					continue;
+				indices.add(oneIndices.toArray());
 			}
 		}
 		
-		if (indices == null || indices.size() < 2) {
+		if (indices.size() < 2) { //The case: 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
 			for (int j = 0; j < maxVariables - 1; j++)
-				xIndices.add(new Object[] {new Integer(j)});
-			zIndices.add(new Object[] {new Integer(maxVariables - 1)}); //The last index is Z index.
+				xIndicesOutput.add(new Object[] {new Integer(j)});
+			zIndicesOutput.add(new Object[] {new Integer(maxVariables - 1)}); //The last index is Z index.
 		}
 		else {
 			for (int j = 0; j < indices.size() - 1; j++)
-				xIndices.add(indices.get(j));
-			zIndices.add(indices.get(indices.size() - 1)); //The last index is Z index
+				xIndicesOutput.add(indices.get(j));
+			zIndicesOutput.add(indices.get(indices.size() - 1)); //The last index is Z index
 		}
 		//End extracting indices from configuration
 		
-		if (zIndices.size() < 2 || xIndices.size() < 2)
+		if (zIndicesOutput.size() < 2 || xIndicesOutput.size() < 2)
 			return false;
 		else
 			return true;
@@ -322,6 +409,11 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		List<String> array = TextParserUtil.split(txtIndex, sep, null);
 		
 		for (String el : array) {
+			if (el.contains(VAR_INDEX_SPECIAL_CHAR)) {
+				indices.add(el);
+				continue;
+			}
+			
 			int index = -1;
 			boolean parseSuccess = true;
 			try {
@@ -330,7 +422,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			catch (Throwable e) {
 				parseSuccess = false;
 			}
-			if (parseSuccess)
+			if (parseSuccess && index >= 0)
 				indices.add(new Integer(index));
 			else
 				indices.add(el);
@@ -350,14 +442,15 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	public static double defaultExtractVariable(Profile profile, List<Object[]> indices, int index) {
 		try {
 			Object item = indices.get(index)[0];
-			if (item instanceof Integer)
-				return profile.getValueAsReal((int)item);
+			if (item instanceof Number)
+				return profile.getValueAsReal(((Number)item).intValue());
 			
-			String txtValue = item.toString().trim();
+			String expr = item.toString().trim();
 			int n = profile.getAttCount();
 			for (int i = 0; i < n; i++) {
 				String attName =  profile.getAtt(i).getName();
-				if(!txtValue.contains(attName))
+				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
+				if(!expr.contains(replacedText))
 					continue;
 				
 				if(profile.isMissing(i))
@@ -366,11 +459,11 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 				if(!Util.isUsed(value))
 					return Constants.UNUSED; //Cannot evaluate
 				
-				txtValue = txtValue.replaceAll(attName, value.toString()).trim();
+				expr = expr.replaceAll(replacedText, value.toString());
 			}
 			
 			Parser parser = new Parser();
-			return parser.parse2(txtValue);
+			return parser.parse2(expr);
 		}
 		catch (Throwable e) {
 			e.printStackTrace();
@@ -390,10 +483,18 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	public static String defaultExtractVariableName(AttributeList attList, List<Object[]> indices, int index) {
 		// TODO Auto-generated method stub
 		Object item = indices.get(index)[0];
-		if (item instanceof Integer)
-			return attList.get((int)item).getName();
-		else
-			return item.toString();
+		if (item instanceof Number)
+			return attList.get(((Number)item).intValue()).getName();
+		else {
+			String expr = item.toString();
+			for (int i = 0; i < attList.size(); i++) {
+				String attName =  attList.get(i).getName();
+				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
+				expr = expr.replaceAll(replacedText, attName).trim();
+			}
+			
+			return expr;
+		}
 	}
 	
 
@@ -422,7 +523,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 				throw new Exception("Null solution");
 		}
 		catch (Exception e1) {
-			logger.info("Problem by LU Decomposition: " + e1.getMessage());
+			logger.info("Problem from LU Decomposition: " + e1.getMessage());
 			try {
 				//Secondly, solve approximate solution by QR Decomposition
 				DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
@@ -430,7 +531,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 				x = checkSolution(x);
 			}
 			catch (SingularMatrixException e2) {
-				logger.info("Singular matrix problem by QR Decomposition");
+				logger.info("Singular matrix problem from QR Decomposition");
 				//Finally, solve approximate solution by Moore–Penrose pseudo-inverse matrix
 				try {
 					DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
@@ -465,4 +566,21 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	}
 	
 	
+	/**
+	 * Creating default attribute list for sample to learn regression model.
+	 * By default, all variables are real numbers.
+	 * @param maxVarNumber maximum number of variables.
+	 * @return default attribute list for sample to learn regression model.
+	 */
+	public static AttributeList defaultAttributeList(int maxVarNumber) {
+		AttributeList attList = new AttributeList();
+		for (int i = 0; i < maxVarNumber; i++) {
+			Attribute att = new Attribute("var" + i, Type.real);
+			attList.add(att);
+		}
+		
+		return attList;
+	}
+
+
 }

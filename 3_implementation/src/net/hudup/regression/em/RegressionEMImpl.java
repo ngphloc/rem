@@ -21,7 +21,7 @@ import net.hudup.regression.AbstractRegression;
  * @version 1.0
  *
  */
-public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, DuplicatableAlg {
+public class RegressionEMImpl extends ExponentialEM implements RegressionEM, DuplicatableAlg {
 
 	
 	/**
@@ -82,6 +82,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	
 	/**
 	 * Attribute list for all variables: all X, Y, and z.
+	 * This variable is also used as the indicator of successful learning (not null).
 	 */
 	protected AttributeList attList = null;
 	
@@ -89,19 +90,22 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	/**
 	 * Default constructor.
 	 */
-	public DefaultRegressionEM() {
+	public RegressionEMImpl() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 	
 	
 	@Override
-	public synchronized Object learn() throws Exception {
+	public Object learn() throws Exception {
 		// TODO Auto-generated method stub
+		Object resulted = null;
 		if (prepareInternalData())
-			return super.learn();
-		else
-			return null;
+			resulted = super.learn();
+		if (resulted == null)
+			clearInternalData();
+
+		return resulted;
 	}
 
 
@@ -132,15 +136,14 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		if (profile0.getAttCount() < 2) //(x1, x2,..., x(n-1), z)
 			return false;
 		this.attList = profile0.getAttRef();
-		AbstractRegression.standardizeAttributeNames(this.attList);
-		
+
+		//Begin parsing indices
 		String cfgIndices = null;
-		if (this.getConfig().containsKey(AbstractRegression.R_INDICES_FIELD))
-			cfgIndices = this.getConfig().getAsString(AbstractRegression.R_INDICES_FIELD).trim();
-		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices)) { //parsing indices
-			clearInternalData();
+		if (this.getConfig().containsKey(R_INDICES_FIELD))
+			cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD).trim();
+		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices)) //parsing indices
 			return false;
-		}
+		//End parsing indices
 		
 		//Begin checking existence of values.
 		boolean zExists = false;
@@ -151,7 +154,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			if (profile == null)
 				continue;
 			
-			double lastValue = extractResponse(profile);
+			double lastValue = (double)extractResponse(profile);
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
@@ -168,10 +171,8 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			if (xExists[j - 1])
 				xIndicesTemp.add(this.xIndices.get(j)); //only use variables having at least one value.
 		}
-		if (!zExists || xIndicesTemp.size() < 2) {
-			clearInternalData();
+		if (!zExists || xIndicesTemp.size() < 2)
 			return false;
-		}
 		this.xIndices = xIndicesTemp;
 		//End checking existence of values.
 		
@@ -187,7 +188,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			zVector[0] = 1;
 			
 			boolean zExist = false;
-			double lastValue = extractResponse(profile);
+			double lastValue = (double)extractResponse(profile);
 			if (!Util.isUsed(lastValue))
 				zVector[1] = Constants.UNUSED;
 			else {
@@ -211,13 +212,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 				this.xData.add(xVector);
 			}
 		}
-		this.sample.close();
+		this.sample.reset();
 		//End extracting data
 		
-		if (this.xData.size() == 0 || this.zData.size() == 0) {
-			clearInternalData();
+		if (this.xData.size() == 0 || this.zData.size() == 0)
 			return false;
-		}
 		else
 			return true;
 	}
@@ -518,9 +517,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 			zStatistics[i] = zVector.get(i);
 		ExchangedParameter currentStatistic = new ExchangedParameter(zStatistics, xStatistics);
 		try {
-			return maximization(currentStatistic);
+			ExchangedParameter parameter = (ExchangedParameter) maximization(currentStatistic);
+			return (parameter != null ? parameter : parameter0); 
+				
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -597,7 +598,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	@Override
 	public Alg newInstance() {
 		// TODO Auto-generated method stub
-		DefaultRegressionEM em = new DefaultRegressionEM();
+		RegressionEMImpl em = new RegressionEMImpl();
 		em.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return em;
 	}
@@ -607,7 +608,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(AbstractRegression.R_INDICES_FIELD, AbstractRegression.R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
 		config.put(REM_INVERSE_MODE_FIELD, REM_INVERSE_MODE_DEFAULT);
 		config.put(REM_BALANCE_MODE_FIELD, REM_BALANCE_MODE_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
@@ -628,11 +629,11 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(alpha[0]));
 		for (int j = 0; j < alpha.length - 1; j++) {
 			double coeff = alpha[j + 1];
-			String variableName = transformRegressor(extractRegressorName(j + 1), false).toString();
+			String regressorExpr = "(" + transformRegressor(extractRegressorName(j + 1), false).toString() + ")";
 			if (coeff < 0)
-				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + variableName);
+				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + regressorExpr);
 			else
-				buffer.append(" + " + MathUtil.format(coeff) + "*" + variableName);
+				buffer.append(" + " + MathUtil.format(coeff) + "*" + regressorExpr);
 		}
 		
 		return buffer.toString();
@@ -899,7 +900,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public double extractResponse(Profile profile) {
+	public Object extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
 		return AbstractRegression.defaultExtractVariable(profile, zIndices, 1);
 	}
@@ -931,7 +932,7 @@ public class DefaultRegressionEM extends ExponentialEM implements RegressionEM, 
 
 	/**
 	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused.
+	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
 	 * @param z specified variable Z.
 	 * @param inverse if true, there is an inverse transformation.
 	 * @return transformed value of Z.
