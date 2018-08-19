@@ -1,9 +1,9 @@
 package net.hudup.regression;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.hudup.core.Util;
 import net.hudup.core.alg.AbstractTestingAlg;
 import net.hudup.core.alg.SetupAlgEvent;
 import net.hudup.core.alg.SetupAlgEvent.Type;
@@ -31,14 +31,14 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 	/**
 	 * List of internal regression model as parameter.
 	 */
-	protected List<Regression> regressions = new ArrayList<>(); 
+	protected List<Regression> regressions = Util.newList(); 
 	
 	
 	@Override
 	public void setup(Dataset dataset, Object... info) throws Exception {
 		// TODO Auto-generated method stub
-		List<Object> additionalInfo = new ArrayList<>();
-		List<Regression> regressions = new ArrayList<>();
+		List<Object> additionalInfo = Util.newList();
+		List<Regression> regressions = Util.newList();
 		for (Object el : info) {
 			if (el instanceof Regression)
 				regressions.add((Regression)el);
@@ -52,8 +52,8 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 	@Override
 	public void setup(Fetcher<Profile> sample, Object... info) throws Exception {
 		// TODO Auto-generated method stub
-		List<Object> additionalInfo = new ArrayList<>();
-		List<Regression> regressions = new ArrayList<>();
+		List<Object> additionalInfo = Util.newList();
+		List<Regression> regressions = Util.newList();
 		for (Object el : info) {
 			if (el instanceof Regression)
 				regressions.add((Regression)el);
@@ -115,7 +115,7 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 	 */
 	public void setup(Fetcher<Profile> sample, Object[] info, Regression...regressions) throws Exception {
 		// TODO Auto-generated method stub
-		List<Object> additionalInfo = new ArrayList<>();
+		List<Object> additionalInfo = Util.newList();
 		additionalInfo.add(sample);
 		additionalInfo.addAll(Arrays.asList(info));
 		
@@ -132,32 +132,37 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 
 	@Override
-	public Object learn() throws Exception {
+	public Object learn(Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		List<Object> parameterList = new ArrayList<>();
+		List<Object> parameterList = Util.newList();
+		boolean success = false;
 		for (Regression regression : this.regressions) {
 			regression.setup(this.sample);
 			Object parameter = regression.getParameter();
+			parameterList.add(parameter);
 			if (parameter != null)
-				parameterList.add(parameter);
+				success = true;
 		}
-		if (parameterList.size() == 0)
+		if (!success)
 			return null;
 		else
-			return parameterList.size() == this.regressions.size() ? parameterList : null; // The learn() method is successful if all internal regressions are learned successful. 
+			return parameterList; 
 	}
 
 	
 	@Override
-	public Object execute(Object input) {
+	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		List<Object> resultList = new ArrayList<>();
+		List<Object> resultList = Util.newList();
+		boolean success = false;
 		for (Regression regression : this.regressions) {
 			Object result = regression.execute(input);
 			resultList.add(result);
+			if (result != null)
+				success = true;
 		}
 		
-		if (resultList.size() == 0)
+		if (!success)
 			return null;
 		else
 			return resultList;
@@ -165,15 +170,18 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 	
 	@Override
-	public Object getParameter() {
+	public synchronized Object getParameter() {
 		// TODO Auto-generated method stub
-		List<Object> parameterList = new ArrayList<>();
+		List<Object> parameterList = Util.newList();
+		boolean success = false;
 		for (Regression regression : this.regressions) {
 			Object parameter = regression.getParameter();
 			parameterList.add(parameter);
+			if (parameter != null)
+				success = true;
 		}
 		
-		if (parameterList.size() == 0)
+		if (!success)
 			return null;
 		else
 			return parameterList;
@@ -190,7 +198,7 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 	
 	@Override
-	public String parameterToShownText(Object parameter, Object... info) {
+	public synchronized String parameterToShownText(Object parameter, Object... info) {
 		// TODO Auto-generated method stub
 		if (parameter == null || !(parameter instanceof List<?>))
 			return "";
@@ -210,7 +218,7 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 	
 	@Override
-	public String getDescription() {
+	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
 		StringBuffer buffer = new StringBuffer();
 		
@@ -227,15 +235,18 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 
 	@Override
-	public Object extractResponse(Profile profile) {
+	public synchronized Object extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
-		List<Object> valueList = new ArrayList<>();
+		List<Object> valueList = Util.newList();
+		boolean success = false;
 		for (Regression regression : this.regressions) {
 			Object value = regression.extractResponse(profile);
 			valueList.add(value);
+			if (value != null)
+				success = true;
 		}
 		
-		if (valueList.size() == 0)
+		if (!success)
 			return null;
 		else
 			return valueList;

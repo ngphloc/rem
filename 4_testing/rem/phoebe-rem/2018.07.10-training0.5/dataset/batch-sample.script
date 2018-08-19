@@ -1,6 +1,6 @@
 # Sample batch script
 
-algorithms=rem
+algorithms=rem, mixrem
 
 trainingsets=datasets/phoebe-rem/hdp_sample.base#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.1.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.2.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.3.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.4.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.5.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.6.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.7.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.8.miss#snapshot_parser#file, datasets/phoebe-rem/hdp_sample.base.0.9.miss#snapshot_parser#file
 

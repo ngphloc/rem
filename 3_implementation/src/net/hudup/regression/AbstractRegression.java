@@ -1,6 +1,5 @@
 package net.hudup.regression;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import net.hudup.core.data.Attribute.Type;
 import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
+import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 
@@ -45,19 +45,19 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	/**
 	 * Regression coefficient.
 	 */
-	protected double[] coeffs = null;
+	protected List<Double> coeffs = null;
 	
 	
 	/**
 	 * Indices for X data.
 	 */
-	protected List<Object[]> xIndices = new ArrayList<>();
+	protected List<Object[]> xIndices = Util.newList();
 
 	
 	/**
 	 * Indices for Z data.
 	 */
-	protected List<Object[]> zIndices = new ArrayList<>();
+	protected List<Object[]> zIndices = Util.newList();
 	
 	
 	/**
@@ -77,7 +77,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	
 	
 	@Override
-	public Object learn() throws Exception {
+	public Object learn(Object...info) throws Exception {
 		// TODO Auto-generated method stub
 		Object resulted = null;
 		if (prepareInternalData())
@@ -118,9 +118,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		this.attList = profile0.getAttRef();
 		
 		//Begin parsing indices
-		String cfgIndices = null;
-		if (this.getConfig().containsKey(R_INDICES_FIELD))
-			cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD).trim();
+		String cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD);
 		if (!AbstractRegression.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices))
 			return false;
 		//End parsing indices
@@ -146,7 +144,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		}
 		this.sample.reset();
 
-		List<Object[]> xIndicesTemp = new ArrayList<>();
+		List<Object[]> xIndicesTemp = Util.newList();
 		xIndicesTemp.add(xIndices.get(0)); //adding -1
 		for (int j = 1; j < xIndices.size(); j++) {
 			if (xExists[j - 1])
@@ -182,10 +180,10 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			return null; //only support profile input currently
 		Profile profile = (Profile)input;
 		
-		double sum = this.coeffs[0];
-		for (int j= 0; j < this.coeffs.length - 1; j++) {
+		double sum = this.coeffs.get(0);
+		for (int j= 0; j < this.coeffs.size() - 1; j++) {
 			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			sum += this.coeffs[j + 1] * (double)transformRegressor(value, false); 
+			sum += this.coeffs.get(j + 1) * (double)transformRegressor(value, false); 
 		}
 		
 		return transformResponse(sum, true);
@@ -233,9 +231,9 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(coeffs[0]));
-		for (int j = 0; j < this.coeffs.length - 1; j++) {
-			double coeff = this.coeffs[j + 1];
+		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(coeffs.get(0)));
+		for (int j = 0; j < this.coeffs.size() - 1; j++) {
+			double coeff = this.coeffs.get(j + 1);
 			String regressorExpr = "(" + transformRegressor(extractRegressorName(j + 1), false).toString() + ")";
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + regressorExpr);
@@ -325,14 +323,14 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * @return list of indices.
 	 */
 	public static List<String> splitIndices(String cfgIndices) {
-		List<String> txtList = new ArrayList<>();
+		List<String> txtList = Util.newList();
 		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(R_INDICES_FIELD_DEFAULT))
 			return txtList;
 					
 		//The pattern is {1, 2}, {3, 4, 5), {5, 6}, {5, 6, 7, 8}, {9, 10}
 		//The pattern can also be 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
 		String regex = "\\}(\\s)*,(\\s)*\\{";
-		String[] txtArray = cfgIndices.split(regex);
+		String[] txtArray = cfgIndices.trim().split(regex);
 		for (String txt : txtArray) {
 			txt = txt.trim().replaceAll("\\}", "").replaceAll("\\{", "");
 			if (!txt.isEmpty())
@@ -362,7 +360,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		//The pattern can also be 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
 		List<String> txtList = splitIndices(cfgIndices);
 		
-		List<Object[]> indices = new ArrayList<>();
+		List<Object[]> indices = Util.newList();
 		if (txtList.size() == 1) { //The case: 1, 2, 3, 4, 5, 5, 6, 5, 6, 7, 8, 9, 10
 			List<Object> oneIndices = parseIndex(txtList.get(0), ",");
 			for (Object index : oneIndices)
@@ -403,7 +401,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * @return list of indices parsed from text.
 	 */
 	private static List<Object> parseIndex(String txtIndex, String sep) {
-		List<Object> indices = new ArrayList<>();
+		List<Object> indices = Util.newList();
 		if (txtIndex == null || txtIndex.isEmpty())
 			return indices;
 		List<String> array = TextParserUtil.split(txtIndex, sep, null);
@@ -431,6 +429,25 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		return indices;
 	}
 
+	
+	/**
+	 * Finding object in specified list of indices.
+	 * @param indicesList specified list of indices.
+	 * @param object specified object.
+	 * @return index of specified object in specified list of indices. 
+	 */
+	public static int findIndex(List<Object[]> indicesList, Object object) {
+		for (int i = 0; i < indicesList.size(); i++) {
+			Object[] objects = indicesList.get(i);
+			for (int j = 0; j < objects.length; j++) {
+				if (objects[j].equals(object))
+					return i;
+			}
+		}
+		
+		return -1;
+	}
+	
 	
 	/**
 	 * Extracting value of variable (X) from specified profile.
@@ -505,19 +522,19 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * @param b specified vector.
 	 * @return solution x of the equation Ax = b. Return null if any error raises.
 	 */
-	public static double[] solve(List<double[]> A, double[] b) {
-		int N = b.length;
+	public static List<Double> solve(List<double[]> A, List<Double> b) {
+		int N = b.size();
 		int n = A.get(0).length;
 		if (N == 0 || n == 0)
 			return null;
 		
-		double[] x = null;
+		List<Double> x = null;
 		RealMatrix M = MatrixUtils.createRealMatrix(A.toArray(new double[N][n]));
-		RealVector m = new ArrayRealVector(b);
+		RealVector m = new ArrayRealVector(b.toArray(new Double[] {}));
 		try {
 			//Firstly, solve exact solution by LU Decomposition
 			DecompositionSolver solver = new LUDecomposition(M).getSolver();
-			x = solver.solve(m).toArray(); //solve Ax = b exactly
+			x = DSUtil.toDoubleList(solver.solve(m).toArray()); //solve Ax = b exactly
 			x = checkSolution(x);
 			if (x == null)
 				throw new Exception("Null solution");
@@ -527,7 +544,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			try {
 				//Secondly, solve approximate solution by QR Decomposition
 				DecompositionSolver solver = new QRDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
-				x = solver.solve(m).toArray(); //solve Ax = b with approximation
+				x = DSUtil.toDoubleList(solver.solve(m).toArray()); //solve Ax = b with approximation
 				x = checkSolution(x);
 			}
 			catch (SingularMatrixException e2) {
@@ -536,7 +553,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 				try {
 					DecompositionSolver solver = new SingularValueDecomposition(M).getSolver(); //It is possible to replace QRDecomposition by LUDecomposition here.
 					RealMatrix pseudoInverse = solver.getInverse();
-					x = pseudoInverse.operate(m).toArray();
+					x = DSUtil.toDoubleList(pseudoInverse.operate(m).toArray());
 					x = checkSolution(x);
 				}
 				catch (SingularMatrixException e3) {
@@ -555,11 +572,12 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * @param x the specified solution.
 	 * @return the checked solution.
 	 */
-	private static double[] checkSolution(double[] x) {
+	private static List<Double> checkSolution(List<Double> x) {
 		if (x == null)
 			return null;
-		for (int i = 0; i < x.length; i++) {
-			if (Double.isNaN(x[i]) || !Util.isUsed(x[i]))
+		for (int i = 0; i < x.size(); i++) {
+			Double value = x.get(i);
+			if (value == null || Double.isNaN(value) || !Util.isUsed(value))
 				return null;
 		}
 		return x;
@@ -582,5 +600,29 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		return attList;
 	}
 
+	
+	/**
+	 * Extracting real number from specified object.
+	 * @param value specified object.
+	 * @return real number extracted from specified object.
+	 */
+	public static double extractNumber(Object value) {
+		if (value == null)
+			return Constants.UNUSED;
+		else if (value instanceof Double)
+			return (double)value;
+		else if (value instanceof Number)
+			return ((Number)value).doubleValue();
+		else {
+			try {
+				Double.parseDouble(value.toString());
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Constants.UNUSED;
+		}
+	}
 
+	
 }

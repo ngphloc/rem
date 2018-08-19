@@ -1,6 +1,5 @@
 package net.hudup.temp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.hudup.core.Constants;
@@ -31,13 +30,13 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	/**
 	 * List of X vectors
 	 */
-	protected List<List<Double>> xVectors = new ArrayList<>();
+	protected List<List<Double>> xVectors = Util.newList();
 	
 	
 	/**
 	 * Z vector.
 	 */
-	protected List<Double> zVector = new ArrayList<>();
+	protected List<Double> zVector = Util.newList();
 
 	
 	/**
@@ -52,12 +51,12 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 	@Override
 	public Object learn0() throws Exception {
 		int n = xIndices.size();
-		List<double[]> A = new ArrayList<>(n);
-		double[] b = new double[n];
+		List<double[]> A = Util.newList(n);
+		List<Double> b = Util.newList(n);
 		
 		for (int i = 0; i < n; i++) {
 			double covXiZ = cor(xVectors.get(i), zVector);
-			b[i] = covXiZ;
+			b.add(covXiZ);
 			
 			double[] vector = new double[n];
 			A.add(vector);
@@ -91,7 +90,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				nZ++;
 			}
 		}
-		this.coeffs[0] = this.coeffs[0] + sumZ / (double)nZ;
+		this.coeffs.set(0, this.coeffs.get(0) + sumZ / (double)nZ);
 		//Adjusting intercept, improved later
 		
 		return this.coeffs;
@@ -109,7 +108,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			return 0;
 		
 		int N = Math.min(xVector.size(), yVector.size());
-		List<Integer> U = new ArrayList<>(N);
+		List<Integer> U = Util.newList(N);
 		double meanX = 0, meanY = 0;
 		for (int i = 0; i < N; i++) {
 			double x = xVector.get(i) != null ? xVector.get(i) : Constants.UNUSED; 
@@ -164,7 +163,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			
 			List<Double> xVector0 = null;
 			if (this.xVectors.size() <= 0) {
-				xVector0 = new ArrayList<>();
+				xVector0 = Util.newList();
 				this.xVectors.add(xVector0);
 			}
 			xVector0 = this.xVectors.get(0);
@@ -173,7 +172,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			for (int j = 1; j < this.xIndices.size(); j++) {
 				List<Double> xVector = null;
 				if (this.xVectors.size() <= j) {
-					xVector = new ArrayList<>();
+					xVector = Util.newList();
 					this.xVectors.add(xVector);
 				}
 				xVector = this.xVectors.get(j);
@@ -182,7 +181,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 				xVector.add((double)transformRegressor(value, false));
 			}
 			
-			double lastValue = (double)extractResponse(profile);
+			double lastValue = extractNumber(extractResponse(profile));
 			this.zVector.add((double)transformResponse(lastValue, false));
 		}
 		this.sample.reset();

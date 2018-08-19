@@ -1,6 +1,11 @@
-package net.hudup.regression.em;
+package net.hudup.temp;
 
-import java.util.ArrayList;
+import static net.hudup.regression.AbstractRegression.defaultAttributeList;
+import static net.hudup.regression.AbstractRegression.extractNumber;
+import static net.hudup.regression.AbstractRegression.splitIndices;
+import static net.hudup.temp.RegressionEMImpl.REM_LOOP_BALANCE_MODE_DEFAULT;
+import static net.hudup.temp.RegressionEMImpl.REM_LOOP_BALANCE_MODE_FIELD;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,12 +13,14 @@ import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
+import net.hudup.core.data.Fetcher;
+import net.hudup.core.data.MemFetcher;
 import net.hudup.core.data.Profile;
+import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.AbstractRegression;
 import net.hudup.regression.Regression;
-import net.hudup.regression.em.RegressionEMImpl.ExchangedParameter;
 
 /**
  * This class implements expectation maximization (EM) algorithm for many partial regression models.
@@ -23,6 +30,7 @@ import net.hudup.regression.em.RegressionEMImpl.ExchangedParameter;
  * @version 1.0
  *
  */
+@Deprecated
 public class MutualRegressionEM extends ExponentialEM implements Regression, DuplicatableAlg {
 
 	
@@ -33,27 +41,21 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 
 	
 	/**
-	 * Name of model number field.
-	 */
-	protected final static String MODELS_NUMBER_FIELD = "mrem_models_number";
-	
-	
-	/**
-	 * Default number of models. The default number is 2, which implies dual regression model.
-	 */
-	protected final static int MODELS_NUMBER_DEFAULT = 2;
-
-	
-	/**
 	 * List of internal regression model as parameter.
 	 */
-	protected List<RegressionEMImpl> rems = new ArrayList<>();
+	protected List<RegressionEMImpl> rems = Util.newList();
 
 	
+	/**
+	 * List of weights.
+	 */
+	protected List<Double> weights = Util.newList();
+	
+	
 	@Override
-	public Object learn() throws Exception {
+	public Object learn(Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		if (!prepareInternalData()) {
+		if (!prepareInternalData(this.sample)) {
 			clearInternalData();
 			return null;
 		}
@@ -64,23 +66,182 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 			return null;
 		}
 		
-		boolean success = false;
+		List<ExchangedParameter> newParameters = Util.newList();
+		List<RegressionEMImpl> newRems = Util.newList();
 		for (int i = 0; i < parameters.length; i++) {
 			ExchangedParameter parameter = parameters[i];
 			RegressionEMImpl rem = this.rems.get(i);
 			if (parameter != null && rem != null) {
 				rem.setParameter(parameter, this.getCurrentIteration());
-				success = true;
+				newParameters.add(parameter);
+				newRems.add(rem);
 			}
 		}
-		if (!success) {
+		if (newParameters.size() == 0) {
 			clearInternalData();
 			return null;
 		}
-		else
-			return parameters;
+		
+		//Only returning non-null REMs
+		parameters = newParameters.toArray(new ExchangedParameter[] {});
+		newParameters.clear();
+		this.rems.clear();
+		this.rems = newRems;
+		this.weights = calcResidualWeights(this.rems, this.sample);
+		//this.weights = calcUniformWeights(this.rems.size());
+		//this.weights = calcRegressWeights(this.rems, this.sample);
+		
+		return parameters;
 	}
 
+	
+	/**
+	 * Calculating weights based on residuals.
+	 * @param rems specified list of regression models.
+	 * @param inputSample specified sample.
+	 * @return weights.
+	 * @throws Exception if any error raises.
+	 */
+	protected static List<Double> calcResidualWeights(List<RegressionEMImpl> rems, Fetcher<Profile> inputSample) {
+		double[] MS = new double[rems.size()];
+		Arrays.fill(MS, 0.0);
+		double MSTotal = 0;
+		List<Double> weights = Util.newList();
+		for (int k = 0; k < rems.size(); k++) {
+			RegressionEMImpl rem = rems.get(k);
+			Fetcher<Profile> estimatedSample = rem.estimate(inputSample, null);
+			if (estimatedSample == null)
+				return calcUniformWeights(rems.size());
+			
+			MS[k] = rem.residualMean(estimatedSample);
+			if (!Util.isUsed(MS[k]))
+				return calcUniformWeights(rems.size()); 
+			else if (MS[k] == 0) {
+				weights.clear();
+				weights.add(0.0);
+				for (int j = 0; j < rems.size(); j++) {
+					if (j == k)
+						weights.add(1.0);
+					else
+						weights.add(0.0);
+				}
+				return weights;
+			}
+			
+			MSTotal += MS[k]; 
+		}
+		
+		double[] W = new double[rems.size()];
+		Arrays.fill(W, 0.0);
+		double WTotal = 0;
+		for (int k = 0; k < rems.size(); k++) {
+			W[k] = MSTotal / MS[k];
+			WTotal += W[k]; 
+		}
+		
+		weights.clear();
+		weights.add(0.0);
+		for (int k = 0; k < rems.size(); k++) {
+			double weight = W[k] / WTotal;
+			weights.add(weight);
+		}
+		
+		return weights;
+	}
+	
+	
+	/**
+	 * Calculating uniform weights.
+	 * @param remNumber the number of regression models.
+	 * @return uniform weights.
+	 */
+	protected static List<Double> calcUniformWeights(int remNumber) {
+		List<Double> weights0 = Util.newList();
+		weights0.add(0.0);
+		for (int i = 0; i < remNumber; i++)
+			weights0.add(1.0 / (double)remNumber);
+		
+		return weights0;
+	}
+	
+	
+	/**
+	 * Calculating weights based on regression model.
+	 * @param rems specified list of regression models.
+	 * @param inputSample specified sample.
+	 * @return weights.
+	 * @throws Exception if any error raises.
+	 */
+	@Deprecated
+	protected List<Double> calcRegressWeights(List<RegressionEMImpl> rems, Fetcher<Profile> inputSample) throws Exception {
+		List<Double> weights0 = Util.newList();
+		weights0.add(0.0);
+		for (int i = 0; i < rems.size(); i++)
+			weights0.add(1.0 / (double)rems.size());
+
+		//Learning weights by regression model.
+		AttributeList attRef = defaultAttributeList(rems.size() + 1);
+		List<Profile> profiles = Util.newList();
+		while (inputSample.next()) {
+			Profile profile = inputSample.pick();
+			if (profile == null)
+				continue;
+			
+			Profile newProfile = new Profile(attRef);
+			double lastValue = extractNumber(this.extractResponse(profile));
+			if (Util.isUsed(lastValue))
+				newProfile.setValue(rems.size(), lastValue);
+			
+			for (int j = 0; j < rems.size(); j++) {
+				RegressionEMImpl em = rems.get(j);
+				double value = extractNumber(em.execute(profile));
+				if (Util.isUsed(value))
+					newProfile.setValue(j, value);
+			}
+			
+			boolean missing = false;
+			for (int j = 0; j < attRef.size(); j++) {
+				if (newProfile.isMissing(j)) {
+					missing = true;
+					break;
+				}
+			}
+			if (!missing)
+				profiles.add(newProfile);
+		}
+		inputSample.reset();
+		
+		if (profiles.size() == 0)
+			return weights0;
+		
+		StringBuffer indices = new StringBuffer();
+		for (int i = 0; i < attRef.size(); i++) {
+			if (i > 0)
+				indices.append(", ");
+			indices.append(i);
+		}
+		MemFetcher<Profile> weightsSample =  new MemFetcher<>(profiles);
+		RegressionEMImpl weightsEM = new RegressionEMImpl();
+		DataConfig config = weightsEM.getConfig();
+		config.put(R_INDICES_FIELD, indices.toString());
+		config.put(REM_LOOP_BALANCE_MODE_FIELD, getConfig().get(REM_LOOP_BALANCE_MODE_FIELD));
+		weightsEM.setup(weightsSample);
+		
+		if (weightsEM.getParameter() == null)
+			return weights0;
+
+		double[] alpha = ((ExchangedParameter)weightsEM.getParameter()).getVector();
+		List<Double> weights = Util.newList();
+		for (int j = 0; j < alpha.length; j++)
+			weights.add(alpha[j]);
+			
+		weightsEM.unsetup();
+		weightsEM.clearInternalData();
+		weightsSample.close();
+		
+		return weights;
+	}
+	
 	
 	@Override
 	public synchronized void unsetup() {
@@ -95,18 +256,36 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 	
 	/**
 	 * Preparing data.
+	 * @param inputSample specified sample.
 	 * @return true if data preparation is successful.
 	 * @throws Exception if any error raises.
 	 */
-	protected boolean prepareInternalData() throws Exception {
+	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
 		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
-		int modelNumbers = thisConfig.getAsInt(MODELS_NUMBER_FIELD);
-		if (modelNumbers <= 0)
-			return false;
 		
-		List<String> indices = AbstractRegression.splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
-		for (int i = 0; i < modelNumbers; i++) {
+		List<String> indicesList = splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
+		if (indicesList.size() == 0) {
+			AttributeList attList = getSampleAttributeList(inputSample);
+			if (attList.size() < 2)
+				return false;
+			
+			StringBuffer indices = new StringBuffer();
+			for (int i = 0; i < attList.size(); i++) {
+				if (i > 0)
+					indices.append(", ");
+				indices.append(i);
+			}
+			indicesList.add(indices.toString());
+			
+			if (attList.size() > 2) {
+				for (int i = 0; i < attList.size() - 1; i++) {
+					indicesList.add(i + ", " + (attList.size() - 1));
+				}
+			}
+		}
+			
+		for (int i = 0; i < indicesList.size(); i++) {
 			RegressionEMImpl rem = new RegressionEMImpl() {
 
 				/**
@@ -115,19 +294,21 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 				private static final long serialVersionUID = 1L;
 
 				@Override
-				public synchronized Object learn() throws Exception {
+				public synchronized Object learn(Object...info) throws Exception {
 					// TODO Auto-generated method stub
-					return prepareInternalData();
+					boolean prepared = prepareInternalData(inputSample);
+					if (prepared)
+						return prepared;
+					else
+						return null;
 				}
 
 			};
 			
 			DataConfig config = rem.getConfig();
-			if (i < indices.size())
-				config.put(R_INDICES_FIELD, indices.get(i));
-			config.put(RegressionEMImpl.REM_INVERSE_MODE_FIELD, thisConfig.get(RegressionEMImpl.REM_INVERSE_MODE_FIELD));
-			config.put(RegressionEMImpl.REM_BALANCE_MODE_FIELD, thisConfig.get(RegressionEMImpl.REM_BALANCE_MODE_FIELD));
-			rem.setup(this.sample);
+			config.put(R_INDICES_FIELD, indicesList.get(i));
+			config.put(REM_LOOP_BALANCE_MODE_FIELD, thisConfig.get(REM_LOOP_BALANCE_MODE_FIELD));
+			rem.setup(inputSample);
 			if(rem.attList != null) // if rem1 is set up successfully.
 				this.rems.add(rem);
 		}
@@ -147,17 +328,18 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 				rem.clearInternalData();
 		}
 		this.rems.clear();
+		this.weights.clear();
 	}
 
 	
 	@Override
-	protected Object expectation(Object currentParameter) throws Exception {
+	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
 		ExchangedParameter[] exParameters = (ExchangedParameter[])currentParameter;
 		
 		ExchangedParameter[] stats = new ExchangedParameter[exParameters.length];
 		Arrays.fill(stats, null);
-		List<ExchangedParameter> successStats = new ArrayList<>();
+		List<ExchangedParameter> successStats = Util.newList();
 		for (int i = 0; i < exParameters.length; i++) {
 			ExchangedParameter exParameter = exParameters[i];
 			RegressionEMImpl rem = this.rems.get(i);
@@ -173,7 +355,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 		
 		//Retrieving same-length Z statistics
 		int N = successStats.get(0).vector.length;
-		List<ExchangedParameter> successStats2 = new ArrayList<>();
+		List<ExchangedParameter> successStats2 = Util.newList();
 		for (ExchangedParameter stat : successStats) {
 			if (stat.vector.length == N)
 				successStats2.add(stat);
@@ -181,6 +363,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 		if (successStats2.size() <= 1)
 			return stats;
 		
+		//Estimating Z based on same-length Z statistics
 		double[] meanVector = new double[N]; //Z statistic
 		for (int j = 0; j < N; j++) {
 			double mean = 0;
@@ -199,7 +382,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 
 	
 	@Override
-	protected Object maximization(Object currentStatistic) throws Exception {
+	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
 		ExchangedParameter[] stats = (ExchangedParameter[])currentStatistic;
 
@@ -272,31 +455,22 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		int k = 0;
-		double mean = 0;
-		for (RegressionEMImpl rem : this.rems) {
-			if (rem == null)
-				continue;
+		double result = this.weights.get(0);
+		for (int i = 0; i < this.rems.size(); i++) {
+			RegressionEMImpl rem = this.rems.get(i);
 			
-			Object value = rem.execute(input);
-			if (value == null || !(value instanceof Number))
-				continue;
-			
-			double realValue = ((Number)value).doubleValue();
-			if (Util.isUsed(realValue)) {
-				mean += realValue;
-				k++;
-			}
+			double value = extractNumber(rem.execute(input));
+			if (Util.isUsed(value))
+				result += this.weights.get(i + 1) * value;
+			else
+				return null;
 		}
-		if (k == 0)
-			return Constants.UNUSED;
-		else
-			return mean / (double)k;
+		return result;
 	}
 
 	
 	@Override
-	public String parameterToShownText(Object parameter, Object... info) {
+	public synchronized String parameterToShownText(Object parameter, Object... info) {
 		// TODO Auto-generated method stub
 		if (parameter == null || !(parameter instanceof ExchangedParameter[]))
 			return "";
@@ -311,6 +485,9 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 				text = this.rems.get(i).parameterToShownText(exParameters[i], info);
 			buffer.append("{" + text + "}");
 		}
+		
+		String weightsText = TextParserUtil.toText(this.weights, ",");
+		buffer.append(" : [" + weightsText + "]");
 		
 		return buffer.toString();
 	}
@@ -331,6 +508,9 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 			buffer.append("{" + text + "}");
 		}
 		
+		String weightsText = TextParserUtil.toText(this.weights, ",");
+		buffer.append(" : [" + weightsText + "]");
+
 		return buffer.toString();
 	}
 
@@ -342,7 +522,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 		if (name != null && !name.isEmpty())
 			return name;
 		else
-			return "mrem";
+			return "mutual_rem";
 	}
 
 	
@@ -367,9 +547,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
 		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
-		config.put(RegressionEMImpl.REM_INVERSE_MODE_FIELD, RegressionEMImpl.REM_INVERSE_MODE_DEFAULT);
-		config.put(RegressionEMImpl.REM_BALANCE_MODE_FIELD, RegressionEMImpl.REM_BALANCE_MODE_DEFAULT);
-		config.put(MODELS_NUMBER_FIELD, MODELS_NUMBER_DEFAULT);
+		config.put(REM_LOOP_BALANCE_MODE_FIELD, REM_LOOP_BALANCE_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
@@ -377,7 +555,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 
 	
 	@Override
-	public Object extractResponse(Profile profile) {
+	public synchronized Object extractResponse(Profile profile) {
 		// TODO Auto-generated method stub
 		int k = 0;
 		double mean = 0;
