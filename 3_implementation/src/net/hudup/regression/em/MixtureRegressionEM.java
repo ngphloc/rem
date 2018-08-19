@@ -93,6 +93,12 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 				indices.append(i);
 			}
 			indicesList.add(indices.toString());
+//			
+//			if (attList.size() > 2) {
+//				for (int i = 0; i < attList.size() - 1; i++) {
+//					indicesList.add(i + ", " + (attList.size() - 1));
+//				}
+//			}
 		}
 			
 		for (int i = 0; i < indicesList.size(); i++) {

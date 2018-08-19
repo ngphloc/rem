@@ -248,9 +248,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		int N = zStatistic.size();
 		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
-		if (alpha == null) {
+		if (alpha == null) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
-				alpha = DSUtil.toDoubleList(currentParameter.vector);
+				alpha = DSUtil.toDoubleList(currentParameter.vector); //clone alpha
 			else { //Used for initialization so that regression model is always determined.
 				alpha = DSUtil.initDoubleList(n, 0.0);
 				double alpha0 = 0;
@@ -275,10 +275,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			List<double[]> Z = Util.newList(N);
 			List<Double> x = Util.newList(N);
 			for (int i = 0; i < N; i++) {
-				double[] zRow = new double[2];
-				Z.add(zRow);
-				zRow[0] = 1;
-				zRow[1] = zStatistic.get(i)[1];
+				Z.add(zStatistic.get(i));
 				x.add(xStatistic.get(i)[j]);
 			}
 			double[] beta = DSUtil.toDoubleArray(calcCoeffs(Z, x));
@@ -417,7 +414,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		int n = this.getData().xData.get(0).length;
 		
 		List<Double> alpha0 = DSUtil.initDoubleList(n, 0.0);
-		List<double[]> betas0 = Util.newList();
+		List<double[]> betas0 = Util.newList(n);
 		for (int j = 0; j < n; j++) {
 			double[] beta0 = new double[2];
 			if (j == 0) {
@@ -487,21 +484,23 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				return false;
 		}
 		
-//		List<double[]> betas1 = parameter1.getMatrix();
-//		List<double[]> betas2 = parameter2.getMatrix();
-//		if (betas1.size() != betas2.size())
-//			return false;
-//		for (int i = 0; i < betas1.size(); i++) {
-//			double[]  beta1 = betas1.get(i);
-//			double[]  beta2 = betas2.get(i);
-//			if (beta1.length != beta2.length)
-//				return false;
-//			
-//			for (int j = 0; j < beta1.length; j++) {
-//				if (Math.abs(beta2[j] - beta1[j]) > threshold * Math.abs(beta1[j]))
-//					return false;
-//			}
-//		}
+		//It is possible not to test beta coefficients
+		List<double[]> betas1 = parameter1.getMatrix();
+		List<double[]> betas2 = parameter2.getMatrix();
+		if (betas1.size() != betas2.size())
+			return false;
+		for (int i = 0; i < betas1.size(); i++) {
+			double[]  beta1 = betas1.get(i);
+			double[]  beta2 = betas2.get(i);
+			if (beta1.length != beta2.length)
+				return false;
+			
+			for (int j = 0; j < beta1.length; j++) {
+				if (Math.abs(beta2[j] - beta1[j]) > threshold * Math.abs(beta1[j]))
+					return false;
+			}
+		}
+		//It is possible not to test beta coefficients
 
 		double c1 = parameter1.getCoeff();
 		double c2 = parameter2.getCoeff();
@@ -549,7 +548,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		
 		double sum = alpha.get(0);
 		for (int j = 0; j < alpha.size() - 1; j++) {
-			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
+			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn-1) and so index 0 indicates value 1.
 			if (!Util.isUsed(value))
 				return null;
 			sum += alpha.get(j + 1) * (double)transformRegressor(value, false); 
@@ -642,7 +641,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			buffer.append(": ");
 		
 		if (Util.isUsed(c))
-			buffer.append("c=" + MathUtil.format(c));
+			buffer.append("coeff=" + MathUtil.format(c));
 		if (Util.isUsed(mean))
 			buffer.append(", mean=" + MathUtil.format(mean));
 		if (Util.isUsed(variance))
@@ -674,7 +673,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			buffer.append(": ");
 		
 		if (Util.isUsed(c))
-			buffer.append("c=" + c);
+			buffer.append("coeff=" + c);
 		if (Util.isUsed(mean))
 			buffer.append(", mean=" + mean);
 		if (Util.isUsed(variance))
@@ -686,6 +685,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	
 	/**
 	 * Calculating coefficients based on regressors X (statistic X) and response variable Z (statistic Z).
+	 * Both statistic X and statistic Z contain 1 at first column.
 	 * @param xStatistic regressors X (statistic X).
 	 * @param zStatistic response variable Z (statistic Z).
 	 * @return coefficients based on regressors X (statistic X) and response variable Z (statistic Z). Return null if any error raises.
@@ -741,7 +741,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * Extracting value of regressor (X) from specified profile.
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param profile specified profile.
-	 * @param index specified indices.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
+	 * So index 0 always indicates to value 1. 
 	 * @return value of regressor (X) extracted from specified profile.
 	 */
 	protected double extractRegressor(Profile profile, int index) {
@@ -753,7 +754,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	/**
 	 * Extracting name of regressor (X).
 	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param index specified indices.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
+	 * So index 0 always indicates to value &apos;#noname&apos;. 
 	 * @return text of regressor (X) extracted.
 	 */
 	protected String extractRegressorName(int index) {
@@ -928,15 +930,17 @@ class ExchangedParameter {
 
 	
 	/**
-	 * Vector parameter.
+	 * Vector parameter. As usual, it is alpha coefficients for Z statistics.
 	 */
-	protected List<Double> vector = null; //As usual, it is alpha coefficients or Z statistics.
+	protected List<Double> vector = null;
 	
 	
 	/**
-	 * Matrix parameter
+	 * Matrix parameter represents beta coefficients for X statistics.
+	 * Each row of the matrix a a list of two beta coefficients for a regressor.
+	 * As a convent, regression 1 also has a list of two beta coefficients.
 	 */
-	protected List<double[]> matrix = null; //As usual, it is beta coefficients or X statistics. 
+	protected List<double[]> matrix = null; 
 	
 	
 	/**
@@ -997,12 +1001,13 @@ class ExchangedParameter {
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		ExchangedParameter newParameter = new ExchangedParameter();
-		newParameter.vector = DSUtil.toDoubleList(this.vector);
-		for (Double value : this.vector)
-			newParameter.vector.add(value);
-		newParameter.matrix = Util.newList();
-		for (double[] array : this.matrix) {
-			newParameter.matrix.add(Arrays.copyOf(array, array.length));
+		newParameter.vector = (this.vector != null ? DSUtil.toDoubleList(this.vector) : null);
+		
+		if (this.matrix != null) {
+			newParameter.matrix = Util.newList(this.matrix.size());
+			for (double[] array : this.matrix) {
+				newParameter.matrix.add(Arrays.copyOf(array, array.length));
+			}
 		}
 		
 		newParameter.coeff = this.coeff;
@@ -1329,6 +1334,120 @@ class LargeStatistics {
 	public LargeStatistics(List<double[]> xData, List<double[]> zData) {
 		this.xData = xData;
 		this.zData = zData;
+	}
+	
+	
+	/**
+	 * Getting data of X variables (X statistic).
+	 * @return data of X variables (X statistic).
+	 */
+	public List<double[]> getXData() {
+		return xData;
+	}
+	
+	
+	/**
+	 * Getting data of X variables (X statistic).
+	 * @return data of X variables (X statistic).
+	 */
+	public List<double[]> getZData() {
+		return zData;
+	}
+
+	
+	/**
+	 * Getting X statistic as row vector.
+	 * @param row specified row.
+	 * @return X statistic as row vector.
+	 */
+	public double[] getXRowStatistic(int row) {
+		return xData.get(row);
+	}
+	
+	
+	/**
+	 * Getting X statistic as column vector.
+	 * @param column specified column.
+	 * @return X statistic as column vector.
+	 */
+	public double[] getXColumnStatistic(int column) {
+		if (isEmpty())
+			return null;
+		
+		double[] xColumnVector = new double[xData.size()];
+		for (int i = 0; i < xData.size(); i++)
+			xColumnVector[i] = xData.get(i)[column];
+		
+		return xColumnVector;
+	}
+
+	
+	/**
+	 * Getting Z statistic.
+	 * @return Z statistic.
+	 */
+	public double[] getZStatistic() {
+		if (isEmpty())
+			return null;
+		
+		double[] zVector = new double[zData.size()];
+		for (int i = 0; i < zData.size(); i++)
+			zVector[i] = zData.get(i)[1];
+		
+		return zVector;
+	}
+
+	
+	/**
+	 * Getting both X statistic and Z statistic.
+	 * @param row specified row.
+	 * @return {@link Statistics} containing both X statistic and Z statistic.
+	 */
+	public Statistics getStatistic(int row) {
+		if (isEmpty())
+			return null;
+		
+		double[] xStatistic = getXRowStatistic(row);
+		double[] zStatistic = getZStatistic();
+		if (xStatistic == null || zStatistic == null || xStatistic.length == 0 || zStatistic.length == 0)
+			return null;
+		else
+			return new Statistics(zStatistic[row], xStatistic);
+	}
+	
+	
+	/**
+	 * Checking whether this statistics is valid.
+	 * @return true if this statistics is valid.
+	 */
+	public boolean checkValid() {
+		return checkValid(this.xData, this.zData);
+	}
+	
+	
+	/**
+	 * Checking whether specified X data and Z data are valid.
+	 * @param xData specified X data.
+	 * @param zData specified Z data.
+	 * @return true if both X data and Z data are valid.
+	 */
+	private static boolean checkValid(List<double[]> xData, List<double[]> zData) {
+		if (xData == null || zData == null || xData.size() != zData.size())
+			return false;
+		else
+			return true;
+	}
+
+	
+	/**
+	 * Checking whether this statistics is empty.
+	 * @return true this statistics is empty.
+	 */
+	public boolean isEmpty() {
+		if (xData == null || zData == null || xData.size() == 0 || zData.size() == 0)
+			return true;
+		else
+			return false;
 	}
 	
 	

@@ -453,10 +453,14 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * Extracting value of variable (X) from specified profile.
 	 * @param profile specified profile.
 	 * @param indices specified list of indices.
-	 * @param index specified index.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
+	 * So index 0 always indicate to value 1. 
 	 * @return value of variable (X) extracted from specified profile.
 	 */
 	public static double defaultExtractVariable(Profile profile, List<Object[]> indices, int index) {
+		if (index == 0)
+			return 1.0;
+		
 		try {
 			Object item = indices.get(index)[0];
 			if (item instanceof Number)
@@ -494,11 +498,15 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * Extracting variable name.
 	 * @param attList specified attribute list.
 	 * @param indices specified list of indices.
-	 * @param index specified index.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
+	 * So index 0 always indicate to value &apos;#noname&apos;. 
 	 * @return variable name.
 	 */
 	public static String defaultExtractVariableName(AttributeList attList, List<Object[]> indices, int index) {
 		// TODO Auto-generated method stub
+		if (index == 0)
+			return "#noname";
+
 		Object item = indices.get(index)[0];
 		if (item instanceof Number)
 			return attList.get(((Number)item).intValue()).getName();

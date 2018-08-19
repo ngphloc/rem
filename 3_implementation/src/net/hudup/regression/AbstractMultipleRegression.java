@@ -210,7 +210,7 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 			if (i > 0)
 				buffer.append(", ");
 			String text = this.regressions.get(i).parameterToShownText(element, info);
-			buffer.append("(" + text + ")");
+			buffer.append("{" + text + "}");
 		}
 		
 		return buffer.toString();
