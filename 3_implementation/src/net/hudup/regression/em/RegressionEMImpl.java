@@ -239,13 +239,39 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		List<double[]> zStatistic = ((LargeStatistics)currentStatistic).zData;
-		List<double[]> xStatistic = ((LargeStatistics)currentStatistic).xData;
-		if (zStatistic.size() == 0 || xStatistic.size() != zStatistic.size())
+		LargeStatistics stat = (LargeStatistics)currentStatistic;
+		if (stat.isEmpty())
 			return null;
+		List<double[]> zStatistic = stat.zData;
+		List<double[]> xStatistic = stat.xData;
+		int N = zStatistic.size();
 		ExchangedParameter currentParameter = (ExchangedParameter)getCurrentParameter();
 		
-		int N = zStatistic.size();
+		//Begin calculating prior parameter. It is not implemented in current version.
+		double zFactor = Constants.UNUSED;
+//		if (currentParameter != null) {
+//			double variance0 = stat.getZStatisticBiasedVariance();
+//			double mean0 = stat.getZStatisticMean();
+//			
+//			double ss = 0;
+//			double[] alpha = DSUtil.toDoubleArray(currentParameter.getVector());
+//			for (int i = 0; i < N; i++) {
+//				double[] xVector = xStatistic.get(i);
+//				double ev = ExchangedParameter.mean(alpha, xVector);
+//				double d = zStatistic.get(i)[1] - ev;
+//				ss += d*d;
+//			}
+//			double variance = ss / N;
+//			zFactor = variance0 - variance;
+//			
+//			for (int i = 0; i < N; i++) {
+//				double zValue = zStatistic.get(i)[1];
+//				double zValueNew = variance0*zValue - variance*mean0;
+//				zStatistic.get(i)[1] = zValueNew;
+//			}
+//		}
+//		//End calculating prior parameter
+		
 		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
 		if (alpha == null) { //If cannot calculate alpha by matrix calculation.
@@ -259,6 +285,13 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				}
 				alpha0 = alpha0 / (double)N; //constant function z = c
 				alpha.set(0, alpha0);
+			}
+		}
+		else if (Util.isUsed(zFactor)){
+			if (zFactor == 0)
+				zFactor = Double.MIN_VALUE;
+			for (int j = 0; j < alpha.size(); j++) {
+				alpha.set(j, alpha.get(j) / zFactor);
 			}
 		}
 		
@@ -295,16 +328,11 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			betas.add(beta);
 		}
 		
-		ExchangedParameter newParameter = null;
-		if (currentParameter == null)
-			newParameter = new ExchangedParameter(alpha, betas);
-		else {
-			newParameter = (ExchangedParameter)currentParameter.clone();
-			newParameter.setVector(alpha);
-			newParameter.setMatrix(betas);
-		}
+		double coeff0 = (currentParameter == null ? 1 : currentParameter.getCoeff()); 
+		double mean0 = stat.getZStatisticMean();
+		double variance0 = stat.getZStatisticBiasedVariance();
 		
-		return newParameter;
+		return new ExchangedParameter(alpha, betas, coeff0, mean0, variance0);
 	}
 	
 	
@@ -349,6 +377,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				xAdditionalMean = null;
 		}
 		//End preparing additional means. This code snippet is not important.
+		
 		
 		if (Util.isUsed(zValue)) {
 			zStatistic = zValue;
@@ -946,19 +975,19 @@ class ExchangedParameter {
 	/**
 	 * Probability associated with this component. This variable is not used for normal regression model.
 	 */
-	protected double coeff = Constants.UNUSED;
+	protected double coeff = 1;
 	
 	
 	/**
 	 * Mean associated with this component. This variable is not used for normal regression model.
 	 */
-	protected double mean = Constants.UNUSED;
+	protected double mean = 0;
 	
 	
 	/**
 	 * Variance associated with this component. This variable is not used for normal regression model.
 	 */
-	protected double variance = Constants.UNUSED;
+	protected double variance = 1;
 	
 	
 	/**
@@ -1211,7 +1240,24 @@ class ExchangedParameter {
 	 */
 	private static double normalPDF(double z, double mean, double variance) {
 		double d = z - mean;
+		if (variance == 0)
+			variance = variance + Double.MIN_VALUE; //Solving the problem of zero variance.
 		return (1.0 / Math.sqrt(2*Math.PI*variance)) * Math.exp(-(d*d) / (2*variance));
+	}
+	
+	
+	/**
+	 * Calculating the mean of specified coefficients and X variable (regressor).
+	 * @param alpha specified coefficients
+	 * @param xVector specified X variable (regressor).
+	 * @return the mean of specified coefficients and X variable (regressor).
+	 */
+	public static double mean(double[] alpha, double[] xVector) {
+		double mean = 0;
+		for (int i = 0; i < alpha.length; i++) {
+			mean += alpha[i] * xVector[i];
+		}
+		return mean;
 	}
 	
 	
@@ -1386,15 +1432,67 @@ class LargeStatistics {
 	 * Getting Z statistic.
 	 * @return Z statistic.
 	 */
-	public double[] getZStatistic() {
+	public List<Double> getZStatistic() {
 		if (isEmpty())
 			return null;
 		
-		double[] zVector = new double[zData.size()];
+		List<Double> zVector = Util.newList(zData.size());
 		for (int i = 0; i < zData.size(); i++)
-			zVector[i] = zData.get(i)[1];
+			zVector.add(zData.get(i)[1]);
 		
 		return zVector;
+	}
+
+	
+	/**
+	 * Getting mean of Z statistic.
+	 * @return mean Z statistic.
+	 */
+	public double getZStatisticMean() {
+		if (isEmpty())
+			return Constants.UNUSED;
+		
+		double sum = 0;
+		int count = 0;
+		for (int i = 0; i < zData.size(); i++) {
+			double value = zData.get(i)[1];
+			if (Util.isUsed(value)) {
+				sum += value;
+				count ++;
+			}
+		}
+		
+		if (count == 0)
+			return Constants.UNUSED;
+		else
+			return sum / (double)zData.size();
+	}
+
+	
+	/**
+	 * Getting biased variance of Z statistic.
+	 * @return biased variance of of Z statistic.
+	 */
+	public double getZStatisticBiasedVariance() {
+		double mean = getZStatisticMean();
+		if (!Util.isUsed(mean))
+			return Constants.UNUSED;
+		
+		double devSum = 0;
+		int count = 0;
+		for (int i = 0; i < zData.size(); i++) {
+			double value = zData.get(i)[1];
+			if (Util.isUsed(value)) {
+				double d = value - mean;
+				devSum += d*d;
+				count ++;
+			}
+		}
+		
+		if (count == 0)
+			return Constants.UNUSED;
+		else
+			return devSum / count;
 	}
 
 	
@@ -1408,11 +1506,11 @@ class LargeStatistics {
 			return null;
 		
 		double[] xStatistic = getXRowStatistic(row);
-		double[] zStatistic = getZStatistic();
-		if (xStatistic == null || zStatistic == null || xStatistic.length == 0 || zStatistic.length == 0)
+		List<Double> zStatistic = getZStatistic();
+		if (xStatistic == null || zStatistic == null || xStatistic.length == 0 || zStatistic.size() == 0)
 			return null;
 		else
-			return new Statistics(zStatistic[row], xStatistic);
+			return new Statistics(zStatistic.get(row), xStatistic);
 	}
 	
 	

@@ -34,6 +34,18 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 
 	
 	/**
+	 * Field name of mutual mode.
+	 */
+	protected final static String MUTUAL_MODE_FIELD = "mixrem_mutual_mode";
+	
+	
+	/**
+	 * Default mutual mode.
+	 */
+	protected final static boolean MUTUAL_MODE_DEFAULT = false;
+
+	
+	/**
 	 * List of internal regression model as parameter.
 	 */
 	protected List<RegressionEMImpl> rems = Util.newList();
@@ -54,7 +66,7 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 			return null;
 		}
 		
-		adjustMixtureParameters(parameters, (List<LargeStatistics>)this.getStatistics());
+		adjustMixtureParametersOne(parameters, (List<LargeStatistics>)this.getStatistics());
 		return parameters;
 	}
 	
@@ -93,12 +105,12 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 				indices.append(i);
 			}
 			indicesList.add(indices.toString());
-//			
-//			if (attList.size() > 2) {
-//				for (int i = 0; i < attList.size() - 1; i++) {
-//					indicesList.add(i + ", " + (attList.size() - 1));
-//				}
-//			}
+			
+			if (attList.size() > 2) {
+				for (int i = 0; i < attList.size() - 1; i++) {
+					indicesList.add(i + ", " + (attList.size() - 1));
+				}
+			}
 		}
 			
 		for (int i = 0; i < indicesList.size(); i++) {
@@ -170,30 +182,27 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 			return null;
 		}
 		
-		//Testing same-length Z statistics
-		int N = stats.get(0).zData.size();
-		for (LargeStatistics stat : stats) {
-			if (stat.zData.size() != N) {
-				logger.error("Response (Z) statistic of some regression model is not equal to " +  N);
-				return null;
+		//Supporting mutual mode. If there are two components, it is dual mode.
+		//Mutual mode is useful in some cases.
+		if (getConfig().getAsBoolean(MUTUAL_MODE_FIELD)) {
+			//Retrieving same-length Z statistics
+			int N = stats.get(0).getZStatistic().size();
+			for (LargeStatistics stat : stats) {
+				if (stat.zData.size() != N)
+					return null;
 			}
-		}
-		
-		//Estimating Z based on same-length Z statistics
-		double[] meanVector = new double[N]; //Z statistic
-		for (int i = 0; i < N; i++) {
-			double mean = 0;
-			for (int k = 0; k < stats.size(); k++) {
-				LargeStatistics stat = stats.get(k);
-				ExchangedParameter parameter = parameters.get(k);
-				
-				mean += parameter.getCoeff() * stat.zData.get(i)[1]; //Calculating mean Z according to mixture model.
+			
+			//Calculating average value of Z in mutual mode.
+			for (int i = 0; i < N; i++) {
+				double mean = 0;
+				for (int k = 0; k < stats.size(); k++) {
+					mean += parameters.get(k).getCoeff() * stats.get(k).getZStatisticMean(); 
+				}
+				for (int k = 0; k < stats.size(); k++) {
+					LargeStatistics stat = stats.get(k);
+					stat.zData.get(i)[1] = mean;
+				}
 			}
-			meanVector[i] = mean;
-		}
-		for (LargeStatistics stat : stats) {
-			for (int i = 0; i < N; i++)
-				stat.zData.get(i)[1] = meanVector[i]; 
 		}
 		
 		return stats;
@@ -231,15 +240,60 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 
 	
 	/**
-	 * Adjusting specified parameters based on specified statistics according to mixture model.
+	 * Adjusting specified parameters based on specified statistics according to mixture model in one iteration.
 	 * @param parametersInOut specified parameters. They are also output parameters.
 	 * @param stats specified statistics.
 	 * @return true if the adjustment process is successful.
 	 */
+	protected boolean adjustMixtureParametersOne(List<ExchangedParameter> parametersInOut, List<LargeStatistics> stats) {
+		if (parametersInOut == null || stats == null || parametersInOut.size() == 0 || stats.size() == 0 || parametersInOut.size() != stats.size())
+			return false;
+		
+		List<double[]> zData = this.rems.get(0).data.zData; //All models have the same original Z variables.
+		for (int k = 0; k < parametersInOut.size(); k++) {
+			ExchangedParameter parameter = parametersInOut.get(k);
+			double condProbSum = 0;
+			int N = 0;
+			for (int i = 0; i < zData.size(); i++) {
+				double zStatistic = zData.get(i)[1];
+				if (Util.isUsed(zStatistic)) {
+					double[] condProbs = condProbs(zStatistic, parametersInOut);
+					condProbSum += condProbs[k];
+					N++;
+				}
+			}
+			if (condProbSum == 0)
+				logger.warn("#adjustMixtureParameters: zero sum of conditional probabilities in " + k + "th model");
+			double coeff = condProbSum / (double)N;
+			parameter.setCoeff(coeff);
+		}
+		
+		return true;
+	}
+	
+	
+	/**
+	 * Adjusting specified parameters based on specified statistics according to mixture model.
+	 * This method is deprecated because coefficients, mean and variance of a regression model is already optimized by EM process.
+	 * It is over-fitting if continue to optimize by mixture process. However, mixture process is reduced into one iteration to estimate the probabilities of partial components.
+	 * Please see the method {@link #adjustMixtureParametersOne(List, List)}.
+	 * @param parametersInOut specified parameters. They are also output parameters.
+	 * @param stats specified statistics.
+	 * @return true if the adjustment process is successful.
+	 */
+	@Deprecated
 	protected boolean adjustMixtureParameters(List<ExchangedParameter> parametersInOut, List<LargeStatistics> stats) {
 		if (parametersInOut == null || stats == null || parametersInOut.size() == 0 || stats.size() == 0 || parametersInOut.size() != stats.size())
 			return false;
 		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
+		
+		for (int k = 0; k < parametersInOut.size(); k++) {
+			ExchangedParameter parameter = parametersInOut.get(k);
+			double mean = stats.get(k).getZStatisticMean();
+			double variance = stats.get(k).getZStatisticBiasedVariance();
+			parameter.setMean(mean);
+			parameter.setVariance(variance);
+		}
 		
 		boolean terminated = true;
 		int t = 0;
@@ -263,6 +317,8 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 					condProbSum += condProbs[k];
 					zSum += condProbs[k] * ZStatistic.get(i)[1];
 				}
+				if (condProbSum == 0)
+					logger.warn("#adjustMixtureParameters: zero sum of conditional probabilities in " + k + "th model");
 				
 				//Estimating coefficient
 				double coeff = condProbSum / (double)N;
@@ -272,7 +328,7 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 				parameter.setCoeff(coeff);
 				
 				//Estimating mean
-				double mean = zSum/condProbSum;
+				double mean = zSum / condProbSum;
 				if (Util.isUsed(parameter.getMean())
 						&& Math.abs(mean - parameter.getMean()) > threshold * Math.abs(parameter.getMean()))
 					terminated = terminated && false;
@@ -334,48 +390,18 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 			return null;
 		}
 		
-		List<Double> coeffs = Util.newList(parameters.size());
-		for (int k = 0; k < parameters.size(); k++) {
-			double coeff = (1.0 / (double)parameters.size());
-			coeffs.add(coeff);
-		}
-		
-		List<Double> means = Util.newList(parameters.size());
-		List<Double> variances = Util.newList(parameters.size());
-		for (int k = 0; k < parameters.size(); k++) {
-			List<double[]> zData = this.rems.get(k).getData().zData;
-			int N = zData.size();
-			
-			double zSum = 0;
-			double zCount = 0;
-			for (int i = 0; i < N; i++) {
-				double z = zData.get(i)[1];
-				if (Util.isUsed(z)) {
-					zSum += z;
-					zCount++;
-				}
-			}
-			double mean = (zCount != 0 ? zSum / (double)zCount : 0);
-			means.add(mean);
-			
-			double zDevSum = 0;
-			for (int i = 0; i < N; i++) {
-				double z = zData.get(i)[1];
-				if (Util.isUsed(z)) {
-					double d = z - mean;
-					zDevSum += d*d;
-				}
-			}
-			double variance = (zCount != 0 ? zDevSum / (double)zCount : 1.0);
-			variance = (variance == 0 ? 1 : variance);
-			variances.add(variance);
-		}
-		
 		for (int k = 0; k < parameters.size(); k++) {
 			ExchangedParameter parameter = parameters.get(k);
-			parameter.coeff = coeffs.get(k);
-			parameter.mean = means.get(k);
-			parameter.variance = variances.get(k);
+			LargeStatistics zData = this.rems.get(k).getData();
+			
+			double coeff = (1.0 / (double)parameters.size());
+			parameter.setCoeff(coeff);
+			
+			double mean = zData.getZStatisticMean();
+			parameter.setMean(mean);
+			
+			double variance = zData.getZStatisticBiasedVariance();
+			parameter.setVariance(variance);
 		}
 		
 		return parameters;
@@ -499,6 +525,7 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
 		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

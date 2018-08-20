@@ -18,6 +18,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		double value = ExchangedParameter.p(1.0, new double[] {2, 3}, new double[] {3, -2}, 1.0);
 		System.out.println(value);
+		System.out.println(1 / Double.MAX_VALUE);
 	}
 
 	
