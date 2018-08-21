@@ -46,6 +46,18 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 	
 	/**
+	 * Field name of mutual mode.
+	 */
+	protected final static String UNIFORM_MODE_FIELD = "mixrem_uniform_mode";
+	
+	
+	/**
+	 * Default mutual mode.
+	 */
+	protected final static boolean UNIFORM_MODE_DEFAULT = false;
+
+	
+	/**
 	 * List of internal regression model as parameter.
 	 */
 	protected List<RegressionEMImpl> rems = Util.newList();
@@ -66,7 +78,12 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			return null;
 		}
 		
-		adjustMixtureParametersOne(parameters, (List<LargeStatistics>)this.getStatistics());
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) { //In uniform mode, all coefficients are 1/K
+			for (RegressionEMImpl rem : this.rems)
+				rem.getExchangedParameter().setCoeff(1.0 / (double)this.rems.size());
+		}
+		else
+			adjustMixtureParametersOne(parameters, (List<LargeStatistics>)this.getStatistics());
 		return parameters;
 	}
 	
@@ -98,18 +115,21 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			if (attList.size() < 2)
 				return false;
 			
-			StringBuffer indices = new StringBuffer();
-			for (int i = 0; i < attList.size(); i++) {
-				if (i > 0)
-					indices.append(", ");
-				indices.append(i);
-			}
-			indicesList.add(indices.toString());
+//			StringBuffer indices = new StringBuffer();
+//			for (int i = 0; i < attList.size(); i++) {
+//				if (i > 0)
+//					indices.append(", ");
+//				indices.append(i);
+//			}
+//			indicesList.add(indices.toString());
+//			if (attList.size() > 2) {
+//				for (int i = 0; i < attList.size() - 1; i++) {
+//					indicesList.add(i + ", " + (attList.size() - 1));
+//				}
+//			}
 			
-			if (attList.size() > 2) {
-				for (int i = 0; i < attList.size() - 1; i++) {
-					indicesList.add(i + ", " + (attList.size() - 1));
-				}
+			for (int i = 0; i < attList.size() - 1; i++) {// For fair test
+				indicesList.add(i + ", " + (attList.size() - 1));
 			}
 		}
 			
@@ -530,6 +550,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 		DataConfig config = super.createDefaultConfig();
 		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
+		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

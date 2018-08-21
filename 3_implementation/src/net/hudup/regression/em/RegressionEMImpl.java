@@ -246,21 +246,19 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		
 		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
-		if (alpha == null) { //If cannot calculate alpha by matrix calculation.
+		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
 				alpha = DSUtil.toDoubleList(currentParameter.vector); //clone alpha
 			else { //Used for initialization so that regression model is always determined.
 				alpha = DSUtil.initDoubleList(n, 0.0);
 				double alpha0 = 0;
-				for (int i = 0; i < N; i++) {
+				for (int i = 0; i < N; i++)
 					alpha0 += zStatistic.get(i)[1];
-				}
-				alpha0 = alpha0 / (double)N; //constant function z = c
-				alpha.set(0, alpha0);
+				alpha.set(0, alpha0 / (double)N); //constant function z = c
 			}
 		}
 		
-		List<double[]> betas = Util.newList();
+		List<double[]> betas = Util.newList(n);
 		for (int j = 0; j < n; j++) {
 			if (j == 0) {
 				double[] beta0 = new double[2];
@@ -276,21 +274,19 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				Z.add(zStatistic.get(i));
 				x.add(xStatistic.get(i)[j]);
 			}
-			double[] beta = DSUtil.toDoubleArray(calcCoeffs(Z, x));
-			if (beta == null) {
-				if (currentParameter != null) {
-					beta = Arrays.copyOf(currentParameter.matrix.get(j),
-						currentParameter.matrix.get(j).length);
-				}
+			List<Double> beta = calcCoeffs(Z, x);
+			if (beta == null || beta.size() == 0) {
+				if (currentParameter != null)
+					beta = DSUtil.toDoubleList(currentParameter.matrix.get(j));
 				else { //Used for initialization so that regression model is always determined.
-					beta = new double[2];
-					beta[1] = 0;
+					beta = DSUtil.initDoubleList(2, 0);
+					double beta0 = 0;
 					for (int i = 0; i < N; i++)
-						beta[0] += xStatistic.get(i)[j];
-					beta[0] = beta[0] / (double)N; //constant function x = c
+						beta0 += xStatistic.get(i)[j];
+					beta.set(0, beta0 / (double)N); //constant function x = c
 				}
 			}
-			betas.add(beta);
+			betas.add(DSUtil.toDoubleArray(beta));
 		}
 		
 		double coeff = (currentParameter == null ? 1 : currentParameter.getCoeff()); 
@@ -473,6 +469,15 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				(ExchangedParameter)previousParameter);
 	}
 
+	
+	/**
+	 * Getting exchanged parameter. Actually, this method calls {@link #getParameter()}.
+	 * @return exchanged parameter.
+	 */
+	public ExchangedParameter getExchangedParameter() {
+		return (ExchangedParameter)getParameter();
+	}
+	
 	
 	@Override
 	public synchronized Object execute(Object input) {
