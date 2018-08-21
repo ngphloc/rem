@@ -19,4 +19,4 @@ set JAVA_CMD=java -cp %CLASSPATH%
 
 @echo on
 
-%JAVA_CMD% -Xmx1g net.hudup.Evaluator
+%JAVA_CMD% -Xmx1g net.hudup.regression.evaluate.RegressionEvaluator

@@ -24,7 +24,7 @@ import net.hudup.regression.Regression;
  * @version 1.0
  *
  */
-public class MixtureRegressionEM extends ExponentialEM implements Regression, DuplicatableAlg {
+public class SemiMixtureRegressionEM extends ExponentialEM implements Regression, DuplicatableAlg {
 
 	
 	/**
@@ -500,14 +500,14 @@ public class MixtureRegressionEM extends ExponentialEM implements Regression, Du
 		if (name != null && !name.isEmpty())
 			return name;
 		else
-			return "mixrem";
+			return "semi_mixrem";
 	}
 
 	
 	@Override
 	public Alg newInstance() {
 		// TODO Auto-generated method stub
-		MixtureRegressionEM mixREM = new MixtureRegressionEM();
+		SemiMixtureRegressionEM mixREM = new SemiMixtureRegressionEM();
 		mixREM.getConfig().putAll((DataConfig)this.getConfig().clone());
 		return mixREM;
 	}

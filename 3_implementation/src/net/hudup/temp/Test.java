@@ -1,5 +1,7 @@
 package net.hudup.temp;
 
+import net.hudup.regression.evaluate.RegressionEvaluator;
+
 /**
  * Test class.
  * 
@@ -14,11 +16,9 @@ public class Test {
 	 * Main method.
 	 * @param args argument parameter.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		double value = ExchangedParameter.p(1.0, new double[] {2, 3}, new double[] {3, -2}, 1.0);
-		System.out.println(value);
-		System.out.println(1 / Double.MAX_VALUE);
+		RegressionEvaluator.main(args);
 	}
 
 	
