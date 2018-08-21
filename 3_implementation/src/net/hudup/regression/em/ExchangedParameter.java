@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.AbstractAlg;
 import net.hudup.core.logistic.DSUtil;
@@ -193,68 +194,110 @@ public class ExchangedParameter {
 	
 	
 	/**
-	 * Testing the terminated condition between this parameter and other parameter.
-	 * @param otherParameter other specified parameter.
+	 * Testing whether the deviation between estimated value and current value is not satisfied a threshold.
+	 * @param estimatedValue estimated value.
+	 * @param currentValue current value.
+	 * @param threshold specified threshold.
+	 * @return true if the deviation between estimated value and current value is not satisfied a threshold.
+	 */
+	private boolean notSatisfy(double estimatedValue, double currentValue, double threshold) {
+		return Math.abs(estimatedValue - currentValue) > threshold * Math.abs(currentValue);
+	}
+	
+	
+	/**
+	 * Testing the terminated condition between this parameter (estimated parameter) and other parameter (current parameter).
 	 * @param threshold specified threshold
+	 * @param currentParameter other specified parameter (current parameter).
+	 * @param previousParameter previous parameter is used to avoid skip-steps in optimization for too acute function.
+	 * It also solve the over-fitting problem. Please pay attention to it.
 	 * @return true if the terminated condition is satisfied.
 	 */
-	protected boolean terminatedCondition(ExchangedParameter otherParameter, double threshold) {
+	public boolean terminatedCondition(double threshold, ExchangedParameter currentParameter, ExchangedParameter previousParameter) {
 		// TODO Auto-generated method stub
-		List<Double> alpha1 = this.getVector();
-		List<Double> alpha2 = otherParameter.getVector();
-		if (alpha1.size() != alpha2.size())
-			return false;
-		for (int i = 0; i < alpha1.size(); i++) {
-			if (Math.abs(alpha2.get(i) - alpha1.get(i)) > threshold * Math.abs(alpha1.get(i)))
-				return false;
-		}
-		
-		//It is possible not to test beta coefficients
-		List<double[]> betas1 = this.getMatrix();
-		List<double[]> betas2 = otherParameter.getMatrix();
-		if (betas1.size() != betas2.size())
-			return false;
-		for (int i = 0; i < betas1.size(); i++) {
-			double[]  beta1 = betas1.get(i);
-			double[]  beta2 = betas2.get(i);
-			if (beta1.length != beta2.length)
-				return false;
-			
-			for (int j = 0; j < beta1.length; j++) {
-				if (Math.abs(beta2[j] - beta1[j]) > threshold * Math.abs(beta1[j]))
-					return false;
+		List<Double> alpha1 = previousParameter != null ? previousParameter.getVector() : null;
+		List<Double> alpha2 = currentParameter.getVector();
+		List<Double> alpha3 = this.getVector();
+		if (alpha3 != null && alpha2 != null) {
+			for (int i = 0; i < alpha2.size(); i++) {
+				if (notSatisfy(alpha3.get(i), alpha2.get(i), threshold)) {
+					if (alpha1 == null)
+						return false;
+					else if (notSatisfy(alpha3.get(i), alpha1.get(i), threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+						return false;
+				}
 			}
 		}
+		else if(alpha3 != null || alpha2 != null)
+			return false;
+		
+		//It is possible not to test beta coefficients
+		List<double[]> betas1 = previousParameter != null ? previousParameter.getMatrix() : null;
+		List<double[]> betas2 = currentParameter.getMatrix();
+		List<double[]> betas3 = this.getMatrix();
+		if(betas3 != null && betas2 != null) {
+			for (int i = 0; i < betas2.size(); i++) {
+				double[]  beta1 = betas1 != null ? betas1.get(i) : null;  
+				double[]  beta2 = betas2.get(i);
+				double[]  beta3 = betas3.get(i);
+				
+				for (int j = 0; j < beta2.length; j++) {
+					if (notSatisfy(beta3[j], beta2[j], threshold)) {
+						if (beta1 == null)
+							return false;
+						else if (notSatisfy(beta3[j], beta1[j], threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+							return false;
+					}
+				}
+			}
+		}
+		else if(betas3 != null || betas2 != null)
+			return false;
 		//It is possible not to test beta coefficients
 
 		//Testing coefficient
-		double c1 = this.getCoeff();
-		double c2 = otherParameter.getCoeff();
-		if (Util.isUsed(c1) && Util.isUsed(c2)) {
-			if (Math.abs(c2 - c1) > threshold * Math.abs(c1))
-				return false;
+		double c1 = previousParameter != null ? previousParameter.getCoeff() : Constants.UNUSED;
+		double c2 = currentParameter.getCoeff();
+		double c3 = this.getCoeff();
+		if (Util.isUsed(c2) && Util.isUsed(c3)) {
+			if (notSatisfy(c3, c2, threshold)) {
+				if (!Util.isUsed(c1))
+					return false;
+				else if (notSatisfy(c3, c1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+					return false;
+			}
 		}
-		else if (Util.isUsed(c1) || Util.isUsed(c2))
+		else if (Util.isUsed(c3) || Util.isUsed(c2))
 			return false;
 		
 		//Testing mean
-		double mean1 = this.getMean();
-		double mean2 = otherParameter.getMean();
-		if (Util.isUsed(mean1) && Util.isUsed(mean2)) {
-			if (Math.abs(mean2 - mean1) > threshold * Math.abs(mean1))
-				return false;
+		double mean1 = previousParameter != null ? previousParameter.getMean() : Constants.UNUSED;
+		double mean2 = currentParameter.getMean();
+		double mean3 = this.getMean();
+		if (Util.isUsed(mean2) && Util.isUsed(mean3)) {
+			if (notSatisfy(mean3, mean2, threshold)) {
+				if (!Util.isUsed(mean1))
+					return false;
+				else if (notSatisfy(mean3, mean1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+					return false;
+			}
 		}
-		else if (Util.isUsed(mean1) || Util.isUsed(mean2))
+		else if (Util.isUsed(mean3) || Util.isUsed(mean2))
 			return false;
 
 		//Testing variance
-		double variance1 = this.getVariance();
-		double variance2 = otherParameter.getVariance();
-		if (Util.isUsed(variance1) && Util.isUsed(variance2)) {
-			if (Math.abs(variance2 - variance1) > threshold * Math.abs(variance1))
-				return false;
+		double variance1 = previousParameter != null ? previousParameter.getVariance() : Constants.UNUSED;
+		double variance2 = currentParameter.getVariance();
+		double variance3 = this.getVariance();
+		if (Util.isUsed(variance2) && Util.isUsed(variance3)) {
+			if (notSatisfy(variance3, variance2, threshold)) {
+				if (!Util.isUsed(variance1))
+					return false;
+				else if (notSatisfy(variance3, variance1, threshold))
+					return false;
+			}
 		}
-		else if (Util.isUsed(variance1) || Util.isUsed(variance2))
+		else if (Util.isUsed(variance3) || Util.isUsed(variance2))
 			return false;
 
 		return true;

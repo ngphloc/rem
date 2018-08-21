@@ -463,13 +463,14 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 
 	
 	@Override
-	protected boolean terminatedCondition(Object currentParameter, Object estimatedParameter, Object... info) {
+	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
-		ExchangedParameter parameter1 = ((ExchangedParameter)currentParameter);
-		ExchangedParameter parameter2 = ((ExchangedParameter)estimatedParameter);
 		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
 		
-		return parameter1.terminatedCondition(parameter2, threshold);
+		return ((ExchangedParameter)estimatedParameter).terminatedCondition(
+				threshold, 
+				(ExchangedParameter)currentParameter, 
+				(ExchangedParameter)previousParameter);
 	}
 
 	
@@ -613,11 +614,11 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			buffer.append(": ");
 		
 		if (Util.isUsed(c))
-			buffer.append("coeff=" + c);
+			buffer.append("coeff=" + MathUtil.format(c));
 		if (Util.isUsed(mean))
-			buffer.append(", mean=" + mean);
+			buffer.append(", mean=" + MathUtil.format(mean));
 		if (Util.isUsed(variance))
-			buffer.append(", variance=" + variance);
+			buffer.append(", variance=" + MathUtil.format(variance));
 			
 		return buffer.toString();
 	}

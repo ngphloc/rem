@@ -241,6 +241,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	
 	/**
 	 * Adjusting specified parameters based on specified statistics according to mixture model in one iteration.
+	 * This method does not need a loop because both mean and variance were optimized in REM process and so the probabilities of components will be optimized in only one time.
 	 * @param parametersInOut specified parameters. They are also output parameters.
 	 * @param stats specified statistics.
 	 * @return true if the adjustment process is successful.
@@ -409,23 +410,26 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 	
 	@Override
-	protected boolean terminatedCondition(Object currentParameter, Object estimatedParameter, Object... info) {
+	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> exEstimatedParameters = (List<ExchangedParameter>)estimatedParameter;
 		@SuppressWarnings("unchecked")
 		List<ExchangedParameter> exCurrentParameters = (List<ExchangedParameter>)currentParameter;
 		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> exEstimatedParameters = (List<ExchangedParameter>)estimatedParameter;
+		List<ExchangedParameter> exPreviousParameters = (List<ExchangedParameter>)previousParameter;
 
 		boolean terminated = true;
 		for (int i = 0; i < this.rems.size(); i++) {
 			RegressionEMImpl rem = this.rems.get(i);
-			ExchangedParameter exCurrentParameter = exCurrentParameters.get(i);
 			ExchangedParameter exEstimatedParameter = exEstimatedParameters.get(i);
+			ExchangedParameter exCurrentParameter = exCurrentParameters.get(i);
+			ExchangedParameter exPreviousParameter = exPreviousParameters != null ? exPreviousParameters.get(i) : null;
 			
-			if (rem == null || exCurrentParameter == null || exEstimatedParameter == null)
+			if (rem == null || exEstimatedParameter == null || exCurrentParameter == null)
 				continue;
 			
-			terminated = terminated && rem.terminatedCondition(exCurrentParameter, exEstimatedParameter, info);
+			terminated = terminated && rem.terminatedCondition(exEstimatedParameter, exCurrentParameter, exPreviousParameter, info);
 			if (!terminated)
 				return false;
 		}

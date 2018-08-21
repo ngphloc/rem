@@ -429,21 +429,23 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 
 	
 	@Override
-	protected boolean terminatedCondition(Object currentParameter, Object estimatedParameter, Object... info) {
+	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
-		ExchangedParameter[] exCurrentParameters = (ExchangedParameter[])currentParameter;
 		ExchangedParameter[] exEstimatedParameters = (ExchangedParameter[])estimatedParameter;
+		ExchangedParameter[] exCurrentParameters = (ExchangedParameter[])currentParameter;
+		ExchangedParameter[] exPreviousParameters = (ExchangedParameter[])previousParameter;
 
 		boolean terminated = true;
 		for (int i = 0; i < this.rems.size(); i++) {
 			RegressionEMImpl rem = this.rems.get(i);
-			ExchangedParameter exCurrentParameter = exCurrentParameters[i];
 			ExchangedParameter exEstimatedParameter = exEstimatedParameters[i];
+			ExchangedParameter exCurrentParameter = exCurrentParameters[i];
+			ExchangedParameter exPreviousParameter = exPreviousParameters[i];
 			
 			if (rem == null || exCurrentParameter == null || exEstimatedParameter == null)
 				continue;
 			
-			terminated = terminated && rem.terminatedCondition(exCurrentParameter, exEstimatedParameter, info);
+			terminated = terminated && rem.terminatedCondition(exEstimatedParameter, exCurrentParameter, exPreviousParameter, info);
 			if (!terminated)
 				return false;
 		}

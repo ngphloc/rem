@@ -612,7 +612,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 
 	
 	@Override
-	protected boolean terminatedCondition(Object currentParameter, Object estimatedParameter, Object... info) {
+	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
 		ExchangedParameter parameter1 = ((ExchangedParameter)currentParameter);
 		ExchangedParameter parameter2 = ((ExchangedParameter)estimatedParameter);
