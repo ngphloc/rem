@@ -1,0 +1,50 @@
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {weight = -6545.0043 + 107.2202*(bpd): coeff=0.2500, mean=2570.4386, variance=614296.8837}, {weight = -4907.7475 + 24.4188*(hc): coeff=0.2500, mean=2570.4386, variance=614296.8837}, {weight = -4482.4739 + 109.5088*(fl): coeff=0.2500, mean=2570.4386, variance=614296.8837}, {weight = -3342.2276 + 19.3187*(ac): coeff=0.2500, mean=2570.4386, variance=614296.8837}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 3) learned models: {weight = -6864.8001 + 110.9366*(bpd): coeff=0.2500, mean=2552.5146, variance=647534.2498}, {weight = -5221.3654 + 25.4388*(hc): coeff=0.2500, mean=2561.5044, variance=612932.3669}, {weight = -4641.6394 + 112.0667*(fl): coeff=0.2500, mean=2558.0892, variance=619740.4321}, {weight = -3512.4913 + 19.8217*(ac): coeff=0.2500, mean=2538.8772, variance=655421.7978}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 5) learned models: {weight = -7330.1501 + 116.5081*(bpd): coeff=0.2500, mean=2456.7968, variance=851756.3315}, {weight = -5857.7986 + 27.5208*(hc): coeff=0.2500, mean=2513.4006, variance=745987.2167}, {weight = -5042.3872 + 118.0455*(fl): coeff=0.2500, mean=2475.2003, variance=796875.1397}, {weight = -3809.8050 + 20.8136*(ac): coeff=0.2500, mean=2449.9488, variance=872037.0281}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 6) learned models: {weight = -7657.9595 + 120.2503*(bpd): coeff=0.2500, mean=2288.5746, variance=1155285.2210}, {weight = -6658.7892 + 30.0695*(hc): coeff=0.2500, mean=2341.5965, variance=1024235.4337}, {weight = -5284.0796 + 121.5846*(fl): coeff=0.2500, mean=2367.9912, variance=1002516.2865}, {weight = -3920.2003 + 21.1794*(ac): coeff=0.2500, mean=2244.4854, variance=1211324.0246}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 5) learned models: {weight = -8047.7558 + 124.6997*(bpd): coeff=0.2500, mean=2128.5643, variance=1384584.1464}, {weight = -6835.3853 + 30.4549*(hc): coeff=0.2500, mean=2169.8670, variance=1269758.2469}, {weight = -5576.6647 + 126.4104*(fl): coeff=0.2500, mean=2141.9211, variance=1395853.3096}, {weight = -4098.3326 + 21.7578*(ac): coeff=0.2500, mean=2161.6199, variance=1337252.0017}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 6) learned models: {weight = -8587.4822 + 131.0776*(bpd): coeff=0.2500, mean=1970.4181, variance=1665468.7930}, {weight = -7388.1586 + 32.2668*(hc): coeff=0.2500, mean=1972.5599, variance=1619597.2289}, {weight = -5617.2580 + 126.9195*(fl): coeff=0.2500, mean=1916.3801, variance=1697886.4695}, {weight = -4542.9750 + 23.0697*(ac): coeff=0.2500, mean=1883.4240, variance=1714592.8553}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 5) learned models: {weight = -8260.6944 + 127.4388*(bpd): coeff=0.2500, mean=1689.0877, variance=1904409.8052}, {weight = -6790.0817 + 30.5260*(hc): coeff=0.2500, mean=1655.4649, variance=1930278.2488}, {weight = -5974.9739 + 132.1854*(fl): coeff=0.2500, mean=1722.8173, variance=1821116.9622}, {weight = -4462.2589 + 22.8753*(ac): coeff=0.2500, mean=1644.1140, variance=1923392.3788}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 4) learned models: {weight = -7921.3530 + 123.1045*(bpd): coeff=0.2500, mean=1264.1243, variance=1944763.7170}, {weight = -7882.8300 + 33.9096*(hc): coeff=0.2500, mean=1269.4371, variance=1903641.9098}, {weight = -5212.3817 + 120.8628*(fl): coeff=0.2500, mean=1350.9810, variance=1954823.7146}, {weight = -3663.2362 + 20.3069*(ac): coeff=0.2500, mean=1204.0088, variance=1858125.7865}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 4) learned models: {weight = -8184.5541 + 127.7841*(bpd): coeff=0.2500, mean=953.8012, variance=1804284.4429}, {weight = -6256.0482 + 28.7789*(hc): coeff=0.2500, mean=1004.8947, variance=1784344.9480}, {weight = -4457.6881 + 108.8343*(fl): coeff=0.2500, mean=888.0278, variance=1657685.6878}, {weight = -5076.6028 + 24.7974*(ac): coeff=0.2500, mean=984.5804, variance=1824240.7494}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 12) learned models: {weight = -11827.8951 + 171.9274*(bpd): coeff=0.2500, mean=596.4942, variance=1540375.1944}, {weight = -14959.5101 + 54.2205*(hc): coeff=0.2500, mean=436.6126, variance=1062670.5794}, {weight = -9340.8556 + 184.2749*(fl): coeff=0.2500, mean=437.2749, variance=1112149.3250}, {weight = -4502.3080 + 23.1752*(ac): coeff=0.2500, mean=477.6418, variance=1169292.0632}
+
+
+
