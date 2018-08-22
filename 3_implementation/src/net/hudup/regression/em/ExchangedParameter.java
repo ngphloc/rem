@@ -1,5 +1,7 @@
 package net.hudup.regression.em;
 
+import static net.hudup.regression.AbstractRegression.notSatisfy;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,8 +9,8 @@ import org.apache.log4j.Logger;
 
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
-import net.hudup.core.alg.AbstractAlg;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.core.logistic.MathUtil;
 
 /**
  * This class represents the exchanged parameter for this REM algorithm.
@@ -21,39 +23,27 @@ public class ExchangedParameter {
 	/**
 	 * Logger of this class.
 	 */
-	protected final static Logger logger = Logger.getLogger(AbstractAlg.class);
+	protected final static Logger logger = Logger.getLogger(ExchangedParameter.class);
 
 	
 	/**
-	 * Vector parameter. As usual, it is alpha coefficients for Z statistics.
+	 * Alpha coefficients for Z statistics.
 	 */
-	protected List<Double> vector = null;
+	protected List<Double> alpha = null;
 	
 	
 	/**
-	 * Matrix parameter represents beta coefficients for X statistics.
+	 * Beta coefficients for X statistics as matrix.
 	 * Each row of the matrix a a list of two beta coefficients for a regressor.
 	 * As a convent, regression 1 also has a list of two beta coefficients.
 	 */
-	protected List<double[]> matrix = null; 
+	protected List<double[]> betas = null; 
 	
 	
 	/**
-	 * Probability associated with this component. This variable is not used for normal regression model.
+	 * Additional information for Z statistics.
 	 */
-	protected double coeff = 1;
-	
-	
-	/**
-	 * Mean associated with this component. This variable is not used for normal regression model.
-	 */
-	protected double mean = 0;
-	
-	
-	/**
-	 * Variance associated with this component. This variable is not used for normal regression model.
-	 */
-	protected double variance = 1;
+	protected ExchangedParameterInfo zInfo = null;
 	
 	
 	/**
@@ -65,146 +55,123 @@ public class ExchangedParameter {
 	
 	
 	/**
-	 * Constructor with specified vector and matrix.
-	 * @param vector specified vector. It must be not null but can be zero-length.
-	 * @param matrix specified matrix. It must be not null but can be zero-length.
+	 * Constructor with specified alpha and betas.
+	 * @param alpha specified alpha. It must be not null.
+	 * @param betas specified betas. It must be not null.
 	 */
-	public ExchangedParameter(List<Double> vector, List<double[]> matrix) {
-		this.vector = vector;
-		this.matrix = matrix;
-	}
-	
-	
-	/**
-	 * Constructor with specified vector, matrix, component probability, mean, and variance.
-	 * @param vector specified vector. It must be not null but can be zero-length.
-	 * @param matrix specified matrix. It must be not null but can be zero-length.
-	 * @param coeff specified coefficient.
-	 * @param mean specified mean.
-	 * @param variance specified variance.
-	 */
-	public ExchangedParameter(List<Double> vector, List<double[]> matrix, double coeff, double mean, double variance) {
-		this.vector = vector;
-		this.matrix = matrix;
-		this.coeff = coeff;
-		this.mean = mean;
-		this.variance = variance;
+	public ExchangedParameter(List<Double> alpha, List<double[]> betas) {
+		this.alpha = alpha;
+		this.betas = betas;
+		this.zInfo = new ExchangedParameterInfo();
 	}
 
+	
+	/**
+	 * Constructor with specified alpha, betas, and Z additional information.
+	 * @param alpha specified alpha. It must be not null.
+	 * @param betas specified betas. It must be not null.
+	 * @param zInfo Additional information for Z statistic.
+	 */
+	public ExchangedParameter(List<Double> alpha, List<double[]> betas, ExchangedParameterInfo zInfo) {
+		this.alpha = alpha;
+		this.betas = betas;
+		this.zInfo = zInfo;
+	}
+	
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		ExchangedParameter newParameter = new ExchangedParameter();
-		newParameter.vector = (this.vector != null ? DSUtil.toDoubleList(this.vector) : null);
+		newParameter.alpha = (this.alpha != null ? DSUtil.toDoubleList(this.alpha) : null);
 		
-		if (this.matrix != null) {
-			newParameter.matrix = Util.newList(this.matrix.size());
-			for (double[] array : this.matrix) {
-				newParameter.matrix.add(Arrays.copyOf(array, array.length));
+		if (this.betas != null) {
+			newParameter.betas = Util.newList(this.betas.size());
+			for (double[] array : this.betas) {
+				newParameter.betas.add(Arrays.copyOf(array, array.length));
 			}
 		}
 		
-		newParameter.coeff = this.coeff;
-		newParameter.mean = this.mean;
-		newParameter.variance = this.variance;
-		
+		newParameter.zInfo = (ExchangedParameterInfo)this.zInfo.clone();
 		return newParameter;
 	}
 
+	
 	/**
-	 * Getting vector parameter.
-	 * @return vector parameter.
+	 * Getting alpha parameter.
+	 * @return alpha parameter.
 	 */
-	public List<Double> getVector() {
-		return vector;
+	public List<Double> getAlpha() {
+		return alpha;
 	}
 	
 	
 	/**
-	 * Setting vector parameter.
-	 * @param vector specified parameter.
+	 * Setting alpha parameter.
+	 * @param alpha specified parameter.
 	 */
-	public void setVector(List<Double> vector) {
-		this.vector = vector;
-	}
-
-	
-	/**
-	 * Getting matrix.
-	 * @return matrix.
-	 */
-	public List<double[]> getMatrix() {
-		return matrix;
-	}
-	
-	
-	/**
-	 * Setting matrix parameter.
-	 * @param matrix specified parameter.
-	 */
-	public void setMatrix(List<double[]> matrix) {
-		this.matrix = matrix;
+	public void setAlpha(List<Double> alpha) {
+		this.alpha = alpha;
 	}
 
 	
 	/**
-	 * Getting coefficient.
-	 * @return coefficient.
+	 * Getting betas.
+	 * @return betas.
 	 */
-	public double getCoeff() {
-		return coeff;
+	public List<double[]> getBetas() {
+		return betas;
 	}
 	
 	
 	/**
-	 * Setting coefficient.
-	 * @param coeff specified coefficient.
+	 * Setting betas parameter.
+	 * @param betas specified betas.
 	 */
-	public void setCoeff(double coeff) {
-		this.coeff = coeff;
+	public void setBetas(List<double[]> betas) {
+		this.betas = betas;
 	}
 
-	
 	/**
-	 * Getting associated probability of component.
-	 * @return associated probability of component.
+	 * Getting Z additional information.
+	 * @return Z additional information.
 	 */
-	public double getMean() {
-		return mean;
+	public ExchangedParameterInfo getZInfo() {
+		return zInfo;
 	}
 	
 	
 	/**
-	 * Setting associated mean.
-	 * @param mean specified mean.
+	 * Setting Z additional information.
+	 * @param zInfo specified Z additional information.
 	 */
-	public void setMean(double mean) {
-		this.mean = mean;
+	public void setZInfo(ExchangedParameterInfo zInfo) {
+		this.zInfo = zInfo;
+	}
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		StringBuffer buffer = new StringBuffer();
+		if (this.alpha != null) {
+			for (int j = 0; j < this.alpha.size(); j++) {
+				if (j > 0)
+					buffer.append(", ");
+				buffer.append(MathUtil.format(this.alpha.get(j)));
+			}
+		}
+		
+		if (this.zInfo != null) {
+			if (buffer.length() > 0)
+				buffer.append(": ");
+			buffer.append(this.zInfo.toString());
+		}
+		
+		return buffer.toString();
 	}
 
-	
-	/**
-	 * Getting associated variance of component.
-	 * @return associated variance of component.
-	 */
-	public double getVariance() {
-		return variance;
-	}
-	
-	
-	/**
-	 * Testing whether the deviation between estimated value and current value is not satisfied a threshold.
-	 * @param estimatedValue estimated value.
-	 * @param currentValue current value.
-	 * @param threshold specified threshold.
-	 * @return true if the deviation between estimated value and current value is not satisfied a threshold.
-	 */
-	private boolean notSatisfy(double estimatedValue, double currentValue, double threshold) {
-		return Math.abs(estimatedValue - currentValue) > threshold * Math.abs(currentValue);
-	}
-	
-	
+
 	/**
 	 * Testing the terminated condition between this parameter (estimated parameter) and other parameter (current parameter).
 	 * @param threshold specified threshold
@@ -215,9 +182,9 @@ public class ExchangedParameter {
 	 */
 	public boolean terminatedCondition(double threshold, ExchangedParameter currentParameter, ExchangedParameter previousParameter) {
 		// TODO Auto-generated method stub
-		List<Double> alpha1 = previousParameter != null ? previousParameter.getVector() : null;
-		List<Double> alpha2 = currentParameter.getVector();
-		List<Double> alpha3 = this.getVector();
+		List<Double> alpha1 = previousParameter != null ? previousParameter.getAlpha() : null;
+		List<Double> alpha2 = currentParameter.getAlpha();
+		List<Double> alpha3 = this.getAlpha();
 		if (alpha3 != null && alpha2 != null) {
 			for (int i = 0; i < alpha2.size(); i++) {
 				if (notSatisfy(alpha3.get(i), alpha2.get(i), threshold)) {
@@ -232,9 +199,9 @@ public class ExchangedParameter {
 			return false;
 		
 		//It is possible not to test beta coefficients
-		List<double[]> betas1 = previousParameter != null ? previousParameter.getMatrix() : null;
-		List<double[]> betas2 = currentParameter.getMatrix();
-		List<double[]> betas3 = this.getMatrix();
+		List<double[]> betas1 = previousParameter != null ? previousParameter.getBetas() : null;
+		List<double[]> betas2 = currentParameter.getBetas();
+		List<double[]> betas3 = this.getBetas();
 		if(betas3 != null && betas2 != null) {
 			for (int i = 0; i < betas2.size(); i++) {
 				double[]  beta1 = betas1 != null ? betas1.get(i) : null;  
@@ -255,106 +222,13 @@ public class ExchangedParameter {
 			return false;
 		//It is possible not to test beta coefficients
 
-		//Testing coefficient
-		double c1 = previousParameter != null ? previousParameter.getCoeff() : Constants.UNUSED;
-		double c2 = currentParameter.getCoeff();
-		double c3 = this.getCoeff();
-		if (Util.isUsed(c2) && Util.isUsed(c3)) {
-			if (notSatisfy(c3, c2, threshold)) {
-				if (!Util.isUsed(c1))
-					return false;
-				else if (notSatisfy(c3, c1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-					return false;
-			}
-		}
-		else if (Util.isUsed(c3) || Util.isUsed(c2))
-			return false;
-		
-		//Testing mean
-		double mean1 = previousParameter != null ? previousParameter.getMean() : Constants.UNUSED;
-		double mean2 = currentParameter.getMean();
-		double mean3 = this.getMean();
-		if (Util.isUsed(mean2) && Util.isUsed(mean3)) {
-			if (notSatisfy(mean3, mean2, threshold)) {
-				if (!Util.isUsed(mean1))
-					return false;
-				else if (notSatisfy(mean3, mean1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-					return false;
-			}
-		}
-		else if (Util.isUsed(mean3) || Util.isUsed(mean2))
-			return false;
-
-		//Testing variance
-		double variance1 = previousParameter != null ? previousParameter.getVariance() : Constants.UNUSED;
-		double variance2 = currentParameter.getVariance();
-		double variance3 = this.getVariance();
-		if (Util.isUsed(variance2) && Util.isUsed(variance3)) {
-			if (notSatisfy(variance3, variance2, threshold)) {
-				if (!Util.isUsed(variance1))
-					return false;
-				else if (notSatisfy(variance3, variance1, threshold))
-					return false;
-			}
-		}
-		else if (Util.isUsed(variance3) || Util.isUsed(variance2))
-			return false;
-
-		return true;
-	}
-
-	
-	/**
-	 * Setting associated variance.
-	 * @param mean specified variance.
-	 */
-	public void setVariance(double variance) {
-		this.variance = variance;
-	}
-
-
-	/**
-	 * Getting coefficients from specified list of parameters.
-	 * @param parameters specified list of parameters.
-	 * @return coefficients from specified list of parameters.
-	 */
-	public static double[] getCoeffs(ExchangedParameter...parameters) {
-		double[] coeffs = new double[parameters.length];
-		for (int i = 0; i < parameters.length; i++) {
-			coeffs[i] = parameters[i].getCoeff();
-		}
-		
-		return coeffs;
-	}
-	
-	
-	/**
-	 * Getting means from specified list of parameters.
-	 * @param parameters specified list of parameters.
-	 * @return means from specified list of parameters.
-	 */
-	public static double[] getMeans(ExchangedParameter...parameters) {
-		double[] means = new double[parameters.length];
-		for (int i = 0; i < parameters.length; i++) {
-			means[i] = parameters[i].getMean();
-		}
-		
-		return means;
-	}
-
-	
-	/**
-	 * Getting variances from specified list of parameters.
-	 * @param parameters specified list of parameters.
-	 * @return variances from specified list of parameters.
-	 */
-	public static double[] getVariances(ExchangedParameter...parameters) {
-		double[] variances = new double[parameters.length];
-		for (int i = 0; i < parameters.length; i++) {
-			variances[i] = parameters[i].getVariance();
-		}
-		
-		return variances;
+		if (this.zInfo == null)
+			return true;
+		else
+			return this.zInfo.terminatedCondition(
+				threshold,
+				currentParameter.zInfo,
+				previousParameter != null ? previousParameter.zInfo : null);
 	}
 
 	
@@ -364,72 +238,28 @@ public class ExchangedParameter {
 	 * @param parameters arrays of parameters.
 	 * @return condition probabilities of the specified parameters given response value (Z).
 	 */
-	public static double[] normalCondProbs(double z, ExchangedParameter...parameters) {
-		double[] coeffs = getCoeffs(parameters); 
-		double[] means = getMeans(parameters);
-		double[] variances = getVariances(parameters);
-		
-		return normalCondProbs(z, coeffs, means, variances);
+	public static double[] normalZCondProbs(double z, ExchangedParameter...parameters) {
+		double[] coeffs = new double[parameters.length];
+		double[] means = new double[parameters.length];
+		double[] variances = new double[parameters.length];
+		for (int i = 0; i < parameters.length; i++) {
+			coeffs[i] = parameters[i].zInfo.getCoeff();
+			means[i] = parameters[i].zInfo.getMean();
+			variances[i] = parameters[i].zInfo.getVariance();
+		}
+
+		return ExchangedParameterInfo.normalCondProbs(z, coeffs, means, variances);
 	}
 
 	
-	/**
-	 * Calculating the condition probabilities given response value (Z), mean, and variance.
-	 * @param z given response value (Z).
-	 * @param coeffs array of coefficients.
-	 * @param means given means.
-	 * @param variances given variances.
-	 * @return condition probabilities given response value (Z), means, and variances. 
-	 */
-	private static double[] normalCondProbs(double z, double[] coeffs, double[] means, double[] variances) {
-		double[] numerators = new double[coeffs.length];
-		double denominator = 0;
-		
-		for (int i = 0; i < coeffs.length; i++) {
-			double p = normalPDF(z, means[i], variances[i]);
-			double value = coeffs[i] * p;
-			
-			denominator += value;
-			numerators[i] = value;
-		}
-		
-		double[] condProbs = new double[coeffs.length];
-		for (int i = 0; i < coeffs.length; i++) {
-			if (denominator == 0) {
-				condProbs[i] = 1.0 / coeffs.length;
-				logger.warn("Reset uniform conditional probability of component due to zero denominator");
-			}
-			else
-				condProbs[i] = numerators[i] / denominator;
-		}
-		
-		return condProbs; 
-	}
-
 	
 	/**
-	 * Evaluating the normal probability density function with specified mean and variance.
-	 * Inherited class can re-defined this density function.
-	 * @param z specified response value z.
-	 * @param mean specified mean.
-	 * @param variance specified variance.
-	 * @return value evaluated from the normal probability density function.
-	 */
-	private static double normalPDF(double z, double mean, double variance) {
-		double d = z - mean;
-		if (variance == 0)
-			variance = variance + Double.MIN_VALUE; //Solving the problem of zero variance.
-		return (1.0 / Math.sqrt(2*Math.PI*variance)) * Math.exp(-(d*d) / (2*variance));
-	}
-	
-	
-	/**
-	 * Calculating the mean of specified coefficients and X variable (regressor).
+	 * Calculating the scalar product of specified coefficients and X variable (regressor).
 	 * @param alpha specified coefficients
 	 * @param xVector specified X variable (regressor).
-	 * @return the mean of specified coefficients and X variable (regressor).
+	 * @return the scalar product of specified coefficients and X variable (regressor).
 	 */
-	public static double mean(double[] alpha, double[] xVector) {
+	public static double product(double[] alpha, double[] xVector) {
 		double mean = 0;
 		for (int i = 0; i < alpha.length; i++) {
 			mean += alpha[i] * xVector[i];
@@ -437,5 +267,263 @@ public class ExchangedParameter {
 		return mean;
 	}
 	
-	
+
+	/**
+	 * This class represents additional information to learn parameter.
+	 * @author Loc Nguyen
+	 * @version 1.0
+	 *
+	 */
+	public static class ExchangedParameterInfo {
+
+		/**
+		 * Logger of this class.
+		 */
+		protected final static Logger logger = Logger.getLogger(ExchangedParameterInfo.class);
+
+		/**
+		 * Probability associated with this component.
+		 */
+		protected double coeff = 1;
+		
+		/**
+		 * Mean associated with this component.
+		 */
+		protected double mean = 0;
+		
+		/**
+		 * Variance associated with this component.
+		 */
+		protected double variance = 1;
+		
+		/**
+		 * Indicator to learning requirement.
+		 */
+		protected boolean requiredLearning = true;
+		
+		/**
+		 * Default constructor.
+		 */
+		public ExchangedParameterInfo() {
+			
+		}
+		
+		/**
+		 * Constructor with specified component probability, mean, and variance.
+		 * @param coeff specified coefficient.
+		 * @param mean specified mean.
+		 * @param variance specified variance.
+		 */
+		public ExchangedParameterInfo(double coeff, double mean, double variance) {
+			this.coeff = coeff;
+			this.mean = mean;
+			this.variance = variance;
+		}
+		
+		/**
+		 * Getting coefficient.
+		 * @return coefficient.
+		 */
+		public double getCoeff() {
+			return coeff;
+		}
+		
+		/**
+		 * Setting coefficient.
+		 * @param coeff specified coefficient.
+		 */
+		public void setCoeff(double coeff) {
+			this.coeff = coeff;
+		}
+
+		/**
+		 * Getting associated probability of component.
+		 * @return associated probability of component.
+		 */
+		public double getMean() {
+			return mean;
+		}
+		
+		/**
+		 * Setting associated mean.
+		 * @param mean specified mean.
+		 */
+		public void setMean(double mean) {
+			this.mean = mean;
+		}
+
+		/**
+		 * Getting associated variance of component.
+		 * @return associated variance of component.
+		 */
+		public double getVariance() {
+			return variance;
+		}
+		
+		/**
+		 * Setting associated variance.
+		 * @param mean specified variance.
+		 */
+		public void setVariance(double variance) {
+			this.variance = variance;
+		}
+
+		/**
+		 * Getting indicator of learning requirement.
+		 * @return true if learning is required.
+		 */
+		public boolean isRequiredLearning() {
+			return requiredLearning;
+		}
+		
+		/**
+		 * Setting indicator of learning requirement.
+		 * @param requiredLearning specified indicator of learning requirement.
+		 */
+		public void setRequiredLearning(boolean requiredLearning) {
+			this.requiredLearning = requiredLearning;
+		}
+		
+		/**
+		 * Learning this additional information from large statistics.
+		 * @param stat large statistics.
+		 */
+		public void learn(LargeStatistics stat) {
+			this.mean = stat.getZStatisticMean();
+			this.variance = stat.getZStatisticBiasedVariance();
+		}
+		
+		@Override
+		public Object clone() throws CloneNotSupportedException {
+			// TODO Auto-generated method stub
+			ExchangedParameterInfo newInfo = new ExchangedParameterInfo(this.coeff, this.mean, this.variance);
+			newInfo.requiredLearning = this.requiredLearning;
+			return newInfo;
+		}
+
+		/**
+		 * Testing the terminated condition between this additional information (estimated additional information) and other additional information (current additional information).
+		 * @param threshold specified threshold
+		 * @param currentInfo other specified additional information (current additional information).
+		 * @param previousInfo previous additional information is used to avoid skip-steps in optimization for too acute function.
+		 * It also solve the over-fitting problem. Please pay attention to it.
+		 * @return true if the terminated condition is satisfied.
+		 */
+		public boolean terminatedCondition(double threshold, ExchangedParameterInfo currentInfo, ExchangedParameterInfo previousInfo) {
+			//Testing coefficient
+			double c1 = previousInfo != null ? previousInfo.getCoeff() : Constants.UNUSED;
+			double c2 = currentInfo.getCoeff();
+			double c3 = this.getCoeff();
+			if (Util.isUsed(c2) && Util.isUsed(c3)) {
+				if (notSatisfy(c3, c2, threshold)) {
+					if (!Util.isUsed(c1))
+						return false;
+					else if (notSatisfy(c3, c1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+						return false;
+				}
+			}
+			else if (Util.isUsed(c3) || Util.isUsed(c2))
+				return false;
+			
+			//Testing mean
+			double mean1 = previousInfo != null ? previousInfo.getMean() : Constants.UNUSED;
+			double mean2 = currentInfo.getMean();
+			double mean3 = this.getMean();
+			if (Util.isUsed(mean2) && Util.isUsed(mean3)) {
+				if (notSatisfy(mean3, mean2, threshold)) {
+					if (!Util.isUsed(mean1))
+						return false;
+					else if (notSatisfy(mean3, mean1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+						return false;
+				}
+			}
+			else if (Util.isUsed(mean3) || Util.isUsed(mean2))
+				return false;
+
+			//Testing variance
+			double variance1 = previousInfo != null ? previousInfo.getVariance() : Constants.UNUSED;
+			double variance2 = currentInfo.getVariance();
+			double variance3 = this.getVariance();
+			if (Util.isUsed(variance2) && Util.isUsed(variance3)) {
+				if (notSatisfy(variance3, variance2, threshold)) {
+					if (!Util.isUsed(variance1))
+						return false;
+					else if (notSatisfy(variance3, variance1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+						return false;
+				}
+			}
+			else if (Util.isUsed(variance3) || Util.isUsed(variance2))
+				return false;
+
+			return true;
+			
+		}
+		
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("coeff=" + MathUtil.format(coeff));
+			buffer.append(", mean=" + MathUtil.format(mean));
+			buffer.append(", variance=" + MathUtil.format(variance));
+			
+			return buffer.toString();
+		}
+
+		
+		/**
+		 * Calculating the condition probabilities given value, mean, and variance.
+		 * @param value given value.
+		 * @param coeffs array of coefficients.
+		 * @param means given means.
+		 * @param variances given variances.
+		 * @return condition probabilities given value, means, and variances. 
+		 */
+		public static double[] normalCondProbs(double value, double[] coeffs, double[] means, double[] variances) {
+			double[] numerators = new double[coeffs.length];
+			double denominator = 0;
+			
+			for (int i = 0; i < coeffs.length; i++) {
+				double p = normalPDF(value, means[i], variances[i]);
+				double product = coeffs[i] * p;
+				
+				denominator += product;
+				numerators[i] = product;
+			}
+			
+			double[] condProbs = new double[coeffs.length];
+			for (int i = 0; i < coeffs.length; i++) {
+				if (denominator == 0) {
+					condProbs[i] = 1.0 / coeffs.length;
+					logger.warn("Reset uniform conditional probability of component due to zero denominator");
+				}
+				else
+					condProbs[i] = numerators[i] / denominator;
+			}
+			
+			return condProbs; 
+		}
+
+		/**
+		 * Evaluating the normal probability density function with specified mean and variance.
+		 * Inherited class can re-defined this density function.
+		 * @param value specified response value z.
+		 * @param mean specified mean.
+		 * @param variance specified variance.
+		 * @return value evaluated from the normal probability density function.
+		 */
+		private static double normalPDF(double value, double mean, double variance) {
+			double d = value - mean;
+			if (variance == 0)
+				variance = variance + Double.MIN_VALUE; //Solving the problem of zero variance.
+			return (1.0 / Math.sqrt(2*Math.PI*variance)) * Math.exp(-(d*d) / (2*variance));
+		}
+		
+	}
+
+
 }
+
+
+
+

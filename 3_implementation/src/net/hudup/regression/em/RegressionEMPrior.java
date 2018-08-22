@@ -9,6 +9,7 @@ import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.NextUpdate;
+import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm.
@@ -97,17 +98,17 @@ public class RegressionEMPrior extends RegressionEMImpl {
 		if (currentParameter != null) {
 			double variance0 = getConfig().getAsReal(VARIANCE0_FIELD);
 			if (!Util.isUsed(variance0))
-				variance0 = currentParameter.getVariance();
+				variance0 = currentParameter.getZInfo().getVariance();
 			
 			double mean0 = getConfig().getAsReal(MEAN0_FIELD);
 			if (!Util.isUsed(mean0))
-				mean0 = currentParameter.getMean();
+				mean0 = currentParameter.getZInfo().getMean();
 			
 			double variance = 0;
-			double[] alpha = DSUtil.toDoubleArray(currentParameter.getVector());
+			double[] alpha = DSUtil.toDoubleArray(currentParameter.getAlpha());
 			for (int i = 0; i < N; i++) {
 				double[] xVector = xStatistic.get(i);
-				double d = zStatistic.get(i)[1] - ExchangedParameter.mean(alpha, xVector);
+				double d = zStatistic.get(i)[1] - ExchangedParameter.product(alpha, xVector);
 				variance += d*d;
 			}
 			variance = variance / (double)N;
@@ -127,7 +128,7 @@ public class RegressionEMPrior extends RegressionEMImpl {
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
 		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
-				alpha = DSUtil.toDoubleList(currentParameter.vector); //clone alpha
+				alpha = DSUtil.toDoubleList(currentParameter.alpha); //clone alpha
 			else { //Used for initialization so that regression model is always determined.
 				alpha = DSUtil.initDoubleList(n, 0.0);
 				double alpha0 = 0;
@@ -163,7 +164,7 @@ public class RegressionEMPrior extends RegressionEMImpl {
 			List<Double> beta = calcCoeffs(Z, x);
 			if (beta == null || beta.size() == 0) {
 				if (currentParameter != null)
-					beta = DSUtil.toDoubleList(currentParameter.matrix.get(j));
+					beta = DSUtil.toDoubleList(currentParameter.getBetas().get(j));
 				else { //Used for initialization so that regression model is always determined.
 					beta = DSUtil.initDoubleList(2, 0);
 					double beta0 = 0;
@@ -182,18 +183,18 @@ public class RegressionEMPrior extends RegressionEMImpl {
 				double[] xVector = xStatistic.get(i);
 				double zValue = this.data.zData.get(i)[1];
 				if (!Util.isUsed(zValue))
-					zStatistic.get(i)[1] = ExchangedParameter.mean(alpha0, xVector); //Z statistic is now corrected
+					zStatistic.get(i)[1] = ExchangedParameter.product(alpha0, xVector); //Z statistic is now corrected
 				else
 					zStatistic.get(i)[1] = zValue;
 			}
 		}
 		//Adjusting Z statistic
 		
-		double coeff = (currentParameter == null ? 1 : currentParameter.getCoeff()); 
-		double mean = stat.getZStatisticMean();
-		double variance = stat.getZStatisticBiasedVariance();
-		
-		return new ExchangedParameter(alpha, betas, coeff, mean, variance);
+		ExchangedParameterInfo zInfo = currentParameter != null ? (ExchangedParameterInfo)currentParameter.getZInfo().clone() : new ExchangedParameterInfo();
+		if (currentParameter == null)
+			zInfo.setRequiredLearning(true);
+		zInfo.learn(stat);
+		return new ExchangedParameter(alpha, betas, zInfo);
 	}
 
 	

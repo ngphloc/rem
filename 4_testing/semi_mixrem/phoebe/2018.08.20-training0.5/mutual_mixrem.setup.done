@@ -1,0 +1,50 @@
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {weight = 1697.1885 + 6.9179*(bpd) + 0.1046*(hc) + 4.5988*(fl) + 1.1102*(ac): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1558.1145 + 16.4350*(bpd): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1825.2739 + 3.6864*(hc): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1869.0458 + 16.8212*(fl): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 2063.2042 + 2.9064*(ac): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1558.1145 + 16.4350*(bpd): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1825.2739 + 3.6864*(hc): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 1869.0458 + 16.8212*(fl): coeff=0.1111, mean=2956.8829, variance=17165.9965}, {weight = 2063.2042 + 2.9064*(ac): coeff=0.1111, mean=2956.8829, variance=17165.9965}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 1) learned models: {weight = 1675.7967 + 6.4016*(bpd) + 0.3372*(hc) + 5.5088*(fl) + 0.8338*(ac): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1589.8332 + 15.8315*(bpd): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1828.0775 + 3.6131*(hc): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1884.2556 + 16.2859*(fl): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 2111.1654 + 2.6908*(ac): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1589.8332 + 15.8315*(bpd): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1828.0775 + 3.6131*(hc): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 1884.2556 + 16.2859*(fl): coeff=0.1111, mean=2935.6506, variance=16995.2415}, {weight = 2111.1654 + 2.6908*(ac): coeff=0.1111, mean=2935.6506, variance=16995.2415}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 1) learned models: {weight = 1701.4363 + 4.1406*(bpd) + 0.4998*(hc) + 6.3816*(fl) + 0.8463*(ac): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1784.3160 + 12.9417*(bpd): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1880.3899 + 3.2548*(hc): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1949.2786 + 14.4211*(fl): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 2159.2150 + 2.3549*(ac): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1784.3160 + 12.9417*(bpd): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1880.3899 + 3.2548*(hc): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 1949.2786 + 14.4211*(fl): coeff=0.1111, mean=2876.8659, variance=15702.6361}, {weight = 2159.2150 + 2.3549*(ac): coeff=0.1111, mean=2876.8659, variance=15702.6361}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 1) learned models: {weight = 1729.1574 + 2.3718*(bpd) + 0.4766*(hc) + 6.4900*(fl) + 0.6120*(ac): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2008.8171 + 8.0020*(bpd): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2057.6613 + 2.0518*(hc): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2135.7799 + 8.5720*(fl): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2195.6874 + 1.5948*(ac): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2008.8171 + 8.0020*(bpd): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2057.6613 + 2.0518*(hc): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2135.7799 + 8.5720*(fl): coeff=0.1111, mean=2675.2241, variance=11517.6538}, {weight = 2195.6874 + 1.5948*(ac): coeff=0.1111, mean=2675.2241, variance=11517.6538}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 1) learned models: {weight = 1654.6894 + 1.8445*(bpd) + 0.9858*(hc) + 7.2047*(fl) - 0.1390*(ac): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2034.7177 + 5.9414*(bpd): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2001.2756 + 1.7431*(hc): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2062.9663 + 7.3775*(fl): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2213.6727 + 1.0552*(ac): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2034.7177 + 5.9414*(bpd): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2001.2756 + 1.7431*(hc): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2062.9663 + 7.3775*(fl): coeff=0.1111, mean=2520.8126, variance=10877.2012}, {weight = 2213.6727 + 1.0552*(ac): coeff=0.1111, mean=2520.8126, variance=10877.2012}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 1) learned models: {weight = 1554.1761 + 0.9277*(bpd) + 1.5742*(hc) + 3.3739*(fl) + 0.2876*(ac): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1884.8329 + 6.3252*(bpd): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1878.8224 + 1.7612*(hc): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1994.5901 + 6.6087*(fl): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 2114.6648 + 1.0013*(ac): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1884.8329 + 6.3252*(bpd): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1878.8224 + 1.7612*(hc): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 1994.5901 + 6.6087*(fl): coeff=0.1111, mean=2400.3537, variance=11317.7348}, {weight = 2114.6648 + 1.0013*(ac): coeff=0.1111, mean=2400.3537, variance=11317.7348}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 1) learned models: {weight = -2570.3974 - 63.5893*(bpd) - 3.3324*(hc) + 55.5394*(fl) + 26.8686*(ac): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -7357.2435 + 117.0291*(bpd): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -5945.8924 + 27.7952*(hc): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -5139.6030 + 119.9344*(fl): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -3367.0016 + 19.3021*(ac): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -7357.2435 + 117.0291*(bpd): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -5945.8924 + 27.7952*(hc): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -5139.6030 + 119.9344*(fl): coeff=0.1111, mean=938.4990, variance=3389248.0846}, {weight = -3367.0016 + 19.3021*(ac): coeff=0.1111, mean=938.4990, variance=3389248.0846}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 1) learned models: {weight = 1271.3257 + 1.0813*(bpd) - 0.1016*(hc) + 1.4588*(fl) + 0.8161*(ac): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1583.6158 + 1.2860*(bpd): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1545.2835 + 0.4822*(hc): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1592.9742 + 1.5609*(fl): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1620.9068 + 0.2328*(ac): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1583.6158 + 1.2860*(bpd): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1545.2835 + 0.4822*(hc): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1592.9742 + 1.5609*(fl): coeff=0.1111, mean=1680.6961, variance=2533.7176}, {weight = 1620.9068 + 0.2328*(ac): coeff=0.1111, mean=1680.6961, variance=2533.7176}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 1) learned models: {weight = 1273.4199 + 0.0065*(bpd) + 0.0526*(hc) + 0.1388*(fl) + 0.0686*(ac): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1199.2493 + 1.1585*(bpd): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1164.0311 + 0.4485*(hc): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1181.0130 + 1.8664*(fl): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1218.9536 + 0.2761*(ac): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1199.2493 + 1.1585*(bpd): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1164.0311 + 0.4485*(hc): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1181.0130 + 1.8664*(fl): coeff=0.1111, mean=1283.4635, variance=4044.8722}, {weight = 1218.9536 + 0.2761*(ac): coeff=0.1111, mean=1283.4635, variance=4044.8722}
+
+
+
+========== Algorithm "mutual_mixrem" ==========
+Setup result of algorithm "mutual_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 1) learned models: {weight = 619.2594 + 0.0246*(bpd) - 0.0046*(hc) + 0.0186*(fl) + 0.0102*(ac): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 596.7642 + 0.3510*(bpd): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 590.4496 + 0.1179*(hc): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 598.0095 + 0.4532*(fl): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 606.4148 + 0.0660*(ac): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 596.7642 + 0.3510*(bpd): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 590.4496 + 0.1179*(hc): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 598.0095 + 0.4532*(fl): coeff=0.1111, mean=619.8156, variance=602.3770}, {weight = 606.4148 + 0.0660*(ac): coeff=0.1111, mean=619.8156, variance=602.3770}
+
+
+

@@ -22,6 +22,7 @@ import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
@@ -207,17 +208,17 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		List<Double> alpha = ((ExchangedParameter)currentParameter).getVector();
-		List<double[]> betas = ((ExchangedParameter)currentParameter).getMatrix();
+		List<Double> alpha = ((ExchangedParameter)currentParameter).getAlpha();
+		List<double[]> betas = ((ExchangedParameter)currentParameter).getBetas();
 		Statistics additionalMean = null;
 		if (info != null && info.length > 0 && (info[0] instanceof Statistics))
 			additionalMean = (Statistics)info[0];
 
-		int N = this.getData().zData.size();
+		int N = this.data.zData.size();
 		List<double[]> zStatistic = Util.newList(N);
 		List<double[]> xStatistic = Util.newList(N);
 		for (int i = 0; i < N; i++) {
-			Statistics stat0 = new Statistics(this.getData().zData.get(i)[1], this.getData().xData.get(i));
+			Statistics stat0 = new Statistics(this.data.getZData().get(i)[1], this.data.getXData().get(i));
 			Statistics stat = estimate(stat0, alpha, betas, additionalMean);
 			if (stat == null)
 				return null;
@@ -248,7 +249,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
 		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
-				alpha = DSUtil.toDoubleList(currentParameter.vector); //clone alpha
+				alpha = DSUtil.toDoubleList(currentParameter.alpha); //clone alpha
 			else { //Used for initialization so that regression model is always determined.
 				alpha = DSUtil.initDoubleList(n, 0.0);
 				double alpha0 = 0;
@@ -277,7 +278,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			List<Double> beta = calcCoeffs(Z, x);
 			if (beta == null || beta.size() == 0) {
 				if (currentParameter != null)
-					beta = DSUtil.toDoubleList(currentParameter.matrix.get(j));
+					beta = DSUtil.toDoubleList(currentParameter.getBetas().get(j));
 				else { //Used for initialization so that regression model is always determined.
 					beta = DSUtil.initDoubleList(2, 0);
 					double beta0 = 0;
@@ -289,11 +290,12 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			betas.add(DSUtil.toDoubleArray(beta));
 		}
 		
-		double coeff = (currentParameter == null ? 1 : currentParameter.getCoeff()); 
-		double mean = stat.getZStatisticMean();
-		double variance = stat.getZStatisticBiasedVariance();
+		ExchangedParameterInfo zInfo = currentParameter != null ? (ExchangedParameterInfo)currentParameter.getZInfo() : null;
+		zInfo = zInfo != null ? (ExchangedParameterInfo)zInfo.clone() : null;
+		if (zInfo != null && zInfo.isRequiredLearning())
+			zInfo.learn(stat);
 		
-		return new ExchangedParameter(alpha, betas, coeff, mean, variance);
+		return new ExchangedParameter(alpha, betas, zInfo);
 	}
 	
 	
@@ -312,33 +314,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		double[] xStatistic = new double[xVector.length];
 		
 		//Begin preparing additional means. This code snippet is not important.
-		double zAdditionalMean = Constants.UNUSED;
-		if (additionalMean != null && Util.isUsed(additionalMean.zStatistic) && !Util.isUsed(zValue))
-			zAdditionalMean = additionalMean.zStatistic;
-		double[] xAdditionalMean = null;
-		if (additionalMean != null && additionalMean.xStatistic != null && additionalMean.xStatistic.length == xVector.length) {
-			boolean missing = false;
-			for (int i = 0; i < additionalMean.xStatistic.length; i++) {
-				if (!Util.isUsed(additionalMean.xStatistic[i])) {
-					missing = true;
-					break;
-				}
-			}
-			if (!missing) //Additional mean vector must be full.
-				xAdditionalMean = additionalMean.xStatistic;
-			
-			missing = false;
-			for (int i = 0; i < xVector.length; i++) {
-				if (!Util.isUsed(xVector[i])) {
-					missing = true;
-					break;
-				}
-			}
-			if (!missing)
-				xAdditionalMean = null;
-		}
+		double zAdditionalMean = additionalMean != null ? additionalMean.zStatistic : Constants.UNUSED;
+		double[] xAdditionalMean = additionalMean != null ? additionalMean.xStatistic : null;
 		//End preparing additional means. This code snippet is not important.
-		
 		
 		if (Util.isUsed(zValue)) {
 			zStatistic = zValue;
@@ -397,11 +375,107 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 
 	
+	/**
+	 * Estimating statistics with specified parameters alpha and beta.
+	 * This method is better than {@link #estimate(Statistics, List, List, Statistics)} method but it is not stable for long regression model having many regressors
+	 * because solving a set of many equations can cause approximate solution or non-solution problem.   
+	 * @param stat specified statistics.
+	 * @param alpha specified alpha parameter.
+	 * @param betas specified alpha parameters.
+	 * @param additionalMean mean statistics. This parameter can be null.
+	 * @return estimated statistics with specified parameters alpha and beta. Return null if any error raises.
+	 */
+	@Deprecated
+	protected Statistics estimateInverse(Statistics stat, List<Double> alpha, List<double[]> betas, Statistics additionalMean) {
+		double zValue = stat.getZStatistic();
+		double[] xVector = stat.getXStatistic();
+		double zStatistic = Constants.UNUSED;
+		double[] xStatistic = new double[xVector.length];
+		
+		//Begin preparing additional means. This code snippet is not important.
+		double zAdditionalMean = additionalMean != null ? additionalMean.zStatistic : Constants.UNUSED;
+		double[] xAdditionalMean = additionalMean != null ? additionalMean.xStatistic : null;
+		//End preparing additional means. This code snippet is not important.
+
+		if (Util.isUsed(zValue)) {
+			zStatistic = zValue;
+			//Estimating missing xij (xStatistic) by equation 5 and zi (zStatistic) above, based on current parameter.
+			for (int j = 0; j < xVector.length; j++) {
+				if (Util.isUsed(xVector[j]))
+					xStatistic[j] = xVector[j];
+				else {
+					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
+					if (xAdditionalMean != null)
+						xStatistic[j] = (xStatistic[j] + xAdditionalMean[j]) / 2.0;
+				}
+			}
+			
+			return new Statistics(zStatistic, xStatistic);
+		}
+		
+		List<Integer> U = Util.newList();
+		int b = 0;
+		for (int j = 0; j < xVector.length; j++) {
+			if (Util.isUsed(xVector[j])) {
+				b += alpha.get(j) * xVector[j];
+				xStatistic[j] = xVector[j]; //existent xij
+			}
+			else
+				U.add(j);
+		}
+
+		if (U.size() > 0) {
+			//Estimating missing xij (xStatistic) by equation 8, based on current parameter.
+			List<double[]> A = Util.newList(U.size());
+			List<Double> y = Util.newList(U.size());
+			
+			for (int i = 0; i < U.size(); i++) {
+				double[] aRow = new double[U.size()];
+				A.add(aRow);
+				for (int j = 0; j < U.size(); j++) {
+					if (i == j)
+						aRow[j] = betas.get(U.get(i))[1] * alpha.get(U.get(j)) - 1;
+					else
+						aRow[j] = betas.get(U.get(i))[1] * alpha.get(U.get(j));
+				}
+				double yi = -betas.get(U.get(i))[0] - betas.get(U.get(i))[1] * b;
+				y.add(yi);
+			}
+			
+			List<Double> solution = solve(A, y); //solve Ax = y
+			if (solution != null) {
+				for (int j = 0; j < U.size(); j++) {
+					int k = U.get(j);
+					xStatistic[k] = solution.get(j);
+					
+					if (xAdditionalMean != null)
+						xStatistic[k] = (xStatistic[k] + xAdditionalMean[k]) / 2.0;
+				}
+			}
+			else {
+				logger.info("Cannot estimate statistic for X by expectation (#estimateInverse), stop estimating for this statistic here because use of other method is wrong.");
+				return null;
+			}
+		}
+		
+		//Estimating missing zi (zStatistic) by equation 4, based on current parameter.
+		zStatistic = 0;
+		for (int j = 0; j < xStatistic.length; j++) {
+			zStatistic += alpha.get(j) * xStatistic[j];
+		}
+		if (Util.isUsed(zAdditionalMean))
+			zStatistic = (zStatistic + zAdditionalMean) / 2.0; 
+		
+		//Balance process is removed with support of mixture model and so list U is not used.
+		return new Statistics(zStatistic, xStatistic);
+	}
+
+	
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
-		int N = this.getData().zData.size();
-		int n = this.getData().xData.get(0).length;
+		int N = this.data.getZData().size();
+		int n = this.data.getXData().get(0).length;
 		
 		List<Double> alpha0 = DSUtil.initDoubleList(n, 0.0);
 		List<double[]> betas0 = Util.newList(n);
@@ -422,11 +496,11 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		List<double[]> xStatistic = Util.newList();
 		List<double[]> zStatistic = Util.newList();
 		for (int i = 0; i < N; i++) {
-			double[] zVector = this.getData().zData.get(i);
+			double[] zVector = this.data.getZData().get(i);
 			if (!Util.isUsed(zVector[1]))
 				continue;
 			
-			double[] xVector = this.getData().xData.get(i);
+			double[] xVector = this.data.getXData().get(i);
 			boolean missing = false;
 			for (int j = 0; j < xVector.length; j++) {
 				if (!Util.isUsed(xVector[j])) {
@@ -479,12 +553,21 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 	
 	
+	/**
+	 * Getting large statistics. Actually, this method calls {@link #getStatistics()}.
+	 * @return large statistics.
+	 */
+	public LargeStatistics getLargeStatistics() {
+		return (LargeStatistics)getStatistics();
+	}
+	
+	
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (this.estimatedParameter == null)
 			return null;
-		List<Double> alpha = ((ExchangedParameter)this.estimatedParameter).getVector();
+		List<Double> alpha = ((ExchangedParameter)this.estimatedParameter).getAlpha();
 		if (alpha == null || alpha.size() == 0)
 			return null;
 		
@@ -565,8 +648,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (this.getParameter() == null)
 			return "";
 		ExchangedParameter exParameter = ((ExchangedParameter)this.getParameter());
-		List<Double> alpha = exParameter.getVector();
-		if (alpha.size() == 0)
+		List<Double> alpha = exParameter.getAlpha();
+		if (alpha == null || alpha.size() == 0)
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
@@ -580,18 +663,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				buffer.append(" + " + MathUtil.format(coeff) + "*" + regressorExpr);
 		}
 		
-		double c = exParameter.getCoeff();
-		double mean = exParameter.getMean();
-		double variance = exParameter.getVariance();
-		if (Util.isUsed(c) || Util.isUsed(mean) || Util.isUsed(variance))
-			buffer.append(": ");
-		
-		if (Util.isUsed(c))
-			buffer.append("coeff=" + MathUtil.format(c));
-		if (Util.isUsed(mean))
-			buffer.append(", mean=" + MathUtil.format(mean));
-		if (Util.isUsed(variance))
-			buffer.append(", variance=" + MathUtil.format(variance));
+		if (exParameter.getZInfo() != null)
+			buffer.append(": " + exParameter.getZInfo().toString());
 
 		return buffer.toString();
 	}
@@ -604,28 +677,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			return "";
 		
 		ExchangedParameter exParameter = ((ExchangedParameter)parameter);
-		List<Double> alpha = exParameter.getVector();
-		StringBuffer buffer = new StringBuffer();
-		for (int j = 0; j < alpha.size(); j++) {
-			if (j > 0)
-				buffer.append(", ");
-			buffer.append(MathUtil.format(alpha.get(j)));
-		}
-		
-		double c = exParameter.getCoeff();
-		double mean = exParameter.getMean();
-		double variance = exParameter.getVariance();
-		if (Util.isUsed(c) || Util.isUsed(mean) || Util.isUsed(variance))
-			buffer.append(": ");
-		
-		if (Util.isUsed(c))
-			buffer.append("coeff=" + MathUtil.format(c));
-		if (Util.isUsed(mean))
-			buffer.append(", mean=" + MathUtil.format(mean));
-		if (Util.isUsed(variance))
-			buffer.append(", variance=" + MathUtil.format(variance));
-			
-		return buffer.toString();
+		return exParameter.toString();
 	}
 
 	
@@ -807,8 +859,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (parameter == null)
 			return null;
 		
-		List<Double> alpha = parameter.getVector();
-		List<double[]> betas = parameter.getMatrix();
+		List<Double> alpha = parameter.getAlpha();
+		List<double[]> betas = parameter.getBetas();
 		RegressionEMImpl em = new RegressionEMImpl();
 		em.getConfig().putAll((DataConfig)this.getConfig().clone());
 		try {
@@ -821,11 +873,11 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			return null;
 		}
 		
-		int N = em.getData().zData.size();
+		int N = em.data.getZData().size();
 		List<double[]> zStatistic = Util.newList(N);
 		List<double[]> xStatistic = Util.newList(N);
 		for (int i = 0; i < N; i++) {
-			Statistics stat0 = new Statistics(em.getData().zData.get(i)[1], em.getData().xData.get(i));
+			Statistics stat0 = new Statistics(em.data.getZData().get(i)[1], em.data.getXData().get(i));
 			Statistics stat = this.estimate(stat0, alpha, betas, additionalMean);
 			if (stat == null)
 				return null;

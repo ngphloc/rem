@@ -1,40 +1,40 @@
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: weight = -5686.8907 + 46.2369*(bpd) + 1.7148*(hc) + 14.3173*(fl) + 9.3881*(ac): coeff=1.0000, mean=2587.3099, variance=643765.4731
+Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: weight = -5686.8907 + 46.2369*(bpd) + 1.7148*(hc) + 14.3173*(fl) + 9.3881*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 6) learned models: weight = -5653.1796 + 43.1677*(bpd) + 0.6491*(hc) + 13.1316*(fl) + 11.3909*(ac): coeff=1.0000, mean=2561.1072, variance=682259.9008
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 6) learned models: weight = -5653.1796 + 43.1677*(bpd) + 0.6491*(hc) + 13.1316*(fl) + 11.3909*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 19) learned models: weight = -5339.8929 + 38.3767*(bpd) - 0.7614*(hc) - 7.1727*(fl) + 17.2627*(ac): coeff=1.0000, mean=2489.9084, variance=774708.6212
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 19) learned models: weight = -5339.8929 + 38.3767*(bpd) - 0.7614*(hc) - 7.1727*(fl) + 17.2627*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 19) learned models: weight = -7999.8525 + 115.6129*(bpd) + 0.9271*(hc) + 4.7293*(fl) + 0.3618*(ac): coeff=1.0000, mean=2313.5809, variance=1093458.6450
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 19) learned models: weight = -7999.8525 + 115.6129*(bpd) + 0.9271*(hc) + 4.7293*(fl) + 0.3618*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 47) learned models: weight = -4518.4741 + 6.9095*(bpd) - 0.0427*(hc) - 3.3680*(fl) + 21.8671*(ac): coeff=1.0000, mean=2161.1832, variance=1446999.0074
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 47) learned models: weight = -4518.4741 + 6.9095*(bpd) - 0.0427*(hc) - 3.3680*(fl) + 21.8671*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 69) learned models: weight = -4730.5376 + 4.5547*(bpd) - 0.7425*(hc) + 0.2069*(fl) + 23.1366*(ac): coeff=1.0000, mean=1950.6647, variance=1787077.0377
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 69) learned models: weight = -4730.5376 + 4.5547*(bpd) - 0.7425*(hc) + 0.2069*(fl) + 23.1366*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 1) learned models: weight = -2570.3974 - 63.5893*(bpd) - 3.3324*(hc) + 55.5394*(fl) + 26.8686*(ac): coeff=1.0000, mean=2276.6667, variance=861088.8889
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 1) learned models: weight = -2570.3974 - 63.5893*(bpd) - 3.3324*(hc) + 55.5394*(fl) + 26.8686*(ac)
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 252) learned models: weight = -6995.7901 + 1.1356*(bpd) + 30.2969*(hc) - 1.9556*(fl) + 0.6029*(ac): coeff=1.0000, mean=1310.5692, variance=1889004.9743
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 252) learned models: weight = -6995.7901 + 1.1356*(bpd) + 30.2969*(hc) - 1.9556*(fl) + 0.6029*(ac)
 
 
 

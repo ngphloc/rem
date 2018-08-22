@@ -1,6 +1,7 @@
 package net.hudup.regression.em;
 
 import static net.hudup.regression.AbstractRegression.extractNumber;
+import static net.hudup.regression.AbstractRegression.notSatisfy;
 import static net.hudup.regression.AbstractRegression.splitIndices;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import net.hudup.core.data.Profile;
 import net.hudup.em.ExponentialEM;
 import net.hudup.regression.AbstractRegression;
 import net.hudup.regression.Regression;
+import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
 
 /**
  * This class implements expectation maximization (EM) algorithm for mixture regression models.
@@ -60,11 +62,10 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	/**
 	 * List of internal regression model as parameter.
 	 */
-	protected List<RegressionEMImpl> rems = Util.newList();
+	protected List<RegressionEMImpl> rems = null;
 
 	
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object learn(Object...info) throws Exception {
 		// TODO Auto-generated method stub
 		if (!prepareInternalData(this.sample)) {
@@ -72,19 +73,19 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			return null;
 		}
 		
-		List<ExchangedParameter> parameters = (List<ExchangedParameter>)super.learn();
-		if (parameters == null || parameters.size() != this.rems.size()) {
+		if (super.learn() == null) {
 			clearInternalContent();
 			return null;
 		}
 		
 		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) { //In uniform mode, all coefficients are 1/K
 			for (RegressionEMImpl rem : this.rems)
-				rem.getExchangedParameter().setCoeff(1.0 / (double)this.rems.size());
+				rem.getExchangedParameter().getZInfo().setCoeff(1.0 / (double)this.rems.size());
 		}
 		else
-			adjustMixtureParametersOne(parameters, (List<LargeStatistics>)this.getStatistics());
-		return parameters;
+			adjustMixtureParametersOne();
+		
+		return this.rems;
 	}
 	
 	
@@ -92,9 +93,11 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	public synchronized void unsetup() {
 		// TODO Auto-generated method stub
 		super.unsetup();
-		for (RegressionEMImpl rem : this.rems) {
-			if (rem != null)
-				rem.unsetup();
+		if (this.rems != null) {
+			for (RegressionEMImpl rem : this.rems) {
+				if (rem != null)
+					rem.unsetup();
+			}
 		}
 	}
 
@@ -115,24 +118,25 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			if (attList.size() < 2)
 				return false;
 			
-//			StringBuffer indices = new StringBuffer();
-//			for (int i = 0; i < attList.size(); i++) {
-//				if (i > 0)
-//					indices.append(", ");
-//				indices.append(i);
-//			}
-//			indicesList.add(indices.toString());
-//			if (attList.size() > 2) {
-//				for (int i = 0; i < attList.size() - 1; i++) {
-//					indicesList.add(i + ", " + (attList.size() - 1));
-//				}
-//			}
+			StringBuffer indices = new StringBuffer();
+			for (int i = 0; i < attList.size(); i++) {
+				if (i > 0)
+					indices.append(", ");
+				indices.append(i);
+			}
+			indicesList.add(indices.toString());
+			if (attList.size() > 2) {
+				for (int i = 0; i < attList.size() - 1; i++) {
+					indicesList.add(i + ", " + (attList.size() - 1));
+				}
+			}
 			
 			for (int i = 0; i < attList.size() - 1; i++) {// For fair test
 				indicesList.add(i + ", " + (attList.size() - 1));
 			}
 		}
-			
+		
+		this.rems = Util.newList(indicesList.size());
 		for (int i = 0; i < indicesList.size(); i++) {
 			RegressionEMImpl rem = new RegressionEMImpl() {
 
@@ -160,7 +164,12 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 				this.rems.add(rem);
 		}
 		
-		return (this.rems.size() == 0 ? false : true);
+		if (this.rems.size() == 0) {
+			this.rems = null;
+			return false;
+		}
+		else
+			return true;
 	}
 	
 	
@@ -169,93 +178,78 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	 */
 	protected void clearInternalContent() {
 		this.currentIteration = 0;
-		this.currentParameter = this.estimatedParameter = null;
-		for (RegressionEMImpl rem : this.rems) {
-			if (rem != null)
-				rem.clearInternalContent();
+		this.estimatedParameter = this.currentParameter = this.previousParameter = null;
+		
+		if (this.rems != null) {
+			for (RegressionEMImpl rem : this.rems) {
+				if (rem != null)
+					rem.clearInternalContent();
+			}
+			this.rems.clear();
+			this.rems = null;
 		}
-		this.rems.clear();
 	}
 
 	
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> parameters = (List<ExchangedParameter>)currentParameter;
-		if (parameters.size() == 0)
-			return null;
-		
-		List<LargeStatistics> stats = Util.newList(parameters.size());
-		for (int i = 0; i < parameters.size(); i++) {
-			ExchangedParameter parameter = parameters.get(i);
-			RegressionEMImpl rem = this.rems.get(i);
-			if (parameter == null || rem == null)
-				continue;
-			
-			LargeStatistics stat = (LargeStatistics)rem.expectation(parameter);
+		for (RegressionEMImpl rem : this.rems) {
+			LargeStatistics stat = (LargeStatistics)rem.expectation(rem.getCurrentParameter());
 			if (stat != null)
-				stats.add(stat);
-		}
-		if (stats.size() != parameters.size()) {
-			logger.error("Some regression models are failed in calculating expectation");
-			return null;
+				rem.setStatistics(stat);
+			else {
+				logger.error("Some regression models are failed in expectation");
+				return null;
+			}
 		}
 		
 		//Supporting mutual mode. If there are two components, it is dual mode.
 		//Mutual mode is useful in some cases.
 		if (getConfig().getAsBoolean(MUTUAL_MODE_FIELD)) {
 			//Retrieving same-length Z statistics
-			int N = stats.get(0).getZStatistic().size();
-			for (LargeStatistics stat : stats) {
-				if (stat.zData.size() != N)
+			LargeStatistics stat0 = this.rems.get(0).getLargeStatistics();
+			int N = stat0.getZData().size();
+			for (RegressionEMImpl rem : this.rems) {
+				LargeStatistics stat = rem.getLargeStatistics();
+				if (stat.getZData().size() != N)
 					return null;
 			}
 			
 			//Calculating average value of Z in mutual mode.
 			for (int i = 0; i < N; i++) {
 				double mean = 0;
-				for (int k = 0; k < stats.size(); k++) {
-					mean += parameters.get(k).getCoeff() * stats.get(k).getZStatisticMean(); 
+				for (RegressionEMImpl rem : this.rems) {
+					ExchangedParameter parameter = rem.getExchangedParameter();
+					LargeStatistics stat = rem.getLargeStatistics();
+					mean += parameter.getZInfo().getCoeff() * stat.getZStatisticMean(); 
 				}
-				for (int k = 0; k < stats.size(); k++) {
-					LargeStatistics stat = stats.get(k);
-					stat.zData.get(i)[1] = mean;
+				
+				for (RegressionEMImpl rem : this.rems) {
+					LargeStatistics stat = rem.getLargeStatistics();
+					stat.getZData().get(i)[1] = mean;
 				}
 			}
 		}
 		
-		return stats;
+		return this.rems;
 	}
 
 	
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		@SuppressWarnings("unchecked")
-		List<LargeStatistics> stats = (List<LargeStatistics>)currentStatistic;
-		if (stats.size() == 0)
-			return null;
-
-		List<ExchangedParameter> parameters = Util.newList(stats.size());
-		for (int i = 0; i < stats.size(); i++) {
-			LargeStatistics stat = stats.get(i);
-			RegressionEMImpl rem = this.rems.get(i);
-			if (stat == null || rem == null)
-				continue;
-			
-			ExchangedParameter parameter = (ExchangedParameter)rem.maximization(stat);
-			if (parameter != null) {
-				rem.setParameter(parameter, this.getCurrentIteration());
-				parameters.add(parameter);
+		for (RegressionEMImpl rem : this.rems) {
+			ExchangedParameter estimatedParameter = (ExchangedParameter)rem.maximization(rem.getStatistics());
+			if (estimatedParameter != null)
+				rem.setParameter(estimatedParameter, this.getCurrentIteration());
+			else {
+				logger.error("Some regression models are failed in maximization");
+				return null;
 			}
 		}
-		if (parameters.size() != stats.size()) {
-			logger.error("Some regression models are failed in maximization");
-			return null;
-		}
 		
-		return parameters;
+		return this.rems;
 	}
 
 	
@@ -266,27 +260,39 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	 * @param stats specified statistics.
 	 * @return true if the adjustment process is successful.
 	 */
-	protected boolean adjustMixtureParametersOne(List<ExchangedParameter> parametersInOut, List<LargeStatistics> stats) {
-		if (parametersInOut == null || stats == null || parametersInOut.size() == 0 || stats.size() == 0 || parametersInOut.size() != stats.size())
+	protected boolean adjustMixtureParametersOne() {
+		if (this.rems == null || this.rems.size() == 0)
 			return false;
 		
-		List<double[]> zData = this.rems.get(0).data.zData; //All models have the same original Z variables.
-		for (int k = 0; k < parametersInOut.size(); k++) {
-			ExchangedParameter parameter = parametersInOut.get(k);
+		for (RegressionEMImpl rem : this.rems) {
+			ExchangedParameterInfo zInfo = rem.getExchangedParameter().getZInfo();
+			if (zInfo == null)
+				return false;
+			zInfo.learn(rem.getLargeStatistics());
+			zInfo.setCoeff(1.0 / (double)this.rems.size());
+		}
+		
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameterInfo zInfo = rem.getExchangedParameter().getZInfo();
+			
 			double condProbSum = 0;
 			int N = 0;
+			List<double[]> zData = rem.getData().getZData(); //By default, all models have the same original Z variables.
 			for (int i = 0; i < zData.size(); i++) {
-				double zStatistic = zData.get(i)[1];
-				if (Util.isUsed(zStatistic)) {
-					double[] condProbs = condProbs(zStatistic, parametersInOut);
+				double zValue = zData.get(i)[1];
+				if (Util.isUsed(zValue)) {
+					double[] condProbs = condZProbs(zValue);
+					
 					condProbSum += condProbs[k];
 					N++;
 				}
 			}
 			if (condProbSum == 0)
 				logger.warn("#adjustMixtureParameters: zero sum of conditional probabilities in " + k + "th model");
+			
 			double coeff = condProbSum / (double)N;
-			parameter.setCoeff(coeff);
+			zInfo.setCoeff(coeff);
 		}
 		
 		return true;
@@ -297,85 +303,86 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	 * Adjusting specified parameters based on specified statistics according to mixture model.
 	 * This method is deprecated because coefficients, mean and variance of a regression model is already optimized by EM process.
 	 * It is over-fitting if continue to optimize by mixture process. However, mixture process is reduced into one iteration to estimate the probabilities of partial components.
-	 * Please see the method {@link #adjustMixtureParametersOne(List, List)}.
-	 * @param parametersInOut specified parameters. They are also output parameters.
-	 * @param stats specified statistics.
+	 * Please see the method {@link #adjustMixtureParametersOne()}.
 	 * @return true if the adjustment process is successful.
 	 */
 	@Deprecated
-	protected boolean adjustMixtureParameters(List<ExchangedParameter> parametersInOut, List<LargeStatistics> stats) {
-		if (parametersInOut == null || stats == null || parametersInOut.size() == 0 || stats.size() == 0 || parametersInOut.size() != stats.size())
+	protected boolean adjustMixtureParameters() {
+		if (this.rems == null || this.rems.size() == 0)
 			return false;
-		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
 		
-		for (int k = 0; k < parametersInOut.size(); k++) {
-			ExchangedParameter parameter = parametersInOut.get(k);
-			double mean = stats.get(k).getZStatisticMean();
-			double variance = stats.get(k).getZStatisticBiasedVariance();
-			parameter.setMean(mean);
-			parameter.setVariance(variance);
+		for (RegressionEMImpl rem : this.rems) {
+			ExchangedParameterInfo zInfo = rem.getExchangedParameter().getZInfo();
+			if (zInfo == null)
+				return false;
+			zInfo.learn(rem.getLargeStatistics());
+			zInfo.setCoeff(1.0 / (double)this.rems.size());
 		}
 		
 		boolean terminated = true;
 		int t = 0;
 		int maxIteration = getConfig().getAsInt(EM_MAX_ITERATION_FIELD);
 		maxIteration = (maxIteration <= 0) ? EM_MAX_ITERATION : maxIteration;
+		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
 		do {
 			terminated = true;
 			t++;
-			for (int k = 0; k < parametersInOut.size(); k++) {
-				ExchangedParameter parameter = parametersInOut.get(k); 
-				List<double[]> ZStatistic = stats.get(k).zData;
-				int N = ZStatistic.size();
+			for (int k = 0; k < this.rems.size(); k++) {
+				RegressionEMImpl rem = this.rems.get(k);
+				ExchangedParameterInfo zInfo = rem.getExchangedParameter().getZInfo();
 				
 				double condProbSum = 0;
 				double zSum = 0;
+				int N = 0;
+				List<double[]> zData = rem.getData().getZData(); //By default, all models have the same original Z variables.
 				List<double[]> condProbsList = Util.newList(N);
-				for (int i = 0; i < N; i++) {
-					double[] condProbs = condProbs(ZStatistic.get(i)[1], parametersInOut);
-					condProbsList.add(condProbs);
-					
-					condProbSum += condProbs[k];
-					zSum += condProbs[k] * ZStatistic.get(i)[1];
+				for (int i = 0; i < zData.size(); i++) {
+					double zValue = zData.get(i)[1];
+					if (Util.isUsed(zValue)) {
+						double[] condProbs = condZProbs(zValue);
+						condProbsList.add(condProbs);
+						
+						condProbSum += condProbs[k];
+						zSum += condProbs[k] * zValue;
+						N++;
+					}
 				}
 				if (condProbSum == 0)
 					logger.warn("#adjustMixtureParameters: zero sum of conditional probabilities in " + k + "th model");
+
 				
 				//Estimating coefficient
 				double coeff = condProbSum / (double)N;
-				if (Util.isUsed(parameter.getCoeff())
-						&& Math.abs(coeff - parameter.getCoeff()) > threshold * Math.abs(parameter.getCoeff()))
+				if (notSatisfy(coeff, zInfo.getCoeff(), threshold))
 					terminated = terminated && false;
-				parameter.setCoeff(coeff);
+				zInfo.setCoeff(coeff);
 				
 				//Estimating mean
 				double mean = zSum / condProbSum;
-				if (Util.isUsed(parameter.getMean())
-						&& Math.abs(mean - parameter.getMean()) > threshold * Math.abs(parameter.getMean()))
+				if (notSatisfy(mean, zInfo.getMean(), threshold))
 					terminated = terminated && false;
-				parameter.setMean(mean);
+				zInfo.setMean(mean);
 	
 				//Estimating variance
 				double zDevSum = 0;
-				for (int i = 0; i < N; i++) {
-					double[] condProbs = condProbsList.get(i);
-					double d = ZStatistic.get(i)[1] - mean;
-					zDevSum += condProbs[k] * (d*d);
+				for (int i = 0; i < zData.size(); i++) {
+					double zValue = zData.get(i)[1];
+					if (Util.isUsed(zValue)) {
+						double[] condProbs = condProbsList.get(i);
+						double d = zValue - mean;
+						zDevSum += condProbs[k] * (d*d);
+					}
 				}
 				double variance = zDevSum / condProbSum;
-				if (Util.isUsed(parameter.getVariance())
-						&& Math.abs(variance - parameter.getVariance()) > threshold * Math.abs(parameter.getVariance()))
+				if (notSatisfy(variance, zInfo.getVariance(), threshold))
 					terminated = terminated && false;
-				parameter.setVariance(variance);
-				
-				if (variance == 0)
-					logger.warn("#adjustMixtureParameters: Variance of the " + k + "th model is 0");
+				zInfo.setVariance(variance);
 			}
 		} while (!terminated && t < maxIteration);
 		
 		return true;
 	}
-	
+
 	
 	/**
 	 * Calculating the condition probabilities of the specified parameters given response value (Z).
@@ -384,69 +391,52 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	 * @param parameters arrays of parameters.
 	 * @return condition probabilities of the specified parameters given response value (Z).
 	 */
-	protected double[] condProbs(double z, List<ExchangedParameter> parameters) {
-		return ExchangedParameter.normalCondProbs(z, parameters.toArray(new ExchangedParameter[] {}));
+	protected double[] condZProbs(double z) {
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+		ExchangedParameter[] parameters = new ExchangedParameter[this.rems.size()];
+		for (int k = 0; k < this.rems.size(); k++) {
+			parameters[k] = this.rems.get(k).getExchangedParameter();
+		}
+
+		return ExchangedParameter.normalZCondProbs(z, parameters);
 	}
 
 	
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
-		if (this.rems.size() == 0)
-			return null;
-		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
-			
 		for (RegressionEMImpl rem : this.rems) {
-			if (rem == null)
-				continue;
-			
 			ExchangedParameter parameter = (ExchangedParameter)rem.initializeParameter();
 			if (parameter != null) {
-				rem.setParameter(parameter, 0);
-				parameters.add(parameter);
+				ExchangedParameterInfo zInfo = new ExchangedParameterInfo();
+				zInfo.learn(rem.getData());
+				zInfo.setCoeff(1.0 / (double)this.rems.size());
+				zInfo.setRequiredLearning(false); //No more learning for saving computation cost in each iteration. This line is important.
+				parameter.setZInfo(zInfo);
+				
+				rem.setParameter(parameter, this.getCurrentIteration());
+			}
+			else {
+				logger.error("Some regression models are failed in initialization");
+				return null;
 			}
 		}
-		if (parameters.size() != this.rems.size()) {
-			logger.error("Some regression models are failed in initialization");
-			return null;
-		}
-		
-		for (int k = 0; k < parameters.size(); k++) {
-			ExchangedParameter parameter = parameters.get(k);
-			LargeStatistics zData = this.rems.get(k).getData();
-			
-			double coeff = (1.0 / (double)parameters.size());
-			parameter.setCoeff(coeff);
-			
-			double mean = zData.getZStatisticMean();
-			parameter.setMean(mean);
-			
-			double variance = zData.getZStatisticBiasedVariance();
-			parameter.setVariance(variance);
-		}
-		
-		return parameters;
+		return this.rems;
 	}
 
 	
 	@Override
 	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
-		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> exEstimatedParameters = (List<ExchangedParameter>)estimatedParameter;
-		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> exCurrentParameters = (List<ExchangedParameter>)currentParameter;
-		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> exPreviousParameters = (List<ExchangedParameter>)previousParameter;
-
 		boolean terminated = true;
-		for (int i = 0; i < this.rems.size(); i++) {
-			RegressionEMImpl rem = this.rems.get(i);
-			ExchangedParameter exEstimatedParameter = exEstimatedParameters.get(i);
-			ExchangedParameter exCurrentParameter = exCurrentParameters.get(i);
-			ExchangedParameter exPreviousParameter = exPreviousParameters != null ? exPreviousParameters.get(i) : null;
+		for (RegressionEMImpl rem : this.rems) {
+			ExchangedParameter exEstimatedParameter = (ExchangedParameter)rem.getEstimatedParameter();
+			ExchangedParameter exCurrentParameter = (ExchangedParameter)rem.getCurrentParameter();
+			ExchangedParameter exPreviousParameter = (ExchangedParameter)rem.getPreviousParameter();;
 			
-			if (rem == null || exEstimatedParameter == null || exCurrentParameter == null)
+			if (exEstimatedParameter == null || exCurrentParameter == null)
 				continue;
 			
 			terminated = terminated && rem.terminatedCondition(exEstimatedParameter, exCurrentParameter, exPreviousParameter, info);
@@ -461,14 +451,16 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
 		double result = 0;
-		for (int i = 0; i < this.rems.size(); i++) {
-			RegressionEMImpl rem = this.rems.get(i);
+		for (RegressionEMImpl rem : this.rems) {
 			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
 			
 			double value = extractNumber(rem.execute(input));
 			if (Util.isUsed(value))
-				result += parameter.getCoeff() * value;
+				result += parameter.getZInfo().getCoeff() * value;
 			else
 				return null;
 		}
@@ -482,15 +474,17 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 		if (parameter == null || !(parameter instanceof List<?>))
 			return "";
 		
-		StringBuffer buffer = new StringBuffer();
 		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> exParameters = (List<ExchangedParameter>)parameter;
-		for (int i = 0; i < exParameters.size(); i++) {
-			if (i > 0)
+		List<RegressionEMImpl> rems = (List<RegressionEMImpl>)parameter;
+		StringBuffer buffer = new StringBuffer();
+		for (int k = 0; k < rems.size(); k++) {
+			if (k > 0)
 				buffer.append(", ");
 			String text = "";
-			if (this.rems.get(i) != null)
-				text = this.rems.get(i).parameterToShownText(exParameters.get(i), info);
+			
+			RegressionEMImpl rem = rems.get(k); 
+			if (rem != null)
+				text = rems.get(k).parameterToShownText(rem.getParameter(), info);
 			buffer.append("{" + text + "}");
 		}
 		
@@ -501,8 +495,10 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
+		if (this.rems == null)
+			return "";
+
 		StringBuffer buffer = new StringBuffer();
-		
 		for (int i = 0; i < this.rems.size(); i++) {
 			Regression regression = this.rems.get(i);
 			if (i > 0)
@@ -569,7 +565,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			if (!Util.isUsed(value))
 				return null;
 			
-			mean += value * ((ExchangedParameter)rem.getParameter()).getCoeff();
+			mean += value * ((ExchangedParameter)rem.getParameter()).getZInfo().getCoeff();
 		}
 		return mean;
 	}

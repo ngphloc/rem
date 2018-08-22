@@ -633,4 +633,16 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	}
 
 	
+	/**
+	 * Testing whether the deviation between estimated value and current value is not satisfied a threshold.
+	 * @param estimatedValue estimated value.
+	 * @param currentValue current value.
+	 * @param threshold specified threshold.
+	 * @return true if the deviation between estimated value and current value is not satisfied a threshold.
+	 */
+	public static boolean notSatisfy(double estimatedValue, double currentValue, double threshold) {
+		return Math.abs(estimatedValue - currentValue) > threshold * Math.abs(currentValue);
+	}
+	
+	
 }

@@ -1,0 +1,136 @@
+========== Algorithm "mutual_mixrem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [356.5289, 715.4164]
+Hudup recall = 1.0000
+MAE.test = 628.1924
+MAERatio.test = 0.3628
+MAEVector.test = [628.1924]
+MSE.test = 638934.4275
+R.test = 0.9592
+RMSE.test = 799.3337
+Setup time = 0.4060
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [334.2077, 719.6285]
+Hudup recall = 1.0000
+MAE.test = 625.8591
+MAERatio.test = 0.3596
+MAEVector.test = [625.8591]
+MSE.test = 629560.8998
+R.test = 0.9588
+RMSE.test = 793.4487
+Setup time = 0.6430
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [257.9940, 737.5701]
+Hudup recall = 1.0000
+MAE.test = 625.5100
+MAERatio.test = 0.3518
+MAEVector.test = [625.5100]
+MSE.test = 610571.5942
+R.test = 0.9564
+RMSE.test = 781.3908
+Setup time = 1.1120
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [94.0058, 757.7745]
+Hudup recall = 1.0000
+MAE.test = 627.7884
+MAERatio.test = 0.3334
+MAEVector.test = [627.7884]
+MSE.test = 583060.3388
+R.test = 0.9524
+RMSE.test = 763.5839
+Setup time = 0.1090
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [-61.6979, 772.8303]
+Hudup recall = 1.0000
+MAE.test = 647.7764
+MAERatio.test = 0.3221
+MAEVector.test = [647.7764]
+MSE.test = 601074.3021
+R.test = 0.9520
+RMSE.test = 775.2898
+Setup time = 1.0850
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [-225.0879, 778.1211]
+Hudup recall = 1.0000
+MAE.test = 681.9268
+MAERatio.test = 0.3142
+MAEVector.test = [681.9268]
+MSE.test = 656137.9506
+R.test = 0.9503
+RMSE.test = 810.0234
+Setup time = 0.2040
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [-509.7328, 794.5512]
+Hudup recall = 1.0000
+MAE.test = 804.4710
+MAERatio.test = 0.3284
+MAEVector.test = [804.4710]
+MSE.test = 891140.1574
+R.test = 0.9543
+RMSE.test = 944.0022
+Setup time = 0.2380
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [-1071.4698, 808.4646]
+Hudup recall = 1.0000
+MAE.test = 1156.5892
+MAERatio.test = 0.4120
+MAEVector.test = [1156.5892]
+MSE.test = 1801663.5161
+R.test = 0.9532
+RMSE.test = 1342.2606
+Setup time = 47.8650
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [-1301.8034, 808.5369]
+Hudup recall = 1.0000
+MAE.test = 1341.0041
+MAERatio.test = 0.4714
+MAEVector.test = [1341.0041]
+MSE.test = 2348424.9921
+R.test = 0.9603
+RMSE.test = 1532.4572
+Setup time = 58.1700
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [-1086.3276, 807.6132]
+Hudup recall = 1.0000
+MAE.test = 1167.7745
+MAERatio.test = 0.4154
+MAEVector.test = [1167.7745]
+MSE.test = 1832347.7804
+R.test = 0.9474
+RMSE.test = 1353.6424
+Setup time = 39.3910
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "mutual_mixrem" - Final result ==========
+
+
+

@@ -1,132 +1,132 @@
 ========== Algorithm "semi_mixrem" - Final result ==========
 
 ----- Testing dataset "1" -----
-ErrorRange.test = [1.9371, 245.4156]
+ErrorRange.test = [1.7350, 238.8381]
 Hudup recall = 1.0000
-MAE.test = 187.1782
-MAERatio.test = 0.0809
-MAEVector.test = [187.1782]
-MSE.test = 60233.5574
-R.test = 0.9561
-RMSE.test = 245.4253
-Setup time = 0.0400
+MAE.test = 181.3909
+MAERatio.test = 0.0779
+MAEVector.test = [181.3909]
+MSE.test = 57047.6689
+R.test = 0.9576
+RMSE.test = 238.8465
+Setup time = 0.1260
 Speed = 0.0000
 ----- Testing dataset "1" -----
 
 ----- Testing dataset "2" -----
-ErrorRange.test = [-2.0812, 238.5713]
+ErrorRange.test = [-2.9839, 232.7593]
 Hudup recall = 1.0000
-MAE.test = 180.7283
-MAERatio.test = 0.0764
-MAEVector.test = [180.7283]
-MSE.test = 56921.6015
-R.test = 0.9561
-RMSE.test = 238.5825
-Setup time = 0.1060
+MAE.test = 175.6722
+MAERatio.test = 0.0741
+MAEVector.test = [175.6722]
+MSE.test = 54186.7829
+R.test = 0.9578
+RMSE.test = 232.7805
+Setup time = 0.1410
 Speed = 0.0000
 ----- Testing dataset "2" -----
 
 ----- Testing dataset "3" -----
-ErrorRange.test = [-15.4847, 232.7465]
+ErrorRange.test = [-17.8159, 227.2988]
 Hudup recall = 1.0000
-MAE.test = 175.8153
-MAERatio.test = 0.0726
-MAEVector.test = [175.8153]
-MSE.test = 54411.7124
-R.test = 0.9558
-RMSE.test = 233.2632
-Setup time = 0.3840
+MAE.test = 171.4416
+MAERatio.test = 0.0711
+MAEVector.test = [171.4416]
+MSE.test = 51983.1615
+R.test = 0.9580
+RMSE.test = 227.9982
+Setup time = 0.0680
 Speed = 0.0000
 ----- Testing dataset "3" -----
 
 ----- Testing dataset "4" -----
-ErrorRange.test = [-33.4414, 232.8478]
+ErrorRange.test = [-45.0667, 227.8222]
 Hudup recall = 1.0000
-MAE.test = 179.2875
-MAERatio.test = 0.0741
-MAEVector.test = [179.2875]
-MSE.test = 55337.4241
-R.test = 0.9554
-RMSE.test = 235.2391
-Setup time = 0.4080
+MAE.test = 175.8949
+MAERatio.test = 0.0730
+MAEVector.test = [175.8949]
+MSE.test = 53934.9754
+R.test = 0.9571
+RMSE.test = 232.2390
+Setup time = 0.0860
 Speed = 0.0000
 ----- Testing dataset "4" -----
 
 ----- Testing dataset "5" -----
-ErrorRange.test = [-15.3477, 235.3938]
+ErrorRange.test = [-26.0142, 228.6591]
 Hudup recall = 1.0000
-MAE.test = 182.6571
-MAERatio.test = 0.0771
-MAEVector.test = [182.6571]
-MSE.test = 55646.7722
-R.test = 0.9553
-RMSE.test = 235.8957
-Setup time = 0.2650
+MAE.test = 177.7013
+MAERatio.test = 0.0752
+MAEVector.test = [177.7013]
+MSE.test = 52962.7029
+R.test = 0.9572
+RMSE.test = 230.1363
+Setup time = 0.0690
 Speed = 0.0000
 ----- Testing dataset "5" -----
 
 ----- Testing dataset "6" -----
-ErrorRange.test = [-36.5092, 243.6647]
+ErrorRange.test = [-55.9303, 239.5441]
 Hudup recall = 1.0000
-MAE.test = 193.6152
-MAERatio.test = 0.0853
-MAEVector.test = [193.6152]
-MSE.test = 60706.3874
-R.test = 0.9553
-RMSE.test = 246.3867
-Setup time = 0.2390
+MAE.test = 193.0333
+MAERatio.test = 0.0860
+MAEVector.test = [193.0333]
+MSE.test = 60510.5547
+R.test = 0.9569
+RMSE.test = 245.9889
+Setup time = 0.0630
 Speed = 0.0000
 ----- Testing dataset "6" -----
 
 ----- Testing dataset "7" -----
-ErrorRange.test = [-9.1600, 248.5879]
+ErrorRange.test = [32.5598, 234.3183]
 Hudup recall = 1.0000
-MAE.test = 194.9871
-MAERatio.test = 0.0845
-MAEVector.test = [194.9871]
-MSE.test = 61880.8542
-R.test = 0.9538
-RMSE.test = 248.7586
-Setup time = 0.2870
+MAE.test = 181.5100
+MAERatio.test = 0.0779
+MAEVector.test = [181.5100]
+MSE.test = 55966.2218
+R.test = 0.9550
+RMSE.test = 236.5718
+Setup time = 0.0790
 Speed = 0.0000
 ----- Testing dataset "7" -----
 
 ----- Testing dataset "8" -----
-ErrorRange.test = [-24.8671, 234.8279]
+ErrorRange.test = [-22.2540, 243.1779]
 Hudup recall = 1.0000
-MAE.test = 181.2512
-MAERatio.test = 0.0755
-MAEVector.test = [181.2512]
-MSE.test = 55763.5108
-R.test = 0.9548
-RMSE.test = 236.1430
-Setup time = 0.2860
+MAE.test = 183.2174
+MAERatio.test = 0.0748
+MAEVector.test = [183.2174]
+MSE.test = 59631.7234
+R.test = 0.9517
+RMSE.test = 244.1961
+Setup time = 0.1070
 Speed = 0.0000
 ----- Testing dataset "8" -----
 
 ----- Testing dataset "9" -----
-ErrorRange.test = [-14.6592, 235.4060]
+ErrorRange.test = [-105.5867, 236.4242]
 Hudup recall = 1.0000
-MAE.test = 180.3300
-MAERatio.test = 0.0738
-MAEVector.test = [180.3300]
-MSE.test = 55631.8636
-R.test = 0.9555
-RMSE.test = 235.8641
-Setup time = 0.3060
+MAE.test = 194.3406
+MAERatio.test = 0.0779
+MAEVector.test = [194.3406]
+MSE.test = 67045.9546
+R.test = 0.9545
+RMSE.test = 258.9323
+Setup time = 0.1730
 Speed = 0.0000
 ----- Testing dataset "9" -----
 
 ----- Testing dataset "10" -----
-ErrorRange.test = [192.8581, 248.2892]
+ErrorRange.test = [115.8138, 232.0409]
 Hudup recall = 1.0000
-MAE.test = 254.9878
-MAERatio.test = 0.1069
-MAEVector.test = [254.9878]
-MSE.test = 98842.7795
-R.test = 0.9527
-RMSE.test = 314.3927
-Setup time = 0.3820
+MAE.test = 207.4137
+MAERatio.test = 0.0911
+MAEVector.test = [207.4137]
+MSE.test = 67256.8020
+R.test = 0.9533
+RMSE.test = 259.3392
+Setup time = 0.1570
 Speed = 0.0000
 ----- Testing dataset "10" -----
 
