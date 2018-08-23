@@ -8,8 +8,6 @@ import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
-import net.hudup.core.logistic.NextUpdate;
-import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm.
@@ -19,7 +17,6 @@ import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
  * @version 1.0
  *
  */
-@NextUpdate
 public class RegressionEMPrior extends RegressionEMImpl {
 
 	
@@ -51,6 +48,18 @@ public class RegressionEMPrior extends RegressionEMImpl {
 	 * Default variance of prior distribution.
 	 */
 	public static final double VARIANCE0_DEFAULT = Constants.UNUSED;
+
+	
+	/**
+	 * Prior mean.
+	 */
+	protected double mean0 = 0;
+	
+	
+	/**
+	 * Prior variance.
+	 */
+	protected double variance0 = 0;
 
 	
 	/**
@@ -88,44 +97,31 @@ public class RegressionEMPrior extends RegressionEMImpl {
 		LargeStatistics stat = (LargeStatistics)currentStatistic;
 		if (stat.isEmpty())
 			return null;
-		List<double[]> zStatistic = stat.zData;
-		List<double[]> xStatistic = stat.xData;
+		List<double[]> zStatistic = stat.getZData();
+		List<double[]> xStatistic = stat.getXData();
 		int N = zStatistic.size();
 		ExchangedParameter currentParameter = (ExchangedParameter)getCurrentParameter();
 		
 		//Begin calculating prior parameter. It is not tested in current version yet.
 		double zFactor = Constants.UNUSED;
+		List<double[]> zDataToLearnAlpha = Util.newList(zStatistic.size());
 		if (currentParameter != null) {
-			double variance0 = getConfig().getAsReal(VARIANCE0_FIELD);
-			if (!Util.isUsed(variance0))
-				variance0 = currentParameter.getZInfo().getVariance();
-			
-			double mean0 = getConfig().getAsReal(MEAN0_FIELD);
-			if (!Util.isUsed(mean0))
-				mean0 = currentParameter.getZInfo().getMean();
-			
-			double variance = 0;
-			double[] alpha = DSUtil.toDoubleArray(currentParameter.getAlpha());
-			for (int i = 0; i < N; i++) {
-				double[] xVector = xStatistic.get(i);
-				double d = zStatistic.get(i)[1] - ExchangedParameter.product(alpha, xVector);
-				variance += d*d;
-			}
-			variance = variance / (double)N;
-			zFactor = variance0 - variance;
+			double variance = currentParameter.estimateZVariance(stat);
+			zFactor = this.variance0 - variance;
 			
 			for (int i = 0; i < N; i++) {
 				double[] zVector = Arrays.copyOf(zStatistic.get(i), zStatistic.get(i).length); 
-				double zValueNew = variance0*zVector[1] - variance*mean0;
-				zVector[1] = zValueNew;
+				zVector[1] = this.variance0*zVector[1] - variance*this.mean0;
 				
-				zStatistic.set(i, zVector); //zStatistic is wrong but it is temporally used to estimate alpha and betas.
+				zDataToLearnAlpha.add(zVector);
 			}
 		}
+		else
+			zDataToLearnAlpha = zStatistic; 
 		//End calculating prior parameter
 		
 		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
-		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
+		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zDataToLearnAlpha);
 		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
 				alpha = DSUtil.toDoubleList(currentParameter.alpha); //clone alpha
@@ -176,34 +172,58 @@ public class RegressionEMPrior extends RegressionEMImpl {
 			betas.add(DSUtil.toDoubleArray(beta));
 		}
 		
-		//Adjusting Z statistic
-		if (currentParameter != null && Util.isUsed(zFactor)) {
-			double[] alpha0 = DSUtil.toDoubleArray(alpha);
-			for (int i = 0; i < N; i++) {
-				double[] xVector = xStatistic.get(i);
-				double zValue = this.data.zData.get(i)[1];
-				if (!Util.isUsed(zValue))
-					zStatistic.get(i)[1] = ExchangedParameter.product(alpha0, xVector); //Z statistic is now corrected
-				else
-					zStatistic.get(i)[1] = zValue;
-			}
-		}
-		//Adjusting Z statistic
-		
-		ExchangedParameterInfo zInfo = currentParameter != null ? (ExchangedParameterInfo)currentParameter.getZInfo().clone() : new ExchangedParameterInfo();
-		if (currentParameter == null)
-			zInfo.setRequiredLearning(true);
-		zInfo.learn(stat);
-		return new ExchangedParameter(alpha, betas, zInfo);
+		return new ExchangedParameter(alpha, betas);
 	}
 
 	
 	@Override
+	protected Object initializeParameter() {
+		// TODO Auto-generated method stub
+		ExchangedParameter parameter = (ExchangedParameter)super.initializeParameter();
+		if (parameter == null)
+			return null;
+		
+		this.mean0 = getConfig().getAsReal(MEAN0_FIELD);
+		this.variance0 = getConfig().getAsReal(VARIANCE0_FIELD);
+		
+		if (Util.isUsed(this.mean0) && Util.isUsed(this.variance0)) {
+			return parameter;
+		}
+		
+		LargeStatistics stat = getLargeStatistics();
+		List<double[]> zData = stat.getZData();
+		
+		double sum = 0;
+		int N = 0;
+		for (int i = 0; i < zData.size(); i++) {
+			double zValue = zData.get(i)[1];
+			if (Util.isUsed(zValue)) {
+				sum += zValue;
+				N++;
+			}
+		}
+		this.mean0 = sum / N;
+		
+		double ss = 0;
+		for (int i = 0; i < zData.size(); i++) {
+			double zValue = zData.get(i)[1];
+			if (Util.isUsed(zValue)) {
+				double d = zValue - this.mean0;
+				ss += d*d;
+			}
+		}
+		this.variance0 = ss / (N*N);
+		
+		return parameter;
+	}
+
+
+	@Override
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(VARIANCE0_FIELD, VARIANCE0_DEFAULT);
 		config.put(MEAN0_FIELD, MEAN0_DEFAULT);
+		config.put(VARIANCE0_FIELD, VARIANCE0_DEFAULT);
 		return config;
 	}
 

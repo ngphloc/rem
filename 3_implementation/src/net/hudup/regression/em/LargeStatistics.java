@@ -2,7 +2,6 @@ package net.hudup.regression.em;
 
 import java.util.List;
 
-import net.hudup.core.Constants;
 import net.hudup.core.Util;
 
 /**
@@ -95,58 +94,6 @@ public class LargeStatistics {
 			zVector.add(zData.get(i)[1]);
 		
 		return zVector;
-	}
-
-	
-	/**
-	 * Getting mean of Z statistic.
-	 * @return mean Z statistic.
-	 */
-	public double getZStatisticMean() {
-		if (isEmpty())
-			return Constants.UNUSED;
-		
-		double sum = 0;
-		int count = 0;
-		for (int i = 0; i < zData.size(); i++) {
-			double value = zData.get(i)[1];
-			if (Util.isUsed(value)) {
-				sum += value;
-				count ++;
-			}
-		}
-		
-		if (count == 0)
-			return Constants.UNUSED;
-		else
-			return sum / (double)zData.size();
-	}
-
-	
-	/**
-	 * Getting biased variance of Z statistic.
-	 * @return biased variance of of Z statistic.
-	 */
-	public double getZStatisticBiasedVariance() {
-		double mean = getZStatisticMean();
-		if (!Util.isUsed(mean))
-			return Constants.UNUSED;
-		
-		double devSum = 0;
-		int count = 0;
-		for (int i = 0; i < zData.size(); i++) {
-			double value = zData.get(i)[1];
-			if (Util.isUsed(value)) {
-				double d = value - mean;
-				devSum += d*d;
-				count ++;
-			}
-		}
-		
-		if (count == 0)
-			return Constants.UNUSED;
-		else
-			return devSum / (double)count;
 	}
 
 	

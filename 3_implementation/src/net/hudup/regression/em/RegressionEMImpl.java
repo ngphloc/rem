@@ -1,6 +1,6 @@
 package net.hudup.regression.em;
 
-import static net.hudup.regression.AbstractRegression.defaultExtractVariable;
+import static net.hudup.regression.AbstractRegression.*;
 import static net.hudup.regression.AbstractRegression.defaultExtractVariableName;
 import static net.hudup.regression.AbstractRegression.extractNumber;
 import static net.hudup.regression.AbstractRegression.findIndex;
@@ -22,7 +22,6 @@ import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.em.ExchangedParameter.ExchangedParameterInfo;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
@@ -214,7 +213,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (info != null && info.length > 0 && (info[0] instanceof Statistics))
 			additionalMean = (Statistics)info[0];
 
-		int N = this.data.zData.size();
+		int N = this.data.getZData().size();
 		List<double[]> zStatistic = Util.newList(N);
 		List<double[]> xStatistic = Util.newList(N);
 		for (int i = 0; i < N; i++) {
@@ -240,8 +239,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		LargeStatistics stat = (LargeStatistics)currentStatistic;
 		if (stat.isEmpty())
 			return null;
-		List<double[]> zStatistic = stat.zData;
-		List<double[]> xStatistic = stat.xData;
+		List<double[]> zStatistic = stat.getZData();
+		List<double[]> xStatistic = stat.getXData();
 		int N = zStatistic.size();
 		ExchangedParameter currentParameter = (ExchangedParameter)getCurrentParameter();
 		
@@ -249,7 +248,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
 		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
-				alpha = DSUtil.toDoubleList(currentParameter.alpha); //clone alpha
+				alpha = DSUtil.toDoubleList(currentParameter.getAlpha()); //clone alpha
 			else { //Used for initialization so that regression model is always determined.
 				alpha = DSUtil.initDoubleList(n, 0.0);
 				double alpha0 = 0;
@@ -290,17 +289,13 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			betas.add(DSUtil.toDoubleArray(beta));
 		}
 		
-		ExchangedParameterInfo zInfo = currentParameter != null ? (ExchangedParameterInfo)currentParameter.getZInfo() : null;
-		zInfo = zInfo != null ? (ExchangedParameterInfo)zInfo.clone() : null;
-		if (zInfo != null && zInfo.isRequiredLearning())
-			zInfo.learn(stat);
-		
-		return new ExchangedParameter(alpha, betas, zInfo);
+		return new ExchangedParameter(alpha, betas);
 	}
 	
 	
 	/**
 	 * Estimating statistics with specified parameters alpha and beta.
+	 * Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases.
 	 * @param stat specified statistics.
 	 * @param alpha specified alpha parameter.
 	 * @param betas specified alpha parameters.
@@ -327,7 +322,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 					xStatistic[j] = xVector[j];
 				else {
 					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-					if (xAdditionalMean != null)
+					if (xAdditionalMean != null) //Putting additional mean
 						xStatistic[j] = (xStatistic[j] + xAdditionalMean[j]) / 2.0;
 				}
 			}
@@ -356,7 +351,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			return null;
 		}
 		
-		if (Util.isUsed(zAdditionalMean))
+		if (Util.isUsed(zAdditionalMean)) //Putting additional mean
 			zStatistic = (zStatistic + zAdditionalMean) / 2.0; 
 
 		//Estimating missing xij (xStatistic) by equation 5 and estimated zi (zStatistic) above, based on current parameter.
@@ -365,18 +360,19 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				xStatistic[j] = xVector[j];
 			else {
 				xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-				if (xAdditionalMean != null)
+				if (xAdditionalMean != null) //Putting additional mean
 					xStatistic[j] = (xStatistic[j] + xAdditionalMean[j]) / 2.0;
 			}
 		}
 		
-		//Balance process is removed with support of mixture model and so list U is not used.
+		//Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases. So list U is not used.
 		return new Statistics(zStatistic, xStatistic);
 	}
 
 	
 	/**
 	 * Estimating statistics with specified parameters alpha and beta.
+	 * Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases.
 	 * This method is better than {@link #estimate(Statistics, List, List, Statistics)} method but it is not stable for long regression model having many regressors
 	 * because solving a set of many equations can cause approximate solution or non-solution problem.   
 	 * @param stat specified statistics.
@@ -405,7 +401,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 					xStatistic[j] = xVector[j];
 				else {
 					xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
-					if (xAdditionalMean != null)
+					if (xAdditionalMean != null) //Putting additional mean
 						xStatistic[j] = (xStatistic[j] + xAdditionalMean[j]) / 2.0;
 				}
 			}
@@ -448,7 +444,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 					int k = U.get(j);
 					xStatistic[k] = solution.get(j);
 					
-					if (xAdditionalMean != null)
+					if (xAdditionalMean != null) //Putting additional mean
 						xStatistic[k] = (xStatistic[k] + xAdditionalMean[k]) / 2.0;
 				}
 			}
@@ -463,10 +459,10 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		for (int j = 0; j < xStatistic.length; j++) {
 			zStatistic += alpha.get(j) * xStatistic[j];
 		}
-		if (Util.isUsed(zAdditionalMean))
+		if (Util.isUsed(zAdditionalMean)) //Putting additional mean
 			zStatistic = (zStatistic + zAdditionalMean) / 2.0; 
 		
-		//Balance process is removed with support of mixture model and so list U is not used.
+		//Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases. So list U is not used.
 		return new Statistics(zStatistic, xStatistic);
 	}
 
@@ -562,12 +558,17 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 	
 	
+	/**
+	 * This method can be used to estimate Z value with incomplete profile.
+	 * In other words, it is possible to test with incomplete testing data.
+	 */
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		if (this.estimatedParameter == null)
+		ExchangedParameter parameter = this.getExchangedParameter(); 
+		if (parameter == null)
 			return null;
-		List<Double> alpha = ((ExchangedParameter)this.estimatedParameter).getAlpha();
+		List<Double> alpha = parameter.getAlpha();
 		if (alpha == null || alpha.size() == 0)
 			return null;
 		
@@ -576,11 +577,39 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		Profile profile = (Profile)input;
 		
 		double sum = alpha.get(0);
-		for (int j = 0; j < alpha.size() - 1; j++) {
-			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn-1) and so index 0 indicates value 1.
-			if (!Util.isUsed(value))
+		for (int j = 1; j < alpha.size(); j++) {
+			double xj = extractRegressor(profile, j); //due to x = (1, x1, x2,..., xn-1) and so index 0 indicates value 1.
+			if (Util.isUsed(xj)) {
+				sum += alpha.get(j) * (double)transformRegressor(xj, false);
+				continue;
+			}
+			List<double[]> betas = parameter.getBetas();
+			if (betas == null || betas.size() == 0)
 				return null;
-			sum += alpha.get(j + 1) * (double)transformRegressor(value, false); 
+			
+			double[] betaj = betas.get(j);
+			double zValue = extractNumber(extractResponse(profile));
+			if (Util.isUsed(zValue))
+				xj = betaj[0] + betaj[1] * zValue; //Calculating xj based on Z. 
+			else {
+				xj = 0;
+				int K = 0;
+				for (int k = 1; k < alpha.size() && k != j; k++) {
+					double xk = extractRegressor(profile, k);
+					if (Util.isUsed(xk) && betas.get(k)[1] != 0) {
+						double[] betak = betas.get(k);
+						xj += betaj[0] + betaj[1] * ((xk-betak[0])/betak[1]); //Calculating xj based on other x.
+						K ++;
+					}
+				}
+				
+				if (K == 0)
+					continue;
+				else
+					xj = xj / K; //xj is average of all other x.
+			}
+			
+			sum += alpha.get(j) * (double)transformRegressor(xj, false);
 		}
 		
 		return transformResponse(sum, true);
@@ -663,8 +692,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				buffer.append(" + " + MathUtil.format(coeff) + "*" + regressorExpr);
 		}
 		
-		if (exParameter.getZInfo() != null)
-			buffer.append(": " + exParameter.getZInfo().toString());
+		buffer.append(": ");
+		buffer.append("coeff=" + exParameter.getCoeff());
+		buffer.append(", z-variance=" + exParameter.getZVariance());
 
 		return buffer.toString();
 	}
