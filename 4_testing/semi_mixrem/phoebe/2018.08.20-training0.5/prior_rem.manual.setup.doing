@@ -1,0 +1,2061 @@
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base"
+Current parameter:
+  -5686.8907, 46.2369, 1.7148, 14.3173, 9.3881: coeff=NaN, z-variance=54055.9870, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8907, 46.2369, 1.7148, 14.3173, 9.3881: coeff=NaN, z-variance=54055.9870, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5599.3621, 45.9801, 0.3958, 16.2667, 10.0791: coeff=NaN, z-variance=56318.3388, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8832, 46.2433, 1.7155, 14.3107, 9.3870: coeff=NaN, z-variance=45590.7558, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5686.8832, 46.2433, 1.7155, 14.3107, 9.3870: coeff=NaN, z-variance=45590.7558, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8921, 46.2433, 1.7153, 14.3115, 9.3871: coeff=NaN, z-variance=45376.0882, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  -5686.8921, 46.2433, 1.7153, 14.3115, 9.3871: coeff=NaN, z-variance=45376.0882, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8943, 46.2433, 1.7153, 14.3115, 9.3871: coeff=NaN, z-variance=45353.8184, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5626.4431, 47.1544, 2.0295, 5.3492, 10.4663: coeff=NaN, z-variance=42582.5205, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.6056, 46.2523, 1.7131, 14.3073, 9.3867: coeff=NaN, z-variance=34103.2973, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5686.6056, 46.2523, 1.7131, 14.3073, 9.3867: coeff=NaN, z-variance=34103.2973, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.5356, 46.2541, 1.7131, 14.2996, 9.3877: coeff=NaN, z-variance=34073.4807, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5686.5356, 46.2541, 1.7131, 14.2996, 9.3877: coeff=NaN, z-variance=34073.4807, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.5339, 46.2542, 1.7131, 14.2993, 9.3877: coeff=NaN, z-variance=34095.6635, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  -5686.5339, 46.2542, 1.7131, 14.2993, 9.3877: coeff=NaN, z-variance=34095.6635, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.5338, 46.2542, 1.7131, 14.2992, 9.3877: coeff=NaN, z-variance=34099.0716, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -6131.6509, 61.2119, 2.6641, 2.8617, 8.0833: coeff=NaN, z-variance=37047.3185, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.9211, 46.2244, 1.7033, 14.3160, 9.3971: coeff=NaN, z-variance=25334.6533, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -5684.9211, 46.2244, 1.7033, 14.3160, 9.3971: coeff=NaN, z-variance=25334.6533, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.4931, 46.2430, 1.7052, 14.2983, 9.3956: coeff=NaN, z-variance=24233.2402, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -5685.4931, 46.2430, 1.7052, 14.2983, 9.3956: coeff=NaN, z-variance=24233.2402, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.5190, 46.2431, 1.7052, 14.2983, 9.3956: coeff=NaN, z-variance=24138.1339, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -5685.5190, 46.2431, 1.7052, 14.2983, 9.3956: coeff=NaN, z-variance=24138.1339, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.5252, 46.2432, 1.7052, 14.2982, 9.3956: coeff=NaN, z-variance=24116.1568, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  -5685.5252, 46.2432, 1.7052, 14.2982, 9.3956: coeff=NaN, z-variance=24116.1568, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.5266, 46.2432, 1.7052, 14.2981, 9.3956: coeff=NaN, z-variance=24110.5898, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5419.1859, 44.4876, -1.6620, 15.1019, 12.2747: coeff=NaN, z-variance=43916.9564, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.3254, 46.2450, 1.7274, 14.2806, 9.3787: coeff=NaN, z-variance=23816.8879, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5686.3254, 46.2450, 1.7274, 14.2806, 9.3787: coeff=NaN, z-variance=23816.8879, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.7364, 46.2516, 1.7138, 14.2869, 9.3874: coeff=NaN, z-variance=17331.6587, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5685.7364, 46.2516, 1.7138, 14.2869, 9.3874: coeff=NaN, z-variance=17331.6587, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.9744, 46.2605, 1.7119, 14.2820, 9.3888: coeff=NaN, z-variance=16608.1855, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5685.9744, 46.2605, 1.7119, 14.2820, 9.3888: coeff=NaN, z-variance=16608.1855, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.0722, 46.2633, 1.7112, 14.2808, 9.3892: coeff=NaN, z-variance=16439.4100, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5686.0722, 46.2633, 1.7112, 14.2808, 9.3892: coeff=NaN, z-variance=16439.4100, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.1062, 46.2642, 1.7110, 14.2805, 9.3893: coeff=NaN, z-variance=16394.6245, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5686.1062, 46.2642, 1.7110, 14.2805, 9.3893: coeff=NaN, z-variance=16394.6245, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.1178, 46.2646, 1.7109, 14.2805, 9.3894: coeff=NaN, z-variance=16381.9116, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5686.1178, 46.2646, 1.7109, 14.2805, 9.3894: coeff=NaN, z-variance=16381.9116, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.1218, 46.2647, 1.7109, 14.2804, 9.3894: coeff=NaN, z-variance=16378.0997, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  -5686.1218, 46.2647, 1.7109, 14.2804, 9.3894: coeff=NaN, z-variance=16378.0997, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.1232, 46.2647, 1.7109, 14.2804, 9.3894: coeff=NaN, z-variance=16376.8950, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -7513.3167, 78.5625, -1.0295, 7.0683, 10.6146: coeff=NaN, z-variance=52276.3593, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.8999, 46.1616, 1.7240, 14.2940, 9.3821: coeff=NaN, z-variance=32953.1096, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5679.8999, 46.1616, 1.7240, 14.2940, 9.3821: coeff=NaN, z-variance=32953.1096, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5683.7775, 46.2293, 1.7128, 14.2893, 9.3879: coeff=NaN, z-variance=19172.4049, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5683.7775, 46.2293, 1.7128, 14.2893, 9.3879: coeff=NaN, z-variance=19172.4049, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.1625, 46.2352, 1.7094, 14.2851, 9.3917: coeff=NaN, z-variance=16001.4540, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.1625, 46.2352, 1.7094, 14.2851, 9.3917: coeff=NaN, z-variance=16001.4540, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.4084, 46.2410, 1.7073, 14.2833, 9.3934: coeff=NaN, z-variance=15124.6221, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.4084, 46.2410, 1.7073, 14.2833, 9.3934: coeff=NaN, z-variance=15124.6221, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5126, 46.2439, 1.7062, 14.2830, 9.3941: coeff=NaN, z-variance=14816.9915, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.5126, 46.2439, 1.7062, 14.2830, 9.3941: coeff=NaN, z-variance=14816.9915, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5541, 46.2453, 1.7057, 14.2831, 9.3943: coeff=NaN, z-variance=14691.4922, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.5541, 46.2453, 1.7057, 14.2831, 9.3943: coeff=NaN, z-variance=14691.4922, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5708, 46.2460, 1.7054, 14.2832, 9.3944: coeff=NaN, z-variance=14634.6948, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.5708, 46.2460, 1.7054, 14.2832, 9.3944: coeff=NaN, z-variance=14634.6948, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5779, 46.2464, 1.7053, 14.2833, 9.3945: coeff=NaN, z-variance=14606.8966, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 9 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.5779, 46.2464, 1.7053, 14.2833, 9.3945: coeff=NaN, z-variance=14606.8966, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5810, 46.2465, 1.7052, 14.2833, 9.3945: coeff=NaN, z-variance=14592.4711, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 10 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  -5684.5810, 46.2465, 1.7052, 14.2833, 9.3945: coeff=NaN, z-variance=14592.4711, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.5825, 46.2466, 1.7052, 14.2833, 9.3945: coeff=NaN, z-variance=14584.6660, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -2570.3974, -63.5893, -3.3324, 55.5394, 26.8686: coeff=NaN, z-variance=0.0000, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5690.7462, 46.3860, 1.7154, 14.2866, 9.3642: coeff=NaN, z-variance=45500.2795, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5690.7462, 46.3860, 1.7154, 14.2866, 9.3642: coeff=NaN, z-variance=45500.2795, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.2313, 46.3077, 1.7136, 14.2671, 9.3740: coeff=NaN, z-variance=7770.7674, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5685.2313, 46.3077, 1.7136, 14.2671, 9.3740: coeff=NaN, z-variance=7770.7674, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.2951, 46.3569, 1.7100, 14.2043, 9.3808: coeff=NaN, z-variance=6496.6650, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5686.2951, 46.3569, 1.7100, 14.2043, 9.3808: coeff=NaN, z-variance=6496.6650, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8496, 46.3793, 1.7076, 14.1737, 9.3854: coeff=NaN, z-variance=6038.3032, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5686.8496, 46.3793, 1.7076, 14.1737, 9.3854: coeff=NaN, z-variance=6038.3032, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.1254, 46.3885, 1.7063, 14.1616, 9.3877: coeff=NaN, z-variance=5847.9025, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5687.1254, 46.3885, 1.7063, 14.1616, 9.3877: coeff=NaN, z-variance=5847.9025, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.2630, 46.3923, 1.7058, 14.1566, 9.3887: coeff=NaN, z-variance=5759.4246, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5687.2630, 46.3923, 1.7058, 14.1566, 9.3887: coeff=NaN, z-variance=5759.4246, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.3350, 46.3939, 1.7056, 14.1545, 9.3892: coeff=NaN, z-variance=5714.3081, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5687.3350, 46.3939, 1.7056, 14.1545, 9.3892: coeff=NaN, z-variance=5714.3081, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.3755, 46.3947, 1.7055, 14.1534, 9.3894: coeff=NaN, z-variance=5689.3174, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 9 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5687.3755, 46.3947, 1.7055, 14.1534, 9.3894: coeff=NaN, z-variance=5689.3174, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.3997, 46.3950, 1.7055, 14.1529, 9.3896: coeff=NaN, z-variance=5674.4496, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 10 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  -5687.3997, 46.3950, 1.7055, 14.1529, 9.3896: coeff=NaN, z-variance=5674.4496, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.4150, 46.3952, 1.7055, 14.1525, 9.3897: coeff=NaN, z-variance=5665.0834, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  1242.9984, 3.6074, 8.6385, 25.9213, -9.7006: coeff=NaN, z-variance=0.0000, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5698.5619, 46.3362, 1.6979, 14.2911, 9.4193: coeff=NaN, z-variance=2232967.7282, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5698.5619, 46.3362, 1.6979, 14.2911, 9.4193: coeff=NaN, z-variance=2232967.7282, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.6886, 46.1779, 1.7119, 14.2916, 9.4150: coeff=NaN, z-variance=23472.2527, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5687.6886, 46.1779, 1.7119, 14.2916, 9.4150: coeff=NaN, z-variance=23472.2527, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.4980, 45.9956, 1.7150, 14.2644, 9.4608: coeff=NaN, z-variance=5535.1835, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5685.4980, 45.9956, 1.7150, 14.2644, 9.4608: coeff=NaN, z-variance=5535.1835, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5685.5880, 45.9466, 1.7121, 14.2322, 9.4839: coeff=NaN, z-variance=3724.1566, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5685.5880, 45.9466, 1.7121, 14.2322, 9.4839: coeff=NaN, z-variance=3724.1566, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.8716, 45.9437, 1.7059, 14.2237, 9.4904: coeff=NaN, z-variance=3322.9365, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5684.8716, 45.9437, 1.7059, 14.2237, 9.4904: coeff=NaN, z-variance=3322.9365, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5683.8556, 45.9441, 1.6998, 14.2268, 9.4925: coeff=NaN, z-variance=3141.8552, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5683.8556, 45.9441, 1.6998, 14.2268, 9.4925: coeff=NaN, z-variance=3141.8552, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5683.1106, 45.9439, 1.6955, 14.2302, 9.4940: coeff=NaN, z-variance=3063.2086, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5683.1106, 45.9439, 1.6955, 14.2302, 9.4940: coeff=NaN, z-variance=3063.2086, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5682.2799, 45.9422, 1.6919, 14.2332, 9.4949: coeff=NaN, z-variance=3009.6932, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 9 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5682.2799, 45.9422, 1.6919, 14.2332, 9.4949: coeff=NaN, z-variance=3009.6932, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5681.3205, 45.9390, 1.6888, 14.2359, 9.4954: coeff=NaN, z-variance=2968.4640, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 10 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5681.3205, 45.9390, 1.6888, 14.2359, 9.4954: coeff=NaN, z-variance=2968.4640, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5680.2247, 45.9347, 1.6861, 14.2382, 9.4954: coeff=NaN, z-variance=2933.9206, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 11 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5680.2247, 45.9347, 1.6861, 14.2382, 9.4954: coeff=NaN, z-variance=2933.9206, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.0740, 45.9297, 1.6841, 14.2399, 9.4948: coeff=NaN, z-variance=2906.0464, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 12 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5679.0740, 45.9297, 1.6841, 14.2399, 9.4948: coeff=NaN, z-variance=2906.0464, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.9937, 45.9244, 1.6830, 14.2405, 9.4938: coeff=NaN, z-variance=2885.8324, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 13 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5677.9937, 45.9244, 1.6830, 14.2405, 9.4938: coeff=NaN, z-variance=2885.8324, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.0741, 45.9191, 1.6829, 14.2400, 9.4925: coeff=NaN, z-variance=2872.6187, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 14 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5677.0741, 45.9191, 1.6829, 14.2400, 9.4925: coeff=NaN, z-variance=2872.6187, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.3391, 45.9144, 1.6833, 14.2389, 9.4913: coeff=NaN, z-variance=2864.5735, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 15 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5676.3391, 45.9144, 1.6833, 14.2389, 9.4913: coeff=NaN, z-variance=2864.5735, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.7706, 45.9106, 1.6840, 14.2374, 9.4901: coeff=NaN, z-variance=2859.9234, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 16 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5675.7706, 45.9106, 1.6840, 14.2374, 9.4901: coeff=NaN, z-variance=2859.9234, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.3366, 45.9076, 1.6848, 14.2359, 9.4891: coeff=NaN, z-variance=2857.3776, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 17 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5675.3366, 45.9076, 1.6848, 14.2359, 9.4891: coeff=NaN, z-variance=2857.3776, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.0060, 45.9054, 1.6855, 14.2345, 9.4882: coeff=NaN, z-variance=2856.0924, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 18 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5675.0060, 45.9054, 1.6855, 14.2345, 9.4882: coeff=NaN, z-variance=2856.0924, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.7531, 45.9038, 1.6861, 14.2332, 9.4874: coeff=NaN, z-variance=2855.5412, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 19 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.7531, 45.9038, 1.6861, 14.2332, 9.4874: coeff=NaN, z-variance=2855.5412, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.5586, 45.9028, 1.6867, 14.2321, 9.4868: coeff=NaN, z-variance=2855.4026, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 20 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.5586, 45.9028, 1.6867, 14.2321, 9.4868: coeff=NaN, z-variance=2855.4026, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.4080, 45.9021, 1.6871, 14.2311, 9.4863: coeff=NaN, z-variance=2855.4842, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 21 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.4080, 45.9021, 1.6871, 14.2311, 9.4863: coeff=NaN, z-variance=2855.4842, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.2907, 45.9017, 1.6874, 14.2303, 9.4859: coeff=NaN, z-variance=2855.6724, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 22 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.2907, 45.9017, 1.6874, 14.2303, 9.4859: coeff=NaN, z-variance=2855.6724, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.1988, 45.9015, 1.6877, 14.2296, 9.4855: coeff=NaN, z-variance=2855.9021, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 23 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.1988, 45.9015, 1.6877, 14.2296, 9.4855: coeff=NaN, z-variance=2855.9021, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.1264, 45.9014, 1.6878, 14.2290, 9.4853: coeff=NaN, z-variance=2856.1371, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 24 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.1264, 45.9014, 1.6878, 14.2290, 9.4853: coeff=NaN, z-variance=2856.1371, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.0692, 45.9015, 1.6880, 14.2285, 9.4850: coeff=NaN, z-variance=2856.3585, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 25 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.0692, 45.9015, 1.6880, 14.2285, 9.4850: coeff=NaN, z-variance=2856.3585, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.0238, 45.9015, 1.6881, 14.2281, 9.4848: coeff=NaN, z-variance=2856.5577, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 26 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  -5674.0238, 45.9015, 1.6881, 14.2281, 9.4848: coeff=NaN, z-variance=2856.5577, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.9877, 45.9016, 1.6882, 14.2278, 9.4847: coeff=NaN, z-variance=2856.7318, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  0.0000, 0.0000, 0.0000, 0.0000, 0.0000: coeff=NaN, z-variance=NaN, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.3173, 46.2400, 1.7149, 14.3182, 9.3888: coeff=NaN, z-variance=25489378.8852, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5687.3173, 46.2400, 1.7149, 14.3182, 9.3888: coeff=NaN, z-variance=25489378.8852, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.9162, 46.2369, 1.7148, 14.3172, 9.3882: coeff=NaN, z-variance=5931967.3408, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5686.9162, 46.2369, 1.7148, 14.3172, 9.3882: coeff=NaN, z-variance=5931967.3408, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8852, 46.2361, 1.7148, 14.3170, 9.3881: coeff=NaN, z-variance=2088200.2968, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5686.8852, 46.2361, 1.7148, 14.3170, 9.3881: coeff=NaN, z-variance=2088200.2968, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.8270, 46.2344, 1.7148, 14.3171, 9.3882: coeff=NaN, z-variance=625972.8551, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5686.8270, 46.2344, 1.7148, 14.3171, 9.3882: coeff=NaN, z-variance=625972.8551, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.7764, 46.2286, 1.7150, 14.3184, 9.3888: coeff=NaN, z-variance=153609.0491, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5686.7764, 46.2286, 1.7150, 14.3184, 9.3888: coeff=NaN, z-variance=153609.0491, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.1386, 46.2032, 1.7166, 14.3274, 9.3932: coeff=NaN, z-variance=31416.7407, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5687.1386, 46.2032, 1.7166, 14.3274, 9.3932: coeff=NaN, z-variance=31416.7407, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5689.8518, 46.1102, 1.7241, 14.3509, 9.4154: coeff=NaN, z-variance=7382.3245, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5689.8518, 46.1102, 1.7241, 14.3509, 9.4154: coeff=NaN, z-variance=7382.3245, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5692.5908, 46.0575, 1.7292, 14.2760, 9.4487: coeff=NaN, z-variance=3728.9996, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 9 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5692.5908, 46.0575, 1.7292, 14.2760, 9.4487: coeff=NaN, z-variance=3728.9996, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5691.7040, 46.0946, 1.7185, 14.1827, 9.4644: coeff=NaN, z-variance=3167.6447, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 10 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5691.7040, 46.0946, 1.7185, 14.1827, 9.4644: coeff=NaN, z-variance=3167.6447, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5690.3375, 46.1230, 1.7057, 14.1476, 9.4716: coeff=NaN, z-variance=2994.1618, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 11 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5690.3375, 46.1230, 1.7057, 14.1476, 9.4716: coeff=NaN, z-variance=2994.1618, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5688.9561, 46.1530, 1.6925, 14.1190, 9.4777: coeff=NaN, z-variance=2889.6780, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 12 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5688.9561, 46.1530, 1.6925, 14.1190, 9.4777: coeff=NaN, z-variance=2889.6780, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.5413, 46.1863, 1.6781, 14.0921, 9.4836: coeff=NaN, z-variance=2813.6092, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 13 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5687.5413, 46.1863, 1.6781, 14.0921, 9.4836: coeff=NaN, z-variance=2813.6092, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.1519, 46.2206, 1.6633, 14.0682, 9.4894: coeff=NaN, z-variance=2755.0056, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 14 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5686.1519, 46.2206, 1.6633, 14.0682, 9.4894: coeff=NaN, z-variance=2755.0056, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.8611, 46.2531, 1.6490, 14.0487, 9.4947: coeff=NaN, z-variance=2708.4155, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 15 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5684.8611, 46.2531, 1.6490, 14.0487, 9.4947: coeff=NaN, z-variance=2708.4155, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5683.7253, 46.2818, 1.6361, 14.0342, 9.4994: coeff=NaN, z-variance=2670.2707, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 16 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5683.7253, 46.2818, 1.6361, 14.0342, 9.4994: coeff=NaN, z-variance=2670.2707, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5682.7723, 46.3056, 1.6250, 14.0246, 9.5033: coeff=NaN, z-variance=2638.0394, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 17 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5682.7723, 46.3056, 1.6250, 14.0246, 9.5033: coeff=NaN, z-variance=2638.0394, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5682.0018, 46.3241, 1.6159, 14.0192, 9.5064: coeff=NaN, z-variance=2609.8964, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 18 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5682.0018, 46.3241, 1.6159, 14.0192, 9.5064: coeff=NaN, z-variance=2609.8964, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5681.3936, 46.3378, 1.6087, 14.0174, 9.5087: coeff=NaN, z-variance=2584.5277, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 19 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5681.3936, 46.3378, 1.6087, 14.0174, 9.5087: coeff=NaN, z-variance=2584.5277, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5680.9180, 46.3473, 1.6032, 14.0182, 9.5104: coeff=NaN, z-variance=2560.9901, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 20 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5680.9180, 46.3473, 1.6032, 14.0182, 9.5104: coeff=NaN, z-variance=2560.9901, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5680.5438, 46.3534, 1.5989, 14.0208, 9.5116: coeff=NaN, z-variance=2538.6090, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 21 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5680.5438, 46.3534, 1.5989, 14.0208, 9.5116: coeff=NaN, z-variance=2538.6090, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5680.2427, 46.3571, 1.5957, 14.0246, 9.5124: coeff=NaN, z-variance=2516.9042, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 22 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5680.2427, 46.3571, 1.5957, 14.0246, 9.5124: coeff=NaN, z-variance=2516.9042, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.9917, 46.3588, 1.5933, 14.0291, 9.5130: coeff=NaN, z-variance=2495.5385, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 23 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.9917, 46.3588, 1.5933, 14.0291, 9.5130: coeff=NaN, z-variance=2495.5385, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.7731, 46.3591, 1.5914, 14.0339, 9.5134: coeff=NaN, z-variance=2474.2812, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 24 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.7731, 46.3591, 1.5914, 14.0339, 9.5134: coeff=NaN, z-variance=2474.2812, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.5738, 46.3585, 1.5899, 14.0388, 9.5136: coeff=NaN, z-variance=2452.9825, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 25 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.5738, 46.3585, 1.5899, 14.0388, 9.5136: coeff=NaN, z-variance=2452.9825, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.3848, 46.3572, 1.5888, 14.0436, 9.5137: coeff=NaN, z-variance=2431.5549, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 26 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.3848, 46.3572, 1.5888, 14.0436, 9.5137: coeff=NaN, z-variance=2431.5549, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.1999, 46.3555, 1.5878, 14.0483, 9.5138: coeff=NaN, z-variance=2409.9592, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 27 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.1999, 46.3555, 1.5878, 14.0483, 9.5138: coeff=NaN, z-variance=2409.9592, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5679.0153, 46.3534, 1.5870, 14.0527, 9.5138: coeff=NaN, z-variance=2388.1934, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 28 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5679.0153, 46.3534, 1.5870, 14.0527, 9.5138: coeff=NaN, z-variance=2388.1934, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5678.8288, 46.3512, 1.5862, 14.0568, 9.5138: coeff=NaN, z-variance=2366.2837, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 29 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5678.8288, 46.3512, 1.5862, 14.0568, 9.5138: coeff=NaN, z-variance=2366.2837, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5678.6395, 46.3489, 1.5856, 14.0608, 9.5138: coeff=NaN, z-variance=2344.2767, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 30 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5678.6395, 46.3489, 1.5856, 14.0608, 9.5138: coeff=NaN, z-variance=2344.2767, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5678.4470, 46.3466, 1.5850, 14.0645, 9.5137: coeff=NaN, z-variance=2322.2331, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 31 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5678.4470, 46.3466, 1.5850, 14.0645, 9.5137: coeff=NaN, z-variance=2322.2331, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5678.2518, 46.3442, 1.5844, 14.0681, 9.5136: coeff=NaN, z-variance=2300.2220, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 32 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5678.2518, 46.3442, 1.5844, 14.0681, 9.5136: coeff=NaN, z-variance=2300.2220, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5678.0545, 46.3419, 1.5839, 14.0715, 9.5135: coeff=NaN, z-variance=2278.3164, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 33 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5678.0545, 46.3419, 1.5839, 14.0715, 9.5135: coeff=NaN, z-variance=2278.3164, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.8560, 46.3396, 1.5834, 14.0747, 9.5134: coeff=NaN, z-variance=2256.5887, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 34 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5677.8560, 46.3396, 1.5834, 14.0747, 9.5134: coeff=NaN, z-variance=2256.5887, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.6574, 46.3374, 1.5830, 14.0779, 9.5133: coeff=NaN, z-variance=2235.1085, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 35 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5677.6574, 46.3374, 1.5830, 14.0779, 9.5133: coeff=NaN, z-variance=2235.1085, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.4595, 46.3352, 1.5825, 14.0810, 9.5131: coeff=NaN, z-variance=2213.9394, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 36 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5677.4595, 46.3352, 1.5825, 14.0810, 9.5131: coeff=NaN, z-variance=2213.9394, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.2634, 46.3331, 1.5821, 14.0840, 9.5128: coeff=NaN, z-variance=2193.1384, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 37 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5677.2634, 46.3331, 1.5821, 14.0840, 9.5128: coeff=NaN, z-variance=2193.1384, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5677.0700, 46.3311, 1.5817, 14.0870, 9.5126: coeff=NaN, z-variance=2172.7540, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 38 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5677.0700, 46.3311, 1.5817, 14.0870, 9.5126: coeff=NaN, z-variance=2172.7540, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.8800, 46.3292, 1.5813, 14.0899, 9.5123: coeff=NaN, z-variance=2152.8267, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 39 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.8800, 46.3292, 1.5813, 14.0899, 9.5123: coeff=NaN, z-variance=2152.8267, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.6942, 46.3274, 1.5810, 14.0928, 9.5120: coeff=NaN, z-variance=2133.3883, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 40 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.6942, 46.3274, 1.5810, 14.0928, 9.5120: coeff=NaN, z-variance=2133.3883, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.5130, 46.3256, 1.5806, 14.0957, 9.5117: coeff=NaN, z-variance=2114.4629, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 41 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.5130, 46.3256, 1.5806, 14.0957, 9.5117: coeff=NaN, z-variance=2114.4629, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.3371, 46.3240, 1.5803, 14.0986, 9.5113: coeff=NaN, z-variance=2096.0673, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 42 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.3371, 46.3240, 1.5803, 14.0986, 9.5113: coeff=NaN, z-variance=2096.0673, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.1666, 46.3224, 1.5800, 14.1014, 9.5109: coeff=NaN, z-variance=2078.2115, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 43 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.1666, 46.3224, 1.5800, 14.1014, 9.5109: coeff=NaN, z-variance=2078.2115, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5676.0020, 46.3210, 1.5798, 14.1043, 9.5105: coeff=NaN, z-variance=2060.9001, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 44 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5676.0020, 46.3210, 1.5798, 14.1043, 9.5105: coeff=NaN, z-variance=2060.9001, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.8434, 46.3196, 1.5795, 14.1071, 9.5100: coeff=NaN, z-variance=2044.1326, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 45 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.8434, 46.3196, 1.5795, 14.1071, 9.5100: coeff=NaN, z-variance=2044.1326, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.6908, 46.3183, 1.5793, 14.1100, 9.5095: coeff=NaN, z-variance=2027.9043, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 46 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.6908, 46.3183, 1.5793, 14.1100, 9.5095: coeff=NaN, z-variance=2027.9043, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.5444, 46.3172, 1.5791, 14.1128, 9.5090: coeff=NaN, z-variance=2012.2075, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 47 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.5444, 46.3172, 1.5791, 14.1128, 9.5090: coeff=NaN, z-variance=2012.2075, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.4041, 46.3161, 1.5789, 14.1156, 9.5085: coeff=NaN, z-variance=1997.0315, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 48 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.4041, 46.3161, 1.5789, 14.1156, 9.5085: coeff=NaN, z-variance=1997.0315, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.2700, 46.3151, 1.5787, 14.1184, 9.5079: coeff=NaN, z-variance=1982.3638, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 49 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.2700, 46.3151, 1.5787, 14.1184, 9.5079: coeff=NaN, z-variance=1982.3638, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.1418, 46.3142, 1.5785, 14.1211, 9.5074: coeff=NaN, z-variance=1968.1903, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 50 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.1418, 46.3142, 1.5785, 14.1211, 9.5074: coeff=NaN, z-variance=1968.1903, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.0195, 46.3134, 1.5784, 14.1239, 9.5068: coeff=NaN, z-variance=1954.4959, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 51 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5675.0195, 46.3134, 1.5784, 14.1239, 9.5068: coeff=NaN, z-variance=1954.4959, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.9030, 46.3126, 1.5783, 14.1266, 9.5062: coeff=NaN, z-variance=1941.2646, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 52 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.9030, 46.3126, 1.5783, 14.1266, 9.5062: coeff=NaN, z-variance=1941.2646, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.7920, 46.3120, 1.5781, 14.1293, 9.5056: coeff=NaN, z-variance=1928.4801, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 53 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.7920, 46.3120, 1.5781, 14.1293, 9.5056: coeff=NaN, z-variance=1928.4801, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.6865, 46.3114, 1.5780, 14.1320, 9.5050: coeff=NaN, z-variance=1916.1260, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 54 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.6865, 46.3114, 1.5780, 14.1320, 9.5050: coeff=NaN, z-variance=1916.1260, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.5863, 46.3109, 1.5779, 14.1346, 9.5044: coeff=NaN, z-variance=1904.1859, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 55 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.5863, 46.3109, 1.5779, 14.1346, 9.5044: coeff=NaN, z-variance=1904.1859, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.4911, 46.3104, 1.5778, 14.1372, 9.5037: coeff=NaN, z-variance=1892.6435, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 56 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.4911, 46.3104, 1.5778, 14.1372, 9.5037: coeff=NaN, z-variance=1892.6435, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.4009, 46.3101, 1.5778, 14.1398, 9.5031: coeff=NaN, z-variance=1881.4831, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 57 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.4009, 46.3101, 1.5778, 14.1398, 9.5031: coeff=NaN, z-variance=1881.4831, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.3153, 46.3098, 1.5777, 14.1423, 9.5025: coeff=NaN, z-variance=1870.6891, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 58 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.3153, 46.3098, 1.5777, 14.1423, 9.5025: coeff=NaN, z-variance=1870.6891, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.2342, 46.3095, 1.5776, 14.1448, 9.5018: coeff=NaN, z-variance=1860.2466, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 59 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.2342, 46.3095, 1.5776, 14.1448, 9.5018: coeff=NaN, z-variance=1860.2466, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.1576, 46.3093, 1.5776, 14.1473, 9.5012: coeff=NaN, z-variance=1850.1410, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 60 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.1576, 46.3093, 1.5776, 14.1473, 9.5012: coeff=NaN, z-variance=1850.1410, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.0850, 46.3092, 1.5775, 14.1498, 9.5005: coeff=NaN, z-variance=1840.3583, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 61 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.0850, 46.3092, 1.5775, 14.1498, 9.5005: coeff=NaN, z-variance=1840.3583, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.0165, 46.3091, 1.5775, 14.1522, 9.4999: coeff=NaN, z-variance=1830.8852, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 62 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5674.0165, 46.3091, 1.5775, 14.1522, 9.4999: coeff=NaN, z-variance=1830.8852, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.9518, 46.3091, 1.5774, 14.1545, 9.4992: coeff=NaN, z-variance=1821.7089, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 63 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.9518, 46.3091, 1.5774, 14.1545, 9.4992: coeff=NaN, z-variance=1821.7089, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.8908, 46.3092, 1.5774, 14.1569, 9.4986: coeff=NaN, z-variance=1812.8171, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 64 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.8908, 46.3092, 1.5774, 14.1569, 9.4986: coeff=NaN, z-variance=1812.8171, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.8333, 46.3092, 1.5774, 14.1592, 9.4979: coeff=NaN, z-variance=1804.1981, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 65 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.8333, 46.3092, 1.5774, 14.1592, 9.4979: coeff=NaN, z-variance=1804.1981, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.7791, 46.3093, 1.5773, 14.1614, 9.4973: coeff=NaN, z-variance=1795.8407, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 66 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.7791, 46.3093, 1.5773, 14.1614, 9.4973: coeff=NaN, z-variance=1795.8407, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.7281, 46.3095, 1.5773, 14.1636, 9.4966: coeff=NaN, z-variance=1787.7343, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 67 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.7281, 46.3095, 1.5773, 14.1636, 9.4966: coeff=NaN, z-variance=1787.7343, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.6802, 46.3097, 1.5773, 14.1658, 9.4960: coeff=NaN, z-variance=1779.8687, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 68 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.6802, 46.3097, 1.5773, 14.1658, 9.4960: coeff=NaN, z-variance=1779.8687, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.6353, 46.3099, 1.5773, 14.1680, 9.4953: coeff=NaN, z-variance=1772.2343, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 69 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.6353, 46.3099, 1.5773, 14.1680, 9.4953: coeff=NaN, z-variance=1772.2343, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.5931, 46.3102, 1.5773, 14.1701, 9.4947: coeff=NaN, z-variance=1764.8219, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 70 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.5931, 46.3102, 1.5773, 14.1701, 9.4947: coeff=NaN, z-variance=1764.8219, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.5536, 46.3105, 1.5773, 14.1721, 9.4941: coeff=NaN, z-variance=1757.6227, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 71 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.5536, 46.3105, 1.5773, 14.1721, 9.4941: coeff=NaN, z-variance=1757.6227, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.5167, 46.3108, 1.5773, 14.1742, 9.4934: coeff=NaN, z-variance=1750.6284, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 72 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.5167, 46.3108, 1.5773, 14.1742, 9.4934: coeff=NaN, z-variance=1750.6284, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.4822, 46.3112, 1.5773, 14.1762, 9.4928: coeff=NaN, z-variance=1743.8311, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 73 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.4822, 46.3112, 1.5773, 14.1762, 9.4928: coeff=NaN, z-variance=1743.8311, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.4501, 46.3116, 1.5773, 14.1781, 9.4922: coeff=NaN, z-variance=1737.2232, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 74 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.4501, 46.3116, 1.5773, 14.1781, 9.4922: coeff=NaN, z-variance=1737.2232, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.4201, 46.3120, 1.5773, 14.1801, 9.4916: coeff=NaN, z-variance=1730.7976, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 75 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.4201, 46.3120, 1.5773, 14.1801, 9.4916: coeff=NaN, z-variance=1730.7976, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.3923, 46.3124, 1.5773, 14.1820, 9.4910: coeff=NaN, z-variance=1724.5473, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 76 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.3923, 46.3124, 1.5773, 14.1820, 9.4910: coeff=NaN, z-variance=1724.5473, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.3665, 46.3129, 1.5773, 14.1838, 9.4904: coeff=NaN, z-variance=1718.4660, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 77 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.3665, 46.3129, 1.5773, 14.1838, 9.4904: coeff=NaN, z-variance=1718.4660, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.3427, 46.3134, 1.5773, 14.1856, 9.4898: coeff=NaN, z-variance=1712.5473, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 78 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.3427, 46.3134, 1.5773, 14.1856, 9.4898: coeff=NaN, z-variance=1712.5473, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.3207, 46.3139, 1.5773, 14.1874, 9.4892: coeff=NaN, z-variance=1706.7853, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 79 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.3207, 46.3139, 1.5773, 14.1874, 9.4892: coeff=NaN, z-variance=1706.7853, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.3005, 46.3144, 1.5773, 14.1892, 9.4886: coeff=NaN, z-variance=1701.1744, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 80 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.3005, 46.3144, 1.5773, 14.1892, 9.4886: coeff=NaN, z-variance=1701.1744, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2819, 46.3149, 1.5773, 14.1909, 9.4880: coeff=NaN, z-variance=1695.7091, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 81 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2819, 46.3149, 1.5773, 14.1909, 9.4880: coeff=NaN, z-variance=1695.7091, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2650, 46.3154, 1.5774, 14.1926, 9.4874: coeff=NaN, z-variance=1690.3844, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 82 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2650, 46.3154, 1.5774, 14.1926, 9.4874: coeff=NaN, z-variance=1690.3844, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2496, 46.3160, 1.5774, 14.1943, 9.4869: coeff=NaN, z-variance=1685.1953, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 83 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2496, 46.3160, 1.5774, 14.1943, 9.4869: coeff=NaN, z-variance=1685.1953, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2357, 46.3166, 1.5774, 14.1959, 9.4863: coeff=NaN, z-variance=1680.1370, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 84 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2357, 46.3166, 1.5774, 14.1959, 9.4863: coeff=NaN, z-variance=1680.1370, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2231, 46.3172, 1.5774, 14.1975, 9.4858: coeff=NaN, z-variance=1675.2051, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 85 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2231, 46.3172, 1.5774, 14.1975, 9.4858: coeff=NaN, z-variance=1675.2051, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2119, 46.3178, 1.5774, 14.1991, 9.4852: coeff=NaN, z-variance=1670.3953, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 86 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2119, 46.3178, 1.5774, 14.1991, 9.4852: coeff=NaN, z-variance=1670.3953, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.2020, 46.3184, 1.5775, 14.2006, 9.4847: coeff=NaN, z-variance=1665.7034, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 87 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.2020, 46.3184, 1.5775, 14.2006, 9.4847: coeff=NaN, z-variance=1665.7034, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1932, 46.3190, 1.5775, 14.2021, 9.4841: coeff=NaN, z-variance=1661.1256, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 88 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1932, 46.3190, 1.5775, 14.2021, 9.4841: coeff=NaN, z-variance=1661.1256, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1856, 46.3196, 1.5775, 14.2036, 9.4836: coeff=NaN, z-variance=1656.6580, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 89 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1856, 46.3196, 1.5775, 14.2036, 9.4836: coeff=NaN, z-variance=1656.6580, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1792, 46.3203, 1.5775, 14.2051, 9.4831: coeff=NaN, z-variance=1652.2969, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 90 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1792, 46.3203, 1.5775, 14.2051, 9.4831: coeff=NaN, z-variance=1652.2969, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1737, 46.3209, 1.5775, 14.2065, 9.4826: coeff=NaN, z-variance=1648.0391, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 91 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1737, 46.3209, 1.5775, 14.2065, 9.4826: coeff=NaN, z-variance=1648.0391, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1693, 46.3216, 1.5776, 14.2079, 9.4821: coeff=NaN, z-variance=1643.8810, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 92 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1693, 46.3216, 1.5776, 14.2079, 9.4821: coeff=NaN, z-variance=1643.8810, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1658, 46.3222, 1.5776, 14.2093, 9.4815: coeff=NaN, z-variance=1639.8195, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 93 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1658, 46.3222, 1.5776, 14.2093, 9.4815: coeff=NaN, z-variance=1639.8195, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1632, 46.3229, 1.5776, 14.2106, 9.4810: coeff=NaN, z-variance=1635.8516, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 94 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1632, 46.3229, 1.5776, 14.2106, 9.4810: coeff=NaN, z-variance=1635.8516, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1615, 46.3236, 1.5776, 14.2119, 9.4806: coeff=NaN, z-variance=1631.9743, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 95 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1615, 46.3236, 1.5776, 14.2119, 9.4806: coeff=NaN, z-variance=1631.9743, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1606, 46.3242, 1.5776, 14.2132, 9.4801: coeff=NaN, z-variance=1628.1847, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 96 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1606, 46.3242, 1.5776, 14.2132, 9.4801: coeff=NaN, z-variance=1628.1847, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1605, 46.3249, 1.5777, 14.2145, 9.4796: coeff=NaN, z-variance=1624.4802, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 97 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  -5673.1605, 46.3249, 1.5777, 14.2145, 9.4796: coeff=NaN, z-variance=1624.4802, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.1612, 46.3256, 1.5777, 14.2158, 9.4791: coeff=NaN, z-variance=1620.8581, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 1 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  0.0000, 0.0000, 0.0000, 0.0000, 0.0000: coeff=NaN, z-variance=NaN, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.8314, 46.2440, 1.7150, 14.3199, 9.3896: coeff=NaN, z-variance=28167967.4741, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 2 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5687.8314, 46.2440, 1.7150, 14.3199, 9.3896: coeff=NaN, z-variance=28167967.4741, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.9187, 46.2367, 1.7148, 14.3178, 9.3882: coeff=NaN, z-variance=3696794.8611, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 3 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5686.9187, 46.2367, 1.7148, 14.3178, 9.3882: coeff=NaN, z-variance=3696794.8611, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.9073, 46.2355, 1.7148, 14.3179, 9.3882: coeff=NaN, z-variance=1385253.1352, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 4 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5686.9073, 46.2355, 1.7148, 14.3179, 9.3882: coeff=NaN, z-variance=1385253.1352, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5686.9098, 46.2333, 1.7148, 14.3187, 9.3884: coeff=NaN, z-variance=423684.4148, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 5 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5686.9098, 46.2333, 1.7148, 14.3187, 9.3884: coeff=NaN, z-variance=423684.4148, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.0376, 46.2262, 1.7151, 14.3231, 9.3897: coeff=NaN, z-variance=98674.5471, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 6 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5687.0376, 46.2262, 1.7151, 14.3231, 9.3897: coeff=NaN, z-variance=98674.5471, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5687.8845, 46.2000, 1.7172, 14.3498, 9.3940: coeff=NaN, z-variance=17299.4010, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 7 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5687.8845, 46.2000, 1.7172, 14.3498, 9.3940: coeff=NaN, z-variance=17299.4010, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5684.1960, 46.3950, 1.7151, 14.3992, 9.3162: coeff=NaN, z-variance=3421.6537, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 8 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5684.1960, 46.3950, 1.7151, 14.3992, 9.3162: coeff=NaN, z-variance=3421.6537, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.9080, 46.7285, 1.6813, 14.3885, 9.2162: coeff=NaN, z-variance=1990.9331, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 9 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5675.9080, 46.7285, 1.6813, 14.3885, 9.2162: coeff=NaN, z-variance=1990.9331, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5675.3474, 46.7564, 1.6716, 14.4129, 9.2102: coeff=NaN, z-variance=1782.1023, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 10 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5675.3474, 46.7564, 1.6716, 14.4129, 9.2102: coeff=NaN, z-variance=1782.1023, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.8016, 46.7783, 1.6676, 14.4156, 9.2051: coeff=NaN, z-variance=1671.3889, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 11 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5674.8016, 46.7783, 1.6676, 14.4156, 9.2051: coeff=NaN, z-variance=1671.3889, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5674.1939, 46.8001, 1.6636, 14.4158, 9.2005: coeff=NaN, z-variance=1572.3737, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 12 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5674.1939, 46.8001, 1.6636, 14.4158, 9.2005: coeff=NaN, z-variance=1572.3737, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5673.5245, 46.8223, 1.6592, 14.4149, 9.1961: coeff=NaN, z-variance=1477.8768, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 13 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5673.5245, 46.8223, 1.6592, 14.4149, 9.1961: coeff=NaN, z-variance=1477.8768, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5672.7996, 46.8445, 1.6544, 14.4129, 9.1922: coeff=NaN, z-variance=1388.1980, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 14 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5672.7996, 46.8445, 1.6544, 14.4129, 9.1922: coeff=NaN, z-variance=1388.1980, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5672.0237, 46.8665, 1.6491, 14.4096, 9.1889: coeff=NaN, z-variance=1303.8093, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 15 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5672.0237, 46.8665, 1.6491, 14.4096, 9.1889: coeff=NaN, z-variance=1303.8093, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5671.2004, 46.8879, 1.6435, 14.4048, 9.1864: coeff=NaN, z-variance=1224.9114, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 16 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5671.2004, 46.8879, 1.6435, 14.4048, 9.1864: coeff=NaN, z-variance=1224.9114, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5670.3325, 46.9085, 1.6374, 14.3981, 9.1847: coeff=NaN, z-variance=1151.5076, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 17 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5670.3325, 46.9085, 1.6374, 14.3981, 9.1847: coeff=NaN, z-variance=1151.5076, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5669.4225, 46.9280, 1.6309, 14.3895, 9.1841: coeff=NaN, z-variance=1083.4778, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 18 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5669.4225, 46.9280, 1.6309, 14.3895, 9.1841: coeff=NaN, z-variance=1083.4778, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5668.4724, 46.9461, 1.6239, 14.3786, 9.1846: coeff=NaN, z-variance=1020.6262, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 19 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5668.4724, 46.9461, 1.6239, 14.3786, 9.1846: coeff=NaN, z-variance=1020.6262, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5667.4842, 46.9626, 1.6166, 14.3653, 9.1863: coeff=NaN, z-variance=962.7115, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 20 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5667.4842, 46.9626, 1.6166, 14.3653, 9.1863: coeff=NaN, z-variance=962.7115, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5666.4601, 46.9774, 1.6088, 14.3493, 9.1895: coeff=NaN, z-variance=909.4673, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 21 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5666.4601, 46.9774, 1.6088, 14.3493, 9.1895: coeff=NaN, z-variance=909.4673, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5665.4021, 46.9901, 1.6007, 14.3304, 9.1940: coeff=NaN, z-variance=860.6157, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 22 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5665.4021, 46.9901, 1.6007, 14.3304, 9.1940: coeff=NaN, z-variance=860.6157, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5664.3127, 47.0007, 1.5923, 14.3084, 9.2001: coeff=NaN, z-variance=815.8759, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 23 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5664.3127, 47.0007, 1.5923, 14.3084, 9.2001: coeff=NaN, z-variance=815.8759, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5663.1949, 47.0090, 1.5835, 14.2833, 9.2078: coeff=NaN, z-variance=774.9707, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 24 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5663.1949, 47.0090, 1.5835, 14.2833, 9.2078: coeff=NaN, z-variance=774.9707, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5662.0518, 47.0149, 1.5744, 14.2551, 9.2170: coeff=NaN, z-variance=737.6303, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 25 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5662.0518, 47.0149, 1.5744, 14.2551, 9.2170: coeff=NaN, z-variance=737.6303, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5660.8875, 47.0183, 1.5651, 14.2236, 9.2278: coeff=NaN, z-variance=703.5951, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 26 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5660.8875, 47.0183, 1.5651, 14.2236, 9.2278: coeff=NaN, z-variance=703.5951, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5659.7066, 47.0192, 1.5556, 14.1891, 9.2401: coeff=NaN, z-variance=672.6169, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 27 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5659.7066, 47.0192, 1.5556, 14.1891, 9.2401: coeff=NaN, z-variance=672.6169, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5658.5144, 47.0177, 1.5459, 14.1516, 9.2539: coeff=NaN, z-variance=644.4602, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 28 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5658.5144, 47.0177, 1.5459, 14.1516, 9.2539: coeff=NaN, z-variance=644.4602, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5657.3171, 47.0136, 1.5362, 14.1115, 9.2690: coeff=NaN, z-variance=618.9026, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 29 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5657.3171, 47.0136, 1.5362, 14.1115, 9.2690: coeff=NaN, z-variance=618.9026, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5656.1214, 47.0071, 1.5264, 14.0691, 9.2855: coeff=NaN, z-variance=595.7347, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 30 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5656.1214, 47.0071, 1.5264, 14.0691, 9.2855: coeff=NaN, z-variance=595.7347, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5654.9347, 46.9983, 1.5166, 14.0247, 9.3031: coeff=NaN, z-variance=574.7600, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 31 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5654.9347, 46.9983, 1.5166, 14.0247, 9.3031: coeff=NaN, z-variance=574.7600, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5653.7644, 46.9874, 1.5068, 13.9788, 9.3216: coeff=NaN, z-variance=555.7947, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 32 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5653.7644, 46.9874, 1.5068, 13.9788, 9.3216: coeff=NaN, z-variance=555.7947, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5652.6186, 46.9744, 1.4972, 13.9319, 9.3410: coeff=NaN, z-variance=538.6674, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 33 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5652.6186, 46.9744, 1.4972, 13.9319, 9.3410: coeff=NaN, z-variance=538.6674, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5651.5050, 46.9595, 1.4877, 13.8846, 9.3611: coeff=NaN, z-variance=523.2184, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 34 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5651.5050, 46.9595, 1.4877, 13.8846, 9.3611: coeff=NaN, z-variance=523.2184, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5650.4309, 46.9430, 1.4784, 13.8373, 9.3816: coeff=NaN, z-variance=509.2993, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 35 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5650.4309, 46.9430, 1.4784, 13.8373, 9.3816: coeff=NaN, z-variance=509.2993, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5649.4033, 46.9250, 1.4693, 13.7906, 9.4024: coeff=NaN, z-variance=496.7728, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 36 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5649.4033, 46.9250, 1.4693, 13.7906, 9.4024: coeff=NaN, z-variance=496.7728, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5648.4282, 46.9057, 1.4605, 13.7449, 9.4233: coeff=NaN, z-variance=485.5118, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 37 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5648.4282, 46.9057, 1.4605, 13.7449, 9.4233: coeff=NaN, z-variance=485.5118, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5647.5107, 46.8854, 1.4520, 13.7007, 9.4442: coeff=NaN, z-variance=475.3993, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 38 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5647.5107, 46.8854, 1.4520, 13.7007, 9.4442: coeff=NaN, z-variance=475.3993, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5646.6550, 46.8643, 1.4438, 13.6585, 9.4648: coeff=NaN, z-variance=466.3273, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 39 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5646.6550, 46.8643, 1.4438, 13.6585, 9.4648: coeff=NaN, z-variance=466.3273, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5645.8639, 46.8426, 1.4359, 13.6185, 9.4851: coeff=NaN, z-variance=458.1970, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 40 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5645.8639, 46.8426, 1.4359, 13.6185, 9.4851: coeff=NaN, z-variance=458.1970, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5645.1392, 46.8205, 1.4283, 13.5809, 9.5050: coeff=NaN, z-variance=450.9178, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 41 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5645.1392, 46.8205, 1.4283, 13.5809, 9.5050: coeff=NaN, z-variance=450.9178, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5644.4817, 46.7982, 1.4211, 13.5461, 9.5242: coeff=NaN, z-variance=444.4068, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 42 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5644.4817, 46.7982, 1.4211, 13.5461, 9.5242: coeff=NaN, z-variance=444.4068, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5643.8910, 46.7758, 1.4143, 13.5141, 9.5427: coeff=NaN, z-variance=438.5886, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 43 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5643.8910, 46.7758, 1.4143, 13.5141, 9.5427: coeff=NaN, z-variance=438.5886, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5643.3657, 46.7535, 1.4078, 13.4849, 9.5605: coeff=NaN, z-variance=433.3944, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 44 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5643.3657, 46.7535, 1.4078, 13.4849, 9.5605: coeff=NaN, z-variance=433.3944, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5642.9039, 46.7315, 1.4017, 13.4587, 9.5775: coeff=NaN, z-variance=428.7618, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 45 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5642.9039, 46.7315, 1.4017, 13.4587, 9.5775: coeff=NaN, z-variance=428.7618, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5642.5029, 46.7098, 1.3959, 13.4353, 9.5937: coeff=NaN, z-variance=424.6342, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 46 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5642.5029, 46.7098, 1.3959, 13.4353, 9.5937: coeff=NaN, z-variance=424.6342, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5642.1594, 46.6887, 1.3905, 13.4147, 9.6090: coeff=NaN, z-variance=420.9604, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 47 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5642.1594, 46.6887, 1.3905, 13.4147, 9.6090: coeff=NaN, z-variance=420.9604, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.8697, 46.6681, 1.3854, 13.3967, 9.6234: coeff=NaN, z-variance=417.6939, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 48 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.8697, 46.6681, 1.3854, 13.3967, 9.6234: coeff=NaN, z-variance=417.6939, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.6301, 46.6482, 1.3807, 13.3813, 9.6369: coeff=NaN, z-variance=414.7929, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 49 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.6301, 46.6482, 1.3807, 13.3813, 9.6369: coeff=NaN, z-variance=414.7929, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.4365, 46.6289, 1.3762, 13.3683, 9.6496: coeff=NaN, z-variance=412.2196, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 50 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.4365, 46.6289, 1.3762, 13.3683, 9.6496: coeff=NaN, z-variance=412.2196, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.2848, 46.6105, 1.3721, 13.3574, 9.6614: coeff=NaN, z-variance=409.9398, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 51 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.2848, 46.6105, 1.3721, 13.3574, 9.6614: coeff=NaN, z-variance=409.9398, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.1711, 46.5928, 1.3683, 13.3486, 9.6724: coeff=NaN, z-variance=407.9230, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 52 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.1711, 46.5928, 1.3683, 13.3486, 9.6724: coeff=NaN, z-variance=407.9230, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0913, 46.5759, 1.3647, 13.3417, 9.6826: coeff=NaN, z-variance=406.1414, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 53 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0913, 46.5759, 1.3647, 13.3417, 9.6826: coeff=NaN, z-variance=406.1414, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0418, 46.5598, 1.3614, 13.3365, 9.6921: coeff=NaN, z-variance=404.5701, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 54 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0418, 46.5598, 1.3614, 13.3365, 9.6921: coeff=NaN, z-variance=404.5701, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0189, 46.5445, 1.3583, 13.3328, 9.7008: coeff=NaN, z-variance=403.1867, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 55 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0189, 46.5445, 1.3583, 13.3328, 9.7008: coeff=NaN, z-variance=403.1867, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0193, 46.5301, 1.3555, 13.3304, 9.7088: coeff=NaN, z-variance=401.9712, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 56 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0193, 46.5301, 1.3555, 13.3304, 9.7088: coeff=NaN, z-variance=401.9712, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0399, 46.5164, 1.3529, 13.3293, 9.7162: coeff=NaN, z-variance=400.9054, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 57 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0399, 46.5164, 1.3529, 13.3293, 9.7162: coeff=NaN, z-variance=400.9054, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.0778, 46.5034, 1.3505, 13.3292, 9.7230: coeff=NaN, z-variance=399.9731, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 58 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.0778, 46.5034, 1.3505, 13.3292, 9.7230: coeff=NaN, z-variance=399.9731, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.1305, 46.4912, 1.3483, 13.3301, 9.7292: coeff=NaN, z-variance=399.1596, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 59 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.1305, 46.4912, 1.3483, 13.3301, 9.7292: coeff=NaN, z-variance=399.1596, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.1955, 46.4798, 1.3463, 13.3317, 9.7349: coeff=NaN, z-variance=398.4518, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 60 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.1955, 46.4798, 1.3463, 13.3317, 9.7349: coeff=NaN, z-variance=398.4518, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.2707, 46.4690, 1.3444, 13.3341, 9.7401: coeff=NaN, z-variance=397.8380, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 61 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.2707, 46.4690, 1.3444, 13.3341, 9.7401: coeff=NaN, z-variance=397.8380, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.3542, 46.4589, 1.3426, 13.3370, 9.7449: coeff=NaN, z-variance=397.3077, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 62 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.3542, 46.4589, 1.3426, 13.3370, 9.7449: coeff=NaN, z-variance=397.3077, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.4443, 46.4494, 1.3410, 13.3404, 9.7492: coeff=NaN, z-variance=396.8512, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 63 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.4443, 46.4494, 1.3410, 13.3404, 9.7492: coeff=NaN, z-variance=396.8512, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.5395, 46.4405, 1.3396, 13.3443, 9.7532: coeff=NaN, z-variance=396.4602, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 64 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.5395, 46.4405, 1.3396, 13.3443, 9.7532: coeff=NaN, z-variance=396.4602, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.6385, 46.4322, 1.3382, 13.3485, 9.7568: coeff=NaN, z-variance=396.1271, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+At the 65 iteration of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  -5641.6385, 46.4322, 1.3382, 13.3485, 9.7568: coeff=NaN, z-variance=396.1271, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+Estimated parameter:
+  -5641.7401, 46.4244, 1.3370, 13.3529, 9.7601: coeff=NaN, z-variance=395.8449, alpha0=(-5686.8907, 46.2369, 1.7148, 14.3173, 9.3881), z-variance0=105.3723
+
+
+

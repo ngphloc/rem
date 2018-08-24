@@ -699,6 +699,16 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 	
 	
+	/**
+	 * Executing this algorithm by arbitrary input parameter.
+	 * @param input arbitrary input parameter.
+	 * @return result of execution. Return null if execution is failed.
+	 */
+	public Object executeIntel(Object...input) {
+		return execute(input);
+	}
+
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -730,7 +740,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(REM_LOOP_BALANCE_MODE_FIELD, REM_LOOP_BALANCE_MODE_DEFAULT); //The new version of this REM algorithm uses one-loop balance.
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
@@ -946,9 +956,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public Object extractResponse(Profile profile) {
+	public Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(profile, zIndices, 1);
+		return defaultExtractVariable(input, zIndices, 1);
 	}
 
 

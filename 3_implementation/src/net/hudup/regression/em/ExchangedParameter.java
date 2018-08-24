@@ -184,7 +184,6 @@ public class ExchangedParameter {
 				N++;
 			}
 		}
-		
 		return ss / N;
 	}
 
@@ -261,33 +260,33 @@ public class ExchangedParameter {
 			return false;
 		//It is possible not to test beta coefficients
 		
-		double coeff1 = previousParameter != null ? previousParameter.coeff : Constants.UNUSED;
-		double coeff2 = currentParameter.coeff;
-		double coeff3 = this.coeff;
-		if (Util.isUsed(coeff3) && Util.isUsed(coeff2)) {
-			if (notSatisfy(coeff3, coeff2, threshold)) {
-				if (!Util.isUsed(coeff1))
-					return false;
-				else if (notSatisfy(coeff3, coeff1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-					return false;
-			}
-		}
-		else if (!Util.isUsed(coeff3) || Util.isUsed(coeff2))
-			return false;
-		
-		double zVariance1 = previousParameter != null ? previousParameter.zVariance : Constants.UNUSED;
-		double zVariance2 = currentParameter.zVariance;
-		double zVariance3 = this.zVariance;
-		if (Util.isUsed(zVariance3) && Util.isUsed(zVariance2)) {
-			if (notSatisfy(zVariance3, zVariance2, threshold)) {
-				if (!Util.isUsed(zVariance1))
-					return false;
-				else if (notSatisfy(zVariance3, zVariance1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-					return false;
-			}
-		}
-		else if (!Util.isUsed(zVariance3) || Util.isUsed(zVariance2))
-			return false;
+//		double coeff1 = previousParameter != null ? previousParameter.coeff : Constants.UNUSED;
+//		double coeff2 = currentParameter.coeff;
+//		double coeff3 = this.coeff;
+//		if (Util.isUsed(coeff3) && Util.isUsed(coeff2)) {
+//			if (notSatisfy(coeff3, coeff2, threshold)) {
+//				if (!Util.isUsed(coeff1))
+//					return false;
+//				else if (notSatisfy(coeff3, coeff1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+//					return false;
+//			}
+//		}
+//		else if (!Util.isUsed(coeff3) || Util.isUsed(coeff2))
+//			return false;
+//		
+//		double zVariance1 = previousParameter != null ? previousParameter.zVariance : Constants.UNUSED;
+//		double zVariance2 = currentParameter.zVariance;
+//		double zVariance3 = this.zVariance;
+//		if (Util.isUsed(zVariance3) && Util.isUsed(zVariance2)) {
+//			if (notSatisfy(zVariance3, zVariance2, threshold)) {
+//				if (!Util.isUsed(zVariance1))
+//					return false;
+//				else if (notSatisfy(zVariance3, zVariance1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+//					return false;
+//			}
+//		}
+//		else if (!Util.isUsed(zVariance3) || Util.isUsed(zVariance2))
+//			return false;
 
 		return true;
 	}
@@ -307,20 +306,30 @@ public class ExchangedParameter {
 		}
 		
 		buffer.append(": ");
-		buffer.append("coeff=" + this.coeff);
-		buffer.append(", z-variance=" + this.zVariance);
+		buffer.append("coeff=" + MathUtil.format(this.coeff));
+		buffer.append(", z-variance=" + MathUtil.format(this.zVariance));
 		
 		return buffer.toString();
 	}
 
 
 	/**
+	 * Calculating the scalar product of internal coefficients and X variable (regressor).
+	 * @param xVector specified X variable (regressor).
+	 * @return the scalar product of specified coefficients and X variable (regressor).
+	 */
+	public double mean(double[] xVector) {
+		return mean(this.alpha, xVector);
+	}
+
+	
+	/**
 	 * Calculating the scalar product of specified coefficients and X variable (regressor).
 	 * @param alpha specified coefficients
 	 * @param xVector specified X variable (regressor).
 	 * @return the scalar product of specified coefficients and X variable (regressor).
 	 */
-	public double mean(double[] xVector) {
+	public static double mean(List<Double> alpha, double[] xVector) {
 		double mean = 0;
 		for (int i = 0; i < alpha.size(); i++) {
 			if (Util.isUsed(alpha.get(i)) && Util.isUsed(xVector[i]))

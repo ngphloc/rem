@@ -1,7 +1,6 @@
 package net.hudup.regression;
 
 import net.hudup.core.alg.TestingAlg;
-import net.hudup.core.data.Profile;
 
 /**
  * <code>Regression</code> is the most abstract interface for all regression algorithms.
@@ -22,7 +21,7 @@ public interface Regression extends TestingAlg {
 	/**
 	 * Default regression indices field.
 	 */
-	public final static String R_INDICES_FIELD_DEFAULT = "{0, #x1, -1, (#x2 + #x3)^2, log(#y)}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
+	public final static String R_INDICES_DEFAULT = "{1, #x2, -1, (#x3 + #x4)^2, log(#y)}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
 	
 	
 	/**
@@ -33,10 +32,10 @@ public interface Regression extends TestingAlg {
 	
 	/**
 	 * Extracting value of response variable (Z) from specified profile.
-	 * @param profile specified profile.
+	 * @param input specified input. It is often profile.
 	 * @return value of response variable (Z) extracted from specified profile.
 	 */
-	Object extractResponse(Profile profile);
+	Object extractResponse(Object input);
 	
 	
 }

@@ -169,6 +169,16 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 	}
 
 	
+	/**
+	 * Executing this algorithm by arbitrary input parameter.
+	 * @param input arbitrary input parameter.
+	 * @return result of execution. Return null if execution is failed.
+	 */
+	public Object executeIntel(Object...input) {
+		return execute(input);
+	}
+
+	
 	@Override
 	public synchronized Object getParameter() {
 		// TODO Auto-generated method stub
@@ -192,7 +202,7 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		return config;
 	}
 
@@ -235,12 +245,12 @@ public abstract class AbstractMultipleRegression extends AbstractTestingAlg impl
 
 
 	@Override
-	public synchronized Object extractResponse(Profile profile) {
+	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
 		List<Object> valueList = Util.newList();
 		boolean success = false;
 		for (Regression regression : this.regressions) {
-			Object value = regression.extractResponse(profile);
+			Object value = regression.extractResponse(input);
 			valueList.add(value);
 			if (value != null)
 				success = true;

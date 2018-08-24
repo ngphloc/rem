@@ -8,6 +8,8 @@ import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.parser.TextParserUtil;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm.
@@ -27,39 +29,39 @@ public class RegressionEMPrior extends RegressionEMImpl {
 
 	
 	/**
-	 * Name of mean of prior distribution.
+	 * Name of alpha coefficients of prior distribution.
 	 */
-	public static final String MEAN0_FIELD = "mean0";
+	public static final String ALPHA0_FIELD = "alpha0";
 
 			
 	/**
-	 * Default mean of prior distribution.
+	 * Default alpha coefficients of prior distribution.
 	 */
-	public static final double MEAN0_DEFAULT = Constants.UNUSED;
+	public static final String ALPHA0_DEFAULT = "";
 
 	
 	/**
 	 * Name of variance of prior distribution.
 	 */
-	public static final String VARIANCE0_FIELD = "variance0";
+	public static final String ZVARIANCE0_FIELD = "zvariance0";
 
 			
 	/**
 	 * Default variance of prior distribution.
 	 */
-	public static final double VARIANCE0_DEFAULT = Constants.UNUSED;
+	public static final double ZVARIANCE0_DEFAULT = Constants.UNUSED;
 
 	
 	/**
-	 * Prior mean.
+	 * Alpha coefficients of prior distribution.
 	 */
-	protected double mean0 = 0;
+	protected List<Double> alpha0 = null;
 	
 	
 	/**
-	 * Prior variance.
+	 * Variance of prior distribution.
 	 */
-	protected double variance0 = 0;
+	protected double zVariance0 = 0;
 
 	
 	/**
@@ -106,12 +108,14 @@ public class RegressionEMPrior extends RegressionEMImpl {
 		double zFactor = Constants.UNUSED;
 		List<double[]> zDataToLearnAlpha = Util.newList(zStatistic.size());
 		if (currentParameter != null) {
-			double variance = currentParameter.estimateZVariance(stat);
-			zFactor = this.variance0 - variance;
+			double zVariance = currentParameter.estimateZVariance(stat);
+			zFactor = this.zVariance0 - zVariance;
 			
 			for (int i = 0; i < N; i++) {
+				double[] xVector =  xStatistic.get(i);
 				double[] zVector = Arrays.copyOf(zStatistic.get(i), zStatistic.get(i).length); 
-				zVector[1] = this.variance0*zVector[1] - variance*this.mean0;
+				double zMean0 = ExchangedParameter.mean(this.alpha0, xVector);
+				zVector[1] = this.zVariance0*zVector[1] - zVariance*zMean0;
 				
 				zDataToLearnAlpha.add(zVector);
 			}
@@ -172,7 +176,19 @@ public class RegressionEMPrior extends RegressionEMImpl {
 			betas.add(DSUtil.toDoubleArray(beta));
 		}
 		
-		return new ExchangedParameter(alpha, betas);
+		ExchangedParameter newParameter = new ExchangedParameter(alpha, betas);
+		if (getConfig().getAsBoolean(R_CALC_VARIANCE_FIELD))
+			newParameter.setZVariance(newParameter.estimateZVariance(stat));
+		else {
+			if (currentParameter == null)
+				newParameter.setZVariance(Constants.UNUSED);
+			else if (Util.isUsed(currentParameter.getZVariance()))
+				newParameter.setZVariance(newParameter.estimateZVariance(stat));
+			else
+				newParameter.setZVariance(Constants.UNUSED);
+		}
+		
+		return newParameter;
 	}
 
 	
@@ -183,47 +199,77 @@ public class RegressionEMPrior extends RegressionEMImpl {
 		if (parameter == null)
 			return null;
 		
-		this.mean0 = getConfig().getAsReal(MEAN0_FIELD);
-		this.variance0 = getConfig().getAsReal(VARIANCE0_FIELD);
+		String alpha0Text = getConfig().getAsString(ALPHA0_FIELD);
+		if (alpha0Text == null || alpha0Text.isEmpty())
+			this.alpha0 = parameter.getAlpha();
+		else
+			this.alpha0 = TextParserUtil.parseListByClass(alpha0Text, Double.class, ",");
+		if (this.alpha0 == null || this.alpha0.size() == 0)
+			return null;
 		
-		if (Util.isUsed(this.mean0) && Util.isUsed(this.variance0)) {
-			return parameter;
-		}
-		
-		LargeStatistics stat = getLargeStatistics();
-		List<double[]> zData = stat.getZData();
-		
-		double sum = 0;
-		int N = 0;
-		for (int i = 0; i < zData.size(); i++) {
-			double zValue = zData.get(i)[1];
-			if (Util.isUsed(zValue)) {
-				sum += zValue;
-				N++;
+		this.zVariance0 = getConfig().getAsReal(ZVARIANCE0_FIELD);
+		if (!Util.isUsed(this.zVariance0)) {
+			LargeStatistics stat;
+			try {
+				stat = (LargeStatistics)this.expectation(parameter);
+				this.zVariance0 = parameter.estimateZVariance(stat) / stat.getZData().size();
+			} 
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
 			}
 		}
-		this.mean0 = sum / N;
-		
-		double ss = 0;
-		for (int i = 0; i < zData.size(); i++) {
-			double zValue = zData.get(i)[1];
-			if (Util.isUsed(zValue)) {
-				double d = zValue - this.mean0;
-				ss += d*d;
-			}
-		}
-		this.variance0 = ss / (N*N);
 		
 		return parameter;
 	}
 
 
 	@Override
+	public synchronized String getDescription() {
+		// TODO Auto-generated method stub
+		return super.getDescription() + ", " + moreParametersToText();
+	}
+
+
+	@Override
+	public String parameterToShownText(Object parameter, Object... info) {
+		// TODO Auto-generated method stub
+		return super.parameterToShownText(parameter, info) + ", " + moreParametersToText();
+	}
+
+
+	/**
+	 * Converting prior alpha and prior variance to text.
+	 * @return text of prior alpha and prior variance
+	 */
+	private String moreParametersToText() {
+		StringBuffer buffer = new StringBuffer();
+		
+		if (this.alpha0 == null)
+			buffer.append("alpha0=()");
+		else {
+			buffer.append("alpha0=(");
+			for (int j = 0; j < this.alpha0.size(); j++) {
+				if (j > 0)
+					buffer.append(", ");
+				buffer.append(MathUtil.format(this.alpha0.get(j)));
+			}
+			buffer.append(")");
+		}
+		
+		buffer.append(", z-variance0=" + MathUtil.format(this.zVariance0));
+		
+		return buffer.toString();
+	}
+	
+	
+	@Override
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(MEAN0_FIELD, MEAN0_DEFAULT);
-		config.put(VARIANCE0_FIELD, VARIANCE0_DEFAULT);
+		config.put(ALPHA0_FIELD, ALPHA0_DEFAULT);
+		config.put(ZVARIANCE0_FIELD, ZVARIANCE0_DEFAULT);
 		return config;
 	}
 

@@ -1,0 +1,90 @@
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base"
+Current parameter:
+  {-6651.5534, 108.5531: coeff=NaN, z-variance=NaN}, {-4986.7292, 24.6736: coeff=NaN, z-variance=NaN}, {-4505.6926, 109.6790: coeff=NaN, z-variance=NaN}, {-3385.5925, 19.4249: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-6651.5534, 108.5531: coeff=NaN, z-variance=NaN}, {-4986.7292, 24.6736: coeff=NaN, z-variance=NaN}, {-4505.6926, 109.6790: coeff=NaN, z-variance=NaN}, {-3385.5925, 19.4249: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  {-6798.5461, 110.2714: coeff=NaN, z-variance=NaN}, {-5078.7370, 24.9761: coeff=NaN, z-variance=NaN}, {-4739.4724, 113.3671: coeff=NaN, z-variance=NaN}, {-3513.8811, 19.8335: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-6798.5461, 110.2714: coeff=NaN, z-variance=NaN}, {-5078.7370, 24.9761: coeff=NaN, z-variance=NaN}, {-4739.4724, 113.3671: coeff=NaN, z-variance=NaN}, {-3513.8811, 19.8335: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  {-6959.2041, 112.3116: coeff=NaN, z-variance=NaN}, {-5278.4101, 25.6111: coeff=NaN, z-variance=NaN}, {-4848.9130, 114.9051: coeff=NaN, z-variance=NaN}, {-3609.3697, 20.1074: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-6959.2041, 112.3116: coeff=NaN, z-variance=NaN}, {-5278.4101, 25.6111: coeff=NaN, z-variance=NaN}, {-4848.9130, 114.9051: coeff=NaN, z-variance=NaN}, {-3609.3697, 20.1074: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  {-7028.8845, 112.8995: coeff=NaN, z-variance=NaN}, {-5719.6176, 26.9417: coeff=NaN, z-variance=NaN}, {-4825.4689, 114.4860: coeff=NaN, z-variance=NaN}, {-3627.2784, 20.1695: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-7028.8845, 112.8995: coeff=NaN, z-variance=NaN}, {-5719.6176, 26.9417: coeff=NaN, z-variance=NaN}, {-4825.4689, 114.4860: coeff=NaN, z-variance=NaN}, {-3627.2784, 20.1695: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  {-7159.7387, 115.0150: coeff=NaN, z-variance=NaN}, {-5495.7534, 26.2909: coeff=NaN, z-variance=NaN}, {-5096.5429, 119.2259: coeff=NaN, z-variance=NaN}, {-3813.6530, 20.8318: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-7159.7387, 115.0150: coeff=NaN, z-variance=NaN}, {-5495.7534, 26.2909: coeff=NaN, z-variance=NaN}, {-5096.5429, 119.2259: coeff=NaN, z-variance=NaN}, {-3813.6530, 20.8318: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  {-7621.2668, 120.3523: coeff=NaN, z-variance=NaN}, {-5979.0602, 27.7895: coeff=NaN, z-variance=NaN}, {-5286.7947, 121.7543: coeff=NaN, z-variance=NaN}, {-3949.5100, 21.2743: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-7621.2668, 120.3523: coeff=NaN, z-variance=NaN}, {-5979.0602, 27.7895: coeff=NaN, z-variance=NaN}, {-5286.7947, 121.7543: coeff=NaN, z-variance=NaN}, {-3949.5100, 21.2743: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  {-8058.2547, 125.2546: coeff=NaN, z-variance=NaN}, {-6906.9505, 30.9941: coeff=NaN, z-variance=NaN}, {-5469.0425, 125.1379: coeff=NaN, z-variance=NaN}, {-3666.8925, 20.2918: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-8058.2547, 125.2546: coeff=NaN, z-variance=NaN}, {-6906.9505, 30.9941: coeff=NaN, z-variance=NaN}, {-5469.0425, 125.1379: coeff=NaN, z-variance=NaN}, {-3666.8925, 20.2918: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  {-7069.1970, 112.7659: coeff=NaN, z-variance=NaN}, {-5389.8869, 25.8797: coeff=NaN, z-variance=NaN}, {-4912.2658, 117.3592: coeff=NaN, z-variance=NaN}, {-3640.0044, 20.3379: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-7069.1970, 112.7659: coeff=NaN, z-variance=NaN}, {-5389.8869, 25.8797: coeff=NaN, z-variance=NaN}, {-4912.2658, 117.3592: coeff=NaN, z-variance=NaN}, {-3640.0044, 20.3379: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  {-7002.9486, 112.4785: coeff=NaN, z-variance=NaN}, {-5164.7828, 25.0668: coeff=NaN, z-variance=NaN}, {-5604.7452, 127.1540: coeff=NaN, z-variance=NaN}, {-3279.5662, 19.3777: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-7002.9486, 112.4785: coeff=NaN, z-variance=NaN}, {-5164.7828, 25.0668: coeff=NaN, z-variance=NaN}, {-5604.7452, 127.1540: coeff=NaN, z-variance=NaN}, {-3279.5662, 19.3777: coeff=NaN, z-variance=NaN}
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+At the 1 iteration of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-6350.1661, 104.5558: coeff=NaN, z-variance=NaN}, {-5091.5272, 24.3281: coeff=NaN, z-variance=NaN}, {-6791.2974, 152.4660: coeff=NaN, z-variance=NaN}, {-3831.9351, 21.4991: coeff=NaN, z-variance=NaN}
+Estimated parameter:
+  {-6350.1661, 104.5558: coeff=NaN, z-variance=NaN}, {-5091.5272, 24.3281: coeff=NaN, z-variance=NaN}, {-6791.2974, 152.4660: coeff=NaN, z-variance=NaN}, {-3831.9351, 21.4991: coeff=NaN, z-variance=NaN}
+
+
+

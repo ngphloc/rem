@@ -173,20 +173,34 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		if (this.coeffs == null)
+		if (this.coeffs == null || input == null)
 			return null;
 		
-		if (input == null || !(input instanceof Profile))
-			return null; //only support profile input currently
-		Profile profile = (Profile)input;
+		Profile profile = null;
+		if (input instanceof Profile)
+			profile = (Profile)input;
+		else
+			profile = createProfile(this.attList, input);
+		if (profile == null)
+			return null;
 		
 		double sum = this.coeffs.get(0);
-		for (int j= 0; j < this.coeffs.size() - 1; j++) {
-			double value = extractRegressor(profile, j + 1); //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			sum += this.coeffs.get(j + 1) * (double)transformRegressor(value, false); 
+		for (int j = 1; j < this.coeffs.size(); j++) {  //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
+			double value = extractRegressor(profile, j);
+			sum += this.coeffs.get(j) * (double)transformRegressor(value, false); 
 		}
 		
 		return transformResponse(sum, true);
+	}
+
+	
+	/**
+	 * Executing this algorithm by arbitrary input parameter.
+	 * @param input arbitrary input parameter.
+	 * @return result of execution. Return null if execution is failed.
+	 */
+	public Object executeIntel(Object...input) {
+		return execute(input);
 	}
 
 	
@@ -201,7 +215,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		return config;
 	}
 
@@ -248,13 +262,13 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	/**
 	 * Extracting value of regressor (X) from specified profile.
 	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param profile specified profile.
+	 * @param input specified input. It is often profile.
 	 * @param index specified indices.
 	 * @return value of regressor (X) extracted from specified profile.
 	 */
-	protected double extractRegressor(Profile profile, int index) {
+	protected double extractRegressor(Object input, int index) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(profile, xIndices, index);
+		return defaultExtractVariable(input, xIndices, index);
 	}
 
 
@@ -274,9 +288,9 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public Object extractResponse(Profile profile) {
+	public Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(profile, zIndices, 1);
+		return defaultExtractVariable(input, zIndices, 1);
 	}
 
 
@@ -324,7 +338,7 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 */
 	public static List<String> splitIndices(String cfgIndices) {
 		List<String> txtList = Util.newList();
-		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(R_INDICES_FIELD_DEFAULT))
+		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(R_INDICES_DEFAULT))
 			return txtList;
 					
 		//The pattern is {1, 2}, {3, 4, 5), {5, 6}, {5, 6, 7, 8}, {9, 10}
@@ -420,8 +434,8 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 			catch (Throwable e) {
 				parseSuccess = false;
 			}
-			if (parseSuccess && index >= 0)
-				indices.add(new Integer(index));
+			if (parseSuccess)
+				indices.add(new Integer(index - 1)); //Index begins 1. Please pay attention to this line.
 			else
 				indices.add(el);
 		}
@@ -451,16 +465,24 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	
 	/**
 	 * Extracting value of variable (X) from specified profile.
-	 * @param profile specified profile.
+	 * @param input specified input. It is often a profile.
 	 * @param indices specified list of indices.
 	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
 	 * So index 0 always indicate to value 1. 
 	 * @return value of variable (X) extracted from specified profile.
 	 */
-	public static double defaultExtractVariable(Profile profile, List<Object[]> indices, int index) {
+	public static double defaultExtractVariable(Object input, List<Object[]> indices, int index) {
 		if (index == 0)
 			return 1.0;
 		
+		if (!(input instanceof Profile)) {
+			List<Double> values = DSUtil.toDoubleList(input, false);
+			AttributeList attList = defaultAttributeList(values.size());
+			Profile profile = createProfile(attList, values);
+			return defaultExtractVariable(profile, indices, index);
+		}
+		
+		Profile profile = (Profile)input;
 		try {
 			Object item = indices.get(index)[0];
 			if (item instanceof Number)
@@ -608,6 +630,27 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		return attList;
 	}
 
+	
+	/**
+	 * Creating profile from specified attribute list and object.
+	 * @param attList specified attribute list
+	 * @param object specified object.
+	 * @return profile from specified attribute list and object.
+	 */
+	public static Profile createProfile(AttributeList attList, Object object) {
+		if (attList.size() == 0)
+			return null;
+		
+		List<Double> values = DSUtil.toDoubleList(object, false);
+		Profile profile = new Profile(attList);
+		int n = Math.min(values.size(), attList.size());
+		for (int j = 0; j < n; j++) {
+			profile.setValue(j, values.get(j));
+		}
+		
+		return profile;
+	}
+	
 	
 	/**
 	 * Extracting real number from specified object.

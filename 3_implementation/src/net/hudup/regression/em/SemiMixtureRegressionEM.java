@@ -76,12 +76,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			return null;
 		}
 		
-		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) { //In uniform mode, all coefficients are 1/K
-			for (RegressionEMImpl rem : this.rems)
-				rem.getExchangedParameter().setCoeff(1.0 / (double)this.rems.size());
-		}
-		else
-			adjustMixtureParametersOne();
+		adjustMixtureParametersOne();
 		
 		return this.rems;
 	}
@@ -117,20 +112,20 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 				return false;
 			
 //			StringBuffer indices = new StringBuffer();
-//			for (int i = 0; i < attList.size(); i++) {
-//				if (i > 0)
+//			for (int i = 1; i <= attList.size(); i++) {
+//				if (i > 1)
 //					indices.append(", ");
 //				indices.append(i);
 //			}
 //			indicesList.add(indices.toString());
 //			if (attList.size() > 2) {
-//				for (int i = 0; i < attList.size() - 1; i++) {
-//					indicesList.add(i + ", " + (attList.size() - 1));
+//				for (int i = 1; i < attList.size(); i++) {
+//					indicesList.add(i + ", " + attList.size());
 //				}
 //			}
 			
-			for (int i = 0; i < attList.size() - 1; i++) {// For fair test
-				indicesList.add(i + ", " + (attList.size() - 1));
+			for (int i = 1; i < attList.size(); i++) {// For fair test
+				indicesList.add(i + ", " + attList.size());
 			}
 		}
 		
@@ -261,8 +256,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	 * Adjusting specified parameters based on specified statistics according to mixture model in one iteration.
 	 * This method does not need a loop because both mean and variance were optimized in REM process and so the probabilities of components will be optimized in only one time.
 	 * @return true if the adjustment process is successful.
+	 * @throws Exception if any error raises.
 	 */
-	protected boolean adjustMixtureParametersOne() {
+	protected boolean adjustMixtureParametersOne() throws Exception {
 		if (this.rems == null || this.rems.size() == 0)
 			return false;
 		
@@ -271,6 +267,14 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			parameter.setCoeff(1.0 / (double)this.rems.size());
 			double zVariance = parameter.estimateZVariance(rem.getLargeStatistics());
 			parameter.setZVariance(zVariance);
+		}
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) //In uniform mode, all coefficients are 1/K
+			return true;
+		
+		List<ExchangedParameter> parameterList = Util.newList(this.rems.size());
+		for (RegressionEMImpl rem : this.rems) {
+			ExchangedParameter parameter = rem.getExchangedParameter();
+			parameterList.add((ExchangedParameter)parameter.clone());
 		}
 		
 		for (int k = 0; k < this.rems.size(); k++) {
@@ -290,7 +294,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 					XList.add(rem2.getLargeStatistics().getXData().get(i));
 				}
 				
-				List<Double> condProbs = condZProbs(XList, zValue);
+				List<Double> condProbs = condZProbs(parameterList, XList, zValue);
 				condProbSum += condProbs.get(k);
 				N++;
 			}
@@ -308,19 +312,15 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	/**
 	 * Calculating the condition probabilities of the specified parameters given regressor values X and response value Z.
 	 * Inherited class can re-define this method. In current version, only normal probability density function is used.
+	 * @param parameterList list of current parameters.
 	 * @param XList regressor values X
 	 * @param zValue given response value Z.
 	 * @return condition probabilities of the specified parameters given regressor values X and response value Z.
 	 */
-	protected List<Double> condZProbs(List<double[]> XList, double zValue) {
-		if (this.rems == null || this.rems.size() == 0)
+	protected List<Double> condZProbs(List<ExchangedParameter> parameterList, List<double[]> XList, double zValue) {
+		if (parameterList.size() == 0)
 			return Util.newList();
 		
-		List<ExchangedParameter> parameterList = Util.newList(this.rems.size());
-		for (RegressionEMImpl rem : this.rems) {
-			parameterList.add(rem.getExchangedParameter());
-		}
-
 		return ExchangedParameter.normalZCondProbs(parameterList, XList, zValue);
 	}
 
@@ -330,9 +330,8 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 		// TODO Auto-generated method stub
 		for (RegressionEMImpl rem : this.rems) {
 			ExchangedParameter parameter = (ExchangedParameter)rem.initializeParameter();
-			if (parameter != null) {
+			if (parameter != null)
 				rem.setParameter(parameter, this.getCurrentIteration());
-			}
 			else {
 				logger.error("Some regression models are failed in initialization");
 				return null;
@@ -380,6 +379,16 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 				return null;
 		}
 		return result;
+	}
+
+	
+	/**
+	 * Executing this algorithm by arbitrary input parameter.
+	 * @param input arbitrary input parameter.
+	 * @return result of execution. Return null if execution is failed.
+	 */
+	public Object executeIntel(Object...input) {
+		return execute(input);
 	}
 
 	
@@ -459,7 +468,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
 		
@@ -469,14 +478,14 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 	
 	@Override
-	public synchronized Object extractResponse(Profile profile) {
+	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
 		double mean = 0;
 		for (RegressionEMImpl rem : this.rems) {
 			if (rem == null)
 				return null;
 			
-			double value = AbstractRegression.extractNumber(rem.extractResponse(profile));
+			double value = AbstractRegression.extractNumber(rem.extractResponse(input));
 			if (!Util.isUsed(value))
 				return null;
 			

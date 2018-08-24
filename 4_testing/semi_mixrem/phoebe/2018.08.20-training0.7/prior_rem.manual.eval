@@ -1,0 +1,136 @@
+========== Algorithm "prior_rem.manual" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [17.8915, 221.5507]
+Hudup recall = 1.0000
+MAE.test = 169.5587
+MAERatio.test = 0.0728
+MAEVector.test = [169.5587]
+MSE.test = 49405.8314
+R.test = 0.9627
+RMSE.test = 222.2742
+Setup time = 0.0350
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [17.8982, 221.5511]
+Hudup recall = 1.0000
+MAE.test = 169.5590
+MAERatio.test = 0.0728
+MAEVector.test = [169.5590]
+MSE.test = 49406.2203
+R.test = 0.9627
+RMSE.test = 222.2751
+Setup time = 0.0770
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [17.8753, 221.5524]
+Hudup recall = 1.0000
+MAE.test = 169.5602
+MAERatio.test = 0.0728
+MAEVector.test = [169.5602]
+MSE.test = 49405.9836
+R.test = 0.9627
+RMSE.test = 222.2746
+Setup time = 0.1090
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [17.8794, 221.5577]
+Hudup recall = 1.0000
+MAE.test = 169.5630
+MAERatio.test = 0.0728
+MAEVector.test = [169.5630]
+MSE.test = 49408.5079
+R.test = 0.9627
+RMSE.test = 222.2802
+Setup time = 0.2570
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [17.8749, 221.5532]
+Hudup recall = 1.0000
+MAE.test = 169.5611
+MAERatio.test = 0.0728
+MAEVector.test = [169.5611]
+MSE.test = 49406.3319
+R.test = 0.9627
+RMSE.test = 222.2754
+Setup time = 0.3230
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [17.8854, 221.5457]
+Hudup recall = 1.0000
+MAE.test = 169.5562
+MAERatio.test = 0.0728
+MAEVector.test = [169.5562]
+MSE.test = 49403.3633
+R.test = 0.9627
+RMSE.test = 222.2687
+Setup time = 0.3510
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [17.8565, 221.5446]
+Hudup recall = 1.0000
+MAE.test = 169.5570
+MAERatio.test = 0.0728
+MAEVector.test = [169.5570]
+MSE.test = 49401.8501
+R.test = 0.9627
+RMSE.test = 222.2653
+Setup time = 0.5360
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [17.8264, 221.5593]
+Hudup recall = 1.0000
+MAE.test = 169.5590
+MAERatio.test = 0.0728
+MAEVector.test = [169.5590]
+MSE.test = 49407.2897
+R.test = 0.9627
+RMSE.test = 222.2775
+Setup time = 0.9720
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [17.7140, 221.4955]
+Hudup recall = 1.0000
+MAE.test = 169.5135
+MAERatio.test = 0.0728
+MAEVector.test = [169.5135]
+MSE.test = 49375.0551
+R.test = 0.9627
+RMSE.test = 222.2050
+Setup time = 1.5350
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [17.7305, 221.5710]
+Hudup recall = 1.0000
+MAE.test = 169.6485
+MAERatio.test = 0.0728
+MAEVector.test = [169.6485]
+MSE.test = 49409.0585
+R.test = 0.9627
+RMSE.test = 222.2815
+Setup time = 4.3380
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "prior_rem.manual" - Final result ==========
+
+
+

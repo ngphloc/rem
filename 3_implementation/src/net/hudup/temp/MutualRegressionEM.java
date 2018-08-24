@@ -471,6 +471,16 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 	}
 
 	
+	/**
+	 * Executing this algorithm by arbitrary input parameter.
+	 * @param input arbitrary input parameter.
+	 * @return result of execution. Return null if execution is failed.
+	 */
+	public Object executeIntel(Object...input) {
+		return execute(input);
+	}
+
+	
 	@Override
 	public synchronized String parameterToShownText(Object parameter, Object... info) {
 		// TODO Auto-generated method stub
@@ -548,7 +558,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_FIELD_DEFAULT);
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(REM_LOOP_BALANCE_MODE_FIELD, REM_LOOP_BALANCE_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
@@ -557,7 +567,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 
 	
 	@Override
-	public synchronized Object extractResponse(Profile profile) {
+	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
 		int k = 0;
 		double mean = 0;
@@ -565,7 +575,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 			if (rem == null)
 				continue;
 			
-			Object value = rem.extractResponse(profile);
+			Object value = rem.extractResponse(input);
 			if (value == null || !(value instanceof Number))
 				continue;
 			
