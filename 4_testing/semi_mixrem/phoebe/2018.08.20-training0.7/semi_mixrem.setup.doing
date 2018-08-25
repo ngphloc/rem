@@ -1,90 +1,90 @@
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base"
 Current parameter:
-  {-6545.0043, 107.2202: coeff=NaN, z-variance=NaN}, {-4907.7475, 24.4188: coeff=NaN, z-variance=NaN}, {-4482.4739, 109.5088: coeff=NaN, z-variance=NaN}, {-3342.2276, 19.3187: coeff=NaN, z-variance=NaN}
+  {-6545.0043, 107.2202: coeff=NaN, z-variance=NaN}, {-4907.7475, 24.4188: coeff=NaN, z-variance=NaN}, {-4482.4739, 109.5088: coeff=NaN, z-variance=NaN}, {-3342.2276, 19.3187: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-6545.0043, 107.2202: coeff=NaN, z-variance=NaN}, {-4907.7475, 24.4188: coeff=NaN, z-variance=NaN}, {-4482.4739, 109.5088: coeff=NaN, z-variance=NaN}, {-3342.2276, 19.3187: coeff=NaN, z-variance=NaN}
+  {-6545.0043, 107.2202: coeff=NaN, z-variance=NaN}, {-4907.7475, 24.4188: coeff=NaN, z-variance=NaN}, {-4482.4739, 109.5088: coeff=NaN, z-variance=NaN}, {-3342.2276, 19.3187: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss"
 Current parameter:
-  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}
+  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}
+  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss"
 Current parameter:
-  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}
+  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}
+  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss"
 Current parameter:
-  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}
+  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}
+  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss"
 Current parameter:
-  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}
+  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}
+  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss"
 Current parameter:
-  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}
+  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}
+  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss"
 Current parameter:
-  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}
+  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}
+  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss"
 Current parameter:
-  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}
+  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}
+  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss"
 Current parameter:
-  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}
+  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}
+  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
 Current parameter:
-  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}
+  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
-  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}
+  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 

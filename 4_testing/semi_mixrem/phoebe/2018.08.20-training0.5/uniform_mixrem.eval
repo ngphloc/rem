@@ -9,7 +9,7 @@ MAEVector.test = [187.1782]
 MSE.test = 60233.5574
 R.test = 0.9561
 RMSE.test = 245.4253
-Setup time = 0.0400
+Setup time = 0.0630
 Speed = 0.0000
 ----- Testing dataset "1" -----
 
@@ -22,7 +22,7 @@ MAEVector.test = [183.2240]
 MSE.test = 58024.6570
 R.test = 0.9561
 RMSE.test = 240.8831
-Setup time = 0.0440
+Setup time = 0.2030
 Speed = 0.0000
 ----- Testing dataset "2" -----
 
@@ -35,8 +35,8 @@ MAEVector.test = [180.0210]
 MSE.test = 56548.2182
 R.test = 0.9561
 RMSE.test = 237.7987
-Setup time = 0.1080
-Speed = 0.0000
+Setup time = 0.2030
+Speed = 0.0001
 ----- Testing dataset "3" -----
 
 ----- Testing dataset "4" -----
@@ -48,7 +48,7 @@ MAEVector.test = [178.1417]
 MSE.test = 56273.9189
 R.test = 0.9556
 RMSE.test = 237.2212
-Setup time = 0.1310
+Setup time = 0.1560
 Speed = 0.0000
 ----- Testing dataset "4" -----
 
@@ -61,7 +61,7 @@ MAEVector.test = [178.3573]
 MSE.test = 54683.0344
 R.test = 0.9561
 RMSE.test = 233.8440
-Setup time = 0.0460
+Setup time = 0.2030
 Speed = 0.0000
 ----- Testing dataset "5" -----
 
@@ -74,7 +74,7 @@ MAEVector.test = [175.7522]
 MSE.test = 53387.7047
 R.test = 0.9559
 RMSE.test = 231.0578
-Setup time = 0.0370
+Setup time = 0.1560
 Speed = 0.0000
 ----- Testing dataset "6" -----
 
@@ -87,7 +87,7 @@ MAEVector.test = [179.9995]
 MSE.test = 54862.9553
 R.test = 0.9548
 RMSE.test = 234.2284
-Setup time = 0.0450
+Setup time = 0.1560
 Speed = 0.0000
 ----- Testing dataset "7" -----
 
@@ -100,7 +100,7 @@ MAEVector.test = [179.4937]
 MSE.test = 55736.7640
 R.test = 0.9560
 RMSE.test = 236.0863
-Setup time = 0.0350
+Setup time = 0.1570
 Speed = 0.0000
 ----- Testing dataset "8" -----
 
@@ -113,7 +113,7 @@ MAEVector.test = [180.5755]
 MSE.test = 55768.5855
 R.test = 0.9560
 RMSE.test = 236.1537
-Setup time = 0.0460
+Setup time = 0.0780
 Speed = 0.0000
 ----- Testing dataset "9" -----
 
@@ -126,7 +126,7 @@ MAEVector.test = [201.8167]
 MSE.test = 64443.8643
 R.test = 0.9556
 RMSE.test = 253.8580
-Setup time = 0.0510
+Setup time = 0.1560
 Speed = 0.0000
 ----- Testing dataset "10" -----
 

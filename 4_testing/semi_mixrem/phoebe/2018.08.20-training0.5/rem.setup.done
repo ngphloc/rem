@@ -1,50 +1,50 @@
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: weight = -5686.8907 + 46.2369*(bpd) + 1.7148*(hc) + 14.3173*(fl) + 9.3881*(ac): coeff=NaN, z-variance=54055.9870
+Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: weight = -5686.8907 + 46.2369*(bpd) + 1.7148*(hc) + 14.3173*(fl) + 9.3881*(ac): t=1, coeff=NaN, z-variance=54055.9870
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 4) learned models: weight = -5685.7848 + 43.1103*(bpd) + 1.4912*(hc) + 17.0387*(fl) + 9.8929*(ac): coeff=NaN, z-variance=45112.0870
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 4) learned models: weight = -5685.7848 + 43.1103*(bpd) + 1.4912*(hc) + 17.0387*(fl) + 9.8929*(ac): t=4, coeff=NaN, z-variance=45112.0870
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: weight = -5853.1212 + 39.5619*(bpd) + 2.4174*(hc) + 21.7261*(fl) + 9.5005*(ac): coeff=NaN, z-variance=33223.4487
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: weight = -5853.1212 + 39.5619*(bpd) + 2.4174*(hc) + 21.7261*(fl) + 9.5005*(ac): t=6, coeff=NaN, z-variance=33223.4487
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 7) learned models: weight = -6198.2399 + 44.6901*(bpd) + 5.2472*(hc) + 20.4527*(fl) + 6.6325*(ac): coeff=NaN, z-variance=22501.4188
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 7) learned models: weight = -6198.2399 + 44.6901*(bpd) + 5.2472*(hc) + 20.4527*(fl) + 6.6325*(ac): t=7, coeff=NaN, z-variance=22501.4188
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 11) learned models: weight = -5941.9821 + 39.9089*(bpd) + 2.6238*(hc) + 23.3260*(fl) + 9.2312*(ac): coeff=NaN, z-variance=15655.8994
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 11) learned models: weight = -5941.9821 + 39.9089*(bpd) + 2.6238*(hc) + 23.3260*(fl) + 9.2312*(ac): t=11, coeff=NaN, z-variance=15655.8994
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 18) learned models: weight = -6496.2424 + 44.6131*(bpd) + 3.9980*(hc) + 25.8861*(fl) + 7.7759*(ac): coeff=NaN, z-variance=13424.4435
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 18) learned models: weight = -6496.2424 + 44.6131*(bpd) + 3.9980*(hc) + 25.8861*(fl) + 7.7759*(ac): t=18, coeff=NaN, z-variance=13424.4435
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 22) learned models: weight = -5940.9170 + 31.6952*(bpd) + 2.8293*(hc) + 34.1356*(fl) + 9.0107*(ac): coeff=NaN, z-variance=5036.8786
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 22) learned models: weight = -5940.9170 + 31.6952*(bpd) + 2.8293*(hc) + 34.1356*(fl) + 9.0107*(ac): t=22, coeff=NaN, z-variance=5036.8786
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 37) learned models: weight = -6296.7603 + 66.8602*(bpd) + 2.7111*(hc) + 16.8848*(fl) + 4.0660*(ac): coeff=NaN, z-variance=2126.1469
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 37) learned models: weight = -6296.7603 + 66.8602*(bpd) + 2.7111*(hc) + 16.8848*(fl) + 4.0660*(ac): t=37, coeff=NaN, z-variance=2126.1469
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 112) learned models: weight = -5362.1163 + 35.6642*(bpd) + 4.7398*(hc) + 14.8123*(fl) + 8.2385*(ac): coeff=NaN, z-variance=1066.3091
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 112) learned models: weight = -5362.1163 + 35.6642*(bpd) + 4.7398*(hc) + 14.8123*(fl) + 8.2385*(ac): t=112, coeff=NaN, z-variance=1066.3091
 
 
 
 ========== Algorithm "rem" ==========
-Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 444) learned models: weight = -5923.3220 + 87.5165*(bpd) + 3.4471*(hc) - 0.2822*(fl) - 0.0753*(ac): coeff=NaN, z-variance=182.7374
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 444) learned models: weight = -5923.3220 + 87.5165*(bpd) + 3.4471*(hc) - 0.2822*(fl) - 0.0753*(ac): t=444, coeff=NaN, z-variance=182.7374
 
 
 

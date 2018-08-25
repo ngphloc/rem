@@ -9,7 +9,7 @@ MAEVector.test = [181.9859]
 MSE.test = 57198.4224
 R.test = 0.9584
 RMSE.test = 239.1619
-Setup time = 0.1510
+Setup time = 0.1110
 Speed = 0.0000
 ----- Testing dataset "1" -----
 
@@ -22,8 +22,8 @@ MAEVector.test = [177.6608]
 MSE.test = 54870.0314
 R.test = 0.9585
 RMSE.test = 234.2435
-Setup time = 0.0490
-Speed = 0.0000
+Setup time = 0.1560
+Speed = 0.0001
 ----- Testing dataset "2" -----
 
 ----- Testing dataset "3" -----
@@ -35,7 +35,7 @@ MAEVector.test = [175.0796]
 MSE.test = 53584.0707
 R.test = 0.9583
 RMSE.test = 231.4823
-Setup time = 0.0430
+Setup time = 0.0940
 Speed = 0.0000
 ----- Testing dataset "3" -----
 
@@ -48,7 +48,7 @@ MAEVector.test = [173.2178]
 MSE.test = 53460.0971
 R.test = 0.9580
 RMSE.test = 231.2144
-Setup time = 0.0440
+Setup time = 0.1250
 Speed = 0.0000
 ----- Testing dataset "4" -----
 
@@ -61,7 +61,7 @@ MAEVector.test = [171.2045]
 MSE.test = 50890.2299
 R.test = 0.9592
 RMSE.test = 225.5886
-Setup time = 0.0470
+Setup time = 0.0940
 Speed = 0.0000
 ----- Testing dataset "5" -----
 
@@ -74,7 +74,7 @@ MAEVector.test = [170.6609]
 MSE.test = 50173.1572
 R.test = 0.9586
 RMSE.test = 223.9937
-Setup time = 0.0550
+Setup time = 0.1250
 Speed = 0.0000
 ----- Testing dataset "6" -----
 
@@ -87,7 +87,7 @@ MAEVector.test = [175.1190]
 MSE.test = 51486.5233
 R.test = 0.9576
 RMSE.test = 226.9064
-Setup time = 0.0500
+Setup time = 0.4690
 Speed = 0.0000
 ----- Testing dataset "7" -----
 
@@ -100,7 +100,7 @@ MAEVector.test = [167.1040]
 MSE.test = 49653.4227
 R.test = 0.9606
 RMSE.test = 222.8305
-Setup time = 0.0450
+Setup time = 0.2570
 Speed = 0.0000
 ----- Testing dataset "8" -----
 
@@ -113,7 +113,7 @@ MAEVector.test = [172.5100]
 MSE.test = 51634.6255
 R.test = 0.9601
 RMSE.test = 227.2325
-Setup time = 0.0560
+Setup time = 0.1110
 Speed = 0.0000
 ----- Testing dataset "9" -----
 
@@ -126,7 +126,7 @@ MAEVector.test = [287.2583]
 MSE.test = 121879.1582
 R.test = 0.9520
 RMSE.test = 349.1120
-Setup time = 0.0370
+Setup time = 0.2520
 Speed = 0.0000
 ----- Testing dataset "10" -----
 

@@ -212,6 +212,7 @@ public class ExchangedParameter {
 	
 	/**
 	 * Testing the terminated condition between this parameter (estimated parameter) and other parameter (current parameter).
+	 * Only internal alpha coefficients and beta coefficients are tested. 
 	 * @param threshold specified threshold
 	 * @param currentParameter other specified parameter (current parameter).
 	 * @param previousParameter previous parameter is used to avoid skip-steps in optimization for too acute function.

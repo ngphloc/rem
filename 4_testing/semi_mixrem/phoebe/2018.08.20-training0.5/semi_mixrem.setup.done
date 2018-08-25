@@ -1,50 +1,50 @@
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {weight = -6651.5534 + 108.5531*(bpd): coeff=0.2721, z-variance=113888.6649}, {weight = -4986.7292 + 24.6736*(hc): coeff=0.2041, z-variance=188973.6069}, {weight = -4505.6926 + 109.6790*(fl): coeff=0.2450, z-variance=119971.2307}, {weight = -3385.5925 + 19.4249*(ac): coeff=0.2788, z-variance=97458.0445}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {weight = -6651.5534 + 108.5531*(bpd): t=1, coeff=0.2721, z-variance=113888.6649}, {weight = -4986.7292 + 24.6736*(hc): t=1, coeff=0.2041, z-variance=188973.6069}, {weight = -4505.6926 + 109.6790*(fl): t=1, coeff=0.2450, z-variance=119971.2307}, {weight = -3385.5925 + 19.4249*(ac): t=1, coeff=0.2788, z-variance=97458.0445}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 1) learned models: {weight = -6798.5461 + 110.2714*(bpd): coeff=0.2701, z-variance=99125.8320}, {weight = -5078.7370 + 24.9761*(hc): coeff=0.2010, z-variance=163839.8564}, {weight = -4739.4724 + 113.3671*(fl): coeff=0.2425, z-variance=103695.5113}, {weight = -3513.8811 + 19.8335*(ac): coeff=0.2864, z-variance=77712.2165}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 1) learned models: {weight = -6798.5461 + 110.2714*(bpd): t=1, coeff=0.2701, z-variance=99125.8320}, {weight = -5078.7370 + 24.9761*(hc): t=1, coeff=0.2010, z-variance=163839.8564}, {weight = -4739.4724 + 113.3671*(fl): t=1, coeff=0.2425, z-variance=103695.5113}, {weight = -3513.8811 + 19.8335*(ac): t=1, coeff=0.2864, z-variance=77712.2165}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 1) learned models: {weight = -6959.2041 + 112.3116*(bpd): coeff=0.2628, z-variance=87922.2159}, {weight = -5278.4101 + 25.6111*(hc): coeff=0.1994, z-variance=140768.1288}, {weight = -4848.9130 + 114.9051*(fl): coeff=0.2508, z-variance=79503.1191}, {weight = -3609.3697 + 20.1074*(ac): coeff=0.2870, z-variance=61661.2923}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 1) learned models: {weight = -6959.2041 + 112.3116*(bpd): t=1, coeff=0.2628, z-variance=87922.2159}, {weight = -5278.4101 + 25.6111*(hc): t=1, coeff=0.1994, z-variance=140768.1288}, {weight = -4848.9130 + 114.9051*(fl): t=1, coeff=0.2508, z-variance=79503.1191}, {weight = -3609.3697 + 20.1074*(ac): t=1, coeff=0.2870, z-variance=61661.2923}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 1) learned models: {weight = -7028.8845 + 112.8995*(bpd): coeff=0.2868, z-variance=49970.2660}, {weight = -5719.6176 + 26.9417*(hc): coeff=0.2140, z-variance=77936.2802}, {weight = -4825.4689 + 114.4860*(fl): coeff=0.2314, z-variance=62032.7957}, {weight = -3627.2784 + 20.1695*(ac): coeff=0.2678, z-variance=48708.1367}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 1) learned models: {weight = -7028.8845 + 112.8995*(bpd): t=1, coeff=0.2868, z-variance=49970.2660}, {weight = -5719.6176 + 26.9417*(hc): t=1, coeff=0.2140, z-variance=77936.2802}, {weight = -4825.4689 + 114.4860*(fl): t=1, coeff=0.2314, z-variance=62032.7957}, {weight = -3627.2784 + 20.1695*(ac): t=1, coeff=0.2678, z-variance=48708.1367}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 1) learned models: {weight = -7159.7387 + 115.0150*(bpd): coeff=0.2780, z-variance=39438.1779}, {weight = -5495.7534 + 26.2909*(hc): coeff=0.1895, z-variance=76852.2962}, {weight = -5096.5429 + 119.2259*(fl): coeff=0.2266, z-variance=50488.0505}, {weight = -3813.6530 + 20.8318*(ac): coeff=0.3059, z-variance=30801.7232}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 1) learned models: {weight = -7159.7387 + 115.0150*(bpd): t=1, coeff=0.2780, z-variance=39438.1779}, {weight = -5495.7534 + 26.2909*(hc): t=1, coeff=0.1895, z-variance=76852.2962}, {weight = -5096.5429 + 119.2259*(fl): t=1, coeff=0.2266, z-variance=50488.0505}, {weight = -3813.6530 + 20.8318*(ac): t=1, coeff=0.3059, z-variance=30801.7232}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 1) learned models: {weight = -7621.2668 + 120.3523*(bpd): coeff=0.2748, z-variance=33054.2764}, {weight = -5979.0602 + 27.7895*(hc): coeff=0.1989, z-variance=56874.4251}, {weight = -5286.7947 + 121.7543*(fl): coeff=0.2374, z-variance=40041.9714}, {weight = -3949.5100 + 21.2743*(ac): coeff=0.2890, z-variance=28742.0542}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 1) learned models: {weight = -7621.2668 + 120.3523*(bpd): t=1, coeff=0.2748, z-variance=33054.2764}, {weight = -5979.0602 + 27.7895*(hc): t=1, coeff=0.1989, z-variance=56874.4251}, {weight = -5286.7947 + 121.7543*(fl): t=1, coeff=0.2374, z-variance=40041.9714}, {weight = -3949.5100 + 21.2743*(ac): t=1, coeff=0.2890, z-variance=28742.0542}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 1) learned models: {weight = -8058.2547 + 125.2546*(bpd): coeff=0.2353, z-variance=24111.9391}, {weight = -6906.9505 + 30.9941*(hc): coeff=0.1797, z-variance=36127.6200}, {weight = -5469.0425 + 125.1379*(fl): coeff=0.2793, z-variance=14902.4273}, {weight = -3666.8925 + 20.2918*(ac): coeff=0.3056, z-variance=12459.4924}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 1) learned models: {weight = -8058.2547 + 125.2546*(bpd): t=1, coeff=0.2353, z-variance=24111.9391}, {weight = -6906.9505 + 30.9941*(hc): t=1, coeff=0.1797, z-variance=36127.6200}, {weight = -5469.0425 + 125.1379*(fl): t=1, coeff=0.2793, z-variance=14902.4273}, {weight = -3666.8925 + 20.2918*(ac): t=1, coeff=0.3056, z-variance=12459.4924}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 1) learned models: {weight = -7069.1970 + 112.7659*(bpd): coeff=0.3977, z-variance=3750.3536}, {weight = -5389.8869 + 25.8797*(hc): coeff=0.1404, z-variance=24035.3864}, {weight = -4912.2658 + 117.3592*(fl): coeff=0.1984, z-variance=12099.5913}, {weight = -3640.0044 + 20.3379*(ac): coeff=0.2636, z-variance=9645.2736}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 1) learned models: {weight = -7069.1970 + 112.7659*(bpd): t=1, coeff=0.3977, z-variance=3750.3536}, {weight = -5389.8869 + 25.8797*(hc): t=1, coeff=0.1404, z-variance=24035.3864}, {weight = -4912.2658 + 117.3592*(fl): t=1, coeff=0.1984, z-variance=12099.5913}, {weight = -3640.0044 + 20.3379*(ac): t=1, coeff=0.2636, z-variance=9645.2736}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 1) learned models: {weight = -7002.9486 + 112.4785*(bpd): coeff=0.2972, z-variance=4215.8970}, {weight = -5164.7828 + 25.0668*(hc): coeff=0.1753, z-variance=8117.3135}, {weight = -5604.7452 + 127.1540*(fl): coeff=0.1807, z-variance=7801.4655}, {weight = -3279.5662 + 19.3777*(ac): coeff=0.3469, z-variance=2902.9919}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 1) learned models: {weight = -7002.9486 + 112.4785*(bpd): t=1, coeff=0.2972, z-variance=4215.8970}, {weight = -5164.7828 + 25.0668*(hc): t=1, coeff=0.1753, z-variance=8117.3135}, {weight = -5604.7452 + 127.1540*(fl): t=1, coeff=0.1807, z-variance=7801.4655}, {weight = -3279.5662 + 19.3777*(ac): t=1, coeff=0.3469, z-variance=2902.9919}: t=1
 
 
 
 ========== Algorithm "semi_mixrem" ==========
-Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 1) learned models: {weight = -6350.1661 + 104.5558*(bpd): coeff=0.1792, z-variance=211.9475}, {weight = -5091.5272 + 24.3281*(hc): coeff=0.0264, z-variance=2281.6901}, {weight = -6791.2974 + 152.4660*(fl): coeff=0.3806, z-variance=69.6003}, {weight = -3831.9351 + 21.4991*(ac): coeff=0.4138, z-variance=54.1918}
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 1) learned models: {weight = -6350.1661 + 104.5558*(bpd): t=1, coeff=0.1792, z-variance=211.9475}, {weight = -5091.5272 + 24.3281*(hc): t=1, coeff=0.0264, z-variance=2281.6901}, {weight = -6791.2974 + 152.4660*(fl): t=1, coeff=0.3806, z-variance=69.6003}, {weight = -3831.9351 + 21.4991*(ac): t=1, coeff=0.4138, z-variance=54.1918}: t=1
 
 
 

@@ -268,7 +268,12 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 */
 	protected double extractRegressor(Object input, int index) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(input, xIndices, index);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, xIndices, index);
+		else
+			return defaultExtractVariable(input, attList, xIndices, index);
 	}
 
 
@@ -288,9 +293,14 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public Object extractResponse(Object input) {
+	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(input, zIndices, 1);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, zIndices, 1);
+		else
+			return defaultExtractVariable(input, attList, zIndices, 1);
 	}
 
 
@@ -466,20 +476,24 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 	/**
 	 * Extracting value of variable (X) from specified profile.
 	 * @param input specified input. It is often a profile.
+	 * @param attList specified attribute list.
 	 * @param indices specified list of indices.
 	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
 	 * So index 0 always indicate to value 1. 
 	 * @return value of variable (X) extracted from specified profile.
 	 */
-	public static double defaultExtractVariable(Object input, List<Object[]> indices, int index) {
+	public static double defaultExtractVariable(Object input, AttributeList attList, List<Object[]> indices, int index) {
 		if (index == 0)
 			return 1.0;
+		if (input == null)
+			return Constants.UNUSED;
 		
 		if (!(input instanceof Profile)) {
 			List<Double> values = DSUtil.toDoubleList(input, false);
-			AttributeList attList = defaultAttributeList(values.size());
+			if (attList == null)
+				attList = defaultAttributeList(values.size());
 			Profile profile = createProfile(attList, values);
-			return defaultExtractVariable(profile, indices, index);
+			return defaultExtractVariable(profile, null, indices, index);
 		}
 		
 		Profile profile = (Profile)input;

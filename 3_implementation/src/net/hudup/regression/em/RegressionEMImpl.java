@@ -564,12 +564,10 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		ExchangedParameter parameter = this.getExchangedParameter(); 
-		if (parameter == null)
+		if (parameter == null || input == null)
 			return null;
 		List<Double> alpha = parameter.getAlpha();
 		if (alpha == null || alpha.size() == 0)
-			return null;
-		if (input == null)
 			return null;
 		
 		Profile profile = null;
@@ -612,7 +610,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * Getting internal data. Actually, this method returns the current statistics.
 	 * @return internal data which is the current statistics.
 	 */
-	protected LargeStatistics getData() {
+	protected synchronized LargeStatistics getData() {
 		return this.data;
 	}
 	
@@ -686,7 +684,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		}
 		
 		buffer.append(": ");
-		buffer.append("coeff=" + MathUtil.format(exParameter.getCoeff()));
+		buffer.append("t=" + getCurrentIteration());
+		buffer.append(", coeff=" + MathUtil.format(exParameter.getCoeff()));
 		buffer.append(", z-variance=" + MathUtil.format(exParameter.getZVariance()));
 
 		return buffer.toString();
@@ -768,7 +767,12 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 */
 	protected double extractRegressor(Object input, int index) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(input, xIndices, index);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, xIndices, index);
+		else
+			return defaultExtractVariable(input, attList, xIndices, index);
 	}
 
 
@@ -789,9 +793,14 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public Object extractResponse(Object input) {
+	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(input, zIndices, 1);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, zIndices, 1);
+		else
+			return defaultExtractVariable(input, attList, zIndices, 1);
 	}
 
 

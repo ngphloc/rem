@@ -930,13 +930,18 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	/**
 	 * Extracting value of regressor (X) from specified profile.
 	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param profile specified profile.
+	 * @param input specified input. It is often profile.
 	 * @param index specified indices.
 	 * @return value of regressor (X) extracted from specified profile.
 	 */
-	protected double extractRegressor(Profile profile, int index) {
+	protected double extractRegressor(Profile input, int index) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(profile, xIndices, index);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, xIndices, index);
+		else
+			return defaultExtractVariable(input, attList, xIndices, index);
 	}
 
 
@@ -958,7 +963,12 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	public Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariable(input, zIndices, 1);
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return defaultExtractVariable(input, null, zIndices, 1);
+		else
+			return defaultExtractVariable(input, attList, zIndices, 1);
 	}
 
 

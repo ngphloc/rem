@@ -12,7 +12,8 @@ import net.hudup.core.logistic.NextUpdate;
 import net.hudup.regression.AbstractRegression;
 
 /**
- * This class implements regression model with correlation in case of missing data, called COR algorithm. 
+ * This class implements regression model with correlation in case of missing data, called COR algorithm.
+ *  
  * @author Loc Nguyen
  * @version 1.0
  *
