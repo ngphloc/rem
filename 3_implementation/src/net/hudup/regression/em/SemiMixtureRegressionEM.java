@@ -1,6 +1,7 @@
 package net.hudup.regression.em;
 
-import static net.hudup.regression.AbstractRegression.*;
+import static net.hudup.regression.AbstractRegression.extractNumber;
+import static net.hudup.regression.AbstractRegression.notSatisfy;
 import static net.hudup.regression.AbstractRegression.splitIndices;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.AbstractRegression;
 import net.hudup.regression.Regression;
 
 /**
@@ -185,6 +185,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	}
 
 	
+	/**
+	 * Expectation method of this class does not change internal data.
+	 */
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
@@ -244,6 +247,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	}
 
 	
+	/**
+	 * Maximization method of this class changes internal data.
+	 */
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
@@ -268,6 +274,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	}
 
 	
+	/**
+	 * Initialization method of this class changes internal data.
+	 */
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
@@ -281,7 +290,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			rem.setCurrentParameter(parameter);
 			rem.setPreviousParameter(null);
 			rem.setStatistics(null);
-			rem.setCurrentIteration(0);
+			rem.setCurrentIteration(this.getCurrentIteration());
 			
 			if (parameter == null)
 				logger.error("Some regression models are failed in initialization");
@@ -291,7 +300,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 	
 	@Override
-	public synchronized void permuteNotify() {
+	protected void permuteNotify() {
 		// TODO Auto-generated method stub
 		super.permuteNotify();
 		@SuppressWarnings("unchecked")
@@ -316,7 +325,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 
 	@Override
-	public synchronized void finishNotify() {
+	protected void finishNotify() {
 		// TODO Auto-generated method stub
 		super.finishNotify();
 		@SuppressWarnings("unchecked")
@@ -396,7 +405,8 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	
 	
 	/**
-	 * Adjusting specified parameters based on specified statistics according to mixture model in one iteration.
+	 * Adjusting specified parameters based on specified statistics according to mixture model for many iterations.
+	 * This method is replaced by {@link #adjustMixtureParametersOne()} method.
 	 * @return true if the adjustment process is successful.
 	 * @throws Exception if any error raises.
 	 */
@@ -666,11 +676,11 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			if (rem == null)
 				return null;
 			
-			double value = AbstractRegression.extractNumber(rem.extractResponse(input));
+			double value = extractNumber(rem.extractResponse(input));
 			if (!Util.isUsed(value))
 				return null;
 			
-			mean += value * ((ExchangedParameter)rem.getParameter()).getCoeff();
+			mean += value * rem.getExchangedParameter().getCoeff();
 		}
 		return mean;
 	}

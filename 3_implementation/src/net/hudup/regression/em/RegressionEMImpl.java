@@ -218,6 +218,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 	
 	
+	/**
+	 * Expectation method of this class does not change internal data.
+	 */
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
@@ -249,6 +252,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 
 	
+	/**
+	 * Expectation method of this class does not change internal data.
+	 */
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
@@ -322,7 +328,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	
 	
 	/**
-	 * Estimating statistics with specified parameters alpha and beta.
+	 * Estimating statistics with specified parameters alpha and beta. This method does not change internal data.
 	 * Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases.
 	 * @param stat specified statistics.
 	 * @param alpha specified alpha parameter.
@@ -384,9 +390,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 
 	
 	/**
-	 * Estimating statistics with specified parameters alpha and beta.
+	 * Estimating statistics with specified parameters alpha and beta. This method does not change internal data.
 	 * Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases.
-	 * This method is better than {@link #estimate(Statistics, List, List, Statistics)} method but it is not stable for long regression model having many regressors
+	 * This method is as good as than {@link #estimate(Statistics, List, List, Statistics)} method but it is not stable for long regression model having many regressors
 	 * because solving a set of many equations can cause approximate solution or non-solution problem.   
 	 * @param stat specified statistics.
 	 * @param alpha specified alpha parameter.
@@ -467,7 +473,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 
 	
 	/**
-	 * Balancing missing values zi (xStatistic) and xij (xValues).
+	 * Balancing missing values zi (xStatistic) and xij (xValues). This method does not change internal data.
 	 * @param alpha alpha coefficients.
 	 * @param betas beta coefficients.
 	 * @param zStatistic statistic for Z variable.
@@ -535,6 +541,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 
 	
+	/**
+	 * Initialization method of this class does not change internal data.
+	 */
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
