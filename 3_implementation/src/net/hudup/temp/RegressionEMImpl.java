@@ -392,7 +392,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		}
 		
 		//Estimating missing zi (zStatistic) by equation 7, based on current parameter.
-		int a = 0, b = 0, c = 0;
+		double a = 0, b = 0, c = 0;
 		List<Integer> U = Util.newList();
 		for (int j = 0; j < xVector.length; j++) {
 			if (Util.isUsed(xVector[j])) {
@@ -489,7 +489,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		}
 		
 		List<Integer> U = Util.newList();
-		int b = 0;
+		double b = 0;
 		for (int j = 0; j < xVector.length; j++) {
 			if (Util.isUsed(xVector[j])) {
 				b += alpha[j] * xVector[j];

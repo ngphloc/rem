@@ -1,0 +1,136 @@
+========== Algorithm "semi_mixrem.long" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [16.3872, 238.6328]
+Hudup recall = 1.0000
+MAE.test = 183.2813
+MAERatio.test = 0.0796
+MAEVector.test = [183.2813]
+MSE.test = 57215.1711
+R.test = 0.9615
+RMSE.test = 239.1969
+Setup time = 0.0380
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [14.4021, 234.6141]
+Hudup recall = 1.0000
+MAE.test = 179.8062
+MAERatio.test = 0.0771
+MAEVector.test = [179.8062]
+MSE.test = 55252.1995
+R.test = 0.9613
+RMSE.test = 235.0579
+Setup time = 0.1600
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [25.8079, 231.4632]
+Hudup recall = 1.0000
+MAE.test = 178.9276
+MAERatio.test = 0.0769
+MAEVector.test = [178.9276]
+MSE.test = 54242.2662
+R.test = 0.9614
+RMSE.test = 232.8997
+Setup time = 0.2070
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [22.8631, 229.8957]
+Hudup recall = 1.0000
+MAE.test = 176.9862
+MAERatio.test = 0.0754
+MAEVector.test = [176.9862]
+MSE.test = 53375.7657
+R.test = 0.9615
+RMSE.test = 231.0320
+Setup time = 0.3620
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [18.9286, 230.2281]
+Hudup recall = 1.0000
+MAE.test = 177.5427
+MAERatio.test = 0.0752
+MAEVector.test = [177.5427]
+MSE.test = 53364.2841
+R.test = 0.9606
+RMSE.test = 231.0071
+Setup time = 0.6440
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [15.9508, 230.1711]
+Hudup recall = 1.0000
+MAE.test = 178.1789
+MAERatio.test = 0.0750
+MAEVector.test = [178.1789]
+MSE.test = 53234.1724
+R.test = 0.9597
+RMSE.test = 230.7253
+Setup time = 0.6850
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [26.3857, 232.8175]
+Hudup recall = 1.0000
+MAE.test = 181.3554
+MAERatio.test = 0.0767
+MAEVector.test = [181.3554]
+MSE.test = 54901.1725
+R.test = 0.9586
+RMSE.test = 234.3100
+Setup time = 1.1090
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [11.9996, 234.5353]
+Hudup recall = 1.0000
+MAE.test = 180.4188
+MAERatio.test = 0.0759
+MAEVector.test = [180.4188]
+MSE.test = 55151.8097
+R.test = 0.9592
+RMSE.test = 234.8442
+Setup time = 2.6980
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [33.4575, 238.3972]
+Hudup recall = 1.0000
+MAE.test = 187.4169
+MAERatio.test = 0.0801
+MAEVector.test = [187.4169]
+MSE.test = 57953.6334
+R.test = 0.9574
+RMSE.test = 240.7356
+Setup time = 43.6520
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [135.1493, 228.0596]
+Hudup recall = 1.0000
+MAE.test = 209.0314
+MAERatio.test = 0.0898
+MAEVector.test = [209.0314]
+MSE.test = 70277.5320
+R.test = 0.9604
+RMSE.test = 265.0991
+Setup time = 20.6620
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "semi_mixrem.long" - Final result ==========
+
+
+

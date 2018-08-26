@@ -8,6 +8,7 @@ import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.core.logistic.NextUpdate;
 import net.hudup.regression.em.ExchangedParameter;
 import net.hudup.regression.em.LargeStatistics;
 import net.hudup.regression.em.RegressionEMPrior;
@@ -19,6 +20,7 @@ import net.hudup.regression.em.RegressionEMPrior;
  * @version 1.0
  *
  */
+@NextUpdate
 public class RegressionEMPriorExt extends RegressionEMPrior {
 
 	
@@ -143,7 +145,7 @@ public class RegressionEMPriorExt extends RegressionEMPrior {
 		if (name != null && !name.isEmpty())
 			return name;
 		else
-			return "prior_rem";
+			return "prior_rem_ext";
 	}
 
 	

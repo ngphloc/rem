@@ -72,7 +72,9 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 			ExchangedParameter parameter = parameters[i];
 			RegressionEMImpl rem = this.rems.get(i);
 			if (parameter != null && rem != null) {
-				rem.setParameter(parameter, this.getCurrentIteration());
+				rem.setEstimatedParameter(parameter);
+				rem.setCurrentParameter(parameter);
+				rem.setCurrentIteration(this.getCurrentIteration());
 				newParameters.add(parameter);
 				newRems.add(rem);
 			}

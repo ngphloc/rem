@@ -10,81 +10,603 @@ Estimated parameter:
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss"
 Current parameter:
-  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6569.2145, 107.4877: coeff=NaN, z-variance=NaN}, {-4876.3810, 24.3217: coeff=NaN, z-variance=NaN}, {-4519.7365, 110.1902: coeff=NaN, z-variance=NaN}, {-3353.0117, 19.3137: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  {-6755.4071, 109.6847: coeff=NaN, z-variance=NaN}, {-5123.4064, 25.1295: coeff=NaN, z-variance=NaN}, {-4596.4401, 111.3893: coeff=NaN, z-variance=NaN}, {-3439.0957, 19.5925: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-6761.4200, 109.7553: coeff=NaN, z-variance=NaN}, {-5137.4646, 25.1754: coeff=NaN, z-variance=NaN}, {-4598.7881, 111.4265: coeff=NaN, z-variance=NaN}, {-3441.4765, 19.6001: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  {-6761.4200, 109.7553: coeff=NaN, z-variance=NaN}, {-5137.4646, 25.1754: coeff=NaN, z-variance=NaN}, {-4598.7881, 111.4265: coeff=NaN, z-variance=NaN}, {-3441.4765, 19.6001: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-6761.5707, 109.7571: coeff=NaN, z-variance=NaN}, {-5138.2090, 25.1779: coeff=NaN, z-variance=NaN}, {-4598.9118, 111.4285: coeff=NaN, z-variance=NaN}, {-3441.5582, 19.6004: coeff=NaN, z-variance=NaN}: t=3.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss"
 Current parameter:
-  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6652.0053, 108.6255: coeff=NaN, z-variance=NaN}, {-5082.9850, 25.0484: coeff=NaN, z-variance=NaN}, {-4423.9432, 108.7102: coeff=NaN, z-variance=NaN}, {-3377.1892, 19.4420: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  {-6859.6754, 111.1100: coeff=NaN, z-variance=NaN}, {-5321.0890, 25.8243: coeff=NaN, z-variance=NaN}, {-4705.0333, 112.9926: coeff=NaN, z-variance=NaN}, {-3527.8076, 19.9296: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-6870.0714, 111.2344: coeff=NaN, z-variance=NaN}, {-5346.3951, 25.9064: coeff=NaN, z-variance=NaN}, {-4719.9242, 113.2195: coeff=NaN, z-variance=NaN}, {-3533.6495, 19.9485: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  {-6870.0714, 111.2344: coeff=NaN, z-variance=NaN}, {-5346.3951, 25.9064: coeff=NaN, z-variance=NaN}, {-4719.9242, 113.2195: coeff=NaN, z-variance=NaN}, {-3533.6495, 19.9485: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-6870.9272, 111.2447: coeff=NaN, z-variance=NaN}, {-5350.2130, 25.9187: coeff=NaN, z-variance=NaN}, {-4720.4136, 113.2266: coeff=NaN, z-variance=NaN}, {-3533.8524, 19.9491: coeff=NaN, z-variance=NaN}: t=3.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss"
 Current parameter:
-  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6743.1695, 109.7231: coeff=NaN, z-variance=NaN}, {-4925.8140, 24.5125: coeff=NaN, z-variance=NaN}, {-4626.9346, 111.6494: coeff=NaN, z-variance=NaN}, {-3205.8407, 18.9080: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  {-7026.7450, 113.0103: coeff=NaN, z-variance=NaN}, {-5493.0608, 26.3666: coeff=NaN, z-variance=NaN}, {-4804.4525, 114.3883: coeff=NaN, z-variance=NaN}, {-3455.0029, 19.7171: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7040.6274, 113.1697: coeff=NaN, z-variance=NaN}, {-5563.1212, 26.5956: coeff=NaN, z-variance=NaN}, {-4814.1543, 114.5370: coeff=NaN, z-variance=NaN}, {-3467.6912, 19.7580: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  {-7040.6274, 113.1697: coeff=NaN, z-variance=NaN}, {-5563.1212, 26.5956: coeff=NaN, z-variance=NaN}, {-4814.1543, 114.5370: coeff=NaN, z-variance=NaN}, {-3467.6912, 19.7580: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7041.6196, 113.1805: coeff=NaN, z-variance=NaN}, {-5571.5098, 26.6231: coeff=NaN, z-variance=NaN}, {-4815.2581, 114.5534: coeff=NaN, z-variance=NaN}, {-3467.9757, 19.7588: coeff=NaN, z-variance=NaN}: t=3.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 4 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  {-7041.6196, 113.1805: coeff=NaN, z-variance=NaN}, {-5571.5098, 26.6231: coeff=NaN, z-variance=NaN}, {-4815.2581, 114.5534: coeff=NaN, z-variance=NaN}, {-3467.9757, 19.7588: coeff=NaN, z-variance=NaN}: t=4.0000
+Estimated parameter:
+  {-7041.8642, 113.1831: coeff=NaN, z-variance=NaN}, {-5573.0066, 26.6280: coeff=NaN, z-variance=NaN}, {-4815.5802, 114.5581: coeff=NaN, z-variance=NaN}, {-3467.8668, 19.7584: coeff=NaN, z-variance=NaN}: t=4.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss"
 Current parameter:
-  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6562.0073, 107.5831: coeff=NaN, z-variance=NaN}, {-4794.8926, 23.9603: coeff=NaN, z-variance=NaN}, {-4607.4233, 111.4634: coeff=NaN, z-variance=NaN}, {-3433.3140, 19.6272: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  {-7100.7594, 113.8430: coeff=NaN, z-variance=NaN}, {-5490.8163, 26.2095: coeff=NaN, z-variance=NaN}, {-4912.1087, 116.3423: coeff=NaN, z-variance=NaN}, {-3652.1363, 20.3485: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7135.2367, 114.2383: coeff=NaN, z-variance=NaN}, {-5575.7212, 26.4837: coeff=NaN, z-variance=NaN}, {-4930.0141, 116.6336: coeff=NaN, z-variance=NaN}, {-3662.9822, 20.3843: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  {-7135.2367, 114.2383: coeff=NaN, z-variance=NaN}, {-5575.7212, 26.4837: coeff=NaN, z-variance=NaN}, {-4930.0141, 116.6336: coeff=NaN, z-variance=NaN}, {-3662.9822, 20.3843: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7136.2567, 114.2466: coeff=NaN, z-variance=NaN}, {-5583.8368, 26.5095: coeff=NaN, z-variance=NaN}, {-4931.0375, 116.6516: coeff=NaN, z-variance=NaN}, {-3663.5719, 20.3862: coeff=NaN, z-variance=NaN}: t=3.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 4 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  {-7136.2567, 114.2466: coeff=NaN, z-variance=NaN}, {-5583.8368, 26.5095: coeff=NaN, z-variance=NaN}, {-4931.0375, 116.6516: coeff=NaN, z-variance=NaN}, {-3663.5719, 20.3862: coeff=NaN, z-variance=NaN}: t=4.0000
+Estimated parameter:
+  {-7135.9669, 114.2413: coeff=NaN, z-variance=NaN}, {-5584.7235, 26.5121: coeff=NaN, z-variance=NaN}, {-4931.2112, 116.6547: coeff=NaN, z-variance=NaN}, {-3663.6924, 20.3865: coeff=NaN, z-variance=NaN}: t=4.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss"
 Current parameter:
-  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6810.9320, 110.6482: coeff=NaN, z-variance=NaN}, {-4533.8886, 23.1801: coeff=NaN, z-variance=NaN}, {-4526.8013, 110.4591: coeff=NaN, z-variance=NaN}, {-3494.9813, 19.7560: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  {-7400.6222, 117.4933: coeff=NaN, z-variance=NaN}, {-5536.4068, 26.4220: coeff=NaN, z-variance=NaN}, {-4926.2070, 116.5738: coeff=NaN, z-variance=NaN}, {-3890.4114, 21.0307: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7447.1068, 118.0306: coeff=NaN, z-variance=NaN}, {-5695.6141, 26.9381: coeff=NaN, z-variance=NaN}, {-4949.7491, 116.9311: coeff=NaN, z-variance=NaN}, {-3917.3327, 21.1175: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  {-7447.1068, 118.0306: coeff=NaN, z-variance=NaN}, {-5695.6141, 26.9381: coeff=NaN, z-variance=NaN}, {-4949.7491, 116.9311: coeff=NaN, z-variance=NaN}, {-3917.3327, 21.1175: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7451.0491, 118.0745: coeff=NaN, z-variance=NaN}, {-5712.3159, 26.9920: coeff=NaN, z-variance=NaN}, {-4950.7268, 116.9443: coeff=NaN, z-variance=NaN}, {-3918.9190, 21.1226: coeff=NaN, z-variance=NaN}: t=3.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 4 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  {-7451.0491, 118.0745: coeff=NaN, z-variance=NaN}, {-5712.3159, 26.9920: coeff=NaN, z-variance=NaN}, {-4950.7268, 116.9443: coeff=NaN, z-variance=NaN}, {-3918.9190, 21.1226: coeff=NaN, z-variance=NaN}: t=4.0000
+Estimated parameter:
+  {-7452.1852, 118.0869: coeff=NaN, z-variance=NaN}, {-5714.4119, 26.9988: coeff=NaN, z-variance=NaN}, {-4950.7684, 116.9445: coeff=NaN, z-variance=NaN}, {-3919.2847, 21.1240: coeff=NaN, z-variance=NaN}: t=4.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss"
 Current parameter:
-  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-6212.5249, 103.7348: coeff=NaN, z-variance=NaN}, {-4726.6583, 23.8756: coeff=NaN, z-variance=NaN}, {-4712.3309, 113.0139: coeff=NaN, z-variance=NaN}, {-3662.4814, 20.3377: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  {-7021.6482, 113.2264: coeff=NaN, z-variance=NaN}, {-5614.5240, 26.7826: coeff=NaN, z-variance=NaN}, {-5228.2788, 120.9730: coeff=NaN, z-variance=NaN}, {-4014.5576, 21.4733: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7089.6969, 114.0204: coeff=NaN, z-variance=NaN}, {-5697.1687, 27.0528: coeff=NaN, z-variance=NaN}, {-5261.5414, 121.4853: coeff=NaN, z-variance=NaN}, {-4029.8934, 21.5219: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  {-7089.6969, 114.0204: coeff=NaN, z-variance=NaN}, {-5697.1687, 27.0528: coeff=NaN, z-variance=NaN}, {-5261.5414, 121.4853: coeff=NaN, z-variance=NaN}, {-4029.8934, 21.5219: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7092.4374, 114.0484: coeff=NaN, z-variance=NaN}, {-5697.9798, 27.0555: coeff=NaN, z-variance=NaN}, {-5263.0618, 121.5074: coeff=NaN, z-variance=NaN}, {-4029.8129, 21.5210: coeff=NaN, z-variance=NaN}: t=3.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss"
 Current parameter:
-  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-7031.4363, 112.7614: coeff=NaN, z-variance=NaN}, {-5878.5663, 27.4217: coeff=NaN, z-variance=NaN}, {-4480.5781, 109.6058: coeff=NaN, z-variance=NaN}, {-2919.1131, 17.9256: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  {-7358.4039, 116.6405: coeff=NaN, z-variance=NaN}, {-6602.4345, 29.8230: coeff=NaN, z-variance=NaN}, {-4773.4319, 114.2178: coeff=NaN, z-variance=NaN}, {-3274.6884, 19.0829: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7369.6129, 116.7748: coeff=NaN, z-variance=NaN}, {-6665.3582, 30.0322: coeff=NaN, z-variance=NaN}, {-4784.2018, 114.3888: coeff=NaN, z-variance=NaN}, {-3289.1987, 19.1299: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss"
+Current parameter:
+  {-7369.6129, 116.7748: coeff=NaN, z-variance=NaN}, {-6665.3582, 30.0322: coeff=NaN, z-variance=NaN}, {-4784.2018, 114.3888: coeff=NaN, z-variance=NaN}, {-3289.1987, 19.1299: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7370.2750, 116.7834: coeff=NaN, z-variance=NaN}, {-6670.0985, 30.0488: coeff=NaN, z-variance=NaN}, {-4784.6344, 114.3968: coeff=NaN, z-variance=NaN}, {-3289.0084, 19.1290: coeff=NaN, z-variance=NaN}: t=3.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss"
 Current parameter:
-  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-5915.0830, 101.3146: coeff=NaN, z-variance=NaN}, {-5129.1176, 25.0816: coeff=NaN, z-variance=NaN}, {-3444.3063, 93.0258: coeff=NaN, z-variance=NaN}, {-4035.9972, 21.4683: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}: t=1.0000
 
 
 
 ========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  {-7058.6871, 114.8274: coeff=NaN, z-variance=NaN}, {-5671.5498, 26.9081: coeff=NaN, z-variance=NaN}, {-4096.5674, 103.3733: coeff=NaN, z-variance=NaN}, {-4483.3389, 22.9358: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-7145.3847, 115.8498: coeff=NaN, z-variance=NaN}, {-5695.8996, 26.9909: coeff=NaN, z-variance=NaN}, {-4120.6009, 103.7571: coeff=NaN, z-variance=NaN}, {-4506.1288, 23.0105: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  {-7145.3847, 115.8498: coeff=NaN, z-variance=NaN}, {-5695.8996, 26.9909: coeff=NaN, z-variance=NaN}, {-4120.6009, 103.7571: coeff=NaN, z-variance=NaN}, {-4506.1288, 23.0105: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-7144.3955, 115.8348: coeff=NaN, z-variance=NaN}, {-5694.5564, 26.9876: coeff=NaN, z-variance=NaN}, {-4118.1224, 103.7216: coeff=NaN, z-variance=NaN}, {-4506.8306, 23.0129: coeff=NaN, z-variance=NaN}: t=3.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
 At the 1 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
 Current parameter:
-  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}: t=1.0000
+  {-7143.3884, 117.7686: coeff=NaN, z-variance=NaN}, {1190.8453, 6.1244: coeff=NaN, z-variance=NaN}, {-6770.0000, 146.8132: coeff=NaN, z-variance=NaN}, {-3495.9907, 20.1157: coeff=NaN, z-variance=NaN}: t=1.0000
 Estimated parameter:
   {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}: t=1.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 2 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-8855.4585, 137.9326: coeff=NaN, z-variance=NaN}, {-1404.8759, 13.8485: coeff=NaN, z-variance=NaN}, {-7595.4258, 158.8792: coeff=NaN, z-variance=NaN}, {-3940.7256, 21.4721: coeff=NaN, z-variance=NaN}: t=2.0000
+Estimated parameter:
+  {-9097.1761, 140.7780: coeff=NaN, z-variance=NaN}, {-4419.5165, 22.9467: coeff=NaN, z-variance=NaN}, {-7653.5805, 159.7343: coeff=NaN, z-variance=NaN}, {-3958.8759, 21.5277: coeff=NaN, z-variance=NaN}: t=2.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 3 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9097.1761, 140.7780: coeff=NaN, z-variance=NaN}, {-4419.5165, 22.9467: coeff=NaN, z-variance=NaN}, {-7653.5805, 159.7343: coeff=NaN, z-variance=NaN}, {-3958.8759, 21.5277: coeff=NaN, z-variance=NaN}: t=3.0000
+Estimated parameter:
+  {-9104.2233, 140.8607: coeff=NaN, z-variance=NaN}, {-6477.5109, 29.2267: coeff=NaN, z-variance=NaN}, {-7654.6108, 159.7456: coeff=NaN, z-variance=NaN}, {-3958.6608, 21.5266: coeff=NaN, z-variance=NaN}: t=3.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 4 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9104.2233, 140.8607: coeff=NaN, z-variance=NaN}, {-6477.5109, 29.2267: coeff=NaN, z-variance=NaN}, {-7654.6108, 159.7456: coeff=NaN, z-variance=NaN}, {-3958.6608, 21.5266: coeff=NaN, z-variance=NaN}: t=4.0000
+Estimated parameter:
+  {-9106.8954, 140.8919: coeff=NaN, z-variance=NaN}, {-6864.7176, 30.4161: coeff=NaN, z-variance=NaN}, {-7655.7947, 159.7603: coeff=NaN, z-variance=NaN}, {-3958.7634, 21.5266: coeff=NaN, z-variance=NaN}: t=4.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 5 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9106.8954, 140.8919: coeff=NaN, z-variance=NaN}, {-6864.7176, 30.4161: coeff=NaN, z-variance=NaN}, {-7655.7947, 159.7603: coeff=NaN, z-variance=NaN}, {-3958.7634, 21.5266: coeff=NaN, z-variance=NaN}: t=5.0000
+Estimated parameter:
+  {-9109.5107, 140.9224: coeff=NaN, z-variance=NaN}, {-6843.2082, 30.3465: coeff=NaN, z-variance=NaN}, {-7657.7682, 159.7877: coeff=NaN, z-variance=NaN}, {-3959.2114, 21.5278: coeff=NaN, z-variance=NaN}: t=5.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 6 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9109.5107, 140.9224: coeff=NaN, z-variance=NaN}, {-6843.2082, 30.3465: coeff=NaN, z-variance=NaN}, {-7657.7682, 159.7877: coeff=NaN, z-variance=NaN}, {-3959.2114, 21.5278: coeff=NaN, z-variance=NaN}: t=6.0000
+Estimated parameter:
+  {-9112.0929, 140.9525: coeff=NaN, z-variance=NaN}, {-6806.3253, 30.2290: coeff=NaN, z-variance=NaN}, {-7660.4019, 159.8260: coeff=NaN, z-variance=NaN}, {-3959.9112, 21.5298: coeff=NaN, z-variance=NaN}: t=6.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 7 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9112.0929, 140.9525: coeff=NaN, z-variance=NaN}, {-6806.3253, 30.2290: coeff=NaN, z-variance=NaN}, {-7660.4019, 159.8260: coeff=NaN, z-variance=NaN}, {-3959.9112, 21.5298: coeff=NaN, z-variance=NaN}: t=7.0000
+Estimated parameter:
+  {-9114.6389, 140.9821: coeff=NaN, z-variance=NaN}, {-6771.3160, 30.1172: coeff=NaN, z-variance=NaN}, {-7663.5372, 159.8727: coeff=NaN, z-variance=NaN}, {-3960.7822, 21.5325: coeff=NaN, z-variance=NaN}: t=7.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 8 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9114.6389, 140.9821: coeff=NaN, z-variance=NaN}, {-6771.3160, 30.1172: coeff=NaN, z-variance=NaN}, {-7663.5372, 159.8727: coeff=NaN, z-variance=NaN}, {-3960.7822, 21.5325: coeff=NaN, z-variance=NaN}: t=8.0000
+Estimated parameter:
+  {-9117.1462, 141.0113: coeff=NaN, z-variance=NaN}, {-6738.4793, 30.0122: coeff=NaN, z-variance=NaN}, {-7667.0174, 159.9254: coeff=NaN, z-variance=NaN}, {-3961.7599, 21.5355: coeff=NaN, z-variance=NaN}: t=8.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 9 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9117.1462, 141.0113: coeff=NaN, z-variance=NaN}, {-6738.4793, 30.0122: coeff=NaN, z-variance=NaN}, {-7667.0174, 159.9254: coeff=NaN, z-variance=NaN}, {-3961.7599, 21.5355: coeff=NaN, z-variance=NaN}: t=9.0000
+Estimated parameter:
+  {-9119.6133, 141.0400: coeff=NaN, z-variance=NaN}, {-6707.6965, 29.9136: coeff=NaN, z-variance=NaN}, {-7670.7022, 159.9818: coeff=NaN, z-variance=NaN}, {-3962.7949, 21.5387: coeff=NaN, z-variance=NaN}: t=9.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 10 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9119.6133, 141.0400: coeff=NaN, z-variance=NaN}, {-6707.6965, 29.9136: coeff=NaN, z-variance=NaN}, {-7670.7022, 159.9818: coeff=NaN, z-variance=NaN}, {-3962.7949, 21.5387: coeff=NaN, z-variance=NaN}: t=10.0000
+Estimated parameter:
+  {-9122.0389, 141.0682: coeff=NaN, z-variance=NaN}, {-6678.8138, 29.8210: coeff=NaN, z-variance=NaN}, {-7674.4739, 160.0400: coeff=NaN, z-variance=NaN}, {-3963.8510, 21.5421: coeff=NaN, z-variance=NaN}: t=10.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 11 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9122.0389, 141.0682: coeff=NaN, z-variance=NaN}, {-6678.8138, 29.8210: coeff=NaN, z-variance=NaN}, {-7674.4739, 160.0400: coeff=NaN, z-variance=NaN}, {-3963.8510, 21.5421: coeff=NaN, z-variance=NaN}: t=11.0000
+Estimated parameter:
+  {-9124.4226, 141.0959: coeff=NaN, z-variance=NaN}, {-6651.6782, 29.7340: coeff=NaN, z-variance=NaN}, {-7678.2385, 160.0985: coeff=NaN, z-variance=NaN}, {-3964.9021, 21.5455: coeff=NaN, z-variance=NaN}: t=11.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 12 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9124.4226, 141.0959: coeff=NaN, z-variance=NaN}, {-6651.6782, 29.7340: coeff=NaN, z-variance=NaN}, {-7678.2385, 160.0985: coeff=NaN, z-variance=NaN}, {-3964.9021, 21.5455: coeff=NaN, z-variance=NaN}: t=12.0000
+Estimated parameter:
+  {-9126.7639, 141.1231: coeff=NaN, z-variance=NaN}, {-6626.1490, 29.6521: coeff=NaN, z-variance=NaN}, {-7681.9240, 160.1560: coeff=NaN, z-variance=NaN}, {-3965.9298, 21.5488: coeff=NaN, z-variance=NaN}: t=12.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 13 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9126.7639, 141.1231: coeff=NaN, z-variance=NaN}, {-6626.1490, 29.6521: coeff=NaN, z-variance=NaN}, {-7681.9240, 160.1560: coeff=NaN, z-variance=NaN}, {-3965.9298, 21.5488: coeff=NaN, z-variance=NaN}: t=13.0000
+Estimated parameter:
+  {-9129.0629, 141.1498: coeff=NaN, z-variance=NaN}, {-6602.1001, 29.5750: coeff=NaN, z-variance=NaN}, {-7685.4774, 160.2118: coeff=NaN, z-variance=NaN}, {-3966.9219, 21.5520: coeff=NaN, z-variance=NaN}: t=13.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 14 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9129.0629, 141.1498: coeff=NaN, z-variance=NaN}, {-6602.1001, 29.5750: coeff=NaN, z-variance=NaN}, {-7685.4774, 160.2118: coeff=NaN, z-variance=NaN}, {-3966.9219, 21.5520: coeff=NaN, z-variance=NaN}: t=14.0000
+Estimated parameter:
+  {-9131.3196, 141.1760: coeff=NaN, z-variance=NaN}, {-6579.4198, 29.5022: coeff=NaN, z-variance=NaN}, {-7688.8615, 160.2652: coeff=NaN, z-variance=NaN}, {-3967.8702, 21.5551: coeff=NaN, z-variance=NaN}: t=14.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 15 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9131.3196, 141.1760: coeff=NaN, z-variance=NaN}, {-6579.4198, 29.5022: coeff=NaN, z-variance=NaN}, {-7688.8615, 160.2652: coeff=NaN, z-variance=NaN}, {-3967.8702, 21.5551: coeff=NaN, z-variance=NaN}: t=15.0000
+Estimated parameter:
+  {-9133.5343, 141.2017: coeff=NaN, z-variance=NaN}, {-6558.0086, 29.4335: coeff=NaN, z-variance=NaN}, {-7692.0517, 160.3157: coeff=NaN, z-variance=NaN}, {-3968.7701, 21.5580: coeff=NaN, z-variance=NaN}: t=15.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 16 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9133.5343, 141.2017: coeff=NaN, z-variance=NaN}, {-6558.0086, 29.4335: coeff=NaN, z-variance=NaN}, {-7692.0517, 160.3157: coeff=NaN, z-variance=NaN}, {-3968.7701, 21.5580: coeff=NaN, z-variance=NaN}: t=16.0000
+Estimated parameter:
+  {-9135.7074, 141.2269: coeff=NaN, z-variance=NaN}, {-6537.7772, 29.3687: coeff=NaN, z-variance=NaN}, {-7695.0334, 160.3631: coeff=NaN, z-variance=NaN}, {-3969.6189, 21.5608: coeff=NaN, z-variance=NaN}: t=16.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 17 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9135.7074, 141.2269: coeff=NaN, z-variance=NaN}, {-6537.7772, 29.3687: coeff=NaN, z-variance=NaN}, {-7695.0334, 160.3631: coeff=NaN, z-variance=NaN}, {-3969.6189, 21.5608: coeff=NaN, z-variance=NaN}: t=17.0000
+Estimated parameter:
+  {-9137.8394, 141.2517: coeff=NaN, z-variance=NaN}, {-6518.6453, 29.3073: coeff=NaN, z-variance=NaN}, {-7697.7996, 160.4072: coeff=NaN, z-variance=NaN}, {-3970.4160, 21.5634: coeff=NaN, z-variance=NaN}: t=17.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 18 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9137.8394, 141.2517: coeff=NaN, z-variance=NaN}, {-6518.6453, 29.3073: coeff=NaN, z-variance=NaN}, {-7697.7996, 160.4072: coeff=NaN, z-variance=NaN}, {-3970.4160, 21.5634: coeff=NaN, z-variance=NaN}: t=18.0000
+Estimated parameter:
+  {-9139.9307, 141.2759: coeff=NaN, z-variance=NaN}, {-6500.5399, 29.2493: coeff=NaN, z-variance=NaN}, {-7700.3493, 160.4481: coeff=NaN, z-variance=NaN}, {-3971.1615, 21.5659: coeff=NaN, z-variance=NaN}: t=18.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 19 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9139.9307, 141.2759: coeff=NaN, z-variance=NaN}, {-6500.5399, 29.2493: coeff=NaN, z-variance=NaN}, {-7700.3493, 160.4481: coeff=NaN, z-variance=NaN}, {-3971.1615, 21.5659: coeff=NaN, z-variance=NaN}: t=19.0000
+Estimated parameter:
+  {-9141.9821, 141.2997: coeff=NaN, z-variance=NaN}, {-6483.3941, 29.1944: coeff=NaN, z-variance=NaN}, {-7702.6855, 160.4856: coeff=NaN, z-variance=NaN}, {-3971.8567, 21.5682: coeff=NaN, z-variance=NaN}: t=19.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 20 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9141.9821, 141.2997: coeff=NaN, z-variance=NaN}, {-6483.3941, 29.1944: coeff=NaN, z-variance=NaN}, {-7702.6855, 160.4856: coeff=NaN, z-variance=NaN}, {-3971.8567, 21.5682: coeff=NaN, z-variance=NaN}: t=20.0000
+Estimated parameter:
+  {-9143.9941, 141.3230: coeff=NaN, z-variance=NaN}, {-6467.1467, 29.1424: coeff=NaN, z-variance=NaN}, {-7704.8146, 160.5200: coeff=NaN, z-variance=NaN}, {-3972.5032, 21.5703: coeff=NaN, z-variance=NaN}: t=20.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 21 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9143.9941, 141.3230: coeff=NaN, z-variance=NaN}, {-6467.1467, 29.1424: coeff=NaN, z-variance=NaN}, {-7704.8146, 160.5200: coeff=NaN, z-variance=NaN}, {-3972.5032, 21.5703: coeff=NaN, z-variance=NaN}: t=21.0000
+Estimated parameter:
+  {-9145.9673, 141.3459: coeff=NaN, z-variance=NaN}, {-6451.7413, 29.0931: coeff=NaN, z-variance=NaN}, {-7706.7447, 160.5513: coeff=NaN, z-variance=NaN}, {-3973.1032, 21.5723: coeff=NaN, z-variance=NaN}: t=21.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 22 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9145.9673, 141.3459: coeff=NaN, z-variance=NaN}, {-6451.7413, 29.0931: coeff=NaN, z-variance=NaN}, {-7706.7447, 160.5513: coeff=NaN, z-variance=NaN}, {-3973.1032, 21.5723: coeff=NaN, z-variance=NaN}: t=22.0000
+Estimated parameter:
+  {-9147.9024, 141.3684: coeff=NaN, z-variance=NaN}, {-6437.1256, 29.0464: coeff=NaN, z-variance=NaN}, {-7708.4857, 160.5797: coeff=NaN, z-variance=NaN}, {-3973.6588, 21.5742: coeff=NaN, z-variance=NaN}: t=22.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 23 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9147.9024, 141.3684: coeff=NaN, z-variance=NaN}, {-6437.1256, 29.0464: coeff=NaN, z-variance=NaN}, {-7708.4857, 160.5797: coeff=NaN, z-variance=NaN}, {-3973.6588, 21.5742: coeff=NaN, z-variance=NaN}: t=23.0000
+Estimated parameter:
+  {-9149.8001, 141.3903: coeff=NaN, z-variance=NaN}, {-6423.2515, 29.0021: coeff=NaN, z-variance=NaN}, {-7710.0482, 160.6054: coeff=NaN, z-variance=NaN}, {-3974.1725, 21.5759: coeff=NaN, z-variance=NaN}: t=23.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 24 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9149.8001, 141.3903: coeff=NaN, z-variance=NaN}, {-6423.2515, 29.0021: coeff=NaN, z-variance=NaN}, {-7710.0482, 160.6054: coeff=NaN, z-variance=NaN}, {-3974.1725, 21.5759: coeff=NaN, z-variance=NaN}: t=24.0000
+Estimated parameter:
+  {-9151.6609, 141.4119: coeff=NaN, z-variance=NaN}, {-6410.0740, 28.9600: coeff=NaN, z-variance=NaN}, {-7711.4432, 160.6284: coeff=NaN, z-variance=NaN}, {-3974.6467, 21.5775: coeff=NaN, z-variance=NaN}: t=24.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 25 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9151.6609, 141.4119: coeff=NaN, z-variance=NaN}, {-6410.0740, 28.9600: coeff=NaN, z-variance=NaN}, {-7711.4432, 160.6284: coeff=NaN, z-variance=NaN}, {-3974.6467, 21.5775: coeff=NaN, z-variance=NaN}: t=25.0000
+Estimated parameter:
+  {-9153.4857, 141.4330: coeff=NaN, z-variance=NaN}, {-6397.5515, 28.9200: coeff=NaN, z-variance=NaN}, {-7712.6820, 160.6490: coeff=NaN, z-variance=NaN}, {-3975.0838, 21.5789: coeff=NaN, z-variance=NaN}: t=25.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 26 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9153.4857, 141.4330: coeff=NaN, z-variance=NaN}, {-6397.5515, 28.9200: coeff=NaN, z-variance=NaN}, {-7712.6820, 160.6490: coeff=NaN, z-variance=NaN}, {-3975.0838, 21.5789: coeff=NaN, z-variance=NaN}: t=26.0000
+Estimated parameter:
+  {-9155.2749, 141.4538: coeff=NaN, z-variance=NaN}, {-6385.6453, 28.8820: coeff=NaN, z-variance=NaN}, {-7713.7755, 160.6673: coeff=NaN, z-variance=NaN}, {-3975.4863, 21.5803: coeff=NaN, z-variance=NaN}: t=26.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 27 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9155.2749, 141.4538: coeff=NaN, z-variance=NaN}, {-6385.6453, 28.8820: coeff=NaN, z-variance=NaN}, {-7713.7755, 160.6673: coeff=NaN, z-variance=NaN}, {-3975.4863, 21.5803: coeff=NaN, z-variance=NaN}: t=27.0000
+Estimated parameter:
+  {-9157.0294, 141.4741: coeff=NaN, z-variance=NaN}, {-6374.3191, 28.8459: coeff=NaN, z-variance=NaN}, {-7714.7346, 160.6835: coeff=NaN, z-variance=NaN}, {-3975.8563, 21.5815: coeff=NaN, z-variance=NaN}: t=27.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 28 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9157.0294, 141.4741: coeff=NaN, z-variance=NaN}, {-6374.3191, 28.8459: coeff=NaN, z-variance=NaN}, {-7714.7346, 160.6835: coeff=NaN, z-variance=NaN}, {-3975.8563, 21.5815: coeff=NaN, z-variance=NaN}: t=28.0000
+Estimated parameter:
+  {-9158.7497, 141.4940: coeff=NaN, z-variance=NaN}, {-6363.5393, 28.8116: coeff=NaN, z-variance=NaN}, {-7715.5697, 160.6978: coeff=NaN, z-variance=NaN}, {-3976.1961, 21.5827: coeff=NaN, z-variance=NaN}: t=28.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 29 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9158.7497, 141.4940: coeff=NaN, z-variance=NaN}, {-6363.5393, 28.8116: coeff=NaN, z-variance=NaN}, {-7715.5697, 160.6978: coeff=NaN, z-variance=NaN}, {-3976.1961, 21.5827: coeff=NaN, z-variance=NaN}: t=29.0000
+Estimated parameter:
+  {-9160.4365, 141.5135: coeff=NaN, z-variance=NaN}, {-6353.2745, 28.7789: coeff=NaN, z-variance=NaN}, {-7716.2905, 160.7103: coeff=NaN, z-variance=NaN}, {-3976.5079, 21.5837: coeff=NaN, z-variance=NaN}: t=29.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 30 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9160.4365, 141.5135: coeff=NaN, z-variance=NaN}, {-6353.2745, 28.7789: coeff=NaN, z-variance=NaN}, {-7716.2905, 160.7103: coeff=NaN, z-variance=NaN}, {-3976.5079, 21.5837: coeff=NaN, z-variance=NaN}: t=30.0000
+Estimated parameter:
+  {-9162.0904, 141.5326: coeff=NaN, z-variance=NaN}, {-6343.4950, 28.7478: coeff=NaN, z-variance=NaN}, {-7716.9065, 160.7211: coeff=NaN, z-variance=NaN}, {-3976.7935, 21.5847: coeff=NaN, z-variance=NaN}: t=30.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 31 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9162.0904, 141.5326: coeff=NaN, z-variance=NaN}, {-6343.4950, 28.7478: coeff=NaN, z-variance=NaN}, {-7716.9065, 160.7211: coeff=NaN, z-variance=NaN}, {-3976.7935, 21.5847: coeff=NaN, z-variance=NaN}: t=31.0000
+Estimated parameter:
+  {-9163.7121, 141.5514: coeff=NaN, z-variance=NaN}, {-6334.1735, 28.7182: coeff=NaN, z-variance=NaN}, {-7717.4266, 160.7304: coeff=NaN, z-variance=NaN}, {-3977.0550, 21.5856: coeff=NaN, z-variance=NaN}: t=31.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 32 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9163.7121, 141.5514: coeff=NaN, z-variance=NaN}, {-6334.1735, 28.7182: coeff=NaN, z-variance=NaN}, {-7717.4266, 160.7304: coeff=NaN, z-variance=NaN}, {-3977.0550, 21.5856: coeff=NaN, z-variance=NaN}: t=32.0000
+Estimated parameter:
+  {-9165.3021, 141.5698: coeff=NaN, z-variance=NaN}, {-6325.2841, 28.6900: coeff=NaN, z-variance=NaN}, {-7717.8588, 160.7384: coeff=NaN, z-variance=NaN}, {-3977.2939, 21.5864: coeff=NaN, z-variance=NaN}: t=32.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 33 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9165.3021, 141.5698: coeff=NaN, z-variance=NaN}, {-6325.2841, 28.6900: coeff=NaN, z-variance=NaN}, {-7717.8588, 160.7384: coeff=NaN, z-variance=NaN}, {-3977.2939, 21.5864: coeff=NaN, z-variance=NaN}: t=33.0000
+Estimated parameter:
+  {-9166.8611, 141.5878: coeff=NaN, z-variance=NaN}, {-6316.8026, 28.6631: coeff=NaN, z-variance=NaN}, {-7718.2110, 160.7451: coeff=NaN, z-variance=NaN}, {-3977.5122, 21.5871: coeff=NaN, z-variance=NaN}: t=33.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 34 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9166.8611, 141.5878: coeff=NaN, z-variance=NaN}, {-6316.8026, 28.6631: coeff=NaN, z-variance=NaN}, {-7718.2110, 160.7451: coeff=NaN, z-variance=NaN}, {-3977.5122, 21.5871: coeff=NaN, z-variance=NaN}: t=34.0000
+Estimated parameter:
+  {-9168.3897, 141.6055: coeff=NaN, z-variance=NaN}, {-6308.7063, 28.6374: coeff=NaN, z-variance=NaN}, {-7718.4903, 160.7506: coeff=NaN, z-variance=NaN}, {-3977.7112, 21.5878: coeff=NaN, z-variance=NaN}: t=34.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 35 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9168.3897, 141.6055: coeff=NaN, z-variance=NaN}, {-6308.7063, 28.6374: coeff=NaN, z-variance=NaN}, {-7718.4903, 160.7506: coeff=NaN, z-variance=NaN}, {-3977.7112, 21.5878: coeff=NaN, z-variance=NaN}: t=35.0000
+Estimated parameter:
+  {-9169.8884, 141.6228: coeff=NaN, z-variance=NaN}, {-6300.9740, 28.6129: coeff=NaN, z-variance=NaN}, {-7718.7032, 160.7551: coeff=NaN, z-variance=NaN}, {-3977.8924, 21.5884: coeff=NaN, z-variance=NaN}: t=35.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 36 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9169.8884, 141.6228: coeff=NaN, z-variance=NaN}, {-6300.9740, 28.6129: coeff=NaN, z-variance=NaN}, {-7718.7032, 160.7551: coeff=NaN, z-variance=NaN}, {-3977.8924, 21.5884: coeff=NaN, z-variance=NaN}: t=36.0000
+Estimated parameter:
+  {-9171.3579, 141.6398: coeff=NaN, z-variance=NaN}, {-6293.5856, 28.5896: coeff=NaN, z-variance=NaN}, {-7718.8558, 160.7586: coeff=NaN, z-variance=NaN}, {-3978.0572, 21.5890: coeff=NaN, z-variance=NaN}: t=36.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 37 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9171.3579, 141.6398: coeff=NaN, z-variance=NaN}, {-6293.5856, 28.5896: coeff=NaN, z-variance=NaN}, {-7718.8558, 160.7586: coeff=NaN, z-variance=NaN}, {-3978.0572, 21.5890: coeff=NaN, z-variance=NaN}: t=37.0000
+Estimated parameter:
+  {-9172.7986, 141.6564: coeff=NaN, z-variance=NaN}, {-6286.5223, 28.5672: coeff=NaN, z-variance=NaN}, {-7718.9538, 160.7613: coeff=NaN, z-variance=NaN}, {-3978.2068, 21.5895: coeff=NaN, z-variance=NaN}: t=37.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 38 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9172.7986, 141.6564: coeff=NaN, z-variance=NaN}, {-6286.5223, 28.5672: coeff=NaN, z-variance=NaN}, {-7718.9538, 160.7613: coeff=NaN, z-variance=NaN}, {-3978.2068, 21.5895: coeff=NaN, z-variance=NaN}: t=38.0000
+Estimated parameter:
+  {-9174.2112, 141.6727: coeff=NaN, z-variance=NaN}, {-6279.7664, 28.5459: coeff=NaN, z-variance=NaN}, {-7719.0024, 160.7632: coeff=NaN, z-variance=NaN}, {-3978.3424, 21.5900: coeff=NaN, z-variance=NaN}: t=38.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 39 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9174.2112, 141.6727: coeff=NaN, z-variance=NaN}, {-6279.7664, 28.5459: coeff=NaN, z-variance=NaN}, {-7719.0024, 160.7632: coeff=NaN, z-variance=NaN}, {-3978.3424, 21.5900: coeff=NaN, z-variance=NaN}: t=39.0000
+Estimated parameter:
+  {-9175.5963, 141.6887: coeff=NaN, z-variance=NaN}, {-6273.3013, 28.5255: coeff=NaN, z-variance=NaN}, {-7719.0062, 160.7644: coeff=NaN, z-variance=NaN}, {-3978.4651, 21.5904: coeff=NaN, z-variance=NaN}: t=39.0000
+
+
+
+========== Algorithm "semi_mixrem" ==========
+At the 40 iteration of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  {-9175.5963, 141.6887: coeff=NaN, z-variance=NaN}, {-6273.3013, 28.5255: coeff=NaN, z-variance=NaN}, {-7719.0062, 160.7644: coeff=NaN, z-variance=NaN}, {-3978.4651, 21.5904: coeff=NaN, z-variance=NaN}: t=40.0000
+Estimated parameter:
+  {-9176.9542, 141.7044: coeff=NaN, z-variance=NaN}, {-6267.1113, 28.5060: coeff=NaN, z-variance=NaN}, {-7718.9696, 160.7650: coeff=NaN, z-variance=NaN}, {-3978.5759, 21.5908: coeff=NaN, z-variance=NaN}: t=40.0000
 
 
 

@@ -188,18 +188,22 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		for (RegressionEMImpl rem : this.rems) {
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)currentParameter;
+		List<LargeStatistics> stats = Util.newList(this.rems.size());
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter parameter = parameters.get(k);
 //			if (rem.terminatedCondition(rem.getEstimatedParameter(), rem.getCurrentParameter(), rem.getPreviousParameter(), info)
 //				&& rem.getLargeStatistics() != null && rem.getLargeStatistics() != rem.getData())
 //				continue;
 				
-			LargeStatistics stat = (LargeStatistics)rem.expectation(rem.getCurrentParameter());
-			if (stat != null)
-				rem.setStatistics(stat);
-			else {
+			LargeStatistics stat = (LargeStatistics)rem.expectation(parameter);
+			rem.setStatistics(stat);
+			stats.add(stat);
+			
+			if (stat == null)
 				logger.error("Some regression models are failed in expectation");
-				return null;
-			}
 		}
 		
 		//Supporting mutual mode. If there are two components, it is dual mode.
@@ -236,30 +240,102 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			}
 		}
 		
-		return this.rems;
+		return stats;
 	}
 
 	
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		for (RegressionEMImpl rem : this.rems) {
+		@SuppressWarnings("unchecked")
+		List<LargeStatistics> stats = (List<LargeStatistics>)currentStatistic;
+		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			LargeStatistics stat = stats.get(k);
 //			if (rem.terminatedCondition(rem.getEstimatedParameter(), rem.getCurrentParameter(), rem.getPreviousParameter(), info))
 //				continue;
 
-			ExchangedParameter estimatedParameter = (ExchangedParameter)rem.maximization(rem.getStatistics());
-			if (estimatedParameter != null)
-				rem.setParameter(estimatedParameter, this.getCurrentIteration());
-			else {
+			ExchangedParameter parameter = (ExchangedParameter)rem.maximization(stat);
+			rem.setEstimatedParameter(parameter);
+			parameters.add(parameter);
+			
+			if (parameter == null)
 				logger.error("Some regression models are failed in maximization");
-				return null;
-			}
 		}
 		
-		return this.rems;
+		return parameters;
 	}
 
 	
+	@Override
+	protected Object initializeParameter() {
+		// TODO Auto-generated method stub
+		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter parameter = (ExchangedParameter)rem.initializeParameter();
+			parameters.add(parameter);
+			
+			rem.setEstimatedParameter(parameter);
+			rem.setCurrentParameter(parameter);
+			rem.setPreviousParameter(null);
+			rem.setStatistics(null);
+			rem.setCurrentIteration(0);
+			
+			if (parameter == null)
+				logger.error("Some regression models are failed in initialization");
+		}
+		return parameters;
+	}
+
+	
+	@Override
+	public synchronized void permuteNotify() {
+		// TODO Auto-generated method stub
+		super.permuteNotify();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> estimatedParameters = (List<ExchangedParameter>)getEstimatedParameter();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> currentParameters = (List<ExchangedParameter>)getCurrentParameter();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> previousParameters = (List<ExchangedParameter>)getPreviousParameter();
+		
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter estimatedParameter = estimatedParameters.get(k);
+			ExchangedParameter currentParameter = currentParameters.get(k);
+			ExchangedParameter previousParameter = previousParameters != null ? previousParameters.get(k) : null;
+			
+			rem.setEstimatedParameter(estimatedParameter);
+			rem.setCurrentParameter(currentParameter);
+			rem.setPreviousParameter(previousParameter);
+			rem.setCurrentIteration(this.getCurrentIteration());
+		}
+	}
+
+
+	@Override
+	public synchronized void finishNotify() {
+		// TODO Auto-generated method stub
+		super.finishNotify();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> estimatedParameters = (List<ExchangedParameter>)getEstimatedParameter();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> currentParameters = (List<ExchangedParameter>)getCurrentParameter();
+		
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter estimatedParameter = estimatedParameters.get(k);
+			ExchangedParameter currentParameter = currentParameters.get(k);
+			
+			rem.setEstimatedParameter(estimatedParameter);
+			rem.setCurrentParameter(currentParameter);
+			rem.setCurrentIteration(this.getCurrentIteration());
+		}
+	}
+
+
 	/**
 	 * Adjusting specified parameters based on specified statistics according to mixture model in one iteration.
 	 * This method does not need a loop because both mean and variance were optimized in REM process and so the probabilities of components will be optimized in only one time.
@@ -285,6 +361,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			parameterList.add((ExchangedParameter)parameter.clone());
 		}
 		
+		this.currentIteration++;
 		for (int k = 0; k < this.rems.size(); k++) {
 			RegressionEMImpl rem = this.rems.get(k);
 			ExchangedParameter parameter = rem.getExchangedParameter();
@@ -345,6 +422,7 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 		do {
 			terminated = true;
 			t++;
+			this.currentIteration++;
 			
 			List<ExchangedParameter> parameterList = Util.newList(this.rems.size());
 			for (RegressionEMImpl rem : this.rems) {
@@ -435,34 +513,28 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 
 	
 	@Override
-	protected Object initializeParameter() {
-		// TODO Auto-generated method stub
-		for (RegressionEMImpl rem : this.rems) {
-			ExchangedParameter parameter = (ExchangedParameter)rem.initializeParameter();
-			if (parameter != null)
-				rem.setParameter(parameter, this.getCurrentIteration());
-			else {
-				logger.error("Some regression models are failed in initialization");
-				return null;
-			}
-		}
-		return this.rems;
-	}
-
-	
-	@Override
 	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> estimatedParameters = (List<ExchangedParameter>)estimatedParameter;
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> currentParameters = (List<ExchangedParameter>)currentParameter;
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> previousParameters = (List<ExchangedParameter>)previousParameter;
+		
 		boolean terminated = true;
-		for (RegressionEMImpl rem : this.rems) {
-			ExchangedParameter exEstimatedParameter = (ExchangedParameter)rem.getEstimatedParameter();
-			ExchangedParameter exCurrentParameter = (ExchangedParameter)rem.getCurrentParameter();
-			ExchangedParameter exPreviousParameter = (ExchangedParameter)rem.getPreviousParameter();;
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter pParameter = previousParameters != null ? previousParameters.get(k) : null;
+			ExchangedParameter cParameter = currentParameters.get(k);
+			ExchangedParameter eParameter = estimatedParameters.get(k);
 			
-			if (exEstimatedParameter == null || exCurrentParameter == null)
+			if (eParameter == null && cParameter == null)
 				continue;
+			else if (eParameter == null || cParameter == null)
+				return false;
 			
-			terminated = terminated && rem.terminatedCondition(exEstimatedParameter, exCurrentParameter, exPreviousParameter, info);
+			terminated = terminated && rem.terminatedCondition(eParameter, cParameter, pParameter, info);
 			if (!terminated)
 				return false;
 		}
@@ -508,16 +580,12 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 			return "";
 		
 		@SuppressWarnings("unchecked")
-		List<RegressionEMImpl> rems = (List<RegressionEMImpl>)parameter;
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)parameter;
 		StringBuffer buffer = new StringBuffer();
 		for (int k = 0; k < rems.size(); k++) {
 			if (k > 0)
 				buffer.append(", ");
-			String text = "";
-			
-			RegressionEMImpl rem = rems.get(k); 
-			if (rem != null)
-				text = rems.get(k).parameterToShownText(rem.getParameter(), info);
+			String text = rems.get(k).parameterToShownText(parameters.get(k), info);
 			buffer.append("{" + text + "}");
 		}
 		buffer.append(": ");

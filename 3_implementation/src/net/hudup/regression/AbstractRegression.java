@@ -655,7 +655,9 @@ public abstract class AbstractRegression extends AbstractTestingAlg implements R
 		if (attList.size() == 0)
 			return null;
 		
-		List<Double> values = DSUtil.toDoubleList(object, false);
+		List<Double> values = Util.newList();
+		if (object != null)
+			values = DSUtil.toDoubleList(object, false);
 		Profile profile = new Profile(attList);
 		int n = Math.min(values.size(), attList.size());
 		for (int j = 0; j < n; j++) {

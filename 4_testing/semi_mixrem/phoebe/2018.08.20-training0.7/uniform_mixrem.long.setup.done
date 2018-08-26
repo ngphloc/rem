@@ -1,0 +1,50 @@
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {weight = -5564.6071 + 44.3620*(bpd) + 1.5490*(hc) + 17.9072*(fl) + 8.9390*(ac): t=1, coeff=0.2000, z-variance=50969.4797}, {weight = -6545.0043 + 107.2202*(bpd): t=1, coeff=0.2000, z-variance=103778.9144}, {weight = -4907.7475 + 24.4188*(hc): t=1, coeff=0.2000, z-variance=186843.0829}, {weight = -4482.4739 + 109.5088*(fl): t=1, coeff=0.2000, z-variance=108787.4268}, {weight = -3342.2276 + 19.3187*(ac): t=1, coeff=0.2000, z-variance=90593.8346}: t=1
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 5) learned models: {weight = -5669.5964 + 42.8764*(bpd) + 1.3222*(hc) + 24.1177*(fl) + 8.5973*(ac): t=5, coeff=0.2000, z-variance=40248.4853}, {weight = -6761.5668 + 109.7570*(bpd): t=5, coeff=0.2000, z-variance=84542.7381}, {weight = -5138.2477 + 25.1780*(hc): t=5, coeff=0.2000, z-variance=157691.1907}, {weight = -4598.9254 + 111.4288*(fl): t=5, coeff=0.2000, z-variance=89637.0806}, {weight = -3441.5659 + 19.6004*(ac): t=5, coeff=0.2000, z-variance=74743.4201}: t=5
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: {weight = -5714.9078 + 41.9456*(bpd) + 1.7053*(hc) + 22.6403*(fl) + 8.9736*(ac): t=6, coeff=0.2000, z-variance=32833.9115}, {weight = -6871.1474 + 111.2473*(bpd): t=6, coeff=0.2000, z-variance=71159.8727}, {weight = -5351.2489 + 25.9221*(hc): t=6, coeff=0.2000, z-variance=135207.4768}, {weight = -4720.3224 + 113.2251*(fl): t=6, coeff=0.2000, z-variance=72878.1859}, {weight = -3533.8605 + 19.9491*(ac): t=6, coeff=0.2000, z-variance=59314.6835}: t=6
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 9) learned models: {weight = -5930.3612 + 48.6826*(bpd) + 1.7029*(hc) + 24.3715*(fl) + 7.4424*(ac): t=9, coeff=0.2000, z-variance=21089.4301}, {weight = -7042.0614 + 113.1851*(bpd): t=9, coeff=0.2000, z-variance=43885.2365}, {weight = -5573.6997 + 26.6303*(hc): t=9, coeff=0.2000, z-variance=98883.0460}, {weight = -4815.7707 + 114.5608*(fl): t=9, coeff=0.2000, z-variance=51211.1556}, {weight = -3467.7658 + 19.7581*(ac): t=9, coeff=0.2000, z-variance=46378.4950}: t=9
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 16) learned models: {weight = -5768.5404 + 36.8808*(bpd) + 2.5703*(hc) + 27.2524*(fl) + 8.7159*(ac): t=16, coeff=0.2000, z-variance=19236.8733}, {weight = -7135.8933 + 114.2372*(bpd): t=16, coeff=0.2000, z-variance=44750.7757}, {weight = -5585.0804 + 26.5129*(hc): t=16, coeff=0.2000, z-variance=75783.3420}, {weight = -4931.3498 + 116.6569*(fl): t=16, coeff=0.2000, z-variance=42604.2951}, {weight = -3663.8033 + 20.3868*(ac): t=16, coeff=0.2000, z-variance=35101.5101}: t=16
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 15) learned models: {weight = -5861.3205 + 29.7899*(bpd) + 2.1362*(hc) + 41.6033*(fl) + 8.3566*(ac): t=15, coeff=0.2000, z-variance=12487.4787}, {weight = -7453.9593 + 118.1059*(bpd): t=15, coeff=0.2000, z-variance=34580.8349}, {weight = -5715.6286 + 27.0029*(hc): t=15, coeff=0.2000, z-variance=56445.9643}, {weight = -4950.7279 + 116.9437*(fl): t=15, coeff=0.2000, z-variance=25894.1097}, {weight = -3919.6509 + 21.1258*(ac): t=15, coeff=0.2000, z-variance=25923.8970}: t=15
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 22) learned models: {weight = -5790.0193 + 25.9709*(bpd) + 4.0375*(hc) + 34.2039*(fl) + 8.8929*(ac): t=22, coeff=0.2000, z-variance=6253.9749}, {weight = -7091.8018 + 114.0197*(bpd): t=22, coeff=0.2000, z-variance=24725.4971}, {weight = -5688.4999 + 27.0222*(hc): t=22, coeff=0.2000, z-variance=25707.2789}, {weight = -5264.5294 + 121.5292*(fl): t=22, coeff=0.2000, z-variance=16371.4985}, {weight = -4028.9193 + 21.5151*(ac): t=22, coeff=0.2000, z-variance=12775.2119}: t=22
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 55) learned models: {weight = -5652.2729 + 31.4215*(bpd) + 4.5917*(hc) + 32.6874*(fl) + 6.6685*(ac): t=55, coeff=0.2000, z-variance=2047.5811}, {weight = -7372.4261 + 116.8035*(bpd): t=55, coeff=0.2000, z-variance=6895.8183}, {weight = -6683.5325 + 30.1003*(hc): t=55, coeff=0.2000, z-variance=12003.2268}, {weight = -4786.4655 + 114.4245*(fl): t=55, coeff=0.2000, z-variance=6059.2257}, {weight = -3286.4330 + 19.1207*(ac): t=55, coeff=0.2000, z-variance=5312.7452}: t=55
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 911) learned models: {weight = -5427.7284 + 19.2673*(bpd) - 0.8637*(hc) + 80.0100*(fl) + 4.7878*(ac): t=911, coeff=0.2000, z-variance=2448.0729}, {weight = -7120.8466 + 115.4982*(bpd): t=911, coeff=0.2000, z-variance=5738.1325}, {weight = -5688.2119 + 26.9720*(hc): t=911, coeff=0.2000, z-variance=4668.7916}, {weight = -4098.5130 + 103.4315*(fl): t=911, coeff=0.2000, z-variance=3355.3200}, {weight = -4510.9810 + 23.0255*(ac): t=911, coeff=0.2000, z-variance=3960.1380}: t=911
+
+
+
+========== Algorithm "uniform_mixrem.long" ==========
+Setup result of algorithm "uniform_mixrem.long" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 513) learned models: {weight = -3277.9882 - 4.3425*(bpd) + 6.5330*(hc) + 15.1539*(fl) + 11.0008*(ac): t=513, coeff=0.2000, z-variance=524.9461}, {weight = -9244.8058 + 142.4584*(bpd): t=513, coeff=0.2000, z-variance=1105.2252}, {weight = -5905.7264 + 27.4366*(hc): t=513, coeff=0.2000, z-variance=2231.9704}, {weight = -7665.9126 + 160.0696*(fl): t=513, coeff=0.2000, z-variance=1964.4354}, {weight = -3976.6936 + 21.5866*(ac): t=513, coeff=0.2000, z-variance=833.7620}: t=513
+
+
+

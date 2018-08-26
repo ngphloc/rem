@@ -9,7 +9,7 @@ MAEVector.test = [162.7412]
 MSE.test = 46704.6462
 R.test = 0.9615
 RMSE.test = 216.1126
-Setup time = 0.7340
+Setup time = 0.0630
 Speed = 0.0000
 ----- Testing dataset "1" -----
 
@@ -22,7 +22,7 @@ MAEVector.test = [164.1306]
 MSE.test = 47656.5313
 R.test = 0.9607
 RMSE.test = 218.3038
-Setup time = 0.4860
+Setup time = 0.7910
 Speed = 0.0000
 ----- Testing dataset "2" -----
 
@@ -35,7 +35,7 @@ MAEVector.test = [164.2652]
 MSE.test = 47932.2681
 R.test = 0.9606
 RMSE.test = 218.9344
-Setup time = 0.1570
+Setup time = 1.0140
 Speed = 0.0000
 ----- Testing dataset "3" -----
 
@@ -48,7 +48,7 @@ MAEVector.test = [166.8966]
 MSE.test = 49168.4458
 R.test = 0.9597
 RMSE.test = 221.7396
-Setup time = 0.1730
+Setup time = 1.1250
 Speed = 0.0000
 ----- Testing dataset "4" -----
 
@@ -61,7 +61,7 @@ MAEVector.test = [172.4305]
 MSE.test = 52787.2629
 R.test = 0.9573
 RMSE.test = 229.7548
-Setup time = 0.6020
+Setup time = 0.8300
 Speed = 0.0000
 ----- Testing dataset "5" -----
 
@@ -74,7 +74,7 @@ MAEVector.test = [210.1613]
 MSE.test = 74862.2057
 R.test = 0.9580
 RMSE.test = 273.6096
-Setup time = 1.7510
+Setup time = 2.2450
 Speed = 0.0000
 ----- Testing dataset "6" -----
 
@@ -87,8 +87,8 @@ MAEVector.test = [414.4266]
 MSE.test = 276041.9579
 R.test = 0.8574
 RMSE.test = 525.3970
-Setup time = 31.7460
-Speed = 0.0000
+Setup time = 24.1860
+Speed = 0.0001
 ----- Testing dataset "7" -----
 
 ----- Testing dataset "8" -----
@@ -100,7 +100,7 @@ MAEVector.test = [657.6399]
 MSE.test = 697702.1266
 R.test = 0.2255
 RMSE.test = 835.2857
-Setup time = 2.1260
+Setup time = 2.0240
 Speed = 0.0000
 ----- Testing dataset "8" -----
 
@@ -113,7 +113,7 @@ MAEVector.test = [2561.4937]
 MSE.test = 7183857.8852
 R.test = -0.9421
 RMSE.test = 2680.2720
-Setup time = 2.2120
+Setup time = 2.9460
 Speed = 0.0000
 ----- Testing dataset "9" -----
 
@@ -126,7 +126,7 @@ MAEVector.test = [2561.3414]
 MSE.test = 7183552.7102
 R.test = -0.9357
 RMSE.test = 2680.2150
-Setup time = 5.0940
+Setup time = 5.9990
 Speed = 0.0000
 ----- Testing dataset "10" -----
 

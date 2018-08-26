@@ -5,6 +5,7 @@ import static net.hudup.regression.AbstractRegression.defaultExtractVariable;
 import static net.hudup.regression.AbstractRegression.defaultExtractVariableName;
 import static net.hudup.regression.AbstractRegression.extractNumber;
 import static net.hudup.regression.AbstractRegression.findIndex;
+import static net.hudup.regression.AbstractRegression.notSatisfy;
 import static net.hudup.regression.AbstractRegression.parseIndices;
 import static net.hudup.regression.AbstractRegression.solve;
 
@@ -377,7 +378,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 				xStatistic[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
 		}
 		
-		//Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases. So list U is not used.
+		//Balance process is removed because it is not necessary. Balance process is the best in some cases. So list U is not used.
 		return new Statistics(zStatistic, xStatistic);
 	}
 
@@ -460,7 +461,76 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			zStatistic += alpha.get(j) * xStatistic[j];
 		}
 		
-		//Balance process is removed because it is over-fitting or not stable. Balance process is the best in some cases. So list U is not used.
+		//Balance process is removed because it is not necessary. Balance process is the best in some cases. So list U is not used.
+		return new Statistics(zStatistic, xStatistic);
+	}
+
+	
+	/**
+	 * Balancing missing values zi (xStatistic) and xij (xValues).
+	 * @param alpha alpha coefficients.
+	 * @param betas beta coefficients.
+	 * @param zStatistic statistic for Z variable.
+	 * @param xStatistic statistic for X variables.
+	 * @param U list of missing X values.
+	 * @param inverse if true, this is inverse mode.
+	 * @return balanced statistics for Z and X variables. Return null if any error raises.
+	 */
+	@Deprecated
+	protected Statistics balanceStatistics(List<Double> alpha, List<double[]> betas,
+			double zStatistic, double[] xStatistic,
+			List<Integer> U, boolean inverse) {
+
+		double zStatisticNext = Constants.UNUSED;
+		double[] xStatisticNext = new double[xStatistic.length];
+		int t = 0;
+		int maxIteration = getConfig().getAsInt(EM_MAX_ITERATION_FIELD);
+		maxIteration = (maxIteration <= 0) ? EM_MAX_ITERATION : maxIteration;
+		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
+		while (t < maxIteration) {
+			if (!inverse) {
+				zStatisticNext = 0;
+				for (int j = 0; j < xStatistic.length; j++)
+					zStatisticNext += alpha.get(j) * xStatistic[j];
+				
+				for (int j = 0; j < xStatistic.length; j++) {
+					if (!U.contains(j))
+						xStatisticNext[j] = xStatistic[j];
+					else
+						xStatisticNext[j] = betas.get(j)[0] + betas.get(j)[1] * zStatisticNext;
+				}
+				
+			}
+			else {
+				for (int j = 0; j < xStatistic.length; j++) {
+					if (!U.contains(j))
+						xStatisticNext[j] = xStatistic[j];
+					else
+						xStatisticNext[j] = betas.get(j)[0] + betas.get(j)[1] * zStatistic;
+				}
+				
+				zStatisticNext = 0;
+				for (int j = 0; j < xStatistic.length; j++)
+					zStatisticNext += alpha.get(j) * xStatisticNext[j];
+			}
+			
+			t++;
+			
+			//Testing approximation
+			boolean approx = !notSatisfy(zStatisticNext, zStatistic, threshold);
+			for (int j = 0; j < xStatistic.length; j++) {
+				approx = approx && !notSatisfy(xStatisticNext[j], xStatistic[j], threshold);
+				if (!approx) break;
+			}
+			
+			zStatistic = zStatisticNext;
+			xStatistic = xStatisticNext;
+			zStatisticNext = Constants.UNUSED;
+			xStatisticNext = new double[xStatistic.length];
+			
+			if (approx) break;
+		} //If the likelihood function is too acute, the loop can be infinite.
+		
 		return new Statistics(zStatistic, xStatistic);
 	}
 
