@@ -1,0 +1,50 @@
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 2) learned models: {PE = 497.0645 - 2.1763*(AT): t=1, coeff=0.4227, z-variance=29.6573}, {PE = 517.8105 - 1.1672*(V): t=1, coeff=0.2769, z-variance=71.6045}, {PE = -1058.5211 + 1.4933*(AP): t=1, coeff=0.1597, z-variance=211.5011}, {PE = 421.6716 + 0.4486*(RH): t=1, coeff=0.1406, z-variance=248.4670}: t=2
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 5) learned models: {PE = 497.4977 - 2.1979*(AT): t=4, coeff=0.4280, z-variance=24.2516}, {PE = 519.3656 - 1.1965*(V): t=4, coeff=0.2768, z-variance=60.5493}, {PE = -1214.8271 + 1.6475*(AP): t=4, coeff=0.1584, z-variance=180.1064}, {PE = 417.8420 + 0.5020*(RH): t=4, coeff=0.1368, z-variance=217.2895}: t=5
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 7) learned models: {PE = 497.6871 - 2.2081*(AT): t=6, coeff=0.4291, z-variance=20.0817}, {PE = 520.7027 - 1.2180*(V): t=6, coeff=0.2841, z-variance=48.7344}, {PE = -1304.3280 + 1.7359*(AP): t=6, coeff=0.1541, z-variance=157.6827}, {PE = 413.7453 + 0.5563*(RH): t=6, coeff=0.1327, z-variance=189.0623}: t=7
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 8) learned models: {PE = 498.5778 - 2.2479*(AT): t=7, coeff=0.4453, z-variance=13.8541}, {PE = 522.2781 - 1.2467*(V): t=7, coeff=0.2830, z-variance=37.3203}, {PE = -1512.8163 + 1.9414*(AP): t=7, coeff=0.1472, z-variance=128.9238}, {PE = 405.7745 + 0.6610*(RH): t=7, coeff=0.1245, z-variance=156.3326}: t=8
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 10) learned models: {PE = 498.5320 - 2.2546*(AT): t=9, coeff=0.4335, z-variance=10.5627}, {PE = 523.8185 - 1.2793*(V): t=9, coeff=0.2961, z-variance=26.0347}, {PE = -1714.4568 + 2.1407*(AP): t=9, coeff=0.1511, z-variance=91.7893}, {PE = 401.0777 + 0.7325*(RH): t=9, coeff=0.1192, z-variance=123.9264}: t=10
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 10) learned models: {PE = 498.4271 - 2.2470*(AT): t=9, coeff=0.4353, z-variance=7.9534}, {PE = 523.2183 - 1.2717*(V): t=9, coeff=0.2939, z-variance=19.5630}, {PE = -1857.9068 + 2.2820*(AP): t=9, coeff=0.1528, z-variance=67.4559}, {PE = 392.9270 + 0.8393*(RH): t=9, coeff=0.1181, z-variance=90.1255}: t=10
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 9) learned models: {PE = 498.0319 - 2.2315*(AT): t=8, coeff=0.4395, z-variance=5.0596}, {PE = 524.2077 - 1.2912*(V): t=8, coeff=0.2861, z-variance=13.3621}, {PE = -1963.7000 + 2.3864*(AP): t=8, coeff=0.1552, z-variance=42.8344}, {PE = 387.3950 + 0.9189*(RH): t=8, coeff=0.1192, z-variance=60.0808}: t=9
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 8) learned models: {PE = 498.3792 - 2.2522*(AT): t=7, coeff=0.4358, z-variance=2.9110}, {PE = 525.1901 - 1.3086*(V): t=7, coeff=0.2879, z-variance=7.2515}, {PE = -2134.9587 + 2.5554*(AP): t=7, coeff=0.1520, z-variance=23.8247}, {PE = 381.4177 + 0.9984*(RH): t=7, coeff=0.1243, z-variance=29.7061}: t=8
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 13) learned models: {PE = 496.4571 - 2.1705*(AT): t=12, coeff=0.4590, z-variance=1.1633}, {PE = 524.3892 - 1.2790*(V): t=12, coeff=0.2884, z-variance=3.3270}, {PE = -2349.5928 + 2.7669*(AP): t=12, coeff=0.1334, z-variance=12.5737}, {PE = 369.4027 + 1.1507*(RH): t=12, coeff=0.1192, z-variance=16.3293}: t=13
+
+
+
+========== Algorithm "semi_mixrem" ==========
+Setup result of algorithm "semi_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 23) learned models: {PE = 497.3288 - 2.1356*(AT): t=22, coeff=0.5466, z-variance=0.1691}, {PE = 532.0547 - 1.4489*(V): t=22, coeff=0.2210, z-variance=1.0673}, {PE = -2537.2255 + 2.9526*(AP): t=22, coeff=0.1349, z-variance=2.7906}, {PE = 369.2398 + 1.1183*(RH): t=22, coeff=0.0975, z-variance=4.1247}: t=23
+
+
+

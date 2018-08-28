@@ -1,0 +1,1911 @@
+General evaluation
+
+  prior_rem
+    ErrorRange.test = [-44.0852, 6.8703]
+    Hudup recall = 1.0000
+    MAE.test = 50.1615
+    MAERatio.test = 0.1106
+    MAEVector.test = 50.1615
+    MSE.test = 20711.7495
+    R.test = 0.7321
+    RMSE.test = 51.2180
+    Setup time = 6.3915
+    Speed = 0.0000
+
+  prior_rem.manual
+    ErrorRange.test = [-0.1500, 4.4220]
+    Hudup recall = 1.0000
+    MAE.test = 3.6582
+    MAERatio.test = 0.0081
+    MAEVector.test = 3.6582
+    MSE.test = 20.5767
+    R.test = 0.9641
+    RMSE.test = 4.5361
+    Setup time = 8.0515
+    Speed = 0.0000
+
+  rem
+    ErrorRange.test = [-0.0476, 4.6660]
+    Hudup recall = 1.0000
+    MAE.test = 3.8375
+    MAERatio.test = 0.0085
+    MAEVector.test = 3.8375
+    MSE.test = 23.0291
+    R.test = 0.9600
+    RMSE.test = 4.7859
+    Setup time = 13.7225
+    Speed = 0.0000
+
+  semi_mixrem
+    ErrorRange.test = [-0.0134, 6.2543]
+    Hudup recall = 1.0000
+    MAE.test = 5.1067
+    MAERatio.test = 0.0112
+    MAEVector.test = 5.1067
+    MSE.test = 40.2223
+    R.test = 0.9456
+    RMSE.test = 6.3349
+    Setup time = 0.3667
+    Speed = 0.0000
+
+  semi_mixrem.long
+    ErrorRange.test = [-0.0202, 5.5509]
+    Hudup recall = 1.0000
+    MAE.test = 4.5597
+    MAERatio.test = 0.0100
+    MAEVector.test = 4.5597
+    MSE.test = 31.8472
+    R.test = 0.9527
+    RMSE.test = 5.6425
+    Setup time = 17.0841
+    Speed = 0.0000
+
+  uniform_mixrem
+    ErrorRange.test = [-0.0084, 8.3103]
+    Hudup recall = 1.0000
+    MAE.test = 6.7573
+    MAERatio.test = 0.0148
+    MAEVector.test = 6.7573
+    MSE.test = 70.2008
+    R.test = 0.9092
+    RMSE.test = 8.3745
+    Setup time = 0.3465
+    Speed = 0.0000
+
+  uniform_mixrem.long
+    ErrorRange.test = [-0.0107, 7.2505]
+    Hudup recall = 1.0000
+    MAE.test = 5.9019
+    MAERatio.test = 0.0129
+    MAEVector.test = 5.9019
+    MSE.test = 53.6149
+    R.test = 0.9302
+    RMSE.test = 7.3206
+    Setup time = 16.7984
+    Speed = 0.0000
+
+
+Dataset evaluation
+
+  Dataset "1"
+    prior_rem
+      ErrorRange.test = [-0.1165, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6583
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6583]
+      MSE.test = 20.5678
+      R.test = 0.9641
+      RMSE.test = 4.5352
+      Setup time = 0.0440
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1499, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5766
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 0.0470
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.1165, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6583
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6583]
+      MSE.test = 20.5678
+      R.test = 0.9641
+      RMSE.test = 4.5352
+      Setup time = 0.0370
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.0823, 6.8631]
+      Hudup recall = 1.0000
+      MAE.test = 5.6085
+      MAERatio.test = 0.0123
+      MAEVector.test = [5.6085]
+      MSE.test = 48.1084
+      R.test = 0.9498
+      RMSE.test = 6.9360
+      Setup time = 0.0890
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [0.0196, 5.6818]
+      Hudup recall = 1.0000
+      MAE.test = 4.6639
+      MAERatio.test = 0.0102
+      MAEVector.test = [4.6639]
+      MSE.test = 33.2830
+      R.test = 0.9591
+      RMSE.test = 5.7691
+      Setup time = 0.1190
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.1744, 8.8526]
+      Hudup recall = 1.0000
+      MAE.test = 7.2912
+      MAERatio.test = 0.0160
+      MAEVector.test = [7.2912]
+      MSE.test = 79.3984
+      R.test = 0.9302
+      RMSE.test = 8.9106
+      Setup time = 0.0560
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [0.1162, 7.5534]
+      Hudup recall = 1.0000
+      MAE.test = 6.1984
+      MAERatio.test = 0.0136
+      MAEVector.test = [6.1984]
+      MSE.test = 58.0667
+      R.test = 0.9478
+      RMSE.test = 7.6201
+      Setup time = 0.0720
+      Speed = 0.0000
+
+  Dataset "2"
+    prior_rem
+      ErrorRange.test = [-0.0717, 4.4209]
+      Hudup recall = 1.0000
+      MAE.test = 3.6607
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6607]
+      MSE.test = 20.5493
+      R.test = 0.9641
+      RMSE.test = 4.5331
+      Setup time = 0.1060
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1499, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5767
+      R.test = 0.9641
+      RMSE.test = 4.5362
+      Setup time = 0.2090
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.1316, 4.4341]
+      Hudup recall = 1.0000
+      MAE.test = 3.6640
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6640]
+      MSE.test = 20.6789
+      R.test = 0.9639
+      RMSE.test = 4.5474
+      Setup time = 0.1590
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.0764, 6.6562]
+      Hudup recall = 1.0000
+      MAE.test = 5.4335
+      MAERatio.test = 0.0119
+      MAEVector.test = [5.4335]
+      MSE.test = 45.3111
+      R.test = 0.9491
+      RMSE.test = 6.7314
+      Setup time = 0.1610
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [0.0123, 5.6094]
+      Hudup recall = 1.0000
+      MAE.test = 4.6061
+      MAERatio.test = 0.0101
+      MAEVector.test = [4.6061]
+      MSE.test = 32.4656
+      R.test = 0.9576
+      RMSE.test = 5.6979
+      Setup time = 0.3210
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.1772, 8.6556]
+      Hudup recall = 1.0000
+      MAE.test = 7.1111
+      MAERatio.test = 0.0156
+      MAEVector.test = [7.1111]
+      MSE.test = 75.9510
+      R.test = 0.9268
+      RMSE.test = 8.7150
+      Setup time = 0.1340
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [0.1154, 7.4167]
+      Hudup recall = 1.0000
+      MAE.test = 6.0736
+      MAERatio.test = 0.0133
+      MAEVector.test = [6.0736]
+      MSE.test = 56.0207
+      R.test = 0.9444
+      RMSE.test = 7.4847
+      Setup time = 0.2160
+      Speed = 0.0000
+
+  Dataset "3"
+    prior_rem
+      ErrorRange.test = [0.0147, 4.4282]
+      Hudup recall = 1.0000
+      MAE.test = 3.6639
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6639]
+      MSE.test = 20.6093
+      R.test = 0.9640
+      RMSE.test = 4.5398
+      Setup time = 0.2250
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1499, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5767
+      R.test = 0.9641
+      RMSE.test = 4.5362
+      Setup time = 0.3170
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.0727, 4.4645]
+      Hudup recall = 1.0000
+      MAE.test = 3.6835
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6835]
+      MSE.test = 20.9371
+      R.test = 0.9635
+      RMSE.test = 4.5757
+      Setup time = 0.5320
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.1145, 6.5062]
+      Hudup recall = 1.0000
+      MAE.test = 5.3105
+      MAERatio.test = 0.0116
+      MAEVector.test = [5.3105]
+      MSE.test = 43.3441
+      R.test = 0.9485
+      RMSE.test = 6.5836
+      Setup time = 0.1890
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [0.0588, 5.5702]
+      Hudup recall = 1.0000
+      MAE.test = 4.5746
+      MAERatio.test = 0.0100
+      MAEVector.test = [4.5746]
+      MSE.test = 32.0309
+      R.test = 0.9564
+      RMSE.test = 5.6596
+      Setup time = 0.4790
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.2095, 8.5320]
+      Hudup recall = 1.0000
+      MAE.test = 7.0031
+      MAERatio.test = 0.0153
+      MAEVector.test = [7.0031]
+      MSE.test = 73.8386
+      R.test = 0.9238
+      RMSE.test = 8.5929
+      Setup time = 0.1640
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [0.1531, 7.3385]
+      Hudup recall = 1.0000
+      MAE.test = 6.0062
+      MAERatio.test = 0.0132
+      MAEVector.test = [6.0062]
+      MSE.test = 54.8766
+      R.test = 0.9418
+      RMSE.test = 7.4079
+      Setup time = 0.4610
+      Speed = 0.0000
+
+  Dataset "4"
+    prior_rem
+      ErrorRange.test = [0.2371, 4.4356]
+      Hudup recall = 1.0000
+      MAE.test = 3.6722
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6722]
+      MSE.test = 20.7305
+      R.test = 0.9641
+      RMSE.test = 4.5531
+      Setup time = 3.0000
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1499, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5767
+      R.test = 0.9641
+      RMSE.test = 4.5362
+      Setup time = 1.0320
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [0.0533, 4.5043]
+      Hudup recall = 1.0000
+      MAE.test = 3.7071
+      MAERatio.test = 0.0082
+      MAEVector.test = [3.7071]
+      MSE.test = 21.2920
+      R.test = 0.9630
+      RMSE.test = 4.6143
+      Setup time = 0.9820
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.0795, 6.2018]
+      Hudup recall = 1.0000
+      MAE.test = 5.0664
+      MAERatio.test = 0.0111
+      MAEVector.test = [5.0664]
+      MSE.test = 39.4680
+      R.test = 0.9480
+      RMSE.test = 6.2824
+      Setup time = 0.2910
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [0.0729, 5.4116]
+      Hudup recall = 1.0000
+      MAE.test = 4.4537
+      MAERatio.test = 0.0098
+      MAEVector.test = [4.4537]
+      MSE.test = 30.2912
+      R.test = 0.9554
+      RMSE.test = 5.5037
+      Setup time = 1.4300
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.0962, 8.3077]
+      Hudup recall = 1.0000
+      MAE.test = 6.7778
+      MAERatio.test = 0.0148
+      MAEVector.test = [6.7778]
+      MSE.test = 70.0266
+      R.test = 0.9177
+      RMSE.test = 8.3682
+      Setup time = 0.2520
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [0.0875, 7.1702]
+      Hudup recall = 1.0000
+      MAE.test = 5.8483
+      MAERatio.test = 0.0128
+      MAEVector.test = [5.8483]
+      MSE.test = 52.4189
+      R.test = 0.9373
+      RMSE.test = 7.2401
+      Setup time = 1.4520
+      Speed = 0.0000
+
+  Dataset "5"
+    prior_rem
+      ErrorRange.test = [-0.1467, 4.4314]
+      Hudup recall = 1.0000
+      MAE.test = 3.6776
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6776]
+      MSE.test = 20.6590
+      R.test = 0.9640
+      RMSE.test = 4.5452
+      Setup time = 2.1150
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1498, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5766
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 9.3810
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.1971, 4.5224]
+      Hudup recall = 1.0000
+      MAE.test = 3.7198
+      MAERatio.test = 0.0082
+      MAEVector.test = [3.7198]
+      MSE.test = 21.4909
+      R.test = 0.9626
+      RMSE.test = 4.6358
+      Setup time = 1.0350
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.0316, 6.1003]
+      Hudup recall = 1.0000
+      MAE.test = 4.9747
+      MAERatio.test = 0.0109
+      MAEVector.test = [4.9747]
+      MSE.test = 38.2148
+      R.test = 0.9468
+      RMSE.test = 6.1818
+      Setup time = 0.4060
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [-0.0339, 5.4089]
+      Hudup recall = 1.0000
+      MAE.test = 4.4386
+      MAERatio.test = 0.0097
+      MAEVector.test = [4.4386]
+      MSE.test = 30.2571
+      R.test = 0.9541
+      RMSE.test = 5.5006
+      Setup time = 1.2100
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.1787, 8.1612]
+      Hudup recall = 1.0000
+      MAE.test = 6.6535
+      MAERatio.test = 0.0146
+      MAEVector.test = [6.6535]
+      MSE.test = 67.6364
+      R.test = 0.9131
+      RMSE.test = 8.2241
+      Setup time = 0.3900
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [0.1038, 7.0913]
+      Hudup recall = 1.0000
+      MAE.test = 5.7753
+      MAERatio.test = 0.0126
+      MAEVector.test = [5.7753]
+      MSE.test = 51.2967
+      R.test = 0.9337
+      RMSE.test = 7.1622
+      Setup time = 1.3170
+      Speed = 0.0000
+
+  Dataset "6"
+    prior_rem
+      ErrorRange.test = [0.6597, 4.4929]
+      Hudup recall = 1.0000
+      MAE.test = 3.7525
+      MAERatio.test = 0.0083
+      MAEVector.test = [3.7525]
+      MSE.test = 21.6211
+      R.test = 0.9630
+      RMSE.test = 4.6498
+      Setup time = 16.2470
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1499, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5766
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 2.9030
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.1886, 4.5503]
+      Hudup recall = 1.0000
+      MAE.test = 3.7451
+      MAERatio.test = 0.0083
+      MAEVector.test = [3.7451]
+      MSE.test = 21.7406
+      R.test = 0.9621
+      RMSE.test = 4.6627
+      Setup time = 3.3410
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [-0.0812, 6.1109]
+      Hudup recall = 1.0000
+      MAE.test = 4.9783
+      MAERatio.test = 0.0109
+      MAEVector.test = [4.9783]
+      MSE.test = 38.3502
+      R.test = 0.9450
+      RMSE.test = 6.1928
+      Setup time = 0.4100
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [-0.1105, 5.4856]
+      Hudup recall = 1.0000
+      MAE.test = 4.4977
+      MAERatio.test = 0.0099
+      MAEVector.test = [4.4977]
+      MSE.test = 31.1039
+      R.test = 0.9523
+      RMSE.test = 5.5771
+      Setup time = 3.7030
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [-0.0015, 8.1518]
+      Hudup recall = 1.0000
+      MAE.test = 6.6064
+      MAERatio.test = 0.0145
+      MAEVector.test = [6.6064]
+      MSE.test = 67.4520
+      R.test = 0.9063
+      RMSE.test = 8.2129
+      Setup time = 0.3810
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [-0.0383, 7.1267]
+      Hudup recall = 1.0000
+      MAE.test = 5.7839
+      MAERatio.test = 0.0127
+      MAEVector.test = [5.7839]
+      MSE.test = 51.7918
+      R.test = 0.9285
+      RMSE.test = 7.1967
+      Setup time = 3.8300
+      Speed = 0.0000
+
+  Dataset "7"
+    prior_rem
+      ErrorRange.test = [0.6212, 4.5451]
+      Hudup recall = 1.0000
+      MAE.test = 3.8234
+      MAERatio.test = 0.0084
+      MAEVector.test = [3.8234]
+      MSE.test = 22.0439
+      R.test = 0.9631
+      RMSE.test = 4.6951
+      Setup time = 20.3620
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1498, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5766
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 29.4260
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.3018, 4.6203]
+      Hudup recall = 1.0000
+      MAE.test = 3.7937
+      MAERatio.test = 0.0084
+      MAEVector.test = [3.7937]
+      MSE.test = 22.4382
+      R.test = 0.9610
+      RMSE.test = 4.7369
+      Setup time = 46.9560
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [-0.1120, 6.1184]
+      Hudup recall = 1.0000
+      MAE.test = 4.9853
+      MAERatio.test = 0.0109
+      MAEVector.test = [4.9853]
+      MSE.test = 38.4479
+      R.test = 0.9434
+      RMSE.test = 6.2006
+      Setup time = 0.3560
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [-0.1609, 5.5505]
+      Hudup recall = 1.0000
+      MAE.test = 4.5489
+      MAERatio.test = 0.0100
+      MAEVector.test = [4.5489]
+      MSE.test = 31.8338
+      R.test = 0.9503
+      RMSE.test = 5.6421
+      Setup time = 55.1660
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [0.0189, 8.1255]
+      Hudup recall = 1.0000
+      MAE.test = 6.5793
+      MAERatio.test = 0.0144
+      MAEVector.test = [6.5793]
+      MSE.test = 67.0238
+      R.test = 0.9017
+      RMSE.test = 8.1868
+      Setup time = 0.3430
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [-0.0436, 7.1365]
+      Hudup recall = 1.0000
+      MAE.test = 5.7882
+      MAERatio.test = 0.0127
+      MAEVector.test = [5.7882]
+      MSE.test = 51.9314
+      R.test = 0.9244
+      RMSE.test = 7.2063
+      Setup time = 54.4570
+      Speed = 0.0000
+
+  Dataset "8"
+    prior_rem
+      ErrorRange.test = [-1.3450, 4.5964]
+      Hudup recall = 1.0000
+      MAE.test = 3.8590
+      MAERatio.test = 0.0085
+      MAEVector.test = [3.8590]
+      MSE.test = 23.9362
+      R.test = 0.9617
+      RMSE.test = 4.8925
+      Setup time = 7.2630
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1498, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5766
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 1.1730
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.3750, 4.6275]
+      Hudup recall = 1.0000
+      MAE.test = 3.7897
+      MAERatio.test = 0.0084
+      MAEVector.test = [3.7897]
+      MSE.test = 22.5540
+      R.test = 0.9610
+      RMSE.test = 4.7491
+      Setup time = 2.0870
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [-0.1535, 6.0908]
+      Hudup recall = 1.0000
+      MAE.test = 4.9649
+      MAERatio.test = 0.0109
+      MAEVector.test = [4.9649]
+      MSE.test = 38.1209
+      R.test = 0.9414
+      RMSE.test = 6.1742
+      Setup time = 0.3140
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [-0.2017, 5.5405]
+      Hudup recall = 1.0000
+      MAE.test = 4.5393
+      MAERatio.test = 0.0100
+      MAEVector.test = [4.5393]
+      MSE.test = 31.7374
+      R.test = 0.9490
+      RMSE.test = 5.6336
+      Setup time = 2.4640
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [-0.0398, 8.0695]
+      Hudup recall = 1.0000
+      MAE.test = 6.5164
+      MAERatio.test = 0.0143
+      MAEVector.test = [6.5164]
+      MSE.test = 66.1179
+      R.test = 0.8971
+      RMSE.test = 8.1313
+      Setup time = 0.3030
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [-0.0971, 7.0712]
+      Hudup recall = 1.0000
+      MAE.test = 5.7254
+      MAERatio.test = 0.0125
+      MAEVector.test = [5.7254]
+      MSE.test = 51.0113
+      R.test = 0.9217
+      RMSE.test = 7.1422
+      Setup time = 2.4330
+      Speed = 0.0000
+
+  Dataset "9"
+    prior_rem
+      ErrorRange.test = [13.4120, 15.8638]
+      Hudup recall = 1.0000
+      MAE.test = 17.7306
+      MAERatio.test = 0.0398
+      MAEVector.test = [17.7306]
+      MSE.test = 432.5435
+      R.test = 0.5022
+      RMSE.test = 20.7977
+      Setup time = 6.1500
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1496, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6582
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6582]
+      MSE.test = 20.5765
+      R.test = 0.9641
+      RMSE.test = 4.5361
+      Setup time = 22.0090
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.1846, 4.9404]
+      Hudup recall = 1.0000
+      MAE.test = 4.0506
+      MAERatio.test = 0.0089
+      MAEVector.test = [4.0506]
+      MSE.test = 25.4417
+      R.test = 0.9554
+      RMSE.test = 5.0440
+      Setup time = 4.0140
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [-0.2061, 6.1252]
+      Hudup recall = 1.0000
+      MAE.test = 4.9989
+      MAERatio.test = 0.0110
+      MAEVector.test = [4.9989]
+      MSE.test = 38.5608
+      R.test = 0.9400
+      RMSE.test = 6.2097
+      Setup time = 0.5130
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [-0.2014, 5.7364]
+      Hudup recall = 1.0000
+      MAE.test = 4.7040
+      MAERatio.test = 0.0103
+      MAEVector.test = [4.7040]
+      MSE.test = 33.9464
+      R.test = 0.9450
+      RMSE.test = 5.8264
+      Setup time = 4.6530
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [-0.1934, 8.2590]
+      Hudup recall = 1.0000
+      MAE.test = 6.6465
+      MAERatio.test = 0.0145
+      MAEVector.test = [6.6465]
+      MSE.test = 69.2488
+      R.test = 0.8854
+      RMSE.test = 8.3216
+      Setup time = 0.5100
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [-0.2013, 7.3957]
+      Hudup recall = 1.0000
+      MAE.test = 5.9803
+      MAERatio.test = 0.0131
+      MAEVector.test = [5.9803]
+      MSE.test = 55.7362
+      R.test = 0.9093
+      RMSE.test = 7.4657
+      Setup time = 4.6570
+      Speed = 0.0000
+
+  Dataset "10"
+    prior_rem
+      ErrorRange.test = [-454.1167, 17.0666]
+      Hudup recall = 1.0000
+      MAE.test = 454.1167
+      MAERatio.test = 1.0000
+      MAEVector.test = [454.1167]
+      MSE.test = 206514.2342
+      R.test = -0.8897
+      RMSE.test = 454.4384
+      Setup time = 8.4030
+      Speed = 0.0000
+    prior_rem.manual
+      ErrorRange.test = [-0.1510, 4.4220]
+      Hudup recall = 1.0000
+      MAE.test = 3.6584
+      MAERatio.test = 0.0081
+      MAEVector.test = [3.6584]
+      MSE.test = 20.5769
+      R.test = 0.9641
+      RMSE.test = 4.5362
+      Setup time = 14.0180
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [1.0389, 5.5741]
+      Hudup recall = 1.0000
+      MAE.test = 4.5628
+      MAERatio.test = 0.0101
+      MAEVector.test = [4.5628]
+      MSE.test = 33.1497
+      R.test = 0.9437
+      RMSE.test = 5.7576
+      Setup time = 78.0820
+      Speed = 0.0000
+    semi_mixrem
+      ErrorRange.test = [0.0344, 5.7702]
+      Hudup recall = 1.0000
+      MAE.test = 4.7456
+      MAERatio.test = 0.0104
+      MAEVector.test = [4.7456]
+      MSE.test = 34.2966
+      R.test = 0.9442
+      RMSE.test = 5.8563
+      Setup time = 0.9380
+      Speed = 0.0000
+    semi_mixrem.long
+      ErrorRange.test = [0.3432, 5.5141]
+      Hudup recall = 1.0000
+      MAE.test = 4.5698
+      MAERatio.test = 0.0101
+      MAEVector.test = [4.5698]
+      MSE.test = 31.5231
+      R.test = 0.9483
+      RMSE.test = 5.6145
+      Setup time = 101.2960
+      Speed = 0.0000
+    uniform_mixrem
+      ErrorRange.test = [-0.7047, 7.9886]
+      Hudup recall = 1.0000
+      MAE.test = 6.3876
+      MAERatio.test = 0.0139
+      MAEVector.test = [6.3876]
+      MSE.test = 65.3146
+      R.test = 0.8902
+      RMSE.test = 8.0817
+      Setup time = 0.9320
+      Speed = 0.0000
+    uniform_mixrem.long
+      ErrorRange.test = [-0.3023, 7.2047]
+      Hudup recall = 1.0000
+      MAE.test = 5.8393
+      MAERatio.test = 0.0128
+      MAEVector.test = [5.8393]
+      MSE.test = 52.9991
+      R.test = 0.9130
+      RMSE.test = 7.2800
+      Setup time = 99.0890
+      Speed = 0.0000
+
+
+ErrorRange.test evaluation
+
+  prior_rem
+    Dataset "1" got [-0.1165, 4.4220]
+    Dataset "2" got [-0.0717, 4.4209]
+    Dataset "3" got [0.0147, 4.4282]
+    Dataset "4" got [0.2371, 4.4356]
+    Dataset "5" got [-0.1467, 4.4314]
+    Dataset "6" got [0.6597, 4.4929]
+    Dataset "7" got [0.6212, 4.5451]
+    Dataset "8" got [-1.3450, 4.5964]
+    Dataset "9" got [13.4120, 15.8638]
+    Dataset "10" got [-454.1167, 17.0666]
+
+  prior_rem.manual
+    Dataset "1" got [-0.1499, 4.4220]
+    Dataset "2" got [-0.1499, 4.4220]
+    Dataset "3" got [-0.1499, 4.4220]
+    Dataset "4" got [-0.1499, 4.4220]
+    Dataset "5" got [-0.1498, 4.4220]
+    Dataset "6" got [-0.1499, 4.4220]
+    Dataset "7" got [-0.1498, 4.4220]
+    Dataset "8" got [-0.1498, 4.4220]
+    Dataset "9" got [-0.1496, 4.4220]
+    Dataset "10" got [-0.1510, 4.4220]
+
+  rem
+    Dataset "1" got [-0.1165, 4.4220]
+    Dataset "2" got [-0.1316, 4.4341]
+    Dataset "3" got [-0.0727, 4.4645]
+    Dataset "4" got [0.0533, 4.5043]
+    Dataset "5" got [-0.1971, 4.5224]
+    Dataset "6" got [-0.1886, 4.5503]
+    Dataset "7" got [-0.3018, 4.6203]
+    Dataset "8" got [-0.3750, 4.6275]
+    Dataset "9" got [-0.1846, 4.9404]
+    Dataset "10" got [1.0389, 5.5741]
+
+  semi_mixrem
+    Dataset "1" got [0.0823, 6.8631]
+    Dataset "2" got [0.0764, 6.6562]
+    Dataset "3" got [0.1145, 6.5062]
+    Dataset "4" got [0.0795, 6.2018]
+    Dataset "5" got [0.0316, 6.1003]
+    Dataset "6" got [-0.0812, 6.1109]
+    Dataset "7" got [-0.1120, 6.1184]
+    Dataset "8" got [-0.1535, 6.0908]
+    Dataset "9" got [-0.2061, 6.1252]
+    Dataset "10" got [0.0344, 5.7702]
+
+  semi_mixrem.long
+    Dataset "1" got [0.0196, 5.6818]
+    Dataset "2" got [0.0123, 5.6094]
+    Dataset "3" got [0.0588, 5.5702]
+    Dataset "4" got [0.0729, 5.4116]
+    Dataset "5" got [-0.0339, 5.4089]
+    Dataset "6" got [-0.1105, 5.4856]
+    Dataset "7" got [-0.1609, 5.5505]
+    Dataset "8" got [-0.2017, 5.5405]
+    Dataset "9" got [-0.2014, 5.7364]
+    Dataset "10" got [0.3432, 5.5141]
+
+  uniform_mixrem
+    Dataset "1" got [0.1744, 8.8526]
+    Dataset "2" got [0.1772, 8.6556]
+    Dataset "3" got [0.2095, 8.5320]
+    Dataset "4" got [0.0962, 8.3077]
+    Dataset "5" got [0.1787, 8.1612]
+    Dataset "6" got [-0.0015, 8.1518]
+    Dataset "7" got [0.0189, 8.1255]
+    Dataset "8" got [-0.0398, 8.0695]
+    Dataset "9" got [-0.1934, 8.2590]
+    Dataset "10" got [-0.7047, 7.9886]
+
+  uniform_mixrem.long
+    Dataset "1" got [0.1162, 7.5534]
+    Dataset "2" got [0.1154, 7.4167]
+    Dataset "3" got [0.1531, 7.3385]
+    Dataset "4" got [0.0875, 7.1702]
+    Dataset "5" got [0.1038, 7.0913]
+    Dataset "6" got [-0.0383, 7.1267]
+    Dataset "7" got [-0.0436, 7.1365]
+    Dataset "8" got [-0.0971, 7.0712]
+    Dataset "9" got [-0.2013, 7.3957]
+    Dataset "10" got [-0.3023, 7.2047]
+
+
+Hudup recall evaluation
+
+  prior_rem
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  prior_rem.manual
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  rem
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  semi_mixrem
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  semi_mixrem.long
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  uniform_mixrem
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+  uniform_mixrem.long
+    Dataset "1" got 1.0000
+    Dataset "2" got 1.0000
+    Dataset "3" got 1.0000
+    Dataset "4" got 1.0000
+    Dataset "5" got 1.0000
+    Dataset "6" got 1.0000
+    Dataset "7" got 1.0000
+    Dataset "8" got 1.0000
+    Dataset "9" got 1.0000
+    Dataset "10" got 1.0000
+
+
+MAE.test evaluation
+
+  prior_rem
+    Dataset "1" got 3.6583
+    Dataset "2" got 3.6607
+    Dataset "3" got 3.6639
+    Dataset "4" got 3.6722
+    Dataset "5" got 3.6776
+    Dataset "6" got 3.7525
+    Dataset "7" got 3.8234
+    Dataset "8" got 3.8590
+    Dataset "9" got 17.7306
+    Dataset "10" got 454.1167
+
+  prior_rem.manual
+    Dataset "1" got 3.6582
+    Dataset "2" got 3.6582
+    Dataset "3" got 3.6582
+    Dataset "4" got 3.6582
+    Dataset "5" got 3.6582
+    Dataset "6" got 3.6582
+    Dataset "7" got 3.6582
+    Dataset "8" got 3.6582
+    Dataset "9" got 3.6582
+    Dataset "10" got 3.6584
+
+  rem
+    Dataset "1" got 3.6583
+    Dataset "2" got 3.6640
+    Dataset "3" got 3.6835
+    Dataset "4" got 3.7071
+    Dataset "5" got 3.7198
+    Dataset "6" got 3.7451
+    Dataset "7" got 3.7937
+    Dataset "8" got 3.7897
+    Dataset "9" got 4.0506
+    Dataset "10" got 4.5628
+
+  semi_mixrem
+    Dataset "1" got 5.6085
+    Dataset "2" got 5.4335
+    Dataset "3" got 5.3105
+    Dataset "4" got 5.0664
+    Dataset "5" got 4.9747
+    Dataset "6" got 4.9783
+    Dataset "7" got 4.9853
+    Dataset "8" got 4.9649
+    Dataset "9" got 4.9989
+    Dataset "10" got 4.7456
+
+  semi_mixrem.long
+    Dataset "1" got 4.6639
+    Dataset "2" got 4.6061
+    Dataset "3" got 4.5746
+    Dataset "4" got 4.4537
+    Dataset "5" got 4.4386
+    Dataset "6" got 4.4977
+    Dataset "7" got 4.5489
+    Dataset "8" got 4.5393
+    Dataset "9" got 4.7040
+    Dataset "10" got 4.5698
+
+  uniform_mixrem
+    Dataset "1" got 7.2912
+    Dataset "2" got 7.1111
+    Dataset "3" got 7.0031
+    Dataset "4" got 6.7778
+    Dataset "5" got 6.6535
+    Dataset "6" got 6.6064
+    Dataset "7" got 6.5793
+    Dataset "8" got 6.5164
+    Dataset "9" got 6.6465
+    Dataset "10" got 6.3876
+
+  uniform_mixrem.long
+    Dataset "1" got 6.1984
+    Dataset "2" got 6.0736
+    Dataset "3" got 6.0062
+    Dataset "4" got 5.8483
+    Dataset "5" got 5.7753
+    Dataset "6" got 5.7839
+    Dataset "7" got 5.7882
+    Dataset "8" got 5.7254
+    Dataset "9" got 5.9803
+    Dataset "10" got 5.8393
+
+
+MAERatio.test evaluation
+
+  prior_rem
+    Dataset "1" got 0.0081
+    Dataset "2" got 0.0081
+    Dataset "3" got 0.0081
+    Dataset "4" got 0.0081
+    Dataset "5" got 0.0081
+    Dataset "6" got 0.0083
+    Dataset "7" got 0.0084
+    Dataset "8" got 0.0085
+    Dataset "9" got 0.0398
+    Dataset "10" got 1.0000
+
+  prior_rem.manual
+    Dataset "1" got 0.0081
+    Dataset "2" got 0.0081
+    Dataset "3" got 0.0081
+    Dataset "4" got 0.0081
+    Dataset "5" got 0.0081
+    Dataset "6" got 0.0081
+    Dataset "7" got 0.0081
+    Dataset "8" got 0.0081
+    Dataset "9" got 0.0081
+    Dataset "10" got 0.0081
+
+  rem
+    Dataset "1" got 0.0081
+    Dataset "2" got 0.0081
+    Dataset "3" got 0.0081
+    Dataset "4" got 0.0082
+    Dataset "5" got 0.0082
+    Dataset "6" got 0.0083
+    Dataset "7" got 0.0084
+    Dataset "8" got 0.0084
+    Dataset "9" got 0.0089
+    Dataset "10" got 0.0101
+
+  semi_mixrem
+    Dataset "1" got 0.0123
+    Dataset "2" got 0.0119
+    Dataset "3" got 0.0116
+    Dataset "4" got 0.0111
+    Dataset "5" got 0.0109
+    Dataset "6" got 0.0109
+    Dataset "7" got 0.0109
+    Dataset "8" got 0.0109
+    Dataset "9" got 0.0110
+    Dataset "10" got 0.0104
+
+  semi_mixrem.long
+    Dataset "1" got 0.0102
+    Dataset "2" got 0.0101
+    Dataset "3" got 0.0100
+    Dataset "4" got 0.0098
+    Dataset "5" got 0.0097
+    Dataset "6" got 0.0099
+    Dataset "7" got 0.0100
+    Dataset "8" got 0.0100
+    Dataset "9" got 0.0103
+    Dataset "10" got 0.0101
+
+  uniform_mixrem
+    Dataset "1" got 0.0160
+    Dataset "2" got 0.0156
+    Dataset "3" got 0.0153
+    Dataset "4" got 0.0148
+    Dataset "5" got 0.0146
+    Dataset "6" got 0.0145
+    Dataset "7" got 0.0144
+    Dataset "8" got 0.0143
+    Dataset "9" got 0.0145
+    Dataset "10" got 0.0139
+
+  uniform_mixrem.long
+    Dataset "1" got 0.0136
+    Dataset "2" got 0.0133
+    Dataset "3" got 0.0132
+    Dataset "4" got 0.0128
+    Dataset "5" got 0.0126
+    Dataset "6" got 0.0127
+    Dataset "7" got 0.0127
+    Dataset "8" got 0.0125
+    Dataset "9" got 0.0131
+    Dataset "10" got 0.0128
+
+
+MAEVector.test evaluation
+
+  prior_rem
+    Dataset "1" got [3.6583]
+    Dataset "2" got [3.6607]
+    Dataset "3" got [3.6639]
+    Dataset "4" got [3.6722]
+    Dataset "5" got [3.6776]
+    Dataset "6" got [3.7525]
+    Dataset "7" got [3.8234]
+    Dataset "8" got [3.8590]
+    Dataset "9" got [17.7306]
+    Dataset "10" got [454.1167]
+
+  prior_rem.manual
+    Dataset "1" got [3.6582]
+    Dataset "2" got [3.6582]
+    Dataset "3" got [3.6582]
+    Dataset "4" got [3.6582]
+    Dataset "5" got [3.6582]
+    Dataset "6" got [3.6582]
+    Dataset "7" got [3.6582]
+    Dataset "8" got [3.6582]
+    Dataset "9" got [3.6582]
+    Dataset "10" got [3.6584]
+
+  rem
+    Dataset "1" got [3.6583]
+    Dataset "2" got [3.6640]
+    Dataset "3" got [3.6835]
+    Dataset "4" got [3.7071]
+    Dataset "5" got [3.7198]
+    Dataset "6" got [3.7451]
+    Dataset "7" got [3.7937]
+    Dataset "8" got [3.7897]
+    Dataset "9" got [4.0506]
+    Dataset "10" got [4.5628]
+
+  semi_mixrem
+    Dataset "1" got [5.6085]
+    Dataset "2" got [5.4335]
+    Dataset "3" got [5.3105]
+    Dataset "4" got [5.0664]
+    Dataset "5" got [4.9747]
+    Dataset "6" got [4.9783]
+    Dataset "7" got [4.9853]
+    Dataset "8" got [4.9649]
+    Dataset "9" got [4.9989]
+    Dataset "10" got [4.7456]
+
+  semi_mixrem.long
+    Dataset "1" got [4.6639]
+    Dataset "2" got [4.6061]
+    Dataset "3" got [4.5746]
+    Dataset "4" got [4.4537]
+    Dataset "5" got [4.4386]
+    Dataset "6" got [4.4977]
+    Dataset "7" got [4.5489]
+    Dataset "8" got [4.5393]
+    Dataset "9" got [4.7040]
+    Dataset "10" got [4.5698]
+
+  uniform_mixrem
+    Dataset "1" got [7.2912]
+    Dataset "2" got [7.1111]
+    Dataset "3" got [7.0031]
+    Dataset "4" got [6.7778]
+    Dataset "5" got [6.6535]
+    Dataset "6" got [6.6064]
+    Dataset "7" got [6.5793]
+    Dataset "8" got [6.5164]
+    Dataset "9" got [6.6465]
+    Dataset "10" got [6.3876]
+
+  uniform_mixrem.long
+    Dataset "1" got [6.1984]
+    Dataset "2" got [6.0736]
+    Dataset "3" got [6.0062]
+    Dataset "4" got [5.8483]
+    Dataset "5" got [5.7753]
+    Dataset "6" got [5.7839]
+    Dataset "7" got [5.7882]
+    Dataset "8" got [5.7254]
+    Dataset "9" got [5.9803]
+    Dataset "10" got [5.8393]
+
+
+MSE.test evaluation
+
+  prior_rem
+    Dataset "1" got 20.5678
+    Dataset "2" got 20.5493
+    Dataset "3" got 20.6093
+    Dataset "4" got 20.7305
+    Dataset "5" got 20.6590
+    Dataset "6" got 21.6211
+    Dataset "7" got 22.0439
+    Dataset "8" got 23.9362
+    Dataset "9" got 432.5435
+    Dataset "10" got 206514.2342
+
+  prior_rem.manual
+    Dataset "1" got 20.5766
+    Dataset "2" got 20.5767
+    Dataset "3" got 20.5767
+    Dataset "4" got 20.5767
+    Dataset "5" got 20.5766
+    Dataset "6" got 20.5766
+    Dataset "7" got 20.5766
+    Dataset "8" got 20.5766
+    Dataset "9" got 20.5765
+    Dataset "10" got 20.5769
+
+  rem
+    Dataset "1" got 20.5678
+    Dataset "2" got 20.6789
+    Dataset "3" got 20.9371
+    Dataset "4" got 21.2920
+    Dataset "5" got 21.4909
+    Dataset "6" got 21.7406
+    Dataset "7" got 22.4382
+    Dataset "8" got 22.5540
+    Dataset "9" got 25.4417
+    Dataset "10" got 33.1497
+
+  semi_mixrem
+    Dataset "1" got 48.1084
+    Dataset "2" got 45.3111
+    Dataset "3" got 43.3441
+    Dataset "4" got 39.4680
+    Dataset "5" got 38.2148
+    Dataset "6" got 38.3502
+    Dataset "7" got 38.4479
+    Dataset "8" got 38.1209
+    Dataset "9" got 38.5608
+    Dataset "10" got 34.2966
+
+  semi_mixrem.long
+    Dataset "1" got 33.2830
+    Dataset "2" got 32.4656
+    Dataset "3" got 32.0309
+    Dataset "4" got 30.2912
+    Dataset "5" got 30.2571
+    Dataset "6" got 31.1039
+    Dataset "7" got 31.8338
+    Dataset "8" got 31.7374
+    Dataset "9" got 33.9464
+    Dataset "10" got 31.5231
+
+  uniform_mixrem
+    Dataset "1" got 79.3984
+    Dataset "2" got 75.9510
+    Dataset "3" got 73.8386
+    Dataset "4" got 70.0266
+    Dataset "5" got 67.6364
+    Dataset "6" got 67.4520
+    Dataset "7" got 67.0238
+    Dataset "8" got 66.1179
+    Dataset "9" got 69.2488
+    Dataset "10" got 65.3146
+
+  uniform_mixrem.long
+    Dataset "1" got 58.0667
+    Dataset "2" got 56.0207
+    Dataset "3" got 54.8766
+    Dataset "4" got 52.4189
+    Dataset "5" got 51.2967
+    Dataset "6" got 51.7918
+    Dataset "7" got 51.9314
+    Dataset "8" got 51.0113
+    Dataset "9" got 55.7362
+    Dataset "10" got 52.9991
+
+
+R.test evaluation
+
+  prior_rem
+    Dataset "1" got 0.9641
+    Dataset "2" got 0.9641
+    Dataset "3" got 0.9640
+    Dataset "4" got 0.9641
+    Dataset "5" got 0.9640
+    Dataset "6" got 0.9630
+    Dataset "7" got 0.9631
+    Dataset "8" got 0.9617
+    Dataset "9" got 0.5022
+    Dataset "10" got -0.8897
+
+  prior_rem.manual
+    Dataset "1" got 0.9641
+    Dataset "2" got 0.9641
+    Dataset "3" got 0.9641
+    Dataset "4" got 0.9641
+    Dataset "5" got 0.9641
+    Dataset "6" got 0.9641
+    Dataset "7" got 0.9641
+    Dataset "8" got 0.9641
+    Dataset "9" got 0.9641
+    Dataset "10" got 0.9641
+
+  rem
+    Dataset "1" got 0.9641
+    Dataset "2" got 0.9639
+    Dataset "3" got 0.9635
+    Dataset "4" got 0.9630
+    Dataset "5" got 0.9626
+    Dataset "6" got 0.9621
+    Dataset "7" got 0.9610
+    Dataset "8" got 0.9610
+    Dataset "9" got 0.9554
+    Dataset "10" got 0.9437
+
+  semi_mixrem
+    Dataset "1" got 0.9498
+    Dataset "2" got 0.9491
+    Dataset "3" got 0.9485
+    Dataset "4" got 0.9480
+    Dataset "5" got 0.9468
+    Dataset "6" got 0.9450
+    Dataset "7" got 0.9434
+    Dataset "8" got 0.9414
+    Dataset "9" got 0.9400
+    Dataset "10" got 0.9442
+
+  semi_mixrem.long
+    Dataset "1" got 0.9591
+    Dataset "2" got 0.9576
+    Dataset "3" got 0.9564
+    Dataset "4" got 0.9554
+    Dataset "5" got 0.9541
+    Dataset "6" got 0.9523
+    Dataset "7" got 0.9503
+    Dataset "8" got 0.9490
+    Dataset "9" got 0.9450
+    Dataset "10" got 0.9483
+
+  uniform_mixrem
+    Dataset "1" got 0.9302
+    Dataset "2" got 0.9268
+    Dataset "3" got 0.9238
+    Dataset "4" got 0.9177
+    Dataset "5" got 0.9131
+    Dataset "6" got 0.9063
+    Dataset "7" got 0.9017
+    Dataset "8" got 0.8971
+    Dataset "9" got 0.8854
+    Dataset "10" got 0.8902
+
+  uniform_mixrem.long
+    Dataset "1" got 0.9478
+    Dataset "2" got 0.9444
+    Dataset "3" got 0.9418
+    Dataset "4" got 0.9373
+    Dataset "5" got 0.9337
+    Dataset "6" got 0.9285
+    Dataset "7" got 0.9244
+    Dataset "8" got 0.9217
+    Dataset "9" got 0.9093
+    Dataset "10" got 0.9130
+
+
+RMSE.test evaluation
+
+  prior_rem
+    Dataset "1" got 4.5352
+    Dataset "2" got 4.5331
+    Dataset "3" got 4.5398
+    Dataset "4" got 4.5531
+    Dataset "5" got 4.5452
+    Dataset "6" got 4.6498
+    Dataset "7" got 4.6951
+    Dataset "8" got 4.8925
+    Dataset "9" got 20.7977
+    Dataset "10" got 454.4384
+
+  prior_rem.manual
+    Dataset "1" got 4.5361
+    Dataset "2" got 4.5362
+    Dataset "3" got 4.5362
+    Dataset "4" got 4.5362
+    Dataset "5" got 4.5361
+    Dataset "6" got 4.5361
+    Dataset "7" got 4.5361
+    Dataset "8" got 4.5361
+    Dataset "9" got 4.5361
+    Dataset "10" got 4.5362
+
+  rem
+    Dataset "1" got 4.5352
+    Dataset "2" got 4.5474
+    Dataset "3" got 4.5757
+    Dataset "4" got 4.6143
+    Dataset "5" got 4.6358
+    Dataset "6" got 4.6627
+    Dataset "7" got 4.7369
+    Dataset "8" got 4.7491
+    Dataset "9" got 5.0440
+    Dataset "10" got 5.7576
+
+  semi_mixrem
+    Dataset "1" got 6.9360
+    Dataset "2" got 6.7314
+    Dataset "3" got 6.5836
+    Dataset "4" got 6.2824
+    Dataset "5" got 6.1818
+    Dataset "6" got 6.1928
+    Dataset "7" got 6.2006
+    Dataset "8" got 6.1742
+    Dataset "9" got 6.2097
+    Dataset "10" got 5.8563
+
+  semi_mixrem.long
+    Dataset "1" got 5.7691
+    Dataset "2" got 5.6979
+    Dataset "3" got 5.6596
+    Dataset "4" got 5.5037
+    Dataset "5" got 5.5006
+    Dataset "6" got 5.5771
+    Dataset "7" got 5.6421
+    Dataset "8" got 5.6336
+    Dataset "9" got 5.8264
+    Dataset "10" got 5.6145
+
+  uniform_mixrem
+    Dataset "1" got 8.9106
+    Dataset "2" got 8.7150
+    Dataset "3" got 8.5929
+    Dataset "4" got 8.3682
+    Dataset "5" got 8.2241
+    Dataset "6" got 8.2129
+    Dataset "7" got 8.1868
+    Dataset "8" got 8.1313
+    Dataset "9" got 8.3216
+    Dataset "10" got 8.0817
+
+  uniform_mixrem.long
+    Dataset "1" got 7.6201
+    Dataset "2" got 7.4847
+    Dataset "3" got 7.4079
+    Dataset "4" got 7.2401
+    Dataset "5" got 7.1622
+    Dataset "6" got 7.1967
+    Dataset "7" got 7.2063
+    Dataset "8" got 7.1422
+    Dataset "9" got 7.4657
+    Dataset "10" got 7.2800
+
+
+Setup time evaluation
+
+  prior_rem
+    Dataset "1" got 0.0440
+    Dataset "2" got 0.1060
+    Dataset "3" got 0.2250
+    Dataset "4" got 3.0000
+    Dataset "5" got 2.1150
+    Dataset "6" got 16.2470
+    Dataset "7" got 20.3620
+    Dataset "8" got 7.2630
+    Dataset "9" got 6.1500
+    Dataset "10" got 8.4030
+
+  prior_rem.manual
+    Dataset "1" got 0.0470
+    Dataset "2" got 0.2090
+    Dataset "3" got 0.3170
+    Dataset "4" got 1.0320
+    Dataset "5" got 9.3810
+    Dataset "6" got 2.9030
+    Dataset "7" got 29.4260
+    Dataset "8" got 1.1730
+    Dataset "9" got 22.0090
+    Dataset "10" got 14.0180
+
+  rem
+    Dataset "1" got 0.0370
+    Dataset "2" got 0.1590
+    Dataset "3" got 0.5320
+    Dataset "4" got 0.9820
+    Dataset "5" got 1.0350
+    Dataset "6" got 3.3410
+    Dataset "7" got 46.9560
+    Dataset "8" got 2.0870
+    Dataset "9" got 4.0140
+    Dataset "10" got 78.0820
+
+  semi_mixrem
+    Dataset "1" got 0.0890
+    Dataset "2" got 0.1610
+    Dataset "3" got 0.1890
+    Dataset "4" got 0.2910
+    Dataset "5" got 0.4060
+    Dataset "6" got 0.4100
+    Dataset "7" got 0.3560
+    Dataset "8" got 0.3140
+    Dataset "9" got 0.5130
+    Dataset "10" got 0.9380
+
+  semi_mixrem.long
+    Dataset "1" got 0.1190
+    Dataset "2" got 0.3210
+    Dataset "3" got 0.4790
+    Dataset "4" got 1.4300
+    Dataset "5" got 1.2100
+    Dataset "6" got 3.7030
+    Dataset "7" got 55.1660
+    Dataset "8" got 2.4640
+    Dataset "9" got 4.6530
+    Dataset "10" got 101.2960
+
+  uniform_mixrem
+    Dataset "1" got 0.0560
+    Dataset "2" got 0.1340
+    Dataset "3" got 0.1640
+    Dataset "4" got 0.2520
+    Dataset "5" got 0.3900
+    Dataset "6" got 0.3810
+    Dataset "7" got 0.3430
+    Dataset "8" got 0.3030
+    Dataset "9" got 0.5100
+    Dataset "10" got 0.9320
+
+  uniform_mixrem.long
+    Dataset "1" got 0.0720
+    Dataset "2" got 0.2160
+    Dataset "3" got 0.4610
+    Dataset "4" got 1.4520
+    Dataset "5" got 1.3170
+    Dataset "6" got 3.8300
+    Dataset "7" got 54.4570
+    Dataset "8" got 2.4330
+    Dataset "9" got 4.6570
+    Dataset "10" got 99.0890
+
+
+Speed evaluation
+
+  prior_rem
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  prior_rem.manual
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  rem
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  semi_mixrem
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  semi_mixrem.long
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  uniform_mixrem
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+  uniform_mixrem.long
+    Dataset "1" got 0.0000
+    Dataset "2" got 0.0000
+    Dataset "3" got 0.0000
+    Dataset "4" got 0.0000
+    Dataset "5" got 0.0000
+    Dataset "6" got 0.0000
+    Dataset "7" got 0.0000
+    Dataset "8" got 0.0000
+    Dataset "9" got 0.0000
+    Dataset "10" got 0.0000
+
+
+Algorithm parameters
+
+  prior_rem
+    em_max_iteration=10000.0000
+    r_calc_variance=true
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    em_epsilon=0.0010
+    alpha0=
+    zvariance0=NaN
+
+  prior_rem.manual
+    em_max_iteration=10000.0000
+    r_calc_variance=true
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    duplicated_alg_name=prior_rem.manual
+    em_epsilon=0.0010
+    alpha0=469.7296, -1.9885, -0.2332, 0.0474, -0.1602
+    zvariance0=0.0044
+
+  rem
+    em_max_iteration=10000.0000
+    r_calc_variance=true
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    em_epsilon=0.0010
+
+  semi_mixrem
+    em_max_iteration=10000.0000
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    em_epsilon=0.0010
+    mixrem_mutual_mode=false
+    mixrem_uniform_mode=false
+
+  semi_mixrem.long
+    em_max_iteration=10000.0000
+    r_indices={1, 2, 3, 4, 5}, {1, 5}, {2, 5}, {3, 5}, {4, 5}
+    duplicated_alg_name=semi_mixrem.long
+    em_epsilon=0.0010
+    mixrem_mutual_mode=false
+    mixrem_uniform_mode=false
+
+  uniform_mixrem
+    em_max_iteration=10000.0000
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    duplicated_alg_name=uniform_mixrem
+    em_epsilon=0.0010
+    mixrem_mutual_mode=false
+    mixrem_uniform_mode=true
+
+  uniform_mixrem.long
+    em_max_iteration=10000.0000
+    r_indices={1, 2, 3, 4, 5}, {1, 5}, {2, 5}, {3, 5}, {4, 5}
+    duplicated_alg_name=uniform_mixrem.long
+    em_epsilon=0.0010
+    mixrem_mutual_mode=false
+    mixrem_uniform_mode=true
+
+
+Algorithm descriptions
+
+  prior_rem
+    Dataset "1" got PE = 469.7296 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=1, coeff=NaN, z-variance=20.9847, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "2" got PE = 455.3271 - 1.9708*(AT) - 0.2400*(V) + 0.0618*(AP) - 0.1619*(RH): t=4, coeff=NaN, z-variance=18.1818, alpha0=(455.3201, -1.9708, -0.2400, 0.0618, -0.1619), z-variance0=0.0038
+    Dataset "3" got PE = 492.0416 - 2.0324*(AT) - 0.2136*(V) + 0.0260*(AP) - 0.1695*(RH): t=11, coeff=NaN, z-variance=15.5124, alpha0=(492.0363, -2.0324, -0.2136, 0.0260, -0.1695), z-variance0=0.0033
+    Dataset "4" got PE = 440.2314 - 1.9878*(AT) - 0.2555*(V) + 0.0784*(AP) - 0.1641*(RH): t=55, coeff=NaN, z-variance=11.0251, alpha0=(440.2381, -1.9878, -0.2555, 0.0784, -0.1641), z-variance0=0.0023
+    Dataset "5" got PE = 403.7195 - 1.8735*(AT) - 0.2577*(V) + 0.1100*(AP) - 0.1379*(RH): t=16, coeff=NaN, z-variance=8.0647, alpha0=(403.7180, -1.8735, -0.2577, 0.1100, -0.1379), z-variance0=0.0018
+    Dataset "6" got PE = 504.0372 - 2.2029*(AT) - 0.1419*(V) + 0.0179*(AP) - 0.2194*(RH): t=213, coeff=NaN, z-variance=8.1086, alpha0=(504.0368, -2.2029, -0.1419, 0.0179, -0.2193), z-variance0=0.0017
+    Dataset "7" got PE = 355.7942 - 1.8609*(AT) - 0.2276*(V) + 0.1597*(AP) - 0.1860*(RH): t=248, coeff=NaN, z-variance=4.7277, alpha0=(355.8012, -1.8609, -0.2276, 0.1597, -0.1860), z-variance0=0.0011
+    Dataset "8" got PE = 500.0783 - 1.8357*(AT) - 0.3247*(V) + 0.0117*(AP) - 0.0699*(RH): t=112, coeff=NaN, z-variance=2.2673, alpha0=(500.0782, -1.8357, -0.3247, 0.0117, -0.0699), z-variance0=0.0005
+    Dataset "9" got PE = 0.0311 + 0.0075*(AT) + 0.0182*(V) + 0.4576*(AP) + 0.0366*(RH): t=66, coeff=NaN, z-variance=82.8236, alpha0=(0.0005, 0.0074, 0.0182, 0.4577, 0.0366), z-variance0=0.0038
+    Dataset "10" got PE = -0.7140 + 0.0010*(AT) + 0.0015*(V) + 0.0006*(AP) + 0.0002*(RH): t=134, coeff=NaN, z-variance=20271.8572, alpha0=(0.0000, 0.0000, 0.0000, 0.0000, 0.0000), z-variance0=4.2372
+
+  prior_rem.manual
+    Dataset "1" got PE = 469.7296 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=1, coeff=NaN, z-variance=20.9859, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "2" got PE = 469.7405 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=4, coeff=NaN, z-variance=18.1780, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "3" got PE = 469.7355 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=10, coeff=NaN, z-variance=15.3633, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "4" got PE = 469.7338 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=25, coeff=NaN, z-variance=10.9558, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "5" got PE = 469.7302 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=234, coeff=NaN, z-variance=8.3218, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "6" got PE = 469.7273 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=71, coeff=NaN, z-variance=6.7759, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "7" got PE = 469.7124 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=453, coeff=NaN, z-variance=4.5853, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "8" got PE = 469.7405 - 1.9886*(AT) - 0.2331*(V) + 0.0474*(AP) - 0.1603*(RH): t=9, coeff=NaN, z-variance=2.5770, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "9" got PE = 469.6932 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1604*(RH): t=439, coeff=NaN, z-variance=1.2877, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+    Dataset "10" got PE = 469.7501 - 1.9883*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1606*(RH): t=317, coeff=NaN, z-variance=0.4786, alpha0=(469.7296, -1.9885, -0.2332, 0.0474, -0.1602), z-variance0=0.0044
+
+  rem
+    Dataset "1" got PE = 469.7296 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=1, coeff=NaN, z-variance=20.9847
+    Dataset "2" got PE = 415.9687 - 1.9131*(AT) - 0.2579*(V) + 0.0979*(AP) - 0.1272*(RH): t=5, coeff=NaN, z-variance=18.0339
+    Dataset "3" got PE = 416.5671 - 1.8401*(AT) - 0.2940*(V) + 0.0963*(AP) - 0.1047*(RH): t=10, coeff=NaN, z-variance=15.1074
+    Dataset "4" got PE = 401.8042 - 1.8324*(AT) - 0.2999*(V) + 0.1099*(AP) - 0.0869*(RH): t=27, coeff=NaN, z-variance=10.4407
+    Dataset "5" got PE = 369.4165 - 1.7559*(AT) - 0.3281*(V) + 0.1410*(AP) - 0.0789*(RH): t=23, coeff=NaN, z-variance=7.7827
+    Dataset "6" got PE = 346.6202 - 1.7208*(AT) - 0.3237*(V) + 0.1615*(AP) - 0.0633*(RH): t=68, coeff=NaN, z-variance=6.1016
+    Dataset "7" got PE = 341.1562 - 1.6900*(AT) - 0.3300*(V) + 0.1647*(AP) - 0.0383*(RH): t=994, coeff=NaN, z-variance=3.8514
+    Dataset "8" got PE = 346.4257 - 1.6501*(AT) - 0.3776*(V) + 0.1618*(AP) - 0.0467*(RH): t=47, coeff=NaN, z-variance=2.0905
+    Dataset "9" got PE = 302.7665 - 1.5758*(AT) - 0.3174*(V) + 0.1942*(AP) + 0.0391*(RH): t=90, coeff=NaN, z-variance=0.8912
+    Dataset "10" got PE = 564.1434 - 2.1327*(AT) + 0.0188*(V) - 0.0684*(AP) + 0.0205*(RH): t=1780, coeff=NaN, z-variance=0.1687
+
+  semi_mixrem
+    Dataset "1" got {PE = 497.0645 - 2.1763*(AT): t=1, coeff=0.4227, z-variance=29.6573}, {PE = 517.8105 - 1.1672*(V): t=1, coeff=0.2769, z-variance=71.6045}, {PE = -1058.5211 + 1.4933*(AP): t=1, coeff=0.1597, z-variance=211.5011}, {PE = 421.6716 + 0.4486*(RH): t=1, coeff=0.1406, z-variance=248.4670}: t=2
+    Dataset "2" got {PE = 497.4977 - 2.1979*(AT): t=4, coeff=0.4280, z-variance=24.2516}, {PE = 519.3656 - 1.1965*(V): t=4, coeff=0.2768, z-variance=60.5493}, {PE = -1214.8271 + 1.6475*(AP): t=4, coeff=0.1584, z-variance=180.1064}, {PE = 417.8420 + 0.5020*(RH): t=4, coeff=0.1368, z-variance=217.2895}: t=5
+    Dataset "3" got {PE = 497.6871 - 2.2081*(AT): t=6, coeff=0.4291, z-variance=20.0817}, {PE = 520.7027 - 1.2180*(V): t=6, coeff=0.2841, z-variance=48.7344}, {PE = -1304.3280 + 1.7359*(AP): t=6, coeff=0.1541, z-variance=157.6827}, {PE = 413.7453 + 0.5563*(RH): t=6, coeff=0.1327, z-variance=189.0623}: t=7
+    Dataset "4" got {PE = 498.5778 - 2.2479*(AT): t=7, coeff=0.4453, z-variance=13.8541}, {PE = 522.2781 - 1.2467*(V): t=7, coeff=0.2830, z-variance=37.3203}, {PE = -1512.8163 + 1.9414*(AP): t=7, coeff=0.1472, z-variance=128.9238}, {PE = 405.7745 + 0.6610*(RH): t=7, coeff=0.1245, z-variance=156.3326}: t=8
+    Dataset "5" got {PE = 498.5320 - 2.2546*(AT): t=9, coeff=0.4335, z-variance=10.5627}, {PE = 523.8185 - 1.2793*(V): t=9, coeff=0.2961, z-variance=26.0347}, {PE = -1714.4568 + 2.1407*(AP): t=9, coeff=0.1511, z-variance=91.7893}, {PE = 401.0777 + 0.7325*(RH): t=9, coeff=0.1192, z-variance=123.9264}: t=10
+    Dataset "6" got {PE = 498.4271 - 2.2470*(AT): t=9, coeff=0.4353, z-variance=7.9534}, {PE = 523.2183 - 1.2717*(V): t=9, coeff=0.2939, z-variance=19.5630}, {PE = -1857.9068 + 2.2820*(AP): t=9, coeff=0.1528, z-variance=67.4559}, {PE = 392.9270 + 0.8393*(RH): t=9, coeff=0.1181, z-variance=90.1255}: t=10
+    Dataset "7" got {PE = 498.0319 - 2.2315*(AT): t=8, coeff=0.4395, z-variance=5.0596}, {PE = 524.2077 - 1.2912*(V): t=8, coeff=0.2861, z-variance=13.3621}, {PE = -1963.7000 + 2.3864*(AP): t=8, coeff=0.1552, z-variance=42.8344}, {PE = 387.3950 + 0.9189*(RH): t=8, coeff=0.1192, z-variance=60.0808}: t=9
+    Dataset "8" got {PE = 498.3792 - 2.2522*(AT): t=7, coeff=0.4358, z-variance=2.9110}, {PE = 525.1901 - 1.3086*(V): t=7, coeff=0.2879, z-variance=7.2515}, {PE = -2134.9587 + 2.5554*(AP): t=7, coeff=0.1520, z-variance=23.8247}, {PE = 381.4177 + 0.9984*(RH): t=7, coeff=0.1243, z-variance=29.7061}: t=8
+    Dataset "9" got {PE = 496.4571 - 2.1705*(AT): t=12, coeff=0.4590, z-variance=1.1633}, {PE = 524.3892 - 1.2790*(V): t=12, coeff=0.2884, z-variance=3.3270}, {PE = -2349.5928 + 2.7669*(AP): t=12, coeff=0.1334, z-variance=12.5737}, {PE = 369.4027 + 1.1507*(RH): t=12, coeff=0.1192, z-variance=16.3293}: t=13
+    Dataset "10" got {PE = 497.3288 - 2.1356*(AT): t=22, coeff=0.5466, z-variance=0.1691}, {PE = 532.0547 - 1.4489*(V): t=22, coeff=0.2210, z-variance=1.0673}, {PE = -2537.2255 + 2.9526*(AP): t=22, coeff=0.1349, z-variance=2.7906}, {PE = 369.2398 + 1.1183*(RH): t=22, coeff=0.0975, z-variance=4.1247}: t=23
+
+  semi_mixrem.long
+    Dataset "1" got {PE = 469.7296 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=1, coeff=0.3279, z-variance=20.9847}, {PE = 497.0645 - 2.1763*(AT): t=1, coeff=0.2786, z-variance=29.6573}, {PE = 517.8105 - 1.1672*(V): t=1, coeff=0.1873, z-variance=71.6045}, {PE = -1058.5211 + 1.4933*(AP): t=1, coeff=0.1093, z-variance=211.5011}, {PE = 421.6716 + 0.4486*(RH): t=1, coeff=0.0970, z-variance=248.4670}: t=2
+    Dataset "2" got {PE = 415.9687 - 1.9131*(AT) - 0.2579*(V) + 0.0979*(AP) - 0.1272*(RH): t=5, coeff=0.3223, z-variance=18.0339}, {PE = 497.4977 - 2.1979*(AT): t=5, coeff=0.2834, z-variance=24.2516}, {PE = 519.3656 - 1.1965*(V): t=5, coeff=0.1890, z-variance=60.5493}, {PE = -1214.8697 + 1.6475*(AP): t=5, coeff=0.1097, z-variance=180.1043}, {PE = 417.8401 + 0.5020*(RH): t=5, coeff=0.0955, z-variance=217.2870}: t=6
+    Dataset "3" got {PE = 416.5671 - 1.8401*(AT) - 0.2940*(V) + 0.0963*(AP) - 0.1047*(RH): t=10, coeff=0.3168, z-variance=15.1074}, {PE = 497.6871 - 2.2081*(AT): t=10, coeff=0.2857, z-variance=20.0817}, {PE = 520.7027 - 1.2180*(V): t=10, coeff=0.1958, z-variance=48.7344}, {PE = -1304.3648 + 1.7360*(AP): t=10, coeff=0.1079, z-variance=157.6809}, {PE = 413.7401 + 0.5564*(RH): t=10, coeff=0.0937, z-variance=189.0547}: t=11
+    Dataset "4" got {PE = 401.8042 - 1.8324*(AT) - 0.2999*(V) + 0.1099*(AP) - 0.0869*(RH): t=27, coeff=0.3179, z-variance=10.4407}, {PE = 498.5778 - 2.2479*(AT): t=27, coeff=0.2938, z-variance=13.8541}, {PE = 522.2781 - 1.2467*(V): t=27, coeff=0.1961, z-variance=37.3203}, {PE = -1512.9068 + 1.9415*(AP): t=27, coeff=0.1038, z-variance=128.9181}, {PE = 405.7557 + 0.6612*(RH): t=27, coeff=0.0883, z-variance=156.3058}: t=28
+    Dataset "5" got {PE = 369.4165 - 1.7559*(AT) - 0.3281*(V) + 0.1410*(AP) - 0.0789*(RH): t=23, coeff=0.3103, z-variance=7.7827}, {PE = 498.5319 - 2.2546*(AT): t=23, coeff=0.2890, z-variance=10.5627}, {PE = 523.8184 - 1.2793*(V): t=23, coeff=0.2072, z-variance=26.0346}, {PE = -1714.4605 + 2.1407*(AP): t=23, coeff=0.1077, z-variance=91.7882}, {PE = 401.0617 + 0.7328*(RH): t=23, coeff=0.0858, z-variance=123.9056}: t=24
+    Dataset "6" got {PE = 346.6202 - 1.7208*(AT) - 0.3237*(V) + 0.1615*(AP) - 0.0633*(RH): t=68, coeff=0.3001, z-variance=6.1016}, {PE = 498.4271 - 2.2470*(AT): t=68, coeff=0.2926, z-variance=7.9534}, {PE = 523.2174 - 1.2717*(V): t=68, coeff=0.2098, z-variance=19.5627}, {PE = -1857.8110 + 2.2819*(AP): t=68, coeff=0.1112, z-variance=67.4515}, {PE = 392.8968 + 0.8398*(RH): t=68, coeff=0.0863, z-variance=90.1045}: t=69
+    Dataset "7" got {PE = 341.1562 - 1.6900*(AT) - 0.3300*(V) + 0.1647*(AP) - 0.0383*(RH): t=994, coeff=0.2913, z-variance=3.8514}, {PE = 498.0334 - 2.2315*(AT): t=994, coeff=0.2964, z-variance=5.0596}, {PE = 524.2128 - 1.2912*(V): t=994, coeff=0.2090, z-variance=13.3624}, {PE = -1963.9957 + 2.3867*(AP): t=994, coeff=0.1147, z-variance=42.8388}, {PE = 387.3480 + 0.9197*(RH): t=994, coeff=0.0886, z-variance=60.0852}: t=995
+    Dataset "8" got {PE = 346.4257 - 1.6501*(AT) - 0.3776*(V) + 0.1618*(AP) - 0.0467*(RH): t=47, coeff=0.2768, z-variance=2.0905}, {PE = 498.3942 - 2.2523*(AT): t=47, coeff=0.3044, z-variance=2.9113}, {PE = 525.2113 - 1.3089*(V): t=47, coeff=0.2101, z-variance=7.2531}, {PE = -2140.1589 + 2.5605*(AP): t=47, coeff=0.1148, z-variance=23.8715}, {PE = 381.2892 + 1.0002*(RH): t=47, coeff=0.0939, z-variance=29.7513}: t=48
+    Dataset "9" got {PE = 302.7665 - 1.5758*(AT) - 0.3174*(V) + 0.1942*(AP) + 0.0391*(RH): t=90, coeff=0.2776, z-variance=0.8912}, {PE = 496.4499 - 2.1703*(AT): t=90, coeff=0.3208, z-variance=1.1632}, {PE = 524.3299 - 1.2782*(V): t=90, coeff=0.2118, z-variance=3.3247}, {PE = -2344.6937 + 2.7621*(AP): t=90, coeff=0.1003, z-variance=12.5520}, {PE = 369.2040 + 1.1537*(RH): t=90, coeff=0.0895, z-variance=16.3698}: t=91
+    Dataset "10" got {PE = 564.1434 - 2.1327*(AT) + 0.0188*(V) - 0.0684*(AP) + 0.0205*(RH): t=1780, coeff=0.3241, z-variance=0.1687}, {PE = 497.3390 - 2.1356*(AT): t=1780, coeff=0.3534, z-variance=0.1691}, {PE = 532.0992 - 1.4501*(V): t=1780, coeff=0.1574, z-variance=1.0681}, {PE = -2555.0566 + 2.9701*(AP): t=1780, coeff=0.0957, z-variance=2.8070}, {PE = 369.9818 + 1.1142*(RH): t=1780, coeff=0.0694, z-variance=4.1221}: t=1781
+
+  uniform_mixrem
+    Dataset "1" got {PE = 497.0645 - 2.1763*(AT): t=1, coeff=0.2500, z-variance=29.6573}, {PE = 517.8105 - 1.1672*(V): t=1, coeff=0.2500, z-variance=71.6045}, {PE = -1058.5211 + 1.4933*(AP): t=1, coeff=0.2500, z-variance=211.5011}, {PE = 421.6716 + 0.4486*(RH): t=1, coeff=0.2500, z-variance=248.4670}: t=1
+    Dataset "2" got {PE = 497.4977 - 2.1979*(AT): t=4, coeff=0.2500, z-variance=24.2516}, {PE = 519.3656 - 1.1965*(V): t=4, coeff=0.2500, z-variance=60.5493}, {PE = -1214.8271 + 1.6475*(AP): t=4, coeff=0.2500, z-variance=180.1064}, {PE = 417.8420 + 0.5020*(RH): t=4, coeff=0.2500, z-variance=217.2895}: t=4
+    Dataset "3" got {PE = 497.6871 - 2.2081*(AT): t=6, coeff=0.2500, z-variance=20.0817}, {PE = 520.7027 - 1.2180*(V): t=6, coeff=0.2500, z-variance=48.7344}, {PE = -1304.3280 + 1.7359*(AP): t=6, coeff=0.2500, z-variance=157.6827}, {PE = 413.7453 + 0.5563*(RH): t=6, coeff=0.2500, z-variance=189.0623}: t=6
+    Dataset "4" got {PE = 498.5778 - 2.2479*(AT): t=7, coeff=0.2500, z-variance=13.8541}, {PE = 522.2781 - 1.2467*(V): t=7, coeff=0.2500, z-variance=37.3203}, {PE = -1512.8163 + 1.9414*(AP): t=7, coeff=0.2500, z-variance=128.9238}, {PE = 405.7745 + 0.6610*(RH): t=7, coeff=0.2500, z-variance=156.3326}: t=7
+    Dataset "5" got {PE = 498.5320 - 2.2546*(AT): t=9, coeff=0.2500, z-variance=10.5627}, {PE = 523.8185 - 1.2793*(V): t=9, coeff=0.2500, z-variance=26.0347}, {PE = -1714.4568 + 2.1407*(AP): t=9, coeff=0.2500, z-variance=91.7893}, {PE = 401.0777 + 0.7325*(RH): t=9, coeff=0.2500, z-variance=123.9264}: t=9
+    Dataset "6" got {PE = 498.4271 - 2.2470*(AT): t=9, coeff=0.2500, z-variance=7.9534}, {PE = 523.2183 - 1.2717*(V): t=9, coeff=0.2500, z-variance=19.5630}, {PE = -1857.9068 + 2.2820*(AP): t=9, coeff=0.2500, z-variance=67.4559}, {PE = 392.9270 + 0.8393*(RH): t=9, coeff=0.2500, z-variance=90.1255}: t=9
+    Dataset "7" got {PE = 498.0319 - 2.2315*(AT): t=8, coeff=0.2500, z-variance=5.0596}, {PE = 524.2077 - 1.2912*(V): t=8, coeff=0.2500, z-variance=13.3621}, {PE = -1963.7000 + 2.3864*(AP): t=8, coeff=0.2500, z-variance=42.8344}, {PE = 387.3950 + 0.9189*(RH): t=8, coeff=0.2500, z-variance=60.0808}: t=8
+    Dataset "8" got {PE = 498.3792 - 2.2522*(AT): t=7, coeff=0.2500, z-variance=2.9110}, {PE = 525.1901 - 1.3086*(V): t=7, coeff=0.2500, z-variance=7.2515}, {PE = -2134.9587 + 2.5554*(AP): t=7, coeff=0.2500, z-variance=23.8247}, {PE = 381.4177 + 0.9984*(RH): t=7, coeff=0.2500, z-variance=29.7061}: t=7
+    Dataset "9" got {PE = 496.4571 - 2.1705*(AT): t=12, coeff=0.2500, z-variance=1.1633}, {PE = 524.3892 - 1.2790*(V): t=12, coeff=0.2500, z-variance=3.3270}, {PE = -2349.5928 + 2.7669*(AP): t=12, coeff=0.2500, z-variance=12.5737}, {PE = 369.4027 + 1.1507*(RH): t=12, coeff=0.2500, z-variance=16.3293}: t=12
+    Dataset "10" got {PE = 497.3288 - 2.1356*(AT): t=22, coeff=0.2500, z-variance=0.1691}, {PE = 532.0547 - 1.4489*(V): t=22, coeff=0.2500, z-variance=1.0673}, {PE = -2537.2255 + 2.9526*(AP): t=22, coeff=0.2500, z-variance=2.7906}, {PE = 369.2398 + 1.1183*(RH): t=22, coeff=0.2500, z-variance=4.1247}: t=22
+
+  uniform_mixrem.long
+    Dataset "1" got {PE = 469.7296 - 1.9885*(AT) - 0.2332*(V) + 0.0474*(AP) - 0.1602*(RH): t=1, coeff=0.2000, z-variance=20.9847}, {PE = 497.0645 - 2.1763*(AT): t=1, coeff=0.2000, z-variance=29.6573}, {PE = 517.8105 - 1.1672*(V): t=1, coeff=0.2000, z-variance=71.6045}, {PE = -1058.5211 + 1.4933*(AP): t=1, coeff=0.2000, z-variance=211.5011}, {PE = 421.6716 + 0.4486*(RH): t=1, coeff=0.2000, z-variance=248.4670}: t=1
+    Dataset "2" got {PE = 415.9687 - 1.9131*(AT) - 0.2579*(V) + 0.0979*(AP) - 0.1272*(RH): t=5, coeff=0.2000, z-variance=18.0339}, {PE = 497.4977 - 2.1979*(AT): t=5, coeff=0.2000, z-variance=24.2516}, {PE = 519.3656 - 1.1965*(V): t=5, coeff=0.2000, z-variance=60.5493}, {PE = -1214.8697 + 1.6475*(AP): t=5, coeff=0.2000, z-variance=180.1043}, {PE = 417.8401 + 0.5020*(RH): t=5, coeff=0.2000, z-variance=217.2870}: t=5
+    Dataset "3" got {PE = 416.5671 - 1.8401*(AT) - 0.2940*(V) + 0.0963*(AP) - 0.1047*(RH): t=10, coeff=0.2000, z-variance=15.1074}, {PE = 497.6871 - 2.2081*(AT): t=10, coeff=0.2000, z-variance=20.0817}, {PE = 520.7027 - 1.2180*(V): t=10, coeff=0.2000, z-variance=48.7344}, {PE = -1304.3648 + 1.7360*(AP): t=10, coeff=0.2000, z-variance=157.6809}, {PE = 413.7401 + 0.5564*(RH): t=10, coeff=0.2000, z-variance=189.0547}: t=10
+    Dataset "4" got {PE = 401.8042 - 1.8324*(AT) - 0.2999*(V) + 0.1099*(AP) - 0.0869*(RH): t=27, coeff=0.2000, z-variance=10.4407}, {PE = 498.5778 - 2.2479*(AT): t=27, coeff=0.2000, z-variance=13.8541}, {PE = 522.2781 - 1.2467*(V): t=27, coeff=0.2000, z-variance=37.3203}, {PE = -1512.9068 + 1.9415*(AP): t=27, coeff=0.2000, z-variance=128.9181}, {PE = 405.7557 + 0.6612*(RH): t=27, coeff=0.2000, z-variance=156.3058}: t=27
+    Dataset "5" got {PE = 369.4165 - 1.7559*(AT) - 0.3281*(V) + 0.1410*(AP) - 0.0789*(RH): t=23, coeff=0.2000, z-variance=7.7827}, {PE = 498.5319 - 2.2546*(AT): t=23, coeff=0.2000, z-variance=10.5627}, {PE = 523.8184 - 1.2793*(V): t=23, coeff=0.2000, z-variance=26.0346}, {PE = -1714.4605 + 2.1407*(AP): t=23, coeff=0.2000, z-variance=91.7882}, {PE = 401.0617 + 0.7328*(RH): t=23, coeff=0.2000, z-variance=123.9056}: t=23
+    Dataset "6" got {PE = 346.6202 - 1.7208*(AT) - 0.3237*(V) + 0.1615*(AP) - 0.0633*(RH): t=68, coeff=0.2000, z-variance=6.1016}, {PE = 498.4271 - 2.2470*(AT): t=68, coeff=0.2000, z-variance=7.9534}, {PE = 523.2174 - 1.2717*(V): t=68, coeff=0.2000, z-variance=19.5627}, {PE = -1857.8110 + 2.2819*(AP): t=68, coeff=0.2000, z-variance=67.4515}, {PE = 392.8968 + 0.8398*(RH): t=68, coeff=0.2000, z-variance=90.1045}: t=68
+    Dataset "7" got {PE = 341.1562 - 1.6900*(AT) - 0.3300*(V) + 0.1647*(AP) - 0.0383*(RH): t=994, coeff=0.2000, z-variance=3.8514}, {PE = 498.0334 - 2.2315*(AT): t=994, coeff=0.2000, z-variance=5.0596}, {PE = 524.2128 - 1.2912*(V): t=994, coeff=0.2000, z-variance=13.3624}, {PE = -1963.9957 + 2.3867*(AP): t=994, coeff=0.2000, z-variance=42.8388}, {PE = 387.3480 + 0.9197*(RH): t=994, coeff=0.2000, z-variance=60.0852}: t=994
+    Dataset "8" got {PE = 346.4257 - 1.6501*(AT) - 0.3776*(V) + 0.1618*(AP) - 0.0467*(RH): t=47, coeff=0.2000, z-variance=2.0905}, {PE = 498.3942 - 2.2523*(AT): t=47, coeff=0.2000, z-variance=2.9113}, {PE = 525.2113 - 1.3089*(V): t=47, coeff=0.2000, z-variance=7.2531}, {PE = -2140.1589 + 2.5605*(AP): t=47, coeff=0.2000, z-variance=23.8715}, {PE = 381.2892 + 1.0002*(RH): t=47, coeff=0.2000, z-variance=29.7513}: t=47
+    Dataset "9" got {PE = 302.7665 - 1.5758*(AT) - 0.3174*(V) + 0.1942*(AP) + 0.0391*(RH): t=90, coeff=0.2000, z-variance=0.8912}, {PE = 496.4499 - 2.1703*(AT): t=90, coeff=0.2000, z-variance=1.1632}, {PE = 524.3299 - 1.2782*(V): t=90, coeff=0.2000, z-variance=3.3247}, {PE = -2344.6937 + 2.7621*(AP): t=90, coeff=0.2000, z-variance=12.5520}, {PE = 369.2040 + 1.1537*(RH): t=90, coeff=0.2000, z-variance=16.3698}: t=90
+    Dataset "10" got {PE = 564.1434 - 2.1327*(AT) + 0.0188*(V) - 0.0684*(AP) + 0.0205*(RH): t=1780, coeff=0.2000, z-variance=0.1687}, {PE = 497.3390 - 2.1356*(AT): t=1780, coeff=0.2000, z-variance=0.1691}, {PE = 532.0992 - 1.4501*(V): t=1780, coeff=0.2000, z-variance=1.0681}, {PE = -2555.0566 + 2.9701*(AP): t=1780, coeff=0.2000, z-variance=2.8070}, {PE = 369.9818 + 1.1142*(RH): t=1780, coeff=0.2000, z-variance=4.1221}: t=1780
+
+
+Note
+  Dataset "1" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "2" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "3" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "4" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "5" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "6" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "7" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "8" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "9" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+  Dataset "10" has path "file:/e:/locnguyen/Eclipse/rem/datasets/ccpp-0.5/hdp_sample.test"
+
+  Java: Java(TM) SE Runtime Environment version 1.8.0_60-b27, Java HotSpot(TM) 64-Bit Server VM version 25.60-b23, Class version 52.0, Vendor "Oracle Corporation" at http://java.oracle.com/
+  OS: Windows 8.1, amd64, version 6.3
+  Memory(VM): Allocated memory = 450.50MB, Free memory = 293.92MB, Max memory = 910.50MB
+  CPU: Intel64 Family 6 Model 76 Stepping 3, GenuineIntel, AMD64, the number of processors is 2
+  Directory: Current working directory is "e:\locnguyen\Eclipse\rem"

@@ -1,0 +1,50 @@
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: PE = 451.6662 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=1, coeff=NaN, z-variance=21.1819
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 5) learned models: PE = 426.3831 - 1.8919*(AT) - 0.2654*(V) + 0.0877*(AP) - 0.1265*(RH): t=5, coeff=NaN, z-variance=17.9897
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 10) learned models: PE = 407.6567 - 1.8292*(AT) - 0.2909*(V) + 0.1051*(AP) - 0.1087*(RH): t=10, coeff=NaN, z-variance=14.3821
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 19) learned models: PE = 384.7271 - 1.8080*(AT) - 0.2968*(V) + 0.1259*(AP) - 0.0854*(RH): t=19, coeff=NaN, z-variance=10.5593
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 22) learned models: PE = 359.4380 - 1.7197*(AT) - 0.3389*(V) + 0.1498*(AP) - 0.0629*(RH): t=22, coeff=NaN, z-variance=8.4417
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 276) learned models: PE = 379.4050 - 1.7018*(AT) - 0.3375*(V) + 0.1298*(AP) - 0.0628*(RH): t=276, coeff=NaN, z-variance=5.7610
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 33) learned models: PE = 351.9643 - 1.6242*(AT) - 0.3719*(V) + 0.1563*(AP) - 0.0509*(RH): t=33, coeff=NaN, z-variance=3.3644
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 58) learned models: PE = 469.3171 - 1.7266*(AT) - 0.3200*(V) + 0.0389*(AP) - 0.0426*(RH): t=58, coeff=NaN, z-variance=2.1229
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 77) learned models: PE = 328.1920 - 1.6241*(AT) - 0.3583*(V) + 0.1714*(AP) + 0.0444*(RH): t=77, coeff=NaN, z-variance=0.8714
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 197) learned models: PE = -1396.7794 + 0.1733*(AT) + 0.0952*(V) + 1.7709*(AP) + 0.6954*(RH): t=197, coeff=NaN, z-variance=2.2139
+
+
+

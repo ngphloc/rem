@@ -1,0 +1,50 @@
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: PE = 451.6662 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=1, coeff=NaN, z-variance=21.1849, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 5) learned models: PE = 451.6697 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=5, coeff=NaN, z-variance=18.1217, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 10) learned models: PE = 451.6687 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=10, coeff=NaN, z-variance=14.6233, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 23) learned models: PE = 451.6684 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=23, coeff=NaN, z-variance=10.9959, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 40) learned models: PE = 451.6645 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=40, coeff=NaN, z-variance=9.2182, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 118) learned models: PE = 451.6527 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=118, coeff=NaN, z-variance=6.4587, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 353) learned models: PE = 451.6568 - 1.9735*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1596*(RH): t=353, coeff=NaN, z-variance=4.0049, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 396) learned models: PE = 451.6483 - 1.9734*(AT) - 0.2310*(V) + 0.0648*(AP) - 0.1597*(RH): t=396, coeff=NaN, z-variance=2.6340, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 143) learned models: PE = 451.6356 - 1.9734*(AT) - 0.2309*(V) + 0.0648*(AP) - 0.1597*(RH): t=143, coeff=NaN, z-variance=1.1298, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+
+========== Algorithm "prior_rem.manual" ==========
+Setup result of algorithm "prior_rem.manual" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 1303) learned models: PE = 451.7431 - 1.9742*(AT) - 0.2304*(V) + 0.0647*(AP) - 0.1599*(RH): t=1303, coeff=NaN, z-variance=0.3832, alpha0=(451.6662, -1.9734, -0.2309, 0.0648, -0.1596), z-variance0=0.0033
+
+
+

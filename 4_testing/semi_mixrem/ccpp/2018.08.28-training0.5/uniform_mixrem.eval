@@ -1,0 +1,136 @@
+========== Algorithm "uniform_mixrem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [0.1744, 8.8526]
+Hudup recall = 1.0000
+MAE.test = 7.2912
+MAERatio.test = 0.0160
+MAEVector.test = [7.2912]
+MSE.test = 79.3984
+R.test = 0.9302
+RMSE.test = 8.9106
+Setup time = 0.0560
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [0.1772, 8.6556]
+Hudup recall = 1.0000
+MAE.test = 7.1111
+MAERatio.test = 0.0156
+MAEVector.test = [7.1111]
+MSE.test = 75.9510
+R.test = 0.9268
+RMSE.test = 8.7150
+Setup time = 0.1340
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [0.2095, 8.5320]
+Hudup recall = 1.0000
+MAE.test = 7.0031
+MAERatio.test = 0.0153
+MAEVector.test = [7.0031]
+MSE.test = 73.8386
+R.test = 0.9238
+RMSE.test = 8.5929
+Setup time = 0.1640
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [0.0962, 8.3077]
+Hudup recall = 1.0000
+MAE.test = 6.7778
+MAERatio.test = 0.0148
+MAEVector.test = [6.7778]
+MSE.test = 70.0266
+R.test = 0.9177
+RMSE.test = 8.3682
+Setup time = 0.2520
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [0.1787, 8.1612]
+Hudup recall = 1.0000
+MAE.test = 6.6535
+MAERatio.test = 0.0146
+MAEVector.test = [6.6535]
+MSE.test = 67.6364
+R.test = 0.9131
+RMSE.test = 8.2241
+Setup time = 0.3900
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [-0.0015, 8.1518]
+Hudup recall = 1.0000
+MAE.test = 6.6064
+MAERatio.test = 0.0145
+MAEVector.test = [6.6064]
+MSE.test = 67.4520
+R.test = 0.9063
+RMSE.test = 8.2129
+Setup time = 0.3810
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [0.0189, 8.1255]
+Hudup recall = 1.0000
+MAE.test = 6.5793
+MAERatio.test = 0.0144
+MAEVector.test = [6.5793]
+MSE.test = 67.0238
+R.test = 0.9017
+RMSE.test = 8.1868
+Setup time = 0.3430
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [-0.0398, 8.0695]
+Hudup recall = 1.0000
+MAE.test = 6.5164
+MAERatio.test = 0.0143
+MAEVector.test = [6.5164]
+MSE.test = 66.1179
+R.test = 0.8971
+RMSE.test = 8.1313
+Setup time = 0.3030
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [-0.1934, 8.2590]
+Hudup recall = 1.0000
+MAE.test = 6.6465
+MAERatio.test = 0.0145
+MAEVector.test = [6.6465]
+MSE.test = 69.2488
+R.test = 0.8854
+RMSE.test = 8.3216
+Setup time = 0.5100
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [-0.7047, 7.9886]
+Hudup recall = 1.0000
+MAE.test = 6.3876
+MAERatio.test = 0.0139
+MAEVector.test = [6.3876]
+MSE.test = 65.3146
+R.test = 0.8902
+RMSE.test = 8.0817
+Setup time = 0.9320
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "uniform_mixrem" - Final result ==========
+
+
+

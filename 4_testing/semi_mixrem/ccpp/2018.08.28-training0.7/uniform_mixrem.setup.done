@@ -1,0 +1,50 @@
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: {PE = 496.8414 - 2.1620*(AT): t=1, coeff=0.2500, z-variance=29.8438}, {PE = 517.2615 - 1.1602*(V): t=1, coeff=0.2500, z-variance=71.4759}, {PE = -1061.7939 + 1.4962*(AP): t=1, coeff=0.2500, z-variance=210.8531}, {PE = 420.6835 + 0.4567*(RH): t=1, coeff=0.2500, z-variance=245.6912}: t=1
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 4) learned models: {PE = 497.2345 - 2.1832*(AT): t=4, coeff=0.2500, z-variance=24.2296}, {PE = 519.1013 - 1.1934*(V): t=4, coeff=0.2500, z-variance=58.7463}, {PE = -1182.0243 + 1.6150*(AP): t=4, coeff=0.2500, z-variance=183.8305}, {PE = 416.8140 + 0.5101*(RH): t=4, coeff=0.2500, z-variance=215.4316}: t=4
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: {PE = 497.4720 - 2.1929*(AT): t=6, coeff=0.2500, z-variance=19.3152}, {PE = 521.1161 - 1.2271*(V): t=6, coeff=0.2500, z-variance=46.5730}, {PE = -1365.0122 + 1.7954*(AP): t=6, coeff=0.2500, z-variance=156.6772}, {PE = 413.0985 + 0.5583*(RH): t=6, coeff=0.2500, z-variance=191.3891}: t=6
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 8) learned models: {PE = 498.2498 - 2.2297*(AT): t=8, coeff=0.2500, z-variance=14.0176}, {PE = 520.8352 - 1.2287*(V): t=8, coeff=0.2500, z-variance=35.8294}, {PE = -1499.1967 + 1.9278*(AP): t=8, coeff=0.2500, z-variance=122.6001}, {PE = 407.1425 + 0.6410*(RH): t=8, coeff=0.2500, z-variance=151.0966}: t=8
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 8) learned models: {PE = 498.2774 - 2.2308*(AT): t=8, coeff=0.2500, z-variance=11.1573}, {PE = 523.4899 - 1.2733*(V): t=8, coeff=0.2500, z-variance=27.4806}, {PE = -1669.4514 + 2.0960*(AP): t=8, coeff=0.2500, z-variance=97.8036}, {PE = 401.6963 + 0.7182*(RH): t=8, coeff=0.2500, z-variance=122.6179}: t=8
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 8) learned models: {PE = 498.4369 - 2.2337*(AT): t=8, coeff=0.2500, z-variance=7.6412}, {PE = 523.2095 - 1.2652*(V): t=8, coeff=0.2500, z-variance=18.3165}, {PE = -1879.0486 + 2.3030*(AP): t=8, coeff=0.2500, z-variance=66.5379}, {PE = 392.0979 + 0.8522*(RH): t=8, coeff=0.2500, z-variance=83.5605}: t=8
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 8) learned models: {PE = 498.3767 - 2.2311*(AT): t=8, coeff=0.2500, z-variance=4.7024}, {PE = 524.3243 - 1.2917*(V): t=8, coeff=0.2500, z-variance=10.9369}, {PE = -2064.6687 + 2.4865*(AP): t=8, coeff=0.2500, z-variance=45.1531}, {PE = 385.9577 + 0.9324*(RH): t=8, coeff=0.2500, z-variance=58.0953}: t=8
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 8) learned models: {PE = 499.2705 - 2.2926*(AT): t=8, coeff=0.2500, z-variance=2.6942}, {PE = 524.4145 - 1.2881*(V): t=8, coeff=0.2500, z-variance=6.5824}, {PE = -2117.8319 + 2.5384*(AP): t=8, coeff=0.2500, z-variance=23.3874}, {PE = 381.7666 + 0.9894*(RH): t=8, coeff=0.2500, z-variance=31.4063}: t=8
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 11) learned models: {PE = 498.8552 - 2.2884*(AT): t=11, coeff=0.2500, z-variance=1.1923}, {PE = 525.2127 - 1.3199*(V): t=11, coeff=0.2500, z-variance=3.1550}, {PE = -2200.8974 + 2.6213*(AP): t=11, coeff=0.2500, z-variance=10.9504}, {PE = 371.4727 + 1.1248*(RH): t=11, coeff=0.2500, z-variance=13.3920}: t=11
+
+
+
+========== Algorithm "uniform_mixrem" ==========
+Setup result of algorithm "uniform_mixrem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 16) learned models: {PE = 499.1809 - 2.2480*(AT): t=16, coeff=0.2500, z-variance=0.3629}, {PE = 522.1090 - 1.2433*(V): t=16, coeff=0.2500, z-variance=0.6362}, {PE = -2563.5590 + 2.9788*(AP): t=16, coeff=0.2500, z-variance=3.4509}, {PE = 365.1423 + 1.2210*(RH): t=16, coeff=0.2500, z-variance=3.5462}: t=16
+
+
+

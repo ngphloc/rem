@@ -1,0 +1,136 @@
+========== Algorithm "rem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [-0.1165, 4.4220]
+Hudup recall = 1.0000
+MAE.test = 3.6583
+MAERatio.test = 0.0081
+MAEVector.test = [3.6583]
+MSE.test = 20.5678
+R.test = 0.9641
+RMSE.test = 4.5352
+Setup time = 0.0370
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [-0.1316, 4.4341]
+Hudup recall = 1.0000
+MAE.test = 3.6640
+MAERatio.test = 0.0081
+MAEVector.test = [3.6640]
+MSE.test = 20.6789
+R.test = 0.9639
+RMSE.test = 4.5474
+Setup time = 0.1590
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [-0.0727, 4.4645]
+Hudup recall = 1.0000
+MAE.test = 3.6835
+MAERatio.test = 0.0081
+MAEVector.test = [3.6835]
+MSE.test = 20.9371
+R.test = 0.9635
+RMSE.test = 4.5757
+Setup time = 0.5320
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [0.0533, 4.5043]
+Hudup recall = 1.0000
+MAE.test = 3.7071
+MAERatio.test = 0.0082
+MAEVector.test = [3.7071]
+MSE.test = 21.2920
+R.test = 0.9630
+RMSE.test = 4.6143
+Setup time = 0.9820
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [-0.1971, 4.5224]
+Hudup recall = 1.0000
+MAE.test = 3.7198
+MAERatio.test = 0.0082
+MAEVector.test = [3.7198]
+MSE.test = 21.4909
+R.test = 0.9626
+RMSE.test = 4.6358
+Setup time = 1.0350
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [-0.1886, 4.5503]
+Hudup recall = 1.0000
+MAE.test = 3.7451
+MAERatio.test = 0.0083
+MAEVector.test = [3.7451]
+MSE.test = 21.7406
+R.test = 0.9621
+RMSE.test = 4.6627
+Setup time = 3.3410
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [-0.3018, 4.6203]
+Hudup recall = 1.0000
+MAE.test = 3.7937
+MAERatio.test = 0.0084
+MAEVector.test = [3.7937]
+MSE.test = 22.4382
+R.test = 0.9610
+RMSE.test = 4.7369
+Setup time = 46.9560
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [-0.3750, 4.6275]
+Hudup recall = 1.0000
+MAE.test = 3.7897
+MAERatio.test = 0.0084
+MAEVector.test = [3.7897]
+MSE.test = 22.5540
+R.test = 0.9610
+RMSE.test = 4.7491
+Setup time = 2.0870
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [-0.1846, 4.9404]
+Hudup recall = 1.0000
+MAE.test = 4.0506
+MAERatio.test = 0.0089
+MAEVector.test = [4.0506]
+MSE.test = 25.4417
+R.test = 0.9554
+RMSE.test = 5.0440
+Setup time = 4.0140
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [1.0389, 5.5741]
+Hudup recall = 1.0000
+MAE.test = 4.5628
+MAERatio.test = 0.0101
+MAEVector.test = [4.5628]
+MSE.test = 33.1497
+R.test = 0.9437
+RMSE.test = 5.7576
+Setup time = 78.0820
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "rem" - Final result ==========
+
+
+
