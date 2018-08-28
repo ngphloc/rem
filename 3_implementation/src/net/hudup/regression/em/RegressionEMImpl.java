@@ -224,6 +224,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
+		if (currentParameter == null)
+			return null;
 		List<Double> alpha = ((ExchangedParameter)currentParameter).getAlpha();
 		List<double[]> betas = ((ExchangedParameter)currentParameter).getBetas();
 		LargeStatistics data = null;
@@ -259,7 +261,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
 		LargeStatistics stat = (LargeStatistics)currentStatistic;
-		if (stat.isEmpty())
+		if (stat == null || stat.isEmpty())
 			return null;
 		List<double[]> zStatistic = stat.getZData();
 		List<double[]> xStatistic = stat.getXData();

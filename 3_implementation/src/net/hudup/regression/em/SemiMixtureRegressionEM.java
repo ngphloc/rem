@@ -191,6 +191,8 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
+		if (currentParameter == null)
+			return null;
 		@SuppressWarnings("unchecked")
 		List<ExchangedParameter> parameters = (List<ExchangedParameter>)currentParameter;
 		List<LargeStatistics> stats = Util.newList(this.rems.size());
@@ -253,6 +255,8 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
+		if (currentStatistic == null)
+			return null;
 		@SuppressWarnings("unchecked")
 		List<LargeStatistics> stats = (List<LargeStatistics>)currentStatistic;
 		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
@@ -281,19 +285,31 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
 		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
+		List<RegressionEMImpl> rems = Util.newList(this.rems.size());
 		for (int k = 0; k < this.rems.size(); k++) {
 			RegressionEMImpl rem = this.rems.get(k);
 			ExchangedParameter parameter = (ExchangedParameter)rem.initializeParameter();
-			parameters.add(parameter);
+			if (parameter == null) {
+				logger.error("Some regression models are failed in initialization");
+				continue;
+			}
 			
 			rem.setEstimatedParameter(parameter);
 			rem.setCurrentParameter(parameter);
 			rem.setPreviousParameter(null);
 			rem.setStatistics(null);
 			rem.setCurrentIteration(this.getCurrentIteration());
-			
-			if (parameter == null)
-				logger.error("Some regression models are failed in initialization");
+
+			rems.add(rem);
+			parameters.add(parameter);
+		}
+		this.rems = null;
+		if (rems.size() == 0)
+			return null;
+		
+		this.rems = rems;
+		for (RegressionEMImpl rem : this.rems) {
+			rem.getExchangedParameter().setCoeff(1.0 / this.rems.size());
 		}
 		return parameters;
 	}
