@@ -541,6 +541,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
+		if (this.rems == null)
+			return true;
+
 		@SuppressWarnings("unchecked")
 		List<ExchangedParameter> estimatedParameters = (List<ExchangedParameter>)estimatedParameter;
 		@SuppressWarnings("unchecked")
@@ -687,6 +690,9 @@ public class SemiMixtureRegressionEM extends ExponentialEM implements Regression
 	@Override
 	public synchronized Object extractResponse(Object input) {
 		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+			
 		double mean = 0;
 		for (RegressionEMImpl rem : this.rems) {
 			if (rem == null)
