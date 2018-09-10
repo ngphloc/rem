@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import net.hudup.core.Cloneable;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.logistic.DSUtil;
@@ -17,7 +18,7 @@ import net.hudup.core.logistic.MathUtil;
  * @author Loc Nguyen
  * @version 1.0
  */
-public class ExchangedParameter {
+public class ExchangedParameter implements Cloneable {
 
 	
 	/**
@@ -71,8 +72,23 @@ public class ExchangedParameter {
 	}
 
 	
+	/**
+	 * Constructor with specified alpha, betas, coefficient, and Z variance.
+	 * @param alpha specified alpha. It must be not null.
+	 * @param betas specified betas. It must be not null.
+	 * @param coeff specified coefficient.
+	 * @param zVariance specified Z variance.
+	 */
+	public ExchangedParameter(List<Double> alpha, List<double[]> betas, double coeff, double zVariance) {
+		this.alpha = alpha;
+		this.betas = betas;
+		this.coeff = coeff;
+		this.zVariance = zVariance;
+	}
+	
+	
 	@Override
-	public Object clone() throws CloneNotSupportedException {
+	public Object clone() {
 		// TODO Auto-generated method stub
 		ExchangedParameter newParameter = new ExchangedParameter();
 		newParameter.coeff = this.coeff;
@@ -350,7 +366,7 @@ public class ExchangedParameter {
 	 * @param variance specified variance.
 	 * @return value evaluated from the normal probability density function.
 	 */
-	private static double normalPDF(double value, double mean, double variance) {
+	public static double normalPDF(double value, double mean, double variance) {
 		double d = value - mean;
 		if (variance == 0)
 			variance = variance + Double.MIN_VALUE; //Solving the problem of zero variance.
@@ -361,20 +377,23 @@ public class ExchangedParameter {
 	/**
 	 * Calculating the normal condition probabilities of the specified parameters given regressor values (X) and response value Z.
 	 * @param parameterList list of specified parameters.
-	 * @param XList given regressor values (X).
-	 * @param zValue Z value.
+	 * @param xData given regressor values (X).
+	 * @param zData response values (Z).
 	 * @return condition probabilities of the specified parameters given regressor values (X) and response value Z.
 	 */
-	public static List<Double> normalZCondProbs(List<ExchangedParameter> parameterList, List<double[]> XList, double zValue) {
-		if (parameterList == null || XList == null || parameterList.size() == 0 || parameterList.size() != XList.size())
+	public static List<Double> normalZCondProbs(List<ExchangedParameter> parameterList, List<double[]> xData, List<double[]> zData) {
+		if (parameterList == null || xData == null || parameterList.size() == 0 || xData.size() == 0 || zData.size() == 0)
 			return Util.newList();
 		
 		List<Double> condProbs = Util.newList(parameterList.size());
 		List<Double> numerators = Util.newList(parameterList.size());
 		double denominator = 0;
 		for (int i = 0; i < parameterList.size(); i++) {
+			double[] xVector = xData.size() == parameterList.size() ? xData.get(i) : xData.get(0);
+			double zValue = zData.size() == parameterList.size() ? zData.get(i)[1] : zData.get(0)[1];
+			
 			double coeff = parameterList.get(i).coeff;
-			double zMean = parameterList.get(i).mean(XList.get(i));
+			double zMean = parameterList.get(i).mean(xVector);
 			double zVariance = parameterList.get(i).zVariance;
 			
 			double p = normalPDF(zValue, zMean, zVariance);
@@ -398,7 +417,5 @@ public class ExchangedParameter {
 
 	
 }
-
-
 
 

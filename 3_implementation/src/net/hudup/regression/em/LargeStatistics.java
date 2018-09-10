@@ -2,7 +2,9 @@ package net.hudup.regression.em;
 
 import java.util.List;
 
+import net.hudup.core.Cloneable;
 import net.hudup.core.Util;
+import net.hudup.core.logistic.DSUtil;
 
 /**
  * This class represents a data sample also a statistics for learning regression model.
@@ -10,7 +12,7 @@ import net.hudup.core.Util;
  * @author Loc Nguyen
  * @version 1.0
  */
-public class LargeStatistics {
+public class LargeStatistics implements Cloneable {
 	
 	
 	/**
@@ -162,6 +164,16 @@ public class LargeStatistics {
 			zData.clear();
 			zData = null;
 		}
+	}
+
+
+	@Override
+	public Object clone() {
+		// TODO Auto-generated method stub
+		List<double[]> xData = DSUtil.cloneDoubleArrayList(this.xData);
+		List<double[]> zData = DSUtil.cloneDoubleArrayList(this.zData);
+		
+		return new LargeStatistics(xData, zData);
 	}
 	
 	

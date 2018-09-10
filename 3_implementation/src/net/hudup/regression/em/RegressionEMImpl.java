@@ -11,6 +11,7 @@ import static net.hudup.regression.AbstractRegression.solve;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
@@ -63,7 +64,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 */
 	protected List<Object[]> xIndices = Util.newList(); //Object list for parsing mathematical expressions in the most general case.
 	
-	
+	 
 	/**
 	 * Indices for Z data.
 	 */
@@ -104,7 +105,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		// TODO Auto-generated method stub
 		super.unsetup();
 		
-		if (this.data != null && this.data != this.statistics)
+		if (this.data != null)
 			this.data.clear();
 		this.data = null;
 	}
@@ -196,9 +197,27 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (xData.size() == 0 || zData.size() == 0)
 			return false;
 		else {
-			this.statistics = this.data = new LargeStatistics(xData, zData);
+			this.data = new LargeStatistics(xData, zData);
 			return true;
 		}
+	}
+	
+	
+	/**
+	 * Setting internal data.
+	 * @param xIndices specified X indices.
+	 * @param zIndices specified Z indices.
+	 * @param attList specified attribute list.
+	 * @param data specified data.
+	 * @return true if setting successful.
+	 */
+	protected boolean prepareInternalData(List<Object[]> xIndices, List<Object[]> zIndices, AttributeList attList, LargeStatistics data) {
+		clearInternalContent();
+		this.xIndices = xIndices;
+		this.zIndices = zIndices;
+		this.attList = attList;
+		this.data = data;
+		return true;
 	}
 	
 	
@@ -212,7 +231,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		this.zIndices.clear();
 		this.attList = null;
 		
-		if (this.statistics != null && this.statistics != this.data && (this.statistics instanceof LargeStatistics))
+		if (this.statistics != null && (this.statistics instanceof LargeStatistics))
 			((LargeStatistics)this.statistics).clear();
 		this.statistics = null;
 	}
@@ -263,12 +282,12 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		LargeStatistics stat = (LargeStatistics)currentStatistic;
 		if (stat == null || stat.isEmpty())
 			return null;
-		List<double[]> zStatistic = stat.getZData();
 		List<double[]> xStatistic = stat.getXData();
+		List<double[]> zStatistic = stat.getZData();
 		int N = zStatistic.size();
+		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
 		ExchangedParameter currentParameter = (ExchangedParameter)getCurrentParameter();
 		
-		int n = xStatistic.get(0).length; //1, x1, x2,..., x(n-1)
 		List<Double> alpha = calcCoeffsByStatistics(xStatistic, zStatistic);
 		if (alpha == null || alpha.size() == 0) { //If cannot calculate alpha by matrix calculation.
 			if (currentParameter != null)
@@ -314,6 +333,8 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		}
 		
 		ExchangedParameter newParameter = new ExchangedParameter(alpha, betas);
+		if (currentParameter != null)
+			newParameter.setCoeff(currentParameter.getCoeff());
 		if (getConfig().getAsBoolean(R_CALC_VARIANCE_FIELD))
 			newParameter.setZVariance(newParameter.estimateZVariance(stat));
 		else {
@@ -549,53 +570,15 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
-		int N = this.data.getZData().size();
 		int n = this.data.getXData().get(0).length;
+		ExchangedParameter parameter0 = initializeAlphaBetas(n, false);
 		
-		List<Double> alpha0 = DSUtil.initDoubleList(n, 0.0);
-		List<double[]> betas0 = Util.newList(n);
-		for (int j = 0; j < n; j++) {
-			double[] beta0 = new double[2];
-			if (j == 0) {
-				beta0[0] = 1;
-				beta0[1] = 0;
-			}
-			else {
-				beta0[0] = 0;
-				beta0[1] = 0;
-			}
-			betas0.add(beta0);
-		}
-		ExchangedParameter parameter0 = new ExchangedParameter(alpha0, betas0);
-		
-		List<double[]> xStatistic = Util.newList();
-		List<double[]> zStatistic = Util.newList();
-		for (int i = 0; i < N; i++) {
-			double[] zVector = this.data.getZData().get(i);
-			if (!Util.isUsed(zVector[1]))
-				continue;
-			
-			double[] xVector = this.data.getXData().get(i);
-			boolean missing = false;
-			for (int j = 0; j < xVector.length; j++) {
-				if (!Util.isUsed(xVector[j])) {
-					missing = true;
-					break;
-				}
-			}
-			
-			if (!missing) {
-				xStatistic.add(xVector);
-				zStatistic.add(zVector);
-			}
-		}
-		
-		if (xStatistic.size() == 0 || zStatistic.size() == 0)
+		LargeStatistics completeData = getCompleteData(this.data);
+		if (completeData == null)
 			return parameter0;
-		
-		LargeStatistics data = new LargeStatistics(xStatistic, zStatistic);
+			
 		try {
-			ExchangedParameter parameter = (ExchangedParameter) maximization(data);
+			ExchangedParameter parameter = (ExchangedParameter) maximization(completeData);
 			return (parameter != null ? parameter : parameter0); 
 		}
 		catch (Throwable e) {
@@ -645,29 +628,15 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		ExchangedParameter parameter = this.getExchangedParameter(); 
-		if (parameter == null || input == null)
+		if (parameter == null)
 			return null;
 		List<Double> alpha = parameter.getAlpha();
 		if (alpha == null || alpha.size() == 0)
 			return null;
 		
-		Profile profile = null;
-		if (input instanceof Profile)
-			profile = (Profile)input;
-		else
-			profile = createProfile(this.attList, input);
-		if (profile == null)
+		double[] xStatistic = extractRegressors(input);
+		if (xStatistic == null)
 			return null;
-		
-		double[] xStatistic = new double[this.xIndices.size()];
-		xStatistic[0] = 1;
-		for (int j = 1; j < this.xIndices.size(); j++) {
-			double xValue = extractRegressor(profile, j);
-			if (Util.isUsed(xValue))
-				xStatistic[j] = (double)transformRegressor(xValue, false);
-			else
-				xStatistic[j] = Constants.UNUSED;
-		}
 		
 		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
 		if (stat == null)
@@ -684,6 +653,15 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 */
 	public Object executeIntel(Object...input) {
 		return execute(input);
+	}
+	
+	
+	/**
+	 * Getting attribute list.
+	 * @return attribute list.
+	 */
+	public AttributeList getAttributeList() {
+		return this.attList;
 	}
 	
 	
@@ -858,6 +836,34 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 
 
 	/**
+	 * Extract regressors from input object.
+	 * @param input specified input object.
+	 * @return list of values of regressors from input object.
+	 */
+	protected double[] extractRegressors(Object input) {
+		Profile profile = null;
+		if (input instanceof Profile)
+			profile = (Profile)input;
+		else
+			profile = createProfile(this.attList, input);
+		if (profile == null)
+			return null;
+		
+		double[] xStatistic = new double[this.xIndices.size()];
+		xStatistic[0] = 1;
+		for (int j = 1; j < this.xIndices.size(); j++) {
+			double xValue = extractRegressor(profile, j);
+			if (Util.isUsed(xValue))
+				xStatistic[j] = (double)transformRegressor(xValue, false);
+			else
+				xStatistic[j] = Constants.UNUSED;
+		}
+		
+		return xStatistic;
+	}
+	
+	
+	/**
 	 * Extracting name of regressor (X).
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
@@ -1006,4 +1012,69 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	}
 
 
+	/**
+	 * Getting complete data from specified data.
+	 * @param data specified data.
+	 * @return complete data from specified data.
+	 */
+	public static LargeStatistics getCompleteData(LargeStatistics data) {
+		int N = data.getZData().size();
+		List<double[]> xStatistic = Util.newList();
+		List<double[]> zStatistic = Util.newList();
+		for (int i = 0; i < N; i++) {
+			double[] zVector = data.getZData().get(i);
+			if (!Util.isUsed(zVector[1]))
+				continue;
+			
+			double[] xVector = data.getXData().get(i);
+			boolean missing = false;
+			for (int j = 0; j < xVector.length; j++) {
+				if (!Util.isUsed(xVector[j])) {
+					missing = true;
+					break;
+				}
+			}
+			
+			if (!missing) {
+				xStatistic.add(xVector);
+				zStatistic.add(zVector);
+			}
+		}
+		
+		if (xStatistic.size() == 0 || zStatistic.size() == 0)
+			return null;
+		else
+			return new LargeStatistics(xStatistic, zStatistic);
+	}
+	
+
+	/**
+	 * Initializing coefficients alpha and betas.
+	 * @param regressorNumber the number regressors.
+	 * @param random if true, randomization is processed.
+	 * @return coefficients alpha and betas.
+	 */
+	public static ExchangedParameter initializeAlphaBetas(int regressorNumber, boolean random) {
+		Random rnd = new Random();
+		List<Double> alpha0 = Util.newList(regressorNumber);
+		List<double[]> betas0 = Util.newList(regressorNumber);
+		for (int j = 0; j < regressorNumber; j++) {
+			alpha0.add(random ? rnd.nextDouble() : 0.0);
+			
+			double[] beta0 = new double[2];
+			if (j == 0) {
+				beta0[0] = 1;
+				beta0[1] = 0;
+			}
+			else {
+				beta0[0] = random ? rnd.nextDouble() : 0.0;
+				beta0[1] = random ? rnd.nextDouble() : 0.0;
+			}
+			betas0.add(beta0);
+		}
+		
+		return new ExchangedParameter(alpha0, betas0);
+	}
+	
+	
 }
