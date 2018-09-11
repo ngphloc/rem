@@ -1,4 +1,8 @@
 # Sample batch script
+# https://archive.ics.uci.edu/ml/datasets/3D+Road+Network+%28North+Jutland%2C+Denmark%29
+# Number of records (original): 434874
+# Number of records (for this test): 10003
+# Number of records (for this test, training set): 5001 = 50% * 10003
 
 algorithms=rem, default_mixrem, semi_mixrem, prior_rem
 

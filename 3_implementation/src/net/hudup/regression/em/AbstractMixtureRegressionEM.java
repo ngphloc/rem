@@ -4,7 +4,6 @@ import static net.hudup.regression.AbstractRegression.extractNumber;
 import static net.hudup.regression.AbstractRegression.splitIndices;
 import static net.hudup.regression.em.RegressionEMImpl.R_CALC_VARIANCE_FIELD;
 
-import java.util.Arrays;
 import java.util.List;
 
 import net.hudup.core.Util;
@@ -180,51 +179,16 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 		for (int k = 0; k < this.rems.size(); k++) {
 			RegressionEMImpl rem = this.rems.get(k);
 			ExchangedParameter parameter = parameters.get(k);
+//			if (rem.terminatedCondition(rem.getEstimatedParameter(), rem.getCurrentParameter(), rem.getPreviousParameter(), info)
+//					&& rem.getLargeStatistics() != null)
+//				continue;
 				
 			LargeStatistics stat = (LargeStatistics)rem.expectation(parameter);
 			rem.setStatistics(stat);
 			stats.add(stat);
-		}
-		
-		//Adjusting large statistics.
-		int N = stats.get(0).getZData().size(); //Suppose all models have the same data.
-		int n = stats.get(0).getXData().get(0).length;  //Suppose all models have the same data.
-		List<double[]> xData = Util.newList(N);
-		List<double[]> zData = Util.newList(N);
-		for (int i = 0; i < N; i++) {
-			double[] xVector = new double[n];
-			Arrays.fill(xVector, 0.0);
-			xVector[0] = 1;
-			xData.add(xVector);
 			
-			double[] zVector = new double[2];
-			zVector[0] = 1;
-			zVector[1] = 0;
-			zData.add(zVector);
-		}
-		for (int k = 0; k < this.rems.size(); k++) {
-			double coeff = parameters.get(k).getCoeff();
-			LargeStatistics stat = stats.get(k);
-			
-			for (int i = 0; i < N; i++) {
-				double[] xVector = xData.get(i);
-				for (int j = 1; j < n; j++) {
-					double xValue = stat.getXData().get(i)[j];
-					xVector[j] += coeff * xValue; // This assignment is not totally exact. In next version, inverse regression model is also associated mixture model. 
-				}
-				
-				double[] zVector = zData.get(i);
-				double zValue = stat.getZData().get(i)[1];
-				zVector[1] += coeff * zValue;
-			}
-		}
-
-		//All regression models have the same large statistics.
-		stats.clear();
-		LargeStatistics stat = new LargeStatistics(xData, zData);
-		for (RegressionEMImpl rem : this.rems) {
-			rem.setStatistics(stat);
-			stats.add(stat);
+//			if (stat == null)
+//				logger.error("Some regression models are failed in expectation");
 		}
 		
 		return stats;
@@ -245,10 +209,16 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 		for (int k = 0; k < this.rems.size(); k++) {
 			RegressionEMImpl rem = this.rems.get(k);
 			LargeStatistics stat = stats.get(k);
+//			if (rem.terminatedCondition(rem.getEstimatedParameter(), rem.getCurrentParameter(), rem.getPreviousParameter(), info)
+//					&& rem.getLargeStatistics() != null)
+//				continue;
 
 			ExchangedParameter parameter = (ExchangedParameter)rem.maximization(stat);
 			rem.setEstimatedParameter(parameter);
 			parameters.add(parameter);
+			
+//			if (parameter == null)
+//				logger.error("Some regression models are failed in expectation");
 		}
 		
 		return parameters;

@@ -1,11 +1,14 @@
 package net.hudup.regression.em;
 
+import static net.hudup.regression.AbstractRegression.extractNumber;
 import static net.hudup.regression.AbstractRegression.notSatisfy;
 import static net.hudup.regression.AbstractRegression.splitIndices;
+import static net.hudup.regression.em.RegressionEMImpl.R_CALC_VARIANCE_FIELD;
 
 import java.util.Arrays;
 import java.util.List;
 
+import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
@@ -67,6 +70,19 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 	protected final static boolean DECOMPOSE_DEFAULT = true;
 
 	
+	/**
+	 * Field name of logistic mode.
+	 */
+	protected final static String LOGISTIC_MODE_FIELD = "srem_logistic_mode";
+	
+	
+	/**
+	 * Default logistic mode.
+	 */
+	protected final static boolean LOGISTIC_MODE_DEFAULT = false;
+
+	
+	@Override
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
 		clearInternalContent();
 		DataConfig thisConfig = this.getConfig();
@@ -113,31 +129,23 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 	}
 
 	
+	@Override
+	protected RegressionEMImpl createRegressionEM() {
+		// TODO Auto-generated method stub
+		RegressionEMImpl rem = super.createRegressionEM();
+		rem.getConfig().put(R_CALC_VARIANCE_FIELD, true);
+		return rem;
+	}
+
+
 	/**
 	 * Expectation method of this class does not change internal data.
 	 */
 	@Override
 	protected Object expectation(Object currentParameter, Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		if (currentParameter == null)
-			return null;
 		@SuppressWarnings("unchecked")
-		List<ExchangedParameter> parameters = (List<ExchangedParameter>)currentParameter;
-		List<LargeStatistics> stats = Util.newList(this.rems.size());
-		for (int k = 0; k < this.rems.size(); k++) {
-			RegressionEMImpl rem = this.rems.get(k);
-			ExchangedParameter parameter = parameters.get(k);
-//			if (rem.terminatedCondition(rem.getEstimatedParameter(), rem.getCurrentParameter(), rem.getPreviousParameter(), info)
-//				&& rem.getLargeStatistics() != null && rem.getLargeStatistics() != rem.getData())
-//				continue;
-				
-			LargeStatistics stat = (LargeStatistics)rem.expectation(parameter);
-			rem.setStatistics(stat);
-			stats.add(stat);
-			
-			if (stat == null)
-				logger.error("Some regression models are failed in expectation");
-		}
+		List<LargeStatistics> stats = (List<LargeStatistics>)super.expectation(currentParameter, info);
 		
 		//Supporting mutual mode. If there are two components, it is dual mode.
 		//Mutual mode is useful in some cases.
@@ -178,17 +186,34 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 
 	
 	@Override
+	protected Object initializeParameter() {
+		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)super.initializeParameter();
+		
+		for (ExchangedParameter parameter : parameters) {
+			parameter.setCoeff(Constants.UNUSED);
+			parameter.setZVariance(Constants.UNUSED);
+		}
+		return parameters;
+	}
+
+
+	@Override
 	protected boolean adjustMixtureParameters() throws Exception {
 		if (this.rems == null || this.rems.size() == 0)
 			return false;
 		
 		for (RegressionEMImpl rem : this.rems) {
 			ExchangedParameter parameter = rem.getExchangedParameter();
-			parameter.setCoeff(1.0 / (double)this.rems.size());
 			double zVariance = parameter.estimateZVariance(rem.getLargeStatistics());
 			parameter.setZVariance(zVariance);
+
+			if (!getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
+				parameter.setCoeff(1.0 / (double)this.rems.size());
 		}
-		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) //In uniform mode, all coefficients are 1/K
+		//In uniform mode, all coefficients are 1/K. In logistic mode, coefficients are not used. 
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD) || getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
 			return true;
 		
 		List<ExchangedParameter> parameterList = Util.newList(this.rems.size());
@@ -241,21 +266,25 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 	protected boolean adjustMixtureParameters2() throws Exception {
 		if (this.rems == null || this.rems.size() == 0)
 			return false;
-		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
 		
 		for (RegressionEMImpl rem : this.rems) {
 			ExchangedParameter parameter = rem.getExchangedParameter();
-			parameter.setCoeff(1.0 / (double)this.rems.size());
 			double zVariance = parameter.estimateZVariance(rem.getLargeStatistics());
 			parameter.setZVariance(zVariance);
+
+			//In logistic mode, coefficients are not used. 
+			if (!getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
+				parameter.setCoeff(1.0 / (double)this.rems.size());
 		}
-		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD)) //In uniform mode, all coefficients are 1/K
+		//In uniform mode, all coefficients are 1/K. In logistic mode, coefficients are not used. 
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD) || getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
 			return true;
 		
 		boolean terminated = true;
 		int t = 0;
 		int maxIteration = getConfig().getAsInt(EM_MAX_ITERATION_FIELD);
 		maxIteration = (maxIteration <= 0) ? EM_MAX_ITERATION : maxIteration;
+		double threshold = getConfig().getAsReal(EM_EPSILON_FIELD);
 		do {
 			terminated = true;
 			t++;
@@ -334,6 +363,42 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 
 	
 	@Override
+	public synchronized Object execute(Object input) {
+		// TODO Auto-generated method stub
+		if (getConfig().getAsBoolean(LOGISTIC_MODE_FIELD)) { // Logistic mode does not use probability
+			List<Double> zValues = Util.newList(this.rems.size());
+			List<Double> expProbs = Util.newList(this.rems.size());
+			double expProbsSum = 0;
+			for (int k = 0; k < this.rems.size(); k++) {
+				RegressionEMImpl rem = this.rems.get(k);
+				double zValue = extractNumber(rem.execute(input));
+				if (!Util.isUsed(zValue))
+					return null;
+				
+				zValues.add(zValue);
+				
+				ExchangedParameter parameter = rem.getExchangedParameter();
+				double prob = ExchangedParameter.normalPDF(zValue, 
+						parameter.mean(rem.extractRegressors(input)),
+						parameter.getZVariance());
+				double weight = Math.exp(prob);
+				expProbs.add(weight);
+				expProbsSum += weight;
+			}
+
+			double result = 0;
+			for (int k = 0; k < this.rems.size(); k++) {
+				result += (expProbs.get(k) / expProbsSum) * zValues.get(k); 
+			}
+			
+			return result;
+		}
+		else
+			return super.execute(input);
+	}
+
+
+	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
@@ -367,6 +432,7 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
 		config.put(DECOMPOSE_FIELD, DECOMPOSE_DEFAULT);
+		config.put(LOGISTIC_MODE_FIELD, LOGISTIC_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

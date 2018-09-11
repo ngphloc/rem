@@ -3,6 +3,7 @@ package net.hudup.regression.em;
 import static net.hudup.regression.AbstractRegression.defaultExtractVariable;
 import static net.hudup.regression.em.RegressionEMImpl.R_CALC_VARIANCE_FIELD;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -95,7 +96,7 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 		this.data = tempEM.data; tempEM.data = null;
 		
 		int K = getConfig().getAsInt(COMP_NUMBER_FIELD);
-		K = K <= 0 ? 2 : K; //Improve here, getting exact the number of PRMs 
+		K = K <= 0 ? 3 : K; //Improve here, getting exact the number of PRMs 
 		this.rems = Util.newList(K);
 		for (int k = 0; k < K; k++) {
 			RegressionEMImpl rem = createRegressionEM();
@@ -127,45 +128,55 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 
 
 	@Override
-	protected Object initializeParameter() {
+	protected Object expectation(Object currentParameter, Object... info) throws Exception {
 		// TODO Auto-generated method stub
-		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
-		LargeStatistics completeData = RegressionEMImpl.getCompleteData(this.data);
-		int recordNumber = (completeData != null && completeData.getZData().size() >= this.rems.size())? 
-				completeData.getZData().size() / this.rems.size() :
-				0;
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)currentParameter;
+		@SuppressWarnings("unchecked")
+		List<LargeStatistics> stats = (List<LargeStatistics>)super.expectation(currentParameter, info);
 		
-		for (int k = 0; k < this.rems.size(); k++) {
-			RegressionEMImpl rem = this.rems.get(k);
-			ExchangedParameter parameter = null;
-			LargeStatistics compSample = null;
-			if (recordNumber > 0) {
-				compSample = randomSampling(completeData, recordNumber, false);
-				try {
-					parameter = (ExchangedParameter) rem.maximization(compSample);
-				}
-				catch (Throwable e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					parameter = null;
-				}
-			}
-			if (parameter == null) {
-				parameter = RegressionEMImpl.initializeAlphaBetas(this.data.getXData().get(0).length, true);
-				parameter.setZVariance(1.0);
-			}
-			parameter.setCoeff(1.0 / (double)this.rems.size());
+		//Adjusting large statistics.
+		int N = stats.get(0).getZData().size(); //Suppose all models have the same data.
+		int n = stats.get(0).getXData().get(0).length;  //Suppose all models have the same data.
+		List<double[]> xData = Util.newList(N);
+		List<double[]> zData = Util.newList(N);
+		for (int i = 0; i < N; i++) {
+			double[] xVector = new double[n];
+			Arrays.fill(xVector, 0.0);
+			xVector[0] = 1;
+			xData.add(xVector);
 			
-			rem.setEstimatedParameter(parameter);
-			rem.setCurrentParameter(parameter);
-			rem.setPreviousParameter(null);
-			rem.setStatistics(null);
-			rem.setCurrentIteration(this.getCurrentIteration());
+			double[] zVector = new double[2];
+			zVector[0] = 1;
+			zVector[1] = 0;
+			zData.add(zVector);
+		}
+		for (int k = 0; k < this.rems.size(); k++) {
+			double coeff = parameters.get(k).getCoeff();
+			LargeStatistics stat = stats.get(k);
+			
+			for (int i = 0; i < N; i++) {
+				double[] xVector = xData.get(i);
+				for (int j = 1; j < n; j++) {
+					double xValue = stat.getXData().get(i)[j];
+					xVector[j] += coeff * xValue; // This assignment is not totally exact. In next version, inverse regression model is also associated mixture model. 
+				}
+				
+				double[] zVector = zData.get(i);
+				double zValue = stat.getZData().get(i)[1];
+				zVector[1] += coeff * zValue;
+			}
+		}
 
-			parameters.add(parameter);
+		//All regression models have the same large statistics.
+		stats.clear();
+		LargeStatistics stat = new LargeStatistics(xData, zData);
+		for (RegressionEMImpl rem : this.rems) {
+			rem.setStatistics(stat);
+			stats.add(stat);
 		}
 		
-		return parameters;
+		return stats;
 	}
 
 
@@ -208,6 +219,49 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 
 			ExchangedParameter parameter = (ExchangedParameter)rem.maximization(stat, condProbs.get(k));
 			rem.setEstimatedParameter(parameter);
+			parameters.add(parameter);
+		}
+		
+		return parameters;
+	}
+
+
+	@Override
+	protected Object initializeParameter() {
+		// TODO Auto-generated method stub
+		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
+		LargeStatistics completeData = RegressionEMImpl.getCompleteData(this.data);
+		int recordNumber = (completeData != null && completeData.getZData().size() >= this.rems.size())? 
+				completeData.getZData().size() / this.rems.size() :
+				0;
+		
+		for (int k = 0; k < this.rems.size(); k++) {
+			RegressionEMImpl rem = this.rems.get(k);
+			ExchangedParameter parameter = null;
+			LargeStatistics compSample = null;
+			if (recordNumber > 0) {
+				compSample = randomSampling(completeData, recordNumber, false);
+				try {
+					parameter = (ExchangedParameter) rem.maximization(compSample);
+				}
+				catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					parameter = null;
+				}
+			}
+			if (parameter == null) {
+				parameter = RegressionEMImpl.initializeAlphaBetas(this.data.getXData().get(0).length, true);
+				parameter.setZVariance(1.0);
+			}
+			parameter.setCoeff(1.0 / (double)this.rems.size());
+			
+			rem.setEstimatedParameter(parameter);
+			rem.setCurrentParameter(parameter);
+			rem.setPreviousParameter(null);
+			rem.setStatistics(null);
+			rem.setCurrentIteration(this.getCurrentIteration());
+
 			parameters.add(parameter);
 		}
 		

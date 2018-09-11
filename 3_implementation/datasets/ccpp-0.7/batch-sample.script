@@ -1,6 +1,6 @@
 # Sample batch script
 
-algorithms=rem, prior_rem, semi_mixrem
+algorithms=rem, default_mixrem, semi_mixrem, prior_rem
 
 trainingsets=datasets/ccpp-0.7/hdp_sample.base#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.1.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.2.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.3.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.4.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.5.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.6.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.7.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.8.miss#snapshot_parser#file, datasets/ccpp-0.7/hdp_sample.base.0.9.miss#snapshot_parser#file
 
