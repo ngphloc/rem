@@ -3,6 +3,7 @@ package net.hudup.regression.em;
 import static net.hudup.regression.AbstractRegression.notSatisfy;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -277,37 +278,77 @@ public class ExchangedParameter implements Cloneable {
 			return false;
 		//It is possible not to test beta coefficients
 		
-//		double coeff1 = previousParameter != null ? previousParameter.coeff : Constants.UNUSED;
-//		double coeff2 = currentParameter.coeff;
-//		double coeff3 = this.coeff;
-//		if (Util.isUsed(coeff3) && Util.isUsed(coeff2)) {
-//			if (notSatisfy(coeff3, coeff2, threshold)) {
-//				if (!Util.isUsed(coeff1))
-//					return false;
-//				else if (notSatisfy(coeff3, coeff1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-//					return false;
-//			}
-//		}
-//		else if (!Util.isUsed(coeff3) || Util.isUsed(coeff2))
-//			return false;
-//		
-//		double zVariance1 = previousParameter != null ? previousParameter.zVariance : Constants.UNUSED;
-//		double zVariance2 = currentParameter.zVariance;
-//		double zVariance3 = this.zVariance;
-//		if (Util.isUsed(zVariance3) && Util.isUsed(zVariance2)) {
-//			if (notSatisfy(zVariance3, zVariance2, threshold)) {
-//				if (!Util.isUsed(zVariance1))
-//					return false;
-//				else if (notSatisfy(zVariance3, zVariance1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
-//					return false;
-//			}
-//		}
-//		else if (!Util.isUsed(zVariance3) || Util.isUsed(zVariance2))
-//			return false;
+		double coeff1 = previousParameter != null ? previousParameter.coeff : Constants.UNUSED;
+		double coeff2 = currentParameter.coeff;
+		double coeff3 = this.coeff;
+		if (Util.isUsed(coeff3) && Util.isUsed(coeff2)) {
+			if (notSatisfy(coeff3, coeff2, threshold)) {
+				if (!Util.isUsed(coeff1))
+					return false;
+				else if (notSatisfy(coeff3, coeff1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+					return false;
+			}
+		}
+		else if (Util.isUsed(coeff3) || Util.isUsed(coeff2))
+			return false;
+		
+		double zVariance1 = previousParameter != null ? previousParameter.zVariance : Constants.UNUSED;
+		double zVariance2 = currentParameter.zVariance;
+		double zVariance3 = this.zVariance;
+		if (Util.isUsed(zVariance3) && Util.isUsed(zVariance2)) {
+			if (notSatisfy(zVariance3, zVariance2, threshold)) {
+				if (!Util.isUsed(zVariance1))
+					return false;
+				else if (notSatisfy(zVariance3, zVariance1, threshold)) //previous parameter is used to avoid skip-steps in optimization for too acute function.
+					return false;
+			}
+		}
+		else if (Util.isUsed(zVariance3) || Util.isUsed(zVariance2))
+			return false;
 
 		return true;
 	}
 
+	
+	/**
+	 * Testing whether the alpha coefficient of other parameter equals the alpha coefficient of other parameter.
+	 * @param other other parameter.
+	 * @return true the alpha coefficient of other parameter equals the alpha coefficient of other parameter.
+	 */
+	public boolean alphaEquals(ExchangedParameter other) {
+		if (other == null)
+			return false;
+		if (this.alpha == null && other.alpha == null)
+			return true;
+		else if (this.alpha == null || other.alpha == null)
+			return false;
+		else if (this.alpha.size() != other.alpha.size())
+			return false;
+		 
+		for (int j = 0; j < this.alpha.size(); j++) {
+			if (this.alpha.get(j) != other.alpha.get(j))
+				return false;
+ 		}
+		
+		return true;
+	}
+	
+	
+	/**
+	 * Testing whether all alpha coefficients are zero.
+	 * @return true if all alpha coefficients are zero.
+	 */
+	public boolean isNullAlpha() {
+		if (this.alpha == null || this.alpha.size() == 0)
+			return true;
+		
+		for (int j = 0; j < this.alpha.size(); j++) {
+			if (this.alpha.get(j) != 0)
+				return false;
+ 		}
+		return true;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -376,6 +417,7 @@ public class ExchangedParameter implements Cloneable {
 	
 	/**
 	 * Calculating the normal condition probabilities of the specified parameters given regressor values (X) and response value Z.
+	 * Inherited class can re-define this method. In current version, only normal probability density function is used.
 	 * @param parameterList list of specified parameters.
 	 * @param xData given regressor values (X).
 	 * @param zData response values (Z).
@@ -415,6 +457,53 @@ public class ExchangedParameter implements Cloneable {
 		return condProbs;
 	}
 
+	
+	/**
+	 * Calculating the normal probabilities of the specified parameters given regressor values (X) and response value Z.
+	 * @param parameterList list of specified parameters.
+	 * @param xData given regressor values (X).
+	 * @param zData response values (Z).
+	 * @param vicinity this parameter is depreciated.
+	 * @return condition probabilities of the specified parameters given regressor values (X) and response value Z.
+	 */
+	public static List<Double> normalZPDF(List<ExchangedParameter> parameterList, List<double[]> xData, List<double[]> zData, double vicinity) {
+		if (parameterList == null || xData == null || parameterList.size() == 0 || xData.size() == 0 || zData.size() == 0)
+			return Util.newList();
+		
+		List<Double> condProbs = Util.newList(parameterList.size());
+		for (int i = 0; i < parameterList.size(); i++) {
+			double[] xVector = xData.size() == parameterList.size() ? xData.get(i) : xData.get(0);
+			double zValue = zData.size() == parameterList.size() ? zData.get(i)[1] : zData.get(0)[1];
+			
+			double zMean = parameterList.get(i).mean(xVector);
+			double zVariance = parameterList.get(i).zVariance;
+			
+//			double p1 = normalPDF(zValue - vicinity, zMean, zVariance);
+//			double p2 = normalPDF(zValue + vicinity, zMean, zVariance);
+//			condProbs.add(p2 - p1);
+			
+			double p = normalPDF(zValue, zMean, zVariance);
+			condProbs.add(p);
+		}
+		
+		return condProbs;
+	}
+
+
+	/**
+	 * Cloning the specified collection of parameters.
+	 * @param collection specified collection of parameters.
+	 * @return cloned list of parameters.
+	 */
+	public static List<ExchangedParameter> clone(Collection<ExchangedParameter> collection) {
+		List<ExchangedParameter> list = Util.newList(collection.size());
+		for (ExchangedParameter parameter : collection) {
+			list.add((ExchangedParameter)parameter.clone());
+		}
+		
+		return list;
+	}
+	
 	
 }
 

@@ -28,6 +28,14 @@ public class LargeStatistics implements Cloneable {
 	
 	
 	/**
+	 * Empty constructor.
+	 */
+	public LargeStatistics() {
+		
+	}
+	
+	
+	/**
 	 * Constructor with specified regressor data and response data. 
 	 * @param xData specified regressor data
 	 * @param zData specified response data.
@@ -149,6 +157,15 @@ public class LargeStatistics implements Cloneable {
 			return true;
 		else
 			return false;
+	}
+	
+	
+	/**
+	 * Getting the size of this large statistics.
+	 * @return the size of this large statistics.
+	 */
+	public int size() {
+		return zData.size();
 	}
 	
 	

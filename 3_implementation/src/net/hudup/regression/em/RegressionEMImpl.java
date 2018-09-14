@@ -94,20 +94,9 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (prepareInternalData(this.sample))
 			resulted = super.learn();
 		if (resulted == null)
-			clearInternalContent();
+			clearInternalData();
 
 		return resulted;
-	}
-
-
-	@Override
-	public synchronized void unsetup() {
-		// TODO Auto-generated method stub
-		super.unsetup();
-		
-		if (this.data != null)
-			this.data.clear();
-		this.data = null;
 	}
 
 
@@ -118,7 +107,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * @throws Exception if any error raises.
 	 */
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
-		clearInternalContent();
+		clearInternalData();
 		
 		this.attList = getSampleAttributeList(inputSample);
 		if (this.attList.size() < 2)
@@ -212,7 +201,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	 * @return true if setting successful.
 	 */
 	protected boolean prepareInternalData(List<Object[]> xIndices, List<Object[]> zIndices, AttributeList attList, LargeStatistics data) {
-		clearInternalContent();
+		clearInternalData();
 		this.xIndices = xIndices;
 		this.zIndices = zIndices;
 		this.attList = attList;
@@ -224,7 +213,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 	/**
 	 * Clear all internal data.
 	 */
-	protected void clearInternalContent() {
+	protected void clearInternalData() {
 		this.currentIteration = 0;
 		this.currentParameter = this.estimatedParameter = null;
 		this.xIndices.clear();
@@ -234,6 +223,10 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 		if (this.statistics != null && (this.statistics instanceof LargeStatistics))
 			((LargeStatistics)this.statistics).clear();
 		this.statistics = null;
+		
+		if (this.data != null)
+			this.data.clear();
+		this.data = null;
 	}
 	
 	
@@ -1006,7 +999,7 @@ public class RegressionEMImpl extends ExponentialEM implements RegressionEM, Dup
 			}
 			profiles.add(profile);
 		}
-		em.clearInternalContent();
+		em.clearInternalData();
 
 		return new MemFetcher<>(profiles);
 	}

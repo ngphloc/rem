@@ -42,7 +42,19 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 	/**
 	 * Default number of cluster.
 	 */
-	public final static int COMP_NUMBER_DEFAULT = 0;
+	public final static int COMP_NUMBER_DEFAULT = 1;
+
+	
+	/**
+	 * Name of previous parameters field.
+	 */
+	public final static String PREV_PARAMS_FIELD = "previous_parameters";
+
+	
+	/**
+	 * Vicinity for calculating probability from probability density function.
+	 */
+	public final static double VICINITY = 0.001;
 
 	
 	/**
@@ -71,32 +83,48 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 
 	
 	@Override
-	public synchronized void unsetup() {
+	protected boolean prepareInternalData(AbstractMixtureRegressionEM other) throws Exception {
 		// TODO Auto-generated method stub
-		super.unsetup();
-		
-		if (this.data != null)
-			this.data.clear();
-		this.data = null;
+		if (other instanceof DefaultMixtureRegressionEM) {
+			DefaultMixtureRegressionEM mixREM = (DefaultMixtureRegressionEM)other;
+			return prepareInternalData(mixREM.xIndices, mixREM.zIndices, mixREM.attList, mixREM.data);
+		}
+		else
+			return super.prepareInternalData(other);
 	}
 
 
 	@Override
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
-		clearInternalContent();
+		clearInternalData();
 
 		RegressionEMImpl tempEM = new RegressionEMImpl();
 		tempEM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
 		if (!tempEM.prepareInternalData(inputSample))
 			return false;
+		else
+			return prepareInternalData(tempEM.xIndices, tempEM.zIndices, tempEM.attList, tempEM.data);
+	}
+
+	
+	/**
+	 * Setting internal data.
+	 * @param xIndices specified X indices.
+	 * @param zIndices specified Z indices.
+	 * @param attList specified attribute list.
+	 * @param data specified data.
+	 * @return true if setting successful.
+	 */
+	private boolean prepareInternalData(List<Object[]> xIndices, List<Object[]> zIndices, AttributeList attList, LargeStatistics data) {
+		clearInternalData();
 		
-		this.xIndices = tempEM.xIndices;
-		this.zIndices = tempEM.zIndices;
-		this.attList = tempEM.attList;
-		this.data = tempEM.data; tempEM.data = null;
-		
+		this.xIndices = xIndices;
+		this.zIndices = zIndices;
+		this.attList = attList;
+		this.data = data;
+
 		int K = getConfig().getAsInt(COMP_NUMBER_FIELD);
-		K = K <= 0 ? 3 : K; //Improve here, getting exact the number of PRMs 
+		K = K <= 0 ? 1 : K;
 		this.rems = Util.newList(K);
 		for (int k = 0; k < K; k++) {
 			RegressionEMImpl rem = createRegressionEM();
@@ -106,15 +134,18 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 		
 		return true;
 	}
-
+	
 	
 	@Override
-	protected void clearInternalContent() {
+	protected void clearInternalData() {
 		// TODO Auto-generated method stub
-		super.clearInternalContent();
+		super.clearInternalData();
 		this.xIndices.clear();
 		this.zIndices.clear();
 		this.attList = null;
+		if (this.data != null)
+			this.data.clear();
+		this.data = null;
 	}
 
 
@@ -122,6 +153,9 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 	protected RegressionEMImpl createRegressionEM() {
 		// TODO Auto-generated method stub
 		RegressionEMExt rem = new RegressionEMExt();
+		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
+		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
+		rem.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
 		rem.getConfig().put(R_CALC_VARIANCE_FIELD, true);
 		return rem;
 	}
@@ -156,18 +190,24 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 			LargeStatistics stat = stats.get(k);
 			
 			for (int i = 0; i < N; i++) {
+				double[] zVector = zData.get(i);
+				double zValue = stat.getZData().get(i)[1];
+				if (!Util.isUsed(this.data.getZData().get(i)[1]))
+					zVector[1] += coeff * zValue;
+				else
+					zVector[1] = zValue; 
+
 				double[] xVector = xData.get(i);
 				for (int j = 1; j < n; j++) {
 					double xValue = stat.getXData().get(i)[j];
-					xVector[j] += coeff * xValue; // This assignment is not totally exact. In next version, inverse regression model is also associated mixture model. 
+					if (!Util.isUsed(this.data.getXData().get(i)[j]))
+						xVector[j] += coeff * xValue; // This assignment is right with assumption of same P(Y=k).
+					else
+						xVector[j] = xValue;
 				}
-				
-				double[] zVector = zData.get(i);
-				double zValue = stat.getZData().get(i)[1];
-				zVector[1] += coeff * zValue;
 			}
 		}
-
+		
 		//All regression models have the same large statistics.
 		stats.clear();
 		LargeStatistics stat = new LargeStatistics(xData, zData);
@@ -179,7 +219,7 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 		return stats;
 	}
 
-
+	
 	@Override
 	protected Object maximization(Object currentStatistic, Object... info) throws Exception {
 		// TODO Auto-generated method stub
@@ -207,7 +247,7 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 				}
 				
 				@SuppressWarnings("unchecked")
-				List<Double> probs = condZProbs((List<ExchangedParameter>)this.getCurrentParameter(),
+				List<Double> probs = ExchangedParameter.normalZCondProbs((List<ExchangedParameter>)this.getCurrentParameter(),
 						xData, zData);
 				kCondProbs.add(probs.get(k));
 			}
@@ -226,34 +266,68 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
+		List<ExchangedParameter> prevParameters = Util.newList();
+		if (getConfig().containsKey(PREV_PARAMS_FIELD))
+			prevParameters = (List<ExchangedParameter>)getConfig().get(PREV_PARAMS_FIELD);
+		
 		List<ExchangedParameter> parameters = Util.newList(this.rems.size());
 		LargeStatistics completeData = RegressionEMImpl.getCompleteData(this.data);
-		int recordNumber = (completeData != null && completeData.getZData().size() >= this.rems.size())? 
-				completeData.getZData().size() / this.rems.size() :
-				0;
-		
+		int recordNumber = 0;
+		if ((completeData != null) && (completeData.getZData().size() >= this.rems.size() - prevParameters.size()))
+			recordNumber = completeData.getZData().size() / (this.rems.size() - prevParameters.size());
+				
 		for (int k = 0; k < this.rems.size(); k++) {
 			RegressionEMImpl rem = this.rems.get(k);
 			ExchangedParameter parameter = null;
-			LargeStatistics compSample = null;
-			if (recordNumber > 0) {
-				compSample = randomSampling(completeData, recordNumber, false);
-				try {
-					parameter = (ExchangedParameter) rem.maximization(compSample);
+			
+			if (k < prevParameters.size()) {
+				parameter = prevParameters.get(k);
+			}
+			else {
+				if (recordNumber > 0) {
+					try {
+						LargeStatistics compSample = randomSampling(completeData, recordNumber, false);
+						parameter = (ExchangedParameter) rem.maximization(compSample);
+						compSample.clear();
+						if (parameter != null) {
+							for (int j = 0; j < k; j++) {
+								if (parameter.alphaEquals(this.rems.get(j).getExchangedParameter())) {
+									parameter = null;
+									break;
+								}
+							}
+						}
+					}
+					catch (Throwable e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						parameter = null;
+					}
 				}
-				catch (Throwable e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				else {
 					parameter = null;
+ 				}
+				
+				if (parameter == null) {
+					while (true) { // This loop avoids same alpha.
+						parameter = RegressionEMImpl.initializeAlphaBetas(this.data.getXData().get(0).length, true);
+						boolean breakhere = true;
+						for (int j = 0; j < k; j++) {
+							if (parameter.alphaEquals(this.rems.get(j).getExchangedParameter())) {
+								breakhere = false;
+								break;
+							}
+						}
+						if (breakhere) break;
+					}
+					parameter.setZVariance(1.0);
 				}
 			}
-			if (parameter == null) {
-				parameter = RegressionEMImpl.initializeAlphaBetas(this.data.getXData().get(0).length, true);
-				parameter.setZVariance(1.0);
-			}
+			
 			parameter.setCoeff(1.0 / (double)this.rems.size());
 			
 			rem.setEstimatedParameter(parameter);
@@ -269,6 +343,127 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 	}
 
 
+	/**
+	 * Getting the fitness criterion of this model given large statistics.
+	 * @param stat given large statistics.
+	 * @return the fitness criterion of this model given large statistics.
+	 */
+	public synchronized double getFitness(LargeStatistics stat) {
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)getParameter();
+		if (stat == null || parameters == null || parameters.size() == 0)
+			return 0;
+		
+		int N = stat.getZData().size();
+		if (N == 0) return 0;
+		double fitness = 0.0;
+		for (int i = 0; i < N; i++) {
+			double[] xVector = stat.getXData().get(i);
+			double[] zVector = stat.getZData().get(i);
+			
+			int K = this.rems.size();
+			List<double[]> xData = Util.newList(K);
+			List<double[]> zData = Util.newList(K);
+			for (int k = 0; k < K; k++) {
+				xData.add(xVector);
+				zData.add(zVector);
+			}
+			
+			List<Double> pdfValues = ExchangedParameter.normalZPDF(parameters, xData, zData, VICINITY);
+			
+			double maxPDF = -1;
+			for (int k = 0; k < K; k++) {
+				if (maxPDF < pdfValues.get(k)) 
+					maxPDF = pdfValues.get(k);
+			}
+			fitness += maxPDF;
+		}
+		
+		return fitness / (double)N;
+	}
+	
+	
+	/**
+	 * Getting the fitness criterion of this model.
+	 * @return the fitness criterion of this model.
+	 */
+	public synchronized double getFitness() {
+		if (this.rems == null || this.rems.size() == 0)
+			return 0;
+		else
+			return getFitness(this.rems.get(0).getLargeStatistics()); // Because all REMs have the same large statistics.
+	}
+
+	
+	/**
+	 * Extracting clusters.
+	 * @return extracted clusters.
+	 */
+	public synchronized List<LargeStatistics> extractClusters() {
+		if (this.rems == null || this.rems.size() == 0 || this.data == null || this.data.size() == 0)
+			return Util.newList();
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)getParameter();
+		if (parameters == null || parameters.size() == 0)
+			return Util.newList();
+		
+		int K = this.rems.size();
+		List<LargeStatistics> clusters = Util.newList(K);
+		for (int k = 0; k < K; k++)
+			clusters.add(new LargeStatistics());
+
+		// Because all REMs have the same large statistics.
+		LargeStatistics stat = this.rems.get(0).getLargeStatistics();
+		int N = stat.size();
+		for (int i = 0; i < N; i++) {
+			double[] xVector = stat.getXData().get(i);
+			double[] zVector = stat.getZData().get(i);
+			
+			int maxK = getComponent(xVector, zVector);
+			if (maxK >= 0) {
+				clusters.get(maxK).getXData().add(xVector);
+				clusters.get(maxK).getZData().add(zVector);
+			}
+		}
+		
+		return clusters;
+	}
+	
+	
+	/**
+	 * Retrieving component of given regressors and response value.
+	 * @param xVector regressor values. 
+	 * @param zVector response value.
+	 * @return component of given regressors and response value.
+	 */
+	protected synchronized int getComponent(double[] xVector, double[] zVector) {
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)getParameter();
+		if (parameters == null || parameters.size() == 0)
+			return -1;
+		
+		int K = this.rems.size();
+		List<double[]> xData = Util.newList(K);
+		List<double[]> zData = Util.newList(K);
+		for (int k = 0; k < K; k++) {
+			xData.add(xVector);
+			zData.add(zVector);
+		}
+		
+		List<Double> condProbs = ExchangedParameter.normalZCondProbs(parameters, xData, zData);
+		double maxProb = -1;
+		int maxK = -1;
+		for (int k = 0; k < K; k++) {
+			if (maxProb < condProbs.get(k)) { 
+				maxProb = condProbs.get(k);
+				maxK = k;
+			}
+		}
+		
+		return maxK;
+	}
+	
+	
 	/**
 	 * This class is an extension of regression expectation maximization algorithm.
 	 * @author Loc Nguyen
@@ -448,7 +643,6 @@ public class DefaultMixtureRegressionEM extends AbstractMixtureRegressionEM impl
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(COMP_NUMBER_FIELD, COMP_NUMBER_DEFAULT);
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

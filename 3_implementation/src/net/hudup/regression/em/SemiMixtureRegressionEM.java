@@ -84,7 +84,7 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 	
 	@Override
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
-		clearInternalContent();
+		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
 		List<String> indicesList = splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
@@ -133,7 +133,9 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 	protected RegressionEMImpl createRegressionEM() {
 		// TODO Auto-generated method stub
 		RegressionEMImpl rem = super.createRegressionEM();
-		rem.getConfig().put(R_CALC_VARIANCE_FIELD, true);
+		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
+		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
+		rem.getConfig().put(R_CALC_VARIANCE_FIELD, false);
 		return rem;
 	}
 
@@ -240,7 +242,7 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 					XList.add(rem2.getLargeStatistics().getXData().get(i));
 				}
 				
-				List<Double> condProbs = condZProbs(parameterList, XList, Arrays.asList(new double[] {1, zValue}));
+				List<Double> condProbs = ExchangedParameter.normalZCondProbs(parameterList, XList, Arrays.asList(new double[] {1, zValue}));
 				condProbSum += condProbs.get(k);
 				N++;
 			}
@@ -315,7 +317,7 @@ public class SemiMixtureRegressionEM extends AbstractMixtureRegressionEM impleme
 						XList.add(rem2.getLargeStatistics().getXData().get(i));
 					}
 					
-					List<Double> condProbs = condZProbs(parameterList, XList, Arrays.asList(new double[] {1, zValue}));
+					List<Double> condProbs = ExchangedParameter.normalZCondProbs(parameterList, XList, Arrays.asList(new double[] {1, zValue}));
 					condProbsList.add(condProbs);
 					
 					condProbSum += condProbs.get(k);

@@ -73,6 +73,15 @@ public class RegressionEMPrior extends RegressionEMImpl {
 	
 	
 	@Override
+	protected void clearInternalData() {
+		// TODO Auto-generated method stub
+		super.clearInternalData();
+		this.alpha0 = null;
+		this.zVariance0 = 0;
+	}
+
+
+	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);

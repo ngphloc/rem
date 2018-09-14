@@ -9,6 +9,7 @@ import java.util.List;
 import net.hudup.core.Util;
 import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
+import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
@@ -38,21 +39,37 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 	protected List<RegressionEMImpl> rems = null;
 
 	
+	/**
+	 * Setting up this model from other model.
+	 * @param other other model.
+	 * @throws Exception if any error raises.
+	 */
+	public void setup(DefaultMixtureRegressionEM other) throws Exception {
+		// TODO Auto-generated method stub
+		super.setup((Dataset)null, other);
+	}
+
+	
 	@Override
 	public Object learn(Object...info) throws Exception {
 		// TODO Auto-generated method stub
-		if (!prepareInternalData(this.sample)) {
-			clearInternalContent();
+		boolean prepared = false;
+		if (info == null || info.length == 0 || !(info[0] instanceof DefaultMixtureRegressionEM))
+			prepared = prepareInternalData(this.sample);
+		else
+			prepared = prepareInternalData((AbstractMixtureRegressionEM)info[0]);
+		if (!prepared) {
+			clearInternalData();
 			return null;
 		}
 		
-		if (super.learn() == null) {
-			clearInternalContent();
+		if (super.learn(info) == null) {
+			clearInternalData();
 			return null;
 		}
 		
 		if(!adjustMixtureParameters()) {
-			clearInternalContent();
+			clearInternalData();
 			return null;
 		}
 		
@@ -65,13 +82,22 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 		// TODO Auto-generated method stub
 		super.unsetup();
 		if (this.rems != null) {
-			for (RegressionEMImpl rem : this.rems) {
-				if (rem != null)
-					rem.unsetup();
-			}
+			for (RegressionEMImpl rem : this.rems)
+				rem.unsetup();
 		}
 	}
 
+	
+	/**
+	 * Preparing data with other regression mixture model.
+	 * @param other other regression mixture model.
+	 * @return true if data preparation is successful.
+	 * @throws Exception if any error raises.
+	 */
+	protected boolean prepareInternalData(AbstractMixtureRegressionEM other) throws Exception {
+		return prepareInternalData(this.sample);
+	}
+	
 	
 	/**
 	 * Preparing data.
@@ -80,7 +106,7 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 	 * @throws Exception if any error raises.
 	 */
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws Exception {
-		clearInternalContent();
+		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
 		List<String> indicesList = splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
@@ -148,14 +174,14 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 	/**
 	 * Clear all internal data.
 	 */
-	protected void clearInternalContent() {
+	protected void clearInternalData() {
 		this.currentIteration = 0;
 		this.estimatedParameter = this.currentParameter = this.previousParameter = null;
 		
 		if (this.rems != null) {
 			for (RegressionEMImpl rem : this.rems) {
-				if (rem != null)
-					rem.clearInternalContent();
+				rem.clearInternalData();
+				rem.unsetup();
 			}
 			this.rems.clear();
 			this.rems = null;
@@ -313,22 +339,6 @@ public abstract class AbstractMixtureRegressionEM extends ExponentialEM implemen
 	}
 
 
-	/**
-	 * Calculating the condition probabilities of the specified parameters given regressor values X and response value Z.
-	 * Inherited class can re-define this method. In current version, only normal probability density function is used.
-	 * @param parameterList list of current parameters.
-	 * @param xData regressor values X
-	 * @param zData given response values Z.
-	 * @return condition probabilities of the specified parameters given regressor values X and response value Z.
-	 */
-	protected List<Double> condZProbs(List<ExchangedParameter> parameterList, List<double[]> xData, List<double[]> zData) {
-		if (parameterList.size() == 0)
-			return Util.newList();
-		
-		return ExchangedParameter.normalZCondProbs(parameterList, xData, zData);
-	}
-
-	
 	@Override
 	protected boolean terminatedCondition(Object estimatedParameter, Object currentParameter, Object previousParameter, Object... info) {
 		// TODO Auto-generated method stub
