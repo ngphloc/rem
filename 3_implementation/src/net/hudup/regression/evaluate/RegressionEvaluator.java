@@ -4,7 +4,7 @@ import net.hudup.Evaluator;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.data.Profile;
 import net.hudup.core.evaluate.testing.TestingEvaluator;
-import net.hudup.regression.Regression;
+import net.hudup.regression.RM;
 
 /**
  * Evaluator for evaluating regression algorithms.
@@ -28,14 +28,14 @@ public class RegressionEvaluator extends TestingEvaluator {
 	@Override
 	protected Object extractTestValue(Alg alg, Profile testingProfile) {
 		// TODO Auto-generated method stub
-		return ((Regression)alg).extractResponse(testingProfile);
+		return ((RM)alg).extractResponse(testingProfile);
 	}
 
 	
 	@Override
 	public boolean acceptAlg(Alg alg) {
 		// TODO Auto-generated method stub
-		return (alg instanceof Regression);
+		return (alg instanceof RM);
 	}
 
 	

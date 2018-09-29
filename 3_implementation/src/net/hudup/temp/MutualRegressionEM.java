@@ -1,8 +1,8 @@
 package net.hudup.temp;
 
-import static net.hudup.regression.AbstractRegression.defaultAttributeList;
-import static net.hudup.regression.AbstractRegression.extractNumber;
-import static net.hudup.regression.AbstractRegression.splitIndices;
+import static net.hudup.regression.AbstractRM.defaultAttributeList;
+import static net.hudup.regression.AbstractRM.extractNumber;
+import static net.hudup.regression.AbstractRM.splitIndices;
 import static net.hudup.temp.RegressionEMImpl.REM_LOOP_BALANCE_MODE_DEFAULT;
 import static net.hudup.temp.RegressionEMImpl.REM_LOOP_BALANCE_MODE_FIELD;
 
@@ -20,7 +20,7 @@ import net.hudup.core.data.MemFetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.parser.TextParserUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.Regression;
+import net.hudup.regression.RM;
 
 /**
  * This class implements expectation maximization (EM) algorithm for many partial regression models.
@@ -31,7 +31,7 @@ import net.hudup.regression.Regression;
  *
  */
 @Deprecated
-public class MutualRegressionEM extends ExponentialEM implements Regression, DuplicatableAlg {
+public class MutualRegressionEM extends ExponentialEM implements RM, DuplicatableAlg {
 
 	
 	/**
@@ -513,7 +513,7 @@ public class MutualRegressionEM extends ExponentialEM implements Regression, Dup
 		StringBuffer buffer = new StringBuffer();
 		
 		for (int i = 0; i < this.rems.size(); i++) {
-			Regression regression = this.rems.get(i);
+			RM regression = this.rems.get(i);
 			if (i > 0)
 				buffer.append(", ");
 			String text = "";

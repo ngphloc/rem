@@ -1,11 +1,11 @@
 package net.hudup.temp;
 
-import static net.hudup.regression.AbstractRegression.defaultExtractVariable;
-import static net.hudup.regression.AbstractRegression.defaultExtractVariableName;
-import static net.hudup.regression.AbstractRegression.extractNumber;
-import static net.hudup.regression.AbstractRegression.findIndex;
-import static net.hudup.regression.AbstractRegression.parseIndices;
-import static net.hudup.regression.AbstractRegression.solve;
+import static net.hudup.regression.AbstractRM.defaultExtractVariable;
+import static net.hudup.regression.AbstractRM.defaultExtractVariableName;
+import static net.hudup.regression.AbstractRM.extractNumber;
+import static net.hudup.regression.AbstractRM.findIndex;
+import static net.hudup.regression.AbstractRM.parseIndices;
+import static net.hudup.regression.AbstractRM.solve;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.em.RegressionEM;
+import net.hudup.regression.em.REM;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
@@ -32,7 +32,7 @@ import net.hudup.regression.em.RegressionEM;
  *
  */
 @NextUpdate
-public class RegressionEMImpl extends ExponentialEM implements RegressionEM, DuplicatableAlg {
+public class RegressionEMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 
 	
 	/**

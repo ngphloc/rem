@@ -1,6 +1,6 @@
 package net.hudup.regression.em;
 
-import static net.hudup.regression.AbstractRegression.notSatisfy;
+import static net.hudup.regression.AbstractRM.notSatisfy;
 
 import java.util.Arrays;
 import java.util.Collection;

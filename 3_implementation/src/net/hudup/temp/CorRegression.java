@@ -9,7 +9,7 @@ import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
-import net.hudup.regression.AbstractRegression;
+import net.hudup.regression.AbstractRM;
 
 /**
  * This class implements regression model with correlation in case of missing data, called COR algorithm.
@@ -19,7 +19,7 @@ import net.hudup.regression.AbstractRegression;
  *
  */
 @NextUpdate
-public class CorRegression extends AbstractRegression implements DuplicatableAlg {
+public class CorRegression extends AbstractRM implements DuplicatableAlg {
 
 	
 	/**
@@ -77,7 +77,7 @@ public class CorRegression extends AbstractRegression implements DuplicatableAlg
 			}
 		}
 		
-		this.coeffs = AbstractRegression.solve(A, b);
+		this.coeffs = AbstractRM.solve(A, b);
 		if (this.coeffs == null)
 			return null;
 		

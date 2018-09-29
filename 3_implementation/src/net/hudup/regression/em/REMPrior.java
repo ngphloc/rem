@@ -1,4 +1,4 @@
-package net.hudup.temp;
+package net.hudup.regression.em;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,20 +8,17 @@ import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
-import net.hudup.core.logistic.NextUpdate;
-import net.hudup.regression.em.ExchangedParameter;
-import net.hudup.regression.em.LargeStatistics;
-import net.hudup.regression.em.REMPrior;
+import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.parser.TextParserUtil;
 
 /**
- * This class represents an extension of regression expectation maximization algorithm with support of prior probability.
+ * This class implements expectation maximization algorithm for regression model in case of missing data with support of the prior probability.
  * 
  * @author Loc Nguyen
  * @version 1.0
  *
  */
-@NextUpdate
-public class RegressionEMPriorExt extends REMPrior {
+public class REMPrior extends REMImpl {
 
 	
 	/**
@@ -31,14 +28,79 @@ public class RegressionEMPriorExt extends REMPrior {
 
 	
 	/**
+	 * Name of alpha coefficients of prior distribution.
+	 */
+	public static final String ALPHA0_FIELD = "alpha0";
+
+			
+	/**
+	 * Default alpha coefficients of prior distribution.
+	 */
+	public static final String ALPHA0_DEFAULT = "";
+
+	
+	/**
+	 * Name of variance of prior distribution.
+	 */
+	public static final String ZVARIANCE0_FIELD = "zvariance0";
+
+			
+	/**
+	 * Default variance of prior distribution.
+	 */
+	public static final double ZVARIANCE0_DEFAULT = Constants.UNUSED;
+
+	
+	/**
+	 * Alpha coefficients of prior distribution.
+	 */
+	protected List<Double> alpha0 = null;
+	
+	
+	/**
+	 * Variance of prior distribution.
+	 */
+	protected double zVariance0 = 0;
+
+	
+	/**
 	 * Default constructor.
 	 */
-	public RegressionEMPriorExt() {
+	public REMPrior() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 	
 	
+	@Override
+	protected void clearInternalData() {
+		// TODO Auto-generated method stub
+		super.clearInternalData();
+		this.alpha0 = null;
+		this.zVariance0 = 0;
+	}
+
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
+		if (name != null && !name.isEmpty())
+			return name;
+		else
+			return "prior_rem";
+	}
+
+	
+	@Override
+	public Alg newInstance() {
+		// TODO Auto-generated method stub
+		REMPrior priorREM = new REMPrior();
+		priorREM.getConfig().putAll((DataConfig)this.getConfig().clone());
+		return priorREM;
+	}
+
+
 	@Override
 	protected Object maximization(Object currentStatistic, Object...info) throws Exception {
 		// TODO Auto-generated method stub
@@ -139,23 +201,85 @@ public class RegressionEMPriorExt extends REMPrior {
 
 	
 	@Override
-	public String getName() {
+	protected Object initializeParameter() {
 		// TODO Auto-generated method stub
-		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
-		if (name != null && !name.isEmpty())
-			return name;
+		ExchangedParameter parameter = (ExchangedParameter)super.initializeParameter();
+		if (parameter == null)
+			return null;
+		
+		String alpha0Text = getConfig().getAsString(ALPHA0_FIELD);
+		if (alpha0Text == null || alpha0Text.isEmpty())
+			this.alpha0 = parameter.getAlpha();
 		else
-			return "prior_rem_ext";
+			this.alpha0 = TextParserUtil.parseListByClass(alpha0Text, Double.class, ",");
+		if (this.alpha0 == null || this.alpha0.size() == 0)
+			return null;
+		
+		this.zVariance0 = getConfig().getAsReal(ZVARIANCE0_FIELD);
+		if (!Util.isUsed(this.zVariance0)) {
+			LargeStatistics stat;
+			try {
+				stat = (LargeStatistics)this.expectation(parameter);
+				this.zVariance0 = parameter.estimateZVariance(stat) / stat.getZData().size();
+			} 
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+		return parameter;
 	}
 
-	
+
 	@Override
-	public Alg newInstance() {
+	public synchronized String getDescription() {
 		// TODO Auto-generated method stub
-		RegressionEMPriorExt priorREMExt = new RegressionEMPriorExt();
-		priorREMExt.getConfig().putAll((DataConfig)this.getConfig().clone());
-		return priorREMExt;
+		return super.getDescription() + ", " + moreParametersToText();
+	}
+
+
+	@Override
+	public String parameterToShownText(Object parameter, Object... info) {
+		// TODO Auto-generated method stub
+		return super.parameterToShownText(parameter, info) + ", " + moreParametersToText();
+	}
+
+
+	/**
+	 * Converting prior alpha and prior variance to text.
+	 * @return text of prior alpha and prior variance
+	 */
+	private String moreParametersToText() {
+		StringBuffer buffer = new StringBuffer();
+		
+		if (this.alpha0 == null)
+			buffer.append("alpha0=()");
+		else {
+			buffer.append("alpha0=(");
+			for (int j = 0; j < this.alpha0.size(); j++) {
+				if (j > 0)
+					buffer.append(", ");
+				buffer.append(MathUtil.format(this.alpha0.get(j)));
+			}
+			buffer.append(")");
+		}
+		
+		buffer.append(", z-variance0=" + MathUtil.format(this.zVariance0));
+		
+		return buffer.toString();
 	}
 	
+	
+	@Override
+	public DataConfig createDefaultConfig() {
+		// TODO Auto-generated method stub
+		DataConfig config = super.createDefaultConfig();
+		config.put(ALPHA0_FIELD, ALPHA0_DEFAULT);
+		config.put(ZVARIANCE0_FIELD, ZVARIANCE0_DEFAULT);
+		return config;
+	}
+
 	
 }
