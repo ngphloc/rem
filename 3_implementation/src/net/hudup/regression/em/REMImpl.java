@@ -16,6 +16,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import flanagan.analysis.Regression;
 import flanagan.math.Fmath;
 import flanagan.plot.PlotGraph;
 import net.hudup.core.Constants;
@@ -31,6 +32,8 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRM;
+import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.ui.REMDlg;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -1029,51 +1032,6 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 
 
-	/**
-	 * Creating 2D decomposed graph.
-	 * @param regressorIndex regressor index.
-	 * @return 2D decomposed graph.
-	 */
-    public synchronized Graph create2dDecomposedGraph(int regressorIndex) {
-		if (getLargeStatistics() == null || getExchangedParameter() == null)
-			return null;
-    	
-		ExchangedParameter parameter = getExchangedParameter();
-		double coeff0 = parameter.getAlpha().get(0);
-		double coeff1 = parameter.getAlpha().get(regressorIndex);
-		if (coeff1 == 0)
-			return null;
-			
-		LargeStatistics stats = getLargeStatistics();
-    	int ncurves = 2;
-    	int npoints = stats.size();
-    	double[][] data = PlotGraph.data(ncurves, npoints);
-    	
-    	for(int i = 0; i < npoints; i++) {
-            data[0][i] = stats.getXData().get(i)[regressorIndex];
-            data[1][i] = stats.getZData().get(i)[1];
-        }
-    	
-    	data[2][0] = Fmath.minimum(data[0]);
-    	data[3][0] = coeff0 + coeff1 * data[2][0];
-    	data[2][1] = Fmath.maximum(data[0]);
-    	data[3][1] = coeff0 + coeff1 * data[2][1];
-
-    	PlotGraphExt pg = new PlotGraphExt(data);
-
-    	pg.setGraphTitle("2D Decomposed plot");
-    	pg.setXaxisLegend(extractRegressorName(regressorIndex));
-    	pg.setYaxisLegend(extractResponseName());
-    	int[] popt = {1, 0};
-    	pg.setPoint(popt);
-    	int[] lopt = {0, 3};
-    	pg.setLine(lopt);
-
-    	pg.setBackground(Color.WHITE);
-        return pg;
-    }
-
-
     /**
 	 * Getting complete data from specified data.
 	 * @param data specified data.
@@ -1139,6 +1097,240 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
+	/**
+	 * Creating 2D decomposed graph for regressor.
+	 * @param xIndex X index.
+	 * @return 2D decomposed graph.
+	 */
+    public synchronized Graph createRegressorGraph(int xIndex) {
+		if (getLargeStatistics() == null || getExchangedParameter() == null)
+			return null;
+    	
+		ExchangedParameter parameter = getExchangedParameter();
+		double coeff0 = parameter.getAlpha().get(0);
+		double coeff1 = parameter.getAlpha().get(xIndex);
+		if (coeff1 == 0) return null;
+			
+		LargeStatistics stats = getLargeStatistics();
+    	int ncurves = 2;
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+    	
+    	for(int i = 0; i < npoints; i++) {
+            data[0][i] = stats.getXData().get(i)[xIndex];
+            data[1][i] = stats.getZData().get(i)[1];
+        }
+    	
+    	data[2][0] = Fmath.minimum(data[0]);
+    	data[3][0] = coeff0 + coeff1 * data[2][0];
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = coeff0 + coeff1 * data[2][1];
+
+    	PlotGraphExt pg = new PlotGraphExt(data);
+
+    	pg.setGraphTitle("2D Decomposed plot");
+    	pg.setXaxisLegend(extractRegressorName(xIndex));
+    	pg.setYaxisLegend(extractResponseName());
+    	int[] popt = {1, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+        return pg;
+    }
+
+    
+    /**
+     * Creating graph for response variable.
+     * @return graph for response variable.
+     */
+    public synchronized Graph createResponseGraph() {
+		if (getLargeStatistics() == null || getExchangedParameter() == null)
+			return null;
+    	
+		LargeStatistics stats = getLargeStatistics();
+    	int ncurves = 2;
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+		ExchangedParameter parameter = getExchangedParameter();
+    	for(int i = 0; i < npoints; i++) {
+            data[0][i] = stats.getZData().get(i)[1];
+            data[1][i] = parameter.mean(stats.getXData().get(i));
+        }
+
+    	Regression regression = new Regression(data[0], data[1]);
+    	regression.linear();
+    	double[] coef = regression.getCoeff();
+    	data[2][0] = Fmath.minimum(data[0]);
+    	data[3][0] = coef[0] + coef[1] * data[2][0];
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = coef[0] + coef[1] * data[2][1];
+
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return "R=" + MathUtil.format(calcR(), 2);
+			}
+    		
+    	};
+
+    	String responseName = extractResponseName();
+    	pg.setGraphTitle("Correlation plot:" + pg.getGraphFeature());
+    	pg.setXaxisLegend("Real " + responseName);
+    	pg.setYaxisLegend("Estimated " + responseName);
+    	int[] popt = {1, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+        return pg;
+    }
+    
+    
+    /**
+     * Creating error graph for response variable.
+     * @return error graph for response variable.
+     */
+    public synchronized Graph createErrorGraph() {
+		if (getLargeStatistics() == null || getExchangedParameter() == null)
+			return null;
+    	
+		LargeStatistics stats = getLargeStatistics();
+    	int ncurves = 4;
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+		ExchangedParameter parameter = getExchangedParameter();
+		double errorMean = 0;
+    	for(int i = 0; i < npoints; i++) {
+            double z = stats.getZData().get(i)[1];
+            double zcalc = parameter.mean(stats.getXData().get(i));
+            data[0][i] = ( z + zcalc ) / 2.0;
+            data[1][i] = zcalc - z;
+            
+            errorMean += data[1][i];
+        }
+    	errorMean = errorMean / npoints;
+    	double errorSd = 0;
+    	for(int i = 0; i < npoints; i++) {
+    		double d = data[1][i] - errorMean;
+    		errorSd += d*d;
+    	}
+   		errorSd = Math.sqrt(errorSd / npoints);
+    		
+    	// Mean - 1.96sd
+    	data[2][0] = 0;
+    	data[3][0] = errorMean - 1.96 * errorSd;
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = errorMean - 1.96 * errorSd;
+
+    	// Mean
+    	data[4][0] = 0;
+    	data[5][0] = errorMean;
+    	data[4][1] = Fmath.maximum(data[0]);
+    	data[5][1] = errorMean;
+
+    	// Mean + 1.96sd
+    	data[6][0] = 0;
+    	data[7][0] = errorMean + 1.96 * errorSd;
+    	data[6][1] = Fmath.maximum(data[0]);
+    	data[7][1] = errorMean + 1.96 * errorSd;
+
+    	final double mean = errorMean, sd = errorSd;
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return MathUtil.format(mean, 2) + " +/- 1.96*" + 
+    				MathUtil.format(sd, 2);
+			}
+    		
+    	};
+
+    	String responseName = extractResponseName();
+    	pg.setGraphTitle("Error plot:" + pg.getGraphFeature());
+    	pg.setXaxisLegend("Mean " + responseName);
+    	pg.setYaxisLegend("Estimate error");
+    	int[] popt = {1, 0, 0, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3, 3, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+    	
+        return pg;
+    }
+
+    
+    /**
+     * Creating graph related to response variable.
+     * @return graph related to response variable.
+     */
+    public synchronized List<Graph> createResponseRalatedGraphs() {
+    	List<Graph> relatedGraphs = Util.newList();
+    	
+    	Graph responseGraph = createResponseGraph();
+    	if (responseGraph != null) relatedGraphs.add(responseGraph);
+    	
+    	Graph errorGraph = createErrorGraph();
+    	if (errorGraph != null) relatedGraphs.add(errorGraph);
+
+    	return relatedGraphs;
+    }
+    
+    
+    /**
+     * Getting list of regressors.
+     * @return list of regressors.
+     */
+    public List<VarWrapper> getActualRegressors() {
+    	return AbstractRM.getActualVariables(this.xIndices, this.attList);
+    }
+    
+    
+    /**
+     * Getting response variable.
+     * @return response variable.
+     */
+    public List<VarWrapper> getActualResponse() {
+    	return AbstractRM.getActualVariables(this.zIndices, this.attList);
+    }
+
+
+    /**
+     * Getting correlation between real response and estimated response.
+     * @return correlation between real response and estimated response.
+     */
+    public synchronized double calcR() {
+    	return Constants.UNUSED;
+    }
+    
+    
+    /**
+     * Calculating mean and variance of errors.
+     * @return mean and variance of errors.
+     */
+    public synchronized double[] calcError() {
+    	return new double[] {Constants.UNUSED, Constants.UNUSED};
+    }
+    
+    
 }
 
 

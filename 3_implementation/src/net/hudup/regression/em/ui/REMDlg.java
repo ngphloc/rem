@@ -1,40 +1,57 @@
 package net.hudup.regression.em.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import net.hudup.core.Constants;
 import net.hudup.core.Util;
-import net.hudup.core.data.Attribute;
-import net.hudup.core.data.AttributeList;
+import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.UriAssoc;
+import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.regression.AbstractRM;
+import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.REMImpl;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -74,14 +91,26 @@ public class REMDlg extends JDialog {
 	
 	
 	/**
+	 * The first list of graphs.
+	 */
+	List<Graph> graphList = new ArrayList<Graph>();
+	
+	
+	/**
+	 * The second list of graphs.
+	 */
+	List<Graph> graphList2 = new ArrayList<Graph>();
+
+	
+	/**
 	 * Constructor with specified regression model.
 	 * @param comp parent component.
 	 * @param rem specified regression model.
 	 */
 	public REMDlg(final Component comp, final REMImpl rem) {
-		super(UIUtil.getFrameForComponent(comp), "Regression Information", true);
+		super(UIUtil.getFrameForComponent(comp), "Regression Information", false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setSize(600, 400);
+		setSize(800, 600);
 		setLocationRelativeTo(UIUtil.getFrameForComponent(comp));
 		
 		this.rem = rem;
@@ -115,7 +144,6 @@ public class REMDlg extends JDialog {
 		//
 		left.add(new JLabel("Variance: "));
 		left.add(new JLabel("R: "));
-		left.add(new JLabel("Ratio error: "));
 		//
 		right = new JPanel(new GridLayout(0, 1));
 		col.add(right, BorderLayout.CENTER);
@@ -130,21 +158,43 @@ public class REMDlg extends JDialog {
 		right.add(pane);
 		//
 		JTextField txtR = new JTextField(
-				MathUtil.format(-1));
+				MathUtil.format(rem.calcR()));
 		txtR.setCaretPosition(0);
 		txtR.setEditable(false);
 		pane = new JPanel(new BorderLayout());
 		pane.add(txtR, BorderLayout.WEST);
 		right.add(pane);
-		//
-		JTextField txtError = new JTextField(
-				MathUtil.format(-1));
-		txtError.setCaretPosition(0);
-		txtError.setEditable(false);
-		pane = new JPanel(new BorderLayout());
-		pane.add(txtError, BorderLayout.WEST);
-		right.add(pane);
 		
+		col = new JPanel(new BorderLayout());
+		header.add(col);
+		//
+		left = new JPanel(new GridLayout(0, 1));
+		col.add(left, BorderLayout.WEST);
+		//
+		left.add(new JLabel("Error mean: "));
+		left.add(new JLabel("Error sd: "));
+		//
+		right = new JPanel(new GridLayout(0, 1));
+		col.add(right, BorderLayout.CENTER);
+		//
+		double[] error = rem.calcError();
+		error = (error == null || error.length < 2) ? new double[] {Constants.UNUSED, Constants.UNUSED} : error; 
+		JTextField txtRatioErrMean = new JTextField(
+				MathUtil.format(error[0]));
+		txtRatioErrMean.setCaretPosition(0);
+		txtRatioErrMean.setEditable(false);
+		pane = new JPanel(new BorderLayout());
+		pane.add(txtRatioErrMean, BorderLayout.WEST);
+		right.add(pane);
+		//
+		JTextField txtRatioErrSd = new JTextField(
+				MathUtil.format(Math.sqrt(error[1])));
+		txtRatioErrSd.setCaretPosition(0);
+		txtRatioErrSd.setEditable(false);
+		pane = new JPanel(new BorderLayout());
+		pane.add(txtRatioErrSd, BorderLayout.WEST);
+		right.add(pane);
+
 		
 		//Body of main panel
 		JPanel body = new JPanel(new BorderLayout());
@@ -153,17 +203,17 @@ public class REMDlg extends JDialog {
 		JPanel paneRegressors = new JPanel(new BorderLayout());
 		body.add(paneRegressors, BorderLayout.NORTH);
 		
-		List<RegressorWrapper> regressorList = RegressorWrapper.getRegressorList(rem);
-		regressorList.sort(new Comparator<RegressorWrapper>() {
+		List<VarWrapper> regressors = rem.getActualRegressors();
+		regressors.sort(new Comparator<VarWrapper>() {
 
 			@Override
-			public int compare(RegressorWrapper o1, RegressorWrapper o2) {
+			public int compare(VarWrapper o1, VarWrapper o2) {
 				// TODO Auto-generated method stub
-				return o1.getName().compareToIgnoreCase(o2.getName());
+				return o1.toString().compareToIgnoreCase(o2.toString());
 			}
 			
 		});
-		JComboBox<RegressorWrapper> cmbReggressors = new JComboBox<RegressorWrapper>(regressorList.toArray(new RegressorWrapper[] {}));
+		JComboBox<VarWrapper> cmbReggressors = new JComboBox<VarWrapper>(regressors.toArray(new VarWrapper[] {}));
 		paneRegressors.add(cmbReggressors, BorderLayout.CENTER);
 		JButton btnPlot = new JButton(new AbstractAction("Plot") {
 
@@ -174,7 +224,7 @@ public class REMDlg extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegressorWrapper regressor = (RegressorWrapper)cmbReggressors.getSelectedItem();
+				VarWrapper regressor = (VarWrapper)cmbReggressors.getSelectedItem();
 				if (regressor == null)
 					JOptionPane.showMessageDialog(
 							cmbReggressors, 
@@ -182,11 +232,121 @@ public class REMDlg extends JDialog {
 							"No selected regressor", 
 							JOptionPane.ERROR_MESSAGE);
 				else
-					plot2dDecomposedGraph(regressor.getIndex());
+					plotRegressorGraph(regressor.getIndex());
 			}
 		});
 		paneRegressors.add(btnPlot, BorderLayout.EAST);
 		
+		JPanel paneGraphList = new JPanel(new GridLayout(1, 0));
+		body.add(paneGraphList, BorderLayout.CENTER);
+		graphList = rem.createResponseRalatedGraphs();
+		graphList2 = rem.createResponseRalatedGraphs();
+		for (int i = 0; i < graphList.size(); i++) {
+			final Graph graph = graphList.get(i);
+			
+			final Graph graph2 = graphList2.get(i);
+			JPanel gPanel = new JPanel(new BorderLayout());
+			paneGraphList.add(gPanel);
+			
+			gPanel.add((Component)graph, BorderLayout.CENTER);
+			JPanel toolbar = new JPanel();
+			gPanel.add(toolbar, BorderLayout.SOUTH);
+			
+			JButton btnZoom = UIUtil.makeIconButton("zoomin-16x16.png", 
+				"zoom", "Zoom", "Zoom", 
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(comp), "Graph", false);
+						dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+						dlg.setSize(600, 400);
+						dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(comp));
+						
+						dlg.setLayout(new BorderLayout());
+						dlg.add( (Component)graph2, BorderLayout.CENTER);
+						
+						JPanel footer = new JPanel();
+						dlg.add(footer, BorderLayout.SOUTH);
+						JButton btnExport = new JButton("Export image");
+						btnExport.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								// TODO Auto-generated method stub
+								graph2.exportImage();
+							}
+						});
+						footer.add(btnExport);
+						
+						dlg.setVisible(true);
+					}
+				});
+			btnZoom.setMargin(new Insets(0, 0 , 0, 0));
+			toolbar.add(btnZoom);
+			
+			JButton btnPrint = UIUtil.makeIconButton("print-16x16.png", 
+				"print", "Print", "Print", 
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						try {
+							Printable printable = new Printable() {
+								
+								@Override
+								public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
+										throws PrinterException {
+									// TODO Auto-generated method stub
+									if (pageIndex > 0)
+										return NO_SUCH_PAGE;
+									
+									double x = pageFormat.getImageableX();
+									double y = pageFormat.getImageableY();
+									graphics.translate((int)x, (int)y);
+									((PlotGraphExt) graph2).paint(graphics, (int) pageFormat.getImageableWidth(), (int) pageFormat.getImageableHeight());
+									
+									return PAGE_EXISTS;
+								}
+							};
+							
+			  				PrinterJob pjob = PrinterJob.getPrinterJob();
+			  				
+			    			//set a HelloPrint as the target to print
+			  				pjob.setPrintable(printable);
+			  				
+			  				//get the print dialog, continue if cancel
+			  				//is not clicked
+		    				if (pjob.printDialog()) {
+		    					//print the target (HelloPrint)
+		    					pjob.print();
+		    				}
+		    				
+						}
+						catch (Throwable ex) {
+							ex.printStackTrace();
+						}
+					}
+				});
+				btnPrint.setMargin(new Insets(0, 0 , 0, 0));
+				toolbar.add(btnPrint);
+				
+				JButton btnOption = UIUtil.makeIconButton("option-16x16.png", 
+						"view_option", "View Option", "View Option", 
+						new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								graph.setupViewOption();
+								((PlotGraphExt)graph2).setViewOption(((PlotGraphExt)graph).getViewOption());
+							}
+						}
+				);
+				btnOption.setMargin(new Insets(0, 0 , 0, 0));
+				toolbar.add(btnOption);
+		}
+
 		
 		//Footer of main panel
 		JPanel footer = new JPanel(new BorderLayout());
@@ -208,7 +368,7 @@ public class REMDlg extends JDialog {
 			}
 		};
 		tbm.setColumnIdentifiers(new String[] {"Regressor", "Value"});
-		for (RegressorWrapper regressor : regressorList) {
+		for (VarWrapper regressor : regressors) {
 			Vector<Object> rowData = new Vector<Object>();
 			rowData.add(regressor);
 			rowData.add(new Double(0));
@@ -231,62 +391,31 @@ public class REMDlg extends JDialog {
 		txtCalc.setEditable(false);
 		control.add(txtCalc);
 		
+		addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(SwingUtilities.isRightMouseButton(e) ) {
+
+					JPopupMenu contextMenu = createContextMenu();
+					if(contextMenu != null) 
+						contextMenu.show((Component)e.getSource(), e.getX(), e.getY());
+				}
+			}
+			
+		});
+
 		setVisible(true);
 	}
 	
 	
 	/**
-	 * Calculating regression model.
-	 */
-	private void calc() {
-		if (rem == null) {
-			JOptionPane.showMessageDialog(
-					this, 
-					"Null regression model", 
-					"Null regression model", 
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		try {
-			Map<String, Double> regressorValues = Util.newMap();
-			int n = tblRegression.getModel().getRowCount();
-			TableModel tbm = tblRegression.getModel();
-			for (int i = 0; i < n; i++) {
-				String name = tbm.getValueAt(i, 0).toString();
-				String value = tbm.getValueAt(i, 1).toString();
-				
-				regressorValues.put(name, Double.parseDouble(value));
-			}
-			
-			double value = AbstractRM.extractNumber(rem.execute(regressorValues));
-			if (!Util.isUsed(value)) {
-				JOptionPane.showMessageDialog(
-						this, 
-						"Regression model is not executed", 
-						"Failed execution", 
-						JOptionPane.ERROR_MESSAGE);
-				this.txtCalc.setText("");
-			}
-			else {
-				this.txtCalc.setText(MathUtil.format(value));
-				this.txtCalc.setCaretPosition(0);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			this.txtCalc.setText("");
-		}
-			
-	}
-
-	
-	/**
 	 * Plotting the graph of given regressor.
-	 * @param regressorIndex
+	 * @param xIndex index of given regressor.
 	 */
-	private void plot2dDecomposedGraph(int regressorIndex) {
-		Graph graph = rem != null ? rem.create2dDecomposedGraph(regressorIndex) : null;
+	private void plotRegressorGraph(int xIndex) {
+		Graph graph = rem != null ? rem.createRegressorGraph(xIndex) : null;
 		if (graph == null) {
 			JOptionPane.showMessageDialog(
 					this, 
@@ -296,7 +425,7 @@ public class REMDlg extends JDialog {
 			return;
 		}
 		
-		final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(this), "Graph", true);
+		final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(this), "Graph", false);
 		dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		dlg.setSize(600, 400);
 		dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(this));
@@ -307,6 +436,16 @@ public class REMDlg extends JDialog {
 		JPanel footer = new JPanel();
 		dlg.add(footer, BorderLayout.SOUTH);
 		
+		JButton btnOption = new JButton("View option");
+		btnOption.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					graph.setupViewOption();
+				}
+			}
+		);
+		footer.add(btnOption);
+
 		JButton btnExport = new JButton("Export image");
 		btnExport.addActionListener(new ActionListener() {
 			
@@ -376,74 +515,187 @@ public class REMDlg extends JDialog {
 
 		dlg.setVisible(true);
 	}
+
+	
+	/**
+	 * Calculating regression model.
+	 */
+	private void calc() {
+		if (rem == null) {
+			JOptionPane.showMessageDialog(
+					this, 
+					"Null regression model", 
+					"Null regression model", 
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		try {
+			Map<String, Double> regressorValues = Util.newMap();
+			int n = tblRegression.getModel().getRowCount();
+			TableModel tbm = tblRegression.getModel();
+			for (int i = 0; i < n; i++) {
+				String name = tbm.getValueAt(i, 0).toString();
+				String value = tbm.getValueAt(i, 1).toString();
+				
+				regressorValues.put(name, Double.parseDouble(value));
+			}
+			
+			double value = AbstractRM.extractNumber(rem.execute(regressorValues));
+			if (!Util.isUsed(value)) {
+				JOptionPane.showMessageDialog(
+						this, 
+						"Regression model is not executed", 
+						"Failed execution", 
+						JOptionPane.ERROR_MESSAGE);
+				this.txtCalc.setText("");
+			}
+			else {
+				this.txtCalc.setText(MathUtil.format(value));
+				this.txtCalc.setCaretPosition(0);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			this.txtCalc.setText("");
+		}
+			
+	}
+
+	
+	/**
+	 * Creating context menu.
+	 * @return context menu.
+	 */
+	private JPopupMenu createContextMenu() {
+		JPopupMenu contextMenu = new JPopupMenu();
+		
+		JMenuItem miBigZoom = UIUtil.makeMenuItem(null, "Big zoom", 
+			new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(getThis()), "Big zoom", false);
+					dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+					dlg.setSize(600, 400);
+					dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(getThis()));
+					
+					dlg.setLayout(new BorderLayout());
+					JPanel body = new JPanel(new GridLayout(1, 0));
+					dlg.add(body, BorderLayout.CENTER);
+					
+					for (Graph graph : graphList2) {
+						body.add( (Component)graph);
+					}
+					
+					JPanel footer = new JPanel();
+					dlg.add(footer, BorderLayout.SOUTH);
+					
+					JButton btnExport = new JButton("Export image");
+					btnExport.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							mergeGraphImages(getThis(), graphList2);
+						}
+					});
+					footer.add(btnExport);
+					
+					dlg.setVisible(true);
+				}
+			});
+		contextMenu.add(miBigZoom);
+		
+		JMenuItem miExport = UIUtil.makeMenuItem(null, "Export graphs to image", 
+			new ActionListener() {
+					
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					mergeGraphImages(getThis(), graphList);
+				}
+			});
+		contextMenu.add(miExport);
+		
+		return contextMenu;
+	}
 	
 	
 	/**
-	 * This class represents the wrapper of a regressor.
-	 * @author Loc Nguyen
-	 * @version 1.0
+	 * Merging list of graphs.
+	 * @param comp parent component.
+	 * @param graphList list of graphs.
 	 */
-	protected static class RegressorWrapper {
+	private static void mergeGraphImages(Component comp, List<Graph> graphList) {
+		if (graphList.size() == 0)
+			return;
 		
-		/**
-		 * Regressor name.
-		 */
-		protected String name = null;
-		
-		/**
-		 * Regressor index.
-		 */
-		protected int index = -1;
-		
-		/**
-		 * Constructor with specified name and index.
-		 * @param name specified name.
-		 * @param index specified index.
-		 */
-		public RegressorWrapper(String name, int index) {
-			this.name = name;
-			this.index = index;
-		}
-		
-		/**
-		 * Getting name.
-		 * @return name.
-		 */
-		public String getName() {
-			return name;
-		}
-		
-		/**
-		 * Getting index.
-		 * @return index.
-		 */
-		public int getIndex() {
-			return index;
-		}
+		DataConfig config = new DataConfig();
+		xURI curStore = xURI.create(new File("."));
+		config.setStoreUri(curStore);
+		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(config);
+		xURI chooseUri = uriAssoc.chooseUri(comp, false, new String[] {"png"}, new String[] {"PNG file"}, curStore);
 
-		@Override
-		public String toString() {
-			// TODO Auto-generated method stub
-			return name;
+		if (chooseUri == null) {
+			JOptionPane.showMessageDialog(
+					comp, 
+					"Image not exported", 
+					"Image not exported", 
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
 		}
 		
-		/**
-		 * Getting list of regressors from specified regression model.
-		 * @param rem specified regression model.
-		 * @return list of regressors from specified regression model.
-		 */
-		public static List<RegressorWrapper> getRegressorList(REMImpl rem){
-			List<RegressorWrapper> wrapperList = Util.newList();
-			if (rem == null || rem.getAttributeList() == null)
-				return wrapperList;
-			AttributeList attList = rem.getAttributeList();
-			for (int i = 0; i < attList.size(); i++) {
-				Attribute att = attList.get(i);
-				RegressorWrapper wrapper = new RegressorWrapper(att.getName(), att.getIndex() + 1);
-				wrapperList.add(wrapper);
-			}
-			return wrapperList;
+		int bigWidth = 0;
+		int maxHeight = Integer.MIN_VALUE;
+		
+		for (Graph graph : graphList) {
+			bigWidth += graph.getOuterBox().width;
+			maxHeight = Math.max(maxHeight, graph.getOuterBox().height);
+		}
+		
+		BufferedImage bigImage = new BufferedImage(bigWidth, maxHeight, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D bigGraphics = bigImage.createGraphics();
+		
+		int x = 0;
+		for (Graph graph : graphList) {
+			Rectangle outerBox = graph.getOuterBox();
+			BufferedImage image = new BufferedImage(outerBox.width, outerBox.height, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D graphics = image.createGraphics();
+			graphics.setColor(new Color(0, 0, 0));
+			
+			if (graph instanceof PlotGraphExt)
+				((PlotGraphExt)graph).paint(graphics, outerBox.width, outerBox.height);
+			else
+				graph.paint(graphics);
+			
+			bigGraphics.drawImage(image, x, 0, null);
+			x += outerBox.width;
+		}
+		
+		try {
+			ImageIO.write(bigImage, "png", new File(chooseUri.getURI()));
+			
+			JOptionPane.showMessageDialog(
+					comp, 
+					"Big image exported successfully", 
+					"Big image exported successfully", 
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
+
+	
+	/**
+	 * Getting this dialog.
+	 * @return this dialog.
+	 */
+	private REMDlg getThis() {
+		return this;
+	}
+	
+	
 }

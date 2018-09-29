@@ -728,4 +728,127 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	}
 	
 	
+    /**
+     * Getting list of actual variables from specified indices and attribute list.
+     * @param indices specified indices.
+     * @param attList specified attribute list.
+     * @return list of variables.
+     */
+    public static List<VarWrapper> getActualVariables(List<Object[]> indices, AttributeList attList) {
+    	List<VarWrapper> vars = Util.newList();
+    	if (indices == null || indices.size() <= 1)
+    		return vars;
+    	
+    	for (int i = 1; i < indices.size(); i++) {
+			Object item = indices.get(i)[0];
+			VarWrapper var = null;
+			if (item instanceof Number) {
+				int attIndex = ((Number)item).intValue();
+				var = new VarWrapper(
+						i,
+						attList.get(attIndex).getName(),
+						null,
+						attList.get(attIndex));
+			}
+			else {
+				String expr = item.toString().trim();
+				var = new VarWrapper(
+						i,
+						null,
+						expr,
+						null);
+			}
+			
+			vars.add(var);
+    	}
+    	
+    	return vars;
+    }
+
+
+    /**
+	 * This class represents the wrapper of a regressor.
+	 * @author Loc Nguyen
+	 * @version 1.0
+	 */
+	public static class VarWrapper {
+		
+		/**
+		 * Variable index.
+		 */
+		protected int index = -1;
+
+		/**
+		 * Variable name.
+		 */
+		protected String name = null;
+		
+		/**
+		 * Variable expression.
+		 */
+		protected String expr = null;
+		
+		/**
+		 * Variable attribute.
+		 */
+		protected Attribute att = null;
+		
+		/**
+		 * Constructor with specified name and index.
+		 * @param index specified index.
+		 * @param name specified name.
+		 * @param expr specified expression.
+		 * @param att specified attribute.
+		 */
+		public VarWrapper(int index, String name, String expr, Attribute att) {
+			this.index = index;
+			this.name = name;
+			this.expr = expr;
+			this.att = att;
+		}
+		
+		/**
+		 * Getting index.
+		 * @return index.
+		 */
+		public int getIndex() {
+			return index;
+		}
+
+		/**
+		 * Getting name.
+		 * @return name.
+		 */
+		public String getName() {
+			return name;
+		}
+		
+		/**
+		 * Getting variable expression.
+		 * @return variable expression.
+		 */
+		public String getExpr() {
+			return expr;
+		}
+		
+		/**
+		 * Getting variable attribute.
+		 * @return
+		 */
+		public Attribute getAttribute() {
+			return att;
+		}
+		
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			if (name != null)
+				return name;
+			else
+				return expr;
+		}
+		
+	}
+
+
 }
