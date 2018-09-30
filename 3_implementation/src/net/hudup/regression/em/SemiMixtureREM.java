@@ -16,6 +16,8 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
+import net.hudup.core.logistic.NextUpdate;
+import net.hudup.regression.em.ui.graph.Graph;
 
 /**
  * This class implements the semi-mixture regression model.
@@ -368,6 +370,9 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (getConfig().getAsBoolean(LOGISTIC_MODE_FIELD)) { // Logistic mode does not use probability
+			if (this.rems == null || this.rems.size() == 0)
+				return null;
+			
 			List<Double> zValues = Util.newList(this.rems.size());
 			List<Double> expProbs = Util.newList(this.rems.size());
 			double expProbsSum = 0;
@@ -441,4 +446,103 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	}
 
 	
+	/**
+	 * The method is not implemented yet.
+	 */
+	@NextUpdate
+	@Override
+	public synchronized Graph createRegressorGraph(int xIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	/**
+	 * The method is not implemented yet.
+	 */
+	@NextUpdate
+	@Override
+	public synchronized Graph createResponseGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	/**
+	 * The method is not implemented yet.
+	 */
+	@NextUpdate
+	@Override
+	public Graph createErrorGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public synchronized double calcVariance() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		
+		double result = 0;
+		for (REMImpl rem : this.rems) {
+			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+			
+			double var = rem.calcVariance();
+			if (Util.isUsed(var))
+				result += parameter.getCoeff() * var;
+			else
+				return Constants.UNUSED;
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public synchronized double calcR() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		
+		double result = 0;
+		for (REMImpl rem : this.rems) {
+			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+			
+			double var = rem.calcR();
+			if (Util.isUsed(var))
+				result += parameter.getCoeff() * var;
+			else
+				return Constants.UNUSED;
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public double[] calcError() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+		double[] result = new double[2];
+		Arrays.fill(result, 0);
+		for (REMImpl rem : this.rems) {
+			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+			
+			double[] error = rem.calcError();
+			if (error != null && error.length >= 2) {
+				result[0] += parameter.getCoeff() * error[0];
+				result[1] += parameter.getCoeff() * error[1];
+			}
+			else
+				return null;
+		}
+		
+		return result;
+	}
+
+
 }

@@ -30,10 +30,12 @@ import net.hudup.core.data.MemFetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.Vector2;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
 import net.hudup.regression.AbstractRM;
 import net.hudup.regression.AbstractRM.VarWrapper;
+import net.hudup.regression.RM2;
 import net.hudup.regression.em.ui.REMDlg;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -625,6 +627,24 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
+	@Override
+	public synchronized Object executeByXStatistic(double[] xStatistic) {
+		if (xStatistic == null)
+			return null;
+
+		ExchangedParameter parameter = this.getExchangedParameter(); 
+		if (parameter == null)
+			return null;
+		List<Double> alpha = parameter.getAlpha();
+
+		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
+		if (stat == null)
+			return null;
+		else
+			return transformResponse(stat.getZStatistic(), true);
+	}
+	
+	
 	/**
 	 * This method can be used to estimate Z value with incomplete profile.
 	 * In other words, it is possible to test with incomplete testing data.
@@ -632,22 +652,8 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		ExchangedParameter parameter = this.getExchangedParameter(); 
-		if (parameter == null)
-			return null;
-		List<Double> alpha = parameter.getAlpha();
-		if (alpha == null || alpha.size() == 0)
-			return null;
-		
 		double[] xStatistic = extractRegressors(input);
-		if (xStatistic == null)
-			return null;
-		
-		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
-		if (stat == null)
-			return null;
-		else
-			return transformResponse(stat.getZStatistic(), true);
+		return executeByXStatistic(xStatistic);
 	}
 	
 	
@@ -911,12 +917,8 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 
 
-	/**
-	 * Extracting name of response variable (Z).
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @return text of response variable (Z) extracted.
-	 */
-	protected String extractResponseName() {
+	@Override
+	public String extractResponseName() {
 		// TODO Auto-generated method stub
 		return defaultExtractVariableName(attList, zIndices, 1);
 	}
@@ -1097,11 +1099,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
-	/**
-	 * Creating 2D decomposed graph for regressor.
-	 * @param xIndex X index.
-	 * @return 2D decomposed graph.
-	 */
+	@Override
     public synchronized Graph createRegressorGraph(int xIndex) {
 		if (getLargeStatistics() == null || getExchangedParameter() == null)
 			return null;
@@ -1128,7 +1126,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 
     	PlotGraphExt pg = new PlotGraphExt(data);
 
-    	pg.setGraphTitle("2D Decomposed plot");
+    	pg.setGraphTitle("Regressor plot");
     	pg.setXaxisLegend(extractRegressorName(xIndex));
     	pg.setYaxisLegend(extractResponseName());
     	int[] popt = {1, 0};
@@ -1141,23 +1139,29 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     }
 
     
+	@Override
+    public synchronized Graph createResponseGraph() {
+    	return createResponseGraph(this, this.getLargeStatistics());
+    }
+    
+    
     /**
-     * Creating graph for response variable.
+     * Creating graph for response variable given large statistic and regression model.
+     * @param rm given regression model.
+     * @param stats given large statistic.
      * @return graph for response variable.
      */
-    public synchronized Graph createResponseGraph() {
-		if (getLargeStatistics() == null || getExchangedParameter() == null)
+    public static Graph createResponseGraph(RM2 rm, LargeStatistics stats) {
+		if (rm == null || stats == null)
 			return null;
-    	
-		LargeStatistics stats = getLargeStatistics();
+		
     	int ncurves = 2;
     	int npoints = stats.size();
     	double[][] data = PlotGraph.data(ncurves, npoints);
 
-		ExchangedParameter parameter = getExchangedParameter();
     	for(int i = 0; i < npoints; i++) {
             data[0][i] = stats.getZData().get(i)[1];
-            data[1][i] = parameter.mean(stats.getXData().get(i));
+            data[1][i] = (double)rm.executeByXStatistic(stats.getXData().get(i));
         }
 
     	Regression regression = new Regression(data[0], data[1]);
@@ -1178,15 +1182,14 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 			@Override
 			public String getGraphFeature() {
 				// TODO Auto-generated method stub
-				return "R=" + MathUtil.format(calcR(), 2);
+				return "R=" + MathUtil.format(rm.calcR(), 2);
 			}
     		
     	};
 
-    	String responseName = extractResponseName();
-    	pg.setGraphTitle("Correlation plot:" + pg.getGraphFeature());
-    	pg.setXaxisLegend("Real " + responseName);
-    	pg.setYaxisLegend("Estimated " + responseName);
+    	pg.setGraphTitle("Correlation plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Real " + rm.extractResponseName());
+    	pg.setYaxisLegend("Estimated " + rm.extractResponseName());
     	int[] popt = {1, 0};
     	pg.setPoint(popt);
     	int[] lopt = {0, 3};
@@ -1197,24 +1200,30 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     }
     
     
+    @Override
+    public synchronized Graph createErrorGraph() {
+    	return createErrorGraph(this, this.getLargeStatistics());
+    }
+
+    
     /**
-     * Creating error graph for response variable.
+     * Creating error graph for response variable given regression model and large statistics.
+     * @param rm given regression model.
+     * @param stats given large statistics.
      * @return error graph for response variable.
      */
-    public synchronized Graph createErrorGraph() {
-		if (getLargeStatistics() == null || getExchangedParameter() == null)
+    public static Graph createErrorGraph(RM2 rm, LargeStatistics stats) {
+		if (rm == null || stats == null)
 			return null;
     	
-		LargeStatistics stats = getLargeStatistics();
     	int ncurves = 4;
     	int npoints = stats.size();
     	double[][] data = PlotGraph.data(ncurves, npoints);
 
-		ExchangedParameter parameter = getExchangedParameter();
 		double errorMean = 0;
     	for(int i = 0; i < npoints; i++) {
             double z = stats.getZData().get(i)[1];
-            double zcalc = parameter.mean(stats.getXData().get(i));
+            double zcalc = (double)rm.executeByXStatistic(stats.getXData().get(i));
             data[0][i] = ( z + zcalc ) / 2.0;
             data[1][i] = zcalc - z;
             
@@ -1226,7 +1235,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     		double d = data[1][i] - errorMean;
     		errorSd += d*d;
     	}
-   		errorSd = Math.sqrt(errorSd / npoints);
+   		errorSd = Math.sqrt(errorSd / npoints); //MLE estimation
     		
     	// Mean - 1.96sd
     	data[2][0] = 0;
@@ -1263,10 +1272,9 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     		
     	};
 
-    	String responseName = extractResponseName();
-    	pg.setGraphTitle("Error plot:" + pg.getGraphFeature());
-    	pg.setXaxisLegend("Mean " + responseName);
-    	pg.setYaxisLegend("Estimate error");
+    	pg.setGraphTitle("Error plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Mean " + rm.extractResponseName());
+    	pg.setYaxisLegend("Estimated error");
     	int[] popt = {1, 0, 0, 0};
     	pg.setPoint(popt);
     	int[] lopt = {0, 3, 3, 3};
@@ -1278,47 +1286,77 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     }
 
     
-    /**
-     * Creating graph related to response variable.
-     * @return graph related to response variable.
-     */
+    @Override
     public synchronized List<Graph> createResponseRalatedGraphs() {
+    	return createResponseRalatedGraphs(this);
+    }
+    
+    
+    /**
+     * Creating graph related to response variable given regression model.
+     * @param rm given regression model.
+     * @return graphs related to response variable given regression model.
+     */
+    public static List<Graph> createResponseRalatedGraphs(RM2 rm) {
     	List<Graph> relatedGraphs = Util.newList();
     	
-    	Graph responseGraph = createResponseGraph();
+    	Graph responseGraph = rm.createResponseGraph();
     	if (responseGraph != null) relatedGraphs.add(responseGraph);
     	
-    	Graph errorGraph = createErrorGraph();
+    	Graph errorGraph = rm.createErrorGraph();
     	if (errorGraph != null) relatedGraphs.add(errorGraph);
 
     	return relatedGraphs;
     }
+
     
-    
-    /**
-     * Getting list of regressors.
-     * @return list of regressors.
-     */
-    public List<VarWrapper> getActualRegressors() {
-    	return AbstractRM.getActualVariables(this.xIndices, this.attList);
+    @Override
+    public List<VarWrapper> getRegressorExpressions() {
+    	return AbstractRM.getExpressions(this.xIndices, this.attList);
     }
     
     
-    /**
-     * Getting response variable.
-     * @return response variable.
-     */
-    public List<VarWrapper> getActualResponse() {
-    	return AbstractRM.getActualVariables(this.zIndices, this.attList);
+    @Override
+    public List<VarWrapper> getRegressors() {
+    	return AbstractRM.getVariables(this.xIndices, this.attList);
     }
-
-
-    /**
-     * Getting correlation between real response and estimated response.
-     * @return correlation between real response and estimated response.
-     */
+    
+    
+    @Override
+    public synchronized double calcVariance() {
+		ExchangedParameter parameter = getExchangedParameter();
+		if (parameter == null)
+			return Constants.UNUSED;
+		
+		double variance = parameter.getZVariance();
+		if (Util.isUsed(variance))
+			return variance;
+		
+		LargeStatistics stats = getLargeStatistics();
+		if (stats == null)
+			return Constants.UNUSED;
+		else
+			return parameter.estimateZVariance(stats);
+    }
+    
+    
+    @Override
     public synchronized double calcR() {
-    	return Constants.UNUSED;
+		if (getLargeStatistics() == null)
+			return Constants.UNUSED;
+
+		LargeStatistics stats = getLargeStatistics();
+		Vector2 zVector = new Vector2(stats.size(), 0);
+		Vector2 zCalcVector = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = stats.getZData().get(i)[1];
+            zVector.set(i, z);
+            
+            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
+            zCalcVector.set(i, zCalc);
+		}
+		
+		return zCalcVector.corr(zVector);
     }
     
     
@@ -1327,7 +1365,18 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
      * @return mean and variance of errors.
      */
     public synchronized double[] calcError() {
-    	return new double[] {Constants.UNUSED, Constants.UNUSED};
+		if (getLargeStatistics() == null || getExchangedParameter() == null)
+			return null;
+
+		LargeStatistics stats = getLargeStatistics();
+		Vector2 error = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = stats.getZData().get(i)[1];
+            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
+            error.set(i, zCalc - z);
+		}
+		
+    	return new double[] {error.mean(), error.mleVar()};
     }
     
     

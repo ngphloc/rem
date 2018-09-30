@@ -4,8 +4,14 @@ import static net.hudup.regression.AbstractRM.extractNumber;
 import static net.hudup.regression.AbstractRM.splitIndices;
 import static net.hudup.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
 
+import java.awt.Color;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import flanagan.math.Fmath;
+import flanagan.plot.PlotGraph;
+import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
@@ -13,8 +19,15 @@ import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.Vector2;
+import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.RM;
+import net.hudup.regression.RM2;
+import net.hudup.regression.em.ui.REMDlg;
+import net.hudup.regression.em.ui.graph.Graph;
+import net.hudup.regression.em.ui.graph.PlotGraphExt;
 
 /**
  * This abstract class implements partially expectation maximization (EM) algorithm for mixture regression models.
@@ -24,7 +37,7 @@ import net.hudup.regression.RM;
  * @version 1.0
  *
  */
-public abstract class AbstractMixtureREM extends ExponentialEM implements RM {
+public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 
 	
 	/**
@@ -395,6 +408,25 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM {
 
 	
 	@Override
+	public synchronized Object executeByXStatistic(double[] xStatistic) {
+		if (this.rems == null || this.rems.size() == 0 || xStatistic == null)
+			return null;
+		
+		double result = 0;
+		for (REMImpl rem : this.rems) {
+			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+			
+			double value = extractNumber(rem.executeByXStatistic(xStatistic));
+			if (Util.isUsed(value))
+				result += parameter.getCoeff() * value;
+			else
+				return null;
+		}
+		return result;
+	}
+	
+	
+	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
@@ -470,6 +502,21 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM {
 
 	
 	@Override
+	public synchronized void manifest() {
+		// TODO Auto-generated method stub
+		if (getParameter() == null) {
+			JOptionPane.showMessageDialog(
+					UIUtil.getFrameForComponent(null), 
+					"Invalid regression model", 
+					"Invalid regression model", 
+					JOptionPane.ERROR_MESSAGE);
+		}
+		else
+			new REMDlg(UIUtil.getFrameForComponent(null), this);
+	}
+
+
+	@Override
 	public DataConfig createDefaultConfig() {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
@@ -491,6 +538,16 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM {
 				return value;
 		}
 		return null;
+	}
+
+
+	@Override
+	public String extractResponseName() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return this.rems.get(0).extractResponseName(); // Suppose all REMs have the same response variable;
 	}
 
 
@@ -517,6 +574,187 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM {
 	protected Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		return z;
+	}
+	
+	
+	@Override
+	public synchronized Graph createRegressorGraph(int xIndex) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+
+		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
+    	int ncurves = 1 + this.rems.size();
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+    	int[] popt = new int[1 + this.rems.size()];
+    	int[] lopt = new int[1 + this.rems.size()];
+    	
+    	for(int i = 0; i < npoints; i++) {
+            data[0][i] = stats.getXData().get(i)[xIndex];
+            data[1][i] = stats.getZData().get(i)[1];
+        }
+    	popt[0] = 1;
+    	lopt[0] = 0;
+    	
+    	for (int k = 0; k < this.rems.size(); k++) {
+    		ExchangedParameter parameter = this.rems.get(k).getExchangedParameter();
+    		double coeff0 = parameter.getAlpha().get(0);
+    		double coeff1 = parameter.getAlpha().get(xIndex);
+    		
+        	data[2*(k+1)][0] = Fmath.minimum(data[0]);
+        	data[2*(k+1) + 1][0] = coeff0 + coeff1 * data[2*(k+1)][0];
+        	
+        	data[2*(k+1)][1] = Fmath.maximum(data[0]);
+        	data[2*(k+1) + 1][1] = coeff0 + coeff1 * data[2*(k+1)][1];
+        	
+        	popt[k + 1] = 0;
+        	lopt[k + 1] = 3;
+    	}
+
+    	PlotGraphExt pg = new PlotGraphExt(data);
+
+    	pg.setGraphTitle("Regressor plot");
+    	pg.setXaxisLegend(this.rems.get(0).extractRegressorName(xIndex));
+    	pg.setYaxisLegend(this.rems.get(0).extractResponseName());
+    	pg.setPoint(popt);
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+        return pg;
+	}
+
+
+	@Override
+	public synchronized Graph createResponseGraph() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return REMImpl.createResponseGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
+	}
+
+
+	@Override
+	public Graph createErrorGraph() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return REMImpl.createErrorGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
+	}
+
+
+	@Override
+	public List<Graph> createResponseRalatedGraphs() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return REMImpl.createResponseRalatedGraphs(this);
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressorExpressions() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> wholeVarList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return wholeVarList;
+		
+		for (REMImpl rem : this.rems) {
+			List<VarWrapper> varList = rem.getRegressorExpressions();
+			for (VarWrapper var : varList) {
+				int found = VarWrapper.lookup(wholeVarList, var.getExpr(), false);
+				if (found < 0)
+					wholeVarList.add(var);
+			}
+		}
+		return wholeVarList;
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressors() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> wholeVarList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return wholeVarList;
+		
+		for (REMImpl rem : this.rems) {
+			List<VarWrapper> varList = rem.getRegressorExpressions();
+			for (VarWrapper var : varList) {
+				int found = VarWrapper.lookup(wholeVarList, var.getName(), true);
+				if (found >= 0)
+					wholeVarList.add(var);
+			}
+		}
+		return wholeVarList;
+	}
+
+
+	@Override
+	public synchronized double calcVariance() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		
+		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
+		List<double[]> xData = stats.getXData();
+		List<double[]> zData = stats.getZData();
+		
+		double ss = 0;
+		int N = 0;
+		for (int i = 0; i < xData.size(); i++) {
+			double[] xVector = xData.get(i);
+			double zValue = zData.get(i)[1];
+			double zEstimatedValue = (double)this.executeByXStatistic(xVector);
+			
+			if (Util.isUsed(zValue) && Util.isUsed(zEstimatedValue)) {
+				ss += (zEstimatedValue - zValue) * (zEstimatedValue - zValue);
+				N++;
+			}
+		}
+		return ss / N;
+	}
+
+
+	@Override
+	public double calcR() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		
+		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
+		Vector2 zVector = new Vector2(stats.size(), 0);
+		Vector2 zCalcVector = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = stats.getZData().get(i)[1];
+            zVector.set(i, z);
+            
+            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
+            zCalcVector.set(i, zCalc);
+		}
+		
+		return zCalcVector.corr(zVector);
+	}
+
+
+	@Override
+	public double[] calcError() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
+		Vector2 error = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = stats.getZData().get(i)[1];
+            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
+            error.set(i, zCalc - z);
+		}
+		
+    	return new double[] {error.mean(), error.mleVar()};
 	}
 	
 	

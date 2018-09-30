@@ -52,7 +52,7 @@ import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.regression.AbstractRM;
 import net.hudup.regression.AbstractRM.VarWrapper;
-import net.hudup.regression.em.REMImpl;
+import net.hudup.regression.RM2;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
 
@@ -75,7 +75,7 @@ public class REMDlg extends JDialog {
 	/**
 	 * Internal regression model.
 	 */
-	protected REMImpl rem = null;
+	protected RM2 rm = null;
 	
 	
 	/**
@@ -105,22 +105,22 @@ public class REMDlg extends JDialog {
 	/**
 	 * Constructor with specified regression model.
 	 * @param comp parent component.
-	 * @param rem specified regression model.
+	 * @param rm specified regression model.
 	 */
-	public REMDlg(final Component comp, final REMImpl rem) {
-		super(UIUtil.getFrameForComponent(comp), "Regression Information", false);
+	public REMDlg(final Component comp, final RM2 rm) {
+		super(UIUtil.getFrameForComponent(comp), "Regression Information", true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(800, 600);
 		setLocationRelativeTo(UIUtil.getFrameForComponent(comp));
 		
-		this.rem = rem;
+		this.rm = rm;
 		
 		setLayout(new BorderLayout());
 		
 		JPanel top = new JPanel(new BorderLayout());
 		this.add(top, BorderLayout.NORTH);
 		
-		REMTextArea txtModel = new REMTextArea(rem);
+		REMTextArea txtModel = new REMTextArea(rm);
 		top.add(txtModel, BorderLayout.CENTER);
 		
 		JPanel main = new JPanel(new BorderLayout());
@@ -148,8 +148,7 @@ public class REMDlg extends JDialog {
 		right = new JPanel(new GridLayout(0, 1));
 		col.add(right, BorderLayout.CENTER);
 		//
-		double variance = rem.getExchangedParameter().getZVariance();
-		variance = Util.isUsed(variance) ? variance : rem.getExchangedParameter().estimateZVariance(rem.getLargeStatistics()); 
+		double variance = rm.calcVariance();
 		JTextField txtVariance = new JTextField(MathUtil.format(variance));
 		txtVariance.setCaretPosition(0);
 		txtVariance.setEditable(false);
@@ -158,7 +157,7 @@ public class REMDlg extends JDialog {
 		right.add(pane);
 		//
 		JTextField txtR = new JTextField(
-				MathUtil.format(rem.calcR()));
+				MathUtil.format(rm.calcR()));
 		txtR.setCaretPosition(0);
 		txtR.setEditable(false);
 		pane = new JPanel(new BorderLayout());
@@ -177,7 +176,7 @@ public class REMDlg extends JDialog {
 		right = new JPanel(new GridLayout(0, 1));
 		col.add(right, BorderLayout.CENTER);
 		//
-		double[] error = rem.calcError();
+		double[] error = rm.calcError();
 		error = (error == null || error.length < 2) ? new double[] {Constants.UNUSED, Constants.UNUSED} : error; 
 		JTextField txtRatioErrMean = new JTextField(
 				MathUtil.format(error[0]));
@@ -200,11 +199,11 @@ public class REMDlg extends JDialog {
 		JPanel body = new JPanel(new BorderLayout());
 		main.add(body, BorderLayout.CENTER);
 		
-		JPanel paneRegressors = new JPanel(new BorderLayout());
-		body.add(paneRegressors, BorderLayout.NORTH);
+		JPanel paneRegressorExprs = new JPanel(new BorderLayout());
+		body.add(paneRegressorExprs, BorderLayout.NORTH);
 		
-		List<VarWrapper> regressors = rem.getActualRegressors();
-		regressors.sort(new Comparator<VarWrapper>() {
+		List<VarWrapper> regressorExprs = rm.getRegressorExpressions();
+		regressorExprs.sort(new Comparator<VarWrapper>() {
 
 			@Override
 			public int compare(VarWrapper o1, VarWrapper o2) {
@@ -213,8 +212,8 @@ public class REMDlg extends JDialog {
 			}
 			
 		});
-		JComboBox<VarWrapper> cmbReggressors = new JComboBox<VarWrapper>(regressors.toArray(new VarWrapper[] {}));
-		paneRegressors.add(cmbReggressors, BorderLayout.CENTER);
+		JComboBox<VarWrapper> cmbReggressorExprs = new JComboBox<VarWrapper>(regressorExprs.toArray(new VarWrapper[] {}));
+		paneRegressorExprs.add(cmbReggressorExprs, BorderLayout.CENTER);
 		JButton btnPlot = new JButton(new AbstractAction("Plot") {
 
 			/**
@@ -224,10 +223,10 @@ public class REMDlg extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VarWrapper regressor = (VarWrapper)cmbReggressors.getSelectedItem();
+				VarWrapper regressor = (VarWrapper)cmbReggressorExprs.getSelectedItem();
 				if (regressor == null)
 					JOptionPane.showMessageDialog(
-							cmbReggressors, 
+							cmbReggressorExprs, 
 							"No selected regressor", 
 							"No selected regressor", 
 							JOptionPane.ERROR_MESSAGE);
@@ -235,12 +234,12 @@ public class REMDlg extends JDialog {
 					plotRegressorGraph(regressor.getIndex());
 			}
 		});
-		paneRegressors.add(btnPlot, BorderLayout.EAST);
+		paneRegressorExprs.add(btnPlot, BorderLayout.EAST);
 		
 		JPanel paneGraphList = new JPanel(new GridLayout(1, 0));
 		body.add(paneGraphList, BorderLayout.CENTER);
-		graphList = rem.createResponseRalatedGraphs();
-		graphList2 = rem.createResponseRalatedGraphs();
+		graphList = rm.createResponseRalatedGraphs();
+		graphList2 = rm.createResponseRalatedGraphs();
 		for (int i = 0; i < graphList.size(); i++) {
 			final Graph graph = graphList.get(i);
 			
@@ -258,7 +257,7 @@ public class REMDlg extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(comp), "Graph", false);
+						final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(comp), "Graph", true);
 						dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 						dlg.setSize(600, 400);
 						dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(comp));
@@ -367,6 +366,16 @@ public class REMDlg extends JDialog {
 				return (column == 1);
 			}
 		};
+		List<VarWrapper> regressors = rm.getRegressors();
+		regressors.sort(new Comparator<VarWrapper>() {
+
+			@Override
+			public int compare(VarWrapper o1, VarWrapper o2) {
+				// TODO Auto-generated method stub
+				return o1.toString().compareToIgnoreCase(o2.toString());
+			}
+			
+		});
 		tbm.setColumnIdentifiers(new String[] {"Regressor", "Value"});
 		for (VarWrapper regressor : regressors) {
 			Vector<Object> rowData = new Vector<Object>();
@@ -415,7 +424,7 @@ public class REMDlg extends JDialog {
 	 * @param xIndex index of given regressor.
 	 */
 	private void plotRegressorGraph(int xIndex) {
-		Graph graph = rem != null ? rem.createRegressorGraph(xIndex) : null;
+		Graph graph = rm != null ? rm.createRegressorGraph(xIndex) : null;
 		if (graph == null) {
 			JOptionPane.showMessageDialog(
 					this, 
@@ -425,7 +434,7 @@ public class REMDlg extends JDialog {
 			return;
 		}
 		
-		final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(this), "Graph", false);
+		final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(this), "Graph", true);
 		dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		dlg.setSize(600, 400);
 		dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(this));
@@ -521,7 +530,7 @@ public class REMDlg extends JDialog {
 	 * Calculating regression model.
 	 */
 	private void calc() {
-		if (rem == null) {
+		if (rm == null) {
 			JOptionPane.showMessageDialog(
 					this, 
 					"Null regression model", 
@@ -541,7 +550,7 @@ public class REMDlg extends JDialog {
 				regressorValues.put(name, Double.parseDouble(value));
 			}
 			
-			double value = AbstractRM.extractNumber(rem.execute(regressorValues));
+			double value = AbstractRM.extractNumber(rm.execute(regressorValues));
 			if (!Util.isUsed(value)) {
 				JOptionPane.showMessageDialog(
 						this, 
@@ -575,7 +584,7 @@ public class REMDlg extends JDialog {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(getThis()), "Big zoom", false);
+					final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(getThis()), "Big zoom", true);
 					dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 					dlg.setSize(600, 400);
 					dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(getThis()));
@@ -631,11 +640,9 @@ public class REMDlg extends JDialog {
 			return;
 		
 		DataConfig config = new DataConfig();
-		xURI curStore = xURI.create(new File("."));
-		config.setStoreUri(curStore);
+		config.setStoreUri(xURI.create(new File(".")));
 		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(config);
-		xURI chooseUri = uriAssoc.chooseUri(comp, false, new String[] {"png"}, new String[] {"PNG file"}, curStore);
-
+		xURI chooseUri = uriAssoc.chooseUri(comp, false, new String[] {"png"}, new String[] {"PNG file"}, null, "png");
 		if (chooseUri == null) {
 			JOptionPane.showMessageDialog(
 					comp, 

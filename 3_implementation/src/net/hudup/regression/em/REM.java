@@ -1,7 +1,7 @@
 package net.hudup.regression.em;
 
 import net.hudup.em.EM;
-import net.hudup.regression.RM;
+import net.hudup.regression.RM2;
 
 
 /**
@@ -11,7 +11,7 @@ import net.hudup.regression.RM;
  * @version 1.0
  *
  */
-public interface REM extends RM, EM {
+public interface REM extends RM2, EM {
 
 	
 }

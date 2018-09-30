@@ -117,11 +117,9 @@ public class PlotGraphExt extends PlotGraph implements Graph {
 	@Override
 	public void exportImage() {
 		DataConfig config = new DataConfig();
-		xURI curStore = xURI.create(new File("."));
-		config.setStoreUri(curStore);
+		config.setStoreUri(xURI.create(new File(".")));
 		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(config);
-		xURI chooseUri = uriAssoc.chooseUri(this, false, new String[] {"png"}, new String[] {"PNG file"}, curStore);
-
+		xURI chooseUri = uriAssoc.chooseUri(this, false, new String[] {"png"}, new String[] {"PNG file"}, null, "png");
 		if (chooseUri == null) {
 			JOptionPane.showMessageDialog(
 					this, 

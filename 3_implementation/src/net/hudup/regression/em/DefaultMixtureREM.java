@@ -665,6 +665,6 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		else
 			return new LargeStatistics(xData, zData);
 	}
-	
-	
+
+
 }

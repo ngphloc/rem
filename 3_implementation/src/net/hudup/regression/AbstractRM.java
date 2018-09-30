@@ -729,12 +729,12 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	
 	
     /**
-     * Getting list of actual variables from specified indices and attribute list.
+     * Getting list of expression from specified indices and attribute list.
      * @param indices specified indices.
      * @param attList specified attribute list.
      * @return list of variables.
      */
-    public static List<VarWrapper> getActualVariables(List<Object[]> indices, AttributeList attList) {
+    public static List<VarWrapper> getExpressions(List<Object[]> indices, AttributeList attList) {
     	List<VarWrapper> vars = Util.newList();
     	if (indices == null || indices.size() <= 1)
     		return vars;
@@ -746,8 +746,8 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 				int attIndex = ((Number)item).intValue();
 				var = new VarWrapper(
 						i,
-						attList.get(attIndex).getName(),
 						null,
+						attList.get(attIndex).getName(),
 						attList.get(attIndex));
 			}
 			else {
@@ -766,6 +766,55 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
     }
 
 
+    /**
+     * Getting list of actual variables from specified indices and attribute list.
+     * @param indices specified indices.
+     * @param attList specified attribute list.
+     * @return list of variables.
+     */
+    public static List<VarWrapper> getVariables(List<Object[]> indices, AttributeList attList) {
+    	List<VarWrapper> vars = Util.newList();
+    	if (indices == null || indices.size() <= 1)
+    		return vars;
+    	
+    	for (int j = 0; j < attList.size(); j++) {
+    		Attribute att = attList.get(j);
+    		
+    		boolean found = false;
+    		int foundIndex = -1;
+        	for (int i = 1; i < indices.size(); i++) {
+    			Object item = indices.get(i)[0];
+    			if (item instanceof Number) {
+    				if (((Number)item).intValue() == j) {
+    					found = true;
+    					foundIndex = i;
+    					break;
+    				}
+    			}
+    			else {
+    				String expr = item.toString().trim();
+    				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + att.getName() : att.getName();   
+    				if(expr.contains(replacedText)) {
+    					found = true;
+    					break;
+    				}
+    			}
+        	}
+        	
+        	if (found) {
+        		VarWrapper var = new VarWrapper(
+        				foundIndex,
+						att.getName(),
+						null,
+						att);
+        		vars.add(var);
+        	}
+    	}
+    	
+    	return vars;
+    }
+    
+    
     /**
 	 * This class represents the wrapper of a regressor.
 	 * @author Loc Nguyen
@@ -792,6 +841,11 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 		 * Variable attribute.
 		 */
 		protected Attribute att = null;
+		
+		/**
+		 * Tag information.
+		 */
+		protected int tag = 0;
 		
 		/**
 		 * Constructor with specified name and index.
@@ -839,6 +893,22 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 			return att;
 		}
 		
+		/**
+		 * Getting tag information.
+		 * @return tag information.
+		 */
+		public int getTag() {
+			return tag;
+		}
+		
+		/**
+		 * Setting tag information.
+		 * @param tag specified tag information.
+		 */
+		public void setTag(int tag) {
+			this.tag = tag;
+		}
+		
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
@@ -848,6 +918,21 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 				return expr;
 		}
 		
+		/**
+		 * Looking an variable by specified expression or name in specified variable list.
+		 * @param varList specified variable list.
+		 * @param lookupText specified expression or name.
+		 * @param isName if true, specified text is a name. Otherwise, specified text is a expression. 
+		 * @return index of found variable in specified variable list.
+		 */
+		public static int lookup(List<VarWrapper> varList, String lookupText, boolean isName) {
+			for (int i = 0; i < varList.size(); i++) {
+				String text = isName ? varList.get(i).getName() : varList.get(i).getExpr();
+				if (text != null && text.equals(lookupText))
+					return i;
+			}
+			return -1;
+		}
 	}
 
 

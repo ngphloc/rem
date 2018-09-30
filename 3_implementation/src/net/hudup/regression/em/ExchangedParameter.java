@@ -389,6 +389,16 @@ public class ExchangedParameter implements Cloneable {
 	 */
 	public static double mean(List<Double> alpha, double[] xVector) {
 		double mean = 0;
+		if (xVector.length < alpha.size()) {
+			double[] xNewVector = new double[alpha.size()];
+			Arrays.fill(xNewVector, 1);
+			int start = alpha.size() - xVector.length;
+			for (int i = start; i < alpha.size(); i++) {
+				xNewVector[start] = xVector[i - start];
+			}
+			xVector = xNewVector;
+		}
+		
 		for (int i = 0; i < alpha.size(); i++) {
 			if (Util.isUsed(alpha.get(i)) && Util.isUsed(xVector[i]))
 				mean += alpha.get(i) * xVector[i];

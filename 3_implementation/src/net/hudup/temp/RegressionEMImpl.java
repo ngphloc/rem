@@ -23,7 +23,9 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.REM;
+import net.hudup.regression.em.ui.graph.Graph;
 
 /**
  * This class implements default expectation maximization algorithm for regression model in case of missing data, called REM algorithm. 
@@ -977,7 +979,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @return text of response variable (Z) extracted.
 	 */
-	protected String extractResponseName() {
+	public String extractResponseName() {
 		// TODO Auto-generated method stub
 		return defaultExtractVariableName(attList, zIndices, 1);
 	}
@@ -1111,6 +1113,76 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 		em.clearInternalData();
 
 		return new MemFetcher<>(profiles);
+	}
+
+
+	@Override
+	public double calcVariance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double calcR() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public Object executeByXStatistic(double[] xStatistic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createRegressorGraph(int xIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createResponseGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createErrorGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Graph> createResponseRalatedGraphs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressorExpressions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public double[] calcError() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

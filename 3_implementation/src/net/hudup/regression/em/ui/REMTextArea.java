@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 
 import net.hudup.core.logistic.ClipboardUtil;
 import net.hudup.core.logistic.ui.UIUtil;
-import net.hudup.regression.em.REMImpl;
+import net.hudup.regression.RM;
 
 /**
  * This class is the text area to show basic infomation of a regression model.
@@ -35,17 +35,17 @@ public class REMTextArea extends JTextArea {
 	/**
 	 * Internal regression model.
 	 */
-	protected REMImpl rem = null;
+	protected RM rm = null;
 	
 	
 	/**
 	 * Constructor with specified regression model.
-	 * @param rem specified regression model.
+	 * @param rm specified regression model.
 	 */
-	public REMTextArea(REMImpl rem) {
-		this.rem = rem;
+	public REMTextArea(RM rm) {
+		this.rm = rm;
 		
-		setText(rem.getDescription());
+		setText(rm.getDescription());
 		setEditable(false);
 		setWrapStyleWord(true);
 		setLineWrap(true);
@@ -69,7 +69,7 @@ public class REMTextArea extends JTextArea {
 			
 		});
 		
-		setToolTipText(rem.getDescription());
+		setToolTipText(rm.getDescription());
 	}
 	
 	
@@ -99,7 +99,7 @@ public class REMTextArea extends JTextArea {
 	 * Copying regression description into clip board.
 	 */
 	private void copyDescToClipboard() {
-		if (rem == null) {
+		if (rm == null) {
 			JOptionPane.showMessageDialog(
 					this, 
 					"Null regression model", 
@@ -107,7 +107,7 @@ public class REMTextArea extends JTextArea {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		else
-			ClipboardUtil.util.setText(rem.getDescription());
+			ClipboardUtil.util.setText(rm.getDescription());
 	}
 	
 

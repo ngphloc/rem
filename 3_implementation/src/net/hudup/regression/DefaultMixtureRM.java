@@ -11,12 +11,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import net.hudup.core.Constants;
+import net.hudup.core.Util;
 import net.hudup.core.alg.AbstractTestingAlg;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.DataConfig;
+import net.hudup.core.logistic.ui.UIUtil;
+import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.DefaultMixtureREM;
 import net.hudup.regression.em.ExchangedParameter;
+import net.hudup.regression.em.ui.graph.Graph;
 
 /**
  * This class represents the default mixture regression model.
@@ -25,7 +32,7 @@ import net.hudup.regression.em.ExchangedParameter;
  * @version 1.0
  *
  */
-public class DefaultMixtureRM extends AbstractTestingAlg implements RM, DuplicatableAlg {
+public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, DuplicatableAlg {
 
 	
 	/**
@@ -138,10 +145,30 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM, Duplicat
 
 	
 	@Override
+	public Object executeByXStatistic(double[] xStatistic) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.executeByXStatistic(xStatistic);
+		else
+			return null;
+	}
+
+
+	@Override
 	public Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (mixREM != null)
 			return mixREM.execute(input);
+		else
+			return null;
+	}
+
+
+	@Override
+	public String extractResponseName() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractResponseName();
 		else
 			return null;
 	}
@@ -188,6 +215,20 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM, Duplicat
 
 
 	@Override
+	public synchronized void manifest() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			mixREM.manifest();
+		else
+			JOptionPane.showMessageDialog(
+				UIUtil.getFrameForComponent(null), 
+				"Invalid regression model", 
+				"Invalid regression model", 
+				JOptionPane.ERROR_MESSAGE);
+	}
+
+
+	@Override
 	public Alg newInstance() {
 		// TODO Auto-generated method stub
 		DefaultMixtureRM mixRegress = new DefaultMixtureRM();
@@ -214,6 +255,96 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM, Duplicat
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
+	}
+
+
+	@Override
+	public Graph createRegressorGraph(int xIndex) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.createRegressorGraph(xIndex);
+		else
+			return null;
+	}
+
+
+	@Override
+	public Graph createResponseGraph() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.createResponseGraph();
+		else
+			return null;
+	}
+
+
+	@Override
+	public Graph createErrorGraph() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.createErrorGraph();
+		else
+			return null;
+	}
+
+
+	@Override
+	public List<Graph> createResponseRalatedGraphs() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.createResponseRalatedGraphs();
+		else
+			return Util.newList();
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressorExpressions() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.getRegressorExpressions();
+		else
+			return Util.newList();
+	}
+
+
+	@Override
+	public List<VarWrapper> getRegressors() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.getRegressors();
+		else
+			return Util.newList();
+	}
+
+
+	@Override
+	public double calcVariance() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.calcVariance();
+		else
+			return Constants.UNUSED;
+	}
+
+
+	@Override
+	public double calcR() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.calcR();
+		else
+			return Constants.UNUSED;
+	}
+
+
+	@Override
+	public double[] calcError() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.calcError();
+		else
+			return null;
 	}
 
 	
