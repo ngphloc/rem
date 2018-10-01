@@ -10,6 +10,8 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.regression.AbstractRM;
+import net.hudup.regression.VarWrapper;
+import net.hudup.regression.em.ui.graph.Graph;
 
 /**
  * This class implements regression model with correlation in case of missing data, called COR algorithm.
@@ -178,11 +180,11 @@ public class CorRegression extends AbstractRM implements DuplicatableAlg {
 				}
 				xVector = this.xVectors.get(j);
 
-				double value = extractRegressor(profile, j);
+				double value = extractRegressorValue(profile, j);
 				xVector.add((double)transformRegressor(value, false));
 			}
 			
-			double lastValue = extractNumber(extractResponse(profile));
+			double lastValue = extractNumber(extractResponseValue(profile));
 			this.zVector.add((double)transformResponse(lastValue, false));
 		}
 		this.sample.reset();
@@ -242,6 +244,76 @@ public class CorRegression extends AbstractRM implements DuplicatableAlg {
 		DataConfig config = super.createDefaultConfig();
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Object executeByXStatistic(double[] xStatistic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createRegressorGraph(int xIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createResponseGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Graph createErrorGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Graph> createResponseRalatedGraphs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public double calcVariance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double calcR() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double[] calcError() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

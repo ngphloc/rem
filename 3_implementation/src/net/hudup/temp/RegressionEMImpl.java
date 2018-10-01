@@ -1,8 +1,8 @@
 package net.hudup.temp;
 
-import static net.hudup.regression.AbstractRM.defaultExtractVariable;
-import static net.hudup.regression.AbstractRM.defaultExtractVariableName;
 import static net.hudup.regression.AbstractRM.extractNumber;
+import static net.hudup.regression.AbstractRM.extractVariable;
+import static net.hudup.regression.AbstractRM.extractVariableValue;
 import static net.hudup.regression.AbstractRM.findIndex;
 import static net.hudup.regression.AbstractRM.parseIndices;
 import static net.hudup.regression.AbstractRM.solve;
@@ -23,7 +23,7 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.AbstractRM.VarWrapper;
+import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.REM;
 import net.hudup.regression.em.ui.graph.Graph;
 
@@ -145,7 +145,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 			if (profile == null)
 				continue;
 			
-			double lastValue = extractNumber(extractResponse(profile));
+			double lastValue = extractNumber(extractResponseValue(profile));
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
@@ -178,7 +178,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 			xVector[0] = 1;
 			zVector[0] = 1;
 			
-			double lastValue = extractNumber(extractResponse(profile));
+			double lastValue = extractNumber(extractResponseValue(profile));
 			if (!Util.isUsed(lastValue))
 				zVector[1] = Constants.UNUSED;
 			else
@@ -941,9 +941,9 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, xIndices, index);
+			return extractVariableValue(input, null, xIndices, index);
 		else
-			return defaultExtractVariable(input, attList, xIndices, index);
+			return extractVariableValue(input, attList, xIndices, index);
 	}
 
 
@@ -955,7 +955,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	 */
 	protected String extractRegressorName(int index) {
 		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, xIndices, index);
+		return extractVariable(attList, xIndices, index).toString();
 	}
 
 	
@@ -963,14 +963,14 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
 	@Override
-	public Object extractResponse(Object input) {
+	public Object extractResponseValue(Object input) {
 		// TODO Auto-generated method stub
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, zIndices, 1);
+			return extractVariableValue(input, null, zIndices, 1);
 		else
-			return defaultExtractVariable(input, attList, zIndices, 1);
+			return extractVariableValue(input, attList, zIndices, 1);
 	}
 
 
@@ -981,7 +981,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	 */
 	public String extractResponseName() {
 		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, zIndices, 1);
+		return extractVariable(attList, zIndices, 1).toString();
 	}
 
 
@@ -998,14 +998,8 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	}
 
 
-	/**
-	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
-	 * @param z specified variable Z.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of Z.
-	 */
-	protected Object transformResponse(Object z, boolean inverse) {
+	@Override
+	public Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		return z;
 	}
@@ -1026,7 +1020,7 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 				if (profile == null)
 					continue;
 				
-				double zValue = extractNumber(extractResponse(profile));
+				double zValue = extractNumber(extractResponseValue(profile));
 				double executedValue = extractNumber(execute(profile));
 				if (Util.isUsed(zValue) && Util.isUsed(executedValue)) {
 					double d = executedValue - zValue;
@@ -1166,21 +1160,42 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 
 
 	@Override
-	public List<VarWrapper> getRegressorExpressions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public List<VarWrapper> getRegressors() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public double[] calcError() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public VarWrapper extractRegressor(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
 		return null;
 	}

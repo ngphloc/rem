@@ -20,7 +20,6 @@ import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.ui.UIUtil;
-import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.DefaultMixtureREM;
 import net.hudup.regression.em.ExchangedParameter;
 import net.hudup.regression.em.ui.graph.Graph;
@@ -165,20 +164,70 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 
 
 	@Override
-	public String extractResponseName() {
+	public VarWrapper extractRegressor(int index) {
 		// TODO Auto-generated method stub
 		if (mixREM != null)
-			return mixREM.extractResponseName();
+			return mixREM.extractRegressor(index);
 		else
 			return null;
 	}
 
 
 	@Override
-	public Object extractResponse(Object input) {
+	public List<VarWrapper> extractRegressors() {
 		// TODO Auto-generated method stub
 		if (mixREM != null)
-			return mixREM.extractResponse(input);
+			return mixREM.extractRegressors();
+		else
+			return Util.newList();
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractSingleRegressors();
+		else
+			return Util.newList();
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractRegressorValue(input, index);
+		else
+			return Constants.UNUSED;
+	}
+
+
+	@Override
+	public VarWrapper extractResponse() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractResponse();
+		else
+			return null;
+	}
+
+
+	@Override
+	public Object extractResponseValue(Object input) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractResponseValue(input);
+		else
+			return null;
+	}
+
+
+	@Override
+	public Object transformResponse(Object z, boolean inverse) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.transformResponse(z, inverse);
 		else
 			return null;
 	}
@@ -293,26 +342,6 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		// TODO Auto-generated method stub
 		if (mixREM != null)
 			return mixREM.createResponseRalatedGraphs();
-		else
-			return Util.newList();
-	}
-
-
-	@Override
-	public List<VarWrapper> getRegressorExpressions() {
-		// TODO Auto-generated method stub
-		if (mixREM != null)
-			return mixREM.getRegressorExpressions();
-		else
-			return Util.newList();
-	}
-
-
-	@Override
-	public List<VarWrapper> getRegressors() {
-		// TODO Auto-generated method stub
-		if (mixREM != null)
-			return mixREM.getRegressors();
 		else
 			return Util.newList();
 	}

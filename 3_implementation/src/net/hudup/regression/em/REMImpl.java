@@ -1,9 +1,11 @@
 package net.hudup.regression.em;
 
 import static net.hudup.regression.AbstractRM.createProfile;
-import static net.hudup.regression.AbstractRM.defaultExtractVariable;
-import static net.hudup.regression.AbstractRM.defaultExtractVariableName;
 import static net.hudup.regression.AbstractRM.extractNumber;
+import static net.hudup.regression.AbstractRM.extractSingleVariables;
+import static net.hudup.regression.AbstractRM.extractVariable;
+import static net.hudup.regression.AbstractRM.extractVariableValue;
+import static net.hudup.regression.AbstractRM.extractVariables;
 import static net.hudup.regression.AbstractRM.findIndex;
 import static net.hudup.regression.AbstractRM.notSatisfy;
 import static net.hudup.regression.AbstractRM.parseIndices;
@@ -16,7 +18,6 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import flanagan.analysis.Regression;
 import flanagan.math.Fmath;
 import flanagan.plot.PlotGraph;
 import net.hudup.core.Constants;
@@ -30,12 +31,12 @@ import net.hudup.core.data.MemFetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
-import net.hudup.core.logistic.Vector2;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
 import net.hudup.regression.AbstractRM;
-import net.hudup.regression.AbstractRM.VarWrapper;
-import net.hudup.regression.RM2;
+import net.hudup.regression.LargeStatistics;
+import net.hudup.regression.Statistics;
+import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.REMDlg;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -142,12 +143,12 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 			if (profile == null)
 				continue;
 			
-			double lastValue = extractNumber(extractResponse(profile));
+			double lastValue = extractNumber(extractResponseValue(profile));
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
 			for (int j = 1; j < this.xIndices.size(); j++) {
-				double value = extractRegressor(profile, j);
+				double value = extractRegressorValue(profile, j);
 				if (Util.isUsed(value))
 					xExists[j - 1] = xExists[j - 1] || true;
 			}
@@ -177,14 +178,14 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 			xVector[0] = 1.0;
 			zVector[0] = 1.0;
 			
-			double lastValue = extractNumber(extractResponse(profile));
+			double lastValue = extractNumber(extractResponseValue(profile));
 			if (!Util.isUsed(lastValue))
 				zVector[1] = Constants.UNUSED;
 			else
 				zVector[1] = (double)transformResponse(lastValue, false);
 			
 			for (int j = 1; j < this.xIndices.size(); j++) {
-				double value = extractRegressor(profile, j);
+				double value = extractRegressorValue(profile, j);
 				if (!Util.isUsed(value))
 					xVector[j] = Constants.UNUSED;
 				else
@@ -646,13 +647,35 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	
 	
 	/**
+	 * Executing by X statistics without transform.
+	 * @param xStatistic X statistics (regressors). The first element of this X statistics is 1.
+	 * @return result of execution without transform. Return null if execution is failed.
+	 */
+	public synchronized Object executeByXStatisticWithoutTransform(double[] xStatistic) {
+		if (xStatistic == null)
+			return null;
+
+		ExchangedParameter parameter = this.getExchangedParameter(); 
+		if (parameter == null)
+			return null;
+		List<Double> alpha = parameter.getAlpha();
+
+		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
+		if (stat == null)
+			return null;
+		else
+			return stat.getZStatistic();
+	}
+
+	
+	/**
 	 * This method can be used to estimate Z value with incomplete profile.
 	 * In other words, it is possible to test with incomplete testing data.
 	 */
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		double[] xStatistic = extractRegressors(input);
+		double[] xStatistic = extractRegressorValues(input);
 		return executeByXStatistic(xStatistic);
 	}
 	
@@ -743,10 +766,10 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(alpha.get(0)));
+		buffer.append(transformResponse(extractResponse().toString(), false) + " = " + MathUtil.format(alpha.get(0)));
 		for (int j = 0; j < alpha.size() - 1; j++) {
 			double coeff = alpha.get(j + 1);
-			String regressorExpr = "(" + transformRegressor(extractRegressorName(j + 1), false).toString() + ")";
+			String regressorExpr = "(" + transformRegressor(extractRegressor(j + 1).toString(), false).toString() + ")";
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + regressorExpr);
 			else
@@ -842,22 +865,36 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
-	/**
-	 * Extracting value of regressor (X) from specified profile.
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param input specified input. It is often profile.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
-	 * So index 0 always indicates to value 1. 
-	 * @return value of regressor (X) extracted from specified profile.
-	 */
-	protected double extractRegressor(Object input, int index) {
+	@Override
+	public VarWrapper extractRegressor(int index) {
+		// TODO Auto-generated method stub
+		return extractVariable(attList, xIndices, index);
+	}
+
+	
+	@Override
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		return extractVariables(attList, xIndices);
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		return extractSingleVariables(attList, xIndices);
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
 		// TODO Auto-generated method stub
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, xIndices, index);
+			return extractVariableValue(input, null, xIndices, index);
 		else
-			return defaultExtractVariable(input, attList, xIndices, index);
+			return extractVariableValue(input, attList, xIndices, index);
 	}
 
 
@@ -866,7 +903,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	 * @param input specified input object.
 	 * @return list of values of regressors from input object.
 	 */
-	protected double[] extractRegressors(Object input) {
+	protected double[] extractRegressorValues(Object input) {
 		Profile profile = null;
 		if (input instanceof Profile)
 			profile = (Profile)input;
@@ -878,7 +915,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 		double[] xStatistic = new double[this.xIndices.size()];
 		xStatistic[0] = 1;
 		for (int j = 1; j < this.xIndices.size(); j++) {
-			double xValue = extractRegressor(profile, j);
+			double xValue = extractRegressorValue(profile, j);
 			if (Util.isUsed(xValue))
 				xStatistic[j] = (double)transformRegressor(xValue, false);
 			else
@@ -889,38 +926,22 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
-	/**
-	 * Extracting name of regressor (X).
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
-	 * So index 0 always indicates to value &apos;#noname&apos;. 
-	 * @return text of regressor (X) extracted.
-	 */
-	protected String extractRegressorName(int index) {
+	@Override
+	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, xIndices, index);
+		return extractVariable(attList, zIndices, 1);
 	}
 
-	
-	/**
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 */
+
 	@Override
-	public synchronized Object extractResponse(Object input) {
+	public synchronized Object extractResponseValue(Object input) {
 		// TODO Auto-generated method stub
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, zIndices, 1);
+			return extractVariableValue(input, null, zIndices, 1);
 		else
-			return defaultExtractVariable(input, attList, zIndices, 1);
-	}
-
-
-	@Override
-	public String extractResponseName() {
-		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, zIndices, 1);
+			return extractVariableValue(input, attList, zIndices, 1);
 	}
 
 
@@ -937,14 +958,8 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 
 
-	/**
-	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
-	 * @param z specified variable Z.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of Z.
-	 */
-	protected Object transformResponse(Object z, boolean inverse) {
+	@Override
+	public Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		return z;
 	}
@@ -965,7 +980,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 				if (profile == null)
 					continue;
 				
-				double zValue = extractNumber(extractResponse(profile));
+				double zValue = extractNumber(extractResponseValue(profile));
 				double executedValue = extractNumber(execute(profile)); //Synchronize due to execute method.
 				if (Util.isUsed(zValue) && Util.isUsed(executedValue)) {
 					double d = executedValue - zValue;
@@ -1127,8 +1142,8 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     	PlotGraphExt pg = new PlotGraphExt(data);
 
     	pg.setGraphTitle("Regressor plot");
-    	pg.setXaxisLegend(extractRegressorName(xIndex));
-    	pg.setYaxisLegend(extractResponseName());
+    	pg.setXaxisLegend(extractRegressor(xIndex).toString());
+    	pg.setYaxisLegend(extractResponse().toString());
     	int[] popt = {1, 0};
     	pg.setPoint(popt);
     	int[] lopt = {0, 3};
@@ -1141,222 +1156,31 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     
 	@Override
     public synchronized Graph createResponseGraph() {
-    	return createResponseGraph(this, this.getLargeStatistics());
-    }
-    
-    
-    /**
-     * Creating graph for response variable given large statistic and regression model.
-     * @param rm given regression model.
-     * @param stats given large statistic.
-     * @return graph for response variable.
-     */
-    public static Graph createResponseGraph(RM2 rm, LargeStatistics stats) {
-		if (rm == null || stats == null)
-			return null;
-		
-    	int ncurves = 2;
-    	int npoints = stats.size();
-    	double[][] data = PlotGraph.data(ncurves, npoints);
-
-    	for(int i = 0; i < npoints; i++) {
-            data[0][i] = stats.getZData().get(i)[1];
-            data[1][i] = (double)rm.executeByXStatistic(stats.getXData().get(i));
-        }
-
-    	Regression regression = new Regression(data[0], data[1]);
-    	regression.linear();
-    	double[] coef = regression.getCoeff();
-    	data[2][0] = Fmath.minimum(data[0]);
-    	data[3][0] = coef[0] + coef[1] * data[2][0];
-    	data[2][1] = Fmath.maximum(data[0]);
-    	data[3][1] = coef[0] + coef[1] * data[2][1];
-
-    	PlotGraphExt pg = new PlotGraphExt(data) {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getGraphFeature() {
-				// TODO Auto-generated method stub
-				return "R=" + MathUtil.format(rm.calcR(), 2);
-			}
-    		
-    	};
-
-    	pg.setGraphTitle("Correlation plot: " + pg.getGraphFeature());
-    	pg.setXaxisLegend("Real " + rm.extractResponseName());
-    	pg.setYaxisLegend("Estimated " + rm.extractResponseName());
-    	int[] popt = {1, 0};
-    	pg.setPoint(popt);
-    	int[] lopt = {0, 3};
-    	pg.setLine(lopt);
-
-    	pg.setBackground(Color.WHITE);
-        return pg;
+		return AbstractRM.createResponseGraph(this, this.getLargeStatistics());
     }
     
     
     @Override
     public synchronized Graph createErrorGraph() {
-    	return createErrorGraph(this, this.getLargeStatistics());
-    }
-
-    
-    /**
-     * Creating error graph for response variable given regression model and large statistics.
-     * @param rm given regression model.
-     * @param stats given large statistics.
-     * @return error graph for response variable.
-     */
-    public static Graph createErrorGraph(RM2 rm, LargeStatistics stats) {
-		if (rm == null || stats == null)
-			return null;
-    	
-    	int ncurves = 4;
-    	int npoints = stats.size();
-    	double[][] data = PlotGraph.data(ncurves, npoints);
-
-		double errorMean = 0;
-    	for(int i = 0; i < npoints; i++) {
-            double z = stats.getZData().get(i)[1];
-            double zcalc = (double)rm.executeByXStatistic(stats.getXData().get(i));
-            data[0][i] = ( z + zcalc ) / 2.0;
-            data[1][i] = zcalc - z;
-            
-            errorMean += data[1][i];
-        }
-    	errorMean = errorMean / npoints;
-    	double errorSd = 0;
-    	for(int i = 0; i < npoints; i++) {
-    		double d = data[1][i] - errorMean;
-    		errorSd += d*d;
-    	}
-   		errorSd = Math.sqrt(errorSd / npoints); //MLE estimation
-    		
-    	// Mean - 1.96sd
-    	data[2][0] = 0;
-    	data[3][0] = errorMean - 1.96 * errorSd;
-    	data[2][1] = Fmath.maximum(data[0]);
-    	data[3][1] = errorMean - 1.96 * errorSd;
-
-    	// Mean
-    	data[4][0] = 0;
-    	data[5][0] = errorMean;
-    	data[4][1] = Fmath.maximum(data[0]);
-    	data[5][1] = errorMean;
-
-    	// Mean + 1.96sd
-    	data[6][0] = 0;
-    	data[7][0] = errorMean + 1.96 * errorSd;
-    	data[6][1] = Fmath.maximum(data[0]);
-    	data[7][1] = errorMean + 1.96 * errorSd;
-
-    	final double mean = errorMean, sd = errorSd;
-    	PlotGraphExt pg = new PlotGraphExt(data) {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getGraphFeature() {
-				// TODO Auto-generated method stub
-				return MathUtil.format(mean, 2) + " +/- 1.96*" + 
-    				MathUtil.format(sd, 2);
-			}
-    		
-    	};
-
-    	pg.setGraphTitle("Error plot: " + pg.getGraphFeature());
-    	pg.setXaxisLegend("Mean " + rm.extractResponseName());
-    	pg.setYaxisLegend("Estimated error");
-    	int[] popt = {1, 0, 0, 0};
-    	pg.setPoint(popt);
-    	int[] lopt = {0, 3, 3, 3};
-    	pg.setLine(lopt);
-
-    	pg.setBackground(Color.WHITE);
-    	
-        return pg;
+    	return AbstractRM.createErrorGraph(this, this.getLargeStatistics());
     }
 
     
     @Override
     public synchronized List<Graph> createResponseRalatedGraphs() {
-    	return createResponseRalatedGraphs(this);
-    }
-    
-    
-    /**
-     * Creating graph related to response variable given regression model.
-     * @param rm given regression model.
-     * @return graphs related to response variable given regression model.
-     */
-    public static List<Graph> createResponseRalatedGraphs(RM2 rm) {
-    	List<Graph> relatedGraphs = Util.newList();
-    	
-    	Graph responseGraph = rm.createResponseGraph();
-    	if (responseGraph != null) relatedGraphs.add(responseGraph);
-    	
-    	Graph errorGraph = rm.createErrorGraph();
-    	if (errorGraph != null) relatedGraphs.add(errorGraph);
-
-    	return relatedGraphs;
-    }
-
-    
-    @Override
-    public List<VarWrapper> getRegressorExpressions() {
-    	return AbstractRM.getExpressions(this.xIndices, this.attList);
-    }
-    
-    
-    @Override
-    public List<VarWrapper> getRegressors() {
-    	return AbstractRM.getVariables(this.xIndices, this.attList);
+    	return AbstractRM.createResponseRalatedGraphs(this);
     }
     
     
     @Override
     public synchronized double calcVariance() {
-		ExchangedParameter parameter = getExchangedParameter();
-		if (parameter == null)
-			return Constants.UNUSED;
-		
-		double variance = parameter.getZVariance();
-		if (Util.isUsed(variance))
-			return variance;
-		
-		LargeStatistics stats = getLargeStatistics();
-		if (stats == null)
-			return Constants.UNUSED;
-		else
-			return parameter.estimateZVariance(stats);
+    	return AbstractRM.calcVariance(this, this.getLargeStatistics());
     }
     
     
     @Override
     public synchronized double calcR() {
-		if (getLargeStatistics() == null)
-			return Constants.UNUSED;
-
-		LargeStatistics stats = getLargeStatistics();
-		Vector2 zVector = new Vector2(stats.size(), 0);
-		Vector2 zCalcVector = new Vector2(stats.size(), 0);
-		for (int i = 0; i < stats.size(); i++) {
-            double z = stats.getZData().get(i)[1];
-            zVector.set(i, z);
-            
-            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
-            zCalcVector.set(i, zCalc);
-		}
-		
-		return zCalcVector.corr(zVector);
+    	return AbstractRM.calcR(this, this.getLargeStatistics());
     }
     
     
@@ -1365,18 +1189,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
      * @return mean and variance of errors.
      */
     public synchronized double[] calcError() {
-		if (getLargeStatistics() == null || getExchangedParameter() == null)
-			return null;
-
-		LargeStatistics stats = getLargeStatistics();
-		Vector2 error = new Vector2(stats.size(), 0);
-		for (int i = 0; i < stats.size(); i++) {
-            double z = stats.getZData().get(i)[1];
-            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
-            error.set(i, zCalc - z);
-		}
-		
-    	return new double[] {error.mean(), error.mleVar()};
+    	return AbstractRM.calcError(this, this.getLargeStatistics());
     }
     
     

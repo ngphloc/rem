@@ -245,12 +245,12 @@ public abstract class AbstractMultipleRM extends AbstractTestingAlg implements M
 
 
 	@Override
-	public synchronized Object extractResponse(Object input) {
+	public synchronized Object extractResponseValue(Object input) {
 		// TODO Auto-generated method stub
 		List<Object> valueList = Util.newList();
 		boolean success = false;
 		for (RM regression : this.regressions) {
-			Object value = regression.extractResponse(input);
+			Object value = regression.extractResponseValue(input);
 			valueList.add(value);
 			if (value != null)
 				success = true;

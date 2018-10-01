@@ -28,7 +28,7 @@ public class RegressionEvaluator extends TestingEvaluator {
 	@Override
 	protected Object extractTestValue(Alg alg, Profile testingProfile) {
 		// TODO Auto-generated method stub
-		return ((RM)alg).extractResponse(testingProfile);
+		return ((RM)alg).extractResponseValue(testingProfile);
 	}
 
 	

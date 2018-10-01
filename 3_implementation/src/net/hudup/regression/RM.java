@@ -32,10 +32,11 @@ public interface RM extends TestingAlg {
 	
 	/**
 	 * Extracting value of response variable (Z) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param input specified input. It is often profile.
 	 * @return value of response variable (Z) extracted from specified profile.
 	 */
-	Object extractResponse(Object input);
+	Object extractResponseValue(Object input);
 	
 	
 }

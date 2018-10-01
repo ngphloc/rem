@@ -14,6 +14,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.regression.LargeStatistics;
 
 /**
  * This class implements the mixture regression model.
@@ -587,7 +588,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		}
 
 		@Override
-		protected Object transformResponse(Object z, boolean inverse) {
+		public Object transformResponse(Object z, boolean inverse) {
 			// TODO Auto-generated method stub
 			return getMixtureREM().transformResponse(z, inverse);
 		}

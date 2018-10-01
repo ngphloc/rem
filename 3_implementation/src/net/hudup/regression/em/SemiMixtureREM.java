@@ -1,13 +1,16 @@
 package net.hudup.regression.em;
 
-import static net.hudup.regression.AbstractRM.extractNumber;
 import static net.hudup.regression.AbstractRM.notSatisfy;
 import static net.hudup.regression.AbstractRM.splitIndices;
 import static net.hudup.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
+import flanagan.analysis.Regression;
+import flanagan.math.Fmath;
+import flanagan.plot.PlotGraph;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
@@ -16,8 +19,12 @@ import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
-import net.hudup.core.logistic.NextUpdate;
+import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.Vector2;
+import net.hudup.regression.LargeStatistics;
+import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
+import net.hudup.regression.em.ui.graph.PlotGraphExt;
 
 /**
  * This class implements the semi-mixture regression model.
@@ -58,30 +65,6 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	 * Default mutual mode.
 	 */
 	protected final static boolean UNIFORM_MODE_DEFAULT = false;
-
-	
-	/**
-	 * Field name of decomposition.
-	 */
-	protected final static String DECOMPOSE_FIELD = "srem_decompose";
-	
-	
-	/**
-	 * Default decomposition.
-	 */
-	protected final static boolean DECOMPOSE_DEFAULT = true;
-
-	
-	/**
-	 * Field name of logistic mode.
-	 */
-	protected final static String LOGISTIC_MODE_FIELD = "srem_logistic_mode";
-	
-	
-	/**
-	 * Default logistic mode.
-	 */
-	protected final static boolean LOGISTIC_MODE_DEFAULT = false;
 
 	
 	@Override
@@ -212,12 +195,10 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			ExchangedParameter parameter = rem.getExchangedParameter();
 			double zVariance = parameter.estimateZVariance(rem.getLargeStatistics());
 			parameter.setZVariance(zVariance);
-
-			if (!getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
-				parameter.setCoeff(1.0 / (double)this.rems.size());
+			parameter.setCoeff(1.0 / (double)this.rems.size());
 		}
 		//In uniform mode, all coefficients are 1/K. In logistic mode, coefficients are not used. 
-		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD) || getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD))
 			return true;
 		
 		List<ExchangedParameter> parameterList = Util.newList(this.rems.size());
@@ -275,13 +256,10 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			ExchangedParameter parameter = rem.getExchangedParameter();
 			double zVariance = parameter.estimateZVariance(rem.getLargeStatistics());
 			parameter.setZVariance(zVariance);
-
-			//In logistic mode, coefficients are not used. 
-			if (!getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
-				parameter.setCoeff(1.0 / (double)this.rems.size());
+			parameter.setCoeff(1.0 / (double)this.rems.size());
 		}
 		//In uniform mode, all coefficients are 1/K. In logistic mode, coefficients are not used. 
-		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD) || getConfig().getAsBoolean(LOGISTIC_MODE_FIELD))
+		if (getConfig().getAsBoolean(UNIFORM_MODE_FIELD))
 			return true;
 		
 		boolean terminated = true;
@@ -369,39 +347,39 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
-		if (getConfig().getAsBoolean(LOGISTIC_MODE_FIELD)) { // Logistic mode does not use probability
-			if (this.rems == null || this.rems.size() == 0)
-				return null;
-			
-			List<Double> zValues = Util.newList(this.rems.size());
-			List<Double> expProbs = Util.newList(this.rems.size());
-			double expProbsSum = 0;
-			for (int k = 0; k < this.rems.size(); k++) {
-				REMImpl rem = this.rems.get(k);
-				double zValue = extractNumber(rem.execute(input));
-				if (!Util.isUsed(zValue))
-					return null;
-				
-				zValues.add(zValue);
-				
-				ExchangedParameter parameter = rem.getExchangedParameter();
-				double prob = ExchangedParameter.normalPDF(zValue, 
-						parameter.mean(rem.extractRegressors(input)),
-						parameter.getZVariance());
-				double weight = Math.exp(prob);
-				expProbs.add(weight);
-				expProbsSum += weight;
-			}
-
-			double result = 0;
-			for (int k = 0; k < this.rems.size(); k++) {
-				result += (expProbs.get(k) / expProbsSum) * zValues.get(k); 
-			}
-			
-			return result;
-		}
-		else
-			return super.execute(input);
+//		if (getConfig().getAsBoolean(LOGISTIC_MODE_FIELD)) { // Logistic mode does not use probability
+//			if (this.rems == null || this.rems.size() == 0)
+//				return null;
+//			
+//			List<Double> zValues = Util.newList(this.rems.size());
+//			List<Double> expProbs = Util.newList(this.rems.size());
+//			double expProbsSum = 0;
+//			for (int k = 0; k < this.rems.size(); k++) {
+//				REMImpl rem = this.rems.get(k);
+//				double zValue = extractNumber(rem.execute(input));
+//				if (!Util.isUsed(zValue))
+//					return null;
+//				
+//				zValues.add(zValue);
+//				
+//				ExchangedParameter parameter = rem.getExchangedParameter();
+//				double prob = ExchangedParameter.normalPDF(zValue, 
+//						parameter.mean(rem.extractRegressorValues(input)),
+//						parameter.getZVariance());
+//				double weight = Math.exp(prob);
+//				expProbs.add(weight);
+//				expProbsSum += weight;
+//			}
+//
+//			double result = 0;
+//			for (int k = 0; k < this.rems.size(); k++) {
+//				result += (expProbs.get(k) / expProbsSum) * zValues.get(k); 
+//			}
+//			
+//			return result;
+//		}
+//		else
+		return super.execute(input);
 	}
 
 
@@ -438,44 +416,187 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		DataConfig config = super.createDefaultConfig();
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
-		config.put(DECOMPOSE_FIELD, DECOMPOSE_DEFAULT);
-		config.put(LOGISTIC_MODE_FIELD, LOGISTIC_MODE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
 	}
 
 	
-	/**
-	 * The method is not implemented yet.
-	 */
-	@NextUpdate
+	@Override
+	public VarWrapper extractRegressor(int index) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return this.rems.get(index - 1).extractRegressor(1);
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		else
+			return this.rems.get(index - 1).extractRegressorValue(input, 1);
+	}
+
+
 	@Override
 	public synchronized Graph createRegressorGraph(int xIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return this.rems.get(xIndex - 1).createRegressorGraph(1);
 	}
 
 
-	/**
-	 * The method is not implemented yet.
-	 */
-	@NextUpdate
 	@Override
 	public synchronized Graph createResponseGraph() {
 		// TODO Auto-generated method stub
-		return null;
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+
+		int ncurves = 2;
+    	int npoints = this.rems.get(0).getLargeStatistics().size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+    	for(int i = 0; i < npoints; i++) {
+			double z = 0;
+			double zEstimated = 0;
+			for (REMImpl rem : this.rems) {
+				double coeff = rem.getExchangedParameter().getCoeff();
+				double[] xVector = rem.getLargeStatistics().getXData().get(i);
+				
+				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+			}
+			z = (double)transformResponse(z, true);
+			zEstimated = (double)transformResponse(zEstimated, true);
+			
+			data[0][i] = z;
+            data[1][i] = zEstimated;
+        }
+
+    	Regression regression = new Regression(data[0], data[1]);
+    	regression.linear();
+    	double[] coef = regression.getCoeff();
+    	data[2][0] = Fmath.minimum(data[0]);
+    	data[3][0] = coef[0] + coef[1] * data[2][0];
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = coef[0] + coef[1] * data[2][1];
+
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return "R=" + MathUtil.format(calcR(), 2);
+			}
+    		
+    	};
+
+    	pg.setGraphTitle("Correlation plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Real " + transformResponse(extractResponse().toString(), true));
+    	pg.setYaxisLegend("Estimated " + transformResponse(extractResponse().toString(), true));
+    	int[] popt = {1, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+        return pg;
 	}
 
 
-	/**
-	 * The method is not implemented yet.
-	 */
-	@NextUpdate
 	@Override
 	public Graph createErrorGraph() {
 		// TODO Auto-generated method stub
-		return null;
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+    	int ncurves = 4;
+    	int npoints = this.rems.get(0).getLargeStatistics().size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+		double errorMean = 0;
+    	for(int i = 0; i < npoints; i++) {
+			double z = 0;
+			double zEstimated = 0;
+			for (REMImpl rem : this.rems) {
+				double coeff = rem.getExchangedParameter().getCoeff();
+				double[] xVector = rem.getLargeStatistics().getXData().get(i);
+				
+				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+			}
+			z = (double)transformResponse(z, true);
+			zEstimated = (double)transformResponse(zEstimated, true);
+
+			data[0][i] = ( z + zEstimated ) / 2.0;
+            data[1][i] = zEstimated - z;
+            errorMean += data[1][i];
+        }
+    	errorMean = errorMean / npoints;
+    	double errorSd = 0;
+    	for(int i = 0; i < npoints; i++) {
+    		double d = data[1][i] - errorMean;
+    		errorSd += d*d;
+    	}
+   		errorSd = Math.sqrt(errorSd / npoints); //MLE estimation
+    		
+    	// Mean - 1.96sd
+    	data[2][0] = 0;
+    	data[3][0] = errorMean - 1.96 * errorSd;
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = errorMean - 1.96 * errorSd;
+
+    	// Mean
+    	data[4][0] = 0;
+    	data[5][0] = errorMean;
+    	data[4][1] = Fmath.maximum(data[0]);
+    	data[5][1] = errorMean;
+
+    	// Mean + 1.96sd
+    	data[6][0] = 0;
+    	data[7][0] = errorMean + 1.96 * errorSd;
+    	data[6][1] = Fmath.maximum(data[0]);
+    	data[7][1] = errorMean + 1.96 * errorSd;
+
+    	final double mean = errorMean, sd = errorSd;
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return MathUtil.format(mean, 2) + " +/- 1.96*" + 
+    				MathUtil.format(sd, 2);
+			}
+    		
+    	};
+
+    	pg.setGraphTitle("Error plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Mean " + transformResponse(extractResponse().toString(), true));
+    	pg.setYaxisLegend("Estimated error");
+    	int[] popt = {1, 0, 0, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3, 3, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+    	
+        return pg;
 	}
 
 
@@ -485,18 +606,25 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
-		double result = 0;
-		for (REMImpl rem : this.rems) {
-			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+		int N = this.rems.get(0).getLargeStatistics().size();
+		double ss = 0;
+		for (int i = 0; i < N; i++) {
+			double z = 0;
+			double zEstimated = 0;
+			for (REMImpl rem : this.rems) {
+				double coeff = rem.getExchangedParameter().getCoeff();
+				double[] xVector = rem.getLargeStatistics().getXData().get(i);
+				
+				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+			}
+			z = (double)transformResponse(z, true);
+			zEstimated = (double)transformResponse(zEstimated, true);
 			
-			double var = rem.calcVariance();
-			if (Util.isUsed(var))
-				result += parameter.getCoeff() * var;
-			else
-				return Constants.UNUSED;
+			ss += (zEstimated - z) * (zEstimated - z);
 		}
 		
-		return result;
+		return ss / N;
 	}
 
 
@@ -506,18 +634,27 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
-		double result = 0;
-		for (REMImpl rem : this.rems) {
-			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
+		int N = this.rems.get(0).getLargeStatistics().size();
+		Vector2 zVector = new Vector2(N, 0);
+		Vector2 zEstimatedVector = new Vector2(N, 0);
+		for (int i = 0; i < N; i++) {
+			double z = 0;
+			double zEstimated = 0;
+			for (REMImpl rem : this.rems) {
+				double coeff = rem.getExchangedParameter().getCoeff();
+				double[] xVector = rem.getLargeStatistics().getXData().get(i);
+				
+				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+			}
+			z = (double)transformResponse(z, true);
+			zEstimated = (double)transformResponse(zEstimated, true);
 			
-			double var = rem.calcR();
-			if (Util.isUsed(var))
-				result += parameter.getCoeff() * var;
-			else
-				return Constants.UNUSED;
+            zVector.set(i, z);
+            zEstimatedVector.set(i, zEstimated);
 		}
 		
-		return result;
+		return zEstimatedVector.corr(zVector);
 	}
 
 
@@ -527,21 +664,23 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		
-		double[] result = new double[2];
-		Arrays.fill(result, 0);
-		for (REMImpl rem : this.rems) {
-			ExchangedParameter parameter = (ExchangedParameter)rem.getParameter();
-			
-			double[] error = rem.calcError();
-			if (error != null && error.length >= 2) {
-				result[0] += parameter.getCoeff() * error[0];
-				result[1] += parameter.getCoeff() * error[1];
+		int N = this.rems.get(0).getLargeStatistics().size();
+		Vector2 error = new Vector2(N, 0);
+		for (int i = 0; i < N; i++) {
+			double z = 0;
+			double zEstimated = 0;
+			for (REMImpl rem : this.rems) {
+				double coeff = rem.getExchangedParameter().getCoeff();
+				double[] xVector = rem.getLargeStatistics().getXData().get(i);
+				
+				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
 			}
-			else
-				return null;
+			
+            error.set(i, zEstimated - z);
 		}
 		
-		return result;
+    	return new double[] {error.mean(), error.mleVar()};
 	}
 
 

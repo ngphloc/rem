@@ -1,5 +1,6 @@
 package net.hudup.regression;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 
 import com.speqmath.Parser;
 
+import flanagan.analysis.Regression;
+import flanagan.math.Fmath;
+import flanagan.plot.PlotGraph;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.AbstractTestingAlg;
@@ -27,7 +31,10 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.Vector2;
 import net.hudup.core.parser.TextParserUtil;
+import net.hudup.regression.em.ui.graph.Graph;
+import net.hudup.regression.em.ui.graph.PlotGraphExt;
 
 /**
  * This is the most abstract class for regression model. It implements partially the interface {@link RM}.
@@ -35,7 +42,7 @@ import net.hudup.core.parser.TextParserUtil;
  * @author Loc Nguyen
  * @version 1.0*
  */
-public abstract class AbstractRM extends AbstractTestingAlg implements RM {
+public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 
 	
 	/**
@@ -134,12 +141,12 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 			if (profile == null)
 				continue;
 			
-			double lastValue = (double)extractResponse(profile);
+			double lastValue = (double)extractResponseValue(profile);
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
 			for (int j = 1; j < xIndices.size(); j++) {
-				double value = extractRegressor(profile, j);
+				double value = extractRegressorValue(profile, j);
 				if (Util.isUsed(value))
 					xExists[j - 1] = xExists[j - 1] || true;
 			}
@@ -188,7 +195,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 		
 		double sum = this.coeffs.get(0);
 		for (int j = 1; j < this.coeffs.size(); j++) {  //due to x = (1, x1, x2,..., xn) and xIndices.get(0) = -1
-			double value = extractRegressor(profile, j);
+			double value = extractRegressorValue(profile, j);
 			sum += this.coeffs.get(j) * (double)transformRegressor(value, false); 
 		}
 		
@@ -247,10 +254,10 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 			return "";
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(transformResponse(extractResponseName(), false) + " = " + MathUtil.format(coeffs.get(0)));
+		buffer.append(transformResponse(extractResponse().toString(), false) + " = " + MathUtil.format(coeffs.get(0)));
 		for (int j = 0; j < this.coeffs.size() - 1; j++) {
 			double coeff = this.coeffs.get(j + 1);
-			String regressorExpr = "(" + transformRegressor(extractRegressorName(j + 1), false).toString() + ")";
+			String regressorExpr = "(" + transformRegressor(extractRegressor(j + 1).toString(), false).toString() + ")";
 			if (coeff < 0)
 				buffer.append(" - " + MathUtil.format(Math.abs(coeff)) + "*" + regressorExpr);
 			else
@@ -261,59 +268,55 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	}
 	
 	
-	/**
-	 * Extracting value of regressor (X) from specified profile.
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param input specified input. It is often profile.
-	 * @param index specified indices.
-	 * @return value of regressor (X) extracted from specified profile.
-	 */
-	protected double extractRegressor(Object input, int index) {
-		// TODO Auto-generated method stub
-		if (input == null)
-			return Constants.UNUSED;
-		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, xIndices, index);
-		else
-			return defaultExtractVariable(input, attList, xIndices, index);
-	}
-
-
-	/**
-	 * Extracting name of regressor (X).
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param index specified indices.
-	 * @return text of regressor (X) extracted.
-	 */
-	protected String extractRegressorName(int index) {
-		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, xIndices, index);
-	}
-
-
-	/**
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 */
 	@Override
-	public synchronized Object extractResponse(Object input) {
+	public VarWrapper extractRegressor(int index) {
+		// TODO Auto-generated method stub
+		return extractVariable(attList, xIndices, index);
+	}
+
+	
+	@Override
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		return extractVariables(attList, xIndices);
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		return extractSingleVariables(attList, xIndices);
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
 		// TODO Auto-generated method stub
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
-			return defaultExtractVariable(input, null, zIndices, 1);
+			return extractVariableValue(input, null, xIndices, index);
 		else
-			return defaultExtractVariable(input, attList, zIndices, 1);
+			return extractVariableValue(input, attList, xIndices, index);
 	}
 
 
-	/**
-	 * Extracting name of response variable (Z).
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @return text of response variable (Z) extracted.
-	 */
-	protected String extractResponseName() {
+	@Override
+	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
-		return defaultExtractVariableName(attList, zIndices, 1);
+		return extractVariable(attList, zIndices, 1);
+	}
+
+
+	@Override
+	public synchronized Object extractResponseValue(Object input) {
+		// TODO Auto-generated method stub
+		if (input == null)
+			return Constants.UNUSED;
+		else if (input instanceof Profile)
+			return extractVariableValue(input, null, zIndices, 1);
+		else
+			return extractVariableValue(input, attList, zIndices, 1);
 	}
 
 
@@ -330,20 +333,14 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	}
 
 
-	/**
-	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
-	 * @param z specified variable Z.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of Z.
-	 */
-	protected Object transformResponse(Object z, boolean inverse) {
+	@Override
+	public Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		return z;
 	}
 
 	
-	/**
+    /**
 	 * Splitting the specified string into list of indices.
 	 * @param cfgIndices specified string.
 	 * @return list of indices.
@@ -475,92 +472,6 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	}
 	
 	
-	/**
-	 * Extracting value of variable (X) from specified profile.
-	 * @param input specified input. It is often a profile.
-	 * @param attList specified attribute list.
-	 * @param indices specified list of indices.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
-	 * So index 0 always indicate to value 1. 
-	 * @return value of variable (X) extracted from specified profile.
-	 */
-	public static double defaultExtractVariable(Object input, AttributeList attList, List<Object[]> indices, int index) {
-		if (index == 0)
-			return 1.0;
-		if (input == null)
-			return Constants.UNUSED;
-		
-		if (!(input instanceof Profile)) {
-			List<Double> values = DSUtil.toDoubleList(input, false);
-			if (attList == null)
-				attList = defaultAttributeList(values.size());
-			Profile profile = createProfile(attList, values);
-			return defaultExtractVariable(profile, null, indices, index);
-		}
-		
-		Profile profile = (Profile)input;
-		try {
-			Object item = indices.get(index)[0];
-			if (item instanceof Number)
-				return profile.getValueAsReal(((Number)item).intValue());
-			
-			String expr = item.toString().trim();
-			int n = profile.getAttCount();
-			for (int i = 0; i < n; i++) {
-				String attName =  profile.getAtt(i).getName();
-				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
-				if(!expr.contains(replacedText))
-					continue;
-				
-				if(profile.isMissing(i))
-					return Constants.UNUSED; //Cannot evaluate
-				Double value = profile.getValueAsReal(attName);
-				if(!Util.isUsed(value))
-					return Constants.UNUSED; //Cannot evaluate
-				
-				expr = expr.replaceAll(replacedText, value.toString());
-			}
-			
-			Parser parser = new Parser();
-			return parser.parse2(expr);
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-		}
-		
-		return Constants.UNUSED;
-	}
-	
-	
-	/**
-	 * Extracting variable name.
-	 * @param attList specified attribute list.
-	 * @param indices specified list of indices.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
-	 * So index 0 always indicate to value &apos;#noname&apos;. 
-	 * @return variable name.
-	 */
-	public static String defaultExtractVariableName(AttributeList attList, List<Object[]> indices, int index) {
-		// TODO Auto-generated method stub
-		if (index == 0)
-			return "#noname";
-
-		Object item = indices.get(index)[0];
-		if (item instanceof Number)
-			return attList.get(((Number)item).intValue()).getName();
-		else {
-			String expr = item.toString();
-			for (int i = 0; i < attList.size(); i++) {
-				String attName =  attList.get(i).getName();
-				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
-				expr = expr.replaceAll(replacedText, attName).trim();
-			}
-			
-			return expr;
-		}
-	}
-	
-
 	/**
 	 * Solving the equation Ax = b. This method uses firstly LU decomposition to solve exact solution and then uses QR decomposition to solve approximate solution in least square sense.
 	 * Finally, if the problem of singular matrix continues to raise, Moore–Penrose pseudo-inverse matrix is used to find approximate solution.
@@ -728,13 +639,43 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 	}
 	
 	
-    /**
-     * Getting list of expression from specified indices and attribute list.
-     * @param indices specified indices.
+	/**
+	 * Extracting variable.
+	 * @param attList specified attribute list.
+	 * @param indices specified list of indices.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
+	 * So index 0 always indicate to value &apos;#noname&apos;. 
+	 * @return variable.
+	 */
+	public static VarWrapper extractVariable(AttributeList attList, List<Object[]> indices, int index) {
+		// TODO Auto-generated method stub
+		if (index == 0 || attList == null) return null;
+
+		Object item = indices.get(index)[0];
+		if (item instanceof Number) {
+			int attIndex = ((Number)item).intValue();
+			return VarWrapper.createByName(index, attList.get(attIndex).getName(), attList.get(attIndex));
+		}
+		else {
+			String expr = item.toString();
+			for (int j = 0; j < attList.size(); j++) {
+				String attName =  attList.get(j).getName();
+				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
+				expr = expr.replaceAll(replacedText, attName).trim();
+			}
+			
+			return VarWrapper.createByExpr(index, expr, null);
+		}
+	}
+
+	
+	/**
+     * Getting list of variables from specified indices and attribute list.
      * @param attList specified attribute list.
+     * @param indices specified indices.
      * @return list of variables.
      */
-    public static List<VarWrapper> getExpressions(List<Object[]> indices, AttributeList attList) {
+    public static List<VarWrapper> extractVariables(AttributeList attList, List<Object[]> indices) {
     	List<VarWrapper> vars = Util.newList();
     	if (indices == null || indices.size() <= 1)
     		return vars;
@@ -744,19 +685,16 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
 			VarWrapper var = null;
 			if (item instanceof Number) {
 				int attIndex = ((Number)item).intValue();
-				var = new VarWrapper(
-						i,
-						null,
-						attList.get(attIndex).getName(),
-						attList.get(attIndex));
+				var = VarWrapper.createByName(i, attList.get(attIndex).getName(), attList.get(attIndex));
 			}
 			else {
 				String expr = item.toString().trim();
-				var = new VarWrapper(
-						i,
-						null,
-						expr,
-						null);
+				for (int j = 0; j < attList.size(); j++) {
+					String attName =  attList.get(j).getName();
+					String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
+					expr = expr.replaceAll(replacedText, attName).trim();
+				}
+				var = VarWrapper.createByExpr(i, expr, null);
 			}
 			
 			vars.add(var);
@@ -766,16 +704,15 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
     }
 
 
-    /**
+	/**
      * Getting list of actual variables from specified indices and attribute list.
-     * @param indices specified indices.
      * @param attList specified attribute list.
+     * @param indices specified indices.
      * @return list of variables.
      */
-    public static List<VarWrapper> getVariables(List<Object[]> indices, AttributeList attList) {
+    public static List<VarWrapper> extractSingleVariables(AttributeList attList, List<Object[]> indices) {
     	List<VarWrapper> vars = Util.newList();
-    	if (indices == null || indices.size() <= 1)
-    		return vars;
+    	if (indices == null || attList == null) return vars;
     	
     	for (int j = 0; j < attList.size(); j++) {
     		Attribute att = attList.get(j);
@@ -802,11 +739,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
         	}
         	
         	if (found) {
-        		VarWrapper var = new VarWrapper(
-        				foundIndex,
-						att.getName(),
-						null,
-						att);
+        		VarWrapper var = VarWrapper.createByName(foundIndex, att.getName(), att);
         		vars.add(var);
         	}
     	}
@@ -815,124 +748,290 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM {
     }
     
     
-    /**
-	 * This class represents the wrapper of a regressor.
-	 * @author Loc Nguyen
-	 * @version 1.0
+	/**
+	 * Extracting value of variable (X) from specified profile.
+	 * @param input specified input. It is often a profile.
+	 * @param attList specified attribute list.
+	 * @param indices specified list of indices.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>indices</code>.
+	 * So index 0 always indicate to value 1. 
+	 * @return value of variable (X) extracted from specified profile.
 	 */
-	public static class VarWrapper {
+	public static double extractVariableValue(Object input, AttributeList attList, List<Object[]> indices, int index) {
+		if (index == 0)
+			return 1.0;
+		if (input == null)
+			return Constants.UNUSED;
 		
-		/**
-		 * Variable index.
-		 */
-		protected int index = -1;
-
-		/**
-		 * Variable name.
-		 */
-		protected String name = null;
-		
-		/**
-		 * Variable expression.
-		 */
-		protected String expr = null;
-		
-		/**
-		 * Variable attribute.
-		 */
-		protected Attribute att = null;
-		
-		/**
-		 * Tag information.
-		 */
-		protected int tag = 0;
-		
-		/**
-		 * Constructor with specified name and index.
-		 * @param index specified index.
-		 * @param name specified name.
-		 * @param expr specified expression.
-		 * @param att specified attribute.
-		 */
-		public VarWrapper(int index, String name, String expr, Attribute att) {
-			this.index = index;
-			this.name = name;
-			this.expr = expr;
-			this.att = att;
+		if (!(input instanceof Profile)) {
+			List<Double> values = DSUtil.toDoubleList(input, false);
+			if (attList == null)
+				attList = defaultAttributeList(values.size());
+			Profile profile = createProfile(attList, values);
+			return extractVariableValue(profile, null, indices, index);
 		}
 		
-		/**
-		 * Getting index.
-		 * @return index.
-		 */
-		public int getIndex() {
-			return index;
-		}
-
-		/**
-		 * Getting name.
-		 * @return name.
-		 */
-		public String getName() {
-			return name;
-		}
-		
-		/**
-		 * Getting variable expression.
-		 * @return variable expression.
-		 */
-		public String getExpr() {
-			return expr;
-		}
-		
-		/**
-		 * Getting variable attribute.
-		 * @return
-		 */
-		public Attribute getAttribute() {
-			return att;
-		}
-		
-		/**
-		 * Getting tag information.
-		 * @return tag information.
-		 */
-		public int getTag() {
-			return tag;
-		}
-		
-		/**
-		 * Setting tag information.
-		 * @param tag specified tag information.
-		 */
-		public void setTag(int tag) {
-			this.tag = tag;
-		}
-		
-		@Override
-		public String toString() {
-			// TODO Auto-generated method stub
-			if (name != null)
-				return name;
-			else
-				return expr;
-		}
-		
-		/**
-		 * Looking an variable by specified expression or name in specified variable list.
-		 * @param varList specified variable list.
-		 * @param lookupText specified expression or name.
-		 * @param isName if true, specified text is a name. Otherwise, specified text is a expression. 
-		 * @return index of found variable in specified variable list.
-		 */
-		public static int lookup(List<VarWrapper> varList, String lookupText, boolean isName) {
-			for (int i = 0; i < varList.size(); i++) {
-				String text = isName ? varList.get(i).getName() : varList.get(i).getExpr();
-				if (text != null && text.equals(lookupText))
-					return i;
+		Profile profile = (Profile)input;
+		try {
+			Object item = indices.get(index)[0];
+			if (item instanceof Number)
+				return profile.getValueAsReal(((Number)item).intValue());
+			
+			String expr = item.toString().trim();
+			int n = profile.getAttCount();
+			for (int i = 0; i < n; i++) {
+				String attName =  profile.getAtt(i).getName();
+				String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
+				if(!expr.contains(replacedText))
+					continue;
+				
+				if(profile.isMissing(i))
+					return Constants.UNUSED; //Cannot evaluate
+				Double value = profile.getValueAsReal(attName);
+				if(!Util.isUsed(value))
+					return Constants.UNUSED; //Cannot evaluate
+				
+				expr = expr.replaceAll(replacedText, value.toString());
 			}
-			return -1;
+			
+			Parser parser = new Parser();
+			return parser.parse2(expr);
 		}
+		catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return Constants.UNUSED;
+	}
+
+
+    /**
+     * Creating graph for response variable given large statistic and regression model.
+     * @param rm given regression model.
+     * @param stats given large statistic.
+     * @return graph for response variable.
+     */
+    public static Graph createResponseGraph(RM2 rm, LargeStatistics stats) {
+		if (rm == null || stats == null)
+			return null;
+		
+    	int ncurves = 2;
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+    	for(int i = 0; i < npoints; i++) {
+            data[0][i] = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
+            data[1][i] = (double)rm.executeByXStatistic(stats.getXData().get(i));
+        }
+
+    	Regression regression = new Regression(data[0], data[1]);
+    	regression.linear();
+    	double[] coef = regression.getCoeff();
+    	data[2][0] = Fmath.minimum(data[0]);
+    	data[3][0] = coef[0] + coef[1] * data[2][0];
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = coef[0] + coef[1] * data[2][1];
+
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return "R=" + MathUtil.format(rm.calcR(), 2);
+			}
+    		
+    	};
+
+    	pg.setGraphTitle("Correlation plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Real " + rm.transformResponse(rm.extractResponse().toString(), true));
+    	pg.setYaxisLegend("Estimated " + rm.transformResponse(rm.extractResponse().toString(), true));
+    	int[] popt = {1, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+        return pg;
+    }
+
+
+    /**
+     * Creating error graph for response variable given regression model and large statistics.
+     * @param rm given regression model.
+     * @param stats given large statistics.
+     * @return error graph for response variable.
+     */
+    public static Graph createErrorGraph(RM2 rm, LargeStatistics stats) {
+		if (rm == null || stats == null)
+			return null;
+    	
+    	int ncurves = 4;
+    	int npoints = stats.size();
+    	double[][] data = PlotGraph.data(ncurves, npoints);
+
+		double errorMean = 0;
+    	for(int i = 0; i < npoints; i++) {
+            double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
+            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            data[0][i] = ( z + zEstimated ) / 2.0;
+            data[1][i] = zEstimated - z;
+            
+            errorMean += data[1][i];
+        }
+    	errorMean = errorMean / npoints;
+    	double errorSd = 0;
+    	for(int i = 0; i < npoints; i++) {
+    		double d = data[1][i] - errorMean;
+    		errorSd += d*d;
+    	}
+   		errorSd = Math.sqrt(errorSd / npoints); //MLE estimation
+    		
+    	// Mean - 1.96sd
+    	data[2][0] = 0;
+    	data[3][0] = errorMean - 1.96 * errorSd;
+    	data[2][1] = Fmath.maximum(data[0]);
+    	data[3][1] = errorMean - 1.96 * errorSd;
+
+    	// Mean
+    	data[4][0] = 0;
+    	data[5][0] = errorMean;
+    	data[4][1] = Fmath.maximum(data[0]);
+    	data[5][1] = errorMean;
+
+    	// Mean + 1.96sd
+    	data[6][0] = 0;
+    	data[7][0] = errorMean + 1.96 * errorSd;
+    	data[6][1] = Fmath.maximum(data[0]);
+    	data[7][1] = errorMean + 1.96 * errorSd;
+
+    	final double mean = errorMean, sd = errorSd;
+    	PlotGraphExt pg = new PlotGraphExt(data) {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getGraphFeature() {
+				// TODO Auto-generated method stub
+				return MathUtil.format(mean, 2) + " +/- 1.96*" + 
+    				MathUtil.format(sd, 2);
+			}
+    		
+    	};
+
+    	pg.setGraphTitle("Error plot: " + pg.getGraphFeature());
+    	pg.setXaxisLegend("Mean " + rm.transformResponse(rm.extractResponse().toString(), true));
+    	pg.setYaxisLegend("Estimated error");
+    	int[] popt = {1, 0, 0, 0};
+    	pg.setPoint(popt);
+    	int[] lopt = {0, 3, 3, 3};
+    	pg.setLine(lopt);
+
+    	pg.setBackground(Color.WHITE);
+    	
+        return pg;
+    }
+
+
+    /**
+     * Creating graph related to response variable given regression model.
+     * @param rm given regression model.
+     * @return graphs related to response variable given regression model.
+     */
+    public static List<Graph> createResponseRalatedGraphs(RM2 rm) {
+    	List<Graph> relatedGraphs = Util.newList();
+    	
+    	Graph responseGraph = rm.createResponseGraph();
+    	if (responseGraph != null) relatedGraphs.add(responseGraph);
+    	
+    	Graph errorGraph = rm.createErrorGraph();
+    	if (errorGraph != null) relatedGraphs.add(errorGraph);
+
+    	return relatedGraphs;
+    }
+
+
+    /**
+     * Calculating variance with specified regression model and large statistics.
+     * @param rm specified regression model.
+     * @param stats specified large statistics.
+     * @return variance with specified regression model and large statistics.
+     */
+	public static double calcVariance(RM2 rm, LargeStatistics stats) {
+		// TODO Auto-generated method stub
+		if (rm == null || stats == null)
+			return Constants.UNUSED;
+		
+		List<double[]> xData = stats.getXData();
+		List<double[]> zData = stats.getZData();
+		
+		double ss = 0;
+		int N = 0;
+		for (int i = 0; i < xData.size(); i++) {
+			double[] xVector = xData.get(i);
+			double z = (double)rm.transformResponse(zData.get(i)[1], true);
+			double zEstimated = (double)rm.executeByXStatistic(xVector);
+			
+			if (Util.isUsed(z) && Util.isUsed(zEstimated)) {
+				ss += (zEstimated - z) * (zEstimated - z);
+				N++;
+			}
+		}
+		return ss / N;
+	}
+
+
+    /**
+     * Calculating correlation with specified regression model and large statistics.
+     * @param rm specified regression model.
+     * @param stats specified large statistics.
+     * @return correlation with specified regression model and large statistics.
+     */
+	public static double calcR(RM2 rm, LargeStatistics stats) {
+		// TODO Auto-generated method stub
+		if (rm == null || stats == null)
+			return Constants.UNUSED;
+		
+		Vector2 zVector = new Vector2(stats.size(), 0);
+		Vector2 zEstimatedVector = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
+            zVector.set(i, z);
+            
+            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            zEstimatedVector.set(i, zEstimated);
+		}
+		
+		return zEstimatedVector.corr(zVector);
+	}
+
+
+    /**
+     * Calculating error with specified regression model and large statistics.
+     * @param rm specified regression model.
+     * @param stats specified large statistics.
+     * @return error with specified regression model and large statistics.
+     */
+	public static double[] calcError(RM2 rm, LargeStatistics stats) {
+		// TODO Auto-generated method stub
+		if (rm == null || stats == null)
+			return null;
+		
+		Vector2 error = new Vector2(stats.size(), 0);
+		for (int i = 0; i < stats.size(); i++) {
+            double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
+            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            error.set(i, zEstimated - z);
+		}
+		
+    	return new double[] {error.mean(), error.mleVar()};
 	}
 
 

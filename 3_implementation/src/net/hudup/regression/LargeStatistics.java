@@ -1,4 +1,4 @@
-package net.hudup.regression.em;
+package net.hudup.regression;
 
 import java.util.List;
 

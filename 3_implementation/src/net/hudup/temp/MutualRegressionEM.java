@@ -190,7 +190,7 @@ public class MutualRegressionEM extends ExponentialEM implements RM, Duplicatabl
 				continue;
 			
 			Profile newProfile = new Profile(attRef);
-			double lastValue = extractNumber(this.extractResponse(profile));
+			double lastValue = extractNumber(this.extractResponseValue(profile));
 			if (Util.isUsed(lastValue))
 				newProfile.setValue(rems.size(), lastValue);
 			
@@ -569,7 +569,7 @@ public class MutualRegressionEM extends ExponentialEM implements RM, Duplicatabl
 
 	
 	@Override
-	public synchronized Object extractResponse(Object input) {
+	public synchronized Object extractResponseValue(Object input) {
 		// TODO Auto-generated method stub
 		int k = 0;
 		double mean = 0;
@@ -577,7 +577,7 @@ public class MutualRegressionEM extends ExponentialEM implements RM, Duplicatabl
 			if (rem == null)
 				continue;
 			
-			Object value = rem.extractResponse(input);
+			Object value = rem.extractResponseValue(input);
 			if (value == null || !(value instanceof Number))
 				continue;
 			

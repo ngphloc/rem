@@ -51,8 +51,8 @@ import net.hudup.core.logistic.UriAssoc;
 import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.regression.AbstractRM;
-import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.RM2;
+import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
 
@@ -199,11 +199,11 @@ public class REMDlg extends JDialog {
 		JPanel body = new JPanel(new BorderLayout());
 		main.add(body, BorderLayout.CENTER);
 		
-		JPanel paneRegressorExprs = new JPanel(new BorderLayout());
-		body.add(paneRegressorExprs, BorderLayout.NORTH);
+		JPanel paneRegressors = new JPanel(new BorderLayout());
+		body.add(paneRegressors, BorderLayout.NORTH);
 		
-		List<VarWrapper> regressorExprs = rm.getRegressorExpressions();
-		regressorExprs.sort(new Comparator<VarWrapper>() {
+		List<VarWrapper> regressors = rm.extractRegressors();
+		regressors.sort(new Comparator<VarWrapper>() {
 
 			@Override
 			public int compare(VarWrapper o1, VarWrapper o2) {
@@ -212,8 +212,8 @@ public class REMDlg extends JDialog {
 			}
 			
 		});
-		JComboBox<VarWrapper> cmbReggressorExprs = new JComboBox<VarWrapper>(regressorExprs.toArray(new VarWrapper[] {}));
-		paneRegressorExprs.add(cmbReggressorExprs, BorderLayout.CENTER);
+		JComboBox<VarWrapper> cmbRegressors = new JComboBox<VarWrapper>(regressors.toArray(new VarWrapper[] {}));
+		paneRegressors.add(cmbRegressors, BorderLayout.CENTER);
 		JButton btnPlot = new JButton(new AbstractAction("Plot") {
 
 			/**
@@ -223,10 +223,10 @@ public class REMDlg extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VarWrapper regressor = (VarWrapper)cmbReggressorExprs.getSelectedItem();
+				VarWrapper regressor = (VarWrapper)cmbRegressors.getSelectedItem();
 				if (regressor == null)
 					JOptionPane.showMessageDialog(
-							cmbReggressorExprs, 
+							cmbRegressors, 
 							"No selected regressor", 
 							"No selected regressor", 
 							JOptionPane.ERROR_MESSAGE);
@@ -234,7 +234,7 @@ public class REMDlg extends JDialog {
 					plotRegressorGraph(regressor.getIndex());
 			}
 		});
-		paneRegressorExprs.add(btnPlot, BorderLayout.EAST);
+		paneRegressors.add(btnPlot, BorderLayout.EAST);
 		
 		JPanel paneGraphList = new JPanel(new GridLayout(1, 0));
 		body.add(paneGraphList, BorderLayout.CENTER);
@@ -366,8 +366,8 @@ public class REMDlg extends JDialog {
 				return (column == 1);
 			}
 		};
-		List<VarWrapper> regressors = rm.getRegressors();
-		regressors.sort(new Comparator<VarWrapper>() {
+		List<VarWrapper> singleRegressors = rm.extractSingleRegressors();
+		singleRegressors.sort(new Comparator<VarWrapper>() {
 
 			@Override
 			public int compare(VarWrapper o1, VarWrapper o2) {
@@ -377,7 +377,7 @@ public class REMDlg extends JDialog {
 			
 		});
 		tbm.setColumnIdentifiers(new String[] {"Regressor", "Value"});
-		for (VarWrapper regressor : regressors) {
+		for (VarWrapper regressor : singleRegressors) {
 			Vector<Object> rowData = new Vector<Object>();
 			rowData.add(regressor);
 			rowData.add(new Double(0));

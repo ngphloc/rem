@@ -19,12 +19,13 @@ import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
-import net.hudup.core.logistic.Vector2;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
-import net.hudup.regression.AbstractRM.VarWrapper;
+import net.hudup.regression.AbstractRM;
+import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.RM;
 import net.hudup.regression.RM2;
+import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.REMDlg;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -184,7 +185,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 			}
 
 			@Override
-			protected Object transformResponse(Object z, boolean inverse) {
+			public Object transformResponse(Object z, boolean inverse) {
 				// TODO Auto-generated method stub
 				return getMixtureREM().transformResponse(z, inverse);
 			}
@@ -526,28 +527,106 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 
 	
 	@Override
-	public synchronized Object extractResponse(Object input) {
+	public VarWrapper extractRegressor(int index) {
 		// TODO Auto-generated method stub
-		if (this.rems == null)
+		if (this.rems == null || this.rems.size() == 0)
 			return null;
-			
-		for (REMImpl rem : this.rems) {
-			if (rem == null) continue;
-			double value = extractNumber(rem.extractResponse(input));
-			if (Util.isUsed(value))
-				return value;
+		
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same regressors.
+			VarWrapper var = rem.extractRegressor(index);
+			if (var != null)
+				return var;
 		}
+		
 		return null;
 	}
 
 
 	@Override
-	public String extractResponseName() {
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> wholeVarList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return wholeVarList;
+
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same regressors.
+			List<VarWrapper> varList = rem.extractRegressors();
+			for (VarWrapper var : varList) {
+				int found = VarWrapper.lookup(wholeVarList, var.toString());
+				if (found < 0)
+					wholeVarList.add(var);
+			}
+		}
+
+		return wholeVarList;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> wholeVarList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return wholeVarList;
+
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same regressors.
+			List<VarWrapper> varList = rem.extractSingleRegressors();
+			for (VarWrapper var : varList) {
+				int found = VarWrapper.lookup(wholeVarList, var.toString());
+				if (found < 0)
+					wholeVarList.add(var);
+			}
+		}
+
+		return wholeVarList;
+	}
+
+
+	@Override
+	public double extractRegressorValue(Object input, int index) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Constants.UNUSED;
+		
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same regressors.
+			double value = rem.extractRegressorValue(input, index);
+			if (Util.isUsed(value))
+				return value;
+		}
+
+		return Constants.UNUSED;
+	}
+
+
+	@Override
+	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
-		else
-			return this.rems.get(0).extractResponseName(); // Suppose all REMs have the same response variable;
+		
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same response.
+			VarWrapper var = rem.extractResponse();
+			if (var != null)
+				return var;
+		}
+		
+		return null;
+	}
+
+
+	@Override
+	public synchronized Object extractResponseValue(Object input) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+		for (REMImpl rem : this.rems) { // Suppose all REMS have the same response.
+			double value = extractNumber(rem.extractResponseValue(input));
+			if (Util.isUsed(value))
+				return value;
+		}
+
+		return null;
 	}
 
 
@@ -564,14 +643,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 	}
 
 	
-	/**
-	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
-	 * @param z specified variable Z.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of Z.
-	 */
-	protected Object transformResponse(Object z, boolean inverse) {
+	@Override
+	public Object transformResponse(Object z, boolean inverse) {
 		// TODO Auto-generated method stub
 		return z;
 	}
@@ -615,8 +688,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
     	PlotGraphExt pg = new PlotGraphExt(data);
 
     	pg.setGraphTitle("Regressor plot");
-    	pg.setXaxisLegend(this.rems.get(0).extractRegressorName(xIndex));
-    	pg.setYaxisLegend(this.rems.get(0).extractResponseName());
+    	pg.setXaxisLegend(extractRegressor(xIndex).toString());
+    	pg.setYaxisLegend(extractResponse().toString());
     	pg.setPoint(popt);
     	pg.setLine(lopt);
 
@@ -631,65 +704,27 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
-			return REMImpl.createResponseGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
+			return AbstractRM.createResponseGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
 	}
 
 
 	@Override
-	public Graph createErrorGraph() {
+	public synchronized Graph createErrorGraph() {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
-			return REMImpl.createErrorGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
+			return AbstractRM.createErrorGraph(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
 	}
 
 
 	@Override
-	public List<Graph> createResponseRalatedGraphs() {
+	public synchronized List<Graph> createResponseRalatedGraphs() {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
-			return REMImpl.createResponseRalatedGraphs(this);
-	}
-
-
-	@Override
-	public List<VarWrapper> getRegressorExpressions() {
-		// TODO Auto-generated method stub
-		List<VarWrapper> wholeVarList = Util.newList();
-		if (this.rems == null || this.rems.size() == 0)
-			return wholeVarList;
-		
-		for (REMImpl rem : this.rems) {
-			List<VarWrapper> varList = rem.getRegressorExpressions();
-			for (VarWrapper var : varList) {
-				int found = VarWrapper.lookup(wholeVarList, var.getExpr(), false);
-				if (found < 0)
-					wholeVarList.add(var);
-			}
-		}
-		return wholeVarList;
-	}
-
-
-	@Override
-	public List<VarWrapper> getRegressors() {
-		// TODO Auto-generated method stub
-		List<VarWrapper> wholeVarList = Util.newList();
-		if (this.rems == null || this.rems.size() == 0)
-			return wholeVarList;
-		
-		for (REMImpl rem : this.rems) {
-			List<VarWrapper> varList = rem.getRegressorExpressions();
-			for (VarWrapper var : varList) {
-				int found = VarWrapper.lookup(wholeVarList, var.getName(), true);
-				if (found >= 0)
-					wholeVarList.add(var);
-			}
-		}
-		return wholeVarList;
+			return AbstractRM.createResponseRalatedGraphs(this);
 	}
 
 
@@ -698,24 +733,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
-		
-		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
-		List<double[]> xData = stats.getXData();
-		List<double[]> zData = stats.getZData();
-		
-		double ss = 0;
-		int N = 0;
-		for (int i = 0; i < xData.size(); i++) {
-			double[] xVector = xData.get(i);
-			double zValue = zData.get(i)[1];
-			double zEstimatedValue = (double)this.executeByXStatistic(xVector);
-			
-			if (Util.isUsed(zValue) && Util.isUsed(zEstimatedValue)) {
-				ss += (zEstimatedValue - zValue) * (zEstimatedValue - zValue);
-				N++;
-			}
-		}
-		return ss / N;
+		else
+			return AbstractRM.calcVariance(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
 	}
 
 
@@ -724,19 +743,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
-		
-		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
-		Vector2 zVector = new Vector2(stats.size(), 0);
-		Vector2 zCalcVector = new Vector2(stats.size(), 0);
-		for (int i = 0; i < stats.size(); i++) {
-            double z = stats.getZData().get(i)[1];
-            zVector.set(i, z);
-            
-            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
-            zCalcVector.set(i, zCalc);
-		}
-		
-		return zCalcVector.corr(zVector);
+		else
+			return AbstractRM.calcR(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
 	}
 
 
@@ -745,16 +753,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
-		
-		LargeStatistics stats = this.rems.get(0).getLargeStatistics(); // Suppose all REM has the same large statistics.
-		Vector2 error = new Vector2(stats.size(), 0);
-		for (int i = 0; i < stats.size(); i++) {
-            double z = stats.getZData().get(i)[1];
-            double zCalc = (double)executeByXStatistic(stats.getXData().get(i));
-            error.set(i, zCalc - z);
-		}
-		
-    	return new double[] {error.mean(), error.mleVar()};
+		else
+			return AbstractRM.calcError(this, this.rems.get(0).getLargeStatistics()); // Suppose all REM has the same large statistics.
 	}
 	
 	

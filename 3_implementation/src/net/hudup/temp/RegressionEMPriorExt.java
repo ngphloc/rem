@@ -9,8 +9,8 @@ import net.hudup.core.alg.Alg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.NextUpdate;
+import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.em.ExchangedParameter;
-import net.hudup.regression.em.LargeStatistics;
 import net.hudup.regression.em.REMPrior;
 
 /**

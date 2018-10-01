@@ -13,6 +13,7 @@ import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.regression.LargeStatistics;
 
 /**
  * This class represents the exchanged parameter for the REM algorithm.
@@ -182,12 +183,12 @@ public class ExchangedParameter implements Cloneable {
 	
 	/**
 	 * Estimating variance by large statistics.
-	 * @param stat large statistics.
+	 * @param stats large statistics.
 	 * @return estimated variance
 	 */
-	public double estimateZVariance(LargeStatistics stat) {
-		List<double[]> xData = stat.getXData();
-		List<double[]> zData = stat.getZData();
+	public double estimateZVariance(LargeStatistics stats) {
+		List<double[]> xData = stats.getXData();
+		List<double[]> zData = stats.getZData();
 		
 		double ss = 0;
 		int N = 0;

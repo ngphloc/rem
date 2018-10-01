@@ -2,7 +2,6 @@ package net.hudup.regression;
 
 import java.util.List;
 
-import net.hudup.regression.AbstractRM.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
 
 /**
@@ -16,20 +15,66 @@ public interface RM2 extends RM {
 
 	
 	/**
-	 * Extracting name of response variable (Z).
-	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @return text of response variable (Z) extracted.
-	 */
-	String extractResponseName();
-
-	
-	/**
 	 * Executing by X statistics.
-	 * @param xStatistic X statistics (regressors).
+	 * @param xStatistic X statistics (regressors). The first element of this X statistics is 1.
 	 * @return result of execution. Return null if execution is failed.
 	 */
 	Object executeByXStatistic(double[] xStatistic);
 
+	
+	/**
+	 * Extracting regressor (X).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
+	 * Index starts from 1. So index 0 always indicates to null. 
+	 * @return regressor (X) extracted.
+	 */
+	VarWrapper extractRegressor(int index);
+
+	
+	/**
+     * Getting list of regressors.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+     * @return list of regressors.
+     */
+    List<VarWrapper> extractRegressors();
+    
+    
+    /**
+     * Getting list of single regressors.
+     * @return list of single regressors.
+     */
+    List<VarWrapper> extractSingleRegressors();
+
+    
+	/**
+	 * Extracting value of regressor (X) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 * @param input specified input. It is often profile.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in internal indices.
+	 * Index starts from 1. So index 0 always indicates to value 1. 
+	 * @return value of regressor (X) extracted from specified profile.
+	 */
+	double extractRegressorValue(Object input, int index);
+
+	
+	/**
+	 * Extracting response variable (Z).
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 * @return response variable (Z) extracted.
+	 */
+	VarWrapper extractResponse();
+
+	
+	/**
+	 * Transforming independent variable Z.
+	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
+	 * @param z specified variable Z.
+	 * @param inverse if true, there is an inverse transformation.
+	 * @return transformed value of Z.
+	 */
+	Object transformResponse(Object z, boolean inverse);
+	
 	
 	/**
 	 * Creating 2D decomposed graph for regressor.
@@ -58,20 +103,6 @@ public interface RM2 extends RM {
      * @return graphs related to response variable.
      */
     List<Graph> createResponseRalatedGraphs();
-
-    
-    /**
-     * Getting list of regressor expressions.
-     * @return list of regressor expressions.
-     */
-    List<VarWrapper> getRegressorExpressions();
-    
-    
-    /**
-     * Getting list of regressors.
-     * @return list of regressors.
-     */
-    List<VarWrapper> getRegressors();
 
     
     /**

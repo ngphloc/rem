@@ -1,4 +1,4 @@
-package net.hudup.regression.em;
+package net.hudup.regression;
 
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
