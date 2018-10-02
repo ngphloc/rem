@@ -98,7 +98,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		
 		this.rems = Util.newList(indicesList.size());
 		for (int i = 0; i < indicesList.size(); i++) {
-			REMImpl rem = createRegressionEM();
+			REMImpl rem = createREM();
 			rem.getConfig().put(R_INDICES_FIELD, indicesList.get(i));
 			rem.setup(inputSample);
 			if(rem.attList != null) // if rem is set up successfully.
@@ -115,9 +115,9 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 	
 	@Override
-	protected REMImpl createRegressionEM() {
+	protected REMImpl createREM() {
 		// TODO Auto-generated method stub
-		REMImpl rem = super.createRegressionEM();
+		REMImpl rem = super.createREM();
 		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
 		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
 		rem.getConfig().put(R_CALC_VARIANCE_FIELD, false);
@@ -138,7 +138,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		//Mutual mode is useful in some cases.
 		if (getConfig().getAsBoolean(MUTUAL_MODE_FIELD)) {
 			//Retrieving same-length Z statistics
-			LargeStatistics stat0 = this.rems.get(0).getLargeStatistics();
+			LargeStatistics stat0 = this.getLargeStatistics();
 			int N = stat0.getZData().size();
 			for (REMImpl rem : this.rems) {
 				LargeStatistics stat = rem.getLargeStatistics();
@@ -345,6 +345,60 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 	
 	@Override
+	public synchronized LargeStatistics getLargeStatistics() {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		
+		int N  = this.rems.get(0).getLargeStatistics().size();
+		List<double[]> xData = Util.newList(N);
+		List<double[]> zData = Util.newList(N);
+		for (int i = 0; i < N; i++) {
+			int K = this.rems.size();
+			double[] xVector = new double[K + 1];
+			xVector[0] = 1;
+			double[] zVector = new double[2];
+			zVector[0] = 1;
+			
+			double zValue = 0;
+			for (int k = 0; k < K; k++) {
+				LargeStatistics stats = this.rems.get(k).getLargeStatistics();
+				xVector[k + 1] = stats.getXData().get(i)[1];
+				
+				double coeff = this.rems.get(k).getExchangedParameter().getCoeff();
+				zValue += coeff * stats.getZData().get(i)[1];
+			}
+			zVector[1] = zValue;
+			
+			xData.add(xVector);
+			zData.add(zVector);
+		}
+		
+		return new LargeStatistics(xData, zData);
+	}
+
+
+	@Override
+	public synchronized double executeByXStatistic(double[] xStatistic) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0 || xStatistic.length != this.rems.size() + 1)
+			return Constants.UNUSED;
+		
+		double result = 0;
+		for (int k = 0; k < this.rems.size(); k++) {
+			REMImpl rem = this.rems.get(k);
+			double value = rem.executeByXStatistic(new double[] {1, xStatistic[k + 1]});
+			if (Util.isUsed(value))
+				result += rem.getExchangedParameter().getCoeff() * value;
+			else
+				return Constants.UNUSED;
+		}
+		
+		return result;
+	}
+
+
+	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 //		if (getConfig().getAsBoolean(LOGISTIC_MODE_FIELD)) { // Logistic mode does not use probability
@@ -379,7 +433,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 //			return result;
 //		}
 //		else
-		return super.execute(input);
+			return super.execute(input);
 	}
 
 
@@ -416,6 +470,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		DataConfig config = super.createDefaultConfig();
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
+		config.remove(COMP_EXECUTION_FIELD);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
@@ -433,6 +488,38 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 
 	@Override
+	public List<VarWrapper> extractRegressors() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> varList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return varList;
+		
+		for (REMImpl rem : this.rems) {
+			VarWrapper var = rem.extractRegressor(1);
+			varList.add(var);
+		}
+		
+		return varList;
+	}
+
+
+	@Override
+	public List<VarWrapper> extractSingleRegressors() {
+		// TODO Auto-generated method stub
+		List<VarWrapper> varList = Util.newList();
+		if (this.rems == null || this.rems.size() == 0)
+			return varList;
+		
+		for (REMImpl rem : this.rems) {
+			VarWrapper var = rem.extractSingleRegressors().get(0);
+			varList.add(var);
+		}
+		
+		return varList;
+	}
+
+
+	@Override
 	public double extractRegressorValue(Object input, int index) {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
@@ -443,12 +530,38 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 
 	@Override
-	public synchronized Graph createRegressorGraph(int xIndex) {
+	public List<Double> extractRegressorStatistic(VarWrapper regressor) {
+		// TODO Auto-generated method stub
+		if (this.rems == null || this.rems.size() == 0)
+			return Util.newList();
+		
+		for (REMImpl rem : this.rems) {
+			List<VarWrapper> varList = rem.extractRegressors();
+			for (VarWrapper var : varList) {
+				if (var.equals(regressor))
+					return rem.extractRegressorStatistic(var);
+			}
+		}
+		
+		return Util.newList();
+	}
+
+
+	@Override
+	public synchronized Graph createRegressorGraph(VarWrapper regressor) {
 		// TODO Auto-generated method stub
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
-		else
-			return this.rems.get(xIndex - 1).createRegressorGraph(1);
+		
+		for (REMImpl rem : this.rems) {
+			List<VarWrapper> varList = rem.extractRegressors();
+			for (VarWrapper var : varList) {
+				if (var.equals(regressor))
+					return rem.createRegressorGraph(var);
+			}
+		}
+		
+		return null;
 	}
 
 
@@ -459,7 +572,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			return null;
 
 		int ncurves = 2;
-    	int npoints = this.rems.get(0).getLargeStatistics().size();
+    	int npoints = this.getLargeStatistics().size();
     	double[][] data = PlotGraph.data(ncurves, npoints);
 
     	for(int i = 0; i < npoints; i++) {
@@ -470,7 +583,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
 				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
-				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
@@ -522,7 +635,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			return null;
 		
     	int ncurves = 4;
-    	int npoints = this.rems.get(0).getLargeStatistics().size();
+    	int npoints = this.getLargeStatistics().size();
     	double[][] data = PlotGraph.data(ncurves, npoints);
 
 		double errorMean = 0;
@@ -534,7 +647,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
 				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
-				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
@@ -606,7 +719,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
-		int N = this.rems.get(0).getLargeStatistics().size();
+		int N = this.getLargeStatistics().size();
 		double ss = 0;
 		for (int i = 0; i < N; i++) {
 			double z = 0;
@@ -616,7 +729,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
 				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
-				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
@@ -634,7 +747,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
-		int N = this.rems.get(0).getLargeStatistics().size();
+		int N = this.getLargeStatistics().size();
 		Vector2 zVector = new Vector2(N, 0);
 		Vector2 zEstimatedVector = new Vector2(N, 0);
 		for (int i = 0; i < N; i++) {
@@ -645,7 +758,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
 				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
-				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
@@ -664,7 +777,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		
-		int N = this.rems.get(0).getLargeStatistics().size();
+		int N = this.getLargeStatistics().size();
 		Vector2 error = new Vector2(N, 0);
 		for (int i = 0; i < N; i++) {
 			double z = 0;
@@ -674,7 +787,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
 				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
-				zEstimated += coeff * (double)rem.executeByXStatisticWithoutTransform(xVector);
+				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			
             error.set(i, zEstimated - z);

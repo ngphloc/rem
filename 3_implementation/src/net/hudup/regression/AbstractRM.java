@@ -589,7 +589,8 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		if (values != null) {
 			int n = Math.min(values.size(), attList.size());
 			for (int j = 0; j < n; j++) {
-				profile.setValue(j, values.get(j));
+				int start = values.size() > attList.size() ? 1 : 0;
+				profile.setValue(j, values.get(j + start));
 			}
 		}
 		else if (mapValues != null) {
@@ -651,10 +652,12 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		// TODO Auto-generated method stub
 		if (index == 0 || attList == null) return null;
 
+		VarWrapper var = null;
 		Object item = indices.get(index)[0];
 		if (item instanceof Number) {
 			int attIndex = ((Number)item).intValue();
-			return VarWrapper.createByName(index, attList.get(attIndex).getName(), attList.get(attIndex));
+			var = VarWrapper.createByName(index, attList.get(attIndex).getName());
+			var.setAttribute(attList.get(attIndex));
 		}
 		else {
 			String expr = item.toString();
@@ -664,8 +667,10 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 				expr = expr.replaceAll(replacedText, attName).trim();
 			}
 			
-			return VarWrapper.createByExpr(index, expr, null);
+			var = VarWrapper.createByExpr(index, expr);
 		}
+		
+		return var;
 	}
 
 	
@@ -685,7 +690,8 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 			VarWrapper var = null;
 			if (item instanceof Number) {
 				int attIndex = ((Number)item).intValue();
-				var = VarWrapper.createByName(i, attList.get(attIndex).getName(), attList.get(attIndex));
+				var = VarWrapper.createByName(i, attList.get(attIndex).getName());
+				var.setAttribute(attList.get(attIndex));
 			}
 			else {
 				String expr = item.toString().trim();
@@ -694,7 +700,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 					String replacedText = expr.contains(VAR_INDEX_SPECIAL_CHAR) ? VAR_INDEX_SPECIAL_CHAR + attName : attName;   
 					expr = expr.replaceAll(replacedText, attName).trim();
 				}
-				var = VarWrapper.createByExpr(i, expr, null);
+				var = VarWrapper.createByExpr(i, expr);
 			}
 			
 			vars.add(var);
@@ -739,7 +745,8 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
         	}
         	
         	if (found) {
-        		VarWrapper var = VarWrapper.createByName(foundIndex, att.getName(), att);
+        		VarWrapper var = VarWrapper.createByName(foundIndex, att.getName());
+        		var.setAttribute(att);
         		vars.add(var);
         	}
     	}
@@ -821,7 +828,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 
     	for(int i = 0; i < npoints; i++) {
             data[0][i] = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
-            data[1][i] = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            data[1][i] = rm.executeByXStatistic(stats.getXData().get(i));
         }
 
     	Regression regression = new Regression(data[0], data[1]);
@@ -877,7 +884,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		double errorMean = 0;
     	for(int i = 0; i < npoints; i++) {
             double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
-            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            double zEstimated = rm.executeByXStatistic(stats.getXData().get(i));
             data[0][i] = ( z + zEstimated ) / 2.0;
             data[1][i] = zEstimated - z;
             
@@ -977,7 +984,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		for (int i = 0; i < xData.size(); i++) {
 			double[] xVector = xData.get(i);
 			double z = (double)rm.transformResponse(zData.get(i)[1], true);
-			double zEstimated = (double)rm.executeByXStatistic(xVector);
+			double zEstimated = rm.executeByXStatistic(xVector);
 			
 			if (Util.isUsed(z) && Util.isUsed(zEstimated)) {
 				ss += (zEstimated - z) * (zEstimated - z);
@@ -1005,7 +1012,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
             double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
             zVector.set(i, z);
             
-            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            double zEstimated = rm.executeByXStatistic(stats.getXData().get(i));
             zEstimatedVector.set(i, zEstimated);
 		}
 		
@@ -1027,7 +1034,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		Vector2 error = new Vector2(stats.size(), 0);
 		for (int i = 0; i < stats.size(); i++) {
             double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
-            double zEstimated = (double)rm.executeByXStatistic(stats.getXData().get(i));
+            double zEstimated = rm.executeByXStatistic(stats.getXData().get(i));
             error.set(i, zEstimated - z);
 		}
 		

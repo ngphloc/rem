@@ -79,13 +79,13 @@ public class LargeStatistics implements Cloneable {
 	 * @param column specified column.
 	 * @return X statistic as column vector.
 	 */
-	public double[] getXColumnStatistic(int column) {
+	public List<Double> getXColumnStatistic(int column) {
 		if (isEmpty())
-			return null;
+			return Util.newList();
 		
-		double[] xColumnVector = new double[xData.size()];
+		List<Double> xColumnVector = Util.newList(xData.size());
 		for (int i = 0; i < xData.size(); i++)
-			xColumnVector[i] = xData.get(i)[column];
+			xColumnVector.add(xData.get(i)[column]);
 		
 		return xColumnVector;
 	}
@@ -97,7 +97,7 @@ public class LargeStatistics implements Cloneable {
 	 */
 	public List<Double> getZStatistic() {
 		if (isEmpty())
-			return null;
+			return Util.newList();
 		
 		List<Double> zVector = Util.newList(zData.size());
 		for (int i = 0; i < zData.size(); i++)

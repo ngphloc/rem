@@ -619,30 +619,27 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	}
 	
 	
-	/**
-	 * Getting large statistics. Actually, this method calls {@link #getStatistics()}.
-	 * @return large statistics.
-	 */
+	@Override
 	public LargeStatistics getLargeStatistics() {
 		return (LargeStatistics)getStatistics();
 	}
 	
 	
 	@Override
-	public synchronized Object executeByXStatistic(double[] xStatistic) {
+	public synchronized double executeByXStatistic(double[] xStatistic) {
 		if (xStatistic == null)
-			return null;
+			return Constants.UNUSED;
 
 		ExchangedParameter parameter = this.getExchangedParameter(); 
 		if (parameter == null)
-			return null;
+			return Constants.UNUSED;
 		List<Double> alpha = parameter.getAlpha();
 
 		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
 		if (stat == null)
-			return null;
+			return Constants.UNUSED;
 		else
-			return transformResponse(stat.getZStatistic(), true);
+			return (double)transformResponse(stat.getZStatistic(), true);
 	}
 	
 	
@@ -651,18 +648,18 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	 * @param xStatistic X statistics (regressors). The first element of this X statistics is 1.
 	 * @return result of execution without transform. Return null if execution is failed.
 	 */
-	public synchronized Object executeByXStatisticWithoutTransform(double[] xStatistic) {
+	public synchronized double executeByXStatisticWithoutTransform(double[] xStatistic) {
 		if (xStatistic == null)
-			return null;
+			return Constants.UNUSED;
 
 		ExchangedParameter parameter = this.getExchangedParameter(); 
 		if (parameter == null)
-			return null;
+			return Constants.UNUSED;
 		List<Double> alpha = parameter.getAlpha();
 
 		Statistics stat = estimate(new Statistics(Constants.UNUSED, xStatistic), alpha, parameter.getBetas());
 		if (stat == null)
-			return null;
+			return Constants.UNUSED;
 		else
 			return stat.getZStatistic();
 	}
@@ -927,6 +924,17 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	
 	
 	@Override
+	public synchronized List<Double> extractRegressorStatistic(VarWrapper regressor) {
+		// TODO Auto-generated method stub
+		LargeStatistics stats = getLargeStatistics();
+		if (stats != null)
+			return stats.getXColumnStatistic(regressor.getIndex());
+		else
+			return Util.newList();
+	}
+
+
+	@Override
 	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
 		return extractVariable(attList, zIndices, 1);
@@ -1115,13 +1123,13 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
 	
 	
 	@Override
-    public synchronized Graph createRegressorGraph(int xIndex) {
+    public synchronized Graph createRegressorGraph(VarWrapper regressor) {
 		if (getLargeStatistics() == null || getExchangedParameter() == null)
 			return null;
     	
 		ExchangedParameter parameter = getExchangedParameter();
 		double coeff0 = parameter.getAlpha().get(0);
-		double coeff1 = parameter.getAlpha().get(xIndex);
+		double coeff1 = parameter.getAlpha().get(regressor.getIndex());
 		if (coeff1 == 0) return null;
 			
 		LargeStatistics stats = getLargeStatistics();
@@ -1130,7 +1138,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     	double[][] data = PlotGraph.data(ncurves, npoints);
     	
     	for(int i = 0; i < npoints; i++) {
-            data[0][i] = stats.getXData().get(i)[xIndex];
+            data[0][i] = stats.getXData().get(i)[regressor.getIndex()];
             data[1][i] = stats.getZData().get(i)[1];
         }
     	
@@ -1142,7 +1150,7 @@ public class REMImpl extends ExponentialEM implements REM, DuplicatableAlg {
     	PlotGraphExt pg = new PlotGraphExt(data);
 
     	pg.setGraphTitle("Regressor plot");
-    	pg.setXaxisLegend(extractRegressor(xIndex).toString());
+    	pg.setXaxisLegend(extractRegressor(regressor.getIndex()).toString());
     	pg.setYaxisLegend(extractResponse().toString());
     	int[] popt = {1, 0};
     	pg.setPoint(popt);

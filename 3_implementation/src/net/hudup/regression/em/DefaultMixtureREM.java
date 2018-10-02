@@ -126,7 +126,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		K = K <= 0 ? 1 : K;
 		this.rems = Util.newList(K);
 		for (int k = 0; k < K; k++) {
-			REMImpl rem = createRegressionEM();
+			REMImpl rem = createREM();
 			rem.prepareInternalData(this.xIndices, this.zIndices, this.attList, this.data);
 			this.rems.add(rem);
 		}
@@ -149,9 +149,9 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 
 
 	@Override
-	protected REMImpl createRegressionEM() {
+	protected REMImpl createREM() {
 		// TODO Auto-generated method stub
-		RegressionEMExt rem = new RegressionEMExt();
+		REMExt rem = new REMExt();
 		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
 		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
 		rem.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
@@ -390,7 +390,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		if (this.rems == null || this.rems.size() == 0)
 			return 0;
 		else
-			return getFitness(this.rems.get(0).getLargeStatistics()); // Because all REMs have the same large statistics.
+			return getFitness(this.getLargeStatistics()); // Because all REMs have the same large statistics.
 	}
 
 	
@@ -412,7 +412,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 			clusters.add(new LargeStatistics());
 
 		// Because all REMs have the same large statistics.
-		LargeStatistics stat = this.rems.get(0).getLargeStatistics();
+		LargeStatistics stat = this.getLargeStatistics();
 		int N = stat.size();
 		for (int i = 0; i < N; i++) {
 			double[] xVector = stat.getXData().get(i);
@@ -468,7 +468,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 	 * @author Loc Nguyen
 	 * @version 1.0
 	 */
-	protected class RegressionEMExt extends REMImpl {
+	protected class REMExt extends REMImpl {
 		
 		/**
 		 * Serial version UID for serializable class.

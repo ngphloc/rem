@@ -23,6 +23,7 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.REM;
 import net.hudup.regression.em.ui.graph.Graph;
@@ -677,6 +678,13 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 
 	
 	@Override
+	public LargeStatistics getLargeStatistics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
 	public synchronized Object execute(Object input) {
 		// TODO Auto-generated method stub
 		if (this.estimatedParameter == null)
@@ -959,6 +967,13 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	}
 
 	
+	@Override
+	public List<Double> extractRegressorStatistic(VarWrapper regressor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	/**
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 */
@@ -1125,14 +1140,14 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 
 
 	@Override
-	public Object executeByXStatistic(double[] xStatistic) {
+	public double executeByXStatistic(double[] xStatistic) {
 		// TODO Auto-generated method stub
-		return null;
+		return Constants.UNUSED;
 	}
 
 
 	@Override
-	public Graph createRegressorGraph(int xIndex) {
+	public Graph createRegressorGraph(VarWrapper regressor) {
 		// TODO Auto-generated method stub
 		return null;
 	}

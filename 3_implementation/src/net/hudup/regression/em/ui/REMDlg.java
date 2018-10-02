@@ -46,11 +46,14 @@ import javax.swing.table.TableModel;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.data.DataConfig;
+import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.UriAssoc;
 import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
+import net.hudup.phoebe.math.ui.StatDlg;
 import net.hudup.regression.AbstractRM;
+import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.RM2;
 import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
@@ -117,27 +120,28 @@ public class REMDlg extends JDialog {
 		
 		setLayout(new BorderLayout());
 		
-		JPanel top = new JPanel(new BorderLayout());
-		this.add(top, BorderLayout.NORTH);
-		
+		//Header
+		JPanel header = new JPanel(new BorderLayout());
+		this.add(header, BorderLayout.NORTH);
 		REMTextArea txtModel = new REMTextArea(rm);
-		top.add(txtModel, BorderLayout.CENTER);
-		
-		JPanel main = new JPanel(new BorderLayout());
-		this.add(main, BorderLayout.CENTER);
+		header.add(txtModel, BorderLayout.CENTER);
 		
 		
-		//Header of main panel
-		JPanel header = new JPanel(new GridLayout(1, 0));
-		main.add(header, BorderLayout.NORTH);
+		//Body
+		JPanel body = new JPanel(new BorderLayout());
+		this.add(body, BorderLayout.CENTER);
+		
+		//Information of body
+		JPanel paneInfo = new JPanel(new GridLayout(1, 0));
+		body.add(paneInfo, BorderLayout.NORTH);
 
 		JPanel col = null;
 		JPanel left = null;
 		JPanel right = null; 
-		JPanel pane = null;
+		JPanel temp = null;
 		
 		col = new JPanel(new BorderLayout());
-		header.add(col);
+		paneInfo.add(col);
 		//
 		left = new JPanel(new GridLayout(0, 1));
 		col.add(left, BorderLayout.WEST);
@@ -152,20 +156,20 @@ public class REMDlg extends JDialog {
 		JTextField txtVariance = new JTextField(MathUtil.format(variance));
 		txtVariance.setCaretPosition(0);
 		txtVariance.setEditable(false);
-		pane = new JPanel(new BorderLayout());
-		pane.add(txtVariance, BorderLayout.WEST);
-		right.add(pane);
+		temp = new JPanel(new BorderLayout());
+		temp.add(txtVariance, BorderLayout.WEST);
+		right.add(temp);
 		//
 		JTextField txtR = new JTextField(
 				MathUtil.format(rm.calcR()));
 		txtR.setCaretPosition(0);
 		txtR.setEditable(false);
-		pane = new JPanel(new BorderLayout());
-		pane.add(txtR, BorderLayout.WEST);
-		right.add(pane);
+		temp = new JPanel(new BorderLayout());
+		temp.add(txtR, BorderLayout.WEST);
+		right.add(temp);
 		
 		col = new JPanel(new BorderLayout());
-		header.add(col);
+		paneInfo.add(col);
 		//
 		left = new JPanel(new GridLayout(0, 1));
 		col.add(left, BorderLayout.WEST);
@@ -182,62 +186,21 @@ public class REMDlg extends JDialog {
 				MathUtil.format(error[0]));
 		txtRatioErrMean.setCaretPosition(0);
 		txtRatioErrMean.setEditable(false);
-		pane = new JPanel(new BorderLayout());
-		pane.add(txtRatioErrMean, BorderLayout.WEST);
-		right.add(pane);
+		temp = new JPanel(new BorderLayout());
+		temp.add(txtRatioErrMean, BorderLayout.WEST);
+		right.add(temp);
 		//
 		JTextField txtRatioErrSd = new JTextField(
 				MathUtil.format(Math.sqrt(error[1])));
 		txtRatioErrSd.setCaretPosition(0);
 		txtRatioErrSd.setEditable(false);
-		pane = new JPanel(new BorderLayout());
-		pane.add(txtRatioErrSd, BorderLayout.WEST);
-		right.add(pane);
+		temp = new JPanel(new BorderLayout());
+		temp.add(txtRatioErrSd, BorderLayout.WEST);
+		right.add(temp);
 
-		
-		//Body of main panel
-		JPanel body = new JPanel(new BorderLayout());
-		main.add(body, BorderLayout.CENTER);
-		
-		JPanel paneRegressors = new JPanel(new BorderLayout());
-		body.add(paneRegressors, BorderLayout.NORTH);
-		
-		List<VarWrapper> regressors = rm.extractRegressors();
-		regressors.sort(new Comparator<VarWrapper>() {
-
-			@Override
-			public int compare(VarWrapper o1, VarWrapper o2) {
-				// TODO Auto-generated method stub
-				return o1.toString().compareToIgnoreCase(o2.toString());
-			}
-			
-		});
-		JComboBox<VarWrapper> cmbRegressors = new JComboBox<VarWrapper>(regressors.toArray(new VarWrapper[] {}));
-		paneRegressors.add(cmbRegressors, BorderLayout.CENTER);
-		JButton btnPlot = new JButton(new AbstractAction("Plot") {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VarWrapper regressor = (VarWrapper)cmbRegressors.getSelectedItem();
-				if (regressor == null)
-					JOptionPane.showMessageDialog(
-							cmbRegressors, 
-							"No selected regressor", 
-							"No selected regressor", 
-							JOptionPane.ERROR_MESSAGE);
-				else
-					plotRegressorGraph(regressor.getIndex());
-			}
-		});
-		paneRegressors.add(btnPlot, BorderLayout.EAST);
-		
-		JPanel paneGraphList = new JPanel(new GridLayout(1, 0));
-		body.add(paneGraphList, BorderLayout.CENTER);
+		//Graphs of body
+		JPanel paneGraph = new JPanel(new GridLayout(1, 0));
+		body.add(paneGraph, BorderLayout.CENTER);
 		graphList = rm.createResponseRalatedGraphs();
 		graphList2 = rm.createResponseRalatedGraphs();
 		for (int i = 0; i < graphList.size(); i++) {
@@ -245,7 +208,7 @@ public class REMDlg extends JDialog {
 			
 			final Graph graph2 = graphList2.get(i);
 			JPanel gPanel = new JPanel(new BorderLayout());
-			paneGraphList.add(gPanel);
+			paneGraph.add(gPanel);
 			
 			gPanel.add((Component)graph, BorderLayout.CENTER);
 			JPanel toolbar = new JPanel();
@@ -346,13 +309,81 @@ public class REMDlg extends JDialog {
 				toolbar.add(btnOption);
 		}
 
+		JPanel paneVars = new JPanel(new BorderLayout());
+		body.add(paneVars, BorderLayout.SOUTH);
 		
-		//Footer of main panel
+		List<VarWrapper> vars = rm.extractRegressors();
+		for (VarWrapper regressor : vars) {
+			regressor.setTag(0);
+		}
+		vars.sort(new Comparator<VarWrapper>() {
+
+			@Override
+			public int compare(VarWrapper o1, VarWrapper o2) {
+				// TODO Auto-generated method stub
+				return o1.toString().compareToIgnoreCase(o2.toString());
+			}
+			
+		});
+		VarWrapper response = rm.extractResponse();
+		response.setTag(1);
+		vars.add(response);
+		JComboBox<VarWrapper> cmbVars = new JComboBox<VarWrapper>(vars.toArray(new VarWrapper[] {}));
+		paneVars.add(cmbVars, BorderLayout.CENTER);
+
+		JPanel varButtons = new JPanel();
+		paneVars.add(varButtons, BorderLayout.EAST);
+		JButton btnPlot = new JButton(new AbstractAction("Plot") {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VarWrapper var = (VarWrapper)cmbVars.getSelectedItem();
+				if (var == null)
+					JOptionPane.showMessageDialog(
+							cmbVars, 
+							"No selected regressor", 
+							"No selected regressor", 
+							JOptionPane.ERROR_MESSAGE);
+				else
+					plotRegressorGraph(var);
+			}
+		});
+		varButtons.add(btnPlot);
+
+		JButton btnStat = new JButton(new AbstractAction("Stat") {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VarWrapper var = (VarWrapper)cmbVars.getSelectedItem();
+				if (var == null)
+					JOptionPane.showMessageDialog(
+							cmbVars, 
+							"No selected regressor", 
+							"No selected regressor", 
+							JOptionPane.ERROR_MESSAGE);
+				else
+					statVar(var);
+			}
+		});
+		varButtons.add(btnStat);
+		
+		
+		//Footer
 		JPanel footer = new JPanel(new BorderLayout());
-		main.add(footer, BorderLayout.SOUTH);
+		this.add(footer, BorderLayout.SOUTH);
 		
-		JPanel control = new JPanel();
-		footer.add(control, BorderLayout.CENTER);
+		JPanel paneCalc = new JPanel();
+		footer.add(paneCalc, BorderLayout.CENTER);
 		
 		DefaultTableModel tbm = new DefaultTableModel() {
 
@@ -366,18 +397,8 @@ public class REMDlg extends JDialog {
 				return (column == 1);
 			}
 		};
-		List<VarWrapper> singleRegressors = rm.extractSingleRegressors();
-		singleRegressors.sort(new Comparator<VarWrapper>() {
-
-			@Override
-			public int compare(VarWrapper o1, VarWrapper o2) {
-				// TODO Auto-generated method stub
-				return o1.toString().compareToIgnoreCase(o2.toString());
-			}
-			
-		});
 		tbm.setColumnIdentifiers(new String[] {"Regressor", "Value"});
-		for (VarWrapper regressor : singleRegressors) {
+		for (VarWrapper regressor : vars) {
 			Vector<Object> rowData = new Vector<Object>();
 			rowData.add(regressor);
 			rowData.add(new Double(0));
@@ -385,8 +406,7 @@ public class REMDlg extends JDialog {
 		}
 		this.tblRegression = new JTable(tbm);
 		this.tblRegression.setPreferredScrollableViewportSize(new Dimension(200, 60));   
-		JScrollPane scroll = new JScrollPane(this.tblRegression);
-		control.add(scroll);
+		paneCalc.add(new JScrollPane(this.tblRegression));
 		
 	    JButton btnCalc = new JButton("Calculate");
 	    btnCalc.addActionListener(new ActionListener() {
@@ -394,11 +414,11 @@ public class REMDlg extends JDialog {
 	    		calc();
 	    	}
 	    });
-		control.add(btnCalc);
+	    paneCalc.add(btnCalc);
 
 		this.txtCalc = new JTextField(12);
 		txtCalc.setEditable(false);
-		control.add(txtCalc);
+		paneCalc.add(txtCalc);
 		
 		addMouseListener(new MouseAdapter() {
 
@@ -421,10 +441,19 @@ public class REMDlg extends JDialog {
 	
 	/**
 	 * Plotting the graph of given regressor.
-	 * @param xIndex index of given regressor.
+	 * @param regressor index of given regressor.
 	 */
-	private void plotRegressorGraph(int xIndex) {
-		Graph graph = rm != null ? rm.createRegressorGraph(xIndex) : null;
+	private void plotRegressorGraph(VarWrapper regressor) {
+		if (((Number)(regressor.getTag())).intValue() == 1) {
+			JOptionPane.showMessageDialog(
+					this, 
+					"Variable is not regressor", 
+					"None regressor", 
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		Graph graph = rm != null ? rm.createRegressorGraph(regressor) : null;
 		if (graph == null) {
 			JOptionPane.showMessageDialog(
 					this, 
@@ -511,20 +540,36 @@ public class REMDlg extends JDialog {
 		});
 		footer.add(btnPrint);
 		
-		JButton btnClose = new JButton("Close");
-		btnClose.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				dlg.dispose();
-			}
-		});
-		footer.add(btnClose);
-
 		dlg.setVisible(true);
 	}
 
+	
+	/**
+	 * Showing statistic dialog for specified variable.
+	 * @param var specified variable.
+	 */
+	private void statVar(VarWrapper var) {
+		int tag = ((Number)(var.getTag())).intValue();
+		
+		List<Double> data = null;
+		if (tag == 0) // Regressor
+			data = rm.extractRegressorStatistic(var);
+		else { // Response
+			LargeStatistics stats = rm.getLargeStatistics();
+			data = stats != null ? stats.getZStatistic() : Util.newList();
+		}
+		
+		if (data.size() == 0) {
+			JOptionPane.showMessageDialog(
+					this, 
+					"Empty data", 
+					"Empty data", 
+					JOptionPane.ERROR_MESSAGE);
+		}
+		else
+			new StatDlg(this, DSUtil.toDoubleArray(data), true);
+	}
+	
 	
 	/**
 	 * Calculating regression model.
@@ -706,3 +751,5 @@ public class REMDlg extends JDialog {
 	
 	
 }
+
+

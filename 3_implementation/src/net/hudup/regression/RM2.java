@@ -15,11 +15,18 @@ public interface RM2 extends RM {
 
 	
 	/**
+	 * Getting large statistics. Actually, this method calls {@link #getStatistics()}.
+	 * @return large statistics.
+	 */
+	LargeStatistics getLargeStatistics();
+
+	
+	/**
 	 * Executing by X statistics.
 	 * @param xStatistic X statistics (regressors). The first element of this X statistics is 1.
 	 * @return result of execution. Return null if execution is failed.
 	 */
-	Object executeByXStatistic(double[] xStatistic);
+	double executeByXStatistic(double[] xStatistic);
 
 	
 	/**
@@ -59,6 +66,14 @@ public interface RM2 extends RM {
 
 	
 	/**
+	 * Extracting statistical values of specified regressor.
+	 * @param regressor specified regressor.
+	 * @return statistical values of specified regressor.
+	 */
+	List<Double> extractRegressorStatistic(VarWrapper regressor);
+	
+	
+	/**
 	 * Extracting response variable (Z).
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @return response variable (Z) extracted.
@@ -78,10 +93,10 @@ public interface RM2 extends RM {
 	
 	/**
 	 * Creating 2D decomposed graph for regressor.
-	 * @param xIndex X index. This index is started by 1.
+	 * @param regressor specified regressor.
 	 * @return 2D decomposed graph.
 	 */
-    Graph createRegressorGraph(int xIndex);
+    Graph createRegressorGraph(VarWrapper regressor);
 
     
     /**

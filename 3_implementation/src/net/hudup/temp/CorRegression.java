@@ -10,6 +10,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
 import net.hudup.regression.AbstractRM;
+import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
 
@@ -212,6 +213,13 @@ public class CorRegression extends AbstractRM implements DuplicatableAlg {
 
 
 	@Override
+	public LargeStatistics getLargeStatistics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
@@ -262,14 +270,21 @@ public class CorRegression extends AbstractRM implements DuplicatableAlg {
 
 
 	@Override
-	public Object executeByXStatistic(double[] xStatistic) {
+	public List<Double> extractRegressorStatistic(VarWrapper regressor) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Graph createRegressorGraph(int xIndex) {
+	public double executeByXStatistic(double[] xStatistic) {
+		// TODO Auto-generated method stub
+		return Constants.UNUSED;
+	}
+
+
+	@Override
+	public Graph createRegressorGraph(VarWrapper regressor) {
 		// TODO Auto-generated method stub
 		return null;
 	}

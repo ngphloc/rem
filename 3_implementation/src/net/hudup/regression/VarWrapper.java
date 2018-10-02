@@ -41,7 +41,7 @@ public class VarWrapper {
 	/**
 	 * Tag information.
 	 */
-	protected int tag = 0;
+	protected Object tag = 0;
 	
 	
 	/**
@@ -63,11 +63,10 @@ public class VarWrapper {
 	 * Create by name.
 	 * @param index specified index.
 	 * @param name specified name.
-	 * @param att specified attribute.
 	 * @return variable created.
 	 */
-	public static VarWrapper createByName(int index, String name, Attribute att) {
-		return new VarWrapper(index, name, null, att);
+	public static VarWrapper createByName(int index, String name) {
+		return new VarWrapper(index, name, null, null);
 	}
 	
 	
@@ -75,11 +74,10 @@ public class VarWrapper {
 	 * Create by expression.
 	 * @param index specified index.
 	 * @param expr specified expression.
-	 * @param att specified attribute.
 	 * @return variable created.
 	 */
-	public static VarWrapper createByExpr(int index, String expr, Attribute att) {
-		return new VarWrapper(index, null, expr, att);
+	public static VarWrapper createByExpr(int index, String expr) {
+		return new VarWrapper(index, null, expr, null);
 	}
 
 	
@@ -120,10 +118,19 @@ public class VarWrapper {
 	
 	
 	/**
+	 * Setting attribute.
+	 * @param att specified attribute.
+	 */
+	public void setAttribute(Attribute att) {
+		this.att = att;
+	}
+	
+	
+	/**
 	 * Getting tag information.
 	 * @return tag information.
 	 */
-	public int getTag() {
+	public Object getTag() {
 		return tag;
 	}
 	
@@ -132,7 +139,7 @@ public class VarWrapper {
 	 * Setting tag information.
 	 * @param tag specified tag information.
 	 */
-	public void setTag(int tag) {
+	public void setTag(Object tag) {
 		this.tag = tag;
 	}
 	
@@ -147,6 +154,16 @@ public class VarWrapper {
 	}
 	
 	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if (obj instanceof VarWrapper)
+			return this.toString().equals(obj.toString());
+		else
+			return false;
+	}
+
+
 	/**
 	 * Looking an variable by specified expression or name in specified variable list.
 	 * @param varList specified variable list.

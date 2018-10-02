@@ -4,6 +4,8 @@ import static net.hudup.em.AbstractEM.EM_EPSILON_FIELD;
 import static net.hudup.em.AbstractEM.EM_MAX_ITERATION_FIELD;
 import static net.hudup.em.EM.EM_DEFAULT_EPSILON;
 import static net.hudup.em.EM.EM_MAX_ITERATION;
+import static net.hudup.regression.em.AbstractMixtureREM.COMP_EXECUTION_DEFAULT;
+import static net.hudup.regression.em.AbstractMixtureREM.COMP_EXECUTION_FIELD;
 import static net.hudup.regression.em.DefaultMixtureREM.COMP_NUMBER_FIELD;
 import static net.hudup.regression.em.DefaultMixtureREM.PREV_PARAMS_FIELD;
 
@@ -68,11 +70,7 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		int maxK = getConfig().getAsInt(COMP_MAX_NUMBER_FIELD);
 		maxK = maxK <= 0 ? Integer.MAX_VALUE : maxK;
 		while (true) {
-			DefaultMixtureREM mixREM = new DefaultMixtureREM();
-			mixREM.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
-			mixREM.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
-			mixREM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
-			mixREM.getConfig().put(COMP_NUMBER_FIELD, 1);
+			DefaultMixtureREM mixREM = createInternalRM();
 			
 			if (prevMixREM != null) {
 				List<ExchangedParameter> prevParameters = ExchangedParameter.clone((List<ExchangedParameter>)prevMixREM.getParameter());
@@ -132,6 +130,22 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 	}
 
 
+	/**
+	 * Creating internal regression model.
+	 * @return internal regression model.
+	 */
+	protected DefaultMixtureREM createInternalRM() {
+		DefaultMixtureREM mixREM = new DefaultMixtureREM();
+		mixREM.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
+		mixREM.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
+		mixREM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
+		mixREM.getConfig().put(COMP_NUMBER_FIELD, 1);
+		mixREM.getConfig().put(COMP_EXECUTION_FIELD, this.getConfig().get(COMP_EXECUTION_FIELD));
+		
+		return mixREM;
+	}
+	
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -144,12 +158,22 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 
 	
 	@Override
-	public Object executeByXStatistic(double[] xStatistic) {
+	public LargeStatistics getLargeStatistics() {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.getLargeStatistics();
+		else
+			return null;
+	}
+
+
+	@Override
+	public double executeByXStatistic(double[] xStatistic) {
 		// TODO Auto-generated method stub
 		if (mixREM != null)
 			return mixREM.executeByXStatistic(xStatistic);
 		else
-			return null;
+			return Constants.UNUSED;
 	}
 
 
@@ -159,7 +183,7 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		if (mixREM != null)
 			return mixREM.execute(input);
 		else
-			return null;
+			return Constants.UNUSED;
 	}
 
 
@@ -220,6 +244,16 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 			return mixREM.extractResponseValue(input);
 		else
 			return null;
+	}
+
+
+	@Override
+	public List<Double> extractRegressorStatistic(VarWrapper regressor) {
+		// TODO Auto-generated method stub
+		if (mixREM != null)
+			return mixREM.extractRegressorStatistic(regressor);
+		else
+			return Util.newList();
 	}
 
 
@@ -301,6 +335,7 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		config.put(EM_MAX_ITERATION_FIELD, EM_MAX_ITERATION);
 		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(COMP_MAX_NUMBER_FIELD, COMP_MAX_NUMBER_DEFAULT);
+		config.put(COMP_EXECUTION_FIELD, COMP_EXECUTION_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;
@@ -308,10 +343,10 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 
 
 	@Override
-	public Graph createRegressorGraph(int xIndex) {
+	public Graph createRegressorGraph(VarWrapper regressor) {
 		// TODO Auto-generated method stub
 		if (mixREM != null)
-			return mixREM.createRegressorGraph(xIndex);
+			return mixREM.createRegressorGraph(regressor);
 		else
 			return null;
 	}
