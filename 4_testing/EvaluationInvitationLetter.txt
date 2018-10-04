@@ -1,0 +1,35 @@
+Chị Hằng thân mến,
+Dạ, trên internet thường có virus, chị cẩn thận là OK.
+Thuật toán REM của chúng ta bước đầu đã được cài đặt với kết quả khả quan nhưng REM cần được đánh giá và sử dụng rộng rãi.
+Em cần sửa lỗi REM và tiếp tục phát triển REM với mô hình hỗn hợp (mixture model) với dữ liệu bị thiếu lẫn thay đổi bất thường.
+Chị vui lòng giúp em phổ biến REM với bệnh viện Vĩnh Long. Sau đây là thư mời chị có thể forward.
+
+"Thư mời sử dụng và đánh giá phương pháp ước lượng mô hình hồi quy REM
+
+Hồi quy là công cụ nghiên cứu mạnh trong y học thống kê. Khi dữ liệu đầy đủ, phương pháp bình phương cực tiểu được sử dụng phổ biến để ước lượng mô hình hồi quy. Khi dữ liệu có nhiều biến số thì việc thu thập mẫu trở nên nặng nhọc vì phương pháp bình phương cực tiểu không chấp nhận dữ liệu bị thiếu. Hơn nữa, một số mẫu khó được thu thập đầy đủ. Vì vậy việc ước lượng mô hình hồi quy với dữ liệu bị thiếu là cần thiết.
+
+Chúng tôi vừa nghiên cứu phương pháp REM để ước lượng mô hình hồi quy với dữ liệu không đầy đủ. REM là phương pháp ước lượng thuận nghịch (tương tự hiệu ứng đối lưu) và dựa trên thuật toán cực đại kỳ vọng (EM algorithm).
+Bước đầu, REM cho kết quả khả quan khi độ chính xác giảm không đáng kể với tỉ lệ dữ liệu bị thiếu có thể đến 80%. Tuy nhiên hiện còn có 6 phương pháp ước lượng hồi quy khác với dữ liệu bị thiếu; theo Horton and Kleinman (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1839993), đó là các phương pháp: complete case, ad-hoc, multiple imputation, maximum likelihood, weighting và Bayesian.
+Chúng tôi mong muốn các nhà nghiên cứu sử dụng REM và đánh giá REM với các phương pháp này mà có thể quý vị đã và đang sử dụng. Sự đánh giá của quý vị rất cần thiết để chúng tôi sửa lỗi REM và tiếp tục phát triển REM với mô hình hỗn hợp (mixture model) khi dữ liệu bị thiếu lẫn thay đổi bất thường. Quý vị có thể tải REM tại http://rem.locnguyen.net
+
+Rất mong sự phản hồi của quý vị.
+Chào thân ái".
+
+Chúc chị ngày càng thành công và hạnh phúc.
+Chào thân ái,
+
+---
+Thư mời sử dụng và đánh giá phương pháp ước lượng mô hình hồi quy REM
+
+Kính gởi quý HOSREM,
+
+Hồi quy là công cụ nghiên cứu mạnh trong y học thống kê. Khi dữ liệu đầy đủ, phương pháp bình phương cực tiểu được sử dụng phổ biến để ước lượng mô hình hồi quy. Khi dữ liệu có nhiều biến số thì việc thu thập mẫu trở nên nặng nhọc vì phương pháp bình phương cực tiểu không chấp nhận dữ liệu bị thiếu. Hơn nữa, một số mẫu khó được thu thập đầy đủ. Vì vậy việc ước lượng mô hình hồi quy với dữ liệu bị thiếu là cần thiết.
+
+Chúng tôi vừa nghiên cứu phương pháp REM để ước lượng mô hình hồi quy với dữ liệu không đầy đủ. REM là phương pháp ước lượng thuận nghịch (tương tự hiệu ứng đối lưu) và dựa trên thuật toán cực đại kỳ vọng (EM algorithm).
+Bước đầu, REM cho kết quả khả quan khi độ chính xác giảm không đáng kể với tỉ lệ dữ liệu bị thiếu có thể đến 80%. Tuy nhiên hiện còn có 6 phương pháp ước lượng hồi quy khác với dữ liệu bị thiếu; theo Horton and Kleinman (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1839993), đó là các phương pháp: complete case, ad-hoc, multiple imputation, maximum likelihood, weighting và Bayesian.
+Chúng tôi mong muốn các nhà nghiên cứu sử dụng REM và đánh giá REM với các phương pháp này mà có thể quý vị đã và đang sử dụng. Sự đánh giá của quý vị rất cần thiết để chúng tôi sửa lỗi REM và tiếp tục phát triển REM với mô hình hỗn hợp (mixture model) khi dữ liệu bị thiếu lẫn thay đổi bất thường. Quý vị có thể tải REM tại http://rem.locnguyen.net
+
+Rất mong sự phản hồi của quý vị.
+Chào thân ái,
+
+
