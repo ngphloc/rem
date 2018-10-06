@@ -22,7 +22,9 @@ import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.NextUpdate;
+import net.hudup.core.logistic.xURI;
 import net.hudup.em.ExponentialEM;
+import net.hudup.regression.AbstractRM;
 import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.REM;
@@ -1213,6 +1215,13 @@ public class RegressionEMImpl extends ExponentialEM implements REM, Duplicatable
 	public VarWrapper extractResponse() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean saveLargeStatistics(xURI uri, int decimal) {
+		// TODO Auto-generated method stub
+		return AbstractRM.saveLargeStatistics(this, getLargeStatistics(), uri, decimal);
 	}
 
 

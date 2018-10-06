@@ -20,6 +20,7 @@ import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.em.ExponentialEM;
 import net.hudup.regression.AbstractRM;
@@ -769,6 +770,13 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 			return null;
 		else
 			return AbstractRM.calcError(this, this.getLargeStatistics()); // Suppose all REMs have the same large statistics.
+	}
+
+
+	@Override
+	public boolean saveLargeStatistics(xURI uri, int decimal) {
+		// TODO Auto-generated method stub
+		return AbstractRM.saveLargeStatistics(this, getLargeStatistics(), uri, decimal);
 	}
 	
 	

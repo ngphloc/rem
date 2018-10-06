@@ -28,6 +28,7 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -45,8 +46,6 @@ import javax.swing.table.TableModel;
 
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
-import net.hudup.core.data.DataConfig;
-import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.UriAssoc;
 import net.hudup.core.logistic.xURI;
@@ -58,6 +57,7 @@ import net.hudup.regression.RM2;
 import net.hudup.regression.VarWrapper;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
+import net.hudup.regression.ui.LargeStatisticsTable;
 
 /**
  * This class represents the dialog to show content of regression model.
@@ -333,6 +333,7 @@ public class REMDlg extends JDialog {
 
 		JPanel varButtons = new JPanel();
 		paneVars.add(varButtons, BorderLayout.EAST);
+		
 		JButton btnPlot = new JButton(new AbstractAction("Plot") {
 
 			/**
@@ -355,7 +356,7 @@ public class REMDlg extends JDialog {
 		});
 		varButtons.add(btnPlot);
 
-		JButton btnStat = new JButton(new AbstractAction("Stat") {
+		JButton btnStat = new JButton(new AbstractAction("Stat.") {
 
 			/**
 			 * Serial version UID for serializable class.
@@ -368,8 +369,8 @@ public class REMDlg extends JDialog {
 				if (var == null)
 					JOptionPane.showMessageDialog(
 							cmbVars, 
-							"No selected regressor", 
-							"No selected regressor", 
+							"No selected variable", 
+							"No selected variable", 
 							JOptionPane.ERROR_MESSAGE);
 				else
 					statVar(var);
@@ -377,13 +378,28 @@ public class REMDlg extends JDialog {
 		});
 		varButtons.add(btnStat);
 		
+		JButton btnLargeStats = new JButton(new AbstractAction("Large stat.") {
+
+			/**
+			 * Serial version UID for serializable class.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LargeStatisticsTable.showDlg(getThisDlg(), rm, true);;
+			}
+		});
+		
+		varButtons.add(Box.createHorizontalBox());
+		varButtons.add(btnLargeStats);
 		
 		//Footer
-		JPanel footer = new JPanel(new BorderLayout());
+		JPanel footer = new JPanel(new GridLayout(0, 1));
 		this.add(footer, BorderLayout.SOUTH);
 		
 		JPanel paneCalc = new JPanel();
-		footer.add(paneCalc, BorderLayout.CENTER);
+		footer.add(paneCalc);
 		
 		DefaultTableModel tbm = new DefaultTableModel() {
 
@@ -398,7 +414,17 @@ public class REMDlg extends JDialog {
 			}
 		};
 		tbm.setColumnIdentifiers(new String[] {"Regressor", "Value"});
-		for (VarWrapper regressor : vars) {
+		List<VarWrapper> regressors = rm.extractRegressors();
+		regressors.sort(new Comparator<VarWrapper>() {
+
+			@Override
+			public int compare(VarWrapper o1, VarWrapper o2) {
+				// TODO Auto-generated method stub
+				return o1.toString().compareToIgnoreCase(o2.toString());
+			}
+			
+		});
+		for (VarWrapper regressor : regressors) {
 			Vector<Object> rowData = new Vector<Object>();
 			rowData.add(regressor);
 			rowData.add(new Double(0));
@@ -567,7 +593,7 @@ public class REMDlg extends JDialog {
 					JOptionPane.ERROR_MESSAGE);
 		}
 		else
-			new StatDlg(this, DSUtil.toDoubleArray(data), true);
+			new StatDlg(this, data, true);
 	}
 	
 	
@@ -629,10 +655,10 @@ public class REMDlg extends JDialog {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(getThis()), "Big zoom", true);
+					final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(getThisDlg()), "Big zoom", true);
 					dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 					dlg.setSize(600, 400);
-					dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(getThis()));
+					dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(getThisDlg()));
 					
 					dlg.setLayout(new BorderLayout());
 					JPanel body = new JPanel(new GridLayout(1, 0));
@@ -651,7 +677,7 @@ public class REMDlg extends JDialog {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							mergeGraphImages(getThis(), graphList2);
+							mergeGraphImages(getThisDlg(), graphList2);
 						}
 					});
 					footer.add(btnExport);
@@ -666,7 +692,7 @@ public class REMDlg extends JDialog {
 					
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					mergeGraphImages(getThis(), graphList);
+					mergeGraphImages(getThisDlg(), graphList);
 				}
 			});
 		contextMenu.add(miExport);
@@ -684,9 +710,7 @@ public class REMDlg extends JDialog {
 		if (graphList.size() == 0)
 			return;
 		
-		DataConfig config = new DataConfig();
-		config.setStoreUri(xURI.create(new File(".")));
-		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(config);
+		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(xURI.create(new File(".")));
 		xURI chooseUri = uriAssoc.chooseUri(comp, false, new String[] {"png"}, new String[] {"PNG file"}, null, "png");
 		if (chooseUri == null) {
 			JOptionPane.showMessageDialog(
@@ -745,7 +769,7 @@ public class REMDlg extends JDialog {
 	 * Getting this dialog.
 	 * @return this dialog.
 	 */
-	private REMDlg getThis() {
+	private REMDlg getThisDlg() {
 		return this;
 	}
 	

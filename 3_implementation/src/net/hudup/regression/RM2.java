@@ -2,6 +2,7 @@ package net.hudup.regression;
 
 import java.util.List;
 
+import net.hudup.core.logistic.xURI;
 import net.hudup.regression.em.ui.graph.Graph;
 
 /**
@@ -103,7 +104,7 @@ public interface RM2 extends RM {
      * Creating graph for response variable.
      * @return graph for response variable.
      */
-    public Graph createResponseGraph();
+    Graph createResponseGraph();
 
     	
     /**
@@ -131,14 +132,23 @@ public interface RM2 extends RM {
      * Getting correlation between real response and estimated response.
      * @return correlation between real response and estimated response.
      */
-    public double calcR();
+    double calcR();
     
     
     /**
      * Calculating mean and variance of errors.
      * @return mean and variance of errors.
      */
-    public double[] calcError();
+    double[] calcError();
+    
+    
+    /**
+     * Saving large statistics at specified URI.
+     * @param uri specified URI.
+	 * @param decimal specified decimal.
+     * @return true if saving is successful.
+     */
+    boolean saveLargeStatistics(xURI uri, int decimal);
     
     
 }

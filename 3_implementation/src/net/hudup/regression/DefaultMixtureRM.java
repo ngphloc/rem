@@ -21,6 +21,7 @@ import net.hudup.core.alg.AbstractTestingAlg;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.DataConfig;
+import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.regression.em.DefaultMixtureREM;
 import net.hudup.regression.em.ExchangedParameter;
@@ -411,6 +412,12 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 			return null;
 	}
 
-	
+
+	@Override
+	public boolean saveLargeStatistics(xURI uri, int decimal) {
+		// TODO Auto-generated method stub
+		return AbstractRM.saveLargeStatistics(this, getLargeStatistics(), uri, decimal);
+	}
+
 
 }

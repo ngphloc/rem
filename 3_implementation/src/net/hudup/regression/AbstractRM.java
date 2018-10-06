@@ -1,6 +1,7 @@
 package net.hudup.regression;
 
 import java.awt.Color;
+import java.io.BufferedWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,9 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.MathUtil;
+import net.hudup.core.logistic.UriAssoc;
 import net.hudup.core.logistic.Vector2;
+import net.hudup.core.logistic.xURI;
 import net.hudup.core.parser.TextParserUtil;
 import net.hudup.regression.em.ui.graph.Graph;
 import net.hudup.regression.em.ui.graph.PlotGraphExt;
@@ -1039,6 +1042,69 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		}
 		
     	return new double[] {error.mean(), error.mleVar()};
+	}
+
+
+	/**
+	 * Saving large statistics at specified URI.
+	 * @param rm specified regression model.
+	 * @param stats specified large statistics.
+	 * @param uri specified URI.
+	 * @param decimal specified decimal.
+	 * @return true if saving is successful.
+	 */
+	public static boolean saveLargeStatistics(RM2 rm, LargeStatistics stats, xURI uri, int decimal) {
+		// TODO Auto-generated method stub
+		if (rm == null || stats == null || stats.size() == 0 || uri == null)
+			return false;
+		
+		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(uri);
+		if (uriAssoc == null) return false;
+		
+		try {
+			BufferedWriter writer = new BufferedWriter(uriAssoc.getWriter(uri, false));
+			
+			StringBuffer columns = new StringBuffer();
+			List<VarWrapper> regressors = rm.extractRegressors();
+			for (int i = 0; i < regressors.size(); i++) {
+				VarWrapper regressor = regressors.get(i);
+				if (i > 0)
+					columns.append(", ");
+				columns.append(regressor.toString());
+			}
+			VarWrapper response = rm.extractResponse();
+			columns.append(", " + response.toString());
+			writer.write(columns.toString());
+			
+			for (int i = 0; i < stats.size(); i++) {
+				double[] xVector = stats.getXData().get(i);
+				double[] zVector = stats.getZData().get(i);
+				StringBuffer row = new StringBuffer(xVector.length + 1);
+				
+				row.append("\n");
+				for (int j = 1; j < xVector.length; j++) {
+					if (decimal > 0)
+						row.append(MathUtil.format(xVector[j], decimal));
+					else
+						row.append(MathUtil.format(xVector[j]));
+					row.append(", ");
+				}
+				if (decimal > 0)
+					row.append(MathUtil.format(zVector[1], decimal));
+				else
+					row.append(MathUtil.format(zVector[1]));
+				
+				writer.write(row.toString());
+			}
+
+			writer.close();
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 
 

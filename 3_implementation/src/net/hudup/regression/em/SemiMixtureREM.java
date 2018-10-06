@@ -350,6 +350,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		
+		// Suppose every partial regression model has only one regressor.
 		int N  = this.rems.get(0).getLargeStatistics().size();
 		List<double[]> xData = Util.newList(N);
 		List<double[]> zData = Util.newList(N);

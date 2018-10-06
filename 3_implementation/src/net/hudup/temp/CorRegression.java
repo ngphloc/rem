@@ -9,6 +9,7 @@ import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.NextUpdate;
+import net.hudup.core.logistic.xURI;
 import net.hudup.regression.AbstractRM;
 import net.hudup.regression.LargeStatistics;
 import net.hudup.regression.VarWrapper;
@@ -329,6 +330,13 @@ public class CorRegression extends AbstractRM implements DuplicatableAlg {
 	public double[] calcError() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean saveLargeStatistics(xURI uri, int decimal) {
+		// TODO Auto-generated method stub
+		return AbstractRM.saveLargeStatistics(this, getLargeStatistics(), uri, decimal);
 	}
 	
 	

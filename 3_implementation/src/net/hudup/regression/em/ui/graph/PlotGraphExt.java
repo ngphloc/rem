@@ -27,7 +27,6 @@ import javax.swing.JTextField;
 
 import flanagan.plot.PlotGraph;
 import net.hudup.core.Util;
-import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.UriAssoc;
 import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
@@ -116,14 +115,12 @@ public class PlotGraphExt extends PlotGraph implements Graph {
 	
 	@Override
 	public void exportImage() {
-		DataConfig config = new DataConfig();
-		config.setStoreUri(xURI.create(new File(".")));
-		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(config);
+		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(xURI.create(new File(".")));
 		xURI chooseUri = uriAssoc.chooseUri(this, false, new String[] {"png"}, new String[] {"PNG file"}, null, "png");
 		if (chooseUri == null) {
 			JOptionPane.showMessageDialog(
 					this, 
-					"Image not exported", 
+					"Invalid URI", 
 					"Image not exported", 
 					JOptionPane.INFORMATION_MESSAGE);
 			return;
