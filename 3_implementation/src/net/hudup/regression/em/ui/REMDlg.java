@@ -491,7 +491,7 @@ public class REMDlg extends JDialog {
 		
 		final JDialog dlg = new JDialog(UIUtil.getFrameForComponent(this), "Graph", true);
 		dlg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		dlg.setSize(600, 400);
+		dlg.setSize(450, 380);
 		dlg.setLocationRelativeTo(UIUtil.getFrameForComponent(this));
 		
 		dlg.setLayout(new BorderLayout());

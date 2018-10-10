@@ -1,0 +1,50 @@
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base" (done) are Learned models: {V2 = 34.0445 - 0.2790*(V1): t=1, coeff=1.0000, z-variance=962.0000}: t=1
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.1.miss" (done) are Learned models: {V2 = 16.6425 - 0.3065*(V1): t=21, coeff=0.6654, z-variance=188.4319}, {V2 = 62.3919 - 0.0429*(V1): t=21, coeff=0.3346, z-variance=86.8709}: t=21
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.2.miss" (done) are Learned models: {V2 = 13.2805 - 0.3332*(V1): t=36, coeff=0.4909, z-variance=124.9130}, {V2 = 64.0639 - 0.0980*(V1): t=36, coeff=0.3031, z-variance=102.6651}, {V2 = 32.5172 - 0.2432*(V1): t=36, coeff=0.2060, z-variance=0.0573}: t=36
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.3.miss" (done) are Learned models: {V2 = 13.2047 - 0.3220*(V1): t=25, coeff=0.4410, z-variance=138.2844}, {V2 = 66.5083 - 0.1668*(V1): t=25, coeff=0.2424, z-variance=91.6464}, {V2 = 31.9337 - 0.2667*(V1): t=25, coeff=0.3166, z-variance=0.0323}: t=25
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.4.miss" (done) are Learned models: {V2 = 14.5836 - 0.3404*(V1): t=29, coeff=0.3772, z-variance=132.5547}, {V2 = 65.9884 - 0.1683*(V1): t=29, coeff=0.2224, z-variance=99.6319}, {V2 = 33.3280 - 0.2766*(V1): t=29, coeff=0.4004, z-variance=0.0547}: t=29
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.5.miss" (done) are Learned models: {V2 = 33.5698 - 0.2666*(V1): t=21, coeff=0.5096, z-variance=0.0346}, {V2 = 65.8616 - 0.1536*(V1): t=21, coeff=0.1906, z-variance=83.6705}, {V2 = 13.6946 - 0.3393*(V1): t=21, coeff=0.2998, z-variance=152.4883}: t=21
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.6.miss" (done) are Learned models: {V2 = 73.1729 - 1.1518*(V1): t=25, coeff=0.8835, z-variance=49.5093}, {V2 = 7.3758 + 1.0052*(V1): t=25, coeff=0.1165, z-variance=296.8865}: t=25
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.5.miss" (done) are Learned models: {V2 = 33.5698 - 0.2666*(V1): t=21, coeff=0.5096, z-variance=0.0346}, {V2 = 65.8616 - 0.1536*(V1): t=21, coeff=0.1906, z-variance=83.6705}, {V2 = 13.6946 - 0.3393*(V1): t=21, coeff=0.2998, z-variance=152.4883}: t=21
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.8.miss" (done) are Learned models: {V2 = 4.7675 - 32.0000*(V1): t=85, coeff=0.0007, z-variance=0.0000}, {V2 = 71.4991 - 1.2399*(V1): t=85, coeff=0.9980, z-variance=58.6416}, {V2 = 44.5074 - 1.9882*(V1): t=85, coeff=0.0013, z-variance=0.0000}: t=85
+
+
+
+========== Algorithm "cluster_mixrm_smart" ==========
+Setup result of algorithm "cluster_mixrm_smart" on training dataset "hdp_sample.base.0.9.miss" (done) are Learned models: {V2 = 62.2939 - 1.1417*(V1): t=14, coeff=1.0000, z-variance=21.6927}: t=14
+
+
+

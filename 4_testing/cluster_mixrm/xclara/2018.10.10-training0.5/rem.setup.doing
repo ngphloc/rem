@@ -1,0 +1,1053 @@
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base"
+Current parameter:
+  34.0445, -0.2790: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  34.0445, -0.2790: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  34.7961, -0.3093: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.4892, -0.3323: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  36.4892, -0.3323: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.7722, -0.3373: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  36.7722, -0.3373: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.8179, -0.3382: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss"
+Current parameter:
+  36.8179, -0.3382: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.8255, -0.3384: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  34.0321, -0.2602: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  35.3926, -0.3070: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  35.3926, -0.3070: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.0902, -0.3269: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  36.0902, -0.3269: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.3798, -0.3346: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  36.3798, -0.3346: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.4943, -0.3376: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  36.4943, -0.3376: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5387, -0.3387: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  36.5387, -0.3387: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5558, -0.3392: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss"
+Current parameter:
+  36.5558, -0.3392: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5624, -0.3393: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  31.4599, -0.2413: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  33.8725, -0.3091: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  33.8725, -0.3091: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  35.4506, -0.3506: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  35.4506, -0.3506: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.3618, -0.3741: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  36.3618, -0.3741: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.8681, -0.3871: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  36.8681, -0.3871: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.1445, -0.3942: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  37.1445, -0.3942: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.2940, -0.3981: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  37.2940, -0.3981: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.3746, -0.4001: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  37.3746, -0.4001: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.4179, -0.4012: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  37.4179, -0.4012: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.4412, -0.4018: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss"
+Current parameter:
+  37.4412, -0.4018: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.4537, -0.4022: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  34.0077, -0.2787: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  37.9598, -0.3835: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  37.9598, -0.3835: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  40.8682, -0.4580: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  40.8682, -0.4580: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  42.8341, -0.5075: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  42.8341, -0.5075: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  44.0821, -0.5387: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  44.0821, -0.5387: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  44.8410, -0.5575: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  44.8410, -0.5575: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.2901, -0.5685: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.2901, -0.5685: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.5515, -0.5750: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.5515, -0.5750: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.7020, -0.5786: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.7020, -0.5786: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.7882, -0.5808: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.7882, -0.5808: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.8374, -0.5819: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.8374, -0.5819: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.8654, -0.5826: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss"
+Current parameter:
+  45.8654, -0.5826: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.8814, -0.5830: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  30.4868, -0.1349: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  31.9270, -0.1957: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  31.9270, -0.1957: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  34.1240, -0.2634: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  34.1240, -0.2634: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5435, -0.3306: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  36.5435, -0.3306: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  38.9443, -0.3942: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  38.9443, -0.3942: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  41.1588, -0.4517: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  41.1588, -0.4517: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  43.0778, -0.5010: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  43.0778, -0.5010: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  44.6501, -0.5410: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  44.6501, -0.5410: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.8762, -0.5721: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  45.8762, -0.5721: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  46.7935, -0.5953: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  46.7935, -0.5953: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  47.4575, -0.6120: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  47.4575, -0.6120: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  47.9263, -0.6238: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  47.9263, -0.6238: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.2511, -0.6319: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.2511, -0.6319: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.4732, -0.6374: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.4732, -0.6374: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.6237, -0.6412: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.6237, -0.6412: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.7250, -0.6437: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.7250, -0.6437: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.7930, -0.6454: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.7930, -0.6454: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8384, -0.6465: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.8384, -0.6465: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8686, -0.6472: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.8686, -0.6472: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8888, -0.6477: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  31.4191, -0.2843: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  38.5289, -0.4405: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  38.5289, -0.4405: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  44.9502, -0.5909: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  44.9502, -0.5909: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  49.9253, -0.7113: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  49.9253, -0.7113: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  53.0581, -0.7882: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  53.0581, -0.7882: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  54.6906, -0.8284: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  54.6906, -0.8284: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  55.4391, -0.8467: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  55.4391, -0.8467: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  55.7603, -0.8544: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  55.7603, -0.8544: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  55.8950, -0.8576: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  55.8950, -0.8576: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  55.9517, -0.8588: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss"
+Current parameter:
+  55.9517, -0.8588: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  55.9764, -0.8593: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  30.4868, -0.1349: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  31.9270, -0.1957: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  31.9270, -0.1957: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  34.1240, -0.2634: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  34.1240, -0.2634: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5435, -0.3306: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  36.5435, -0.3306: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  38.9443, -0.3942: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  38.9443, -0.3942: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  41.1588, -0.4517: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  41.1588, -0.4517: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  43.0778, -0.5010: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  43.0778, -0.5010: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  44.6501, -0.5410: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  44.6501, -0.5410: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  45.8762, -0.5721: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  45.8762, -0.5721: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  46.7935, -0.5953: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  46.7935, -0.5953: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  47.4575, -0.6120: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  47.4575, -0.6120: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  47.9263, -0.6238: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  47.9263, -0.6238: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.2511, -0.6319: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.2511, -0.6319: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.4732, -0.6374: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.4732, -0.6374: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.6237, -0.6412: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.6237, -0.6412: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.7250, -0.6437: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.7250, -0.6437: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.7930, -0.6454: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.7930, -0.6454: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8384, -0.6465: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.8384, -0.6465: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8686, -0.6472: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss"
+Current parameter:
+  48.8686, -0.6472: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  48.8888, -0.6477: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  32.2901, -0.0522: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  32.2620, -0.0751: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  32.2620, -0.0751: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  33.6142, -0.1296: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  33.6142, -0.1296: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  36.5827, -0.2217: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  36.5827, -0.2217: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  41.8634, -0.3688: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  41.8634, -0.3688: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  49.7439, -0.5772: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  49.7439, -0.5772: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  58.5228, -0.8032: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  58.5228, -0.8032: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  64.5314, -0.9559: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  64.5314, -0.9559: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  66.9141, -1.0165: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  66.9141, -1.0165: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  67.7034, -1.0372: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  67.7034, -1.0372: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.0763, -1.0474: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.0763, -1.0474: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.3301, -1.0545: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.3301, -1.0545: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.5274, -1.0602: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.5274, -1.0602: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.6852, -1.0648: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.6852, -1.0648: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.8115, -1.0687: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 15 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.8115, -1.0687: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.9123, -1.0719: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 16 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.9123, -1.0719: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  68.9920, -1.0745: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 17 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  68.9920, -1.0745: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  69.0545, -1.0767: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 18 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  69.0545, -1.0767: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  69.1031, -1.0785: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 19 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  69.1031, -1.0785: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  69.1402, -1.0800: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 20 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  69.1402, -1.0800: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  69.1682, -1.0812: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 21 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss"
+Current parameter:
+  69.1682, -1.0812: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  69.1886, -1.0823: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 1 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  19.7660, -0.0068: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  20.0477, -0.0120: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 2 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  20.0477, -0.0120: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  20.4956, -0.0217: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 3 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  20.4956, -0.0217: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  21.2300, -0.0393: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 4 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  21.2300, -0.0393: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  22.4768, -0.0707: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 5 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  22.4768, -0.0707: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  24.6286, -0.1266: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 6 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  24.6286, -0.1266: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  28.3366, -0.2246: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 7 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  28.3366, -0.2246: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  34.5168, -0.3901: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 8 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  34.5168, -0.3901: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  43.7191, -0.6385: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 9 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  43.7191, -0.6385: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  53.8928, -0.9147: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 10 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  53.8928, -0.9147: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  60.1192, -1.0844: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 11 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  60.1192, -1.0844: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  61.8672, -1.1317: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 12 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  61.8672, -1.1317: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  62.1719, -1.1395: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 13 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  62.1719, -1.1395: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  62.2489, -1.1410: coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+At the 14 iteration of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss"
+Current parameter:
+  62.2489, -1.1410: coeff=NaN, z-variance=NaN
+Estimated parameter:
+  62.2939, -1.1417: coeff=NaN, z-variance=NaN
+
+
+
