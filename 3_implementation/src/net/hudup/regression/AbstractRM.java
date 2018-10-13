@@ -1,10 +1,11 @@
 package net.hudup.regression;
 
 import java.awt.Color;
-import java.io.BufferedWriter;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
@@ -1062,7 +1063,7 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		if (uriAssoc == null) return false;
 		
 		try {
-			BufferedWriter writer = new BufferedWriter(uriAssoc.getWriter(uri, false));
+			Writer writer = uriAssoc.getWriter(uri, false);
 			
 			StringBuffer columns = new StringBuffer();
 			List<VarWrapper> regressors = rm.extractRegressors();
@@ -1070,13 +1071,14 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 				VarWrapper regressor = regressors.get(i);
 				if (i > 0)
 					columns.append(", ");
-				columns.append(regressor.toString());
+				columns.append(regressor.toString() + "~real");
 			}
 			VarWrapper response = rm.extractResponse();
-			columns.append(", " + response.toString());
+			columns.append(", " + response.toString() + "~real");
 			writer.write(columns.toString());
 			
-			for (int i = 0; i < stats.size(); i++) {
+			int N = stats.size();
+			for (int i = 0; i < N; i++) {
 				double[] xVector = stats.getXData().get(i);
 				double[] zVector = stats.getZData().get(i);
 				StringBuffer row = new StringBuffer(xVector.length + 1);
@@ -1086,13 +1088,14 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 					if (decimal > 0)
 						row.append(MathUtil.format(xVector[j], decimal));
 					else
-						row.append(MathUtil.format(xVector[j]));
+						row.append(xVector[j]);
+						
 					row.append(", ");
 				}
 				if (decimal > 0)
 					row.append(MathUtil.format(zVector[1], decimal));
 				else
-					row.append(MathUtil.format(zVector[1]));
+					row.append(zVector[1]);
 				
 				writer.write(row.toString());
 			}
@@ -1105,6 +1108,136 @@ public abstract class AbstractRM extends AbstractTestingAlg implements RM2 {
 		}
 		
 		return false;
+	}
+
+
+	/**
+	 * Generating 2-dimensional regressive data with specified list of regression coefficients, list of probabilities, list of variances, and size.
+	 * @param alphas specified list of regression coefficients.
+	 * @param probs specified list of probabilities.
+	 * @param variances specified list of variances.
+	 * @param size size of data.
+	 * @return regressive large statistics generated from specified list of regression coefficients, list of probabilities, list of variances, and size.
+	 */
+	public static LargeStatistics generate2DRegressiveGaussianData(List<double[]> alphas, List<Double> probs, List<Double> variances, int size) {
+		if (alphas.size() == 0) return null;
+		List<double[]> xData = Util.newList(alphas.size() * size);
+		List<double[]> zData = Util.newList(alphas.size() * size);
+		
+		Random cRnd = new Random();
+		Random xRnd = new Random();
+		List<Random> zRnds = Util.newList(alphas.size());
+		for (int k = 0; k < alphas.size(); k++) {
+			zRnds.add(new Random());
+		}
+
+		//Indexing
+		int[] counts = new int[alphas.size()];
+		List<Integer> numbers = Util.newList(alphas.size());
+		int m = 1000;
+		for (int i = 0; i < alphas.size(); i++) {
+			counts[i] = (int) (m * probs.get(i) + 0.5);
+			if (probs.get(i) > 0) numbers.add(i);
+		}
+		List<Integer> indices = Util.newList(m);
+		while (numbers.size() > 0) {
+			int index = numbers.get(cRnd.nextInt(numbers.size()));
+			if (counts[index] > 0)
+				counts[index] = counts[index] - 1;
+			if (counts[index] == 0) {
+				Object o = new Integer(index);
+				numbers.remove(o);
+			}
+			indices.add(index);
+		}
+		
+		for (int i = 0; i < size; i++) {
+			double[] xVector = new double[2];
+			xVector[0] = 1;
+			xData.add(xVector);
+			double[] zVector = new double[2];
+			zVector[0] = 1;
+			zData.add(zVector);
+			
+			xVector[1] = xRnd.nextDouble();
+			int index = indices.get(cRnd.nextInt(indices.size()));
+			double[] alpha = alphas.get(index);
+			double mean = alpha[0] + alpha[1] * xVector[1];
+			zVector[1] = zRnds.get(index).nextGaussian() * Math.sqrt(variances.get(index)) + mean;
+		}
+		
+		return new LargeStatistics(xData, zData);
+	}
+	
+	
+	/**
+	 * Generating 2-dimensional regressive data with specified list of regression coefficients, list of probabilities, list of variances, and size.
+	 * @param alphas specified list of regression coefficients.
+	 * @param probs specified list of probabilities.
+	 * @param variances specified list of variances.
+	 * @param size size of data.
+	 * @return regressive large statistics generated from specified list of regression coefficients, list of probabilities, list of variances, and size.
+	 */
+	public static LargeStatistics generate2DRegressiveGaussianData2(List<double[]> alphas, List<Double> probs, List<Double> variances, int size) {
+		if (alphas.size() == 0) return null;
+		List<double[]> xData = Util.newList(alphas.size() * size);
+		List<double[]> zData = Util.newList(alphas.size() * size);
+		
+		Random cRnd = new Random();
+		Random xRnd = new Random();
+		List<Random> zRnds = Util.newList(alphas.size());
+		for (int k = 0; k < alphas.size(); k++) {
+			zRnds.add(new Random());
+		}
+
+		//Indexing
+		int[] counts = new int[alphas.size()];
+		List<Integer> numbers = Util.newList(alphas.size());
+		int m = 1000;
+		for (int i = 0; i < alphas.size(); i++) {
+			counts[i] = (int) (m * probs.get(i) + 0.5);
+			if (probs.get(i) > 0) numbers.add(i);
+		}
+		List<Integer> indices = Util.newList(m);
+		while (numbers.size() > 0) {
+			int index = numbers.get(cRnd.nextInt(numbers.size()));
+			if (counts[index] > 0)
+				counts[index] = counts[index] - 1;
+			if (counts[index] == 0) {
+				Object o = new Integer(index);
+				numbers.remove(o);
+			}
+			indices.add(index);
+		}
+		
+		//Interval
+		List<double[]> intervals= Util.newList(alphas.size());
+		for (int i = 0 ; i < alphas.size(); i++) {
+			double d = 1.0 / alphas.size();
+			double a = i * d;
+			double b = (i + 1) * d;
+			intervals.add(new double[] {a, b});
+		}
+		
+		for (int i = 0; i < size; i++) {
+			double[] xVector = new double[2];
+			xVector[0] = 1;
+			xData.add(xVector);
+			double[] zVector = new double[2];
+			zVector[0] = 1;
+			zData.add(zVector);
+			
+			int index = indices.get(cRnd.nextInt(indices.size()));
+			double a = intervals.get(index)[0];
+			double b = intervals.get(index)[1];
+			xVector[1] = xRnd.nextDouble() * (b - a) + a;
+			
+			double[] alpha = alphas.get(index);
+			double mean = alpha[0] + alpha[1] * xVector[1];
+			zVector[1] = zRnds.get(index).nextGaussian() * Math.sqrt(variances.get(index)) + mean;
+		}
+		
+		return new LargeStatistics(xData, zData);
 	}
 
 

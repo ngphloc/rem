@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import net.hudup.core.Constants;
 import net.hudup.core.Util;
 import net.hudup.core.alg.Alg;
 import net.hudup.core.alg.DuplicatableAlg;
@@ -14,6 +15,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.core.logistic.MathUtil;
 import net.hudup.regression.LargeStatistics;
 
 /**
@@ -345,37 +347,50 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 	/**
 	 * Getting the fitness criterion of this model given large statistics.
 	 * @param stat given large statistics.
-	 * @return the fitness criterion of this model given large statistics.
+	 * @return the fitness criterion of this model given large statistics. Return NaN if any error raises.
 	 */
-	public synchronized double getFitness(LargeStatistics stat) {
+	@Deprecated
+	public synchronized double getFitness2(LargeStatistics stat) {
 		@SuppressWarnings("unchecked")
 		List<ExchangedParameter> parameters = (List<ExchangedParameter>)getParameter();
 		if (stat == null || parameters == null || parameters.size() == 0)
-			return 0;
+			return Constants.UNUSED;
 		
 		int N = stat.getZData().size();
-		if (N == 0) return 0;
+		if (N == 0) return Constants.UNUSED;
 		double fitness = 0.0;
 		for (int i = 0; i < N; i++) {
 			double[] xVector = stat.getXData().get(i);
 			double[] zVector = stat.getZData().get(i);
 			
-			int K = this.rems.size();
-			List<double[]> xData = Util.newList(K);
-			List<double[]> zData = Util.newList(K);
-			for (int k = 0; k < K; k++) {
-				xData.add(xVector);
-				zData.add(zVector);
-			}
+			List<Double> probs = ExchangedParameter.normalZCondProbs(parameters, xVector, zVector);
+			fitness += MathUtil.max(probs);
+		}
+		
+		return fitness / (double)N;
+	}
+
+	
+	/**
+	 * Getting the fitness criterion of this model given large statistics.
+	 * @param stat given large statistics.
+	 * @return the fitness criterion of this model given large statistics. Return NaN if any error raises.
+	 */
+	public synchronized double getFitness(LargeStatistics stat) {
+		@SuppressWarnings("unchecked")
+		List<ExchangedParameter> parameters = (List<ExchangedParameter>)getParameter();
+		if (stat == null || parameters == null || parameters.size() == 0)
+			return Constants.UNUSED;
+		
+		int N = stat.getZData().size();
+		if (N == 0) return Constants.UNUSED;
+		double fitness = 0.0;
+		for (int i = 0; i < N; i++) {
+			double[] xVector = stat.getXData().get(i);
+			double[] zVector = stat.getZData().get(i);
 			
-			List<Double> pdfValues = ExchangedParameter.normalZPDF(parameters, xData, zData, VICINITY);
-			
-			double maxPDF = -1;
-			for (int k = 0; k < K; k++) {
-				if (maxPDF < pdfValues.get(k)) 
-					maxPDF = pdfValues.get(k);
-			}
-			fitness += maxPDF;
+			List<Double> pdfValues = ExchangedParameter.normalZPDF(parameters, xVector, zVector);
+			fitness += MathUtil.max(pdfValues);
 		}
 		
 		return fitness / (double)N;

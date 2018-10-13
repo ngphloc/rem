@@ -1,0 +1,136 @@
+========== Algorithm "cluster_mixrm_smart" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [0.1294, 18.0281]
+Hudup recall = 1.0000
+MAE.test = 14.2690
+MAERatio.test = 2.9282
+MAEVector.test = [14.2690]
+MSE.test = 325.0286
+R.test = 0.2259
+RMSE.test = 18.0285
+Setup time = 0.2370
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+----- Testing dataset "2" -----
+ErrorRange.test = [0.9891, 18.1088]
+Hudup recall = 1.0000
+MAE.test = 14.3991
+MAERatio.test = 3.0172
+MAEVector.test = [14.3991]
+MSE.test = 328.9084
+R.test = 0.2087
+RMSE.test = 18.1358
+Setup time = 2004.2770
+Speed = 0.0000
+----- Testing dataset "2" -----
+
+----- Testing dataset "3" -----
+ErrorRange.test = [0.2924, 18.1113]
+Hudup recall = 1.0000
+MAE.test = 14.2141
+MAERatio.test = 2.9319
+MAEVector.test = [14.2141]
+MSE.test = 328.1040
+R.test = 0.2208
+RMSE.test = 18.1136
+Setup time = 248.9060
+Speed = 0.0000
+----- Testing dataset "3" -----
+
+----- Testing dataset "4" -----
+ErrorRange.test = [1.0038, 18.1646]
+Hudup recall = 1.0000
+MAE.test = 14.3296
+MAERatio.test = 3.0250
+MAEVector.test = [14.3296]
+MSE.test = 330.9615
+R.test = 0.2259
+RMSE.test = 18.1923
+Setup time = 17.6380
+Speed = 0.0000
+----- Testing dataset "4" -----
+
+----- Testing dataset "5" -----
+ErrorRange.test = [-0.5270, 18.7415]
+Hudup recall = 1.0000
+MAE.test = 14.4985
+MAERatio.test = 2.8604
+MAEVector.test = [14.4985]
+MSE.test = 351.5222
+R.test = 0.2250
+RMSE.test = 18.7489
+Setup time = 1.3260
+Speed = 0.0000
+----- Testing dataset "5" -----
+
+----- Testing dataset "6" -----
+ErrorRange.test = [-0.2387, 19.0229]
+Hudup recall = 1.0000
+MAE.test = 14.8349
+MAERatio.test = 2.9243
+MAEVector.test = [14.8349]
+MSE.test = 361.9263
+R.test = 0.2265
+RMSE.test = 19.0244
+Setup time = 1.3170
+Speed = 0.0000
+----- Testing dataset "6" -----
+
+----- Testing dataset "7" -----
+ErrorRange.test = [0.2810, 19.6281]
+Hudup recall = 1.0000
+MAE.test = 15.4022
+MAERatio.test = 3.0273
+MAEVector.test = [15.4022]
+MSE.test = 385.3429
+R.test = 0.2223
+RMSE.test = 19.6302
+Setup time = 1.0520
+Speed = 0.0000
+----- Testing dataset "7" -----
+
+----- Testing dataset "8" -----
+ErrorRange.test = [-0.8130, 20.2175]
+Hudup recall = 1.0000
+MAE.test = 16.1452
+MAERatio.test = 2.9592
+MAEVector.test = [16.1452]
+MSE.test = 409.4097
+R.test = 0.1948
+RMSE.test = 20.2339
+Setup time = 0.6900
+Speed = 0.0000
+----- Testing dataset "8" -----
+
+----- Testing dataset "9" -----
+ErrorRange.test = [-0.7696, 20.1099]
+Hudup recall = 1.0000
+MAE.test = 16.0307
+MAERatio.test = 2.9565
+MAEVector.test = [16.0307]
+MSE.test = 404.9985
+R.test = 0.1976
+RMSE.test = 20.1246
+Setup time = 1.0560
+Speed = 0.0000
+----- Testing dataset "9" -----
+
+----- Testing dataset "10" -----
+ErrorRange.test = [1.7771, 26.9877]
+Hudup recall = 1.0000
+MAE.test = 22.8626
+MAERatio.test = 3.7082
+MAEVector.test = [22.8626]
+MSE.test = 731.4929
+R.test = -0.0864
+RMSE.test = 27.0461
+Setup time = 4.2490
+Speed = 0.0000
+----- Testing dataset "10" -----
+
+========== Algorithm "cluster_mixrm_smart" - Final result ==========
+
+
+

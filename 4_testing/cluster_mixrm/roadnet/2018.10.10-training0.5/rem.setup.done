@@ -1,0 +1,50 @@
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base" (done) are  (t = 1) learned models: altitude = 367.1365 + 8.0895*(longitude) - 7.3553*(latitude): t=1, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.1.miss" (done) are  (t = 6) learned models: altitude = 322.3638 + 8.4593*(longitude) - 6.6323*(latitude): t=6, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.2.miss" (done) are  (t = 6) learned models: altitude = 294.9778 + 9.8712*(longitude) - 6.3936*(latitude): t=6, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.3.miss" (done) are  (t = 17) learned models: altitude = 339.4471 + 11.0029*(longitude) - 7.3580*(latitude): t=17, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.4.miss" (done) are  (t = 24) learned models: altitude = 324.5201 + 16.4713*(longitude) - 8.0293*(latitude): t=24, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.5.miss" (done) are  (t = 55) learned models: altitude = 729.2072 + 18.6067*(longitude) - 15.4761*(latitude): t=55, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.6.miss" (done) are  (t = 46) learned models: altitude = 1210.9076 + 21.3220*(longitude) - 24.3661*(latitude): t=46, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.7.miss" (done) are  (t = 21) learned models: altitude = 2039.8887 + 20.3732*(longitude) - 38.7549*(latitude): t=21, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.8.miss" (done) are  (t = 29) learned models: altitude = 1964.3469 + 20.3226*(longitude) - 37.4216*(latitude): t=29, coeff=NaN, z-variance=NaN
+
+
+
+========== Algorithm "rem" ==========
+Setup result of algorithm "rem" on training dataset "hdp_sample.base.0.9.miss" (done) are  (t = 127) learned models: altitude = 3240.5499 - 9.9667*(longitude) - 54.6514*(latitude): t=127, coeff=NaN, z-variance=NaN
+
+
+

@@ -50,15 +50,15 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 
 	
 	/**
-	 * Field name of component execution mode.
+	 * Field name of smart execution mode.
 	 */
-	public final static String COMP_EXECUTION_FIELD = "mrem_comp_execution";
+	public final static String SMART_EXECUTE_FIELD = "mrem_smart_execute";
 	
 	
 	/**
-	 * Default component execution mode.
+	 * Default smart execution mode.
 	 */
-	public final static boolean COMP_EXECUTION_DEFAULT = false;
+	public final static boolean SMART_EXECUTE_DEFAULT = false;
 
 	
 	/**
@@ -437,7 +437,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		if (this.rems == null || this.rems.size() == 0 || xStatistic == null)
 			return Constants.UNUSED;
 		
-		if (getConfig().getAsBoolean(COMP_EXECUTION_FIELD)) {
+		if (getConfig().getAsBoolean(SMART_EXECUTE_FIELD)) {
 			double maxPDF = -1;
 			double result = 0;
 			for (REMImpl rem : this.rems) {
@@ -570,7 +570,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
 		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
-		config.put(COMP_EXECUTION_FIELD, COMP_EXECUTION_DEFAULT);
+		config.put(SMART_EXECUTE_FIELD, SMART_EXECUTE_DEFAULT);
 		return config;
 	}
 

@@ -1,5 +1,14 @@
 package net.hudup.temp;
 
+import java.io.File;
+import java.io.Writer;
+import java.util.List;
+
+import net.hudup.core.Util;
+import net.hudup.core.logistic.UriAssoc;
+import net.hudup.core.logistic.xURI;
+import net.hudup.regression.AbstractRM;
+import net.hudup.regression.LargeStatistics;
 
 /**
  * Test class.
@@ -99,7 +108,22 @@ public class Test {
 		// TODO Auto-generated method stub
 		//RegressionEvaluator.main(args);
 		//double a = Double.MAX_VALUE;
-		System.out.println(net.hudup.regression.em.ExchangedParameter.normalPDF(0, 0, 0));
+		//System.out.println(net.hudup.regression.em.ExchangedParameter.normalPDF(0, 0, 0));
+		List<double[]> alphas = Util.newList(2);
+		alphas.add(new double[] {0, 1});
+		alphas.add(new double[] {1, -1});
+		List<Double> probs = Util.newList(2);
+		probs.add(0.5);
+		probs.add(0.5);
+		List<Double> variances = Util.newList(2);
+		variances.add(0.001);
+		variances.add(0.001);
+		
+		LargeStatistics stats = AbstractRM.generate2DRegressiveGaussianData2(alphas, probs, variances, 1000);
+		UriAssoc uriAssoc = Util.getFactory().createUriAssoc(xURI.create(new File(".")));
+		Writer writer = uriAssoc.getWriter(xURI.create(new File("E:\\a.csv")), false);
+		stats.save(writer, -1);
+		writer.close();
 	}
 
 	

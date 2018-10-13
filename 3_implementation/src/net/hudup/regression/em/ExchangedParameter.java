@@ -470,6 +470,18 @@ public class ExchangedParameter implements Cloneable {
 
 	
 	/**
+	 * Calculating the normal condition probabilities of the specified parameters given regressor values (X) and response value Z.
+	 * @param parameterList list of specified parameters.
+	 * @param xVector given regressor values (X).
+	 * @param zVector response values (Z).
+	 * @return condition probabilities of the specified parameters given regressor values (X) and response value Z.
+	 */
+	public static List<Double> normalZCondProbs(List<ExchangedParameter> parameterList, double[] xVector, double[] zVector) {
+		return normalZCondProbs(parameterList, Arrays.asList(xVector), Arrays.asList(zVector));
+	}
+	
+	
+	/**
 	 * Calculating the normal probabilities of the specified parameters given regressor values (X) and response value Z.
 	 * @param parameterList list of specified parameters.
 	 * @param xData given regressor values (X).
@@ -501,6 +513,18 @@ public class ExchangedParameter implements Cloneable {
 	}
 
 
+	/**
+	 * Calculating the normal probabilities of the specified parameters given regressor values (X) and response value Z.
+	 * @param parameterList list of specified parameters.
+	 * @param xVector given regressor values (X).
+	 * @param zVector response values (Z).
+	 * @return condition probabilities of the specified parameters given regressor values (X) and response value Z.
+	 */
+	public static List<Double> normalZPDF(List<ExchangedParameter> parameterList, double[] xVector, double[] zVector) {
+		return normalZPDF(parameterList, Arrays.asList(xVector), Arrays.asList(zVector), 0);
+	}
+	
+	
 	/**
 	 * Cloning the specified collection of parameters.
 	 * @param collection specified collection of parameters.

@@ -1,10 +1,13 @@
 package net.hudup.regression;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 import net.hudup.core.Cloneable;
 import net.hudup.core.Util;
 import net.hudup.core.logistic.DSUtil;
+import net.hudup.core.logistic.MathUtil;
 
 /**
  * This class represents a data sample also a statistics for learning regression model.
@@ -191,6 +194,53 @@ public class LargeStatistics implements Cloneable {
 		List<double[]> zData = DSUtil.cloneDoubleArrayList(this.zData);
 		
 		return new LargeStatistics(xData, zData);
+	}
+	
+	
+	/**
+	 * Saving this large statistics to specified writer.
+	 * @param writer specified writer.
+	 * @param decimal specified decimal.
+	 * @throws IOException if any error raises
+	 */
+	public boolean save(Writer writer, int decimal) throws IOException {
+		if (isEmpty())
+			return false;
+		
+		StringBuffer columns = new StringBuffer();
+		int n = xData.get(0).length;
+		for (int i = 1; i < n; i++) {
+			if (i > 1)
+				columns.append(", ");
+			columns.append("x" + i + "~real");
+		}
+		columns.append(", z~real");
+		writer.write(columns.toString());
+
+		int N = size();
+		for (int i = 0; i < N; i++) {
+			double[] xVector = xData.get(i);
+			double[] zVector = zData.get(i);
+			StringBuffer row = new StringBuffer(xVector.length + 1);
+			
+			row.append("\n");
+			for (int j = 1; j < xVector.length; j++) {
+				if (decimal > 0)
+					row.append(MathUtil.format(xVector[j], decimal));
+				else
+					row.append(xVector[j]);
+
+				row.append(", ");
+			}
+			if (decimal > 0)
+				row.append(MathUtil.format(zVector[1], decimal));
+			else
+				row.append(zVector[1]);
+			
+			writer.write(row.toString());
+		}
+
+		return true;
 	}
 	
 	

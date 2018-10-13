@@ -1,0 +1,50 @@
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base" (done) are Learned models: {altitude = 367.1365 + 8.0895*(longitude) - 7.3553*(latitude): t=1, coeff=1.0000, z-variance=320.1274}: t=1
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.1.miss" (done) are Learned models: {altitude = -90.4083 + 0.0127*(longitude) + 1.6302*(latitude): t=222, coeff=0.1097, z-variance=2.1066}, {altitude = -195.0228 + 21.0873*(longitude) + 1.2586*(latitude): t=222, coeff=0.0010, z-variance=0.0007}, {altitude = 32.8273 + 12.5091*(longitude) - 2.2167*(latitude): t=222, coeff=0.7161, z-variance=116.1013}, {altitude = -1308.2610 - 24.2169*(longitude) + 27.3830*(latitude): t=222, coeff=0.1060, z-variance=8.7036}, {altitude = -17.5923 + 8.1399*(longitude) + 0.3620*(latitude): t=222, coeff=0.0004, z-variance=0.0000}, {altitude = -546.4551 + 13.4246*(longitude) + 8.7234*(latitude): t=222, coeff=0.0013, z-variance=0.0697}, {altitude = 29.8115 + 11.9019*(longitude) - 1.3899*(latitude): t=222, coeff=0.0654, z-variance=53.8329}: t=222
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.2.miss" (done) are Learned models: {altitude = -137.7651 + 0.1662*(longitude) + 2.4339*(latitude): t=95, coeff=0.1030, z-variance=2.0107}, {altitude = 186.6240 + 14.3470*(longitude) - 4.5960*(latitude): t=95, coeff=0.0848, z-variance=81.9008}, {altitude = 83.6828 + 10.3623*(longitude) - 2.7839*(latitude): t=95, coeff=0.8122, z-variance=99.4000}: t=95
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.3.miss" (done) are Learned models: {altitude = 286.8824 + 11.4765*(longitude) - 6.5016*(latitude): t=257, coeff=0.3091, z-variance=0.0167}, {altitude = 337.9546 + 12.9524*(longitude) - 7.5944*(latitude): t=257, coeff=0.6121, z-variance=273.1835}, {altitude = -121.7233 - 0.0086*(longitude) + 2.1821*(latitude): t=257, coeff=0.0788, z-variance=1.9393}: t=257
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.4.miss" (done) are Learned models: {altitude = 324.5201 + 16.4713*(longitude) - 8.0293*(latitude): t=24, coeff=1.0000, z-variance=168.6855}: t=24
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.5.miss" (done) are Learned models: {altitude = 729.2072 + 18.6067*(longitude) - 15.4761*(latitude): t=55, coeff=1.0000, z-variance=120.6668}: t=55
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.6.miss" (done) are Learned models: {altitude = 1210.9076 + 21.3220*(longitude) - 24.3661*(latitude): t=46, coeff=1.0000, z-variance=76.3474}: t=46
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.7.miss" (done) are Learned models: {altitude = 2039.8887 + 20.3732*(longitude) - 38.7549*(latitude): t=21, coeff=1.0000, z-variance=38.3024}: t=21
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.8.miss" (done) are Learned models: {altitude = 1964.3469 + 20.3226*(longitude) - 37.4216*(latitude): t=29, coeff=1.0000, z-variance=15.7497}: t=29
+
+
+
+========== Algorithm "cluster_mixrm" ==========
+Setup result of algorithm "cluster_mixrm" on training dataset "hdp_sample.base.0.9.miss" (done) are Learned models: {altitude = 3240.5499 - 9.9667*(longitude) - 54.6514*(latitude): t=127, coeff=1.0000, z-variance=3.0804}: t=127
+
+
+
