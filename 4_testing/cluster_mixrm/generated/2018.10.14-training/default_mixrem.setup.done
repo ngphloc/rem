@@ -1,0 +1,5 @@
+========== Algorithm "default_mixrem" ==========
+Setup result of algorithm "default_mixrem" on training dataset "hdp_sample" (done) are  (t = 15) learned models: {z = 0.0036 + 0.9765*(x): t=15, coeff=0.4634, z-variance=0.0011}, {z = 0.9767 - 0.9713*(x): t=15, coeff=0.5366, z-variance=0.0009}: t=15
+
+
+

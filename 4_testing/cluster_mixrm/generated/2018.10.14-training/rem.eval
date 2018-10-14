@@ -1,0 +1,19 @@
+========== Algorithm "rem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [-0.0000, 0.1459]
+Hudup recall = 1.0000
+MAE.test = 0.1260
+MAERatio.test = 2.5790
+MAEVector.test = [0.1260]
+MSE.test = 0.0213
+R.test = 0.0202
+RMSE.test = 0.1459
+Setup time = 0.0610
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+========== Algorithm "rem" - Final result ==========
+
+
+

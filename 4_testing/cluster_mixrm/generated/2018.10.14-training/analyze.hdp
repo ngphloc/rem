@@ -1,0 +1,238 @@
+General evaluation
+
+  default_mixrem
+    ErrorRange.test = [0.2413, 0.1469]
+    Hudup recall = 1.0000
+    MAE.test = 0.2428
+    MAERatio.test = 5.3957
+    MAEVector.test = 0.2428
+    MSE.test = 0.0798
+    R.test = 0.0202
+    RMSE.test = 0.2825
+    Setup time = 1.1210
+    Speed = 0.0000
+
+  default_mixrem2
+    ErrorRange.test = [-0.0012, 0.0318]
+    Hudup recall = 1.0000
+    MAE.test = 0.0256
+    MAERatio.test = 0.4000
+    MAEVector.test = 0.0256
+    MSE.test = 0.0010
+    R.test = 0.9761
+    RMSE.test = 0.0318
+    Setup time = 0.6440
+    Speed = 0.0000
+
+  rem
+    ErrorRange.test = [-0.0000, 0.1459]
+    Hudup recall = 1.0000
+    MAE.test = 0.1260
+    MAERatio.test = 2.5790
+    MAEVector.test = 0.1260
+    MSE.test = 0.0213
+    R.test = 0.0202
+    RMSE.test = 0.1459
+    Setup time = 0.0610
+    Speed = 0.0000
+
+
+Dataset evaluation
+
+  Dataset "1"
+    default_mixrem
+      ErrorRange.test = [0.2413, 0.1469]
+      Hudup recall = 1.0000
+      MAE.test = 0.2428
+      MAERatio.test = 5.3957
+      MAEVector.test = [0.2428]
+      MSE.test = 0.0798
+      R.test = 0.0202
+      RMSE.test = 0.2825
+      Setup time = 1.1210
+      Speed = 0.0000
+    default_mixrem2
+      ErrorRange.test = [-0.0012, 0.0318]
+      Hudup recall = 1.0000
+      MAE.test = 0.0256
+      MAERatio.test = 0.4000
+      MAEVector.test = [0.0256]
+      MSE.test = 0.0010
+      R.test = 0.9761
+      RMSE.test = 0.0318
+      Setup time = 0.6440
+      Speed = 0.0000
+    rem
+      ErrorRange.test = [-0.0000, 0.1459]
+      Hudup recall = 1.0000
+      MAE.test = 0.1260
+      MAERatio.test = 2.5790
+      MAEVector.test = [0.1260]
+      MSE.test = 0.0213
+      R.test = 0.0202
+      RMSE.test = 0.1459
+      Setup time = 0.0610
+      Speed = 0.0000
+
+
+ErrorRange.test evaluation
+
+  default_mixrem
+    Dataset "1" got [0.2413, 0.1469]
+
+  default_mixrem2
+    Dataset "1" got [-0.0012, 0.0318]
+
+  rem
+    Dataset "1" got [-0.0000, 0.1459]
+
+
+Hudup recall evaluation
+
+  default_mixrem
+    Dataset "1" got 1.0000
+
+  default_mixrem2
+    Dataset "1" got 1.0000
+
+  rem
+    Dataset "1" got 1.0000
+
+
+MAE.test evaluation
+
+  default_mixrem
+    Dataset "1" got 0.2428
+
+  default_mixrem2
+    Dataset "1" got 0.0256
+
+  rem
+    Dataset "1" got 0.1260
+
+
+MAERatio.test evaluation
+
+  default_mixrem
+    Dataset "1" got 5.3957
+
+  default_mixrem2
+    Dataset "1" got 0.4000
+
+  rem
+    Dataset "1" got 2.5790
+
+
+MAEVector.test evaluation
+
+  default_mixrem
+    Dataset "1" got [0.2428]
+
+  default_mixrem2
+    Dataset "1" got [0.0256]
+
+  rem
+    Dataset "1" got [0.1260]
+
+
+MSE.test evaluation
+
+  default_mixrem
+    Dataset "1" got 0.0798
+
+  default_mixrem2
+    Dataset "1" got 0.0010
+
+  rem
+    Dataset "1" got 0.0213
+
+
+R.test evaluation
+
+  default_mixrem
+    Dataset "1" got 0.0202
+
+  default_mixrem2
+    Dataset "1" got 0.9761
+
+  rem
+    Dataset "1" got 0.0202
+
+
+RMSE.test evaluation
+
+  default_mixrem
+    Dataset "1" got 0.2825
+
+  default_mixrem2
+    Dataset "1" got 0.0318
+
+  rem
+    Dataset "1" got 0.1459
+
+
+Setup time evaluation
+
+  default_mixrem
+    Dataset "1" got 1.1210
+
+  default_mixrem2
+    Dataset "1" got 0.6440
+
+  rem
+    Dataset "1" got 0.0610
+
+
+Speed evaluation
+
+  default_mixrem
+    Dataset "1" got 0.0000
+
+  default_mixrem2
+    Dataset "1" got 0.0000
+
+  rem
+    Dataset "1" got 0.0000
+
+
+Algorithm parameters
+
+  default_mixrem
+    comp_number=2.0000
+    em_max_iteration=10000.0000
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    em_epsilon=0.0010
+
+  default_mixrem2
+    comp_number=2.0000
+    em_max_iteration=10000.0000
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    em_epsilon=0.0010
+
+  rem
+    em_max_iteration=10000.0000
+    r_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+    r_calc_variance=false
+    em_epsilon=0.0010
+
+
+Algorithm descriptions
+
+  default_mixrem
+    Dataset "1" got {z = 0.0036 + 0.9765*(x): t=15, coeff=0.4634, z-variance=0.0011}, {z = 0.9767 - 0.9713*(x): t=15, coeff=0.5366, z-variance=0.0009}: t=15
+
+  default_mixrem2
+    Dataset "1" got {z = 0.0036 + 0.9765*(x): t=15, coeff=0.4634, z-variance=0.0011}, {z = 0.9767 - 0.9713*(x): t=15, coeff=0.5366, z-variance=0.0009}: t=15
+
+  rem
+    Dataset "1" got z = 0.2543 - 0.0102*(x): t=1, coeff=NaN, z-variance=NaN
+
+
+Note
+  Dataset "1" has path "file:/E:/locnguyen/Eclipse/rem/datasets/generated/hdp_sample"
+
+  Java: Java(TM) SE Runtime Environment version 1.8.0_101-b13, Java HotSpot(TM) 64-Bit Server VM version 25.101-b13, Class version 52.0, Vendor "Oracle Corporation" at http://java.oracle.com/
+  OS: Windows 8.1, amd64, version 6.3
+  Memory(VM): Allocated memory = 362.50MB, Free memory = 338.13MB, Max memory = 892.50MB
+  CPU: Intel64 Family 6 Model 76 Stepping 3, GenuineIntel, AMD64, the number of processors is 2
+  Directory: Current working directory is "E:\locnguyen\Eclipse\rem"

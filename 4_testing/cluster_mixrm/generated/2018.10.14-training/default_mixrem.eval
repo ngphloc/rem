@@ -1,0 +1,19 @@
+========== Algorithm "default_mixrem" - Final result ==========
+
+----- Testing dataset "1" -----
+ErrorRange.test = [0.2413, 0.1469]
+Hudup recall = 1.0000
+MAE.test = 0.2428
+MAERatio.test = 5.3957
+MAEVector.test = [0.2428]
+MSE.test = 0.0798
+R.test = 0.0202
+RMSE.test = 0.2825
+Setup time = 1.1210
+Speed = 0.0000
+----- Testing dataset "1" -----
+
+========== Algorithm "default_mixrem" - Final result ==========
+
+
+

@@ -9,8 +9,8 @@ MAEVector.test = [28.1512]
 MSE.test = 944.5148
 R.test = 0.2395
 RMSE.test = 30.7330
-Setup time = 0.4940
-Speed = 0.0006
+Setup time = 0.2720
+Speed = 0.0000
 ----- Testing dataset "1" -----
 
 ----- Testing dataset "2" -----
@@ -22,7 +22,7 @@ MAEVector.test = [28.2556]
 MSE.test = 948.2029
 R.test = 0.2395
 RMSE.test = 30.7929
-Setup time = 0.8500
+Setup time = 2.4290
 Speed = 0.0000
 ----- Testing dataset "2" -----
 
@@ -35,7 +35,7 @@ MAEVector.test = [28.1742]
 MSE.test = 946.1125
 R.test = 0.2395
 RMSE.test = 30.7589
-Setup time = 1.2750
+Setup time = 1.5490
 Speed = 0.0000
 ----- Testing dataset "3" -----
 
@@ -48,7 +48,7 @@ MAEVector.test = [27.8567]
 MSE.test = 948.0045
 R.test = 0.2395
 RMSE.test = 30.7897
-Setup time = 1.0000
+Setup time = 1.6240
 Speed = 0.0000
 ----- Testing dataset "4" -----
 
@@ -61,7 +61,7 @@ MAEVector.test = [28.0666]
 MSE.test = 945.0018
 R.test = 0.2395
 RMSE.test = 30.7409
-Setup time = 0.8020
+Setup time = 1.0810
 Speed = 0.0000
 ----- Testing dataset "5" -----
 
@@ -74,7 +74,7 @@ MAEVector.test = [28.1995]
 MSE.test = 944.7984
 R.test = 0.2395
 RMSE.test = 30.7376
-Setup time = 0.8800
+Setup time = 1.2730
 Speed = 0.0000
 ----- Testing dataset "6" -----
 
@@ -87,7 +87,7 @@ MAEVector.test = [30.1871]
 MSE.test = 1216.5185
 R.test = 0.2395
 RMSE.test = 34.8786
-Setup time = 0.8050
+Setup time = 1.2020
 Speed = 0.0000
 ----- Testing dataset "7" -----
 
@@ -100,7 +100,7 @@ MAEVector.test = [28.1995]
 MSE.test = 944.7984
 R.test = 0.2395
 RMSE.test = 30.7376
-Setup time = 0.9840
+Setup time = 0.8290
 Speed = 0.0000
 ----- Testing dataset "8" -----
 
@@ -113,7 +113,7 @@ MAEVector.test = [31.3143]
 MSE.test = 1353.5205
 R.test = 0.2395
 RMSE.test = 36.7902
-Setup time = 0.2760
+Setup time = 0.3810
 Speed = 0.0000
 ----- Testing dataset "9" -----
 
@@ -126,7 +126,7 @@ MAEVector.test = [33.2745]
 MSE.test = 1467.8722
 R.test = 0.2395
 RMSE.test = 38.3128
-Setup time = 0.1570
+Setup time = 0.1530
 Speed = 0.0000
 ----- Testing dataset "10" -----
 
