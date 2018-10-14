@@ -5,7 +5,6 @@ import static net.hudup.regression.AbstractRM.splitIndices;
 import static net.hudup.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -47,18 +46,6 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 	 * Serial version UID for serializable class.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	
-	/**
-	 * Field name of smart execution mode.
-	 */
-	public final static String SMART_EXECUTE_FIELD = "mrem_smart_execute";
-	
-	
-	/**
-	 * Default smart execution mode.
-	 */
-	public final static boolean SMART_EXECUTE_DEFAULT = false;
 
 	
 	/**
@@ -437,41 +424,39 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		if (this.rems == null || this.rems.size() == 0 || xStatistic == null)
 			return Constants.UNUSED;
 		
-		if (getConfig().getAsBoolean(SMART_EXECUTE_FIELD)) {
-			double maxPDF = -1;
-			double result = 0;
-			for (REMImpl rem : this.rems) {
-				double value = rem.executeByXStatistic(xStatistic);
-				if (!Util.isUsed(value))
-					continue;
-				
-				ExchangedParameter parameter = rem.getExchangedParameter();
-				double pdf = ExchangedParameter.normalZPDF(
-						Arrays.asList(parameter), 
-						Arrays.asList(xStatistic), 
-						Arrays.asList(new double[] {1, value}),
-						0).get(0);
-				
-				if (pdf > maxPDF) {
-					maxPDF = pdf;
-					result = value;
-				}
-			}
-			return result;
+//		if (getConfig().getAsBoolean(SMART_EXECUTE_FIELD)) { // This mode is wrong
+//			double maxPDF = -1;
+//			double result = 0;
+//			for (REMImpl rem : this.rems) {
+//				double value = rem.executeByXStatistic(xStatistic);
+//				if (!Util.isUsed(value))
+//					continue;
+//				
+//				ExchangedParameter parameter = rem.getExchangedParameter();
+//				double pdf = ExchangedParameter.normalZPDF(
+//						Arrays.asList(parameter), 
+//						Arrays.asList(xStatistic), 
+//						Arrays.asList(new double[] {1, value}),
+//						0).get(0);
+//				
+//				if (pdf > maxPDF) {
+//					maxPDF = pdf;
+//					result = value;
+//				}
+//			}
+//			return result;
+//		}
+		double result = 0;
+		for (REMImpl rem : this.rems) {
+			ExchangedParameter parameter = rem.getExchangedParameter();
+			
+			double value = rem.executeByXStatistic(xStatistic);
+			if (Util.isUsed(value))
+				result += parameter.getCoeff() * value;
+			else
+				return Constants.UNUSED;
 		}
-		else {
-			double result = 0;
-			for (REMImpl rem : this.rems) {
-				ExchangedParameter parameter = rem.getExchangedParameter();
-				
-				double value = rem.executeByXStatistic(xStatistic);
-				if (Util.isUsed(value))
-					result += parameter.getCoeff() * value;
-				else
-					return Constants.UNUSED;
-			}
-			return result;
-		}
+		return result;
 	}
 	
 	
@@ -570,7 +555,6 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM2 {
 		// TODO Auto-generated method stub
 		DataConfig config = super.createDefaultConfig();
 		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
-		config.put(SMART_EXECUTE_FIELD, SMART_EXECUTE_DEFAULT);
 		return config;
 	}
 

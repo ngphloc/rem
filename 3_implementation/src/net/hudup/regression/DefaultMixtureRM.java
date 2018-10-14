@@ -4,8 +4,6 @@ import static net.hudup.em.AbstractEM.EM_EPSILON_FIELD;
 import static net.hudup.em.AbstractEM.EM_MAX_ITERATION_FIELD;
 import static net.hudup.em.EM.EM_DEFAULT_EPSILON;
 import static net.hudup.em.EM.EM_MAX_ITERATION;
-import static net.hudup.regression.em.AbstractMixtureREM.SMART_EXECUTE_DEFAULT;
-import static net.hudup.regression.em.AbstractMixtureREM.SMART_EXECUTE_FIELD;
 import static net.hudup.regression.em.DefaultMixtureREM.COMP_NUMBER_FIELD;
 import static net.hudup.regression.em.DefaultMixtureREM.PREV_PARAMS_FIELD;
 
@@ -142,7 +140,6 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		mixREM.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
 		mixREM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
 		mixREM.getConfig().put(COMP_NUMBER_FIELD, 1);
-		mixREM.getConfig().put(SMART_EXECUTE_FIELD, this.getConfig().get(SMART_EXECUTE_FIELD));
 		
 		return mixREM;
 	}
@@ -337,7 +334,6 @@ public class DefaultMixtureRM extends AbstractTestingAlg implements RM2, Duplica
 		config.put(EM_MAX_ITERATION_FIELD, EM_MAX_ITERATION);
 		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
 		config.put(COMP_MAX_NUMBER_FIELD, COMP_MAX_NUMBER_DEFAULT);
-		config.put(SMART_EXECUTE_FIELD, SMART_EXECUTE_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

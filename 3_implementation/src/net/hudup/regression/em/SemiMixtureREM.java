@@ -471,7 +471,6 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		DataConfig config = super.createDefaultConfig();
 		config.put(MUTUAL_MODE_FIELD, MUTUAL_MODE_DEFAULT);
 		config.put(UNIFORM_MODE_FIELD, UNIFORM_MODE_DEFAULT);
-		config.remove(SMART_EXECUTE_FIELD);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		return config;

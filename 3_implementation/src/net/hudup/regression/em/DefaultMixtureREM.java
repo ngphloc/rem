@@ -364,7 +364,9 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 			double[] zVector = stat.getZData().get(i);
 			
 			List<Double> probs = ExchangedParameter.normalZCondProbs(parameters, xVector, zVector);
-			fitness += MathUtil.max(probs);
+			double[] max = MathUtil.findExtremeValue(probs, true);
+			if (max != null)
+				fitness += max[0];
 		}
 		
 		return fitness / (double)N;
@@ -390,7 +392,9 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 			double[] zVector = stat.getZData().get(i);
 			
 			List<Double> pdfValues = ExchangedParameter.normalZPDF(parameters, xVector, zVector);
-			fitness += MathUtil.max(pdfValues);
+			double[] max = MathUtil.findExtremeValue(pdfValues, true);
+			if (max != null)
+				fitness += max[0];
 		}
 		
 		return fitness / (double)N;
