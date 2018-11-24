@@ -124,6 +124,8 @@ public class Test {
 		Writer writer = uriAssoc.getWriter(xURI.create(new File("E:\\a.csv")), false);
 		stats.save(writer, -1);
 		writer.close();
+		
+		
 	}
 
 	
