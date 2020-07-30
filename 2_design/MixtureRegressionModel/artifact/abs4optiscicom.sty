@@ -1,0 +1,69 @@
+%            
+% This is the LaTeX-style-file abs4hpsc.sty for an one-A4-page abstract of the
+%            18th Workshop on Optimization and Scientific Computing
+%                            August 20-22, 2020
+%                             Hoà Lạc, Vietnam
+% 
+
+\hoffset=-1truecm
+\textheight 21truecm 
+\textwidth 14truecm 
+\parskip 6pt
+\hfuzz= 12pt
+%\vfuzz=12pt
+\font\typc=cmbx10 scaled \magstep1         	% for authors
+\font\typd=cmbx10 scaled \magstep2         	% for title
+\font\cmssbxh=cmssbx10 scaled \magstep2	% for title
+\font\cmssbxm=cmssbx10 scaled \magstep1	% for Author
+\font\cmssbxk=cmssbx10 							% for Abstract
+\font\ssl=cmssi10 											
+
+\font\sff=cmss10 scaled 1050 %%%1150
+\font\sfnote=cmss10 scaled 950
+\font\sfno=cmss10 scaled 850
+
+\def\newtitle#1{\vspace{4pt}\newpage\begin{center}{\rm\Large\textbf{#1}}\end{center}}
+
+\def\newabstract{\noindent{\rm\small\bf Abstract:} \rm\small  }
+\def\newabstractVN{\noindent{\rm\small\bf Tóm tắt:} \rm\small  }
+\def\newauthor#1{\begin{center}{\rm\bf #1}\end{center}\vspace{12pt}}
+\def\newaddress#1{\vspace{8pt}\vfill\hrulefill\hbox to 9cm {}\\ 
+                    \vspace{-18pt} {\setlength{\baselineskip}{11pt}\rm\footnotesize #1 }}
+\def\no#1{$^{\mbox{\rm\footnotesize #1}}$}
+
+\newcount\sobai
+\sobai=0
+\newcount\songuoi
+\songuoi=0
+\newcommand{\contents}[2]{\advance \sobai by 1 \addcontentsline{toc}{subsection}{\the\sobai. {\rm #2}\\{\it #1}}}
+
+%\newcommand{\adindex}[1]{\addtocontents{toc}{\protect\index{#1}}}
+
+\newcommand{\nso}[1]{\advance \songuoi by 1 \medskip \noindent \the \songuoi . {#1}}
+
+\renewcommand{\contentsname}{\hfil\huge\sf List of Abstracts}
+\pagestyle{myheadings}
+\markboth{Workshop on Optimization and Scientific Computing}{Workshop on Optimization and Scientific Computing}
+
+\renewcommand{\it}{\rm\fontshape{it}\selectfont } %{\ssl} %
+
+\newcount\somuc
+\somuc=0
+\newcommand{\confcontents}[1]{\advance \somuc by 1 \addcontentsline{lot}{subsection}{ {\rm #1}}}
+\renewcommand{\listtablename}{\hfil\huge\sf Contents}
+\renewcommand{\indexname}{\huge\sf Index}
+
+%\newcommand{\dindex}{\index}
+\newcommand{\dindex}[1]{\addtocontents{toc}{\index{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%prg4hpsc
+\newcommand{\prgcontent}[1]{\addcontentsline{toc}{section}{ {\rm #1}}}
+\newcommand{\prgcontents}[1]{\addcontentsline{toc}{subsection}{ {\large\rm #1}}}
+
+
+\def\R{{\rm I\!R}}
+\def\N{{\rm I\!N}}
+\def\Z{{\rm Z\!\!Z}}
+\def\C{{\rm l\!\!\!C}}
+\def\Q{{\rm l\!\!\!Q}}
+
+% end of style file
