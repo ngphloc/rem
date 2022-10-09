@@ -1,0 +1,57 @@
+#HUDUP: A FRAMEWORK OF E-COMMERCIAL RECOMMENDATION ALGORITHMS
+#(C) Copyright by Loc Nguyen's Academic Network
+#Project homepage: http://www.locnguyen.net/st/products/hudup
+#Email: ng_phloc@yahoo.com
+#Phone: +84-975250362
+
+#Define here custom propertes which replace system properties.
+
+#Additional loaded packages. Note, the default load package is "net.hudup" built in Hudup framework.
+additional_packages=net.rem
+
+#Demo admin password, remove the "admin" property in real-time application. Instead accounts are stored in account unit of database.
+#This administration account is also used to start and stop server and listener from remote control when being impossible to retrieve accounts stored in database.
+#admin=admin
+
+#If flag is true, the framework supports compressed file (zip, jar) as storage.
+#Currently, Hudup used TrueZip (https://christian-schlichtherle.bitbucket.io/truezip) developed by Christian Schlichtherle to process compressed files.
+#When this flag is false, TrueZip is not used. It is more stable if setting this flag to be false. 
+#compressed_file_support=false
+compressed_file_support=true
+
+#Setting debug mode. If this flag is true, Hudup framework runs in debug mode in which thrown exceptions are printed traced, for example.
+#Otherwise, thrown exceptions are not traced and so only error meassages are printed.
+#It is faster if setting this flag to be false.
+#debug=false
+debug=true
+
+#If this flag is true, tested algorithms will be duplicated when evaluator is reproduced.
+#evaluator_duplicate_algorithm=true
+
+#Global address is often static internet address or WAN address. When deploying Hudup on WAN or internet, global address must be set.
+#global_address=hudup.locnguyen.net
+
+#I18n meassages bundle: en_US, vi_VN, zh_CN, ar_YE
+#language=en
+#country=US
+
+#Plug-in manager.
+plugin_manager=net.hudup.REMFirer
+
+#Setting pull mode advice. If this property is true, connection to server is advised to be in pull mode to prevent server from unexpected deadlock.
+#It is good for remote connection if setting this flag to be true.
+pull_mode_advice=true
+#pull_mode_advice=false
+
+#If flag is true, server has UI. Otherwise, server has no UI, in this case, server is automatically set up at the first time running.
+#server_ui=true
+
+#Try to use random port if the default port was in used. Value here is true, which means that ports are flexible.
+#It is better if setting this flag to be false.
+try_random_port=false
+#try_random_port=true
+
+#If flag is true, the server will watch something, concretely, the working library directory working/lib.
+#If it is set to be false in case of saving resources.
+watcher_enabled=true
+#watcher_enabled=false
