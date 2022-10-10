@@ -60,6 +60,20 @@
 
 
 	<!--
+	Function: The runtime library for Hudup framework.
+	Affected packages, classes: Require to run evaluator.
+	Referred jars:
+	Source: http://www.locnguyen.net/st/products/hudup
+	Vendor: Loc Nguyen
+	Archive: working/projects/hudup-ext/3_implementation
+	Version: 12 build 2019.09.16
+	Status: using
+	Note:
+	-->
+	<property name="hudup-runtime-lib.jar" value="${lib.home}/hudup-runtime-lib.jar"/>
+
+
+	<!--
 	Function: Parsing mathematical expressions.
 	Affected packages, classes: 
 	Referred jars:
