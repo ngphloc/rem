@@ -54,8 +54,8 @@ public class LargeStatistics implements Cloneable, Serializable {
 	
 	/**
 	 * Constructor with specified regressor data and response data. 
-	 * @param xData specified regressor data
-	 * @param zData specified response data.
+	 * @param xData specified regressor data: 1, x1, x2,..., x(n-1).
+	 * @param zData specified response data: 1, z.
 	 */
 	public LargeStatistics(List<double[]> xData, List<double[]> zData) {
 		this.xData = xData;
@@ -64,8 +64,8 @@ public class LargeStatistics implements Cloneable, Serializable {
 	
 	
 	/**
-	 * Getting data of X variables (X statistic).
-	 * @return data of X variables (X statistic).
+	 * Getting data of X variables (X statistic): 1, x1, x2,..., x(n-1).
+	 * @return data of X variables (X statistic): 1, x1, x2,..., x(n-1).
 	 */
 	public List<double[]> getXData() {
 		return xData;
@@ -73,8 +73,8 @@ public class LargeStatistics implements Cloneable, Serializable {
 	
 	
 	/**
-	 * Getting data of X variables (X statistic).
-	 * @return data of X variables (X statistic).
+	 * Getting data of Z variables (X statistic): 1, z.
+	 * @return data of Z variables (X statistic): 1, z.
 	 */
 	public List<double[]> getZData() {
 		return zData;
@@ -82,9 +82,9 @@ public class LargeStatistics implements Cloneable, Serializable {
 
 	
 	/**
-	 * Getting X statistic as row vector.
+	 * Getting X statistic as row vector: 1, x1, x2,..., x(n-1).
 	 * @param row specified row.
-	 * @return X statistic as row vector.
+	 * @return X statistic as row vector: 1, x1, x2,..., x(n-1).
 	 */
 	public double[] getXRowStatistic(int row) {
 		return xData.get(row);
@@ -109,8 +109,8 @@ public class LargeStatistics implements Cloneable, Serializable {
 
 	
 	/**
-	 * Getting Z statistic.
-	 * @return Z statistic.
+	 * Getting Z statistic: z.
+	 * @return Z statistic: z.
 	 */
 	public List<Double> getZStatistic() {
 		if (isEmpty())
@@ -153,8 +153,8 @@ public class LargeStatistics implements Cloneable, Serializable {
 	
 	/**
 	 * Checking whether specified X data and Z data are valid.
-	 * @param xData specified X data.
-	 * @param zData specified Z data.
+	 * @param xData specified X data: 1, x1, x2,..., x(n-1).
+	 * @param zData specified Z data: 1, z.
 	 * @return true if both X data and Z data are valid.
 	 */
 	private static boolean checkValid(List<double[]> xData, List<double[]> zData) {
@@ -203,7 +203,6 @@ public class LargeStatistics implements Cloneable, Serializable {
 
 	@Override
 	public Object clone() {
-		// TODO Auto-generated method stub
 		List<double[]> xData = DSUtil.cloneDoubleArrayList(this.xData);
 		List<double[]> zData = DSUtil.cloneDoubleArrayList(this.zData);
 		

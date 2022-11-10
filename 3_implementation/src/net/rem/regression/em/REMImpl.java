@@ -667,7 +667,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 			ratioMode);
 	}
 
-	
+
 	@Override
 	public synchronized double executeByXStatistic(double[] xStatistic) throws RemoteException {
 		double value = executeByXStatisticWithoutTransform(xStatistic);

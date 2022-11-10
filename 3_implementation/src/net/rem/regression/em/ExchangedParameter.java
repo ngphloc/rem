@@ -23,6 +23,7 @@ import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
+import net.rem.regression.Statistics;
 
 /**
  * This class represents the exchanged parameter for the REM algorithm.
@@ -287,6 +288,32 @@ public class ExchangedParameter implements Cloneable, Serializable {
 		return sum / N;
 	}
 
+	
+	/**
+	 * Calculating likelihood of specified statistics.
+	 * @param stats specified large statistics.
+	 * @return likelihood of specified statistics.
+	 */
+	public double likelihood(LargeStatistics stats) {
+		int n = stats.size();
+		if (n == 0) return Constants.UNUSED;
+		
+		double variance = estimateZVariance(stats);
+		variance = Util.isUsed(variance) ? variance : 1;
+		double prob = 1;
+		for (int i = 0; i < n; i++) {
+			try {
+				Statistics stat = stats.getStatistic(i);
+				if (stat == null) continue;
+
+				double mean = mean(stat.getXStatistic());
+				prob *= normalPDF(stat.getZStatistic(), mean, variance);
+			} catch (Throwable e) {LogUtil.trace(e);}
+		}
+		
+		return prob;
+	}
+	
 	
 	/**
 	 * Testing the terminated condition between this parameter (estimated parameter) and other parameter (current parameter).

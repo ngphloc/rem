@@ -28,21 +28,21 @@ public class Statistics implements Serializable {
 
 	
 	/**
-	 * Statistic for Z variable.
+	 * Statistic for Z variable: z.
 	 */
 	protected double zStatistic = Constants.UNUSED;
 	
 	
 	/**
-	 * Statistic for X variables.
+	 * Statistic for X variables: 1, x1, x2,..., x(n-1)
 	 */
 	protected double[] xStatistic = null;
 	
 	
 	/**
 	 * Constructor with specified statistic for Z variable and statistic for X variables.
-	 * @param zStatistic statistic for Z variable.
-	 * @param xStatistic statistic for X variables. It must be not null but can be zero-length.
+	 * @param zStatistic statistic for Z variable: 1, x1, x2,..., x(n-1).
+	 * @param xStatistic statistic for X variables: z. It must be not null but can be zero-length.
 	 */
 	public Statistics(double zStatistic, double[] xStatistic) {
 		this.zStatistic = zStatistic;
