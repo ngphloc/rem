@@ -52,7 +52,7 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
 	 * Default constructor.
 	 */
 	public REMAbstract() {
-	
+		super();
 	}
 
 	

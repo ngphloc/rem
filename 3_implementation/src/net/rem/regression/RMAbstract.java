@@ -287,6 +287,12 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	}
 	
 	
+	@Override
+	public synchronized Inspector getInspector() {
+		return getInspector(this);
+	}
+
+
 	/**
 	 * Getting inspector of regression model.
 	 * @param rm specified regression model.
