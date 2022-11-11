@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.io.Writer;
 import java.rmi.RemoteException;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
@@ -111,8 +112,11 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	
 	@Override
 	public synchronized Object learnStart(Object...info) throws RemoteException {
+		UsedIndices usedIndices = UsedIndices.extract(info);
+		boolean prepared = usedIndices != null ? prepareInternalData(usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData();
+			
 		Object resulted = null;
-		if (prepareInternalData())
+		if (prepared)
 			resulted = learn0();
 		if (resulted == null)
 			clearInternalData();
@@ -131,11 +135,17 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	
 	/**
 	 * Preparing data.
+	 * @param xIndicesUsed indicator of used X indices (xIndices).
+	 * For xIndices, regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value.
+	 * Therefore, xIndicesUsed[0] is always 0.
+	 * @param zIndicesUsed indicator of used Z indices.
+	 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+	 * Therefore, zIndicesUsed[0] is always 0.
 	 * @return true if data preparation is successful.
 	 * @throws RemoteException if any error raises.
 	 */
 	@SuppressWarnings("unchecked")
-	protected boolean prepareInternalData() throws RemoteException {
+	protected boolean prepareInternalData(int[] xIndicesUsed, int[] zIndicesUsed) throws RemoteException {
 		clearInternalData();
 		
 		Profile profile0 = null;
@@ -155,6 +165,11 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 			return false;
 		//End parsing indices
 
+		//Begin adjusting indices
+		this.xIndices = RMAbstract.extractIndices(this.xIndices, xIndicesUsed);
+		this.zIndices = RMAbstract.extractIndices(this.zIndices, zIndicesUsed);
+		//End adjusting indices
+		
 		//Begin checking existence of values.
 		boolean zExists = false;
 		boolean[] xExists = new boolean[xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
@@ -164,12 +179,12 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 			if (profile == null)
 				continue;
 			
-			double lastValue = (double)extractResponseValue(profile);
+			double lastValue = (double)extractResponseValue0(profile);
 			if (Util.isUsed(lastValue))
 				zExists = zExists || true; 
 			
 			for (int j = 1; j < xIndices.size(); j++) {
-				double value = extractRegressorValue(profile, j);
+				double value = extractRegressorValue0(profile, j);
 				if (Util.isUsed(value))
 					xExists[j - 1] = xExists[j - 1] || true;
 			}
@@ -190,6 +205,20 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 		return true;
 	}
 
+	
+	/**
+	 * Preparing data.
+	 * @return true if data preparation is successful.
+	 * @throws RemoteException if any error raises.
+	 */
+	protected boolean prepareInternalData() {
+		try {
+			return prepareInternalData(null, null);
+		} catch (Throwable e) {LogUtil.trace(e);}
+		
+		return false;
+	}
+	
 	
 	/**
 	 * Clear all internal data.
@@ -242,14 +271,6 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	}
 
 	
-	@Override
-	public DataConfig createDefaultConfig() {
-		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
-		return config;
-	}
-
-
 	@Override
 	public String parameterToShownText(Object parameter, Object... info) throws RemoteException {
 		if (parameter == null || !(parameter instanceof double[]))
@@ -351,6 +372,20 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 
 	@Override
 	public double extractRegressorValue(Object input, int index) throws RemoteException {
+		return extractRegressorValue0(input, index);
+	}
+
+
+	/**
+	 * Extracting value of regressor (X) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 * @param input specified input. It is often profile. It can be an array of real values.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter r_indices.
+	 * So the index here is the second index, and of course it is number.
+	 * Index starts from 1. So index 0 always indicates to value 1. 
+	 * @return value of regressor (X) extracted from specified profile. Note, the returned value is not transformed.
+	 */
+	private double extractRegressorValue0(Object input, int index) {
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
@@ -359,7 +394,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 			return extractVariableValue(input, attList, xIndices, index);
 	}
 
-
+	
 	@Override
 	public double[] extractRegressorValues(Object input) throws RemoteException {
 		return extractVariableValues(input, attList, xIndices);
@@ -373,7 +408,18 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 
 
 	@Override
-	public synchronized Object extractResponseValue(Object input) throws RemoteException {
+	public Object extractResponseValue(Object input) throws RemoteException {
+		return extractResponseValue0(input);
+	}
+
+
+	/**
+	 * Extracting value of response variable (Z) from specified profile.
+	 * In the most general case that each index is an mathematical expression, this method is focused.
+	 * @param input specified input. It is often profile but it can be an array of real values.
+	 * @return value of response variable (Z) extracted from specified profile.
+	 */
+	private Object extractResponseValue0(Object input) {
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)
@@ -382,7 +428,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 			return extractVariableValue(input, attList, zIndices, 1);
 	}
 
-
+	
 	/**
 	 * Transforming independent variable X.
 	 * In the most general case that each index is an mathematical expression, this method is not focused.
@@ -401,6 +447,14 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	}
 
 	
+	@Override
+	public DataConfig createDefaultConfig() {
+		DataConfig config = super.createDefaultConfig();
+		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
+		return config;
+	}
+
+
     /**
 	 * Splitting the specified string into list of indices.
 	 * @param cfgIndices specified string.
@@ -429,8 +483,9 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	 * Parsing indices of variables. In the most general case, each index is an mathematical expression.
 	 * @param cfgIndices input configured indices string.
 	 * @param maxVariables input maximum variables.
-	 * @param xIndicesOutput output regressors indices.
-	 * @param zIndicesOutput output response indices.
+	 * @param xIndicesOutput output regressors indices. Regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so,
+	 * the first element (0) of this indices array is -1 pointing to 1 value. 
+	 * @param zIndicesOutput output response indices. Due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
 	 * @return true if parsing is successful.
 	 */
 	public static boolean parseIndices(String cfgIndices, int maxVariables, List<Object[]> xIndicesOutput, List<Object[]> zIndicesOutput) {
@@ -530,6 +585,122 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 		}
 		
 		return -1;
+	}
+	
+	
+	/**
+	 * Creating used sequence of indices.
+	 * @param maxIndices the number of elements in X indices (xIndices) or Z indices (zIndices).
+	 * For xIndices, regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value. 
+	 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+	 * Therefore, this parameter maxIndices is the length of xIndices or zIndices.
+	 * @param used indicating existent indices. Therefore, used[0] is always 0.
+	 * @return bit set as used sequence.
+	 */
+	public static BitSet usedIndicesToBitset(int maxIndices, int[] used) {
+		if (maxIndices <= 0) return null;
+		BitSet bsFull = new BitSet(maxIndices); bsFull.set(0, maxIndices);
+		if (used == null || used.length < 2 || used[0] != 0) return bsFull;
+		
+		BitSet bs = new BitSet(maxIndices);
+		for (int pos : used) {
+			if (pos >= 0 && pos < maxIndices) bs.set(pos);
+		}
+		
+		return bs.cardinality() >= 2 ? bs : bsFull;
+	}
+	
+	
+	/**
+	 * Converting bit set to used indices.
+	 * @param orginalIndices original indices.
+	 * For X indices (xIndices), regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value. 
+	 * For Z indices (zIndices), due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+	 * @param bs bit set pointing to used indices. Therefore, bs[0] is always 1.
+	 * @return indices extracted from original indices and used bit set.
+	 */
+	public static int[] bitsetToUsedIndices(List<Object[]> originalIndices, BitSet bs) {
+		if (originalIndices == null || originalIndices.size() < 2) return null;
+		
+		int[] full = new int[originalIndices.size()];
+		for (int i = 0; i < originalIndices.size(); i++) full[i] = i;
+		if (bs == null || bs.cardinality() < 2) return full;
+		
+		List<Integer> list = Util.newList();
+		for (int i = bs.nextSetBit(0); i >= 0; i = bs.nextSetBit(i + 1)) list.add(i);
+		
+		int[] used = DSUtil.toIntArray(list);
+		return used[0] == 0 ? used : full;
+	}
+	
+	
+	
+	/**
+	 * Extracting used indices.
+	 * @param indices original indices.
+	 * For xIndices, regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value. 
+	 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+	 * @param used indicating existent indices. Therefore, used[0] is always 0.
+	 * @return used indices.
+	 */
+	public static List<Object[]> extractIndices(List<Object[]> indices, int[] used) {
+		if (indices == null || indices.size() < 2 || used == null || used.length < 2 || used[0] != 0)
+			return indices;
+		
+		List<Object[]> newIndices = Util.newList();
+		for (int idx : used) {
+			if (idx >= 0 && idx < indices.size()) newIndices.add(indices.get(idx));
+		}
+
+		return newIndices.size() >= 2 ? newIndices : indices;
+	}
+	
+	
+	/**
+	 * This class represents used indices.
+	 * @author Loc Nguyen
+	 * @version 1.0
+	 */
+	public static class UsedIndices {
+		
+		/**
+		 * Indicator of used X indices (xIndices).
+		 * For xIndices, regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value.
+		 * Therefore, xIndicesUsed[0] is always 0.
+		 */
+		public int[] xIndicesUsed = null;
+		
+		/**
+		 * Indicator of used Z indices.
+		 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+		 * Therefore, zIndicesUsed[0] is always 0.
+		 */
+		public int[] zIndicesUsed = null;
+		
+		/**
+		 * Constructor with Indicator of used X indices (xIndices) and indicator of used Z indices.
+		 * @param xIndicesUsed Indicator of used X indices (xIndices).
+		 * @param zIndicesUsed Indicator of used Z indices.
+		 */
+		public UsedIndices(int[] xIndicesUsed, int[] zIndicesUsed) {
+			this.xIndicesUsed = xIndicesUsed;
+			this.zIndicesUsed = zIndicesUsed;
+		}
+		
+		/**
+		 * Extracting used indices from specified information.
+		 * @param info specified information.
+		 * @return used indices extracted from specified information.
+		 */
+		public static UsedIndices extract(Object...info) {
+			if (info == null || info.length == 0) return null;
+			for (Object object : info) {
+				if (object instanceof UsedIndices) return (UsedIndices)object;
+			}
+			
+			return null;
+		}
+		
 	}
 	
 	
@@ -935,7 +1106,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 			@Override
 			public String getGraphFeature() {
 				try {
-					return "R=" + MathUtil.format(rm.calcR(), 2);
+					return "R=" + MathUtil.format(rm.calcR(1.0), 2);
 				} catch (Exception e) {LogUtil.trace(e);}
 				
 				return "R=NaN";
@@ -1089,18 +1260,33 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
      * Calculating correlation with specified regression model and large statistics.
      * @param rm specified regression model.
      * @param stats specified large statistics.
+     * @param factor multiplied factor.
      * @return correlation with specified regression model and large statistics.
      * @throws RemoteException if any error raises.
      */
-	public static double calcR(RM rm, LargeStatistics stats) throws RemoteException {
-		if (rm == null || stats == null)
-			return Constants.UNUSED;
+	public static double calcR(RM rm, LargeStatistics stats, double factor) throws RemoteException {
+		return calcR(rm, stats, factor, -1);
+	}
+
+
+    /**
+     * Calculating correlation with specified regression model and large statistics.
+     * @param rm specified regression model.
+     * @param stats specified large statistics.
+     * @param index if index < 0, calculating the correlation between estimated Z and real Z.
+     * If index >= 0, calculating the correlation between real indexed X and real Z; note, X index from 1 because of X = (1, x1, x2,..., x(n-1)).
+     * @param factor multiplied factor.
+     * @return correlation with specified regression model and large statistics.
+     * @throws RemoteException if any error raises.
+     */
+	public static double calcR(RM rm, LargeStatistics stats, double factor, int index) throws RemoteException {
+		if (rm == null || stats == null) return Constants.UNUSED;
 		
 		Vector2 zVector = new Vector2(stats.size(), 0);
 		Vector2 zEstimatedVector = new Vector2(stats.size(), 0);
 		for (int i = 0; i < stats.size(); i++) {
-            double z = (double)rm.transformResponse(stats.getZData().get(i)[1], true);
-            zVector.set(i, z);
+            double z = index < 0 ? (double)rm.transformResponse(stats.getZData().get(i)[1], true) : stats.getXData().get(i)[index];
+            zVector.set(i, z*factor);
             
             double zEstimated = rm.executeByXStatistic(stats.getXData().get(i));
             zEstimatedVector.set(i, zEstimated);
@@ -1109,8 +1295,8 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 		return zEstimatedVector.corr(zVector);
 	}
 
-
-    /**
+	
+	/**
      * Calculating error with specified regression model and large statistics.
      * @param rm specified regression model.
      * @param stats specified large statistics.

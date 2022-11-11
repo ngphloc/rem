@@ -160,7 +160,6 @@ public class VarWrapper implements Serializable {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		if (name != null)
 			return name;
 		else

@@ -505,7 +505,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			@Override
 			public String getGraphFeature() {
 				try {
-					return "R=" + MathUtil.format(calcR(), 2);
+					return "R=" + MathUtil.format(calcR(1.0), 2);
 				} catch (Exception e) {LogUtil.trace(e);}
 				
 				return "R=NaN";
@@ -637,7 +637,13 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 
 	@Override
-	public synchronized double calcR() throws RemoteException {
+	public synchronized double calcR(double factor) throws RemoteException {
+		return calcR(factor, -1);
+	}
+
+
+	@Override
+	public double calcR(double factor, int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
@@ -651,13 +657,13 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 				double coeff = rem.getExchangedParameter().getCoeff();
 				double[] xVector = rem.getLargeStatistics().getXData().get(i);
 				
-				z += coeff * rem.getLargeStatistics().getZData().get(i)[1];
+				z += coeff * (index < 0 ? rem.getLargeStatistics().getZData().get(i)[1] : rem.getLargeStatistics().getXData().get(i)[index]);
 				zEstimated += coeff * rem.executeByXStatisticWithoutTransform(xVector);
 			}
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
 			
-            zVector.set(i, z);
+            zVector.set(i, z*factor);
             zEstimatedVector.set(i, zEstimated);
 		}
 		

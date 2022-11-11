@@ -421,9 +421,18 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 
 
 	@Override
-	public double calcR() throws RemoteException {
+	public double calcR(double factor) throws RemoteException {
 		if (mixREM != null)
-			return mixREM.calcR();
+			return mixREM.calcR(factor);
+		else
+			return Constants.UNUSED;
+	}
+
+
+	@Override
+	public double calcR(double factor, int index) throws RemoteException {
+		if (mixREM != null)
+			return mixREM.calcR(factor, index);
 		else
 			return Constants.UNUSED;
 	}

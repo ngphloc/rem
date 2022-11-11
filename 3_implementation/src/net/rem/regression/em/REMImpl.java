@@ -41,6 +41,7 @@ import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.Statistics;
 import net.rem.regression.VarWrapper;
+import net.rem.regression.RMAbstract.UsedIndices;
 import net.rem.regression.em.ExchangedParameter.NormalDisParameter;
 import net.rem.regression.ui.RegressResponseChooser;
 
@@ -168,8 +169,11 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object learnStart(Object...info) throws RemoteException {
+		UsedIndices usedIndices = UsedIndices.extract(info);
+		boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
+
 		Object resulted = null;
-		if (prepareInternalData((Fetcher<Profile>)sample))
+		if (prepared)
 			resulted = super.learnStart();
 		if (resulted == null)
 			clearInternalData();
@@ -181,10 +185,16 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	/**
 	 * Preparing data.
 	 * @param inputSample specified sample.
+	 * @param xIndicesUsed indicator of used X indices (xIndices).
+	 * For xIndices, regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of this indices array is -1 pointing to 1 value.
+	 * Therefore, xIndicesUsed[0] is always 0.
+	 * @param zIndicesUsed indicator of used Z indices.
+	 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
+	 * Therefore, zIndicesUsed[0] is always 0.
 	 * @return true if data preparation is successful.
 	 * @throws RemoteException if any error raises.
 	 */
-	protected boolean prepareInternalData(Fetcher<Profile> inputSample) throws RemoteException {
+	protected boolean prepareInternalData(Fetcher<Profile> inputSample, int[] xIndicesUsed, int[] zIndicesUsed) throws RemoteException {
 		clearInternalData();
 		
 		this.attList = getSampleAttributeList(inputSample);
@@ -198,6 +208,11 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 		if (!parseIndices(cfgIndices, this.attList.size(), this.xIndices, this.zIndices)) //parsing indices
 			return false;
 		//End parsing indices
+		
+		//Begin adjusting indices
+		this.xIndices = RMAbstract.extractIndices(this.xIndices, xIndicesUsed);
+		this.zIndices = RMAbstract.extractIndices(this.zIndices, zIndicesUsed);
+		//End adjusting indices
 		
 		//Begin checking existence of values.
 		boolean zExists = false;
@@ -269,6 +284,21 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 			this.data = new LargeStatistics(xData, zData);
 			return true;
 		}
+	}
+	
+	
+	/**
+	 * Preparing data.
+	 * @param inputSample specified sample.
+	 * @return true if data preparation is successful.
+	 * @throws RemoteException if any error raises.
+	 */
+	protected boolean prepareInternalData(Fetcher<Profile> inputSample) {
+		try {
+			return prepareInternalData(inputSample, null, null);
+		} catch (Throwable e) {LogUtil.trace(e);}
+		
+		return false;
 	}
 	
 	
@@ -897,7 +927,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	
 	
 	@Override
-	public synchronized List<Double> extractRegressorStatistic(VarWrapper regressor) throws RemoteException {
+	public List<Double> extractRegressorStatistic(VarWrapper regressor) throws RemoteException {
 		LargeStatistics stats = getLargeStatistics();
 		if (stats != null)
 			return stats.getXColumnStatistic(regressor.getIndex());
@@ -913,7 +943,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 
 
 	@Override
-	public synchronized Object extractResponseValue(Object input) throws RemoteException {
+	public Object extractResponseValue(Object input) throws RemoteException {
 		if (input == null)
 			return Constants.UNUSED;
 		else if (input instanceof Profile)

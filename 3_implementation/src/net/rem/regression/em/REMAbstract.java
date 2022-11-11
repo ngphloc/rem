@@ -93,24 +93,6 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
 	}
 	
 	
-	/**
-	 * Transforming independent variable X.
-	 * In the most general case that each index is an mathematical expression, this method is not focused.
-	 * @param x specified variable X.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of X.
-	 */
-	protected Object transformRegressor(Object x, boolean inverse) {
-		return x;
-	}
-
-
-	@Override
-	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-		return z;
-	}
-
-
 	@Override
 	public synchronized String getDescription() throws RemoteException {
 		if (this.getParameter() == null)
@@ -156,6 +138,24 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
 	@Override
 	public synchronized Inspector getInspector() {
 		return RMAbstract.getInspector(this);
+	}
+
+
+	/**
+	 * Transforming independent variable X.
+	 * In the most general case that each index is an mathematical expression, this method is not focused.
+	 * @param x specified variable X.
+	 * @param inverse if true, there is an inverse transformation.
+	 * @return transformed value of X.
+	 */
+	protected Object transformRegressor(Object x, boolean inverse) {
+		return x;
+	}
+
+
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		return z;
 	}
 
 
@@ -230,11 +230,18 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
     
     
     @Override
-    public synchronized double calcR() throws RemoteException {
-    	return RMAbstract.calcR(this, this.getLargeStatistics());
+    public synchronized double calcR(double factor) throws RemoteException {
+    	return RMAbstract.calcR(this, this.getLargeStatistics(), factor);
     }
     
+
     @Override
+	public synchronized double calcR(double factor, int index) throws RemoteException {
+    	return RMAbstract.calcR(this, this.getLargeStatistics(), factor, index);
+	}
+
+	
+	@Override
     public synchronized double[] calcError() throws RemoteException {
     	return RMAbstract.calcError(this, this.getLargeStatistics());
     }

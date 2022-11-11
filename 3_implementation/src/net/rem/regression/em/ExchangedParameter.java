@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
+
 import net.hudup.core.Cloneable;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
@@ -292,28 +294,46 @@ public class ExchangedParameter implements Cloneable, Serializable {
 	/**
 	 * Calculating likelihood of specified statistics.
 	 * @param stats specified large statistics.
+	 * @param log logarithm flag.
 	 * @return likelihood of specified statistics.
 	 */
-	public double likelihood(LargeStatistics stats) {
+	public double likelihood(LargeStatistics stats, boolean log) {
+		return likelihood(stats, Constants.UNUSED, log);
+	}
+	
+	
+	/**
+	 * Calculating likelihood of specified statistics.
+	 * @param stats specified large statistics.
+	 * @param variance specified variance.
+	 * @param log logarithm flag.
+	 * @return likelihood of specified statistics.
+	 */
+	public double likelihood(LargeStatistics stats, double variance, boolean log) {
+		if (stats == null) return Constants.UNUSED;
 		int n = stats.size();
 		if (n == 0) return Constants.UNUSED;
 		
-		double variance = estimateZVariance(stats);
+		variance = Util.isUsed(variance) ? variance : estimateZVariance(stats);
 		variance = Util.isUsed(variance) ? variance : 1;
-		double prob = 1;
+		double lh = 1;
 		for (int i = 0; i < n; i++) {
 			try {
 				Statistics stat = stats.getStatistic(i);
 				if (stat == null) continue;
 
 				double mean = mean(stat.getXStatistic());
-				prob *= normalPDF(stat.getZStatistic(), mean, variance);
+				double prob = normalPDF(stat.getZStatistic(), mean, variance);
+				if (log)
+					lh += prob > 0 ? Math.log(prob) : 0;
+				else
+					lh *= prob;
 			} catch (Throwable e) {LogUtil.trace(e);}
 		}
 		
-		return prob;
+		return lh;
 	}
-	
+
 	
 	/**
 	 * Testing the terminated condition between this parameter (estimated parameter) and other parameter (current parameter).
@@ -609,6 +629,23 @@ public class ExchangedParameter implements Cloneable, Serializable {
 //		variance = variance != 0 ? variance : Float.MIN_VALUE;
 		double d = value - mean;
 		return (1.0 / (Math.sqrt(2*Math.PI*variance))) * Math.exp(-(d*d) / (2*variance));
+	}
+
+	
+	/**
+	 * Evaluating the normal cumulative density function with specified mean and variance.
+	 * Inherited class can re-defined this density function.
+	 * @param value specified response value z.
+	 * @param mean specified mean.
+	 * @param variance specified variance.
+	 * @return value evaluated from the normal probability density function.
+	 */
+	public static double normalCDF(double value, double mean, double variance) {
+		if (variance == 0 && mean != value) return 0;
+		if (variance == 0 && mean == value) return 1;
+//		variance = variance != 0 ? variance : Float.MIN_VALUE;
+
+		return new NormalDistribution(mean, Math.sqrt(variance)).cumulativeProbability(value);
 	}
 
 	

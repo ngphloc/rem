@@ -172,7 +172,7 @@ public class REMInspector extends JDialog implements Inspector {
 		right.add(temp);
 		//
 		JTextField txtR = new JTextField(
-				MathUtil.format(rm.calcR()));
+				MathUtil.format(rm.calcR(1.0)));
 		txtR.setCaretPosition(0);
 		txtR.setEditable(false);
 		temp = new JPanel(new BorderLayout());

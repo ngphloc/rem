@@ -166,11 +166,17 @@ public class RMRemoteWrapper extends ExecutableAlgRemoteWrapper implements RM, R
 
 	
 	@Override
-	public double calcR() throws RemoteException {
-		return ((RMRemote)remoteAlg).calcR();
+	public double calcR(double factor) throws RemoteException {
+		return ((RMRemote)remoteAlg).calcR(factor);
 	}
 
 	
+	@Override
+	public double calcR(double factor, int index) throws RemoteException {
+		return ((RMRemote)remoteAlg).calcR(factor, index);
+	}
+
+
 	@Override
 	public double[] calcError() throws RemoteException {
 		return ((RMRemote)remoteAlg).calcError();

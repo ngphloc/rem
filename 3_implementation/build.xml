@@ -19,7 +19,7 @@
 
 	<!--
 	Function: Creating and maintaining a mathematical and statistical library that is accurate requires a greater degree of communication than might be the case for other components.
-	Affected packages, classes: net.rem.em.NewtonGEM, net.rem.regression.RMAbstract
+	Affected packages, classes: net.rem.regression.em.ExchangedParameter.normalCDF(value, mean, variance), net.rem.em.NewtonGEM, net.rem.regression.RMAbstract
 	Referred jars:
 	Source: https://commons.apache.org/proper/commons-math/
 	Vendor: Apache
@@ -92,6 +92,7 @@
 	
 	net.rem.em.NewtonGEM: commons-math3.jar
 	net.rem.regression.em.AbstractMixtureREM: flanagan.jar
+	net.rem.regression.em.ExchangedParameter.normalCDF(value, mean, variance): commons-math3.jar
 	net.rem.regression.em.REMAbstract: flanagan.jar
 	net.rem.regression.em.SemiMixtureREM: flanagan.jar
 	net.rem.regression.em.ui.graph.PlotGraphExt: flanagan.jar
