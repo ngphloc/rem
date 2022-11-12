@@ -41,7 +41,7 @@ public class REMPrior extends REMImpl {
 	/**
 	 * Name of alpha coefficients of prior distribution.
 	 */
-	public static final String ALPHA0_FIELD = "alpha0";
+	public static final String ALPHA0_FIELD = "rem_prior_alpha0";
 
 			
 	/**
@@ -53,7 +53,7 @@ public class REMPrior extends REMImpl {
 	/**
 	 * Name of variance of prior distribution.
 	 */
-	public static final String ZVARIANCE0_FIELD = "zvariance0";
+	public static final String ZVARIANCE0_FIELD = "rem_prior_zvariance0";
 
 			
 	/**
@@ -183,7 +183,7 @@ public class REMPrior extends REMImpl {
 		}
 		
 		ExchangedParameter newParameter = new ExchangedParameter(alpha, betas);
-		if (getConfig().getAsBoolean(R_CALC_VARIANCE_FIELD))
+		if (getConfig().getAsBoolean(CALC_VARIANCE_FIELD))
 			newParameter.setZVariance(newParameter.estimateZVariance(stat));
 		else {
 			if (currentParameter == null)

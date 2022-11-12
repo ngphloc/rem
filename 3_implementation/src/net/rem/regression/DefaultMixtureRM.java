@@ -28,6 +28,7 @@ import net.hudup.core.alg.ExecutableAlgAbstract;
 import net.hudup.core.alg.MemoryBasedAlg;
 import net.hudup.core.alg.MemoryBasedAlgRemote;
 import net.hudup.core.alg.SetupAlgEvent;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
@@ -38,7 +39,7 @@ import net.hudup.core.logistic.NextUpdate;
 import net.hudup.core.logistic.xURI;
 import net.rem.regression.em.DefaultMixtureREM;
 import net.rem.regression.em.ExchangedParameter;
-import net.rem.regression.em.ui.graph.Graph;
+import net.rem.regression.ui.graph.Graph;
 
 /**
  * This class represents the default mixture regression model.
@@ -67,7 +68,7 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 	/**
 	 * Name of maximum cluster number field.
 	 */
-	public final static String COMP_MAX_NUMBER_FIELD = "max_comp_number";
+	public final static String COMP_MAX_NUMBER_FIELD = "mixrm_cluster_max_comp_number";
 
 	
 	/**
@@ -182,7 +183,7 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 		DefaultMixtureREM mixREM = new DefaultMixtureREM();
 		mixREM.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
 		mixREM.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
-		mixREM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
+		mixREM.getConfig().put(RM_INDICES_FIELD, this.getConfig().get(RM_INDICES_FIELD));
 		mixREM.getConfig().put(COMP_NUMBER_FIELD, 1);
 		
 		try {
@@ -233,6 +234,15 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 			return mixREM.execute(input);
 		else
 			return Constants.UNUSED;
+	}
+
+
+	@Override
+	public AttributeList getAttributeList() throws RemoteException {
+		if (mixREM != null)
+			return mixREM.getAttributeList();
+		else
+			return null;
 	}
 
 
@@ -367,7 +377,7 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 		config.put(EM_EPSILON_FIELD, EM_EPSILON);
 		config.put(EM_EPSILON_RATIO_MODE_FIELD, EM_EPSILON_RATIO_MODE);
 		config.put(EM_MAX_ITERATION_FIELD, EM_MAX_ITERATION);
-		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
+		config.put(RM_INDICES_FIELD, RM_INDICES_DEFAULT);
 		config.put(COMP_MAX_NUMBER_FIELD, COMP_MAX_NUMBER_DEFAULT);
 		
 		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
@@ -421,9 +431,9 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 
 
 	@Override
-	public double calcR(double factor) throws RemoteException {
+	public double calcR() throws RemoteException {
 		if (mixREM != null)
-			return mixREM.calcR(factor);
+			return mixREM.calcR();
 		else
 			return Constants.UNUSED;
 	}

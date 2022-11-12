@@ -11,12 +11,13 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import net.hudup.core.alg.ExecutableAlgRemoteWrapper;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.BaseClass;
 import net.hudup.core.logistic.Inspector;
 import net.hudup.core.logistic.LogUtil;
 import net.hudup.core.logistic.xURI;
-import net.rem.regression.em.ui.graph.Graph;
+import net.rem.regression.ui.graph.Graph;
 
 /**
  * The class is a wrapper of remote regression algorithm. This is a trick to use RMI object but not to break the defined programming architecture.
@@ -87,6 +88,12 @@ public class RMRemoteWrapper extends ExecutableAlgRemoteWrapper implements RM, R
 	}
 
 	
+	@Override
+	public AttributeList getAttributeList() throws RemoteException {
+		return ((RMRemote)remoteAlg).getAttributeList();
+	}
+
+
 	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		return ((RMRemote)remoteAlg).extractRegressor(index);
@@ -166,8 +173,8 @@ public class RMRemoteWrapper extends ExecutableAlgRemoteWrapper implements RM, R
 
 	
 	@Override
-	public double calcR(double factor) throws RemoteException {
-		return ((RMRemote)remoteAlg).calcR(factor);
+	public double calcR() throws RemoteException {
+		return ((RMRemote)remoteAlg).calcR();
 	}
 
 	

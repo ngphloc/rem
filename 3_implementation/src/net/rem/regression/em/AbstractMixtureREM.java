@@ -8,7 +8,7 @@
 package net.rem.regression.em;
 
 import static net.rem.regression.RMAbstract.splitIndices;
-import static net.rem.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
+import static net.rem.regression.em.REMImpl.CALC_VARIANCE_FIELD;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -30,6 +30,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Dataset;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
+import net.hudup.core.logistic.BaseClass;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.Inspector;
 import net.hudup.core.logistic.LogUtil;
@@ -40,12 +41,14 @@ import net.rem.em.ExponentialEM;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RM;
 import net.rem.regression.RMAbstract;
+import net.rem.regression.RMAbstract.UsedIndices;
 import net.rem.regression.RMRemote;
 import net.rem.regression.Statistics;
 import net.rem.regression.VarWrapper;
+import net.rem.regression.em.AbstractMixtureREM.REMExt;
 import net.rem.regression.em.ExchangedParameter.NormalDisParameter;
-import net.rem.regression.em.ui.graph.Graph;
-import net.rem.regression.em.ui.graph.PlotGraphExt;
+import net.rem.regression.ui.graph.Graph;
+import net.rem.regression.ui.graph.PlotGraphExt;
 
 /**
  * This abstract class implements partially expectation maximization (EM) algorithm for mixture regression models.
@@ -67,7 +70,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	/**
 	 * Field of component selection execution mode. If this property is true, the mixture model will select most appropriate component (cluster) for execution instead of making average.
 	 */
-	protected static final String EXECUTE_SELECT_COMP_FIELD = "execute_select_comp";
+	protected static final String EXECUTE_SELECT_COMP_FIELD = "mixrem_execute_select_comp";
 
 	
 	/**
@@ -79,7 +82,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	/**
 	 * Field of including z probability execution mode. If this property is true, the mixture model will include z probability (response probability) for execution.
 	 */
-	protected static final String EXECUTE_INCLUDE_ZPROB_FIELD = "execute_include_zprob";
+	protected static final String EXECUTE_INCLUDE_ZPROB_FIELD = "mixrem_execute_include_zprob";
 
 	
 	/**
@@ -91,7 +94,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	/**
 	 * Field of initialization mode. If this property is true, the mixture model will randomize sample with replacement when initializing parameters.
 	 */
-	protected static final String INITIALIZE_GIVEBACK_FIELD = "initialize_giveback";
+	protected static final String INITIALIZE_GIVEBACK_FIELD = "mixrem_init_giveback";
 
 	
 	/**
@@ -181,7 +184,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
-		List<String> indicesList = splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
+		List<String> indicesList = splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
 		if (indicesList.size() == 0) {
 			AttributeList attList = getSampleAttributeList(inputSample);
 			if (attList.size() < 2)
@@ -199,7 +202,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 		this.rems = Util.newList(indicesList.size());
 		for (int i = 0; i < indicesList.size(); i++) {
 			REMImpl rem = createREM();
-			rem.getConfig().put(R_INDICES_FIELD, indicesList.get(i));
+			rem.getConfig().put(RM_INDICES_FIELD, indicesList.get(i));
 			rem.setup(inputSample);
 			if(rem.attList != null) // if rem is set up successfully.
 				this.rems.add(rem);
@@ -219,35 +222,8 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	 * @return internal regression model.
 	 */
 	protected REMImpl createREM() {
-		REMImpl rem = new REMImpl() {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public synchronized Object learnStart(Object...info) throws RemoteException {
-				boolean prepared = prepareInternalData((Fetcher<Profile>)sample);
-				if (prepared)
-					return prepared;
-				else
-					return null;
-			}
-
-			@Override
-			protected Object transformRegressor(Object x, boolean inverse) {
-				return getMixtureREM().transformRegressor(x, inverse);
-			}
-
-			@Override
-			public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-				return getMixtureREM().transformResponse(z, inverse);
-			}
-			
-		};
-		rem.getConfig().put(R_CALC_VARIANCE_FIELD, true);
+		REMExt rem = new REMExt();
+		rem.getConfig().put(CALC_VARIANCE_FIELD, true);
 		
 		return rem;
 	}
@@ -459,7 +435,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 	
 	@Override
-	public synchronized LargeStatistics getLargeStatistics() throws RemoteException {
+	public LargeStatistics getLargeStatistics() throws RemoteException {
 		if (rems != null && rems.size() > 0)
 			return rems.get(0).getLargeStatistics(); //Suppose all REMs have the same large statistics.
 		else
@@ -504,7 +480,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 					stat = rem.estimate(new Statistics(Constants.UNUSED, xStatistic), parameter);
 				}
 				double value = stat.getZStatistic();
-				double pdf = ExchangedParameter.normalPDF(value, value, parameter.getZVariance());
+				double pdf = RMAbstract.normalPDF(value, value, parameter.getZVariance());
 				coeff *= pdf;
 			}
 			
@@ -670,7 +646,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	@Override
 	public DataConfig createDefaultConfig() {
 		DataConfig tempConfig = super.createDefaultConfig();
-		tempConfig.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
+		tempConfig.put(RM_INDICES_FIELD, RM_INDICES_DEFAULT);
 		tempConfig.put(REMImpl.ESTIMATE_MODE_FIELD, REMImpl.ESTIMATE_MODE_DEFAULT);
 		tempConfig.put(EXECUTE_INCLUDE_ZPROB_FIELD, EXECUTE_INCLUDE_ZPROB_DEFAULT);
 		
@@ -707,8 +683,53 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	}
 
 	
+	/**
+	 * This class is an extension of regression expectation maximization algorithm.
+	 * @author Loc Nguyen
+	 * @version 1.0
+	 */
+	protected class REMExt extends REMImpl {
+		
+		/**
+		 * Serial version UID for serializable class.
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		@SuppressWarnings("unchecked")
+		@Override
+		public synchronized Object learnStart(Object...info) throws RemoteException {
+			UsedIndices usedIndices = UsedIndices.extract(info);
+			boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
+			if (prepared)
+				return prepared;
+			else
+				return null;
+		}
+
+		@Override
+		protected Object transformRegressor(Object x, boolean inverse) {
+			return getMixtureREM().transformRegressor(x, inverse);
+		}
+
+		@Override
+		public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+			return getMixtureREM().transformResponse(z, inverse);
+		}
+		
+	}
+	
+	
 	@Override
-	public synchronized VarWrapper extractRegressor(int index) throws RemoteException {
+	public AttributeList getAttributeList() throws RemoteException {
+		if (this.rems == null || this.rems.size() == 0)
+			return null;
+		else
+			return this.rems.get(0).getAttributeList();
+	}
+
+
+	@Override
+	public VarWrapper extractRegressor(int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -717,7 +738,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized List<VarWrapper> extractRegressors() throws RemoteException {
+	public List<VarWrapper> extractRegressors() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Util.newList();
 		else
@@ -726,7 +747,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized List<VarWrapper> extractSingleRegressors() throws RemoteException {
+	public List<VarWrapper> extractSingleRegressors() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Util.newList();
 		else
@@ -735,7 +756,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized double extractRegressorValue(Object input, int index) throws RemoteException {
+	public double extractRegressorValue(Object input, int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		else
@@ -762,7 +783,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized VarWrapper extractResponse() throws RemoteException {
+	public VarWrapper extractResponse() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -771,7 +792,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized Object extractResponseValue(Object input) throws RemoteException {
+	public  Object extractResponseValue(Object input) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -798,7 +819,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	
 	
 	@Override
-	public synchronized Graph createRegressorGraph(VarWrapper regressor) throws RemoteException {
+	public Graph createRegressorGraph(VarWrapper regressor) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 
@@ -845,7 +866,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized Graph createResponseGraph() throws RemoteException {
+	public Graph createResponseGraph() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -854,7 +875,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized Graph createErrorGraph() throws RemoteException {
+	public Graph createErrorGraph() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -863,7 +884,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized List<Graph> createResponseRalatedGraphs() throws RemoteException {
+	public List<Graph> createResponseRalatedGraphs() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return null;
 		else
@@ -872,7 +893,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public synchronized double calcVariance() throws RemoteException {
+	public double calcVariance() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		else
@@ -881,11 +902,11 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public double calcR(double factor) throws RemoteException {
+	public double calcR() throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		else
-			return RMAbstract.calcR(this, this.getLargeStatistics(), factor); // Suppose all REMs have the same large statistics.
+			return RMAbstract.calcR(this, this.getLargeStatistics()); // Suppose all REMs have the same large statistics.
 	}
 
 
@@ -914,3 +935,67 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	
 	
 }
+
+
+
+/**
+ * This class represents the expectation maximization algorithm used for mixture model. This class is the same {@link REMExt}
+ * 
+ * @author Loc Nguyen
+ * @version 1.0
+ *
+ */
+@BaseClass //This base class annotation prevents auto registering this algorithm.
+@Deprecated
+final class REMExtOuter extends REMImpl {
+
+	
+	/**
+	 * Serial version UID for serializable class.
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+	/**
+	 * Internal mixture regressive expectation maximization algorithm.
+	 */
+	protected AbstractMixtureREM mixtureREM = null;
+	
+	
+	/**
+	 * Constructor with internal mixture regressive expectation maximization algorithm.
+	 * @param mixtureREM mixture regressive expectation maximization algorithm.
+	 */
+	public REMExtOuter(AbstractMixtureREM mixtureREM) {
+		this.mixtureREM = mixtureREM;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public synchronized Object learnStart(Object...info) throws RemoteException {
+		UsedIndices usedIndices = UsedIndices.extract(info);
+		boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
+		if (prepared)
+			return prepared;
+		else
+			return null;
+	}
+
+	
+	@Override
+	protected Object transformRegressor(Object x, boolean inverse) {
+		return mixtureREM.transformRegressor(x, inverse);
+	}
+
+	
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		return mixtureREM.transformResponse(z, inverse);
+	}
+	
+	
+}
+
+
+

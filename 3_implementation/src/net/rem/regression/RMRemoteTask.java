@@ -11,8 +11,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import net.hudup.core.alg.ExecutableAlgRemoteTask;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.logistic.xURI;
-import net.rem.regression.em.ui.graph.Graph;
+import net.rem.regression.ui.graph.Graph;
 
 /**
  * This interface declares methods for remote regression algorithm.
@@ -28,7 +29,7 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
 	/**
 	 * Name of regression indices field.
 	 */
-	final static String R_INDICES_FIELD = "r_indices";
+	final static String RM_INDICES_FIELD = "rm_indices";
 
 	
 	/**
@@ -38,28 +39,38 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
 	 * The pattern can also be 1, 2, #x3+#x4, 5, x6, 7, 8, log(x9), #y^2.
 	 * However, it is impossible to specify 1^2, log(1) but it is possible to specify log(x1), x2.
 	 */
-	final static String R_INDICES_DEFAULT = "{1, #x2, -1, (#x3 + #x4)^2, log(#y)}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
+	final static String RM_INDICES_DEFAULT = "{1, #x2, -1, (#x3 + #x4)^2, log(#y)}"; //Use default indices in which n-1 first variables are regressors and the last variable is response variable
 	
 	
 	/**
 	 * Guidance note.
 	 */
-	final static String note = "The attribute \"r_indices\" indicates indices of independent variables (regressors) and dependent variables (responsors).\n" +
-			"Its pattern is \"{1, 2}, {#x3, 4, 5), {x5, 6}, {log(x5), 6, 7, 8}, {#x9^#x10, 10}\" or \"1, 2, #x3 + #x4, 5, x6, 7, 8, log(x9), #y^2\".\n" +
-			"The first complex pattern in current implementation is not made the best yet, for instance, given index {#x3, 4, 5), only the first #x3 is used.\n" +
-			"However, the first complex pattern is only used for the semi-mixture model in which every sub-model (component) is a {1, #x2}, for example.\n" +
-			"It is impossible to specify 1^2, log(2) because 1^2 and log(1) are evaluated as fixed numbers (1 and 0, for example), not index but it is possible to specify log(x1), x2.\n" +
-			"Index is number, field name, or mathematical expression.\n" +
-			"If index is number, it starts with 1 because index 0 always points to 1 value and so please do not declare number index 0 or negative number index. Number index -1 is wrong, which is used to indicate that the \"r_indices\" is only used for hinting.\n" +
-			"The last index is the index (number, field name, mathematical expression) of responsor and remaining indices (n-1 first indices) are indices of regressors.\n" +
-			"A hinting example of \"r_indices\" is \"{1, #x2, -1, (#x3 + #x4)^2, log(#y)}\" in which the index -1 indicates that such hinting \"r_indices\" will be wrong in parsing.\n" +
-			"When \"r_indices\" is wrong, it is assigned as \"1, 2,..., n\" where n is the number of fields (variables) and the nth field (the last field) is responsor and remaining fields are regressors.";
+	final static String note = "The attribute \"rm_indices\" indicates indices of independent variables (regressors) and dependent variables (responsors).\n" +
+		"Its pattern is \"{1, 2}, {#x3, 4, 5), {x5, 6}, {log(x5), 6, 7, 8}, {#x9^#x10, 10}\" or \"1, 2, #x3 + #x4, 5, x6, 7, 8, log(x9), #y^2\".\n" +
+		"The first complex pattern in current implementation is not made the best yet, for instance, given index {#x3, 4, 5), only the first #x3 is used.\n" +
+		"However, the first complex pattern is only used for the semi-mixture model in which every sub-model (component) is a {1, #x2}, for example.\n" +
+		"It is impossible to specify 1^2, log(2) because 1^2 and log(1) are evaluated as fixed numbers (1 and 0, for example), not index but it is possible to specify log(x1), x2.\n" +
+		"\n" +
+		"Index is number, field name, or mathematical expression.\n" +
+		"If index is number, it starts with 1 because index 0 always points to 1 value and so please do not declare number index 0 or negative number index. Number index -1 is wrong, which is used to indicate that the \"rm_indices\" is only used for hinting.\n" +
+		"The last index is the index (number, field name, mathematical expression) of responsor and remaining indices (n-1 first indices) are indices of regressors.\n" +
+		"\n" +
+		"A hinting example of \"rm_indices\" is \"{1, #x2, -1, (#x3 + #x4)^2, log(#y)}\" in which the index -1 indicates that such hinting \"rm_indices\" will be wrong in parsing.\n" +
+		"When \"rm_indices\" is wrong, it is assigned as \"1, 2,..., n\" where n is the number of fields (variables) and the nth field (the last field) is responsor and remaining fields are regressors.";
 			
 			
 	/**
 	 * Special character for indexing variables.
 	 */
 	final static String VAR_INDEX_SPECIAL_CHAR = "#";
+	
+	
+	/**
+	 * Getting attribute list.
+	 * @return attribute list.
+	 * @throws RemoteException if any error raises.
+	 */
+	AttributeList getAttributeList() throws RemoteException;
 	
 	
 	/**
@@ -92,7 +103,7 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
 	/**
 	 * Extracting regressor (X).
 	 * In the most general case that each index is an mathematical expression, this method is focused.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>r_indices</code>.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>rm_indices</code>.
 	 * So the index here is the second index, and of course it is number.
 	 * Index starts from 1. So index 0 always indicates to null. 
 	 * @return regressor (X) extracted.
@@ -122,7 +133,7 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
 	 * Extracting value of regressor (X) from specified profile.
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param input specified input. It is often profile. It can be an array of real values.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>r_indices</code>.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter <code>rm_indices</code>.
 	 * So the index here is the second index, and of course it is number.
 	 * Index starts from 1. So index 0 always indicates to value 1. 
 	 * @return value of regressor (X) extracted from specified profile. Note, the returned value is not transformed.
@@ -212,16 +223,15 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
     
     /**
      * Getting correlation between real response and estimated response.
-     * @param factor multiplied factor.
      * @return correlation between real response and estimated response.
      * @throws RemoteException if any error raises.
      */
-    double calcR(double factor) throws RemoteException ;
+    double calcR() throws RemoteException ;
     
     
     /**
      * Calculating correlation with real response (or real regressor) and estimated response..
-     * @param factor multiplied factor.
+     * @param factor factor multiplied with the indexed.
      * @param index if index < 0, calculating the correlation between estimated Z and real Z.
      * If index >= 0, calculating the correlation between real indexed X and real Z; note, X index from 1 because of X = (1, x1, x2,..., x(n-1)).
      * @return correlation with specified regression model and large statistics.

@@ -8,7 +8,7 @@
 package net.rem.regression.em;
 
 import static net.rem.regression.RMAbstract.splitIndices;
-import static net.rem.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
+import static net.rem.regression.em.REMImpl.CALC_VARIANCE_FIELD;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
@@ -31,8 +31,8 @@ import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.Vector2;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.VarWrapper;
-import net.rem.regression.em.ui.graph.Graph;
-import net.rem.regression.em.ui.graph.PlotGraphExt;
+import net.rem.regression.ui.graph.Graph;
+import net.rem.regression.ui.graph.PlotGraphExt;
 
 /**
  * This class implements the semi-mixture regression model.
@@ -67,7 +67,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	/**
 	 * Field name of mutual mode.
 	 */
-	protected final static String MUTUAL_MODE_FIELD = "srem_mutual_mode";
+	protected final static String MUTUAL_MODE_FIELD = "mixrem_semi_mutual_mode";
 	
 	
 	/**
@@ -79,7 +79,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 	/**
 	 * Field name of mutual mode.
 	 */
-	protected final static String UNIFORM_MODE_FIELD = "srem_uniform_mode";
+	protected final static String UNIFORM_MODE_FIELD = "mixrem_semi_uniform_mode";
 	
 	
 	/**
@@ -93,7 +93,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
-		List<String> indicesList = splitIndices(thisConfig.getAsString(R_INDICES_FIELD));
+		List<String> indicesList = splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
 		if (indicesList.size() == 0) {
 			AttributeList attList = getSampleAttributeList(inputSample);
 			if (attList.size() < 2)
@@ -120,7 +120,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		this.rems = Util.newList(indicesList.size());
 		for (int i = 0; i < indicesList.size(); i++) {
 			REMImpl rem = createREM();
-			rem.getConfig().put(R_INDICES_FIELD, indicesList.get(i));
+			rem.getConfig().put(RM_INDICES_FIELD, indicesList.get(i));
 			rem.setup(inputSample);
 			if(rem.attList != null) // if rem is set up successfully.
 				this.rems.add(rem);
@@ -140,7 +140,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		REMImpl rem = super.createREM();
 		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
 		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
-		rem.getConfig().put(R_CALC_VARIANCE_FIELD, false);
+		rem.getConfig().put(CALC_VARIANCE_FIELD, false);
 		return rem;
 	}
 
@@ -505,7 +505,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			@Override
 			public String getGraphFeature() {
 				try {
-					return "R=" + MathUtil.format(calcR(1.0), 2);
+					return "R=" + MathUtil.format(calcR(), 2);
 				} catch (Exception e) {LogUtil.trace(e);}
 				
 				return "R=NaN";
@@ -637,8 +637,8 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 
 	@Override
-	public synchronized double calcR(double factor) throws RemoteException {
-		return calcR(factor, -1);
+	public synchronized double calcR() throws RemoteException {
+		return calcR(1, -1);
 	}
 
 

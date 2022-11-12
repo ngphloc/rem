@@ -29,8 +29,8 @@ import net.rem.em.ExponentialEM;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.VarWrapper;
-import net.rem.regression.em.ui.graph.Graph;
-import net.rem.regression.em.ui.graph.PlotGraphExt;
+import net.rem.regression.ui.graph.Graph;
+import net.rem.regression.ui.graph.PlotGraphExt;
 
 /**
  * This class is abstract class for EM algorithm {@link EM}.
@@ -230,8 +230,8 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
     
     
     @Override
-    public synchronized double calcR(double factor) throws RemoteException {
-    	return RMAbstract.calcR(this, this.getLargeStatistics(), factor);
+    public synchronized double calcR() throws RemoteException {
+    	return RMAbstract.calcR(this, this.getLargeStatistics());
     }
     
 

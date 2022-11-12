@@ -13,13 +13,14 @@ import java.util.List;
 import net.hudup.core.alg.AlgAbstract;
 import net.hudup.core.alg.DuplicatableAlg;
 import net.hudup.core.alg.NoteAlg;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.logistic.Inspector;
 import net.hudup.core.logistic.xURI;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.VarWrapper;
-import net.rem.regression.em.ui.graph.Graph;
+import net.rem.regression.ui.graph.Graph;
 
 /**
  * This class implements the regression model based on expectation maximization algorithm.
@@ -126,6 +127,12 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 
 
 	@Override
+	public AttributeList getAttributeList() throws RemoteException {
+		return rem.getAttributeList();
+	}
+
+
+	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		return rem.extractRegressor(index);
 	}
@@ -210,8 +217,8 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 
 	
 	@Override
-	public synchronized double calcR(double factor) throws RemoteException {
-		return rem.calcR(factor);
+	public synchronized double calcR() throws RemoteException {
+		return rem.calcR();
 	}
 
 	
@@ -241,7 +248,10 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 
 	@Override
 	public DataConfig createDefaultConfig() {
-		return rem != null ? rem.createDefaultConfig() : super.createDefaultConfig();
+		DataConfig config = rem != null ? rem.createDefaultConfig() : super.createDefaultConfig();
+		config.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
+		
+		return config;
 	}
 
 

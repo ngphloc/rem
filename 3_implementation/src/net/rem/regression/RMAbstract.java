@@ -15,6 +15,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.DecompositionSolver;
 import org.apache.commons.math3.linear.LUDecomposition;
@@ -48,10 +49,11 @@ import net.hudup.core.logistic.Vector2;
 import net.hudup.core.logistic.xURI;
 import net.hudup.core.logistic.ui.UIUtil;
 import net.hudup.core.parser.TextParserUtil;
-import net.rem.regression.em.ui.REMInspector;
-import net.rem.regression.em.ui.graph.Graph;
-import net.rem.regression.em.ui.graph.PlotGraphExt;
 import net.rem.regression.logistic.speqmath.Parser;
+import net.rem.regression.ui.RMInspector;
+import net.rem.regression.ui.graph.Graph;
+import net.rem.regression.ui.graph.PlotGraphExt;
+import net.rem.regression.ui.graph.PlotGraphExt2;
 
 /**
  * This is the most abstract class for regression model. It implements partially the interface {@link RM}.
@@ -160,7 +162,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 		this.attList = profile0.getAttRef();
 		
 		//Begin parsing indices
-		String cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD);
+		String cfgIndices = this.getConfig().getAsString(RM_INDICES_FIELD);
 		if (!RMAbstract.parseIndices(cfgIndices, profile0.getAttCount(), this.xIndices, this.zIndices))
 			return false;
 		//End parsing indices
@@ -308,12 +310,6 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	}
 	
 	
-	@Override
-	public synchronized Inspector getInspector() {
-		return getInspector(this);
-	}
-
-
 	/**
 	 * Getting inspector of regression model.
 	 * @param rm specified regression model.
@@ -334,7 +330,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 		}
 		else {
 			try {
-				return new REMInspector(UIUtil.getDialogForComponent(null), rm);
+				return new RMInspector(UIUtil.getDialogForComponent(null), rm);
 			} 
 			catch (Exception e) {
 				LogUtil.trace(e);
@@ -352,6 +348,12 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	}
 
 	
+	@Override
+	public AttributeList getAttributeList() throws RemoteException {
+		return attList;
+	}
+
+
 	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		return extractVariable(attList, xIndices, index);
@@ -380,7 +382,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	 * Extracting value of regressor (X) from specified profile.
 	 * In the most general case that each index is an mathematical expression, this method is focused.
 	 * @param input specified input. It is often profile. It can be an array of real values.
-	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter r_indices.
+	 * @param index specified index. Index 0 is not included in the profile because this specified index is in the parameter rm_indices.
 	 * So the index here is the second index, and of course it is number.
 	 * Index starts from 1. So index 0 always indicates to value 1. 
 	 * @return value of regressor (X) extracted from specified profile. Note, the returned value is not transformed.
@@ -450,7 +452,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	@Override
 	public DataConfig createDefaultConfig() {
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
+		config.put(RM_INDICES_FIELD, RM_INDICES_DEFAULT);
 		return config;
 	}
 
@@ -462,7 +464,7 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	 */
 	public static List<String> splitIndices(String cfgIndices) {
 		List<String> txtList = Util.newList();
-		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(R_INDICES_DEFAULT))
+		if (cfgIndices == null || cfgIndices.isEmpty() || cfgIndices.equals(RM_INDICES_DEFAULT))
 			return txtList;
 					
 		//The pattern is {1, 2}, {3, 4, 5), {5, 6}, {5, 6, 7, 8}, {9, 10}
@@ -834,6 +836,41 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 	
 	
 	/**
+	 * Evaluating the normal probability density function with specified mean and variance.
+	 * Inherited class can re-defined this density function.
+	 * @param value specified response value z.
+	 * @param mean specified mean.
+	 * @param variance specified variance.
+	 * @return value evaluated from the normal probability density function.
+	 */
+	public static double normalPDF(double value, double mean, double variance) {
+		if (variance == 0 && mean != value) return 0;
+		if (variance == 0 && mean == value) return 1;
+		
+//		variance = variance != 0 ? variance : Float.MIN_VALUE;
+		double d = value - mean;
+		return (1.0 / (Math.sqrt(2*Math.PI*variance))) * Math.exp(-(d*d) / (2*variance));
+	}
+
+	
+	/**
+	 * Evaluating the normal cumulative density function with specified mean and variance.
+	 * Inherited class can re-defined this density function.
+	 * @param value specified response value z.
+	 * @param mean specified mean.
+	 * @param variance specified variance.
+	 * @return value evaluated from the normal probability density function.
+	 */
+	public static double normalCDF(double value, double mean, double variance) {
+		if (variance == 0 && mean != value) return 0;
+		if (variance == 0 && mean == value) return 1;
+		
+//		variance = variance != 0 ? variance : Float.MIN_VALUE;
+		return new NormalDistribution(mean, Math.sqrt(variance)).cumulativeProbability(value);
+	}
+
+	
+	/**
 	 * Extracting real number from specified object.
 	 * @param value specified object.
 	 * @return real number extracted from specified object.
@@ -1096,24 +1133,28 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
     	data[2][1] = Fmath.maximum(data[0]);
     	data[3][1] = coef[0] + coef[1] * data[2][1];
 
-    	PlotGraphExt pg = new PlotGraphExt(data) {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getGraphFeature() {
-				try {
-					return "R=" + MathUtil.format(rm.calcR(1.0), 2);
-				} catch (Exception e) {LogUtil.trace(e);}
-				
-				return "R=NaN";
-			}
-    		
-    	};
-
+//    	PlotGraphExt pg = new PlotGraphExt(data) { //Removed due to remote casting.
+//			/**
+//			 * Serial version UID for serializable class.
+//			 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public String getGraphFeature() {
+//				try {
+//					return "R=" + MathUtil.format(rm.calcR(1.0), 2);
+//				} catch (Exception e) {LogUtil.trace(e);}
+//				
+//				return "R=NaN";
+//			}
+//    	};
+    	String graphFeature = "R=NaN";
+		try {
+			graphFeature = "R=" + MathUtil.format(rm.calcR(), 2);
+		} catch (Exception e) {LogUtil.trace(e);}
+		PlotGraphExt pg = new PlotGraphExt2(data, graphFeature);
+    	
+    	
     	pg.setGraphTitle("Correlation plot: " + pg.getGraphFeature());
     	pg.setXaxisLegend("Real " + rm.transformResponse(rm.extractResponse().toString(), true));
     	pg.setYaxisLegend("Estimated " + rm.transformResponse(rm.extractResponse().toString(), true));
@@ -1177,21 +1218,21 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
     	data[6][1] = Fmath.maximum(data[0]);
     	data[7][1] = errorMean + 1.96 * errorSd;
 
-    	final double mean = errorMean, sd = errorSd;
-    	PlotGraphExt pg = new PlotGraphExt(data) {
-
-			/**
-			 * Serial version UID for serializable class.
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getGraphFeature() {
-				return MathUtil.format(mean, 2) + " +/- 1.96*" + 
-    				MathUtil.format(sd, 2);
-			}
-    		
-    	};
+    	double mean = errorMean, sd = errorSd;
+//    	PlotGraphExt pg = new PlotGraphExt(data) { //Removed due to remote casting.
+//
+//			/**
+//			 * Serial version UID for serializable class.
+//			 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public String getGraphFeature() {
+//				return MathUtil.format(mean, 2) + " +/- 1.96*" + MathUtil.format(sd, 2);
+//			}
+//    	};
+    	String graphFeature = MathUtil.format(mean, 2) + " +/- 1.96*" + MathUtil.format(sd, 2);
+		PlotGraphExt pg = new PlotGraphExt2(data, graphFeature);
 
     	pg.setGraphTitle("Error plot: " + pg.getGraphFeature());
     	pg.setXaxisLegend("Mean " + rm.transformResponse(rm.extractResponse().toString(), true));
@@ -1260,12 +1301,11 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
      * Calculating correlation with specified regression model and large statistics.
      * @param rm specified regression model.
      * @param stats specified large statistics.
-     * @param factor multiplied factor.
      * @return correlation with specified regression model and large statistics.
      * @throws RemoteException if any error raises.
      */
-	public static double calcR(RM rm, LargeStatistics stats, double factor) throws RemoteException {
-		return calcR(rm, stats, factor, -1);
+	public static double calcR(RM rm, LargeStatistics stats) throws RemoteException {
+		return calcR(rm, stats, 1, -1);
 	}
 
 
@@ -1273,9 +1313,9 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
      * Calculating correlation with specified regression model and large statistics.
      * @param rm specified regression model.
      * @param stats specified large statistics.
+     * @param factor factor multiplied with the indexed.
      * @param index if index < 0, calculating the correlation between estimated Z and real Z.
      * If index >= 0, calculating the correlation between real indexed X and real Z; note, X index from 1 because of X = (1, x1, x2,..., x(n-1)).
-     * @param factor multiplied factor.
      * @return correlation with specified regression model and large statistics.
      * @throws RemoteException if any error raises.
      */

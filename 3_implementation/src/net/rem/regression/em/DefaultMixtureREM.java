@@ -7,7 +7,7 @@
  */
 package net.rem.regression.em;
 
-import static net.rem.regression.em.REMImpl.R_CALC_VARIANCE_FIELD;
+import static net.rem.regression.em.REMImpl.CALC_VARIANCE_FIELD;
 
 import java.rmi.RemoteException;
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 	/**
 	 * Name of cluster number field.
 	 */
-	public final static String COMP_NUMBER_FIELD = "comp_number";
+	public final static String COMP_NUMBER_FIELD = "mixrem_comp_number";
 
 	
 	/**
@@ -58,7 +58,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 	/**
 	 * Name of previous parameters field.
 	 */
-	public final static String PREV_PARAMS_FIELD = "previous_parameters";
+	public final static String PREV_PARAMS_FIELD = "mixrem_prev_parameters";
 
 	
 	/**
@@ -108,7 +108,7 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		clearInternalData();
 
 		REMImpl tempEM = new REMImpl();
-		tempEM.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
+		tempEM.getConfig().put(RM_INDICES_FIELD, this.getConfig().get(RM_INDICES_FIELD));
 		if (!tempEM.prepareInternalData(inputSample))
 			return false;
 		else {
@@ -164,12 +164,12 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 
 	@Override
 	protected REMImpl createREM() {
-		REMExt rem = new REMExt();
+		REMImpl rem = super.createREM();
 		rem.getConfig().put(EM_EPSILON_FIELD, this.getConfig().get(EM_EPSILON_FIELD));
 		rem.getConfig().put(EM_MAX_ITERATION_FIELD, this.getConfig().get(EM_MAX_ITERATION_FIELD));
-		rem.getConfig().put(R_INDICES_FIELD, this.getConfig().get(R_INDICES_FIELD));
+		rem.getConfig().put(RM_INDICES_FIELD, this.getConfig().get(RM_INDICES_FIELD));
 		rem.getConfig().put(REMImpl.ESTIMATE_MODE_FIELD, this.getConfig().get(REMImpl.ESTIMATE_MODE_FIELD));
-		rem.getConfig().put(R_CALC_VARIANCE_FIELD, true);
+		rem.getConfig().put(CALC_VARIANCE_FIELD, true);
 		return rem;
 	}
 
@@ -567,41 +567,6 @@ public class DefaultMixtureREM extends AbstractMixtureREM implements Duplicatabl
 		}
 		
 		return maxK;
-	}
-	
-	
-	/**
-	 * This class is an extension of regression expectation maximization algorithm.
-	 * @author Loc Nguyen
-	 * @version 1.0
-	 */
-	protected class REMExt extends REMImpl {
-		
-		/**
-		 * Serial version UID for serializable class.
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		@SuppressWarnings("unchecked")
-		@Override
-		public synchronized Object learnStart(Object...info) throws RemoteException {
-			boolean prepared = prepareInternalData((Fetcher<Profile>)sample);
-			if (prepared)
-				return prepared;
-			else
-				return null;
-		}
-
-		@Override
-		protected Object transformRegressor(Object x, boolean inverse) {
-			return getMixtureREM().transformRegressor(x, inverse);
-		}
-
-		@Override
-		public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-			return getMixtureREM().transformResponse(z, inverse);
-		}
-		
 	}
 	
 	

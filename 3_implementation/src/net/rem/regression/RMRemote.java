@@ -11,8 +11,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import net.hudup.core.alg.ExecutableAlgRemote;
+import net.hudup.core.data.AttributeList;
 import net.hudup.core.logistic.xURI;
-import net.rem.regression.em.ui.graph.Graph;
+import net.rem.regression.ui.graph.Graph;
 
 /**
  * This interface represents remote regression algorithm.
@@ -24,6 +25,10 @@ import net.rem.regression.em.ui.graph.Graph;
 public interface RMRemote extends RMRemoteTask, ExecutableAlgRemote {
     
     
+	@Override
+	AttributeList getAttributeList() throws RemoteException;
+
+	
 	@Override
 	Object extractResponseValue(Object input) throws RemoteException;
 
@@ -89,7 +94,7 @@ public interface RMRemote extends RMRemoteTask, ExecutableAlgRemote {
     
     
 	@Override
-    double calcR(double factor) throws RemoteException;
+    double calcR() throws RemoteException;
     
     
 	@Override

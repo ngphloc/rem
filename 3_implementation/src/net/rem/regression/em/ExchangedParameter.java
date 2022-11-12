@@ -14,8 +14,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.math3.distribution.NormalDistribution;
-
 import net.hudup.core.Cloneable;
 import net.hudup.core.Constants;
 import net.hudup.core.Util;
@@ -323,7 +321,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 				if (stat == null) continue;
 
 				double mean = mean(stat.getXStatistic());
-				double prob = normalPDF(stat.getZStatistic(), mean, variance);
+				double prob = RMAbstract.normalPDF(stat.getZStatistic(), mean, variance);
 				if (log)
 					lh += prob > 0 ? Math.log(prob) : 0;
 				else
@@ -587,7 +585,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 			}
 			
 			if (equal)
-				return normalPDF(0, 0, 0);
+				return RMAbstract.normalPDF(0, 0, 0);
 			else
 				return 0;
 		}
@@ -615,41 +613,6 @@ public class ExchangedParameter implements Cloneable, Serializable {
 
 	
 	/**
-	 * Evaluating the normal probability density function with specified mean and variance.
-	 * Inherited class can re-defined this density function.
-	 * @param value specified response value z.
-	 * @param mean specified mean.
-	 * @param variance specified variance.
-	 * @return value evaluated from the normal probability density function.
-	 */
-	public static double normalPDF(double value, double mean, double variance) {
-		if (variance == 0 && mean != value) return 0;
-		if (variance == 0 && mean == value) return 1;
-		
-//		variance = variance != 0 ? variance : Float.MIN_VALUE;
-		double d = value - mean;
-		return (1.0 / (Math.sqrt(2*Math.PI*variance))) * Math.exp(-(d*d) / (2*variance));
-	}
-
-	
-	/**
-	 * Evaluating the normal cumulative density function with specified mean and variance.
-	 * Inherited class can re-defined this density function.
-	 * @param value specified response value z.
-	 * @param mean specified mean.
-	 * @param variance specified variance.
-	 * @return value evaluated from the normal probability density function.
-	 */
-	public static double normalCDF(double value, double mean, double variance) {
-		if (variance == 0 && mean != value) return 0;
-		if (variance == 0 && mean == value) return 1;
-//		variance = variance != 0 ? variance : Float.MIN_VALUE;
-
-		return new NormalDistribution(mean, Math.sqrt(variance)).cumulativeProbability(value);
-	}
-
-	
-	/**
 	 * Calculating the normal condition probabilities of the specified parameters given regressor values (X) and response value Z.
 	 * Inherited class can re-define this method. In current version, only normal probability density function is used.
 	 * @param parameterList list of specified parameters.
@@ -672,7 +635,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 			double zMean = parameterList.get(i).mean(xVector);
 			double zVariance = parameterList.get(i).zVariance;
 			
-			double p = normalPDF(zValue, zMean, zVariance);
+			double p = RMAbstract.normalPDF(zValue, zMean, zVariance);
 			double product = coeff * p;
 			
 			denominator += product;
@@ -728,7 +691,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 //			double p2 = normalPDF(zValue + vicinity, zMean, zVariance);
 //			condProbs.add(p2 - p1);
 			
-			double p = normalPDF(zValue, zMean, zVariance);
+			double p = RMAbstract.normalPDF(zValue, zMean, zVariance);
 			condProbs.add(p);
 		}
 		

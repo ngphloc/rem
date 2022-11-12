@@ -75,13 +75,13 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	/**
 	 * Name of variance calculation field.
 	 */
-	public final static String R_CALC_VARIANCE_FIELD = "r_calc_variance";
+	public final static String CALC_VARIANCE_FIELD = "rem_calc_variance";
 
 	
 	/**
 	 * Default value variance calculation field.
 	 */
-	public final static boolean R_CALC_VARIANCE_DEFAULT = false;
+	public final static boolean CALC_VARIANCE_DEFAULT = false;
 
 	
 	/**
@@ -108,7 +108,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	/**
 	 * Field of estimation mode.
 	 */
-	public final static String ESTIMATE_MODE_FIELD = "estimate_mode";
+	public final static String ESTIMATE_MODE_FIELD = "rem_estimate_mode";
 	
 	
 	/**
@@ -202,7 +202,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 			return false;
 
 		//Begin parsing indices
-		String cfgIndices = this.getConfig().getAsString(R_INDICES_FIELD);
+		String cfgIndices = this.getConfig().getAsString(RM_INDICES_FIELD);
 		if (this.xIndices == null) this.xIndices = Util.newList();
 		if (this.zIndices == null) this.zIndices = Util.newList();
 		if (!parseIndices(cfgIndices, this.attList.size(), this.xIndices, this.zIndices)) //parsing indices
@@ -485,7 +485,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 		if (kCondProbs == null) {
 			if (currentParameter != null)
 				newParameter.setCoeff(currentParameter.getCoeff());
-			if (getConfig().getAsBoolean(R_CALC_VARIANCE_FIELD))
+			if (getConfig().getAsBoolean(CALC_VARIANCE_FIELD))
 				newParameter.setZVariance(newParameter.estimateZVariance(stat));
 			else {
 				if (currentParameter == null)
@@ -751,15 +751,6 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	
 	
 	/**
-	 * Getting attribute list.
-	 * @return attribute list.
-	 */
-	protected AttributeList getAttributeList() {
-		return this.attList;
-	}
-	
-	
-	/**
 	 * Getting internal data. Actually, this method returns the current statistics.
 	 * @return internal data which is the current statistics.
 	 */
@@ -796,8 +787,8 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	@Override
 	public DataConfig createDefaultConfig() {
 		DataConfig tempConfig = super.createDefaultConfig();
-		tempConfig.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
-		tempConfig.put(R_CALC_VARIANCE_FIELD, R_CALC_VARIANCE_DEFAULT);
+		tempConfig.put(RM_INDICES_FIELD, RM_INDICES_DEFAULT);
+		tempConfig.put(CALC_VARIANCE_FIELD, CALC_VARIANCE_DEFAULT);
 		tempConfig.put(ESTIMATE_MODE_FIELD, getDefaultEstimateMode());
 		tempConfig.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		
@@ -810,7 +801,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 
 			@Override
 			public Serializable userEdit(Component comp, String key, Serializable defaultValue) {
-				if (key.equals(R_INDICES_FIELD)) {
+				if (key.equals(RM_INDICES_FIELD)) {
 					boolean loadDataset = true;
 					if (attList != null) {
 						int answer = JOptionPane.showConfirmDialog(
@@ -888,6 +879,12 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	 */
 	protected String getDefaultEstimateMode() {
 		return ESTIMATE_MODE_DEFAULT;
+	}
+	
+	
+	@Override
+	public AttributeList getAttributeList() throws RemoteException {
+		return this.attList;
 	}
 	
 	

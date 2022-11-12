@@ -124,7 +124,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	/**
 	 * Combination number for evaluation.
 	 */
-	public final static String COMBINE_NUMBER_FIELD = "remro_combine";
+	public final static String COMBINE_NUMBER_FIELD = "remro_combine_number";
 	
 	
 	/**
@@ -259,7 +259,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 						fit = parameter.estimateZVariance(stats);
 					}
 					else {
-						weight = rem.calcR(1.0);
+						weight = rem.calcR();
 						fit = rem.calcR(alpha, varIndex);
 					}
 					
@@ -278,7 +278,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 				double alpha = alphaSum / weightSum;
 				double fit = fitSum / weightSum;
 				if (optmode.equals(OPTIMAL_MODE_CDF)) {
-					double cdfFit = ExchangedParameter.normalCDF(0, alpha, fit);
+					double cdfFit = normalCDF(0, alpha, fit);
 					fits.add(new double[] {varIndex, cdfFit});
 				}
 				else
@@ -396,13 +396,14 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		if (name != null && !name.isEmpty())
 			return name;
 		else
-			return "rem_robust";
+			return "remro";
 	}
 
 	
 	@Override
 	public DataConfig createDefaultConfig() {
 		DataConfig tempConfig = super.createDefaultConfig();
+		tempConfig.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		tempConfig.put(COMBINE_NUMBER_FIELD, COMBINE_NUMBER_DEFAULT);
 		tempConfig.put(FREE_XINDICES_USED_FIELD, FREE_XINDICES_DEFAULT);
 		tempConfig.put(MAXREGVARS_FIELD, MAXREGVARS_DEFAULT);

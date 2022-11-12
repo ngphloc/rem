@@ -102,9 +102,9 @@ public abstract class MultipleRMAbstract extends ExecutableAlgAbstract implement
 			this.sample = dataset.fetchSample();
 		
 		List<String> cfgIndicesList = RMAbstract.splitIndices(
-				this.getConfig().getAsString(R_INDICES_FIELD));
+				this.getConfig().getAsString(RM_INDICES_FIELD));
 		for (int i = 0; i < Math.min(cfgIndicesList.size(), this.regressions.size()); i++) {
-			this.regressions.get(i).getConfig().put(R_INDICES_FIELD, cfgIndicesList.get(i));
+			this.regressions.get(i).getConfig().put(RM_INDICES_FIELD, cfgIndicesList.get(i));
 		}
 		
 		learnStart();
@@ -214,7 +214,7 @@ public abstract class MultipleRMAbstract extends ExecutableAlgAbstract implement
 	@Override
 	public DataConfig createDefaultConfig() {
 		DataConfig config = super.createDefaultConfig();
-		config.put(R_INDICES_FIELD, R_INDICES_DEFAULT);
+		config.put(RM_INDICES_FIELD, RM_INDICES_DEFAULT);
 		return config;
 	}
 
