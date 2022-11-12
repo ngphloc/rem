@@ -223,8 +223,8 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 
 	
 	@Override
-	public synchronized double calcR(double factor, int index) throws RemoteException {
-		return rem.calcR(factor, index);
+	public synchronized double calcR(int index) throws RemoteException {
+		return rem.calcR(index);
 	}
 
 

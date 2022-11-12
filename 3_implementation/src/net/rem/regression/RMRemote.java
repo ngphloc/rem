@@ -98,7 +98,7 @@ public interface RMRemote extends RMRemoteTask, ExecutableAlgRemote {
     
     
 	@Override
-    double calcR(double factor, int index) throws RemoteException;
+    double calcR(int index) throws RemoteException;
 
 	
 	@Override

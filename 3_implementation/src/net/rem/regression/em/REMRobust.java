@@ -259,8 +259,8 @@ public class REMRobust extends REMInclude implements NoteAlg {
 						fit = parameter.estimateZVariance(stats);
 					}
 					else {
-						weight = rem.calcR();
-						fit = rem.calcR(alpha, varIndex);
+						weight = rem.calcR(1);
+						fit = rem.calcR();
 					}
 					
 					if (Util.isUsed(weight) && Util.isUsed(fit))

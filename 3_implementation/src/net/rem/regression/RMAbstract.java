@@ -1298,35 +1298,34 @@ public abstract class RMAbstract extends ExecutableAlgAbstract implements RM, RM
 
 
     /**
-     * Calculating correlation with specified regression model and large statistics.
+     * Calculating correlation between real response and estimated response.
      * @param rm specified regression model.
      * @param stats specified large statistics.
-     * @return correlation with specified regression model and large statistics.
+     * @return correlation between real response and estimated response.
      * @throws RemoteException if any error raises.
      */
 	public static double calcR(RM rm, LargeStatistics stats) throws RemoteException {
-		return calcR(rm, stats, 1, -1);
+		return calcR(rm, stats, -1);
 	}
 
 
     /**
-     * Calculating correlation with specified regression model and large statistics.
+     * Calculating correlation with real response or real regressor and estimated response.
      * @param rm specified regression model.
      * @param stats specified large statistics.
-     * @param factor factor multiplied with the indexed.
      * @param index if index < 0, calculating the correlation between estimated Z and real Z.
      * If index >= 0, calculating the correlation between real indexed X and real Z; note, X index from 1 because of X = (1, x1, x2,..., x(n-1)).
-     * @return correlation with specified regression model and large statistics.
+     * @return correlation with real response or real regressor and estimated response.
      * @throws RemoteException if any error raises.
      */
-	public static double calcR(RM rm, LargeStatistics stats, double factor, int index) throws RemoteException {
+	public static double calcR(RM rm, LargeStatistics stats, int index) throws RemoteException {
 		if (rm == null || stats == null) return Constants.UNUSED;
 		
 		Vector2 zVector = new Vector2(stats.size(), 0);
 		Vector2 zEstimatedVector = new Vector2(stats.size(), 0);
 		for (int i = 0; i < stats.size(); i++) {
             double z = index < 0 ? (double)rm.transformResponse(stats.getZData().get(i)[1], true) : stats.getXData().get(i)[index];
-            zVector.set(i, z*factor);
+            zVector.set(i, z);
             
             double zEstimated = rm.executeByXStatistic(stats.getXData().get(i));
             zEstimatedVector.set(i, zEstimated);

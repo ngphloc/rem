@@ -911,11 +911,11 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 
 
 	@Override
-	public double calcR(double factor, int index) throws RemoteException {
+	public double calcR(int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		else
-			return RMAbstract.calcR(this, this.getLargeStatistics(), factor, index); // Suppose all REMs have the same large statistics.
+			return RMAbstract.calcR(this, this.getLargeStatistics(), index); // Suppose all REMs have the same large statistics.
 	}
 
 

@@ -236,8 +236,8 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
     
 
     @Override
-	public synchronized double calcR(double factor, int index) throws RemoteException {
-    	return RMAbstract.calcR(this, this.getLargeStatistics(), factor, index);
+	public synchronized double calcR(int index) throws RemoteException {
+    	return RMAbstract.calcR(this, this.getLargeStatistics(), index);
 	}
 
 	

@@ -638,12 +638,12 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 
 	@Override
 	public synchronized double calcR() throws RemoteException {
-		return calcR(1, -1);
+		return calcR(-1);
 	}
 
 
 	@Override
-	public double calcR(double factor, int index) throws RemoteException {
+	public double calcR(int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
 			return Constants.UNUSED;
 		
@@ -663,7 +663,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 			z = (double)transformResponse(z, true);
 			zEstimated = (double)transformResponse(zEstimated, true);
 			
-            zVector.set(i, z*factor);
+            zVector.set(i, z);
             zEstimatedVector.set(i, zEstimated);
 		}
 		

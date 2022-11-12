@@ -222,7 +222,7 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
     
     
     /**
-     * Getting correlation between real response and estimated response.
+     * Calculating correlation between real response and estimated response.
      * @return correlation between real response and estimated response.
      * @throws RemoteException if any error raises.
      */
@@ -230,14 +230,13 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
     
     
     /**
-     * Calculating correlation with real response (or real regressor) and estimated response..
-     * @param factor factor multiplied with the indexed.
+     * Calculating correlation with real response or real regressor and estimated response.
      * @param index if index < 0, calculating the correlation between estimated Z and real Z.
      * If index >= 0, calculating the correlation between real indexed X and real Z; note, X index from 1 because of X = (1, x1, x2,..., x(n-1)).
-     * @return correlation with specified regression model and large statistics.
+     * @return real response or real regressor and estimated response.
      * @throws RemoteException if any error raises.
      */
-	double calcR(double factor, int index) throws RemoteException;
+	double calcR(int index) throws RemoteException;
 	
 	
     /**
