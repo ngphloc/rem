@@ -95,6 +95,18 @@ public class RMRemoteWrapper extends ExecutableAlgRemoteWrapper implements RM, R
 
 
 	@Override
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
+		return ((RMRemote)remoteAlg).transformRegressor(x, inverse);
+	}
+
+
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		return ((RMRemote)remoteAlg).transformResponse(z, inverse);
+	}
+
+	
+	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		return ((RMRemote)remoteAlg).extractRegressor(index);
 	}
@@ -133,12 +145,6 @@ public class RMRemoteWrapper extends ExecutableAlgRemoteWrapper implements RM, R
 	@Override
 	public VarWrapper extractResponse() throws RemoteException {
 		return ((RMRemote)remoteAlg).extractResponse();
-	}
-
-	
-	@Override
-	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-		return ((RMRemote)remoteAlg).transformResponse(z, inverse);
 	}
 
 	

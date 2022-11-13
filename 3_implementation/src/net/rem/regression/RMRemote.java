@@ -30,6 +30,14 @@ public interface RMRemote extends RMRemoteTask, ExecutableAlgRemote {
 
 	
 	@Override
+	Object transformRegressor(Object x, boolean inverse) throws RemoteException;
+
+	
+	@Override
+	Object transformResponse(Object z, boolean inverse) throws RemoteException;
+	
+	
+	@Override
 	Object extractResponseValue(Object input) throws RemoteException;
 
 
@@ -68,10 +76,6 @@ public interface RMRemote extends RMRemoteTask, ExecutableAlgRemote {
 	@Override
 	VarWrapper extractResponse() throws RemoteException;
 
-	
-	@Override
-	Object transformResponse(Object z, boolean inverse) throws RemoteException;
-	
 	
 	@Override
     Graph createRegressorGraph(VarWrapper regressor) throws RemoteException;

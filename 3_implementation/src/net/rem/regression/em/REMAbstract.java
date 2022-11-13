@@ -141,14 +141,8 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
 	}
 
 
-	/**
-	 * Transforming independent variable X.
-	 * In the most general case that each index is an mathematical expression, this method is not focused.
-	 * @param x specified variable X.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of X.
-	 */
-	protected Object transformRegressor(Object x, boolean inverse) {
+	@Override
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
 		return x;
 	}
 

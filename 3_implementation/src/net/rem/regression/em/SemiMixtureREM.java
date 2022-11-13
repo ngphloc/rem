@@ -7,7 +7,6 @@
  */
 package net.rem.regression.em;
 
-import static net.rem.regression.RMAbstract.splitIndices;
 import static net.rem.regression.em.REMImpl.CALC_VARIANCE_FIELD;
 
 import java.awt.Color;
@@ -29,6 +28,7 @@ import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.LogUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.Vector2;
+import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.VarWrapper;
 import net.rem.regression.ui.graph.Graph;
@@ -93,7 +93,7 @@ public class SemiMixtureREM extends AbstractMixtureREM implements DuplicatableAl
 		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
-		List<String> indicesList = splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
+		List<String> indicesList = Indices.splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
 		if (indicesList.size() == 0) {
 			AttributeList attList = getSampleAttributeList(inputSample);
 			if (attList.size() < 2)

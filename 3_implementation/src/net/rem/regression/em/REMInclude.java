@@ -133,6 +133,18 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 
 
 	@Override
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
+		return rem.transformRegressor(x, inverse);
+	}
+
+
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		return rem.transformResponse(z, inverse);
+	}
+
+
+	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		return rem.extractRegressor(index);
 	}
@@ -180,12 +192,6 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 	}
 
 	
-	@Override
-	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-		return rem.transformResponse(z, inverse);
-	}
-
-
 	@Override
 	public synchronized Graph createRegressorGraph(VarWrapper regressor) throws RemoteException {
 		return rem.createRegressorGraph(regressor);

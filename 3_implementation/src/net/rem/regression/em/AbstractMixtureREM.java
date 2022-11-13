@@ -7,7 +7,6 @@
  */
 package net.rem.regression.em;
 
-import static net.rem.regression.RMAbstract.splitIndices;
 import static net.rem.regression.em.REMImpl.CALC_VARIANCE_FIELD;
 
 import java.awt.Color;
@@ -38,10 +37,10 @@ import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.logistic.xURI;
 import net.rem.em.EMRemote;
 import net.rem.em.ExponentialEM;
+import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RM;
 import net.rem.regression.RMAbstract;
-import net.rem.regression.RMAbstract.UsedIndices;
 import net.rem.regression.RMRemote;
 import net.rem.regression.Statistics;
 import net.rem.regression.VarWrapper;
@@ -184,7 +183,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 		clearInternalData();
 		DataConfig thisConfig = this.getConfig();
 		
-		List<String> indicesList = splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
+		List<String> indicesList = Indices.splitIndices(thisConfig.getAsString(RM_INDICES_FIELD));
 		if (indicesList.size() == 0) {
 			AttributeList attList = getSampleAttributeList(inputSample);
 			if (attList.size() < 2)
@@ -698,7 +697,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 		@SuppressWarnings("unchecked")
 		@Override
 		public synchronized Object learnStart(Object...info) throws RemoteException {
-			UsedIndices usedIndices = UsedIndices.extract(info);
+			Indices.Used usedIndices = Indices.extractUsedIndices(info);
 			boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
 			if (prepared)
 				return prepared;
@@ -707,7 +706,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 		}
 
 		@Override
-		protected Object transformRegressor(Object x, boolean inverse) {
+		public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
 			return getMixtureREM().transformRegressor(x, inverse);
 		}
 
@@ -728,6 +727,18 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	}
 
 
+	@Override
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException  {
+		return x;
+	}
+
+	
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		return z;
+	}
+	
+	
 	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
@@ -800,24 +811,6 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 	}
 
 
-	/**
-	 * Transforming independent variable X.
-	 * In the most general case that each index is an mathematical expression, this method is not focused.
-	 * @param x specified variable X.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of X.
-	 */
-	protected Object transformRegressor(Object x, boolean inverse) {
-		return x;
-	}
-
-	
-	@Override
-	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-		return z;
-	}
-	
-	
 	@Override
 	public Graph createRegressorGraph(VarWrapper regressor) throws RemoteException {
 		if (this.rems == null || this.rems.size() == 0)
@@ -974,7 +967,7 @@ final class REMExtOuter extends REMImpl {
 	@SuppressWarnings("unchecked")
 	@Override
 	public synchronized Object learnStart(Object...info) throws RemoteException {
-		UsedIndices usedIndices = UsedIndices.extract(info);
+		Indices.Used usedIndices = Indices.extractUsedIndices(info);
 		boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
 		if (prepared)
 			return prepared;
@@ -984,7 +977,7 @@ final class REMExtOuter extends REMImpl {
 
 	
 	@Override
-	protected Object transformRegressor(Object x, boolean inverse) {
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
 		return mixtureREM.transformRegressor(x, inverse);
 	}
 

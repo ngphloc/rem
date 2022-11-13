@@ -29,6 +29,7 @@ import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.LogUtil;
 import net.hudup.core.parser.TextParserUtil;
+import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
 
@@ -130,7 +131,19 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	/**
 	 * Default value for combination number for evaluation.
 	 */
-	public final static int COMBINE_NUMBER_DEFAULT = 3;
+	public final static int COMBINE_NUMBER_DEFAULT = 0;
+
+	
+	/**
+	 * Combination number for evaluation in percentage.
+	 */
+	public final static String COMBINE_PERCENT_FIELD = "remro_combine_percent";
+	
+	
+	/**
+	 * Default value for combination number for evaluation in percentage.
+	 */
+	public final static double COMBINE_PERCENT_DEFAULT = 0.5;
 
 	
 	/**
@@ -190,30 +203,31 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		this.coeffs = null;
 		REMAbstract rem = rem();
 		if (rem == null) return null;
+		if (this.xIndices == null || this.xIndices.size() < 2) return Util.newList();
 		
-		int r = config.getAsInt(COMBINE_NUMBER_FIELD);
-		r = r <= 0 ? COMBINE_NUMBER_DEFAULT : r;
 		List<Integer> total = extractRealXIndicesUsed();
 		List<Integer> free = extractRealFreeXIndicesUsed();
 		List<Integer> focus = Util.newList(); focus.addAll(total); focus.removeAll(free);
-		if (focus.size() - 1 <= r) {
+		if (focus.size() <= 1) {
 			rem.addSetupListener(this);
-			
 			rem.setup((Fetcher<Profile>)sample);
-//			ExchangedParameter parameter = rem.getExchangedParameter();
-//			if (parameter != null) this.coeffs = parameter.alpha;
-			
 			rem.removeSetupListener(this);
-			return rem.getParameter();
 		}
+
+		int r = config.getAsInt(COMBINE_NUMBER_FIELD);
+		if (r <= 0) {
+			double rp = config.getAsReal(COMBINE_PERCENT_FIELD);
+			if (rp > 0 && rp <= 1) r = (int)(rp * (focus.size()-1));
+			r = r >= 1 ? r : focus.size() - 1;
+		}
+		r = Math.min(r, focus.size() - 1);
 		
+		String optmode = config.getAsString(OPTIMAL_MODE_FIELD);
 		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
 		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
-		String optmode = config.getAsString(OPTIMAL_MODE_FIELD);
-		List<Integer> doubtful = extractRealXIndicesUsed();
-		doubtful.removeAll(focus);
 		Map<BitSet, double[]> weightFits = Util.newMap();
 		List<double[]> fits = Util.newList();
+		LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
 		
 		if (isLearnStarted()) return null;
 		
@@ -222,7 +236,6 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		learnStarted = true;
 		while (learnStarted && (maxIteration <= 0 || iteration < maxIteration)) {
 			
-			//Do something with main tasks here.
 			List<Integer> doubltful = Util.newList(focus.size());
 			doubltful.addAll(focus);
 			int varIndex = doubltful.remove(iteration);
@@ -233,17 +246,18 @@ public class REMRobust extends REMInclude implements NoteAlg {
 			double fitSum = 0;
 			while (gen.hasMore()) {
 				int[] comb = gen.getNext();
-				int[] xIndicesUsed = new int[comb.length + 2];
+				int[] xIndicesUsed = new int[2 + free.size() + comb.length];
 				xIndicesUsed[0] = 0;
 				xIndicesUsed[1] = varIndex;
+				for (int i = 0; i < free.size(); i++) xIndicesUsed[2 + i] = free.get(i);
 				for (int i = 0; i < comb.length; i++) {
-					int pos = doubltful.get(comb[i]);
-					xIndicesUsed[i + 2] = pos;
+					int used = doubltful.get(comb[i]);
+					xIndicesUsed[2 + free.size() + i] = used;
 				}
 	
-				rem.setup((Fetcher<Profile>)sample, new UsedIndices(xIndicesUsed, null));
+				rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
 				
-				BitSet bs = RMAbstract.usedIndicesToBitset(this.xIndices.size(), xIndicesUsed);
+				BitSet bs = Indices.usedIndicesToBitset(this.xIndices.size(), xIndicesUsed);
 				ExchangedParameter parameter = rem.getExchangedParameter();
 				double alpha = parameter.getAlpha().get(1);
 				double weight = Constants.UNUSED;
@@ -259,8 +273,11 @@ public class REMRobust extends REMInclude implements NoteAlg {
 						fit = parameter.estimateZVariance(stats);
 					}
 					else {
-						weight = rem.calcR(1);
-						fit = rem.calcR();
+						weight = 1.0;
+						
+						//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) * R(estimated y with model k, y).
+						//It means R(x, y | k) = R(x, y estimated with k) * R(y estimated with k, y)
+						fit = rem.calcR(1) * rem.calcR();
 					}
 					
 					if (Util.isUsed(weight) && Util.isUsed(fit))
@@ -275,14 +292,21 @@ public class REMRobust extends REMInclude implements NoteAlg {
 			}
 			
 			if (weightSum != 0) {
-				double alpha = alphaSum / weightSum;
-				double fit = fitSum / weightSum;
 				if (optmode.equals(OPTIMAL_MODE_CDF)) {
+					double fit = fitSum / weightSum;
+					double alpha = alphaSum / weightSum;
 					double cdfFit = normalCDF(0, alpha, fit);
 					fits.add(new double[] {varIndex, cdfFit});
 				}
-				else
-					fits.add(new double[] {varIndex, fit});
+				else {
+					//Averaged conditional (local or model) correlation is average of R(x, y | k) over all k models.
+					double fit = fitSum / weightSum;
+					
+					//Global correlation: R(x, y).
+					double globalFit = RMAbstract.calcRRegressorResponse(data, varIndex);
+					
+					fits.add(new double[] {varIndex, fit*globalFit});
+				}
 			}
 			
 			iteration ++;
@@ -329,16 +353,11 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		});
 		fits = fits.subList(0, maxRegVars);
 		
-		if (fits.size() > 0) {
-			int[] xIndicesUsed = new int[fits.size() + 1];
-			xIndicesUsed[0] = 0;
-			for (int i = 0; i < fits.size(); i++) {
-				xIndicesUsed[i + 1] = (int)fits.get(i)[0];
-			}
-			rem.setup((Fetcher<Profile>)sample, new UsedIndices(xIndicesUsed, null));
-//			ExchangedParameter parameter = rem.getExchangedParameter();
-//			if (parameter != null) this.coeffs = parameter.alpha;
-		}
+		int[] xIndicesUsed = new int[1+ fits.size() + free.size()];
+		xIndicesUsed[0] = 0;
+		for (int i = 0; i < fits.size(); i++) xIndicesUsed[1 + i] = (int)fits.get(i)[0];
+		for (int i = 0; i < free.size(); i++) xIndicesUsed[1 + fits.size() + i] = free.get(i);
+		rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
 		
 		synchronized (this) {
 			learnStarted = false;
@@ -405,6 +424,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		DataConfig tempConfig = super.createDefaultConfig();
 		tempConfig.addReadOnly(DUPLICATED_ALG_NAME_FIELD);
 		tempConfig.put(COMBINE_NUMBER_FIELD, COMBINE_NUMBER_DEFAULT);
+		tempConfig.put(COMBINE_PERCENT_FIELD, COMBINE_PERCENT_DEFAULT);
 		tempConfig.put(FREE_XINDICES_USED_FIELD, FREE_XINDICES_DEFAULT);
 		tempConfig.put(MAXREGVARS_FIELD, MAXREGVARS_DEFAULT);
 		tempConfig.put(PROPORTION_FIELD, PROPORTION_DEFAULT);

@@ -247,6 +247,24 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 
 
 	@Override
+	public Object transformRegressor(Object x, boolean inverse) throws RemoteException {
+		if (mixREM != null)
+			return mixREM.transformRegressor(x, inverse);
+		else
+			return null;
+	}
+
+
+	@Override
+	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
+		if (mixREM != null)
+			return mixREM.transformResponse(z, inverse);
+		else
+			return null;
+	}
+
+
+	@Override
 	public VarWrapper extractRegressor(int index) throws RemoteException {
 		if (mixREM != null)
 			return mixREM.extractRegressor(index);
@@ -315,15 +333,6 @@ public class DefaultMixtureRM extends ExecutableAlgAbstract implements RM, RMRem
 			return mixREM.extractRegressorStatistic(regressor);
 		else
 			return Util.newList();
-	}
-
-
-	@Override
-	public Object transformResponse(Object z, boolean inverse) throws RemoteException {
-		if (mixREM != null)
-			return mixREM.transformResponse(z, inverse);
-		else
-			return null;
 	}
 
 

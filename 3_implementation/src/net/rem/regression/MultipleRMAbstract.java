@@ -101,8 +101,7 @@ public abstract class MultipleRMAbstract extends ExecutableAlgAbstract implement
 		else
 			this.sample = dataset.fetchSample();
 		
-		List<String> cfgIndicesList = RMAbstract.splitIndices(
-				this.getConfig().getAsString(RM_INDICES_FIELD));
+		List<String> cfgIndicesList = Indices.splitIndices(this.getConfig().getAsString(RM_INDICES_FIELD));
 		for (int i = 0; i < Math.min(cfgIndicesList.size(), this.regressions.size()); i++) {
 			this.regressions.get(i).getConfig().put(RM_INDICES_FIELD, cfgIndicesList.get(i));
 		}
@@ -110,11 +109,11 @@ public abstract class MultipleRMAbstract extends ExecutableAlgAbstract implement
 		learnStart();
 		
 		SetupAlgEvent evt = new SetupAlgEvent(
-				this,
-				Type.done,
-				this.getName(),
-				dataset,
-				"Learned models: " + this.getDescription());
+			this,
+			Type.done,
+			this.getName(),
+			dataset,
+			"Learned models: " + this.getDescription());
 		fireSetupEvent(evt);
 	}
 

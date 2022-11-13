@@ -22,7 +22,7 @@ import net.rem.regression.ui.graph.Graph;
  * @version 2.0
  *
  */
-public interface RMRemoteTask extends ExecutableAlgRemoteTask {
+public interface RMRemoteTask extends ExecutableAlgRemoteTask, Transformer {
 
 
 	
@@ -168,17 +168,6 @@ public interface RMRemoteTask extends ExecutableAlgRemoteTask {
 	 */
 	VarWrapper extractResponse() throws RemoteException;
 
-	
-	/**
-	 * Transforming independent variable Z.
-	 * In the most general case that each index is an mathematical expression, this method is not focused but is useful in some cases.
-	 * @param z specified variable Z.
-	 * @param inverse if true, there is an inverse transformation.
-	 * @return transformed value of Z.
-	 * @throws RemoteException if any error raises.
-	 */
-	Object transformResponse(Object z, boolean inverse) throws RemoteException;
-	
 	
 	/**
 	 * Creating 2D decomposed graph for regressor.

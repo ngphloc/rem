@@ -12,8 +12,6 @@ import static net.rem.regression.RMAbstract.extractSingleVariables;
 import static net.rem.regression.RMAbstract.extractVariable;
 import static net.rem.regression.RMAbstract.extractVariableValue;
 import static net.rem.regression.RMAbstract.extractVariables;
-import static net.rem.regression.RMAbstract.findIndex;
-import static net.rem.regression.RMAbstract.parseIndices;
 
 import java.awt.Component;
 import java.io.Serializable;
@@ -37,11 +35,11 @@ import net.hudup.core.data.Profile;
 import net.hudup.core.data.ui.DatasetLoader;
 import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.LogUtil;
+import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.Statistics;
 import net.rem.regression.VarWrapper;
-import net.rem.regression.RMAbstract.UsedIndices;
 import net.rem.regression.em.ExchangedParameter.NormalDisParameter;
 import net.rem.regression.ui.RegressResponseChooser;
 
@@ -169,7 +167,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object learnStart(Object...info) throws RemoteException {
-		UsedIndices usedIndices = UsedIndices.extract(info);
+		Indices.Used usedIndices = Indices.extractUsedIndices(info);
 		boolean prepared = usedIndices != null ? prepareInternalData((Fetcher<Profile>)sample, usedIndices.xIndicesUsed, usedIndices.zIndicesUsed) : prepareInternalData((Fetcher<Profile>)sample);
 
 		Object resulted = null;
@@ -192,96 +190,26 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	 * For zIndices, due to Z = (1, z), the first element (0) of this indices array is -1 pointing to 1 value.
 	 * Therefore, zIndicesUsed[0] is always 0.
 	 * @return true if data preparation is successful.
-	 * @throws RemoteException if any error raises.
 	 */
-	protected boolean prepareInternalData(Fetcher<Profile> inputSample, int[] xIndicesUsed, int[] zIndicesUsed) throws RemoteException {
+	protected boolean prepareInternalData(Fetcher<Profile> inputSample, int[] xIndicesUsed, int[] zIndicesUsed) {
 		clearInternalData();
 		
-		this.attList = getSampleAttributeList(inputSample);
-		if (this.attList.size() < 2)
-			return false;
-
 		//Begin parsing indices
-		String cfgIndices = this.getConfig().getAsString(RM_INDICES_FIELD);
-		if (this.xIndices == null) this.xIndices = Util.newList();
-		if (this.zIndices == null) this.zIndices = Util.newList();
-		if (!parseIndices(cfgIndices, this.attList.size(), this.xIndices, this.zIndices)) //parsing indices
-			return false;
+		Indices indices = Indices.parse(getConfig().getAsString(RM_INDICES_FIELD), inputSample, xIndicesUsed, zIndicesUsed);
+		if (indices == null) return false;
+		this.attList = indices.attList;
+		this.xIndices = indices.xIndices;
+		this.zIndices = indices.zIndices;
 		//End parsing indices
 		
-		//Begin adjusting indices
-		this.xIndices = RMAbstract.extractIndices(this.xIndices, xIndicesUsed);
-		this.zIndices = RMAbstract.extractIndices(this.zIndices, zIndicesUsed);
-		//End adjusting indices
-		
-		//Begin checking existence of values.
-		boolean zExists = false;
-		boolean[] xExists = new boolean[this.xIndices.size() - 1]; //profile = (x1, x2,..., x(n-1), z)
-		Arrays.fill(xExists, false);
-		while (inputSample.next()) {
-			Profile profile = inputSample.pick(); //profile = (x1, x2,..., x(n-1), z)
-			if (profile == null)
-				continue;
-			
-			double lastValue = extractNumber(extractResponseValue(profile));
-			if (Util.isUsed(lastValue))
-				zExists = zExists || true; 
-			
-			for (int j = 1; j < this.xIndices.size(); j++) {
-				double value = extractRegressorValue(profile, j);
-				if (Util.isUsed(value))
-					xExists[j - 1] = xExists[j - 1] || true;
-			}
-		}
-		inputSample.reset();
-		List<Object[]> xIndicesTemp = Util.newList();
-		xIndicesTemp.add(this.xIndices.get(0)); //adding -1
-		for (int j = 1; j < this.xIndices.size(); j++) {
-			if (xExists[j - 1])
-				xIndicesTemp.add(this.xIndices.get(j)); //only use variables having at least one value.
-		}
-		if (!zExists || xIndicesTemp.size() < 2) //Please pay attention here.
-			return false;
-		this.xIndices = xIndicesTemp;
-		//End checking existence of values.
-		
 		//Begin extracting data
-		List<double[]> xData = Util.newList();
-		List<double[]> zData = Util.newList();
-		while (inputSample.next()) {
-			Profile profile = inputSample.pick(); //profile = (x1, x2,..., x(n-1), z)
-			if (profile == null)
-				continue;
-			
-			double[] xVector = new double[this.xIndices.size()]; //1, x1, x2,..., x(n-1)
-			double[] zVector = new double[2]; //1, z
-			xVector[0] = 1.0;
-			zVector[0] = 1.0;
-			
-			double lastValue = extractNumber(extractResponseValue(profile));
-			if (!Util.isUsed(lastValue))
-				zVector[1] = Constants.UNUSED;
-			else
-				zVector[1] = (double)transformResponse(lastValue, false);
-			
-			for (int j = 1; j < this.xIndices.size(); j++) {
-				double value = extractRegressorValue(profile, j);
-				if (!Util.isUsed(value))
-					xVector[j] = Constants.UNUSED;
-				else
-					xVector[j] = (double)transformRegressor(value, false);
-			}
-			
-			zData.add(zVector);
-			xData.add(xVector);
-		}
-		inputSample.reset();
+		LargeStatistics stats = Indices.extractData(inputSample, this.attList, this.xIndices, this.zIndices, this);
 		//End extracting data
 		
-		if (xData.size() == 0 || zData.size() == 0)
+		if (stats == null)
 			return false;
 		else {
-			this.data = new LargeStatistics(xData, zData);
+			this.data = stats;
 			return true;
 		}
 	}
@@ -294,11 +222,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 	 * @throws RemoteException if any error raises.
 	 */
 	protected boolean prepareInternalData(Fetcher<Profile> inputSample) {
-		try {
-			return prepareInternalData(inputSample, null, null);
-		} catch (Throwable e) {LogUtil.trace(e);}
-		
-		return false;
+		return prepareInternalData(inputSample, null, null);
 	}
 	
 	
@@ -1021,7 +945,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 			profile.setValue(attRef.size() - 1, z);
 			
 			for (int j = 0; j < attRef.size() - 1; j++) {
-				int foundX = findIndex(em.xIndices, j);
+				int foundX = Indices.findIndex(em.xIndices, j);
 				if (foundX >= 0)
 					profile.setValue(j, xvector[foundX]);
 			}
