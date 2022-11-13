@@ -159,7 +159,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	 * For X indices (xIndices), regressors begin from 1 due to X = (1, x1, x2,..., x(n-1)) and so, the first element (0) of xIndices is -1 pointing to 1 value.
 	 * Therefore this free X positions pointing to xIndices are from 1. 
 	 */
-	public final static String FREE_XINDICES_DEFAULT = ""; //Like "7, 9, 3, 4"
+	public final static String FREE_XINDICES_DEFAULT = ""; //Like "7, 9, 3, 4, 11"
 
 	
 	/**
@@ -200,7 +200,6 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Object learn0() throws RemoteException {
-		this.coeffs = null;
 		REMAbstract rem = rem();
 		if (rem == null) return null;
 		if (this.xIndices == null || this.xIndices.size() < 2) return Util.newList();
@@ -212,6 +211,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 			rem.addSetupListener(this);
 			rem.setup((Fetcher<Profile>)sample);
 			rem.removeSetupListener(this);
+			return rem.getParameter();
 		}
 
 		int r = config.getAsInt(COMBINE_NUMBER_FIELD);
@@ -227,7 +227,6 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
 		Map<BitSet, double[]> weightFits = Util.newMap();
 		List<double[]> fits = Util.newList();
-		LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
 		
 		if (isLearnStarted()) return null;
 		
@@ -275,7 +274,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 					else {
 						weight = 1.0;
 						
-						//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) * R(estimated y with model k, y).
+						//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) multiplied with R(estimated y with model k, y).
 						//It means R(x, y | k) = R(x, y estimated with k) * R(y estimated with k, y)
 						fit = rem.calcR(1) * rem.calcR();
 					}
@@ -302,6 +301,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 					//Averaged conditional (local or model) correlation is average of R(x, y | k) over all k models.
 					double fit = fitSum / weightSum;
 					
+					LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
 					//Global correlation: R(x, y).
 					double globalFit = RMAbstract.calcRRegressorResponse(data, varIndex);
 					
