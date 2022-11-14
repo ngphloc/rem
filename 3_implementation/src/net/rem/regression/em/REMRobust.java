@@ -29,6 +29,7 @@ import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
 import net.hudup.core.data.Pair;
 import net.hudup.core.data.Profile;
+import net.hudup.core.logistic.Inspector;
 import net.hudup.core.logistic.LogUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
@@ -608,6 +609,12 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	}
 
 
+	@Override
+	public synchronized Inspector getInspector() {
+		return RMAbstract.getInspector(this);
+	}
+
+	
 	@Override
 	public String getName() {
 		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
