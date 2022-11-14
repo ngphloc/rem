@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,12 +27,15 @@ import net.hudup.core.alg.SetupAlgEvent;
 import net.hudup.core.alg.SetupAlgEvent.Type;
 import net.hudup.core.data.DataConfig;
 import net.hudup.core.data.Fetcher;
+import net.hudup.core.data.Pair;
 import net.hudup.core.data.Profile;
 import net.hudup.core.logistic.LogUtil;
+import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
 import net.rem.regression.RMAbstract;
+import net.rem.regression.VarWrapper;
 
 /**
  * This class implements the regression model based on robust regressors.
@@ -175,6 +179,12 @@ public class REMRobust extends REMInclude implements NoteAlg {
 
 	
 	/**
+	 * List of robust regressors.
+	 */
+	protected List<VarWrapper> robusts = Util.newList();
+	
+	
+	/**
 	 * Default constructor.
 	 */
 	public REMRobust() {
@@ -197,12 +207,30 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Object learn0() throws RemoteException {
+		String optmode = config.getAsString(OPTIMAL_MODE_FIELD);
+		if (optmode == null)
+			return remro();
+		else if (optmode.equals(OPTIMAL_MODE_R))
+			return remro();
+		else if (optmode.equals(OPTIMAL_MODE_CDF))
+			return cdf();
+		else
+			return remro();
+	}
+
+
+	/**
+	 * Learning by REMRO algorithm.
+	 * @return regressive parameter.
+	 * @throws RemoteException if any error raises.
+	 */
+	@SuppressWarnings("unchecked")
+	protected Object remro() throws RemoteException {
+		robusts.clear();
 		REMAbstract rem = rem();
-		if (rem == null) return null;
-		if (this.xIndices == null || this.xIndices.size() < 2) return Util.newList();
+		if (rem == null || this.xIndices == null || this.xIndices.size() < 2) return null;
 		
 		List<Integer> total = extractRealXIndicesUsed();
 		List<Integer> free = extractRealFreeXIndicesUsed();
@@ -222,12 +250,11 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		}
 		r = Math.min(r, focus.size() - 1);
 		
-		String optmode = config.getAsString(OPTIMAL_MODE_FIELD);
 		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
 		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
-		Map<BitSet, double[]> weightFits = Util.newMap();
-		List<double[]> fits = Util.newList();
-		
+		Map<BitSet, Double> fitMap = Util.newMap();
+		List<Pair> roIndices = Util.newList(); //Important list of robust regressor indices with their fitness.
+
 		if (isLearnStarted()) return null;
 		
 		int maxIteration = focus.size();
@@ -240,8 +267,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 			int varIndex = doubltful.remove(iteration);
 			
 			CombinationGenerator gen = new CombinationGenerator(doubltful.size(), r);
-			double alphaSum = 0;
-			double weightSum = 0;
+			double K = 0;
 			double fitSum = 0;
 			while (gen.hasMore()) {
 				int[] comb = gen.getNext();
@@ -257,56 +283,32 @@ public class REMRobust extends REMInclude implements NoteAlg {
 				rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
 				
 				BitSet bs = Indices.usedIndicesToBitset(this.xIndices.size(), xIndicesUsed);
-				ExchangedParameter parameter = rem.getExchangedParameter();
-				double alpha = parameter.getAlpha().get(1);
-				double weight = Constants.UNUSED;
 				double fit = Constants.UNUSED;
-				if (weightFits.containsKey(bs)) {
-					weight = weightFits.get(bs)[0];
-					fit = weightFits.get(bs)[1];
-				}
+				if (fitMap.containsKey(bs))
+					fit = fitMap.get(bs);
 				else {
-					LargeStatistics stats = rem.getLargeStatistics();
-					if (optmode.equals(OPTIMAL_MODE_CDF)) {
-						weight = parameter.likelihood(stats, fit, true);
-						fit = parameter.estimateZVariance(stats);
-					}
-					else {
-						weight = 1.0;
-						
-						//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) multiplied with R(estimated y with model k, y).
-						//It means R(x, y | k) = R(x, y estimated with k) * R(y estimated with k, y)
-						fit = rem.calcR(1) * rem.calcR();
-					}
+					//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) multiplied with R(estimated y with model k, y).
+					//It means R(x, y | k) = R(x, y estimated with k) * R(y estimated with k, y)
+					fit = rem.calcR(1) * rem.calcR();
 					
-					if (Util.isUsed(weight) && Util.isUsed(fit))
-						weightFits.put(bs, new double[] {weight, fit});
+					if (Util.isUsed(fit)) fitMap.put(bs, fit);
 				}
 				
-				if (Util.isUsed(weight) && Util.isUsed(fit)) {
-					weightSum += weight;
-					alphaSum += weight * alpha;
-					fitSum += weight * fit;
+				if (Util.isUsed(fit)) {
+					K += 1;
+					fitSum += fit;
 				}
 			}
 			
-			if (weightSum != 0) {
-				if (optmode.equals(OPTIMAL_MODE_CDF)) {
-					double fit = fitSum / weightSum;
-					double alpha = alphaSum / weightSum;
-					double cdfFit = normalCDF(0, alpha, fit);
-					fits.add(new double[] {varIndex, cdfFit});
-				}
-				else {
-					//Averaged conditional (local or model) correlation is average of R(x, y | k) over all k models.
-					double fit = fitSum / weightSum;
-					
-					LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
-					//Global correlation: R(x, y).
-					double globalFit = RMAbstract.calcRRegressorResponse(data, varIndex);
-					
-					fits.add(new double[] {varIndex, fit*globalFit});
-				}
+			if (K != 0) {
+				//Averaged conditional (local or model) correlation is average of R(x, y | k) over all k models.
+				double fit = fitSum / K;
+				
+				LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
+				//Global correlation: R(x, y).
+				double globalFit = RMAbstract.calcRRegressorResponse(data, varIndex);
+				
+				roIndices.add(new Pair(varIndex, fit*globalFit));
 			}
 			
 			iteration ++;
@@ -325,39 +327,50 @@ public class REMRobust extends REMInclude implements NoteAlg {
 			
 		}
 		
-		Collections.sort(fits, new Comparator<double[]>() {
+		Collections.sort(roIndices, new Comparator<Pair>() {
 			@Override
-			public int compare(double[] o1, double[] o2) {
-				double v1 = o1[1], v2 = o2[1];
+			public int compare(Pair o1, Pair o2) {
+				double fit1 = o1.value(), fit2 = o2.value();
 				String prop = getConfig().getAsString(PROPORTION_FIELD);
+				
 				if (prop.equals(PROPORTION_ABSOLUTE)) {
-					v1 = Math.abs(o1[1]);
-					v2 = Math.abs(o2[1]);
+					fit1 = Math.abs(o1.value());
+					fit2 = Math.abs(o2.value());
 				}
 				else if (prop.equals(PROPORTION_INCREASE)) {
-					v1 = o1[1];
-					v2 = o2[1];
+					fit1 = o1.value();
+					fit2 = o2.value();
 				}
 				else if (prop.equals(PROPORTION_DECREASE)) {
-					v1 = o2[1];
-					v2 = o1[1];
+					fit1 = o2.value();
+					fit2 = o1.value();
 				}
 					
-				if (v1 > v2)
+				if (fit1 > fit2)
 					return -1;
-				else if (v1 == v2)
+				else if (fit1 == fit2)
 					return 0;
 				else
 					return 1;
 			}
 		});
-		fits = fits.subList(0, maxRegVars);
+		roIndices = roIndices.subList(0, maxRegVars);
 		
-		int[] xIndicesUsed = new int[1+ fits.size() + free.size()];
-		xIndicesUsed[0] = 0;
-		for (int i = 0; i < fits.size(); i++) xIndicesUsed[1 + i] = (int)fits.get(i)[0];
-		for (int i = 0; i < free.size(); i++) xIndicesUsed[1 + fits.size() + i] = free.get(i);
-		rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+		if (roIndices.size() > 0) {
+			int[] xIndicesUsed = new int[1 + roIndices.size() + free.size()];
+			xIndicesUsed[0] = 0;
+			for (int i = 0; i < roIndices.size(); i++) xIndicesUsed[1 + i] = roIndices.get(i).key();
+			for (int i = 0; i < free.size(); i++) xIndicesUsed[1 + roIndices.size() + i] = free.get(i);
+			rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+			
+			for (int i = 0; i < roIndices.size(); i++) {
+				VarWrapper robust = rem.extractRegressor(i + 1);
+				robust.setTag(roIndices.get(i).value());
+				this.robusts.add(robust);
+			}
+		}
+		else
+			rem.setup((Fetcher<Profile>)sample);
 		
 		synchronized (this) {
 			learnStarted = false;
@@ -371,7 +384,175 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		
 		return rem.getParameter();
 	}
+	
+	
+	/**
+	 * Learning by cumulative density function (CDF) algorithm.
+	 * @return regressive parameter.
+	 * @throws RemoteException if any error raises.
+	 */
+	@SuppressWarnings("unchecked")
+	protected Object cdf() throws RemoteException {
+		robusts.clear();
+		REMAbstract rem = rem();
+		if (rem == null || this.xIndices == null || this.xIndices.size() < 2) return null;
+		
+		List<Integer> total = extractRealXIndicesUsed();
+		List<Integer> free = extractRealFreeXIndicesUsed();
+		List<Integer> focus = Util.newList(); focus.addAll(total); focus.removeAll(free);
+		if (focus.size() <= 1) {
+			rem.addSetupListener(this);
+			rem.setup((Fetcher<Profile>)sample);
+			rem.removeSetupListener(this);
+			return rem.getParameter();
+		}
 
+		int r = config.getAsInt(COMBINE_NUMBER_FIELD);
+		if (r <= 0) {
+			double rp = config.getAsReal(COMBINE_PERCENT_FIELD);
+			if (rp > 0 && rp <= 1) r = (int)(rp * (focus.size()-1));
+			r = r >= 1 ? r : focus.size() - 1;
+		}
+		r = Math.min(r, focus.size() - 1);
+		
+		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
+		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
+		Map<BitSet, double[]> fitMap = Util.newMap();
+		List<Pair> roIndices = Util.newList();
+		
+		if (isLearnStarted()) return null;
+		
+		int maxIteration = focus.size();
+		int iteration = 0;
+		learnStarted = true;
+		while (learnStarted && (maxIteration <= 0 || iteration < maxIteration)) {
+			
+			List<Integer> doubltful = Util.newList(focus.size());
+			doubltful.addAll(focus);
+			int varIndex = doubltful.remove(iteration);
+			
+			CombinationGenerator gen = new CombinationGenerator(doubltful.size(), r);
+			double alphaSum = 0;
+			double likelihoodSum = 0;
+			while (gen.hasMore()) {
+				int[] comb = gen.getNext();
+				int[] xIndicesUsed = new int[2 + free.size() + comb.length];
+				xIndicesUsed[0] = 0;
+				xIndicesUsed[1] = varIndex;
+				for (int i = 0; i < free.size(); i++) xIndicesUsed[2 + i] = free.get(i);
+				for (int i = 0; i < comb.length; i++) {
+					int used = doubltful.get(comb[i]);
+					xIndicesUsed[2 + free.size() + i] = used;
+				}
+	
+				rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+				
+				BitSet bs = Indices.usedIndicesToBitset(this.xIndices.size(), xIndicesUsed);
+				ExchangedParameter parameter = rem.getExchangedParameter();
+				double alpha = parameter.getAlpha().get(1);
+				double likelihood = Constants.UNUSED;
+				if (fitMap.containsKey(bs)) {
+					alpha = fitMap.get(bs)[0];
+					likelihood = fitMap.get(bs)[1];
+				}
+				else {
+					LargeStatistics stats = rem.getLargeStatistics();
+					double variance = parameter.estimateZVariance(stats);
+					likelihood = parameter.likelihood(stats, variance, true);
+					
+					if (Util.isUsed(alpha) && Util.isUsed(likelihood))
+						fitMap.put(bs, new double[] {alpha, likelihood});
+				}
+				
+				if (Util.isUsed(alpha) && Util.isUsed(likelihood)) {
+					alphaSum += alpha * likelihood;
+					likelihoodSum += likelihood;
+				}
+			}
+			
+			if (likelihoodSum != 0) {
+				double alphaMean = alphaSum / likelihoodSum;
+				
+				Collection<double[]> fits = fitMap.values();
+				double alphaVariance = 0;
+				for (double[] fit : fits) {
+					double alpha = fit[0];
+					double likelihood = fit[1];
+					double d = alpha - alphaMean;
+					alphaVariance += d*d * likelihood;
+				}
+				alphaVariance = alphaVariance / likelihoodSum;
+				
+				double cdf = normalCDF(0, alphaMean, alphaVariance);
+				String prop = getConfig().getAsString(PROPORTION_FIELD);
+				if (prop.equals(PROPORTION_ABSOLUTE))
+					cdf = Math.max(cdf, 1.0 - cdf);
+				else if (prop.equals(PROPORTION_INCREASE))
+					cdf = 1.0 - cdf;
+				
+				roIndices.add(new Pair(varIndex, cdf));
+			}
+			
+			iteration ++;
+
+			//Pseudo-code to fire doing setup event.
+			fireSetupEvent(new SetupAlgEvent(this, Type.doing, getName(), "Setting up is doing: " + getDescription(), iteration, maxIteration));
+			
+			synchronized (this) {
+				while (learnPaused) {
+					notifyAll();
+					try {
+						wait();
+					} catch (Exception e) {LogUtil.trace(e);}
+				}
+			}
+			
+		}
+		
+		Collections.sort(roIndices, new Comparator<Pair>() {
+			@Override
+			public int compare(Pair o1, Pair o2) {
+				double v1 = o1.value(), v2 = o2.value();
+					
+				if (v1 > v2)
+					return -1;
+				else if (v1 == v2)
+					return 0;
+				else
+					return 1;
+			}
+		});
+		roIndices = roIndices.subList(0, maxRegVars);
+		
+		if (roIndices.size() > 0) {
+			int[] xIndicesUsed = new int[1 + roIndices.size() + free.size()];
+			xIndicesUsed[0] = 0;
+			for (int i = 0; i < roIndices.size(); i++) xIndicesUsed[1 + i] = roIndices.get(i).key();
+			for (int i = 0; i < free.size(); i++) xIndicesUsed[1 + roIndices.size() + i] = free.get(i);
+			rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+			
+			for (int i = 0; i < roIndices.size(); i++) {
+				VarWrapper robust = rem.extractRegressor(i + 1);
+				robust.setTag(roIndices.get(i).value());
+				this.robusts.add(robust);
+			}
+		}
+		else
+			rem.setup((Fetcher<Profile>)sample);
+		
+		synchronized (this) {
+			learnStarted = false;
+			learnPaused = false;
+			
+			//Pseudo-code to fire done setup event.
+			fireSetupEvent(new SetupAlgEvent(this, Type.done, getName(), "Setting up is done: " + getDescription(), iteration, maxIteration));
+
+			notifyAll();
+		}
+		
+		return rem.getParameter();
+	}
+	
 	
 	/**
 	 * Extract free X positions.
@@ -409,6 +590,24 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	}
 	
 	
+	@Override
+	public synchronized String getDescription() throws RemoteException {
+		String desc = super.getDescription();
+		if (robusts.size() == 0) return desc;
+		
+		StringBuffer buffer = new StringBuffer(desc);
+		buffer.append("\nfitnesses: ");
+		for (int i = 0; i < robusts.size(); i++) {
+			if (i > 0) buffer.append(", ");
+			VarWrapper robust = robusts.get(i);
+			double fit = RMAbstract.extractNumber(robust.getTag());
+			buffer.append(robust.toString() + "=" + MathUtil.format(fit));
+		}
+		
+		return buffer.toString();
+	}
+
+
 	@Override
 	public String getName() {
 		String name = getConfig().getAsString(DUPLICATED_ALG_NAME_FIELD);
@@ -622,4 +821,179 @@ public class REMRobust extends REMInclude implements NoteAlg {
 	}
 	
 	
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	protected Object learn0() throws RemoteException {
+//		REMAbstract rem = rem();
+//		if (rem == null || this.xIndices == null || this.xIndices.size() < 2) return null;
+//		
+//		List<Integer> total = extractRealXIndicesUsed();
+//		List<Integer> free = extractRealFreeXIndicesUsed();
+//		List<Integer> focus = Util.newList(); focus.addAll(total); focus.removeAll(free);
+//		if (focus.size() <= 1) {
+//			rem.addSetupListener(this);
+//			rem.setup((Fetcher<Profile>)sample);
+//			rem.removeSetupListener(this);
+//			return rem.getParameter();
+//		}
+//
+//		int r = config.getAsInt(COMBINE_NUMBER_FIELD);
+//		if (r <= 0) {
+//			double rp = config.getAsReal(COMBINE_PERCENT_FIELD);
+//			if (rp > 0 && rp <= 1) r = (int)(rp * (focus.size()-1));
+//			r = r >= 1 ? r : focus.size() - 1;
+//		}
+//		r = Math.min(r, focus.size() - 1);
+//		
+//		String optmode = config.getAsString(OPTIMAL_MODE_FIELD);
+//		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
+//		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
+//		Map<BitSet, double[]> weightFits = Util.newMap();
+//		List<double[]> fits = Util.newList();
+//		
+//		if (isLearnStarted()) return null;
+//		
+//		int maxIteration = focus.size();
+//		int iteration = 0;
+//		learnStarted = true;
+//		while (learnStarted && (maxIteration <= 0 || iteration < maxIteration)) {
+//			
+//			List<Integer> doubltful = Util.newList(focus.size());
+//			doubltful.addAll(focus);
+//			int varIndex = doubltful.remove(iteration);
+//			
+//			CombinationGenerator gen = new CombinationGenerator(doubltful.size(), r);
+//			double alphaSum = 0;
+//			double weightSum = 0;
+//			double fitSum = 0;
+//			while (gen.hasMore()) {
+//				int[] comb = gen.getNext();
+//				int[] xIndicesUsed = new int[2 + free.size() + comb.length];
+//				xIndicesUsed[0] = 0;
+//				xIndicesUsed[1] = varIndex;
+//				for (int i = 0; i < free.size(); i++) xIndicesUsed[2 + i] = free.get(i);
+//				for (int i = 0; i < comb.length; i++) {
+//					int used = doubltful.get(comb[i]);
+//					xIndicesUsed[2 + free.size() + i] = used;
+//				}
+//	
+//				rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+//				
+//				BitSet bs = Indices.usedIndicesToBitset(this.xIndices.size(), xIndicesUsed);
+//				ExchangedParameter parameter = rem.getExchangedParameter();
+//				double alpha = parameter.getAlpha().get(1);
+//				double weight = Constants.UNUSED;
+//				double fit = Constants.UNUSED;
+//				if (weightFits.containsKey(bs)) {
+//					weight = weightFits.get(bs)[0];
+//					fit = weightFits.get(bs)[1];
+//				}
+//				else {
+//					LargeStatistics stats = rem.getLargeStatistics();
+//					if (optmode.equals(OPTIMAL_MODE_CDF)) {
+//						weight = parameter.likelihood(stats, fit, true);
+//						fit = parameter.estimateZVariance(stats);
+//					}
+//					else {
+//						weight = 1.0;
+//						
+//						//Conditional (local or model) correlation: R(x, y) given model k is R(x, estimated y with model k) multiplied with R(estimated y with model k, y).
+//						//It means R(x, y | k) = R(x, y estimated with k) * R(y estimated with k, y)
+//						fit = rem.calcR(1) * rem.calcR();
+//					}
+//					
+//					if (Util.isUsed(weight) && Util.isUsed(fit))
+//						weightFits.put(bs, new double[] {weight, fit});
+//				}
+//				
+//				if (Util.isUsed(weight) && Util.isUsed(fit)) {
+//					weightSum += weight;
+//					alphaSum += weight * alpha;
+//					fitSum += weight * fit;
+//				}
+//			}
+//			
+//			if (weightSum != 0) {
+//				if (optmode.equals(OPTIMAL_MODE_CDF)) {
+//					double fit = fitSum / weightSum;
+//					double alpha = alphaSum / weightSum;
+//					double cdfFit = normalCDF(0, alpha, fit);
+//					fits.add(new double[] {varIndex, cdfFit});
+//				}
+//				else {
+//					//Averaged conditional (local or model) correlation is average of R(x, y | k) over all k models.
+//					double fit = fitSum / weightSum;
+//					
+//					LargeStatistics data = Indices.extractData((Fetcher<Profile>)sample, this.attList, this.xIndices, this.zIndices, this);
+//					//Global correlation: R(x, y).
+//					double globalFit = RMAbstract.calcRRegressorResponse(data, varIndex);
+//					
+//					fits.add(new double[] {varIndex, fit*globalFit});
+//				}
+//			}
+//			
+//			iteration ++;
+//
+//			//Pseudo-code to fire doing setup event.
+//			fireSetupEvent(new SetupAlgEvent(this, Type.doing, getName(), "Setting up is doing: " + getDescription(), iteration, maxIteration));
+//			
+//			synchronized (this) {
+//				while (learnPaused) {
+//					notifyAll();
+//					try {
+//						wait();
+//					} catch (Exception e) {LogUtil.trace(e);}
+//				}
+//			}
+//			
+//		}
+//		
+//		Collections.sort(fits, new Comparator<double[]>() {
+//			@Override
+//			public int compare(double[] o1, double[] o2) {
+//				double v1 = o1[1], v2 = o2[1];
+//				String prop = getConfig().getAsString(PROPORTION_FIELD);
+//				if (prop.equals(PROPORTION_ABSOLUTE)) {
+//					v1 = Math.abs(o1[1]);
+//					v2 = Math.abs(o2[1]);
+//				}
+//				else if (prop.equals(PROPORTION_INCREASE)) {
+//					v1 = o1[1];
+//					v2 = o2[1];
+//				}
+//				else if (prop.equals(PROPORTION_DECREASE)) {
+//					v1 = o2[1];
+//					v2 = o1[1];
+//				}
+//					
+//				if (v1 > v2)
+//					return -1;
+//				else if (v1 == v2)
+//					return 0;
+//				else
+//					return 1;
+//			}
+//		});
+//		fits = fits.subList(0, maxRegVars);
+//		
+//		int[] xIndicesUsed = new int[1+ fits.size() + free.size()];
+//		xIndicesUsed[0] = 0;
+//		for (int i = 0; i < fits.size(); i++) xIndicesUsed[1 + i] = (int)fits.get(i)[0];
+//		for (int i = 0; i < free.size(); i++) xIndicesUsed[1 + fits.size() + i] = free.get(i);
+//		rem.setup((Fetcher<Profile>)sample, new Indices.Used(xIndicesUsed, null));
+//		
+//		synchronized (this) {
+//			learnStarted = false;
+//			learnPaused = false;
+//			
+//			//Pseudo-code to fire done setup event.
+//			fireSetupEvent(new SetupAlgEvent(this, Type.done, getName(), "Setting up is done: " + getDescription(), iteration, maxIteration));
+//
+//			notifyAll();
+//		}
+//		
+//		return rem.getParameter();
+//	}
+
+
 }

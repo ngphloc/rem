@@ -113,10 +113,10 @@ public abstract class REMInclude extends RMAbstract implements DuplicatableAlg, 
 	
 	@Override
 	public synchronized Inspector getInspector() {
-		return rem.getInspector();
+		return RMAbstract.getInspector(this);
 	}
 
-
+	
 	@Override
 	public String note() {
 		if (rem instanceof REMAbstract)
