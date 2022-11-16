@@ -1,0 +1,17 @@
+========== Algorithm "cdf" ==========
+Setup result of algorithm "cdf" (done) are Setting up is done: mpg = 49.2352 - 1.6137*(cyl) - 0.0119*(disp) - 0.0288*(hp) - 0.6827*(qsec): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.9913, disp=0.7055, hp=0.6908, qsec=0.6545
+
+
+
+========== Algorithm "cdf" ==========
+Setup result of algorithm "cdf" on training dataset 'hdp_sample.base' with assigned ID '1' (done) are Learned models: mpg = 49.2352 - 1.6137*(cyl) - 0.0119*(disp) - 0.0288*(hp) - 0.6827*(qsec): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.9913, disp=0.7055, hp=0.6908, qsec=0.6545
+
+
+
+========== Algorithm "cdf" ==========
+Setup result of algorithm "cdf" on training dataset with assigned ID '1' (done) are fired
+
+
+

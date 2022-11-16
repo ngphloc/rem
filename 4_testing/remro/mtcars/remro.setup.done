@@ -1,0 +1,17 @@
+========== Algorithm "remro" ==========
+Setup result of algorithm "remro" (done) are Setting up is done: mpg = 40.8285 - 1.2933*(cyl) + 0.0116*(disp) - 0.0205*(hp) - 3.8539*(wt): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.7262, disp=0.72, hp=0.6435, wt=0.6133
+
+
+
+========== Algorithm "remro" ==========
+Setup result of algorithm "remro" on training dataset 'hdp_sample.base' with assigned ID '1' (done) are Learned models: mpg = 40.8285 - 1.2933*(cyl) + 0.0116*(disp) - 0.0205*(hp) - 3.8539*(wt): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.7262, disp=0.72, hp=0.6435, wt=0.6133
+
+
+
+========== Algorithm "remro" ==========
+Setup result of algorithm "remro" on training dataset with assigned ID '1' (done) are fired
+
+
+

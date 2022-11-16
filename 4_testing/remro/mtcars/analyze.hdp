@@ -1,0 +1,194 @@
+General evaluation
+
+  cdf
+    ErrorRange.exe = [-0, 2.753]
+    Hudup recall = 1
+    MAE.exe = 2.245
+    MAERatio.exe = 0.1115
+    MAEVector.exe = 2.245
+    MSE.exe = 7.5792
+    R.exe = 0.8858
+    Setup time = 0.299
+    Speed = 0
+
+  remro
+    ErrorRange.exe = [-0, 2.3079]
+    Hudup recall = 1
+    MAE.exe = 1.771
+    MAERatio.exe = 0.0895
+    MAEVector.exe = 1.771
+    MSE.exe = 5.3264
+    R.exe = 0.9212
+    Setup time = 0.142
+    Speed = 0.0001
+
+
+Dataset evaluation
+
+  Dataset "1"
+    cdf
+      ErrorRange.exe = [-0, 2.753]
+      Hudup recall = 1
+      MAE.exe = 2.245
+      MAERatio.exe = 0.1115
+      MAEVector.exe = [2.245]
+      MSE.exe = 7.5792
+      R.exe = 0.8858
+      Setup time = 0.299
+      Speed = 0
+    remro
+      ErrorRange.exe = [-0, 2.3079]
+      Hudup recall = 1
+      MAE.exe = 1.771
+      MAERatio.exe = 0.0895
+      MAEVector.exe = [1.771]
+      MSE.exe = 5.3264
+      R.exe = 0.9212
+      Setup time = 0.142
+      Speed = 0.0001
+
+
+ErrorRange.exe evaluation
+
+  cdf
+    Dataset "1" got [-0, 2.753]
+
+  remro
+    Dataset "1" got [-0, 2.3079]
+
+
+Hudup recall evaluation
+
+  cdf
+    Dataset "1" got 1
+
+  remro
+    Dataset "1" got 1
+
+
+MAE.exe evaluation
+
+  cdf
+    Dataset "1" got 2.245
+
+  remro
+    Dataset "1" got 1.771
+
+
+MAERatio.exe evaluation
+
+  cdf
+    Dataset "1" got 0.1115
+
+  remro
+    Dataset "1" got 0.0895
+
+
+MAEVector.exe evaluation
+
+  cdf
+    Dataset "1" got [2.245]
+
+  remro
+    Dataset "1" got [1.771]
+
+
+MSE.exe evaluation
+
+  cdf
+    Dataset "1" got 7.5792
+
+  remro
+    Dataset "1" got 5.3264
+
+
+R.exe evaluation
+
+  cdf
+    Dataset "1" got 0.8858
+
+  remro
+    Dataset "1" got 0.9212
+
+
+Setup time evaluation
+
+  cdf
+    Dataset "1" got 0.299
+
+  remro
+    Dataset "1" got 0.142
+
+
+Speed evaluation
+
+  cdf
+    Dataset "1" got 0
+
+  remro
+    Dataset "1" got 0.0001
+
+
+Evaluation information
+  Total records: 64
+  Evaluated records: 64
+  Evaluation percentage: 100.0%
+  Elapsed time: 0 hours 0 minutes 1 seconds
+  Started date: 2022-11-16 17-27-08
+  Ended date: 2022-11-16 17-27-09
+
+
+Algorithm parameters
+
+  cdf
+    rem_calc_variance=false
+    duplicated_alg_name=cdf
+    delay_unsetup=false
+    em_epsilon_ratio_mode=true
+    remro_free_xindices=
+    rem_estimate_mode=reversible
+    remro_maxregvars=4
+    remro_optimal_mode=cdf
+    em_max_iteration=1000
+    remro_combine_number=0
+    remro_proportion=absolute
+    em_epsilon=0.001
+    remro_combine_percent=0.5
+    rm_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+
+  remro
+    rem_calc_variance=false
+    delay_unsetup=false
+    em_epsilon_ratio_mode=true
+    remro_free_xindices=
+    rem_estimate_mode=reversible
+    remro_maxregvars=4
+    remro_optimal_mode=r
+    em_max_iteration=1000
+    remro_combine_number=0
+    remro_proportion=absolute
+    em_epsilon=0.001
+    remro_combine_percent=0.5
+    rm_indices={1, #x2, -1, (#x3 + #x4)^2, log(#y)}
+
+
+Algorithm descriptions
+
+  cdf
+    Dataset "1" got mpg = 49.2352 - 1.6137*(cyl) - 0.0119*(disp) - 0.0288*(hp) - 0.6827*(qsec): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.9913, disp=0.7055, hp=0.6908, qsec=0.6545
+
+  remro
+    Dataset "1" got mpg = 40.8285 - 1.2933*(cyl) + 0.0116*(disp) - 0.0205*(hp) - 3.8539*(wt): t=1, coeff=NaN, z-variance=NaN
+fitnesses: cyl=0.7262, disp=0.72, hp=0.6435, wt=0.6133
+
+
+Note
+  Testing dataset "1" has path "file:/d:/todo/working/projects/rem/3_implementation/datasets/mtcars/hdp_sample.test"
+
+  Java: Java(TM) SE Runtime Environment version 15.0.1+9-18, Java HotSpot(TM) 64-Bit Server VM version 15.0.1+9-18, Class version 59.0, Vendor "Oracle Corporation" at https://java.oracle.com/, Home "C:\Program Files\Java\jdk-15.0.1"
+  OS: Windows 10, amd64, version 10.0
+  Network: Local address is 192.168.1.7
+  Memory (VM): Allocated memory = 44MB, Free memory = 13.36MB, Max memory = 966MB
+  CPU: Intel64 Family 6 Model 122 Stepping 8, GenuineIntel, AMD64, the number of processors is 4
+  Directory: Current working directory is "d:\todo\working\projects\rem\3_implementation"
