@@ -1,0 +1,7 @@
+# Sample batch script
+
+algorithms=rem, remro
+
+trainingsets=datasets/mtcars/hdp_sample.base#snapshot_parser#file
+
+testingsets=datasets/mtcars/hdp_sample.test#snapshot_parser#file
