@@ -7,8 +7,6 @@
  */
 package net.rem.regression.em;
 
-import static net.rem.regression.RMAbstract.solve;
-
 import java.awt.Color;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -27,6 +25,7 @@ import net.rem.em.EM;
 import net.rem.em.EMRemote;
 import net.rem.em.ExponentialEM;
 import net.rem.regression.LargeStatistics;
+import net.rem.regression.MathAdapter;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.VarWrapper;
 import net.rem.regression.ui.graph.Graph;
@@ -297,7 +296,7 @@ public abstract class REMAbstract extends ExponentialEM implements REM, REMRemot
 			b.add(sum);
 		}
 		
-		return solve(A, b);
+		return MathAdapter.solve(A, b);
 	}
 	
 	

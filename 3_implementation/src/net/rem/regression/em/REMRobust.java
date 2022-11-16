@@ -35,6 +35,7 @@ import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
+import net.rem.regression.MathAdapter;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.VarWrapper;
 
@@ -484,7 +485,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 				}
 				alphaVariance = alphaVariance / likelihoodSum;
 				
-				double cdf = normalCDF(0, alphaMean, alphaVariance);
+				double cdf = MathAdapter.normalCDF(0, alphaMean, alphaVariance);
 				String prop = getConfig().getAsString(PROPORTION_FIELD);
 				if (prop.equals(PROPORTION_ABSOLUTE))
 					cdf = Math.max(cdf, 1.0 - cdf);

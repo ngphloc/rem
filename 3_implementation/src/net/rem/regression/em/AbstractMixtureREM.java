@@ -39,6 +39,7 @@ import net.rem.em.EMRemote;
 import net.rem.em.ExponentialEM;
 import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
+import net.rem.regression.MathAdapter;
 import net.rem.regression.RM;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.RMRemote;
@@ -479,7 +480,7 @@ public abstract class AbstractMixtureREM extends ExponentialEM implements RM, RM
 					stat = rem.estimate(new Statistics(Constants.UNUSED, xStatistic), parameter);
 				}
 				double value = stat.getZStatistic();
-				double pdf = RMAbstract.normalPDF(value, value, parameter.getZVariance());
+				double pdf = MathAdapter.normalPDF(value, value, parameter.getZVariance());
 				coeff *= pdf;
 			}
 			

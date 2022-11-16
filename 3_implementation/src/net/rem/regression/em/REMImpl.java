@@ -37,6 +37,7 @@ import net.hudup.core.logistic.DSUtil;
 import net.hudup.core.logistic.LogUtil;
 import net.rem.regression.Indices;
 import net.rem.regression.LargeStatistics;
+import net.rem.regression.MathAdapter;
 import net.rem.regression.RMAbstract;
 import net.rem.regression.Statistics;
 import net.rem.regression.VarWrapper;
@@ -1020,7 +1021,7 @@ public class REMImpl extends REMAbstract implements DuplicatableAlg {
 				y.add(yi);
 			}
 			
-			List<Double> solution = RMAbstract.solve(A, y); //solve Ax = y
+			List<Double> solution = MathAdapter.solve(A, y); //solve Ax = y
 			if (solution != null) {
 				for (int j = 0; j < U.size(); j++) {
 					int k = U.get(j);

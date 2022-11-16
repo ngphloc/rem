@@ -22,7 +22,7 @@ import net.hudup.core.logistic.LogUtil;
 import net.hudup.core.logistic.MathUtil;
 import net.hudup.core.parser.TextParserUtil;
 import net.rem.regression.LargeStatistics;
-import net.rem.regression.RMAbstract;
+import net.rem.regression.MathAdapter;
 import net.rem.regression.Statistics;
 
 /**
@@ -321,11 +321,14 @@ public class ExchangedParameter implements Cloneable, Serializable {
 				if (stat == null) continue;
 
 				double mean = mean(stat.getXStatistic());
-				double prob = RMAbstract.normalPDF(stat.getZStatistic(), mean, variance);
-				if (log)
-					lh += prob > 0 ? Math.log(prob) : 0;
-				else
-					lh *= prob;
+				if (log) {
+					double prob = MathAdapter.logNormalPDF(stat.getZStatistic(), mean, variance);
+					lh += Util.isUsed(prob) ? prob : 0;
+				}
+				else {
+					double prob = MathAdapter.normalPDF(stat.getZStatistic(), mean, variance);
+					lh *= Util.isUsed(prob) ? prob : 1;
+				}
 			} catch (Throwable e) {LogUtil.trace(e);}
 		}
 		
@@ -574,7 +577,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 	public static double normalPDF(List<Double> value, List<Double> mean, List<double[]> variance) {
 		int n = mean.size();
 		
-		double det = RMAbstract.matrixDeterminant(variance);
+		double det = MathAdapter.matrixDeterminant(variance);
 		if (det == 0) {
 			boolean equal = true;
 			for (int i = 0; i < n; i++) {
@@ -585,7 +588,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 			}
 			
 			if (equal)
-				return RMAbstract.normalPDF(0, 0, 0);
+				return MathAdapter.normalPDF(0, 0, 0);
 			else
 				return 0;
 		}
@@ -596,7 +599,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 			d.add(value.get(i) - mean.get(i));
 		}
 		
-		List<double[]> inverseVariance = RMAbstract.matrixInverse(variance);
+		List<double[]> inverseVariance = MathAdapter.matrixInverse(variance);
 		double v2 = 0;
 		if (inverseVariance != null && inverseVariance.size() > 0) {
 			for (int j = 0; j < n; j++) {
@@ -635,7 +638,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 			double zMean = parameterList.get(i).mean(xVector);
 			double zVariance = parameterList.get(i).zVariance;
 			
-			double p = RMAbstract.normalPDF(zValue, zMean, zVariance);
+			double p = MathAdapter.normalPDF(zValue, zMean, zVariance);
 			double product = coeff * p;
 			
 			denominator += product;
@@ -691,7 +694,7 @@ public class ExchangedParameter implements Cloneable, Serializable {
 //			double p2 = normalPDF(zValue + vicinity, zMean, zVariance);
 //			condProbs.add(p2 - p1);
 			
-			double p = RMAbstract.normalPDF(zValue, zMean, zVariance);
+			double p = MathAdapter.normalPDF(zValue, zMean, zVariance);
 			condProbs.add(p);
 		}
 		
