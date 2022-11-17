@@ -169,9 +169,9 @@ public class REMRobust extends REMInclude implements NoteAlg {
 
 	
 	/**
-	 * Maximum number of regressors.
+	 * Maximum number of robust regressors.
 	 */
-	public final static String MAXREGVARS_FIELD = "remro_maxregvars";
+	public final static String MAXROGVARS_FIELD = "remro_maxrogvars";
 	
 	
 	/**
@@ -252,8 +252,8 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		}
 		r = Math.min(r, focus.size() - 1);
 		
-		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
-		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
+		int maxRoVars = config.getAsInt(MAXROGVARS_FIELD);
+		maxRoVars = maxRoVars <= 0 ? focus.size() : Math.min(maxRoVars, focus.size());
 		Map<BitSet, Double> fitMap = Util.newMap();
 		List<Pair> roIndices = Util.newList(); //Important list of robust regressor indices with their fitness.
 
@@ -356,7 +356,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 					return 1;
 			}
 		});
-		roIndices = roIndices.subList(0, maxRegVars);
+		roIndices = roIndices.subList(0, maxRoVars);
 		
 		if (roIndices.size() > 0) {
 			int[] xIndicesUsed = new int[1 + roIndices.size() + free.size()];
@@ -417,8 +417,8 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		}
 		r = Math.min(r, focus.size() - 1);
 		
-		int maxRegVars = config.getAsInt(MAXREGVARS_FIELD);
-		maxRegVars = maxRegVars <= 0 ? focus.size() : Math.min(maxRegVars, focus.size());
+		int maxRoVars = config.getAsInt(MAXROGVARS_FIELD);
+		maxRoVars = maxRoVars <= 0 ? focus.size() : Math.min(maxRoVars, focus.size());
 		Map<BitSet, double[]> fitMap = Util.newMap();
 		List<Pair> roIndices = Util.newList();
 		
@@ -524,7 +524,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 					return 1;
 			}
 		});
-		roIndices = roIndices.subList(0, maxRegVars);
+		roIndices = roIndices.subList(0, maxRoVars);
 		
 		if (roIndices.size() > 0) {
 			int[] xIndicesUsed = new int[1 + roIndices.size() + free.size()];
@@ -633,7 +633,7 @@ public class REMRobust extends REMInclude implements NoteAlg {
 		tempConfig.put(COMBINE_NUMBER_FIELD, COMBINE_NUMBER_DEFAULT);
 		tempConfig.put(COMBINE_PERCENT_FIELD, COMBINE_PERCENT_DEFAULT);
 		tempConfig.put(FREE_XINDICES_USED_FIELD, FREE_XINDICES_DEFAULT);
-		tempConfig.put(MAXREGVARS_FIELD, MAXREGVARS_DEFAULT);
+		tempConfig.put(MAXROGVARS_FIELD, MAXREGVARS_DEFAULT);
 		tempConfig.put(PROPORTION_FIELD, PROPORTION_DEFAULT);
 		tempConfig.put(OPTIMAL_MODE_FIELD, OPTIMAL_MODE_DEFAULT);
 		
