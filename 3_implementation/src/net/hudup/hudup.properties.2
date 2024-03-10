@@ -13,11 +13,13 @@ additional_packages=net.rem
 #This administration account is also used to start and stop server and listener from remote control when being impossible to retrieve accounts stored in database.
 #admin=admin
 
-#If flag is true, the framework supports compressed file (zip, jar) as storage.
-#Currently, Hudup used TrueZip (https://christian-schlichtherle.bitbucket.io/truezip) developed by Christian Schlichtherle to process compressed files.
-#When this flag is false, TrueZip is not used. It is more stable if setting this flag to be false. 
-#compressed_file_support=false
-compressed_file_support=true
+#This mode is calling explicitly finalize method, which is true if the finalize method of an object is called explicitly when the object is discarded.
+#call_finalize=true
+call_finalize=false
+
+#This is flag to indicate whether Hudup sever calls internal tasks periodly. It is set to be true by default. If it is false, internal tasks are not called, which can cause some implicit and unexpected problems but the server will be run faster.
+#call_server_tasks=true
+call_server_tasks=false
 
 #Setting debug mode. If this flag is true, Hudup framework runs in debug mode in which thrown exceptions are printed traced, for example.
 #Otherwise, thrown exceptions are not traced and so only error meassages are printed.
